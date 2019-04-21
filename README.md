@@ -56,4 +56,4 @@ loom binary by running:
 
 ## License
 
-MIT
+GNU GPLv3

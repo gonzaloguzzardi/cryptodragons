@@ -1,0 +1,14 @@
+# gitignore
+webclient.pid
+
+node_modules
+Template
+yarn.lock
+.DS_Store
+
+# Only apps should have lockfiles
+package-lock.json
+/.env.test
+/yarn-error.log
+node_modules
+src

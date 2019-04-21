@@ -1,0 +1,59 @@
+
+body {
+    /*background-image:   url("../Images/portada3.jpg");
+    background-repeat: round;*/
+    padding-top: 80px; /* Relleno superior igual a la altura de la cabecera*/
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    //background-color: #333333;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 16px;
+    text-decoration: none;
+    font-family: Calibre,Helvetica,Arial,sans-serif;
+    font-size: 2rem;
+    line-height: 1.4;
+}
+
+li a:hover {
+    background-color: #111111;
+}
+
+.floatleft {
+    float:left;
+}
+.floatright {
+    float:right;
+}
+
+#main-header {
+	background: #333;
+	color: white;
+	height: 80px;
+
+	width: 100%; /* hacemos que la cabecera ocupe el ancho completo de la página */
+	left: 0; /* Posicionamos la cabecera al lado izquierdo */
+	top: 0; /* Posicionamos la cabecera pegada arriba */
+	position: fixed; /* Hacemos que la cabecera tenga una posición fija */
+}
+
+#Proyect {
+    margin-left: 10%;
+}
+
+#AboutUS {
+    margin-left: 10%;
+}

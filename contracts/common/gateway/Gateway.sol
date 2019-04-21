@@ -17,6 +17,7 @@ contract Gateway is IERC20Receiver, IERC721Receiver, ValidatorManagerContract {
     mapping(address => uint256) erc20;
 
     // Fijarse si suficiente esta implementacion o si hace falta un booleano como estaba, que diga si tiene o no el token
+    // Ahora se fija si una cuenta tiene un token, si en el mapa existen datos para ese token, para esa cuenta
     mapping(address => mapping(uint256 => bytes)) erc721;
   }
 

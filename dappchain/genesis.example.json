@@ -1,12 +1,6 @@
 {
 	"contracts": [
 		{
-			"vm": "EVM",
-			"format": "hex",
-			"name": "TransferableDragon",
-			"location": "contracts/TransferableDragon.bin"
-		},
-		{
 			"vm": "plugin",
 			"format": "plugin",
 			"name": "coin",

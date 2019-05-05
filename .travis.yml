@@ -16,7 +16,8 @@ before_script:
 
 script:
   - ./crypto_dragons.sh setup
-  - ./crypto_dragons.sh start 
-  - kill -0 $(cat dappchain-scripts/loom.pid)     # Checks if sidechain up & running
-  - kill -0 $(cat webclient/webclient.pid)        # Checks if webclient up & running
-  - kill -0 $(cat truffle-ethereum/ganache.pid)   # Checks if evm blockchain up & running
+  - ./crypto_dragons.sh start
+
+  # Run tests here!!
+
+  - ./crypto_dragons.sh stop

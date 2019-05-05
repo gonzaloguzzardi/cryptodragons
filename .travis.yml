@@ -24,5 +24,6 @@ script:
 
   - cd webclient
   - npm run test
+  - cd ..
 
   - ./crypto_dragons.sh stop

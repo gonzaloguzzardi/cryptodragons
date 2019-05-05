@@ -1,0 +1,1 @@
+./loom genkey -k extdev_private_key -a extdev_public_key

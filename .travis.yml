@@ -22,6 +22,7 @@ script:
   - ./crypto_dragons.sh setup
   - ./crypto_dragons.sh start
 
-  # Run tests here!!
+  - cd webclient
+  - npm run test
 
   - ./crypto_dragons.sh stop

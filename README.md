@@ -1,4 +1,6 @@
 
+[![Build Status](https://travis-ci.com/gonzaloguzzardi/cryptodragons.svg?token=oBxkUCm6L9Ftej7DmuyY&branch=develop)](https://travis-ci.com/gonzaloguzzardi/cryptodragons)
+
 # Overview
 
 A template for a Loom DAppChain with a Unity client. See [Unity + Truffle + Loom Template](https://loomx.io/developers/docs/en/unity-truffle-loom-template.html) for more information.

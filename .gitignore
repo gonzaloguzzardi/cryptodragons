@@ -2,5 +2,5 @@ protobuf-*
 truffle-dappchain/yarn.lock
 webclient/yarn.lock
 *.meta
-dappchain-scripts/extdev_private_key
-dappchain-scripts/extdev_public_key
+dappchain/extdev_private_key
+dappchain/extdev_public_key

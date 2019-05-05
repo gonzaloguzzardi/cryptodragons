@@ -61,7 +61,7 @@ function stop_truffle_ethereum {
 function start_dappchain {
   if [ $(check_file_exists dappchain/loom.pid) = 0 ]; then
     echo "Start DAppChain"
-    cd dappchain-scripts
+    cd dappchain
     # Make a folder for DAppChain instance
     if [ ! -d ./build ]; then
         mkdir build
@@ -83,9 +83,9 @@ function start_dappchain {
 }
 
 function stop_dappchain {
-  if [ $(check_file_exists dappchain-scripts/loom.pid) = 1 ]; then
+  if [ $(check_file_exists dappchain/loom.pid) = 1 ]; then
     echo "Stop DAppChain"
-    cd dappchain-scripts
+    cd dappchain
     pid=$(cat loom.pid)
     kill -9 $pid
     rm loom.pid

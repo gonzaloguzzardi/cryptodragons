@@ -39,6 +39,6 @@ module.exports = {
     },
     build: function (options, callback) {
         options.searchContractsInDestinationDirectory = true;
-        new LoomUnityBuildUtility(options, [], "../UnityClient/Assets/Contracts/Resources/", "../dappchain-scripts/build/contracts/").copyFiles();
+        new LoomUnityBuildUtility(options, [], "../UnityClient/Assets/Contracts/Resources/", "../dappchain/build/contracts/").copyFiles();
     }
 };

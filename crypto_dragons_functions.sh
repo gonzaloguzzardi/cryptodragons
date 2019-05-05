@@ -26,6 +26,13 @@ function setup {
   cd ../transfer-gateway-scripts
   echo "Install Transfer Gateway Scripts"
   yarn
+  cd ../dappchain
+  echo "Install DappChain"
+  wget "https://private.delegatecall.com/loom/$platform/build-$build_number/loom"
+  chmod +x loom
+  ./loom init -f
+  sleep 5
+  cp genesis.example.json genesis.json
   cd ..
 }
 
@@ -63,19 +70,10 @@ function start_dappchain {
     echo "Start DAppChain"
     cd dappchain
     # Make a folder for DAppChain instance
-    if [ ! -d ./build ]; then
-        mkdir build
-    fi
-    cd build
-    if [ ! -f ./loom ]; then
-        ../download-loom.sh 288
-    fi
-    #./loom reset; ./loom run > /dev/null 2>&1 &
-    ./loom init; ./loom run > /dev/null 2>&1 &
+    ./loom reset; ./loom run > /dev/null 2>&1 &
     loom_pid=$!
-    cd ..
     echo $loom_pid > loom.pid
-    sleep 2
+    sleep 10
     cd ..
   else
     echo "DAppChain is running"

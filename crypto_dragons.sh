@@ -88,10 +88,10 @@ start)
   fi
 
   start_and_deploy_truffle_ethereum
-  start_dappchain
-  deploy_truffle_dappchain
-  start_webapp
-  run_mapping
+  #start_dappchain
+  #deploy_truffle_dappchain
+  #start_webapp
+  #run_mapping
 
   echo
   echo "-----------------------------------------------------------"
@@ -128,10 +128,10 @@ cleanup)
   echo
 
   echo "Cleaning DAppChain"
-  rm -rf dappchain/build/loom
-  rm -rf dappchain/build/genesis.json
-  rm -rf dappchain/build/app.db
-  rm -rf dappchain/build/chaindata
+  rm -rf dappchain/loom
+  rm -rf dappchain/genesis.json
+  rm -rf dappchain/app.db
+  rm -rf dappchain/chaindata
   rm -rf dappchain/loom.pid
   
   echo "Cleaning Transfer Gateway Scripts"

@@ -1,19 +1,22 @@
-language: bash
-# os: osx
+os: osx
+
+language: node_js
+node_js:
+  - "10"
 
 before_install:
 # install dependencies
 # ej: brew install python3
 
 before_script:
-    - echo "Starting..."
-    - chmod +x crypto_dragons.sh
-    - chmod +x crypto_dragons_functions.sh
+  - echo "Starting..."
+  - chmod +x crypto_dragons.sh
+  - chmod +x crypto_dragons_functions.sh
 
 script:
-    - ./crypto_dragons.sh setup
-    - ./crypto_dragons.sh start
-    - echo "Chequeo de que webapp responde va aca..."
-    - echo "Chequeo de que webapp responde va aca..."
-    - echo "Chequeo de que webapp responde va aca..."
-    - echo "Chequeo de que webapp responde va aca..."
+  - ./crypto_dragons.sh setup
+  - ./crypto_dragons.sh start
+  - echo "Chequeo de que webapp responde va aca..."
+  - echo "Chequeo de que webapp responde va aca..."
+  - echo "Chequeo de que webapp responde va aca..."
+  - echo "Chequeo de que webapp responde va aca..."

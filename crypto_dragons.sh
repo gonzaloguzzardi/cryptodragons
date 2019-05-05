@@ -88,10 +88,10 @@ start)
   fi
 
   start_and_deploy_truffle_ethereum
-  #start_dappchain
-  #deploy_truffle_dappchain
-  #start_webapp
-  #run_mapping
+  start_dappchain
+  deploy_truffle_dappchain
+  start_webapp
+  run_mapping
 
   echo
   echo "-----------------------------------------------------------"

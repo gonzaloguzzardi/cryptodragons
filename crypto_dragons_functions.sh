@@ -69,7 +69,6 @@ function start_dappchain {
   if [ $(check_file_exists dappchain/loom.pid) = 0 ]; then
     echo "Start DAppChain"
     cd dappchain
-    # Make a folder for DAppChain instance
     ./loom reset; ./loom run > /dev/null 2>&1 &
     loom_pid=$!
     echo $loom_pid > loom.pid

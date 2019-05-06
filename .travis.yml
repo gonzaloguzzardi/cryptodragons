@@ -26,4 +26,7 @@ script:
   - npm run test
   - cd ..
 
-  - ./crypto_dragons.sh stop
+  # - ./crypto_dragons.sh stop
+  - kill -9 $(cat webclient/webclient.pid)
+  - kill -9 $(cat dappchain/loom.pid)
+  - kill -9 $(cat truffle-ethereum/ganache.pid)

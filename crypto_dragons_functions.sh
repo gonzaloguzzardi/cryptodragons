@@ -26,6 +26,13 @@ function setup {
   cd ../transfer-gateway-scripts
   echo "Install Transfer Gateway Scripts"
   yarn
+  cd ../dappchain
+  echo "Install DappChain"
+  wget "https://private.delegatecall.com/loom/$platform/build-$build_number/loom"
+  chmod +x loom
+  ./loom init -f
+  sleep 5
+  cp genesis.example.json genesis.json
   cd ..
 }
 
@@ -61,21 +68,11 @@ function stop_truffle_ethereum {
 function start_dappchain {
   if [ $(check_file_exists dappchain/loom.pid) = 0 ]; then
     echo "Start DAppChain"
-    cd dappchain-scripts
-    # Make a folder for DAppChain instance
-    if [ ! -d ./build ]; then
-        mkdir build
-    fi
-    cd build
-    if [ ! -f ./loom ]; then
-        ../download-loom.sh 288
-    fi
-    #./loom reset; ./loom run > /dev/null 2>&1 &
-    ./loom init; ./loom run > /dev/null 2>&1 &
+    cd dappchain
+    ./loom reset; ./loom run > /dev/null 2>&1 &
     loom_pid=$!
-    cd ..
     echo $loom_pid > loom.pid
-    sleep 2
+    sleep 10
     cd ..
   else
     echo "DAppChain is running"
@@ -83,9 +80,9 @@ function start_dappchain {
 }
 
 function stop_dappchain {
-  if [ $(check_file_exists dappchain-scripts/loom.pid) = 1 ]; then
+  if [ $(check_file_exists dappchain/loom.pid) = 1 ]; then
     echo "Stop DAppChain"
-    cd dappchain-scripts
+    cd dappchain
     pid=$(cat loom.pid)
     kill -9 $pid
     rm loom.pid

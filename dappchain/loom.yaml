@@ -1,15 +1,6 @@
-ChainID: 'valyriachain'
-CreateEmptyBlocks: false
+ChainID: 'default'
 RegistryVersion: 2
-DPOSVersion: 1
-ReceiptsVersion: 1
-PlasmaCashEnabled: false
-RootDir: "."
-GenesisFile: "genesis.json"
-BFTLogLevel: "debug"
-EventDispatcherURI: ""
-
-LogDestination: 'file://loom2.log'
+#LogDestination: 'file://loom2.log'
 LoomLogLevel: 'debug'
 ContractLogLevel: 'debug'
 BlockchainLogLevel: 'error'
@@ -27,7 +18,6 @@ TransferGateway:
   MainnetContractHexAddress: '0xf5cad0db6415a71a5bc67403c87b56b629b4ddaa'
   MainnetPrivateKeyPath: 'oracle_eth_priv.key'
   DAppChainPrivateKeyPath: 'oracle_priv.key'
-  RPCBindAddress: "tcp://0.0.0.0:46658"
   DAppChainReadURI: 'http://localhost:46658/query'
   DAppChainWriteURI: 'http://localhost:46658/rpc'
   # Websocket URI that should be used to subscribe to DAppChain events (only used for tests atm).

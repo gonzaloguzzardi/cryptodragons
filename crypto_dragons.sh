@@ -51,7 +51,7 @@ status)
   echo
 
   [[ $(check_file_exists truffle-ethereum/ganache.pid) = 1 ]] && echo "Truffle Ethereum(ganache) running" || echo "Truffle Ethereum(ganache) stopped"
-  [[ $(check_file_exists dappchain-scripts/loom.pid) = 1 ]] && echo "DAppChain running" || echo "DAppChain stopped"
+  [[ $(check_file_exists dappchain/loom.pid) = 1 ]] && echo "DAppChain running" || echo "DAppChain stopped"
   [[ $(check_file_exists webclient/webclient.pid) = 1 ]] && echo "WebApp running" || echo "WebApp stopped"
 
   echo
@@ -128,11 +128,11 @@ cleanup)
   echo
 
   echo "Cleaning DAppChain"
-  rm -rf dappchain-scripts/build/loom
-  rm -rf dappchain-scripts/build/genesis.json
-  rm -rf dappchain-scripts/build/app.db
-  rm -rf dappchain-scripts/build/chaindata
-  rm -rf dappchain-scripts/loom.pid
+  rm -rf dappchain/loom
+  rm -rf dappchain/genesis.json
+  rm -rf dappchain/app.db
+  rm -rf dappchain/chaindata
+  rm -rf dappchain/loom.pid
   
   echo "Cleaning Transfer Gateway Scripts"
   rm -rf transfer-gateway-scripts/node_modules

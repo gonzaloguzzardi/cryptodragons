@@ -73,7 +73,7 @@ export default class DAppChainAccountManager {
     const from = new Address('eth', LocalAddress.fromHexString(ethAddress))
     const to = new Address(this._client.chainId, LocalAddress.fromPublicKey(this._publicKey))
 
-    const web3 = new Web3(window.Web3.currentProvider)
+    const web3 = new Web3(window.web3.currentProvider)
     const web3Signer = new Web3Signer(web3, ethAddress)
     return await this._addressMapper.addIdentityMappingAsync(from, to, web3Signer)
   }

@@ -9,7 +9,7 @@ contract DragonBase is ERC721Enumerable, Ownable {
     uint constant dnaModulus = 10 ** dnaDigits;
 
     // Maps mainchain ids to sidechain ids
-    mapping(uint => uint) internal  mainchainToSidechainIds;
+    mapping(uint => uint) internal  _mainchainToSidechainIds;
 
     struct Dragon {
         uint256 genes;
@@ -229,9 +229,8 @@ contract DragonBase is ERC721Enumerable, Ownable {
         }
 
         // Decode name
-        for (uint i = 0; i < 32; i++) {
-            name |= bytes32(_data[counter + i] & 0xFF) >> (i * 8);
-        }
+        name = _decodeName(_data, counter);
+        counter += 32;
 
         // Decode creation time
         for (uint i = 0; i < 8; i++)
@@ -324,24 +323,10 @@ contract DragonBase is ERC721Enumerable, Ownable {
         }
     }
 
-    // Remove
-    function int256ToBytes(uint256 x) private pure returns (bytes memory b) {
-        b = new bytes(32);
-        assembly { mstore(add(b, 32), x) }
-    }
-
-    function int64ToBytes(uint64 x) private pure returns (bytes memory b) {
-        b = new bytes(8);
-        assembly { mstore(add(b, 8), x) }
-    }
-
-    function int32ToBytes(uint32 x) private pure returns (bytes memory b) {
-        b = new bytes(4);
-        assembly { mstore(add(b, 4), x) }
-    }
-
-    function int16ToBytes(uint16 x) private pure returns (bytes memory b) {
-        b = new bytes(2);
-        assembly { mstore(add(b, 2), x) }
+    function _decodeName(bytes memory _data, uint _dataIndex) private pure returns(bytes32 name) {
+        for (uint i = 0; i < 32; i++) {
+            name |= bytes32(_data[_dataIndex + i] & 0xFF) >> (i * 8);
+        }
+    
     }
 }

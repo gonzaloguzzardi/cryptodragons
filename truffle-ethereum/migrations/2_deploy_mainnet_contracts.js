@@ -1,7 +1,7 @@
 const { writeFileSync } = require('fs')
 
-const DragonToken = artifacts.require('DragonToken')
-const Gateway = artifacts.require('Gateway')
+const DragonToken = artifacts.require('mainnet/TransferableDragon')
+const Gateway = artifacts.require('common/gateway/Gateway')
 
 module.exports = (deployer, _network, accounts) => {
   const [_, user] = accounts

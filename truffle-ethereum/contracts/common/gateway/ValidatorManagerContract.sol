@@ -1,6 +1,6 @@
 pragma solidity ^0.5.0;
 
-import "openzeppelin-solidity/contracts/ownership/Ownable.sol";
+import "../ownership/Ownable.sol";
 import "./ECVerify.sol";
 
 contract ValidatorManagerContract is Ownable {
@@ -90,10 +90,8 @@ contract ValidatorManagerContract is Ownable {
   // Can't pass bytes[] to use the whole sig due to ABI enc
   //, so we need to send v,r,s params
   function checkThreshold(bytes32 message, uint8[] memory v, bytes32[] memory r, bytes32[] memory s) private view {
-    require(v.length > 0 && v.length == r.length && r.length == s.length,
-      "Incorrect number of params");
-    require(v.length >= (threshold_num * numValidators / threshold_denom ),
-      "Not enough votes");
+    require(v.length > 0 && v.length == r.length && r.length == s.length,"Incorrect number of params");
+    require(v.length >= (threshold_num * numValidators / threshold_denom ),"Not enough votes");
 
     bytes32 hash = keccak256(abi.encodePacked("\x19Ethereum Signed Message:\n32", message));
     uint256 sig_length = v.length;

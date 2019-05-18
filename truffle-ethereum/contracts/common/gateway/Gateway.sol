@@ -1,28 +1,31 @@
 pragma solidity ^0.5.0;
 
-import "openzeppelin-solidity/contracts/token/ERC721/ERC721.sol";
-import "openzeppelin-solidity/contracts/token/ERC20/ERC20.sol";
-import "openzeppelin-solidity/contracts/math/SafeMath.sol";
-import "./ERC20Receiver.sol";
-import "./ERC721Receiver.sol";
+import "../token/ERC721.sol";
+import "../token/ERC20.sol";
+import "../math/SafeMath.sol";
+import "../token/IERC721Receiver.sol";
+import "../token/IERC20Receiver.sol";
 import "./ValidatorManagerContract.sol";
 
 
-contract Gateway is ERC20Receiver, ERC721Receiver, ValidatorManagerContract {
+contract Gateway is IERC20Receiver, IERC721Receiver, ValidatorManagerContract {
 
   using SafeMath for uint256;
 
   struct Balance {
     uint256 eth;
     mapping(address => uint256) erc20;
-    mapping(address => mapping(uint256 => bool)) erc721;
+
+    // Fijarse si suficiente esta implementacion o si hace falta un booleano como estaba, que diga si tiene o no el token
+    // Ahora se fija si una cuenta tiene un token, si en el mapa existen datos para ese token, para esa cuenta
+    mapping(address => mapping(uint256 => bytes)) erc721;
   }
 
   mapping (address => Balance) balances;
 
   event ETHReceived(address from, uint256 amount);
   event ERC20Received(address from, uint256 amount, address contractAddress);
-  event ERC721Received(address from, uint256 uid, address contractAddress);
+  event ERC721Received(address from, uint256 uid, address contractAddress, bytes data);
 
   enum TokenKind {
     ETH,
@@ -48,8 +51,8 @@ contract Gateway is ERC20Receiver, ERC721Receiver, ValidatorManagerContract {
     balances[msg.sender].eth = balances[msg.sender].eth.add(msg.value);
   }
 
-  function depositERC721(address from, uint256 uid) private {
-    balances[from].erc721[msg.sender][uid] = true;
+  function depositERC721(address from, uint256 uid, bytes memory data) private {
+    balances[from].erc721[msg.sender][uid] = data;
   }
 
   function depositERC20(address from, uint256 amount) private {
@@ -70,8 +73,9 @@ contract Gateway is ERC20Receiver, ERC721Receiver, ValidatorManagerContract {
     external
     isVerifiedByValidator(uid, contractAddress, sig)
   {
-    require(balances[msg.sender].erc721[contractAddress][uid], "Does not own token");
-    ERC721(contractAddress).safeTransferFrom(address(this),  msg.sender, uid);
+    require(balances[msg.sender].erc721[contractAddress][uid].length > 0, "Does not own token");
+    bytes storage dragonData = balances[msg.sender].erc721[contractAddress][uid];
+    ERC721(contractAddress).safeTransferFrom(address(this),  msg.sender, uid, dragonData);
     delete balances[msg.sender].erc721[contractAddress][uid];
     emit TokenWithdrawn(msg.sender, TokenKind.ERC721, contractAddress, uid);
   }
@@ -105,13 +109,13 @@ contract Gateway is ERC20Receiver, ERC721Receiver, ValidatorManagerContract {
     return ERC20_RECEIVED;
   }
 
-  function onERC721Received(address _from, uint256 _uid, bytes memory)
+  function onERC721Received(address operator, address _from, uint256 _uid, bytes memory data)
     public
     returns (bytes4)
   {
     require(allowedTokens[msg.sender], "Not a valid token");
-    depositERC721(_from, _uid);
-    emit ERC721Received(_from, _uid, msg.sender);
+    depositERC721(_from, _uid, data);
+    emit ERC721Received(_from, _uid, msg.sender, data);
     return ERC721_RECEIVED;
   }
 
@@ -132,6 +136,6 @@ contract Gateway is ERC20Receiver, ERC721Receiver, ValidatorManagerContract {
 
   // Returns ERC721 token by uid
   function getNFT(address owner, uint256 uid, address contractAddress) external view returns (bool) {
-    return balances[owner].erc721[contractAddress][uid];
+    return balances[owner].erc721[contractAddress][uid].length > 0;
   }
 }

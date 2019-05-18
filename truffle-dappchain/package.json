@@ -14,7 +14,7 @@
     "ganache-cli": "6.1.6",
     "loom-truffle-provider": "0.8.0",
     "openzeppelin-solidity": "1.10.0",
-    "truffle": "4.1.13",
+    "truffle": "5.0.7",
     "truffle-flattener": "1.2.5",
     "truffle-hdwallet-provider": "0.0.6",
     "truffle-privatekey-provider": "0.1.0",

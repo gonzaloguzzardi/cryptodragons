@@ -96,6 +96,7 @@ function deploy_truffle_dappchain {
   if [ $(check_file_exists webclient/webclient.pid) = 0 ]; then
     echo "Deploy Truffle DAppChain"
     cd truffle-dappchain
+    truffle build
     yarn deploy > /dev/null 2>&1 &
     cd ..
     sleep 20

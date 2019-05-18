@@ -123,6 +123,7 @@ import GatewayTokens from './components/gateway_tokens'
 
 ReactDOM.render(
   <div>
+    <p>{DC_CRYPTO_CARDS_JSON}</p>
     <h1>Al menos se ve algo...</h1>
   </div>,
   document.getElementById('root')

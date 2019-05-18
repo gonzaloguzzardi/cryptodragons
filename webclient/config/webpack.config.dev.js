@@ -1,12 +1,20 @@
 'use strict';
 
 const webpack = require('webpack')
-// const cryptoCardsJSON = require('../truffle-ethereum/build/contracts/CryptoCards.json')
-// const dcCryptoCardsJSON = require('../truffle-dappchain/build/contracts/CryptoCardsDappChain.json')
-// const gameTokenJSON = require('../truffle-ethereum/build/contracts/GameToken.json')
-// const dcGameTokenJSON = require('../truffle-dappchain/build/contracts/GameTokenDappChain.json')
-// const dcSimpleStakeJSON = require('../truffle-dappchain/build/contracts/SimpleStake.json')
-// const gatewayJSON = require('../truffle-ethereum/build/contracts/Gateway.json')
+const cryptoCardsJSON = require('../../truffle-ethereum/build/contracts/TransferableDragon.json')
+const dcCryptoCardsJSON = require('../../truffle-dappchain/build/contracts/TransferableDragon.json')
+// const gameTokenJSON = require('../../truffle-ethereum/build/contracts/GameToken.json')
+// const dcGameTokenJSON = require('../../truffle-dappchain/build/contracts/GameTokenDappChain.json')
+// const dcSimpleStakeJSON = require('../../truffle-dappchain/build/contracts/SimpleStake.json')
+const gatewayDappchainJSON = require('../../truffle-dappchain/build/contracts/Gateway.json')
+const gatewayJSON = require('../../truffle-ethereum/build/contracts/Gateway.json')
+
+console.log('PASAA');
+console.log('PASAA');
+console.log('PASAA');
+console.log('PASAA');
+console.log('PASAA');
+console.log('PASAA');
 
 module.exports = {
   context: __dirname + '/../src',
@@ -35,12 +43,12 @@ module.exports = {
   plugins: [
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
-      // CRYPTO_CARDS_JSON: JSON.stringify(cryptoCardsJSON),
-      // DC_CRYPTO_CARDS_JSON: JSON.stringify(dcCryptoCardsJSON),
+      CRYPTO_CARDS_JSON: JSON.stringify(cryptoCardsJSON),
+      DC_CRYPTO_CARDS_JSON: JSON.stringify(dcCryptoCardsJSON),
       // GAME_TOKEN_JSON: JSON.stringify(gameTokenJSON),
       // DC_GAME_TOKEN_JSON: JSON.stringify(dcGameTokenJSON),
       // DC_SIMPLE_STAKE: JSON.stringify(dcSimpleStakeJSON),
-      // GATEWAY_JSON: JSON.stringify(gatewayJSON),
+      GATEWAY_JSON: JSON.stringify(gatewayJSON),
     }),
   ],
   optimization: {

@@ -13,6 +13,7 @@ cache:
 
 before_install:
   - npm install -g yarn
+  - npm install -g truffle
 
 before_script:
   - chmod +x crypto_dragons.sh

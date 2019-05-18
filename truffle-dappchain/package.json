@@ -3,6 +3,7 @@
   "description": "Template of a Unity project that utilises Truffle for testing the contract, and Loom for running the DAppChain",
   "scripts": {
     "truffle": "truffle",
+    "build": "truffle build",
     "compile": "rm -rf build; truffle compile",
     "deploy:reset": "truffle deploy --reset --network loom_dapp_chain",
     "deploy": "rm -rf build; truffle migrate --reset --network loom_dapp_chain",

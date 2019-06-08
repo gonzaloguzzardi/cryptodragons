@@ -1,0 +1,14 @@
+protobuf-*
+truffle-dappchain/yarn.lock
+webclient/yarn.lock
+*.meta
+dappchain/extdev_private_key
+dappchain/extdev_public_key
+dappchain/priv_key
+dappchain/pub_key
+
+
+dragon_token_address
+dragon_token_tx_hash
+gateway_address
+dappchain-scripts/build/

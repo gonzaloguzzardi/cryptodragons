@@ -1,0 +1,5 @@
+*.meta
+loom
+priv_key
+pub_key
+dbuild/

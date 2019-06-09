@@ -2,4 +2,28 @@
 loom
 priv_key
 pub_key
+.env
 dbuild/
+app.db
+chaindata
+build
+dragon_token_tx_hash
+gateway_address
+dragon_token_address
+
+# Logs
+logs
+*.log
+
+# Directories used by tools like mocha & istanbul
+coverage
+shippable
+
+# Dependency directory
+node_modules
+
+# Generated files
+config/development/contracts.json
+config/development/*.sol.js
+config/test/contracts.json
+dist

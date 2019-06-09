@@ -109,9 +109,7 @@ contract Gateway is IERC20Receiver, IERC721Receiver, ValidatorManagerContract {
     return ERC20_RECEIVED;
   }
 
-  function onERC721Received(address _from, uint256 _uid, bytes memory data)
-    public
-    returns (bytes4)
+  function onERC721Received(address operator, address _from, uint256 _uid, bytes memory data) public returns (bytes4)
   {
     require(allowedTokens[msg.sender], "Not a valid token");
     depositERC721(_from, _uid, data);

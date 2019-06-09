@@ -24,6 +24,18 @@
 // const fs = require('fs');
 // const mnemonic = fs.readFileSync(".secret").toString().trim();
 
+require('dotenv').config();
+const LoomTruffleProvider = require('loom-truffle-provider');
+const HDWalletProvider = require('truffle-hdwallet-provider');
+
+const privateKey = process.env.PRIVATE_KEY;
+const chainId = 'default';
+const writeUrl = 'http://127.0.0.1:46658/rpc';
+const readUrl = 'http://127.0.0.1:46658/query';
+const loomTruffleProvider = new LoomTruffleProvider(chainId, writeUrl, readUrl, privateKey);
+loomTruffleProvider.createExtraAccounts(10);
+
+
 module.exports = {
   /**
    * Networks define how you connect to your ethereum client and let you set the
@@ -75,6 +87,10 @@ module.exports = {
       // network_id: 2111,   // This network is yours, in the cloud.
       // production: true    // Treats this network as if it was a public net. (default: false)
     // }
+    dappchain: {
+      provider: loomTruffleProvider,
+      network_id: '*'
+    }
   },
 
   // Set default mocha options here, use special reporters etc.

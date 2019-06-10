@@ -1,11 +1,20 @@
 #!/bin/bash
 set -e
 
-curl https://raw.githubusercontent.com/loomnetwork/loom-sdk-documentation/master/scripts/get_loom.sh | sh
+if [ ! -f ./loom ]; then
+    curl https://raw.githubusercontent.com/loomnetwork/loom-sdk-documentation/master/scripts/get_loom.sh | sh
+fi
 
 chmod +x loom
 
-./loom init
+set +e
+
+# Run loom init if it wasn't ran before
+if [ ! -d ./app.db ]; then
+    ./loom init
+fi
+
+set -e
 
 ./loom genkey -k priv_key -a pub_key
 

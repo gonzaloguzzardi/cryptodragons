@@ -2,12 +2,14 @@ const { writeFileSync } = require('fs')
 
 const DragonToken = artifacts.require('./dappchain/TransferableDragon')
 const Gateway = artifacts.require('./common/gateway/Gateway')
+const Counter = artifacts.require('./Counter')
 
 module.exports = function (deployer, _network, accounts) {
-  console.log("ACCOUNTS")
-  console.log(accounts)
   const [_, user] = accounts
   const validator = accounts[9]
+
+  // TODO remove
+  deployer.deploy(Counter)
 
   deployer.deploy(Gateway, [validator], 3, 4).then(async () => {
 

@@ -9,3 +9,4 @@ dragon_token_address
 dragon_token_tx_hash
 gateway_address
 dappchain-scripts/build/
+new_project/dappchain/reset_chain.sh

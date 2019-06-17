@@ -56,8 +56,8 @@ class App extends Component  {
     this.counter.methods.getCounter().call().then((value) => {
       console.log(`Counter value before updating is: ${value}`)
       console.log(`Current user address: ${this.currentUserAddress}`)
-      this.counter.methods.increment().send({ from: this.currentUserAddress }).then((r) => {
-        console.log("Counter incremented by 1")
+      this.counter.methods.increment().send({ from: this.currentUserAddress }, (data) => {
+        console.log(`Counter response: ${data}`)
         this.counter.methods.getCounter().call().then((value) => {
           console.log("Reading counter value")
           return this.setState({ value, loading: false })

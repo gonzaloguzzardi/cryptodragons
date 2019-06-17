@@ -9,22 +9,26 @@ module.exports = function (deployer, _network, accounts) {
   const validator = accounts[9]
 
   // TODO remove
-  deployer.deploy(Counter)
-
-  deployer.deploy(Gateway, [validator], 3, 4).then(async () => {
-
-      const gatewayInstance = await Gateway.deployed()
-  
-      console.log(`Gateway deployed at address: ${gatewayInstance.address}`)
-  
-      const dragonTokenContract = await deployer.deploy(DragonToken, gatewayInstance.address)
-      const dragonTokenInstance = await DragonToken.deployed()
-  
-      console.log(`DragonToken deployed at address: ${dragonTokenInstance.address}`)
-      console.log(`DragonToken transaction at hash: ${dragonTokenContract.transactionHash}`)
-  
-      writeFileSync('./gateway_address', gatewayInstance.address)
-      writeFileSync('./dragon_token_address', dragonTokenInstance.address)
-      writeFileSync('./dragon_token_tx_hash', dragonTokenContract.transactionHash)
+  deployer.deploy(Counter).then(async () => {
+    const counterInstance = await Counter.deployed()
+    console.log(`Counter deployed at address: ${counterInstance.address}`)
+    writeFileSync('../frontend/src/counter_info.json', `{"address": "${counterInstance.address}"}`)
   })
+
+  // deployer.deploy(Gateway, [validator], 3, 4).then(async () => {
+
+  //     const gatewayInstance = await Gateway.deployed()
+  
+  //     console.log(`Gateway deployed at address: ${gatewayInstance.address}`)
+  
+  //     const dragonTokenContract = await deployer.deploy(DragonToken, gatewayInstance.address)
+  //     const dragonTokenInstance = await DragonToken.deployed()
+  
+  //     console.log(`DragonToken deployed at address: ${dragonTokenInstance.address}`)
+  //     console.log(`DragonToken transaction at hash: ${dragonTokenContract.transactionHash}`)
+  
+  //     writeFileSync('./gateway_address', gatewayInstance.address)
+  //     writeFileSync('./dragon_token_address', dragonTokenInstance.address)
+  //     writeFileSync('./dragon_token_tx_hash', dragonTokenContract.transactionHash)
+  // })
 }

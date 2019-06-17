@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom'
 import Web3 from 'web3'
 import Counter from './contracts/Counter.json'
+import CounterInfo from './counter_info.json'
 import { Client, LocalAddress, CryptoUtils, LoomProvider } from 'loom-js'
+import './App.css'
 
 class App extends Component  {
 
@@ -40,7 +41,7 @@ class App extends Component  {
       this.web3 = new Web3(this.web3Provider)
            
       // Change for 
-      this.counter = new this.web3.eth.Contract(Counter.abi, "0x5eE87fA0853897512C8EDC4763809b91C5488bdC", {
+      this.counter = new this.web3.eth.Contract(Counter.abi, CounterInfo.address, {
         from: this.currentUserAddress
       })
 
@@ -63,8 +64,8 @@ class App extends Component  {
 
   render() {
     return (
-      <div class='row'>
-        <div class='col-lg-12 text-center' >
+      <div className='row'>
+        <div className='col-lg-12 text-center' >
           <h1>Counter</h1>
           <input type="text" value={this.state.pk} onChange={this.handlePk} placeholder="Enter your private key"/>
           <br />
@@ -73,7 +74,7 @@ class App extends Component  {
           </button>
           <br/>
           { this.state.loading
-            ? <p class='text-center'>Loading...</p>
+            ? <p className='text-center'>Loading...</p>
             : <p>Counter: {this.state.value.toString()}</p>
           }
         </div>

@@ -88,7 +88,7 @@ module.exports = {
       // production: true    // Treats this network as if it was a public net. (default: false)
     // }
     dappchain: {
-      provider: loomTruffleProvider,
+      provider: () => loomTruffleProvider,
       network_id: '*'
     }
   },

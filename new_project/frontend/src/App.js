@@ -53,11 +53,14 @@ class App extends Component  {
   increment() {
     console.log("Incrementing counter by 1")
     this.setState({ loading: true })
-    this.counter.methods.increment().send({ from: this.currentUserAddress }).then((r) => {
-      console.log("Counter incremented by 1")
-      this.counter.methods.getCounter().call().then((value) => {
-        console.log("Reading counter value")
-        return this.setState({ value, loading: false })
+    this.counter.methods.getCounter().call().then((value) => {
+      console.log(`Counter value before updating is: ${value}`)
+      this.counter.methods.increment().send({ from: this.currentUserAddress }).then((r) => {
+        console.log("Counter incremented by 1")
+        this.counter.methods.getCounter().call().then((value) => {
+          console.log("Reading counter value")
+          return this.setState({ value, loading: false })
+        })
       })
     })
   }

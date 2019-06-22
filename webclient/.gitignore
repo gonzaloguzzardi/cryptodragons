@@ -1,5 +1,0 @@
-# gitignore
-webclient.pid
-
-node_modules
-.DS_Store

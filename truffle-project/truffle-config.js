@@ -8,11 +8,7 @@ module.exports = {
   contracts_build_directory: join(__dirname, './src/contracts'),
   compilers: {
     solc: {
-      version: '0.5.0',
-      optimizer: {
-        enabled: true,
-        runs: 200
-      }
+      version: '0.5.0'
     }
   },
   networks: {
@@ -60,9 +56,5 @@ module.exports = {
       gasPrice: 15000000001,
       skipDryRun: true
     }
-  },
-  build: function (options, callback) {
-      options.searchContractsInDestinationDirectory = true;
-      new LoomUnityBuildUtility(options, [], "../UnityClient/Assets/Contracts/Resources/", "../dappchain/build/contracts/").copyFiles();
   }
 }

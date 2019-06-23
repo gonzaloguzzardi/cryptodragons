@@ -17,7 +17,7 @@
     "get:loom": "if [ ! -d loom ]; then mkdir loom && cd loom && curl https://raw.githubusercontent.com/loomnetwork/loom-sdk-documentation/master/scripts/get_loom.sh | sh && chmod +x ./loom && cd ..; fi",
     "gen:extdev-key": "npm run get:loom && ./loom/loom genkey -k extdev_private_key -a extdev_public_key",
     "gen:loom-key": "npm run get:loom && ./loom/loom genkey -k loom_private_key -a loom_public_key",
-    "loom:init": "./loom/loom init -f && ./loom/loom run"
+    "loom:init": "loom/loom init -f && loom/loom run"
   },
   "dependencies": {
     "bip39": "^2.5.0",
@@ -28,7 +28,7 @@
     "loom-js": "1.38.0",
     "loom-truffle-provider": "^0.11.0",
     "openzeppelin-solidity": "^2.3.0",
-    "truffle": "^5.0.2",
+    "truffle": "^5.0.1",
     "truffle-hdwallet-provider": "^1.0.2"
   },
   "devDependencies": {

@@ -3,7 +3,6 @@ const path = require('path')
 const { join } = require('path')
 const LoomTruffleProvider = require('loom-truffle-provider')
 const HDWalletProvider = require('truffle-hdwallet-provider')
-const LoomUnityBuildUtility = require("./LoomUnityBuildUtility");
 
 module.exports = {
   contracts_build_directory: join(__dirname, './src/contracts'),
@@ -57,8 +56,5 @@ module.exports = {
       gasPrice: 15000000001,
       skipDryRun: true
     }
-  },
-  build: function (options, callback) {
-      new LoomUnityBuildUtility(options, [], "../UnityClient/Assets/Contracts/Resources/", "./src/contracts/").copyFiles();
   }
 }

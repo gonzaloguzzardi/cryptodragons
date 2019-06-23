@@ -2,7 +2,7 @@ pragma solidity ^0.5.0;
 
 import "../common/DragonFactory.sol";
 
-contract TransferableDragon is DragonFactory {
+contract MainnetTransferableDragon is DragonFactory {
     address private _gateway;
 
     constructor(address gateway) DragonBase() public {

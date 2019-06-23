@@ -1,3 +1,5 @@
+const { writeFileSync } = require('fs')
+
 const MyRinkebyToken = artifacts.require('./MyRinkebyToken.sol')
 const MyRinkebyCoin = artifacts.require('./MyRinkebyCoin.sol')
 const DragonToken = artifacts.require('./mainnet/MainnetTransferableDragon.sol')

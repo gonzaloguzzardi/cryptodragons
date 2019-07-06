@@ -5,6 +5,7 @@ rm -rf app.db
 rm -rf chaindata
 rm -rf genesis.json
 rm -rf loom
+rm -r src/contracts/*
 rm loom_priv_key
 rm loom_private_key
 rm loom_pub_key

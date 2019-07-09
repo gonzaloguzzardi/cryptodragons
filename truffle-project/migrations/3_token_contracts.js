@@ -28,9 +28,9 @@ module.exports = function (deployer, network, accounts) {
     //await gatewayInstance.toggleToken(dragonTokenInstance.address, { from: validator })
     //await dragonTokenInstance.register(user)
 
-    writeFileSync('../gateway_address', gatewayInstance.address)
-    writeFileSync('../dragon_token_address', dragonTokenInstance.address)
-    writeFileSync('../dragon_token_tx_hash', dragonTokenContract.transactionHash)
+    writeFileSync('../loom_gateway_address', gatewayInstance.address)
+    writeFileSync('../loom_dragon_token_address', dragonTokenInstance.address)
+    writeFileSync('../loom_dragon_token_tx_hash', dragonTokenContract.transactionHash)
 
     // Example
     await deployer.deploy(MyToken, gatewayAddress)

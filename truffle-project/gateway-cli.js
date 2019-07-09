@@ -441,7 +441,7 @@ function loadRinkebyAccount() {
 }
 
 function loadExtdevAccount() {
-  const privateKeyStr = fs.readFileSync(path.join(__dirname, './extdev_private_key'), 'utf-8')
+  const privateKeyStr = fs.readFileSync(path.join(__dirname, './loom_private_key'), 'utf-8')
   const privateKey = CryptoUtils.B64ToUint8Array(privateKeyStr)
   const publicKey = CryptoUtils.publicKeyFromPrivateKey(privateKey)
   const client = new Client(

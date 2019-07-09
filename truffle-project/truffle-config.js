@@ -8,7 +8,11 @@ module.exports = {
   contracts_build_directory: join(__dirname, './src/contracts'),
   compilers: {
     solc: {
-      version: '0.5.0'
+      version: '0.5.0',
+      optimizer: {
+        enabled: true,
+        runs: 200
+      }
     }
   },
   networks: {
@@ -54,6 +58,7 @@ module.exports = {
       },
       network_id: 4,
       gasPrice: 15000000001,
+      //gas: 1500000,
       skipDryRun: true
     }
   }

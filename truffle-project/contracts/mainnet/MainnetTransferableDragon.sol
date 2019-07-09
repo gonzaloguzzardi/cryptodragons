@@ -21,5 +21,5 @@ contract MainnetTransferableDragon is DragonFactory {
         safeTransferFrom(msg.sender, _gateway, _tokenId, encodedDragon);
     }
 
-    function register(uint256 _uid) public {}
+    function register(uint256 _uid) public pure {}
 }

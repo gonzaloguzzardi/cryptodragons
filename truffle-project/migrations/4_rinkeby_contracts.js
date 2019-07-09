@@ -24,8 +24,8 @@ module.exports = function (deployer, network, accounts) {
     console.log(`DragonToken deployed at address: ${dragonTokenInstance.address}`)
     console.log(`DragonToken transaction at hash: ${dragonTokenContract.transactionHash}`)
 
-    await gatewayInstance.toggleToken(dragonTokenInstance.address, { from: validator })
-    await dragonTokenInstance.register(user)
+    // await gatewayInstance.toggleToken(dragonTokenInstance.address, { from: validator })
+    // await dragonTokenInstance.register(user)
 
     writeFileSync('../mainnet_gateway_address', gatewayInstance.address)
     writeFileSync('../mainnet_dragon_token_address', dragonTokenInstance.address)

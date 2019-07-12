@@ -12,3 +12,5 @@ dappchain-scripts/build/
 loom_dragon_token_tx_hash
 loom_gateway_address
 loom_dragon_token_address
+loom_dragon_coin_tx_hash
+loom_dragon_coin_address

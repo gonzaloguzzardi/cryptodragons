@@ -15,18 +15,11 @@ before_install:
   - npm install -g yarn
 
 before_script:
-  - chmod +x crypto_dragons.sh
-  - chmod +x crypto_dragons_functions.sh
+  - cd truffle-project
 
 script:
-  - ./crypto_dragons.sh setup
-  - ./crypto_dragons.sh start
-
-  - cd webclient
-  - npm run test
-  - cd ..
-
-  # - ./crypto_dragons.sh stop
-  - kill -9 $(cat webclient/webclient.pid)
-  - kill -9 $(cat dappchain/loom.pid)
-  - kill -9 $(cat truffle-ethereum/ganache.pid)
+  - yarn install
+  - yarn gen:loom-key
+  - yarn loom:init  > /dev/null 2>&1 &
+  - yarn deploy
+  - yarn serve

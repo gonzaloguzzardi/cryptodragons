@@ -20,6 +20,6 @@ before_script:
 script:
   - yarn install
   - yarn gen:loom-key
-  - yarn loom:init  > /dev/null 2>&1 &
+  - yarn loom:init > /dev/null 2>&1 &
   - yarn deploy
-  - yarn serve
+  - yarn serve > /dev/null 2>&1 &

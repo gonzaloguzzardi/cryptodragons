@@ -89,7 +89,7 @@ yarn serve:extdev
 First, you have to generate a private key using:
 
 ```bash
-yarn gen:extdev-key
+yarn gen:loom-key
 ```
 
 ### Spin up Loom Chain
@@ -97,7 +97,7 @@ yarn gen:extdev-key
 In a new terminal, run:
 
 ```bash
-yarn loom-init
+yarn loom:init
 ```
 
 ### Deploy the smart contract

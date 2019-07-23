@@ -4,7 +4,7 @@ const MyToken = artifacts.require('./MyToken.sol')
 const MyCoin = artifacts.require('./MyCoin.sol')
 const DragonToken = artifacts.require('./dappchain/DappchainTransferableDragon.sol')
 const DragonCoin = artifacts.require('./dappchain/DappchainDragonCoin.sol')
-const Gateway = artifacts.require('./common/gateway/Gateway.sol')
+const Gateway = artifacts.require('./dappchain/gateway/DappchainGateway.sol')
 
 const gatewayAddress = '0xe754d9518bf4a9c63476891ef9AA7d91C8236A5D'
 

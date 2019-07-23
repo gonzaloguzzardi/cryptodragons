@@ -4,7 +4,7 @@ const MyRinkebyToken = artifacts.require('./MyRinkebyToken.sol')
 const MyRinkebyCoin = artifacts.require('./MyRinkebyCoin.sol')
 const DragonToken = artifacts.require('./mainnet/MainnetTransferableDragon.sol')
 const DragonCoin = artifacts.require('./mainnet/MainnetDragonCoin.sol')
-const Gateway = artifacts.require('./common/gateway/Gateway.sol')
+const Gateway = artifacts.require('./mainnet/gateway/MainnetGateway.sol')
 
 module.exports = function (deployer, network, accounts) {
   if (network !== 'rinkeby') {

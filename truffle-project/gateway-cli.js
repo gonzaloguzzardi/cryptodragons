@@ -23,11 +23,19 @@ const EthCoin = Contracts.EthCoin
 
 // See https://loomx.io/developers/docs/en/testnet-plasma.html#contract-addresses-transfer-gateway
 // for the most up to date address.
-const rinkebyGatewayAddress = '0xb73C9506cb7f4139A4D6Ac81DF1e5b6756Fab7A2'
-const extdevGatewayAddress = '0xE754d9518bF4a9C63476891eF9Aa7D91c8236a5d'
-const extdevChainId = 'extdev-plasma-us1'
+const rinkebyGatewayAddress = readRinkebyGatewayAddress()
+const extdevGatewayAddress = readLoomGatewayAddress()
+const loomChainId = '13654820909954' // TODO ver si cambia o si es siempre el mismo
 
-const coinMultiplier = new BN(10).pow(new BN(18))
+const coinMultiplier = new BN(10).pow(new BN(18)) // TODO analizar esto
+
+function readRinkebyGatewayAddress() {
+  return fs.readFileSync(path.join(__dirname, '../mainnet_gateway_address'), 'utf-8')
+}
+
+function readLoomGatewayAddress() {
+  return fs.readFileSync(path.join(__dirname, '../loom_gateway_address'), 'utf-8')
+}
 
 async function getRinkebyCoinContract(web3js) {
   const networkId = await web3js.eth.net.getId()
@@ -445,7 +453,7 @@ function loadExtdevAccount() {
   const privateKey = CryptoUtils.B64ToUint8Array(privateKeyStr)
   const publicKey = CryptoUtils.publicKeyFromPrivateKey(privateKey)
   const client = new Client(
-    extdevChainId,
+    loomChainId,
     'wss://extdev-plasma-us1.dappchains.com/websocket',
     'wss://extdev-plasma-us1.dappchains.com/queryws'
   )
@@ -648,7 +656,7 @@ program
   .action(async function(uid, options) {
     let client
     try {
-      const extdev = loadExtdevAccount()
+      const extdev = loadLoomAccount()
       const rinkeby = loadRinkebyAccount()
       client = extdev.client
 
@@ -690,7 +698,7 @@ program
   .action(async function(options) {
     let client
     try {
-      const extdev = loadExtdevAccount()
+      const extdev = loadLoomAccount()
       const rinkeby = loadRinkebyAccount()
       client = extdev.client
 

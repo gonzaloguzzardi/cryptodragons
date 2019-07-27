@@ -19,7 +19,7 @@ $ sudo apt-get update & sudo apt-get upgrade
 $ sudo apt-get install yarn
 ```
 
-### Setup Node.js
+#### 1. Setup Node.js
 ```bash
 $ sudo apt-get install curl python-software-properties
 $ curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash 
@@ -29,12 +29,12 @@ Una vez instalado node, se deben instalar algunos modulos globalmente.
 $ npm install -g node-gyp
 $ npm install -g truffle
 ```
-### Descargar el proyecto
+#### 2. Descargar el proyecto
 ```bash
 $ https://github.com/gonzaloguzzardi/cryptodragons.git
 ```
 
-### Instalar dependencias
+#### 3. Instalar dependencias
 ```bash
 $ npm install
 ```
@@ -43,27 +43,27 @@ $ npm install
 
 Asegurarse de estar en el directorio `truffle-project`
 
-### 1. Descargar Loom
+#### 1. Descargar Loom
 ```bash
 $ yarn get:loom
 ```
 
-### 2. Generar claves para loom
+#### 2. Generar claves para loom
 ```bash
 $ yarn gen:loom-key
 ```
 
-### 3. Inicializar loom
+#### 3. Inicializar loom
 ```bash
 $ yarn loom:init
 ```
 
-### 4. Correr la sidechain
+#### 4. Correr la sidechain
 ```bash
 $ yarn loom:run
 ```
 
-### 5. Deploy de contratos a la sidechain
+#### 5. Deploy de contratos a la sidechain
 ```bash
 $ yarn deploy
 ```
@@ -77,19 +77,19 @@ $ yarn deploy:reset
 
 Asegurarse de estar en el directorio `truffle-project`
 
-### 1. Descargar Ganache
+#### 1. Descargar Ganache
 
 [Descargar Ganache](https://www.trufflesuite.com/ganache)
 
-### 2. Generar claves para ganache
+#### 2. Generar claves para ganache
 ```bash
 $ yarn gen:ganache-key
 ```
 
-### 3. Correr ganache
+#### 3. Correr ganache
 Abrir ganache y asegurarse que corra en `localhost` puerto 8545 con chain id 5777.
 
-### 4. Deploy de contratos a ganache
+#### 4. Deploy de contratos a ganache
 ```bash
 $ yarn deploy:ganache
 ```

@@ -1,10 +1,10 @@
 pragma solidity ^0.5.0;
 
-import "../ownership/Ownable.sol";
-import "./ECVerify.sol";
+import "../../common/ownership/Ownable.sol";
+import "./DappchainECVerify.sol";
 
-contract ValidatorManagerContract is Ownable {
-  using ECVerify for bytes32;
+contract DappchainValidatorManagerContract is Ownable {
+  using DappchainECVerify for bytes32;
 
   mapping (address => bool) public allowedTokens;
   mapping (address => uint256) public nonces;

@@ -3,12 +3,15 @@ const { writeFileSync } = require('fs')
 const MyRinkebyToken = artifacts.require('./MyRinkebyToken.sol')
 const MyRinkebyCoin = artifacts.require('./MyRinkebyCoin.sol')
 const DragonToken = artifacts.require('./mainnet/MainnetTransferableDragon.sol')
-const Gateway = artifacts.require('./common/gateway/Gateway.sol')
+const DragonCoin = artifacts.require('./mainnet/MainnetDragonCoin.sol')
+const Gateway = artifacts.require('./mainnet/gateway/MainnetGateway.sol')
 
 module.exports = function (deployer, network, accounts) {
-  if (network !== 'rinkeby') {
+  if (network !== 'rinkeby' && network !== 'ganache') {
     return
   }
+
+  console.log("Deploying mainnet contracts to " + network + "...")
 
   const [_, user] = accounts
   const validator = accounts[9]
@@ -24,12 +27,20 @@ module.exports = function (deployer, network, accounts) {
     console.log(`DragonToken deployed at address: ${dragonTokenInstance.address}`)
     console.log(`DragonToken transaction at hash: ${dragonTokenContract.transactionHash}`)
 
+    const dragonCoinContract = await deployer.deploy(DragonCoin, gatewayInstance.address)
+    const dragonCoinInstance = await DragonCoin.deployed()
+
+    console.log(`DragonCoin deployed at address: ${dragonCoinInstance.address}`)
+    console.log(`DragonCoin transaction at hash: ${dragonCoinContract.transactionHash}`)
+
     // await gatewayInstance.toggleToken(dragonTokenInstance.address, { from: validator })
     // await dragonTokenInstance.register(user)
 
     writeFileSync('../mainnet_gateway_address', gatewayInstance.address)
     writeFileSync('../mainnet_dragon_token_address', dragonTokenInstance.address)
     writeFileSync('../mainnet_dragon_token_tx_hash', dragonTokenContract.transactionHash)
+    writeFileSync('../loom_dragon_coin_address', dragonCoinInstance.address)
+    writeFileSync('../loom_dragon_coin_tx_hash', dragonCoinContract.transactionHash)
 
     // Example
     await deployer.deploy(MyRinkebyToken)

@@ -1,6 +1,6 @@
 pragma solidity ^0.5.0;
 
-library ECVerify {
+library MainnetECVerify {
 
   enum SignatureMode {
     EIP712,
@@ -9,7 +9,7 @@ library ECVerify {
   }
 
   function recover(bytes32 hash, bytes memory signature) internal pure returns (address) {
-    require(signature.length == 66);
+    require(signature.length == 66, "signature nedds to be 66 bytes long. See MainnetECVerify.sol");
     SignatureMode mode = SignatureMode(uint8(signature[0]));
 
     uint8 v;

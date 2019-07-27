@@ -1,14 +1,13 @@
 pragma solidity ^0.5.0;
 
-import "../token/ERC721.sol";
-import "../token/ERC20.sol";
-import "../math/SafeMath.sol";
-import "../token/IERC721Receiver.sol";
-import "../token/IERC20Receiver.sol";
-import "./ValidatorManagerContract.sol";
+import "../../common/token/ERC721.sol";
+import "../../common/token/ERC20.sol";
+import "../../common/math/SafeMath.sol";
+import "../../common/token/IERC721Receiver.sol";
+import "../../common/token/IERC20Receiver.sol";
+import "./DappchainValidatorManagerContract.sol";
 
-
-contract Gateway is IERC20Receiver, IERC721Receiver, ValidatorManagerContract {
+contract DappchainGateway is IERC20Receiver, IERC721Receiver, DappchainValidatorManagerContract {
 
   using SafeMath for uint256;
 
@@ -43,7 +42,7 @@ contract Gateway is IERC20Receiver, IERC721Receiver, ValidatorManagerContract {
   event TokenWithdrawn(address indexed owner, TokenKind kind, address contractAddress, uint256 value);
 
   constructor (address[] memory _validators, uint8 _threshold_num, uint8 _threshold_denom)
-    public ValidatorManagerContract(_validators, _threshold_num, _threshold_denom) {
+    public DappchainValidatorManagerContract(_validators, _threshold_num, _threshold_denom) {
   }
 
   // Deposit functions

@@ -3,14 +3,15 @@ const { writeFileSync } = require('fs')
 const MyToken = artifacts.require('./MyToken.sol')
 const MyCoin = artifacts.require('./MyCoin.sol')
 const DragonToken = artifacts.require('./dappchain/DappchainTransferableDragon.sol')
-const Gateway = artifacts.require('./common/gateway/Gateway.sol')
+const DragonCoin = artifacts.require('./dappchain/DappchainDragonCoin.sol')
+const Gateway = artifacts.require('./dappchain/gateway/DappchainGateway.sol')
 
-const gatewayAddress = '0xe754d9518bf4a9c63476891ef9AA7d91C8236A5D'
-
-module.exports = function (deployer, network, accounts) {
-  if (network === 'rinkeby') {
+module.exports = function (deployer, network, accounts) { 
+  if (network === 'rinkeby' || network === 'ganache') {
     return
   }
+
+  console.log("Deploying sidechain contracts to " + network + "...")
 
   const [_, user] = accounts
   const validator = accounts[9]
@@ -25,12 +26,20 @@ module.exports = function (deployer, network, accounts) {
     console.log(`DragonToken deployed at address: ${dragonTokenInstance.address}`)
     console.log(`DragonToken transaction at hash: ${dragonTokenContract.transactionHash}`)
 
+    const dragonCoinContract = await deployer.deploy(DragonCoin, gatewayInstance.address)
+    const dragonCoinInstance = await DragonCoin.deployed()
+
+    console.log(`DragonCoin deployed at address: ${dragonCoinInstance.address}`)
+    console.log(`DragonCoin transaction at hash: ${dragonCoinContract.transactionHash}`)
+
     //await gatewayInstance.toggleToken(dragonTokenInstance.address, { from: validator })
     //await dragonTokenInstance.register(user)
 
     writeFileSync('../loom_gateway_address', gatewayInstance.address)
     writeFileSync('../loom_dragon_token_address', dragonTokenInstance.address)
     writeFileSync('../loom_dragon_token_tx_hash', dragonTokenContract.transactionHash)
+    writeFileSync('../loom_dragon_coin_address', dragonCoinInstance.address)
+    writeFileSync('../loom_dragon_coin_tx_hash', dragonCoinContract.transactionHash)
 
     // Example
     await deployer.deploy(MyToken, gatewayAddress)

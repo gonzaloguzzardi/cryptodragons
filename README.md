@@ -3,54 +3,101 @@
 
 # Overview
 
-A template for a Loom DAppChain with a Unity client. See [Unity + Truffle + Loom Template](https://loomx.io/developers/docs/en/unity-truffle-loom-template.html) for more information.
+Aplicación descentralizada (DApp) que utiliza el concepto de [2-way peg (2WP)](https://www.rsk.co/es/noticia/sidechains-drivechains-and-rsk-2-way-peg-design/) para permitir la transferencia de tokens no fungibles ERC721 entre una blockchain principal basada en ethereum y una blockchain secundaria (sidechain), lo cual ofrece una series de ventjas como:
+
+- Tener una blockchain dedicada a la DApp que mejor satisfaga sus requerimientos
+- Velocidad de transacciones al utilizar un algoritmo de concenso mas laxo
+- Evitar la competencia por la resolucion de las transacciones entre distintas DApps de la blockchain. Esto es un problema que se evidenció con la salida de [Cryptokitties](https://www.bbc.com/news/technology-42237162).
+- Permitir a los usuaris proteger sus tokens en blockchains con algoritmos de consenso de alta seguridad, utilizando una blockchain de principal segura.
 
 -----------------
 
-### Install
-
-After cloning this repository install all the necessary dependencies use the `crypto_dragons.sh`
-shell script to automatically download & install all the required dependencies:
+## General Setup
 
 ```bash
-./crypto_dragons.sh setup
+$ sudo apt-get update & sudo apt-get upgrade
+$ sudo apt-get install yarn
 ```
 
-### Running
-
-After everything has been installed use the `crypto_dragons.sh` script to spin up all the required
-services:
-
+### Setup Node.js
 ```bash
-./crypto_dragons.sh start
+$ sudo apt-get install curl python-software-properties
+$ curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash 
 ```
-
-### Stop
-
-When you're done playing around with the example you should stop all the running services using:
-
+Una vez instalado node, se deben instalar algunos modulos globalmente.
+```
+$ npm install -g node-gyp
+$ npm install -g truffle
+```
+### Descargar el proyecto
 ```bash
-./crypto_dragons.sh stop
+$ https://github.com/gonzaloguzzardi/cryptodragons.git
 ```
 
-### Status
-
-To check which services are currently running:
-
+### Instalar dependencias
 ```bash
-./crypto_dragons.sh status
+$ npm install
 ```
 
-### Cleanup
+## Sidechain
 
-If you want to start with a clean slate you can remove all the `node_modules` directories, and the
-loom binary by running:
+Asegurarse de estar en el directorio `truffle-project`
 
+### Descargar Loom
 ```bash
-./crypto_dragons.sh cleanup
+$ yarn get:loom
 ```
 
+### Generar claves para loom
+```bash
+$ yarn gen:loom-key
+```
 
+### Inicializar loom
+```bash
+$ yarn loom:init
+```
+
+### Correr la sidechain
+```bash
+$ yarn loom:run
+```
+
+### Deploy de contratos a la sidechain
+```bash
+$ yarn deploy
+```
+
+Para sustituir contratos ya existentes en la blockchain:
+```bash
+$ yarn deploy:reset
+```
+
+## Mainchain - Ganache
+
+Asegurarse de estar en el directorio `truffle-project`
+
+### Descargar Ganache
+
+[Descargar Ganache](https://www.trufflesuite.com/ganache)
+
+### Generar claves para ganache
+```bash
+$ yarn gen:ganache-key
+```
+
+### Correr ganache
+Abrir ganache y asegurarse que corra en `localhost` puerto 8545 con chain id 5777.
+
+### Deploy de contratos a ganache
+```bash
+$ yarn deploy:ganache
+```
+
+Para sustituir contratos ya existentes en la blockchain:
+```bash
+$ yarn deploy:reset:ganache
+```
 
 ## Loom Network
 

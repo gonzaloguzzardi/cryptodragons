@@ -10,9 +10,18 @@ node_js:
 cache:
   - npm
   - yarn
+  - truffle
+
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - build-essential
+      - g++-4.8
 
 before_install:
-  - npm install -g yarn
+  - export CXX="g++-4.8"
 
 before_script:
   - cd truffle-project
@@ -21,5 +30,6 @@ script:
   - yarn install
   - yarn gen:loom-key
   - yarn loom:init > /dev/null 2>&1 &
+  - yarn loom:run
   - yarn deploy
   - yarn serve > /dev/null 2>&1 &

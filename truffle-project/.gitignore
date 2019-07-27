@@ -1,0 +1,22 @@
+node_modules
+app.db
+chaindata
+genesis.json
+loom
+
+# If you want to versioning build files (and it is recommended) you should remove or comment the line below
+src/contracts
+
+/rinkeby_private_key
+/rinkeby_account
+/rinkeby_mnemonic
+/extdev_private_key
+.DS_Store
+extdev_public_key
+loom_priv_key
+loom_private_key
+loom_pub_key
+loom_public_key
+loom_mnemonic
+extdev_mnemonic
+mainnet_mnemonic

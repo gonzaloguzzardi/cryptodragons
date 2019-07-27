@@ -9,3 +9,11 @@ dragon_token_address
 dragon_token_tx_hash
 gateway_address
 dappchain-scripts/build/
+loom_dragon_token_tx_hash
+loom_gateway_address
+loom_dragon_token_address
+loom_dragon_coin_tx_hash
+loom_dragon_coin_address
+mainnet_dragon_token_address
+mainnet_dragon_token_tx_hash
+mainnet_gateway_address

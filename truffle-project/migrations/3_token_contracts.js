@@ -6,12 +6,12 @@ const DragonToken = artifacts.require('./dappchain/DappchainTransferableDragon.s
 const DragonCoin = artifacts.require('./dappchain/DappchainDragonCoin.sol')
 const Gateway = artifacts.require('./dappchain/gateway/DappchainGateway.sol')
 
-const gatewayAddress = '0xe754d9518bf4a9c63476891ef9AA7d91C8236A5D'
-
-module.exports = function (deployer, network, accounts) {
-  if (network === 'rinkeby') {
+module.exports = function (deployer, network, accounts) { 
+  if (network === 'rinkeby' || network === 'ganache') {
     return
   }
+
+  console.log("Deploying sidechain contracts to " + network + "...")
 
   const [_, user] = accounts
   const validator = accounts[9]

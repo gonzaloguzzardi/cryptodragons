@@ -43,27 +43,27 @@ $ npm install
 
 Asegurarse de estar en el directorio `truffle-project`
 
-### Descargar Loom
+### 1. Descargar Loom
 ```bash
 $ yarn get:loom
 ```
 
-### Generar claves para loom
+### 2. Generar claves para loom
 ```bash
 $ yarn gen:loom-key
 ```
 
-### Inicializar loom
+### 3. Inicializar loom
 ```bash
 $ yarn loom:init
 ```
 
-### Correr la sidechain
+### 4. Correr la sidechain
 ```bash
 $ yarn loom:run
 ```
 
-### Deploy de contratos a la sidechain
+### 5. Deploy de contratos a la sidechain
 ```bash
 $ yarn deploy
 ```
@@ -77,19 +77,19 @@ $ yarn deploy:reset
 
 Asegurarse de estar en el directorio `truffle-project`
 
-### Descargar Ganache
+### 1. Descargar Ganache
 
 [Descargar Ganache](https://www.trufflesuite.com/ganache)
 
-### Generar claves para ganache
+### 2. Generar claves para ganache
 ```bash
 $ yarn gen:ganache-key
 ```
 
-### Correr ganache
+### 3. Correr ganache
 Abrir ganache y asegurarse que corra en `localhost` puerto 8545 con chain id 5777.
 
-### Deploy de contratos a ganache
+### 4. Deploy de contratos a ganache
 ```bash
 $ yarn deploy:ganache
 ```

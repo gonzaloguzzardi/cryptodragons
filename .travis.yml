@@ -26,7 +26,7 @@ script:
   - npm install
   - yarn gen:loom-key
   - yarn loom:init > /dev/null 2>&1 &
-  - yarn loom:run &
+  - yarn loom:run > /dev/null 2>&1 &
   - sleep 5
   - yarn deploy
   - yarn serve > /dev/null 2>&1 &

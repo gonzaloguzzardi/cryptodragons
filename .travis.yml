@@ -16,6 +16,7 @@ cache:
 
 before_install:
   - sudo apt-get install yarn
+  - npm install -g yarn
   - npm install -g node-gyp
 
 before_script:

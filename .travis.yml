@@ -15,7 +15,6 @@ cache:
   - truffle
 
 before_install:
-  - sudo apt-get install yarn
   - npm install -g yarn
   - npm install -g node-gyp
 

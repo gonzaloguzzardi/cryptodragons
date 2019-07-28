@@ -1,7 +1,7 @@
 # Documentation
 # https://docs.travis-ci.com/user/languages/javascript-with-nodejs/
 
-os: osx
+os: linux
 
 language: node_js
 node_js:
@@ -22,6 +22,8 @@ addons:
 
 before_install:
   - export CXX="g++-4.8"
+  - npm install -g yarn
+  - npm install -g node-gyp
 
 before_script:
   - cd truffle-project

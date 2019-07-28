@@ -42,10 +42,10 @@ module.exports = function (deployer, network, accounts) {
     writeFileSync('../loom_dragon_coin_tx_hash', dragonCoinContract.transactionHash)
 
     // Example
-    await deployer.deploy(MyToken, gatewayAddress)
+    await deployer.deploy(MyToken, gatewayInstance.address)
     const myTokenInstance = await MyToken.deployed()
 
-    await deployer.deploy(MyCoin, gatewayAddress)
+    await deployer.deploy(MyCoin, gatewayInstance.address)
     const myCoinInstance = await MyCoin.deployed()
         
     console.log('\n*************************************************************************\n')

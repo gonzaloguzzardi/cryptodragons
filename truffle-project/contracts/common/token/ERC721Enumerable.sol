@@ -37,6 +37,11 @@ contract ERC721Enumerable is ERC165, ERC721, IERC721Enumerable {
         _registerInterface(_INTERFACE_ID_ERC721_ENUMERABLE);
     }
 
+    function tokensIdsOwnedBy(address owner) external view returns (uint256[] memory) {
+        require(owner != address(0), "Invalid address");
+        return _ownedTokens[owner];
+    }
+
     /**
      * @dev Gets the token ID at a given index of the tokens list of the requested owner
      * @param owner address owning the tokens list to be accessed

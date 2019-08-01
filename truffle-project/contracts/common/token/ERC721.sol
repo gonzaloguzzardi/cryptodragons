@@ -57,7 +57,7 @@ contract ERC721 is ERC165, IERC721 {
      * @return uint256 representing the amount owned by the passed address
      */
     function balanceOf(address owner) public view returns (uint256) {
-        require(owner != address(0));
+        require(owner != address(0), "Invalid address");
         return _ownedTokensCount[owner].current();
     }
 

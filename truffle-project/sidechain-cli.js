@@ -2,6 +2,7 @@ const Tx = require('ethereumjs-tx')
 const Web3 = require('web3')
 const program = require('commander')
 const fs = require('fs')
+
 const path = require('path')
 const {
     Client, NonceTxMiddleware, SignedTxMiddleware, Address, LocalAddress, CryptoUtils, LoomProvider,
@@ -15,6 +16,8 @@ const DappchainDragonTokenJson = require('./src/contracts/DappchainTransferableD
 const DaapchainCoinJson = require('./src/contracts/DappchainDragonCoin.json')
 const DaapchainGatewayJson = require('./src/contracts/DappchainGateway.json')
 
+const dirPath = "../loom_test_accounts"
+
 /*const TransferGateway = Contracts.TransferGateway
 const AddressMapper = Contracts.AddressMapper
 const EthCoin = Contracts.EthCoin*/
@@ -22,10 +25,6 @@ const EthCoin = Contracts.EthCoin*/
 const loomChainId = '13654820909954' // TODO ver si cambia o si es siempre el mismo
 
 const coinMultiplier = new BN(10).pow(new BN(18)) // TODO analizar esto
-
-function readLoomGatewayAddress() {
-    return fs.readFileSync(path.join(__dirname, '../loom_gateway_address'), 'utf-8')
-}
 
 async function getLoomCoinContract(web3js) {
     return new web3js.eth.Contract(
@@ -73,8 +72,31 @@ async function getLoomTokenBalance(web3js, accountAddress) {
     return { total, tokensIds }
 }
 
-  function loadLoomAccount() {
-    const privateKeyStr = fs.readFileSync(path.join(__dirname, './loom_private_key'), 'utf-8')
+function createAccount(accountName) {
+  if (!fs.existsSync(dirPath)){
+    fs.mkdirSync(dirPath)
+  }
+  const privateKey = CryptoUtils.generatePrivateKey();
+  fs.writeFile(`${dirPath}/${accountName}`, privateKey.toString(), function(err) {
+    if(err) {
+        console.log("error creating account " + accountName);
+        console.log(err.message)
+    } else {
+      console.log("Account " + accountName + " created with private key: " + privateKey.toString());
+    }
+  })
+
+}
+
+  function loadLoomAccount(accountName) {
+    const accountPath = './loom_private_key'
+    if (accountName !== undefined)  {
+      const paramFile = `../${dirPath}/${accountName}`
+      if (fs.existsSync(paramFile)) {
+        accountPath = paramFile
+      }
+    }
+    const privateKeyStr = fs.readFileSync(path.join(__dirname, accountPath), 'utf-8')
     const privateKey = CryptoUtils.B64ToUint8Array(privateKeyStr)
     const publicKey = CryptoUtils.publicKeyFromPrivateKey(privateKey)
     const client = new Client(
@@ -82,6 +104,8 @@ async function getLoomTokenBalance(web3js, accountAddress) {
       'ws://127.0.0.1:46658/websocket',
       'ws://127.0.0.1:46658/queryws'
     )
+    console.log("private key = " + privateKeyStr)
+
     client.txMiddleware = [
       new NonceTxMiddleware(publicKey, client),
       new SignedTxMiddleware(privateKey)
@@ -98,13 +122,18 @@ async function getLoomTokenBalance(web3js, accountAddress) {
   }
 
 async function createDragonToken(web3js, ownerAccount, gas) {
+    console.log("\n ENTRAAAA")
     const contract = await getLoomTokenContract(web3js)
   // createDragon(string memory _name, uint64 _creationTime, uint32 _dadId, uint32 _motherId)
+
+  console.log("\n ENTRAAAA 2")
+
     const gasEstimate = await contract.methods
       .createDragon("test dragon", 1, 2, 2)
-      .estimateGas({ from: ownerAccount, gas })
+      .estimateGas({ from: ownerAccount, gas: 0 })
   
-    if (gasEstimate == gas) {
+      console.log("\n ENTRAAAA 2")
+      if (gasEstimate == gas) {
       throw new Error('Not enough enough gas, send more.')
     }
   
@@ -114,12 +143,19 @@ async function createDragonToken(web3js, ownerAccount, gas) {
   }
 
 program
+  .command('create-account <accountName>')
+  .description('Create a new loom acount')
+  .action(async function(accountName) {
+    createAccount(accountName)
+  })
+
+program
   .command('create-dragon')
   .description('Create test dragon')
   .option("-g, --gas <number>", "Gas for the tx")
   .action(async function(options) {
     const { account, web3js, client } = loadLoomAccount()
-    const loomAccAddress = Address.fromString(`${client.chainId}:${account.toLowerCase()}`)
+    const loomAccAddress = Address.fromString(`${client.chainId}:${account}`)
     console.log("account = " + loomAccAddress)
     try {
       const tx = await createDragonToken(

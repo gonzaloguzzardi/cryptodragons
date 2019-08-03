@@ -88,7 +88,7 @@ function createAccount(accountName) {
   })
 }
 
-  function loadLoomAccount(accountName) {
+function loadLoomAccount(accountName) {
     var accountPath = './loom_private_key'
 
     if (accountName !== undefined)  {
@@ -98,8 +98,6 @@ function createAccount(accountName) {
       }
     }
     const privateKeyStr = fs.readFileSync(path.join(__dirname, accountPath), 'utf-8')
-    console.log("private key = " + privateKeyStr)
-
     const privateKey = CryptoUtils.B64ToUint8Array(privateKeyStr)
     const publicKey = CryptoUtils.publicKeyFromPrivateKey(privateKey)
     const client = new Client(
@@ -126,8 +124,6 @@ async function createDragonToken(web3js, ownerAccount, gas) {
     console.log("\n ENTRAAAA")
     const contract = await getLoomTokenContract(web3js)
   // createDragon(string memory _name, uint64 _creationTime, uint32 _dadId, uint32 _motherId)
-
-  console.log("\n ENTRAAAA 2")
 
     const gasEstimate = await contract.methods
       .createDragon("test dragon", 1, 2, 2)

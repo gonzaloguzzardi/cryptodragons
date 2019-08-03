@@ -77,7 +77,8 @@ function createAccount(accountName) {
     fs.mkdirSync(dirPath)
   }
   const privateKey = CryptoUtils.generatePrivateKey();
-  fs.writeFile(`${dirPath}/${accountName}`, privateKey.toString(), function(err) {
+  const buffer = new Buffer(privateKey);
+  fs.writeFile(`${dirPath}/${accountName}`, buffer.toString('base64'), function(err) {
     if(err) {
         console.log("error creating account " + accountName);
         console.log(err.message)
@@ -85,18 +86,20 @@ function createAccount(accountName) {
       console.log("Account " + accountName + " created with private key: " + privateKey.toString());
     }
   })
-
 }
 
   function loadLoomAccount(accountName) {
-    const accountPath = './loom_private_key'
+    var accountPath = './loom_private_key'
+
     if (accountName !== undefined)  {
-      const paramFile = `../${dirPath}/${accountName}`
-      if (fs.existsSync(paramFile)) {
+      const paramFile = `${dirPath}/${accountName}`
+      if (fs.existsSync(path.join(__dirname, paramFile))) {
         accountPath = paramFile
       }
     }
     const privateKeyStr = fs.readFileSync(path.join(__dirname, accountPath), 'utf-8')
+    console.log("private key = " + privateKeyStr)
+
     const privateKey = CryptoUtils.B64ToUint8Array(privateKeyStr)
     const publicKey = CryptoUtils.publicKeyFromPrivateKey(privateKey)
     const client = new Client(
@@ -104,8 +107,6 @@ function createAccount(accountName) {
       'ws://127.0.0.1:46658/websocket',
       'ws://127.0.0.1:46658/queryws'
     )
-    console.log("private key = " + privateKeyStr)
-
     client.txMiddleware = [
       new NonceTxMiddleware(publicKey, client),
       new SignedTxMiddleware(privateKey)
@@ -153,8 +154,9 @@ program
   .command('create-dragon')
   .description('Create test dragon')
   .option("-g, --gas <number>", "Gas for the tx")
+  .option("-a, --account <accountName>", "File countaining private key of the account to use for this transaction")
   .action(async function(options) {
-    const { account, web3js, client } = loadLoomAccount()
+    const { account, web3js, client } = loadLoomAccount(options.account)
     const loomAccAddress = Address.fromString(`${client.chainId}:${account}`)
     console.log("account = " + loomAccAddress)
     try {

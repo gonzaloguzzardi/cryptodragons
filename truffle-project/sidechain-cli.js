@@ -101,7 +101,7 @@ function loadLoomAccount(accountName) {
     const privateKey = CryptoUtils.B64ToUint8Array(privateKeyStr)
     const publicKey = CryptoUtils.publicKeyFromPrivateKey(privateKey)
     const client = new Client(
-      loomChainId,
+      'default',
       'ws://127.0.0.1:46658/websocket',
       'ws://127.0.0.1:46658/queryws'
     )
@@ -121,7 +121,6 @@ function loadLoomAccount(accountName) {
   }
 
 async function createDragonToken(web3js, ownerAccount, gas) {
-    console.log("\n ENTRAAAA")
     const contract = await getLoomTokenContract(web3js)
   // createDragon(string memory _name, uint64 _creationTime, uint32 _dadId, uint32 _motherId)
 
@@ -129,7 +128,6 @@ async function createDragonToken(web3js, ownerAccount, gas) {
       .createDragon("test dragon", 1, 2, 2)
       .estimateGas({ from: ownerAccount, gas: 0 })
   
-      console.log("\n ENTRAAAA 2")
       if (gasEstimate == gas) {
       throw new Error('Not enough enough gas, send more.')
     }
@@ -153,12 +151,8 @@ program
   .option("-a, --account <accountName>", "File countaining private key of the account to use for this transaction")
   .action(async function(options) {
     const { account, web3js, client } = loadLoomAccount(options.account)
-    const loomAccAddress = Address.fromString(`${client.chainId}:${account}`)
-    console.log("account = " + loomAccAddress)
     try {
-      const tx = await createDragonToken(
-        web3js, loomAccAddress, 350000
-      )
+      const tx = await createDragonToken(web3js, account, options.gas || 350000)
       console.log(`Dragon created`)
       console.log(`tx hash: ${tx.transactionHash}`)
     } catch (err) {

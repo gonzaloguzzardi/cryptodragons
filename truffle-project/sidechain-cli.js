@@ -137,6 +137,23 @@ async function createDragonToken(web3js, ownerAccount, gas) {
       .send({ from: ownerAccount, gas: gasEstimate })
   }
 
+  async function getMyDragons(web3js, ownerAccount, gas) {
+    const contract = await getLoomTokenContract(web3js)
+  // createDragon(string memory _name, uint64 _creationTime, uint32 _dadId, uint32 _motherId)
+
+    const gasEstimate = await contract.methods
+      .getDragonsIdsByOwner(ownerAccount)
+      .estimateGas({ from: ownerAccount, gas: 0 })
+  
+      if (gasEstimate == gas) {
+      throw new Error('Not enough enough gas, send more.')
+    }
+  
+    return await contract.methods
+      .getDragonsIdsByOwner(ownerAccount)
+      .call({ from: ownerAccount, gas: gasEstimate });
+  }
+
 program
   .command('create-account <accountName>')
   .description('Create a new loom acount')
@@ -157,6 +174,29 @@ program
       console.log(`tx hash: ${tx.transactionHash}`)
     } catch (err) {
       console.error(err)
+    } finally {
+      if (client) {
+        client.disconnect()
+      }
+    }
+  })
+
+  program
+  .command('my-dragons')
+  .description('Create test dragon')
+  .option("-g, --gas <number>", "Gas for the tx")
+  .option("-a, --account <accountName>", "File countaining private key of the account to use for this transaction")
+  .action(async function(options) {
+    const { account, web3js, client } = loadLoomAccount(options.account)
+    try {
+      const data = await getMyDragons(web3js, account, options.gas || 350000)
+      console.log(`\nAddress ${account} holds dragons with id ${data}\n`) 
+    } catch (err) {
+      console.error(err)
+    } finally {
+      if (client) {
+        client.disconnect()
+      }
     }
   })
 
@@ -175,6 +215,10 @@ program
       console.log(`Rinkeby tx hash: ${tx.transactionHash}`)
     } catch (err) {
       console.error(err)
+    } finally {
+      if (client) {
+        client.disconnect()
+      }
     }
   })
 

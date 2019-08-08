@@ -224,7 +224,7 @@ program
       if (options.id === undefined) {
       }
       const data = await transferDragonToGateway(web3js, options.gas || 350000, account, options.id)
-      console.log(`\nAddress ${account} holds dragons with id ${data}\n`) 
+      console.log(`\n Token with id ${options.id} was successfully transfered to gateway \n`) 
     } catch (err) {
       console.error(err)
     } finally {

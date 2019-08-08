@@ -2,6 +2,11 @@ pragma solidity ^0.5.0;
 
 import "../common/DragonFactory.sol";
 
+contract IDappchainGateway {
+  function onERC721Received(address operator, address _from, uint256 _uid, bytes memory data)public returns (bytes4) {}
+  function onERC20Received(address _from, uint256 amount) public returns (bytes4) {}
+}
+
 contract DappchainTransferableDragon is DragonFactory {
     address private _gateway;
 
@@ -11,6 +16,7 @@ contract DappchainTransferableDragon is DragonFactory {
 
     // Setter to update who the gateway is
     function setGatewayAddress(address gateway) external onlyOwner {
+        //TODO check address is a gateway
         _gateway = gateway;
     }
 
@@ -18,5 +24,14 @@ contract DappchainTransferableDragon is DragonFactory {
     function mintToGateway(uint256 _tokenId, bytes memory _data) public {
         require(msg.sender == _gateway, "only the gateway is allowed to mint");
         _mintDragon(_gateway, _tokenId, _data);
+    }
+
+    function transferToGateway(uint256 _tokenId) public {
+        Dragon storage dragon = dragons[_tokenId];
+        bytes memory encodedDragon = _encodeDragonToBytes(dragon);
+        safeTransferFrom(msg.sender, _gateway, _tokenId);
+
+        IDappchainGateway gateway = IDappchainGateway(_gateway);
+        gateway.onERC721Received(msg.sender, msg.sender, _tokenId, encodedDragon);
     }
 }

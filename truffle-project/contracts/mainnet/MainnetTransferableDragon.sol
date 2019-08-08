@@ -2,6 +2,11 @@ pragma solidity ^0.5.0;
 
 import "../common/DragonFactory.sol";
 
+contract IMainnetGateway {
+  function onERC721Received(address operator, address _from, uint256 _uid, bytes memory data)public returns (bytes4) {}
+  function onERC20Received(address _from, uint256 amount) public returns (bytes4) {}
+}
+
 contract MainnetTransferableDragon is DragonFactory {
     address private _gateway;
 
@@ -14,11 +19,13 @@ contract MainnetTransferableDragon is DragonFactory {
         _gateway = gateway;
     }
 
-    // Used to transfer tokens to the gateway and the transfer them to the sidechain
     function transferToGateway(uint256 _tokenId) public {
         Dragon storage dragon = dragons[_tokenId];
         bytes memory encodedDragon = _encodeDragonToBytes(dragon);
-        safeTransferFrom(msg.sender, _gateway, _tokenId, encodedDragon);
+        safeTransferFrom(msg.sender, _gateway, _tokenId);
+
+        IMainnetGateway gateway = IMainnetGateway(_gateway);
+        gateway.onERC721Received(msg.sender, msg.sender, _tokenId, encodedDragon);
     }
 
     function register(uint256 _uid) public pure {}

@@ -58,18 +58,6 @@ contract DappchainGateway is IERC20Receiver, IERC721Receiver, DappchainValidator
     balances[from].erc20[msg.sender] = balances[from].erc20[msg.sender].add(amount);
   }
 
-  /************* NEW METHODS - CHECK SECURITY ***************************** */
-  function withdrawERC20Async(uint256 amount, address from, address to)
-    external
-  {
-    balances[msg.sender].erc20[from] = balances[msg.sender].erc20[from].sub(amount);
-    ERC20(to).transfer(msg.sender, amount);
-    emit TokenWithdrawn(msg.sender, TokenKind.ERC20, to, amount);
-  }
-
-
-  /******************************************************* */
-
   // Withdrawal functions
   function withdrawERC20(uint256 amount, bytes calldata sig, address contractAddress)
     external
@@ -124,7 +112,7 @@ contract DappchainGateway is IERC20Receiver, IERC721Receiver, DappchainValidator
     public
     returns (bytes4)
   {
-    require(allowedTokens[msg.sender], "Not a valid token");
+    //TODO  depende que permitimos require allowedTokens[msg.sender], "Not a valid token");
     depositERC721(_from, _uid, data);
     emit ERC721Received(_from, _uid, msg.sender, data);
     return ERC721_RECEIVED;

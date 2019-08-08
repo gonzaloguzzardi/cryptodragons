@@ -112,7 +112,7 @@ contract MainnetGateway is IERC20Receiver, IERC721Receiver, MainnetValidatorMana
     public
     returns (bytes4)
   {
-    require(allowedTokens[msg.sender], "Not a valid token");
+    //TODO  depende que permitimos require allowedTokens[msg.sender], "Not a valid token");
     depositERC721(_from, _uid, data);
     emit ERC721Received(_from, _uid, msg.sender, data);
     return ERC721_RECEIVED;

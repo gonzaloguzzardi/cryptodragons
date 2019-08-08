@@ -139,8 +139,6 @@ async function createDragonToken(web3js, ownerAccount, gas) {
 
   async function getMyDragons(web3js, ownerAccount, gas) {
     const contract = await getLoomTokenContract(web3js)
-  // createDragon(string memory _name, uint64 _creationTime, uint32 _dadId, uint32 _motherId)
-
     const gasEstimate = await contract.methods
       .getDragonsIdsByOwner(ownerAccount)
       .estimateGas({ from: ownerAccount, gas: 0 })
@@ -152,6 +150,21 @@ async function createDragonToken(web3js, ownerAccount, gas) {
     return await contract.methods
       .getDragonsIdsByOwner(ownerAccount)
       .call({ from: ownerAccount, gas: gasEstimate });
+  }
+
+  async function transferDragonToGateway(web3js, gas, ownerAccount, dragonId) {
+    const contract = await getLoomTokenContract(web3js)
+    const gasEstimate = await contract.methods
+      .transferToGateway(dragonId)
+      .estimateGas({ from: ownerAccount, gas: 0 })
+  
+      if (gasEstimate == gas) {
+      throw new Error('Not enough enough gas, send more.')
+    }
+  
+    return await contract.methods
+      .transferToGateway(dragonId)
+      .send({ from: ownerAccount, gas: gasEstimate });
   }
 
 program
@@ -199,6 +212,29 @@ program
       }
     }
   })
+
+  program
+  .command('transfer-dragon')
+  .description('Transfer dragon with token id to the transfer gateway')
+  .option("-g, --gas <number>", "Gas for the tx")
+  .option("-i, --id <dragonId>", "Dragon id to be transfer to the transfer gateway")
+  .action(async function(options) {
+    const { account, web3js, client } = loadLoomAccount(options.account)
+    try {
+      if (options.id === undefined) {
+      }
+      const data = await transferDragonToGateway(web3js, options.gas || 350000, account, options.id)
+      console.log(`\nAddress ${account} holds dragons with id ${data}\n`) 
+    } catch (err) {
+      console.error(err)
+    } finally {
+      if (client) {
+        client.disconnect()
+      }
+    }
+  })
+
+  
 
 program
   .command('deposit-coin <amount>')

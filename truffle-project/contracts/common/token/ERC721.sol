@@ -165,7 +165,7 @@ contract ERC721 is ERC165, IERC721 {
      */
     function safeTransferFrom(address from, address to, uint256 tokenId, bytes memory _data) public {
         transferFrom(from, to, tokenId);
-        // TODO gateway is a contract require(_checkOnERC721Received(from, to, tokenId, _data), "Target address does not implement onERC721Received interface");
+        require(_checkOnERC721Received(from, to, tokenId, _data), "Target address does not implement onERC721Received interface");
     }
 
     /**

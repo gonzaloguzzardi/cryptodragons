@@ -29,7 +29,7 @@ contract DappchainTransferableDragon is DragonFactory {
     function transferToGateway(uint256 _tokenId) public {
         Dragon storage dragon = dragons[_tokenId];
         bytes memory encodedDragon = _encodeDragonToBytes(dragon);
-        safeTransferFrom(msg.sender, _gateway, _tokenId);
+        transferFrom(msg.sender, _gateway, _tokenId);
 
         IDappchainGateway gateway = IDappchainGateway(_gateway);
         gateway.onERC721Received(msg.sender, msg.sender, _tokenId, encodedDragon);

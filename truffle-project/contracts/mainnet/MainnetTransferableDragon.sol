@@ -22,7 +22,7 @@ contract MainnetTransferableDragon is DragonFactory {
     function transferToGateway(uint256 _tokenId) public {
         Dragon storage dragon = dragons[_tokenId];
         bytes memory encodedDragon = _encodeDragonToBytes(dragon);
-        safeTransferFrom(msg.sender, _gateway, _tokenId);
+        transferFrom(msg.sender, _gateway, _tokenId);
 
         IMainnetGateway gateway = IMainnetGateway(_gateway);
         gateway.onERC721Received(msg.sender, msg.sender, _tokenId, encodedDragon);

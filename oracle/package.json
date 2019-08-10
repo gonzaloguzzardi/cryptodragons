@@ -1,0 +1,32 @@
+{
+  "name": "oracle",
+  "version": "1.0.0",
+  "description": "CryptoDragons Oracle",
+  "main": "",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://bitbucket.org/nitzardi/cryptodragons.git"
+  },
+  "scripts": {
+    "start": "webpack-dev-server --hot --content-base ./dist",
+    "test": "jest --config=jest.config.js",
+    "build:dev": "npm run clean && webpack --mode development",
+    "build": "npm run clean && BABEL_ENV=production webpack --mode production",
+    "init": "node oracle.js",
+    "ganache-cli": "ganache-cli -p 8545 -v -m \"trade nothing tag piece anger smoke clay reveal burst behave dose brave\"",
+    "stats": "webpack --profile --json > stats.json",
+    "clean": "rimraf dist"
+  },
+  "devDependencies": {
+    "body-parser": "latest",
+    "express": "latest",
+    "fs": "latest",
+    "node-cron": "latest",
+    "request": "latest",
+    "mongodb": "latest",
+    "web3": "^1.0.0-beta.55",
+    "loom-js": "latest",
+    "bn": "latest"
+  }
+}

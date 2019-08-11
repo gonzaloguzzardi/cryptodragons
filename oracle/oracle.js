@@ -2,7 +2,9 @@
 const Web3 = require('web3');
 const path = require('path')
 const BN = require('bn.js');
-const Gateway = require("../truffle-project/src/contracts/DappchainGateway");
+//const Gateway = require("../truffle-project/src/contracts/DappchainGateway");
+
+const Gateway = require("../truffle-project/src/contracts/DappchainTransferableDragon");
 const {
 	NonceTxMiddleware, SignedTxMiddleware, Client, LocalAddress, CryptoUtils, LoomProvider
   } = require('loom-js')
@@ -104,33 +106,103 @@ function eventGetter() {
 		currentNetwork["13654820909954"].address
 	)
 
-	gatewayInstance.events.ERC721Received((err, event) => {
-		if (err) 
-			log("error"); //console.error('Error on event', err)
-		else {
-			console.log("algo hay!!!!!");
-			if (onEvent) {
-				console.log("Entro el evento!!!!");
-				//console.log(event);
-				//onEvent(event.returnValues)
-			}
-		}
-	})		
-	
-	gatewayInstance.events.ERC20Received((err, event) => {
-		if (err) //console.error('Error on event', err)
-			log("error");
-		else {
-			console.log("algo hay!!!!!");
-			if (this.onEvent) {
-				console.log("Entro el evento!!!!");
-				//console.log(event);
-				//this.onEvent(event.returnValues)
-			}
-		}
-	})		
-	
-	gatewayInstance.events.ETHReceived((err, event) => {
+	//console.log(gatewayInstance);
+
+	//gatewayInstance.events.ERC721Received((err, event) => {
+	//	if (err) 
+	//		log("error"); //console.error('Error on event', err)
+	//	else {
+	//		console.log("algo hay!!!!!");
+	//		if (onEvent) {
+	//			console.log("Entro el evento!!!!");
+	//			//console.log(event);
+	//			//onEvent(event.returnValues)
+	//		}
+	//	}
+	//});		
+	//
+	//gatewayInstance.events.ERC20Received((err, event) => {
+	//	if (err) //console.error('Error on event', err)
+	//		log("error");
+	//	else {
+	//		console.log("algo hay!!!!!");
+	//		if (this.onEvent) {
+	//			console.log("Entro el evento!!!!");
+	//			//console.log(event);
+	//			//this.onEvent(event.returnValues)
+	//		}
+	//	}
+	//});		
+	//
+	//gatewayInstance.events.ETHReceived((err, event) => {
+	//	if (err) 
+	//		//console.error('Error on event', err)
+	//		log("error");
+	//	else {
+	//		console.log("algo hay!!!!!");
+	//		if (this.onEvent) {
+	//			console.log("Entro el evento!!!!");
+	//			//console.log(event);
+	//			//this.onEvent(event.returnValues)
+	//		}
+	//	}
+	//});
+//
+//
+	//gatewayInstance.events.TokenWithdrawn((err, event) => {
+	//	if (err) 
+	//		//console.error('Error on event', err)
+	//		log("error");
+	//	else {
+	//		console.log("algo hay!!!!!");
+	//		if (this.onEvent) {
+	//			console.log("Entro el evento!!!!");
+	//			//console.log(event);
+	//			//this.onEvent(event.returnValues)
+	//		}
+	//	}
+	//});
+	//gatewayInstance.events.AddedValidator((err, event) => {
+	//	if (err) 
+	//		//console.error('Error on event', err)
+	//		log("error");
+	//	else {
+	//		console.log("algo hay!!!!!");
+	//		if (this.onEvent) {
+	//			console.log("Entro el evento!!!!");
+	//			//console.log(event);
+	//			//this.onEvent(event.returnValues)
+	//		}
+	//	}
+	//});
+	//gatewayInstance.events.RemovedValidator((err, event) => {
+	//	if (err) 
+	//		//console.error('Error on event', err)
+	//		log("error");
+	//	else {
+	//		console.log("algo hay!!!!!");
+	//		if (this.onEvent) {
+	//			console.log("Entro el evento!!!!");
+	//			//console.log(event);
+	//			//this.onEvent(event.returnValues)
+	//		}
+	//	}
+	//});
+	//gatewayInstance.events.OwnershipTransferred((err, event) => {
+	//	if (err) 
+	//		//console.error('Error on event', err)
+	//		log("error");
+	//	else {
+	//		console.log("algo hay!!!!!");
+	//		if (this.onEvent) {
+	//			console.log("Entro el evento!!!!");
+	//			//console.log(event);
+	//			//this.onEvent(event.returnValues)
+	//		}
+	//	}
+	//});
+
+	var event = gatewayInstance.events.allEvents((err, event) => {
 		if (err) 
 			//console.error('Error on event', err)
 			log("error");
@@ -143,6 +215,7 @@ function eventGetter() {
 			}
 		}
 	})
+	
 }
 
 function insertOnMongo(database,url,user,collection) {

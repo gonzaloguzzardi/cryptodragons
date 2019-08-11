@@ -1,11 +1,10 @@
 
 const Web3 = require('web3');
-// import { Gateway } from "../truffle-project/src/Gateway.json";
-// import { Gateway } from "../truffle-project/src/Gateway.json";
+const path = require('path')
 const BN = require('bn.js');
-const Gateway = require("../truffle-project/src/Gateway");
+const Gateway = require("../truffle-project/src/contracts/DappchainGateway");
 const {
-	Client, LocalAddress, CryptoUtils, LoomProvider
+	NonceTxMiddleware, SignedTxMiddleware, Client, LocalAddress, CryptoUtils, LoomProvider
   } = require('loom-js')
   
 
@@ -16,9 +15,6 @@ var bodyParser = require("body-parser");
 var fs = require("fs");
 var request = require('request');
 var MongoClient = require('mongodb').MongoClient;
-const web3 = new Web3();
-const ABI = Gateway.abi;
-    
 
 var mainList = new Array();
 var sideList = new Array();
@@ -34,18 +30,14 @@ var database = "crypto-dragons";
 var url = "mongodb://localhost:27017/" + database;
 
 
-const networkId = _getCurrentNetwork()
-//let currentNetwork = Gateway.networks[networkId]
-
-let currentNetwork = Gateway.networks
-//console.log(Gateway.networks);
-if (!currentNetwork) {
-  throw Error('Contract not deployed on DAppChain')
-}
 function _getCurrentNetwork() {
-    let writeUrl = 'ws://127.0.0.1:46658/websocket'
-    let readUrl = 'ws://127.0.0.1:46658/queryws'
-    let networkId = 'default'
+	const networkId = 'default'
+	const writeUrl = 'http://127.0.0.1:46658/rpc'
+	const readUrl = 'http://127.0.0.1:46658/query'
+
+    //let writeUrl = 'ws://127.0.0.1:46658/websocket'
+    //let readUrl = 'ws://127.0.0.1:46658/queryws'
+    //let networkId = 'default'
     let client = new Client(networkId, writeUrl, readUrl)
 
 
@@ -60,9 +52,13 @@ function _getCurrentNetwork() {
 function _createClient() {
     let privateKey = CryptoUtils.generatePrivateKey()
     let publicKey = CryptoUtils.publicKeyFromPrivateKey(privateKey)
-    let writeUrl = 'ws://127.0.0.1:46658/websocket'
-    let readUrl = 'ws://127.0.0.1:46658/queryws'
-    let networkId = 'default'
+	const networkId = 'default'
+	const writeUrl = 'http://127.0.0.1:46658/rpc'
+	const readUrl = 'http://127.0.0.1:46658/query'
+
+    //let writeUrl = 'ws://127.0.0.1:46658/websocket'
+    //let readUrl = 'ws://127.0.0.1:46658/queryws'
+    //let networkId = 'default'
 
     let client = new Client(networkId, writeUrl, readUrl)
 
@@ -74,51 +70,80 @@ function _createClient() {
 	return LocalAddress.fromPublicKey(publicKey).toString();
 }
 
-let currentUserAddress = _createClient();
- 
-var gatewayInstance = new web3.eth.Contract(ABI, currentNetwork.address, {
-	from: currentUserAddress
-})
+function eventGetter() {
+	var accountPath = '../truffle-project/loom_private_key'
+    const privateKeyStr = fs.readFileSync(path.join(__dirname, accountPath), 'utf-8')
+    const privateKey = CryptoUtils.B64ToUint8Array(privateKeyStr)
+	const publicKey = CryptoUtils.publicKeyFromPrivateKey(privateKey)
+    const client = new Client(
+      'default',
+      'ws://127.0.0.1:46658/websocket',
+	  'ws://127.0.0.1:46658/queryws'
+	  //'default',
+	  //'http://127.0.0.1:46658/rpc',
+	  //'http://127.0.0.1:46658/query'
+    )
+    client.txMiddleware = [
+      new NonceTxMiddleware(publicKey, client),
+      new SignedTxMiddleware(privateKey)
+    ]
+    client.on('error', msg => {
+      console.error('Loom connection error', msg)
+	})
+	
+	const web3 = new Web3(new LoomProvider(client, privateKey));
+	const ABI = Gateway.abi;
 
-console.log(gatewayInstance.events);
-  //events: 
-  
-  //event ETHReceived(address from, uint256 amount);
-  //event ERC20Received(address from, uint256 amount, address contractAddress);
-  //event ERC721Received(address from, uint256 uid, address contractAddress, bytes data);
-
-gatewayInstance.events.ERC721Received((err, event) => {
-	if (err) console.error('Error on event', err)
-	else {
-		if (this.onEvent) {
-			console.log("Entro el evento!!!!");
-			console.log(event);
-			this.onEvent(event.returnValues)
-		}
+	let currentNetwork = Gateway.networks
+	if (!currentNetwork) {
+	throw Error('Contract not deployed on DAppChain')
 	}
-})		
 
-gatewayInstance.events.ERC20Received((err, event) => {
-	if (err) console.error('Error on event', err)
-	else {
-		if (this.onEvent) {
-			console.log("Entro el evento!!!!");
-			console.log(event);
-			this.onEvent(event.returnValues)
-		}
-	}
-})		
+	var gatewayInstance = new web3.eth.Contract(
+		ABI,
+		currentNetwork["13654820909954"].address
+	)
 
-gatewayInstance.events.ETHReceived((err, event) => {
-	if (err) console.error('Error on event', err)
-	else {
-		if (this.onEvent) {
-			console.log("Entro el evento!!!!");
-			console.log(event);
-			this.onEvent(event.returnValues)
+	gatewayInstance.events.ERC721Received((err, event) => {
+		if (err) 
+			log("error"); //console.error('Error on event', err)
+		else {
+			console.log("algo hay!!!!!");
+			if (onEvent) {
+				console.log("Entro el evento!!!!");
+				//console.log(event);
+				//onEvent(event.returnValues)
+			}
 		}
-	}
-})		
+	})		
+	
+	gatewayInstance.events.ERC20Received((err, event) => {
+		if (err) //console.error('Error on event', err)
+			log("error");
+		else {
+			console.log("algo hay!!!!!");
+			if (this.onEvent) {
+				console.log("Entro el evento!!!!");
+				//console.log(event);
+				//this.onEvent(event.returnValues)
+			}
+		}
+	})		
+	
+	gatewayInstance.events.ETHReceived((err, event) => {
+		if (err) 
+			//console.error('Error on event', err)
+			log("error");
+		else {
+			console.log("algo hay!!!!!");
+			if (this.onEvent) {
+				console.log("Entro el evento!!!!");
+				//console.log(event);
+				//this.onEvent(event.returnValues)
+			}
+		}
+	})
+}
 
 function insertOnMongo(database,url,user,collection) {
 	MongoClient.connect(url, function(err, db) {
@@ -253,7 +278,6 @@ cron.schedule("*/5 * * * * *", () => {
 	insertInMain();
 	insertInSide();
 	chekStatus();
-	getEvent();
 });
 
 function chekStatus(){
@@ -275,4 +299,4 @@ function msjFinish(msj) {
 }
 
 
-
+eventGetter();

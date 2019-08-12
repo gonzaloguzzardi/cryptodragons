@@ -5,7 +5,8 @@ const fs = require('fs')
 
 const path = require('path')
 const {
-    Client, NonceTxMiddleware, SignedTxMiddleware, Address, LocalAddress, CryptoUtils, LoomProvider,
+    Client, NonceTxMiddleware, SignedTxMiddleware, Address,
+    LocalAddress, CryptoUtils, LoomProvider,
     Contracts, Web3Signer, soliditySha3
 } = require('loom-js')
 // TODO: fix this export in loom-js

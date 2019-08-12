@@ -2,13 +2,14 @@
 const Web3 = require('web3');
 const path = require('path')
 const BN = require('bn.js');
-//const Gateway = require("../truffle-project/src/contracts/DappchainGateway");
 
+//const Gateway = require("../truffle-project/src/contracts/DappchainGateway");
 const Gateway = require("../truffle-project/src/contracts/DappchainTransferableDragon");
+
 const {
-	NonceTxMiddleware, SignedTxMiddleware, Client, LocalAddress, CryptoUtils, LoomProvider
-  } = require('loom-js')
-  
+	NonceTxMiddleware, SignedTxMiddleware, Client,
+	LocalAddress, CryptoUtils, LoomProvider
+} = require('loom-js');
 
 const cron = require("node-cron");
 var express = require('express');
@@ -207,11 +208,12 @@ function eventGetter() {
 			//console.error('Error on event', err)
 			log("error");
 		else {
-			console.log("algo hay!!!!!");
+			console.log("algo hay1!!!!!");
+			console.log(event);
 			if (this.onEvent) {
 				console.log("Entro el evento!!!!");
 				//console.log(event);
-				//this.onEvent(event.returnValues)
+				this.onEvent(event)
 			}
 		}
 	})

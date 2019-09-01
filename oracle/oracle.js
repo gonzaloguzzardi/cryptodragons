@@ -107,113 +107,16 @@ function eventGetter() {
 		currentNetwork["13654820909954"].address
 	)
 
-	//console.log(gatewayInstance);
-
-	//gatewayInstance.events.ERC721Received((err, event) => {
-	//	if (err) 
-	//		log("error"); //console.error('Error on event', err)
-	//	else {
-	//		console.log("algo hay!!!!!");
-	//		if (onEvent) {
-	//			console.log("Entro el evento!!!!");
-	//			//console.log(event);
-	//			//onEvent(event.returnValues)
-	//		}
-	//	}
-	//});		
-	//
-	//gatewayInstance.events.ERC20Received((err, event) => {
-	//	if (err) //console.error('Error on event', err)
-	//		log("error");
-	//	else {
-	//		console.log("algo hay!!!!!");
-	//		if (this.onEvent) {
-	//			console.log("Entro el evento!!!!");
-	//			//console.log(event);
-	//			//this.onEvent(event.returnValues)
-	//		}
-	//	}
-	//});		
-	//
-	//gatewayInstance.events.ETHReceived((err, event) => {
-	//	if (err) 
-	//		//console.error('Error on event', err)
-	//		log("error");
-	//	else {
-	//		console.log("algo hay!!!!!");
-	//		if (this.onEvent) {
-	//			console.log("Entro el evento!!!!");
-	//			//console.log(event);
-	//			//this.onEvent(event.returnValues)
-	//		}
-	//	}
-	//});
-//
-//
-	//gatewayInstance.events.TokenWithdrawn((err, event) => {
-	//	if (err) 
-	//		//console.error('Error on event', err)
-	//		log("error");
-	//	else {
-	//		console.log("algo hay!!!!!");
-	//		if (this.onEvent) {
-	//			console.log("Entro el evento!!!!");
-	//			//console.log(event);
-	//			//this.onEvent(event.returnValues)
-	//		}
-	//	}
-	//});
-	//gatewayInstance.events.AddedValidator((err, event) => {
-	//	if (err) 
-	//		//console.error('Error on event', err)
-	//		log("error");
-	//	else {
-	//		console.log("algo hay!!!!!");
-	//		if (this.onEvent) {
-	//			console.log("Entro el evento!!!!");
-	//			//console.log(event);
-	//			//this.onEvent(event.returnValues)
-	//		}
-	//	}
-	//});
-	//gatewayInstance.events.RemovedValidator((err, event) => {
-	//	if (err) 
-	//		//console.error('Error on event', err)
-	//		log("error");
-	//	else {
-	//		console.log("algo hay!!!!!");
-	//		if (this.onEvent) {
-	//			console.log("Entro el evento!!!!");
-	//			//console.log(event);
-	//			//this.onEvent(event.returnValues)
-	//		}
-	//	}
-	//});
-	//gatewayInstance.events.OwnershipTransferred((err, event) => {
-	//	if (err) 
-	//		//console.error('Error on event', err)
-	//		log("error");
-	//	else {
-	//		console.log("algo hay!!!!!");
-	//		if (this.onEvent) {
-	//			console.log("Entro el evento!!!!");
-	//			//console.log(event);
-	//			//this.onEvent(event.returnValues)
-	//		}
-	//	}
-	//});
-
-	var event = gatewayInstance.events.allEvents((err, event) => {
+	console.log('EVENTOS:', gatewayInstance.events);
+	gatewayInstance.events.NewDragon((err, event) => {
 		if (err) 
 			//console.error('Error on event', err)
 			log("error");
 		else {
-			console.log("algo hay1!!!!!");
+			console.log("[SIDECHAIN]: NewDragon event!!!!!");
 			console.log(event);
 			if (this.onEvent) {
 				console.log("Entro el evento!!!!");
-				//console.log(event);
-				this.onEvent(event)
 			}
 		}
 	})

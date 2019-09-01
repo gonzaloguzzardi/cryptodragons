@@ -15,13 +15,8 @@ const BN = require('bn.js')
 
 const DappchainDragonTokenJson = require('./src/contracts/DappchainTransferableDragon.json')
 const DaapchainCoinJson = require('./src/contracts/DappchainDragonCoin.json')
-const DaapchainGatewayJson = require('./src/contracts/DappchainGateway.json')
 
 const dirPath = "../loom_test_accounts"
-
-/*const TransferGateway = Contracts.TransferGateway
-const AddressMapper = Contracts.AddressMapper
-const EthCoin = Contracts.EthCoin*/
 
 const loomChainId = '13654820909954' // TODO ver si cambia o si es siempre el mismo
 
@@ -34,43 +29,11 @@ async function getLoomCoinContract(web3js) {
     )
 }
 
-function getGatewayAddress() {
-    return DaapchainGatewayJson.networks[loomChainId].address
-}
-
 async function getLoomTokenContract(web3js) {
     return new web3js.eth.Contract(
         DappchainDragonTokenJson.abi,
         DappchainDragonTokenJson.networks[loomChainId].address,
     )
-}
-
-async function getLoomGatewayContract(web3js) {
-    return new web3js.eth.Contract(
-        DaapchainGatewayJson.abi,
-        DaapchainGatewayJson.networks[loomChainId].address,
-    )
-}
-
-async function getLoomCoinBalance(web3js, accountAddress) {
-    const contract = await getLoomCoinContract(web3js)
-    const addr = accountAddress.toLowerCase()
-    const balance = await contract.methods
-      .balanceOf(addr)
-      .call({ from: addr })
-    return balance
-  }
-
-async function getLoomTokenBalance(web3js, accountAddress) {
-    const contract = await getLoomTokenContract(web3js)
-    const addr = accountAddress.toLowerCase()
-    const total = await contract.methods
-    .balanceOf(addr)
-    .call({ from: addr })
-    const tokensIds = await contract.methods
-        .tokensIdsOwnedBy(addr)
-        .call({ from: addr })
-    return { total, tokensIds }
 }
 
 function createAccount(accountName) {

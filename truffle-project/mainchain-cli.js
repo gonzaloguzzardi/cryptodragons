@@ -14,9 +14,10 @@ async function getGanacheTokenContract(web3js) {
 }
 
 function loadGanacheAccount() {
-  const privateKey = fs.readFileSync(path.join(__dirname, './ganache_private_key'), 'utf-8')
+  //const privateKey = fs.readFileSync(path.join(__dirname, './ganache_private_key'), 'utf-8')
+  //const ownerAccount = web3js.eth.accounts.privateKeyToAccount(privateKey)
   const web3js = new Web3(new Web3.providers.HttpProvider('http://127.0.0.1:8545'));
-  const ownerAccount = web3js.eth.accounts.privateKeyToAccount(privateKey)
+  const ownerAccount = fs.readFileSync(path.join(__dirname, './ganache_account'), 'utf-8')
   web3js.eth.accounts.wallet.add(ownerAccount)
   return { account: ownerAccount, web3js }
 }
@@ -26,16 +27,15 @@ async function createDragonToken(web3js, ownerAccount, gas) {
   
   const gasEstimate = await contract.methods
     .createDragon("test dragon", 1, 2, 2)
-    .estimateGas({ from: ownerAccount['address'], gas: 35000 })
-    //.estimateGas({ from: ownerAccount, gas: 35000 })
-    
+    .estimateGas({ from: ownerAccount, gas })
+  
   if (gasEstimate == gas) {
     throw new Error('Not enough enough gas, send more.')
   }
+  
   return contract.methods
     .createDragon("test dragon", 1, 2, 2)
-    .send({ from: ownerAccount['address'], gas: 35000 })
-    //.send({ from: ownerAccount, gas: 35000 })
+    .send({ from: ownerAccount, gas })
 }
 
 async function getMyDragons(web3js, ownerAccount, gas) {

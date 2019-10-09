@@ -32,6 +32,9 @@ module.exports = function (deployer, network, accounts) {
     console.log(`DragonCoin deployed at address: ${dragonCoinInstance.address}`)
     console.log(`DragonCoin transaction at hash: ${dragonCoinContract.transactionHash}`)
 
+    // map gateway and contract addresses
+    await gatewayInstance.setERC721ContractAddress(dragonTokenInstance.address)
+
     //await gatewayInstance.toggleToken(dragonTokenInstance.address, { from: validator })
     //await dragonTokenInstance.register(user)
 

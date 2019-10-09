@@ -3,8 +3,7 @@ pragma solidity ^0.5.0;
 import "../common/DragonFactory.sol";
 
 contract IDappchainGateway {
-  function onERC721Received(address operator, address _from, uint256 _uid, bytes memory data)public returns (bytes4) {}
-  function onERC20Received(address _from, uint256 amount) public returns (bytes4) {}
+  function depositERC721(address from, address to, uint256 uid, bytes memory data) public {}
 }
 
 contract DappchainTransferableDragon is DragonFactory {
@@ -46,6 +45,6 @@ contract DappchainTransferableDragon is DragonFactory {
         transferFrom(msg.sender, _gateway, _tokenId);
 
         IDappchainGateway gateway = IDappchainGateway(_gateway);
-        gateway.onERC721Received(msg.sender, msg.sender, _tokenId, encodedDragon);
+        gateway.depositERC721(msg.sender, _gateway, _tokenId, encodedDragon);
     }
 }

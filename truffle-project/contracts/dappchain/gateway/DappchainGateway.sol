@@ -20,11 +20,15 @@ contract DappchainGateway is IERC20Receiver, IERC721Receiver, DappchainValidator
     mapping(address => mapping(uint256 => bytes)) erc721;
   }
 
+  address private _erc721ContractAddress;
+
   mapping (address => Balance) balances;
 
   event ETHReceived(address from, uint256 amount);
   event ERC20Received(address from, uint256 amount, address contractAddress);
   event ERC721Received(address from, uint256 uid, address contractAddress, bytes data);
+
+  event ERC721ReceivedFromMainchain(address from, uint256 uid, address to, bytes data);
 
   enum TokenKind {
     ETH,
@@ -45,12 +49,37 @@ contract DappchainGateway is IERC20Receiver, IERC721Receiver, DappchainValidator
     public DappchainValidatorManagerContract(_validators, _threshold_num, _threshold_denom) {
   }
 
+
+  function setERC721ContractAddress(address contractAddress) external onlyOwner {
+    require(contractAddress != address(0), "Invalid address parameter");
+    require(_erc721ContractAddress == address(0), "contract con only be set once");
+    _erc721ContractAddress = contractAddress;
+  }
+
+  /**
+  * @dev Throws if called by any account other than the owner.
+  */
+  modifier onlyERC721Contract() {
+      require(msg.sender == _erc721ContractAddress, "Only the erc721 contract can perform this action");
+      _;
+  }
+
+  /******************* Nuestras funciones sin validadores *************************** */
+
+  function depositERC721(address from, address to, uint256 uid, bytes memory data) public onlyERC721Contract {
+      balances[from].erc721[msg.sender][uid] = data;
+      emit ERC721Received(from, uid, msg.sender, data);
+      emit ERC721ReceivedFromMainchain(from, uid, to, data);
+  }
+
+  /*********************************************************************************** */
+
   // Deposit functions
   function depositETH() private {
     balances[msg.sender].eth = balances[msg.sender].eth.add(msg.value);
   }
 
-  function depositERC721(address from, uint256 uid, bytes memory data) private {
+  function _depositERC721(address from, uint256 uid, bytes memory data) private {
     balances[from].erc721[msg.sender][uid] = data;
   }
 
@@ -112,9 +141,8 @@ contract DappchainGateway is IERC20Receiver, IERC721Receiver, DappchainValidator
     public
     returns (bytes4)
   {
-    //@TODO: Depende que permitimos (la siguiente linea)
-    //require(allowedTokens[msg.sender], "Not a valid token");
-    depositERC721(_from, _uid, data);
+    require(allowedTokens[msg.sender], "Not a valid token");
+    _depositERC721(_from, _uid, data);
     emit ERC721Received(_from, _uid, msg.sender, data);
     return ERC721_RECEIVED;
   }

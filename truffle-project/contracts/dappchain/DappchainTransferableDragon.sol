@@ -3,11 +3,13 @@ pragma solidity ^0.5.0;
 import "../common/DragonFactory.sol";
 
 contract IDappchainGateway {
-  function depositERC721(address from, address to, uint256 uid, bytes memory data) public {}
+  function depositDragon(address from, address to, uint256 uid, bytes memory data) public {}
 }
 
 contract DappchainTransferableDragon is DragonFactory {
     address private _gateway;
+
+    // map sidechain address to mainchain address
     mapping (address => address) private _mainnetMapping;
 
     constructor(address gateway) DragonBase() public {
@@ -19,6 +21,12 @@ contract DappchainTransferableDragon is DragonFactory {
     function setGatewayAddress(address gateway) external onlyOwner {
         //TODO check address is a gateway
         _gateway = gateway;
+    }
+
+    // Used by the DAppChain Gateway to mint tokens that have been deposited to the Ethereum Gateway
+    function retrieveToken(address receiver, uint256 _tokenId, bytes memory _data) public {
+        require(msg.sender == _gateway, "only the gateway is allowed to call this function");
+        _mintDragon(receiver, _tokenId, _data);
     }
 
     function undoMapping(address owner, address mainnetAddress) external onlyOwner {
@@ -33,18 +41,12 @@ contract DappchainTransferableDragon is DragonFactory {
         _mainnetMapping[msg.sender] = mainnetAddress;
     }
 
-    // Used by the DAppChain Gateway to mint tokens that have been deposited to the Ethereum Gateway
-    function mintToGateway(uint256 _tokenId, bytes memory _data) public {
-        require(msg.sender == _gateway, "only the gateway is allowed to mint");
-        _mintDragon(_gateway, _tokenId, _data);
-    }
-
-    function transferToGateway(uint256 _tokenId) public {
+    function transferToGateway(uint256 _tokenId) public onlyDragonOwner(_tokenId) {
         Dragon storage dragon = dragons[_tokenId];
         bytes memory encodedDragon = _encodeDragonToBytes(dragon);
         transferFrom(msg.sender, _gateway, _tokenId);
 
         IDappchainGateway gateway = IDappchainGateway(_gateway);
-        gateway.depositERC721(msg.sender, _gateway, _tokenId, encodedDragon);
+        gateway.depositDragon(msg.sender, _mainnetMapping[msg.sender], _tokenId, encodedDragon);
     }
 }

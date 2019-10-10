@@ -3,11 +3,13 @@ pragma solidity ^0.5.0;
 import "../common/DragonFactory.sol";
 
 contract IMainnetGateway {
-  function depositERC721(address from, address to, uint256 uid, bytes memory data) public {}
+  function depositDragon(address from, address to, uint256 uid, bytes memory data) public {}
 }
 
 contract MainnetTransferableDragon is DragonFactory {
     address private _gateway;
+
+    // map mainnet address to sidechain address
     mapping (address => address) private _sidechainMapping;
 
     constructor(address gateway) DragonBase() public {
@@ -18,6 +20,11 @@ contract MainnetTransferableDragon is DragonFactory {
     // Setter to update who the gateway is
     function setGatewayAddress(address gateway) external onlyOwner {
         _gateway = gateway;
+    }
+
+    function retrieveToken(address receiver, uint256 _tokenId, bytes memory _data) public {
+        require(msg.sender == _gateway, "only the gateway is allowed to call this function");
+        _mintDragon(receiver, _tokenId, _data);
     }
 
     function undoMapping(address owner, address sidechainAddress) external onlyOwner {
@@ -32,13 +39,13 @@ contract MainnetTransferableDragon is DragonFactory {
         _sidechainMapping[msg.sender] = sidechainAddress;
     }
 
-    function transferToGateway(uint256 _tokenId) public {
+    function transferToGateway(uint256 _tokenId) public onlyDragonOwner(_tokenId) {
         Dragon storage dragon = dragons[_tokenId];
         bytes memory encodedDragon = _encodeDragonToBytes(dragon);
         transferFrom(msg.sender, _gateway, _tokenId);
 
         IMainnetGateway gateway = IMainnetGateway(_gateway);
-        gateway.depositERC721(msg.sender, _gateway, _tokenId, encodedDragon);
+        gateway.depositDragon(msg.sender, _sidechainMapping[msg.sender], _tokenId, encodedDragon);
     }
 
     function register(uint256 _uid) public pure {}

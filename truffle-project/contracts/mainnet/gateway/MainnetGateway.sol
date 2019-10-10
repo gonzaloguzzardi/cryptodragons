@@ -7,6 +7,10 @@ import "../../common/token/IERC721Receiver.sol";
 import "../../common/token/IERC20Receiver.sol";
 import "./MainnetValidatorManagerContract.sol";
 
+contract IDragonContract {
+    function retrieveToken(address receiver, uint256 _tokenId, bytes memory _data) public {}
+}
+
 contract MainnetGateway is IERC20Receiver, IERC721Receiver, MainnetValidatorManagerContract {
 
   using SafeMath for uint256;
@@ -23,12 +27,14 @@ contract MainnetGateway is IERC20Receiver, IERC721Receiver, MainnetValidatorMana
   address private _erc721ContractAddress;
 
   mapping (address => Balance) balances;
+  mapping (uint => bool) lockedDragons;
 
   event ETHReceived(address from, uint256 amount);
   event ERC20Received(address from, uint256 amount, address contractAddress);
   event ERC721Received(address from, uint256 uid, address contractAddress, bytes data);
 
-  event ERC721ReceivedFromMainchain(address from, uint256 uid, address to, bytes data);
+  event SendDragonToSidechainAttempt(address from, uint256 uid, address toSidechainAddress, bytes data);
+  event DragonSuccessfullyRetrievedInSidechain(address sidechainAddress, uint256 uid, bytes data);
 
   enum TokenKind {
     ETH,
@@ -58,17 +64,48 @@ contract MainnetGateway is IERC20Receiver, IERC721Receiver, MainnetValidatorMana
   /**
   * @dev Throws if called by any account other than the owner.
   */
-  modifier onlyERC721Contract() {
+  modifier onlyDragonContract() {
       require(msg.sender == _erc721ContractAddress, "Only the erc721 contract can perform this action");
       _;
   }
 
   /******************* Nuestras funciones sin validadores *************************** */
 
-  function depositERC721(address from, address to, uint256 uid, bytes memory data) public onlyERC721Contract {
-      balances[from].erc721[msg.sender][uid] = data;
-      emit ERC721Received(from, uid, msg.sender, data);
-      emit ERC721ReceivedFromMainchain(from, uid, to, data);
+  /**
+  * @dev Se llama cuando se quiere transferir un dragon a la otra blockchain
+  */
+  function depositDragon(address from, address toSidechainAddress, uint256 uid, bytes memory data) public onlyDragonContract {
+      // locked dragon to know a transference was made for this id
+      lockedDragons[uid] = true;
+      balances[from].erc721[from][uid] = data;
+      emit SendDragonToSidechainAttempt(from, uid, toSidechainAddress, data);
+  }
+
+   //@TODO hacer onlyOracle
+  /**
+  * @dev Se llama cuando se recibe un dragon desde la otra blockchain
+  */
+  function receiveDragon(address mainchainAddress, uint256 uid, bytes memory data) public {
+    if (lockedDragons[uid]) { // Token isnt new
+      require(balances[mainchainAddress].erc721[mainchainAddress][uid].length > 0, "Does not own token");
+    }
+    IDragonContract(mainchainAddress).retrieveToken(mainchainAddress, uid, data);
+    delete lockedDragons[uid];
+    delete balances[mainchainAddress].erc721[mainchainAddress][uid];
+    emit DragonSuccessfullyRetrievedInSidechain(mainchainAddress, uid, data);
+  }
+
+  //@TODO hacer onlyOracle
+  /**
+  * @dev Se llama cuando el usuario hace un withdraw del dragon. Primero se debe bloquear el dragon en la otra blockchain
+  */
+  function withdrawDragon(address mainchainAddress, uint256 uid) public {
+    require(balances[mainchainAddress].erc721[mainchainAddress][uid].length > 0, "Does not own token");
+    bytes storage dragonData = balances[mainchainAddress].erc721[mainchainAddress][uid];
+    IDragonContract(mainchainAddress).retrieveToken(mainchainAddress, uid, dragonData);
+    delete lockedDragons[uid];
+    delete balances[mainchainAddress].erc721[mainchainAddress][uid];
+    emit DragonWithdrawal(mainchainAddress, uid);
   }
 
   /*********************************************************************************** */

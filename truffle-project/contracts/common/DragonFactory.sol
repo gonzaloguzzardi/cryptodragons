@@ -7,6 +7,9 @@ contract DragonFactory is DragonBase {
     uint constant dnaDigits = 16;
     uint constant dnaModulus = 10 ** dnaDigits;
 
+    // Maps mainchain ids to sidechain ids
+    mapping(uint => uint) internal  _mainchainToSidechainIds;
+
     event NewDragon(uint dragonId, uint dna);
 
     // TODO RESTRICT ACCESS
@@ -18,7 +21,7 @@ contract DragonFactory is DragonBase {
        // Dragon storage mother = dragons[_motherId];
 
         uint256 newGenes = 14564515454;
-        
+
         bytes32 nameInBytes = _stringToBytes32(_name);
         uint id = _createDragon(nameInBytes, _creationTime, newGenes, _dadId, _motherId);
 
@@ -38,34 +41,32 @@ contract DragonFactory is DragonBase {
         } else {
             _updateDragonFromData(_tokenId, _data);
         }
-  
     }
 
     function _createDragon(bytes32 _name, uint64 _creationTime, uint256 _genes, uint32 _dadId, uint32 _motherId) private returns(uint256 id) {
         uint32 currentExperience = 0;
         uint16 actionCooldown = 0;
-        uint16 health = 50; 
+        uint16 health = 50;
         uint16 strength = 7;
         uint16 agility = 7;
         uint16 fortitude = 7;
-        uint16 hatchTime = 60; 
+        uint16 hatchTime = 60;
         id = _createDragonWithStats(_genes, _name, _creationTime, _dadId, _motherId, currentExperience,
                     actionCooldown, health, strength, agility, fortitude,hatchTime);
     }
 
     function _createDragonFromData(bytes memory _data) private returns(uint256) {
-        
-        (uint _genes, 
-        bytes32 _name, 
-        uint64 _creationTime, 
-        uint32 _dadId, 
-        uint32 _motherId, 
+        (uint _genes,
+        bytes32 _name,
+        uint64 _creationTime,
+        uint32 _dadId,
+        uint32 _motherId,
         uint32 _currentExperience,
         uint16 _actionCooldown,
-        uint16 _health, 
+        uint16 _health,
         uint16 _strength,
-        uint16 _agility, 
-        uint16 _fortitude, 
+        uint16 _agility,
+        uint16 _fortitude,
         uint16 _hatchTime) = _decodeDragonFromBytes(_data);
 
         uint id = _createDragonWithStats(_genes, _name, _creationTime, _dadId, _motherId, _currentExperience,
@@ -75,17 +76,17 @@ contract DragonFactory is DragonBase {
     }
 
     function _createDragonWithStats
-        (uint256 _genes, 
-        bytes32 _name, 
-        uint64 _creationTime, 
-        uint32 _dadId, 
-        uint32 _motherId, 
+        (uint256 _genes,
+        bytes32 _name,
+        uint64 _creationTime,
+        uint32 _dadId,
+        uint32 _motherId,
         uint32 _currentExperience,
         uint16 _actionCooldown,
-        uint16 _health, 
+        uint16 _health,
         uint16 _strength,
-        uint16 _agility, 
-        uint16 _fortitude, 
+        uint16 _agility,
+        uint16 _fortitude,
         uint16 _hatchTime) private returns(uint256 id) {
 
         id = dragons.push(Dragon(
@@ -114,7 +115,7 @@ contract DragonFactory is DragonBase {
 
         // Assign genes in different function as a workaround to the stack too deep exception
         _assignGenes(id, _genes);
-    } 
+    }
 
     function _assignGenes(uint256 _dragonId, uint256 _genes) private {
         Dragon storage dragon = dragons[_dragonId];
@@ -122,17 +123,17 @@ contract DragonFactory is DragonBase {
     }
 
     function _updateDragonFromData(uint _sidechainId, bytes memory _data) private {
-        (uint256 _genes, 
-        bytes32 _name, 
-        uint64 _creationTime, 
-        uint32 _dadId, 
-        uint32 _motherId, 
+        (uint256 _genes,
+        bytes32 _name,
+        uint64 _creationTime,
+        uint32 _dadId,
+        uint32 _motherId,
         uint32 _currentExperience,
         uint16 _actionCooldown,
-        uint16 _health, 
+        uint16 _health,
         uint16 _strength,
-        uint16 _agility, 
-        uint16 _fortitude, 
+        uint16 _agility,
+        uint16 _fortitude,
         uint16 _hatchTime) = _decodeDragonFromBytes(_data);
 
         _updateDragonWithStatsFromSidechain(_sidechainId, _genes, _name, _creationTime, _dadId, _motherId, _currentExperience,
@@ -141,20 +142,19 @@ contract DragonFactory is DragonBase {
 
     function _updateDragonWithStatsFromSidechain
         (uint _sidechainId,
-        uint _genes, 
-        bytes32 _name, 
-        uint64 _creationTime, 
-        uint32 _dadId, 
-        uint32 _motherId, 
+        uint _genes,
+        bytes32 _name,
+        uint64 _creationTime,
+        uint32 _dadId,
+        uint32 _motherId,
         uint32 _currentExperience,
         uint16 _actionCooldown,
-        uint16 _health, 
+        uint16 _health,
         uint16 _strength,
-        uint16 _agility, 
-        uint16 _fortitude, 
+        uint16 _agility,
+        uint16 _fortitude,
         uint16 _hatchTime) private {
 
-            
         uint tokenId = _mainchainToSidechainIds[_sidechainId];
         require(tokenId != 0, "invalid token id");
 

@@ -57,7 +57,7 @@ contract ERC721 is ERC165, IERC721 {
      * @return uint256 representing the amount owned by the passed address
      */
     function balanceOf(address owner) public view returns (uint256) {
-        require(owner != address(0));
+        require(owner != address(0), "Invalid address");
         return _ownedTokensCount[owner].current();
     }
 
@@ -131,7 +131,7 @@ contract ERC721 is ERC165, IERC721 {
      * @param tokenId uint256 ID of the token to be transferred
      */
     function transferFrom(address from, address to, uint256 tokenId) public {
-        require(_isApprovedOrOwner(msg.sender, tokenId));
+        require(_isApprovedOrOwner(msg.sender, tokenId), "Sender doesn't own this token or have rights on it");
 
         _transferFrom(from, to, tokenId);
     }
@@ -165,7 +165,7 @@ contract ERC721 is ERC165, IERC721 {
      */
     function safeTransferFrom(address from, address to, uint256 tokenId, bytes memory _data) public {
         transferFrom(from, to, tokenId);
-        require(_checkOnERC721Received(from, to, tokenId, _data));
+        require(_checkOnERC721Received(from, to, tokenId, _data), "Target address does not implement onERC721Received interface");
     }
 
     /**
@@ -239,8 +239,8 @@ contract ERC721 is ERC165, IERC721 {
      * @param tokenId uint256 ID of the token to be transferred
      */
     function _transferFrom(address from, address to, uint256 tokenId) internal {
-        require(ownerOf(tokenId) == from);
-        require(to != address(0));
+        require(ownerOf(tokenId) == from, "Sender doesnt own token to be transfered");
+        require(to != address(0), "Invalid address. Error transferic token");
 
         _clearApproval(tokenId);
 

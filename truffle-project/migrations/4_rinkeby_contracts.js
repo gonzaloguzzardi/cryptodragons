@@ -36,6 +36,9 @@ module.exports = function (deployer, network, accounts) {
     // await gatewayInstance.toggleToken(dragonTokenInstance.address, { from: validator })
     // await dragonTokenInstance.register(user)
 
+    // map gateway and contract addresses
+    await gatewayInstance.setERC721ContractAddress(dragonTokenInstance.address)
+
     writeFileSync('../mainnet_gateway_address', gatewayInstance.address)
     writeFileSync('../mainnet_dragon_token_address', dragonTokenInstance.address)
     writeFileSync('../mainnet_dragon_token_tx_hash', dragonTokenContract.transactionHash)

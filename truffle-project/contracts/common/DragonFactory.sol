@@ -7,6 +7,9 @@ contract DragonFactory is DragonBase {
     uint constant dnaDigits = 16;
     uint constant dnaModulus = 10 ** dnaDigits;
 
+    // Maps mainchain ids to sidechain ids
+    mapping(uint => uint) internal  _mainchainToSidechainIds;
+
     event NewDragon(uint dragonId, uint dna);
 
     // TODO RESTRICT ACCESS
@@ -152,7 +155,6 @@ contract DragonFactory is DragonBase {
         uint16 _fortitude,
         uint16 _hatchTime) private {
 
-            
         uint tokenId = _mainchainToSidechainIds[_sidechainId];
         require(tokenId != 0, "invalid token id");
 

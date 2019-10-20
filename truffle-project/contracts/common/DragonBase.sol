@@ -8,9 +8,6 @@ contract DragonBase is ERC721Enumerable, Ownable {
     uint constant dnaDigits = 16;
     uint constant dnaModulus = 10 ** dnaDigits;
 
-    // Maps mainchain ids to sidechain ids
-    mapping(uint => uint) internal  _mainchainToSidechainIds;
-
     struct Dragon {
         uint256 genes;
         bytes32 name; // maybe we can avoid saving the name in teh blockchain
@@ -27,7 +24,7 @@ contract DragonBase is ERC721Enumerable, Ownable {
         uint16 actionCooldown; // time to be waited to perform an action
 
         // fighting attributes
-        uint16 health; 
+        uint16 health;
         uint16 strength;
         uint16 agility;
         uint16 fortitude;

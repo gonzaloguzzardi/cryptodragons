@@ -1,9 +1,0 @@
-contracts:
-	- contrato crypto dragons 
- 
-migrations:
-	- encargado de generar y buildear tood
-
-scripts:
-	- deployea todos los contratos.
-

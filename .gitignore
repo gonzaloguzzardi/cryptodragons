@@ -1,14 +1,6 @@
 protobuf-*
-truffle-dappchain/yarn.lock
-webclient/yarn.lock
 *.meta
-dappchain/extdev_private_key
-dappchain/extdev_public_key
 
-dragon_token_address
-dragon_token_tx_hash
-gateway_address
-dappchain-scripts/build/
 loom_dragon_token_tx_hash
 loom_gateway_address
 loom_dragon_token_address

@@ -28,5 +28,8 @@
     "web3": "1.0.0-beta.37",
     "loom-js": "latest",
     "bn": "latest"
+  },
+  "dependencies": {
+    "web3": "^1.0.0-beta.37"
   }
 }

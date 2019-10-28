@@ -14,6 +14,11 @@ Aplicación descentralizada (DApp) que utiliza el concepto de [2-way peg (2WP)](
 
 ## General Setup
 
+Antes que nada, debemos setear la versión correcta de Node que utilizamos en el proyecto, con el siguiente comando:
+```
+$ nvm use
+```
+
 ```bash
 $ sudo apt-get update & sudo apt-get upgrade
 $ sudo apt-get install yarn

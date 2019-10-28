@@ -12,7 +12,6 @@ node_js:
 cache:
   - npm
   - yarn
-  - truffle
 
 before_install:
   - npm install -g node-gyp

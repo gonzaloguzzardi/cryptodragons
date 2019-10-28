@@ -3,8 +3,8 @@ const Web3 = require('web3');
 const path = require('path')
 const BN = require('bn.js');
 
-//const Gateway = require("../truffle-project/src/contracts/DappchainGateway");
-const Gateway = require("../truffle-project/src/contracts/DappchainTransferableDragon");
+const Gateway = require("../truffle-project/src/contracts/DappchainGateway");
+//const Gateway = require("../truffle-project/src/contracts/DappchainTransferableDragon");
 
 const {
 	NonceTxMiddleware, SignedTxMiddleware, Client,
@@ -27,8 +27,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 
-var user = { name: "origin" };
-var collection = "users";
+var collection = "transactions";
 var database = "crypto-dragons";
 var url = "mongodb://localhost:27017/" + database;
 
@@ -120,20 +119,46 @@ function eventGetter() {
 			}
 		}
 	})
-	
+
+	gatewayInstance.events.SendDragonToMainchainAttempt((err, event) => {
+		if (err) 
+			log("error");
+		else {
+			console.log(event);
+			transaction = transforEventIntoTransactionObj(event);
+			console.log(transaction);
+			insertOnMongo(database,url,transaction,collection);
+		}
+	});
+
+	//var event = gatewayInstance.events.allEvents((err, event) => {
+	//	if (err) 
+	//		//console.error('Error on event', err)
+	//		log("error");
+	//	else {
+	//		console.log("algo hay1!!!!!");
+	//		console.log(event);
+	//		if (this.onEvent) {
+	//			console.log("Entro el evento!!!!");
+	//			//console.log(event);
+	//			this.onEvent(event)
+	//		}
+	//	}
+	//})
+
 }
 
-function insertOnMongo(database,url,user,collection) {
+function insertOnMongo(database,url,transaction,collection) {
 	MongoClient.connect(url, function(err, db) {
 	  if (err) throw err;
 	  var dbo = db.db(database);
-	  dbo.collection(collection).insertOne(myobj, function(err, res) {
+	  dbo.collection(collection).insertOne(transaction, function(err, res) {
 		if (err) throw err;
 		console.log("inserted...");
 		db.close();
 	  });
 	});	
-	return user;
+	return transaction;
 } 
 
 fs.readFile( __dirname + "/" + "config.json", 'utf8', function (err, data) {
@@ -276,5 +301,15 @@ function msjFinish(msj) {
 	return true;
 }
 
+function transforEventIntoTransactionObj(event) {
+	console.log(event);
+	var transaction = new Object();
+	transaction.id = event.returnValues.uid;
+	transaction.data = event.raw.data;
+	transaction.to = event.returnValues.toMainchainAddress;
+	transaction.from = event.returnValues.from;
+	transaction.type = event.event;
+	return transaction
+}
 
 eventGetter();

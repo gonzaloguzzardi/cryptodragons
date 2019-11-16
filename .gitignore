@@ -10,3 +10,6 @@ mainnet_dragon_token_address
 mainnet_dragon_token_tx_hash
 mainnet_gateway_address
 loom_test_accounts/
+truffle-project/bfa/devnet/bfa_address
+truffle-project/bfa/devnet/geth/
+truffle-project/bfa/devnet/

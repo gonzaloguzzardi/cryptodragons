@@ -36,3 +36,5 @@ fi
 echo "BFA ACCOUNT ADDRESS = $BFA_PUB_KEY"
 
 puppeth
+
+# geth --datadir ../bfa/devnet/network/node init devnet.json

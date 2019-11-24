@@ -104,6 +104,36 @@ Para sustituir contratos ya existentes en la blockchain:
 $ yarn deploy:reset:ganache
 ```
 
+## Oracle
+
+Asegurarse de estar en el directorio `oracle`
+
+#### 1. Correr Oracle
+```bash
+node oracle.js
+```
+
+## Sidechain-cli
+
+Asegurarse de estar en el directorio `truffle-project`
+
+#### 1. Emitir un evento
+```bash
+node sidechain-cli.js create-dragon
+node sidechain-cli.js my-dragons
+```
+
+## Mainchain-cli
+
+Asegurarse de estar en el directorio `truffle-project`
+
+#### 1. Emitir un evento
+```bash
+node mainchain-cli.js create-dragon
+node mainchain-cli.js my-dragons
+```
+
+
 ## Loom Network
 
 [https://loomx.io](https://loomx.io)
@@ -111,4 +141,3 @@ $ yarn deploy:reset:ganache
 ## License
 
 GNU GPLv3
- 

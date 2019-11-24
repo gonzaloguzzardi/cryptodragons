@@ -3,8 +3,9 @@ const Web3 = require('web3');
 const path = require('path')
 const BN = require('bn.js');
 
-const Gateway = require("../truffle-project/src/contracts/DappchainGateway");
-//const Gateway = require("../truffle-project/src/contracts/DappchainTransferableDragon");
+//const Gateway = require("../truffle-project/src/contracts/DappchainGateway");
+const Gateway = require("../truffle-project/src/contracts/DappchainTransferableDragon");
+const MainChainGateway = require("../truffle-project/src/contracts/MainnetTransferableDragon");
 
 const {
 	NonceTxMiddleware, SignedTxMiddleware, Client,
@@ -72,7 +73,7 @@ function _createClient() {
 	return LocalAddress.fromPublicKey(publicKey).toString();
 }
 
-function eventGetter() {
+function listenSideChainEvents() {
 	var accountPath = '../truffle-project/loom_private_key'
     const privateKeyStr = fs.readFileSync(path.join(__dirname, accountPath), 'utf-8')
     const privateKey = CryptoUtils.B64ToUint8Array(privateKeyStr)
@@ -81,9 +82,6 @@ function eventGetter() {
       'default',
       'ws://127.0.0.1:46658/websocket',
 	  'ws://127.0.0.1:46658/queryws'
-	  //'default',
-	  //'http://127.0.0.1:46658/rpc',
-	  //'http://127.0.0.1:46658/query'
     )
     client.txMiddleware = [
       new NonceTxMiddleware(publicKey, client),
@@ -98,7 +96,7 @@ function eventGetter() {
 
 	let currentNetwork = Gateway.networks
 	if (!currentNetwork) {
-	throw Error('Contract not deployed on DAppChain')
+		throw Error('Contract not deployed on DAppChain')
 	}
 
 	var gatewayInstance = new web3.eth.Contract(
@@ -106,12 +104,10 @@ function eventGetter() {
 		currentNetwork["13654820909954"].address
 	)
 
-	console.log('EVENTOS:', gatewayInstance.events);
 	gatewayInstance.events.NewDragon((err, event) => {
-		if (err) 
-			//console.error('Error on event', err)
-			log("error");
-		else {
+		if (err) {
+			console.error('Error on event', err);
+		} else {
 			console.log("[SIDECHAIN]: NewDragon event!!!!!");
 			console.log(event);
 			if (this.onEvent) {
@@ -119,33 +115,38 @@ function eventGetter() {
 			}
 		}
 	})
+}
 
-	gatewayInstance.events.SendDragonToMainchainAttempt((err, event) => {
-		if (err) 
-			log("error");
-		else {
+function listenMainChainEvents() {
+	const web3MainChain = new Web3(new Web3.providers.WebsocketProvider('http://127.0.0.1:8545'));
+	const MainChainABI = MainChainGateway.abi;
+
+	let currentMainChainNetwork = MainChainGateway.networks
+	if (!currentMainChainNetwork) {
+		throw Error('Contract not deployed on DAppChain')
+	}
+
+	var mainChainGatewayInstance = new web3MainChain.eth.Contract(
+		MainChainABI,
+		currentMainChainNetwork["5777"].address
+	)
+
+	mainChainGatewayInstance.events.NewDragon((err, event) => {
+		if (err) {
+			console.error('Error on event', err);
+		} else {
+			console.log("[MAINCHAIN]: NewDragon event!!!!!");
 			console.log(event);
-			transaction = transforEventIntoTransactionObj(event);
-			console.log(transaction);
-			insertOnMongo(database,url,transaction,collection);
+			if (this.onEvent) {
+				console.log("Entro el evento!!!!");
+			}
 		}
-	});
+	})
+}
 
-	//var event = gatewayInstance.events.allEvents((err, event) => {
-	//	if (err) 
-	//		//console.error('Error on event', err)
-	//		log("error");
-	//	else {
-	//		console.log("algo hay1!!!!!");
-	//		console.log(event);
-	//		if (this.onEvent) {
-	//			console.log("Entro el evento!!!!");
-	//			//console.log(event);
-	//			this.onEvent(event)
-	//		}
-	//	}
-	//})
-
+function eventGetter() {
+	listenSideChainEvents();
+	listenMainChainEvents();
 }
 
 function insertOnMongo(database,url,transaction,collection) {

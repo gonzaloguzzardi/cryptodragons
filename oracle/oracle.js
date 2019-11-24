@@ -94,14 +94,13 @@ function listenSideChainEvents() {
 	const web3 = new Web3(new LoomProvider(client, privateKey));
 	const ABI = Gateway.abi;
 
-	let currentNetwork = Gateway.networks
-	if (!currentNetwork) {
+	if (!Gateway.networks) {
 		throw Error('Contract not deployed on DAppChain')
 	}
 
 	var gatewayInstance = new web3.eth.Contract(
 		ABI,
-		currentNetwork["13654820909954"].address
+		Gateway.networks["13654820909954"].address
 	)
 
 	gatewayInstance.events.NewDragon((err, event) => {
@@ -121,14 +120,13 @@ function listenMainChainEvents() {
 	const web3MainChain = new Web3(new Web3.providers.WebsocketProvider('http://127.0.0.1:8545'));
 	const MainChainABI = MainChainGateway.abi;
 
-	let currentMainChainNetwork = MainChainGateway.networks
-	if (!currentMainChainNetwork) {
-		throw Error('Contract not deployed on DAppChain')
+	if (!MainChainGateway.networks) {
+		throw Error('Contract not deployed on Mainchain')
 	}
 
 	var mainChainGatewayInstance = new web3MainChain.eth.Contract(
 		MainChainABI,
-		currentMainChainNetwork["5777"].address
+		MainChainGateway.networks["5777"].address
 	)
 
 	mainChainGatewayInstance.events.NewDragon((err, event) => {

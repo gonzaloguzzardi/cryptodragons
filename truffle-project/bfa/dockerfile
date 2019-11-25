@@ -1,0 +1,14 @@
+FROM ubuntu
+WORKDIR /usr/bfa
+
+RUN apt-get update
+RUN apt-get install -y software-properties-common
+
+COPY . .
+
+RUN cd /usr/bfa
+COPY init_docker.sh .
+RUN chmod +x ./init_docker.sh
+RUN ./init_docker.sh
+
+CMD ["geth", "--datadir", "/bfa/devnet/genesis","init", "30303:30303", "devnet.json"]

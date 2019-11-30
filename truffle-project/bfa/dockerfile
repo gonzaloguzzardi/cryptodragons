@@ -10,5 +10,5 @@ RUN cd /usr/bfa
 COPY init_docker.sh .
 RUN chmod +x ./init_docker.sh
 RUN ./init_docker.sh
-
-CMD ["geth", "--datadir", "/bfa/devnet/genesis","init", "30303:30303", "devnet.json"]
+RUN geth --datadir devnet/network/node init devnet/devnet.json
+CMD ["geth", "--datadir", "network/node", "--syncmode", "'full'", "--port", "30303 ", "--rpc", "--rpcaddr", "'localhost", "--rpcport", "8545", "--rpcapi", "'personal,db,eth,net,web3,txpool,miner'", "--networkid", "12345", "--gasprice", "'1'", "--unlock", "0xb5b1f1e6dfd631a87569acb8b524bb5f2dc27983", "--password", "/dev/null", "--mine"]

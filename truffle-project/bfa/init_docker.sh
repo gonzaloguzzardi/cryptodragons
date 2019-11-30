@@ -3,8 +3,6 @@
 mkdir -p devnet/network/node
 cd devnet
 
-echo $(ls network/node/)
-
 # Actualización de dependencias
 add-apt-repository -y ppa:ethereum/ethereum
 

@@ -112,3 +112,4 @@ $ yarn deploy:reset:ganache
 
 GNU GPLv3
  
+docker-compose up

@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  mongo:
+    build: './mongo'
+
+  oracle:
+    build:
+      context: '.'
+      dockerfile: 'oracle/Dockerfile'
+    command: "node oracle.js"

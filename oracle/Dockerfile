@@ -5,4 +5,6 @@ COPY ./ ./
 WORKDIR /usr/src/app/oracle
 RUN if test -d node_modules; then rm -r node_modules; fi
 RUN npm install
+EXPOSE 46658
+EXPOSE 8081
 CMD [ "npm", "start" ]

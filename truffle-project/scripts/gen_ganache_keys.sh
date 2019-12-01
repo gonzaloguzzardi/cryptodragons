@@ -1,4 +1,4 @@
 #!/bin/bash
 
-echo "0xbb63b692f9d8f21f0b978b596dc2b8611899f053d68aec6c1c20d1df4f5b6ee2" > ganache_private_key
-echo "0x5194b63f10691e46635b27925100cfc0a5ceca62" > ganache_account
+printf "f016064de2d322a690c4685915a5c38f89c7e1866b0a54dda2df9f76615df98b" > ganache_private_key
+printf "0x4484Df93047cF6B9D700A4BB138A5793c639F081" > ganache_account

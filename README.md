@@ -14,6 +14,11 @@ Aplicación descentralizada (DApp) que utiliza el concepto de [2-way peg (2WP)](
 
 ## General Setup
 
+Antes que nada, debemos setear la versión correcta de Node que utilizamos en el proyecto, con el siguiente comando:
+```
+$ nvm use
+```
+
 ```bash
 $ sudo apt-get update & sudo apt-get upgrade
 $ sudo apt-get install yarn
@@ -98,6 +103,36 @@ Para sustituir contratos ya existentes en la blockchain:
 ```bash
 $ yarn deploy:reset:ganache
 ```
+
+## Oracle
+
+Asegurarse de estar en el directorio `oracle`
+
+#### 1. Correr Oracle
+```bash
+node oracle.js
+```
+
+## Sidechain-cli
+
+Asegurarse de estar en el directorio `truffle-project`
+
+#### 1. Emitir un evento
+```bash
+node sidechain-cli.js create-dragon
+node sidechain-cli.js my-dragons
+```
+
+## Mainchain-cli
+
+Asegurarse de estar en el directorio `truffle-project`
+
+#### 1. Emitir un evento
+```bash
+node mainchain-cli.js create-dragon
+node mainchain-cli.js my-dragons
+```
+
 
 ## Loom Network
 

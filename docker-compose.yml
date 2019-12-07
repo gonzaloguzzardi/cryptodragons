@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  mongo:
+    build: './mongo'
+    expose:
+      - "27017"
+    ports:
+      - "27017:27017"
+
+  oracle:
+    build:
+      context: '.'
+      dockerfile: 'oracle/Dockerfile'
+    command: "node oracle.js"
+    expose:
+      - "8081"
+      - "46658"
+    ports:
+      - "8081:8081"
+      - "46658:46658"
+      

@@ -3,9 +3,14 @@ const Web3 = require('web3');
 const path = require('path')
 const BN = require('bn.js');
 
+const Gateway = require("../truffle-project/src/contracts/DappchainGateway");
+//const Gateway = require("./dependencies/DappchainGateway");
+//const Gateway = require("../truffle-project/src/contracts/DappchainTransferableDragon");
 //const Gateway = require("../truffle-project/src/contracts/DappchainGateway");
-const Gateway = require("../truffle-project/src/contracts/DappchainTransferableDragon");
+//const Gateway = require("../truffle-project/src/contracts/DappchainTransferableDragon");
 const MainChainGateway = require("../truffle-project/src/contracts/MainnetTransferableDragon");
+
+
 
 const {
 	NonceTxMiddleware, SignedTxMiddleware, Client,

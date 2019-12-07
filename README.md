@@ -141,3 +141,5 @@ node mainchain-cli.js my-dragons
 ## License
 
 GNU GPLv3
+ 
+docker-compose up

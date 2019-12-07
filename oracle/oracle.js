@@ -10,7 +10,14 @@ const Gateway = require("../truffle-project/src/contracts/DappchainGateway");
 //const Gateway = require("../truffle-project/src/contracts/DappchainTransferableDragon");
 const MainChainGateway = require("../truffle-project/src/contracts/MainnetTransferableDragon");
 
-
+const CHAIN_ID = "default";
+const WRITE_URL = "ws://localhost:46658/websocket";
+const READ_URL = "ws://localhost:46658/queryws";
+const MAIN_CHAIN_URL = "http://localhost:8545";
+const API_PORT = 8081
+const collection = "transactions";
+const database = "crypto-dragons";
+const url = "mongodb://localhost:27017/" + database;
 
 const {
 	NonceTxMiddleware, SignedTxMiddleware, Client,
@@ -31,12 +38,6 @@ var msjStatus = new Array();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
-
-var collection = "transactions";
-var database = "crypto-dragons";
-var url = "mongodb://localhost:27017/" + database;
-
 
 function _getCurrentNetwork() {
 	const networkId = 'default'
@@ -83,11 +84,7 @@ function listenSideChainEvents() {
     const privateKeyStr = fs.readFileSync(path.join(__dirname, accountPath), 'utf-8')
     const privateKey = CryptoUtils.B64ToUint8Array(privateKeyStr)
 	const publicKey = CryptoUtils.publicKeyFromPrivateKey(privateKey)
-    const client = new Client(
-      'default',
-      'ws://127.0.0.1:46658/websocket',
-	  'ws://127.0.0.1:46658/queryws'
-    )
+    const client = new Client(CHAIN_ID, WRITE_URL, READ_URL)
     client.txMiddleware = [
       new NonceTxMiddleware(publicKey, client),
       new SignedTxMiddleware(privateKey)
@@ -108,21 +105,21 @@ function listenSideChainEvents() {
 		Gateway.networks["13654820909954"].address
 	)
 
-	gatewayInstance.events.NewDragon((err, event) => {
-		if (err) {
-			console.error('Error on event', err);
-		} else {
-			console.log("[SIDECHAIN]: NewDragon event!!!!!");
-			console.log(event);
-			if (this.onEvent) {
-				console.log("Entro el evento!!!!");
-			}
-		}
-	})
+	//gatewayInstance.events.NewDragon((err, event) => {
+	//	if (err) {
+	//		console.error('Error on event', err);
+	//	} else {
+	//		console.log("[SIDECHAIN]: NewDragon event!!!!!");
+	//		console.log(event);
+	//		if (this.onEvent) {
+	//			console.log("Entro el evento!!!!");
+	//		}
+	//	}
+	//})
 }
 
 function listenMainChainEvents() {
-	const web3MainChain = new Web3(new Web3.providers.WebsocketProvider('http://127.0.0.1:8545'));
+	const web3MainChain = new Web3(new Web3.providers.WebsocketProvider(MAIN_CHAIN_URL));
 	const MainChainABI = MainChainGateway.abi;
 
 	if (!MainChainGateway.networks) {
@@ -149,7 +146,7 @@ function listenMainChainEvents() {
 
 function eventGetter() {
 	listenSideChainEvents();
-	listenMainChainEvents();
+	//listenMainChainEvents();
 }
 
 function insertOnMongo(database,url,transaction,collection) {
@@ -275,7 +272,7 @@ function sendMessageToSide(message) {
 	console.log("enviando mensaje a la side net");
 }
 
-var server = app.listen(8081, function () {
+var server = app.listen(API_PORT, function () {
    var host = server.address().address
    var port = server.address().port
    console.log("Example app listening at http://%s:%s", host, port)

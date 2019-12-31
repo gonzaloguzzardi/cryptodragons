@@ -1,3 +1,6 @@
+
+const WAsync = require('@rimiti/express-async');
+
 const Tx = require('ethereumjs-tx')
 const Web3 = require('web3')
 const program = require('commander')
@@ -164,6 +167,7 @@ program
   .option("-g, --gas <number>", "Gas for the tx")
   .option("-a, --account <accountName>", "File countaining private key of the account to use for this transaction")
   .action(async function(options) {
+    console.log("account on the options is:" + options.account)
     const { account, web3js, client } = loadLoomAccount(options.account)
     try {
       const data = await getMyDragons(web3js, account, options.gas || 350000)
@@ -183,6 +187,7 @@ program
   .option("-g, --gas <number>", "Gas for the tx")
   .option("-i, --id <dragonId>", "Dragon id to be transfer to the transfer gateway")
   .action(async function(options) {
+    console.log("account on the options is:" + options.account)
     const { account, web3js, client } = loadLoomAccount(options.account)
     try {
       if (options.id === undefined) {
@@ -233,3 +238,72 @@ program
 program
   .version('0.1.0')
   .parse(process.argv)
+
+
+var express = require('express')
+var http = require('http')
+var cors = require('cors')
+var app = express()
+
+app.use(cors())
+
+app.get('/', (req, res) => {
+  res.status(200).send("Welcome to API REST")
+})
+
+app.get('/api/dragon/create',  WAsync.wrapAsync(async function createFunction(req, res, next) {
+    const { account, web3js, client } = loadLoomAccount(req.query.account)
+    var hash = "";
+    try {
+      const tx = await createDragonToken(web3js, account, req.query.gas || 350000)
+      console.log(`Dragon created`)
+      console.log(`tx hash: ${tx.transactionHash}`)
+      hash = tx.transactionHash
+    } catch (err) {
+      res.status(400).send(err)
+    } finally {
+      if (client) {
+        client.disconnect()
+      }
+      res.status(200).send(hash)
+    }
+}))
+
+app.get('/api/dragon/transfer', WAsync.wrapAsync(async function transferFunction(req, res, next) {
+  const { account, web3js, client } = loadLoomAccount(req.query.account)
+  try {
+    if (req.query.id === undefined) {
+    }
+    const data = await transferDragonToGateway(web3js, req.query.gas || 350000, account, req.query.id)
+
+    console.log(`\n Token with id ${req.query.id} was successfully transfered to gateway \n`) 
+  } catch (err) {
+    res.status(400).send(err)
+  } finally {
+    if (client) {
+      client.disconnect()
+    }
+    res.status(400).send(`Token with id ${req.query.id} was successfully transfered to gateway`)
+  }
+}))
+
+app.get('/api/dragons', WAsync.wrapAsync(async function getDragonFunction(req, res, next) {
+  const { account, web3js, client } = loadLoomAccount(req.query.account)
+  var data = ""
+  try {
+    data = await getMyDragons(web3js, account, req.query.gas || 350000)
+    console.log(`\nAddress ${account} holds dragons with id ${data}\n`) 
+  } catch (err) {
+    res.status(400).send(err)
+  } finally {
+    if (client) {
+      client.disconnect()
+    }
+    res.status(200).send(data)
+  }
+}))
+
+http.createServer(app).listen(8001, () => {
+  console.log('Server started at http://localhost:8001');
+});
+  

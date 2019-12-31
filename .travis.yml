@@ -12,6 +12,8 @@ node_js:
 cache:
   - npm
   - yarn
+  directories:
+    - node_modules
 
 before_install:
   - npm install -g node-gyp

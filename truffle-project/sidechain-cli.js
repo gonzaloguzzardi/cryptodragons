@@ -283,7 +283,7 @@ app.get('/api/dragon/transfer', WAsync.wrapAsync(async function transferFunction
     if (client) {
       client.disconnect()
     }
-    res.status(400).send(`Token with id ${req.query.id} was successfully transfered to gateway`)
+    res.status(200).send(`Token with id ${req.query.id} was successfully transfered to gateway`)
   }
 }))
 

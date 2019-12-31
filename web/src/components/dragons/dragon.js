@@ -5,8 +5,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import CardMedia from '@material-ui/core/CardMedia';
-
-
+import axios from 'axios';
 
 class Dragon extends Component {
 
@@ -17,7 +16,30 @@ class Dragon extends Component {
             id:props.id,
             pic:"onepic"
         };
+        this.transfer = this.transfer.bind(this);
+        this.getDragons = this.getDragons.bind(this);
     }  
+
+    getDragons = () => {
+        this.props.parentMethod();
+    }
+
+    transfer() {
+        axios.get("http://localhost:8001/api/dragon/transfer",{
+            params: {
+                id: this.state.id
+            }
+        },{
+            headers: {
+                'Content-Type': 'text/html', 
+                'Access-Control-Allow-Origin': true
+            }
+        })
+        .then(res => {
+            this.getDragons();
+        })
+    }
+
     render() {
         return (
             <Card>
@@ -31,10 +53,9 @@ class Dragon extends Component {
                 </CardContent>
                 <CardActions style={{justifyContent: 'center'}}>  
                     <div>
-                        <Button variant="contained" color="primary" href="dragons" align="center">
+                        <Button variant="contained" color="primary" onClick={this.transfer}>
                             Transfer
                         </Button>
-
                     </div>  
                 </CardActions>
             </Card>

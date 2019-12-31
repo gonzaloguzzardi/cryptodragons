@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Button from '@material-ui/core/Button';
 import logo from './dragon.svg';
-import './App.css';
+import './landing.css';
 
 export class Landing extends Component {
   render() {

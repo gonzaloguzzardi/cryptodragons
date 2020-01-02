@@ -30,5 +30,4 @@ script:
   - yarn deploy:reset
   - yarn serve > /dev/null 2>&1 &
   # https://create-react-app.dev/docs/running-tests/#travis-ci
-  - echo "Running web unit tests..."
   - cd ../web && npm install && npm test

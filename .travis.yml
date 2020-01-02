@@ -30,7 +30,4 @@ script:
   - yarn deploy:reset
   - yarn serve > /dev/null 2>&1 &
   # https://create-react-app.dev/docs/running-tests/#travis-ci
-  - cd web
-  - npm install
-  - npm run build
-  - npm test
+  - cd web && npm install && npm test

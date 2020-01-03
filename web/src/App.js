@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-// import { Provider } from 'react-redux';
-// import { Router, browserHistory } from 'react-router';
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import Landing from './views/landing/landing.js';
 import Dragons from './views/dragons/dragons.js';

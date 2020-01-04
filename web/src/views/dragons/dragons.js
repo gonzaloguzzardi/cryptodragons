@@ -37,6 +37,7 @@ class Dragons extends Component {
         })
         .then(res => {
             this.setState({sideDragons: res.data});
+            this.getDragonsFromOracle();
         })
     }
 
@@ -49,6 +50,7 @@ class Dragons extends Component {
         })
         .then(res => {
             this.setState({oracleDragons: res.data});
+            this.getDragonsFromSide();
         })
     }
 

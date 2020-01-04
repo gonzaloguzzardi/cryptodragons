@@ -11,13 +11,13 @@ const Gateway = require("../truffle-project/src/contracts/DappchainGateway");
 const MainChainGateway = require("../truffle-project/src/contracts/MainnetTransferableDragon");
 
 const CHAIN_ID = "default";
-const WRITE_URL = "ws://localhost:46658/websocket";
-const READ_URL = "ws://localhost:46658/queryws";
-const MAIN_CHAIN_URL = "http://localhost:8545";
+const WRITE_URL = "ws://0.0.0.0:46658/websocket";
+const READ_URL = "ws://0.0.0.0:46658/queryws";
+const MAIN_CHAIN_URL = "http://0.0.0.0:8545";
 const API_PORT = 8081
 const collection = "transactions";
 const database = "crypto-dragons";
-const url = "mongodb://localhost:27017/" + database;
+const url = "mongodb://0.0.0.0:27017/" + database;
 
 const {
 	NonceTxMiddleware, SignedTxMiddleware, Client,
@@ -27,6 +27,9 @@ const {
 const cron = require("node-cron");
 var express = require('express');
 var app = express();
+var cors = require('cors')
+app.use(cors())
+
 var bodyParser = require("body-parser");
 var fs = require("fs");
 var request = require('request');
@@ -41,8 +44,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 function _getCurrentNetwork() {
 	const networkId = 'default'
-	const writeUrl = 'http://127.0.0.1:46658/rpc'
-	const readUrl = 'http://127.0.0.1:46658/query'
+	const writeUrl = 'http://0.0.0.0:46658/rpc'
+	const readUrl = 'http://0.0.0.0:46658/query'
 
     //let writeUrl = 'ws://127.0.0.1:46658/websocket'
     //let readUrl = 'ws://127.0.0.1:46658/queryws'
@@ -62,8 +65,8 @@ function _createClient() {
     let privateKey = CryptoUtils.generatePrivateKey()
     let publicKey = CryptoUtils.publicKeyFromPrivateKey(privateKey)
 	const networkId = 'default'
-	const writeUrl = 'http://127.0.0.1:46658/rpc'
-	const readUrl = 'http://127.0.0.1:46658/query'
+	const writeUrl = 'http://0.0.0.0:46658/rpc'
+	const readUrl = 'http://0.0.0.0:46658/query'
 
     //let writeUrl = 'ws://127.0.0.1:46658/websocket'
     //let readUrl = 'ws://127.0.0.1:46658/queryws'
@@ -105,17 +108,15 @@ function listenSideChainEvents() {
 		Gateway.networks["13654820909954"].address
 	)
 
-	//gatewayInstance.events.NewDragon((err, event) => {
-	//	if (err) {
-	//		console.error('Error on event', err);
-	//	} else {
-	//		console.log("[SIDECHAIN]: NewDragon event!!!!!");
-	//		console.log(event);
-	//		if (this.onEvent) {
-	//			console.log("Entro el evento!!!!");
-	//		}
-	//	}
-	//})
+	gatewayInstance.events.allEvents((err, event) => {
+		if (err) {
+			console.error('Error on event', err);
+		} else {
+			console.log("[SIDECHAIN]: NewDragon event!!!!!");
+			console.log(event);
+			insertOnMongo(database,url,transforEventIntoTransactionObj(event),collection)
+		}
+	})
 }
 
 function listenMainChainEvents() {
@@ -209,6 +210,22 @@ app.post('/addToSideNet', function (req, res) {
 	res.sendStatus(200);
 });
 
+app.get('/api/dragons', function (req, res) {
+	var dragons = "";
+	MongoClient.connect(url, function(err, db) {
+		if (err) throw err;
+		var dbo = db.db(database);
+		dbo.collection(collection).find({}).toArray(
+			function(err, result) {
+				if (err) throw err;
+				res.send(result);
+				console.log(result);
+				db.close();
+			}
+		) 
+	});	
+});
+
 function insertInMain() {
 	i=0;
 	while (sideList.length > 0 && i < 10) {
@@ -272,7 +289,7 @@ function sendMessageToSide(message) {
 	console.log("enviando mensaje a la side net");
 }
 
-var server = app.listen(API_PORT, function () {
+var server = app.listen(API_PORT, '0.0.0.0', function () {
    var host = server.address().address
    var port = server.address().port
    console.log("Example app listening at http://%s:%s", host, port)

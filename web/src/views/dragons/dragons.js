@@ -9,18 +9,26 @@ class Dragons extends Component {
     constructor(props) {
         super(props);
 
-        this.state = {dragons:[]}
+        this.state = { sideDragons:[], oracleDragons:[] }
 
         axios.get("http://localhost:8001/api/dragons")
         .then(res => {
-            this.setState({dragons: res.data});
+            this.setState({sideDragons: res.data});
             console.log(this.state);
-        })
-        this.getDragons = this.getDragons.bind(this);
+        });
+
+        axios.get("http://localhost:8081/api/dragons")
+        .then(res => {
+            this.setState({oracleDragons: res.data});
+            console.log(this.state);
+        });
+        
+        this.getDragonsFromSide = this.getDragonsFromSide.bind(this);
+        this.getDragonsFromOracle = this.getDragonsFromOracle.bind(this);
         this.buyDragon = this.buyDragon.bind(this);
     }  
 
-    getDragons() {
+    getDragonsFromSide() {
         axios.get("http://localhost:8001/api/dragons",{
             headers: {
                 'Content-Type': 'text/html', 
@@ -28,7 +36,19 @@ class Dragons extends Component {
             }
         })
         .then(res => {
-            this.setState({dragons: res.data});
+            this.setState({sideDragons: res.data});
+        })
+    }
+
+    getDragonsFromOracle() {
+        axios.get("http://localhost:8081/api/dragons",{
+            headers: {
+                'Content-Type': 'text/html', 
+                'Access-Control-Allow-Origin': true
+            }
+        })
+        .then(res => {
+            this.setState({oracleDragons: res.data});
         })
     }
 
@@ -40,7 +60,7 @@ class Dragons extends Component {
             }
         })
         .then(res => {
-            this.getDragons();
+            this.getDragonsFromSide();
         })
     }
 
@@ -51,12 +71,25 @@ class Dragons extends Component {
                 <Button variant="contained" color="primary" onClick={this.buyDragon}>
                     Buy New Dragon
                 </Button>
+                <h1>Side Chain Dragons</h1>
                 <Grid container spacing={2}>
                     <Grid item xs={12}>
                         <Grid container justify="center" spacing={spacing}>
-                            {this.state.dragons.map(value => (
+                            {this.state.sideDragons.map(value => (
                             <Grid key={value} item>
-                                <Dragon id={value} parentMethod={this.getDragons}/>
+                                <Dragon id={value} parentMethod={this.getDragonsFromSide}/>
+                            </Grid>
+                            ))}
+                        </Grid>
+                    </Grid>
+                </Grid>
+                <h1>Oracle Dragons</h1>
+                <Grid container spacing={2}>
+                    <Grid item xs={12}>
+                        <Grid container justify="center" spacing={spacing}>
+                            {this.state.oracleDragons.map(value => (
+                            <Grid key={value["id"]} item>
+                                <Dragon id={value["id"]} parentMethod={this.getDragonsFromSide}/>
                             </Grid>
                             ))}
                         </Grid>

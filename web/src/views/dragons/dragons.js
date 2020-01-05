@@ -23,23 +23,9 @@ class Dragons extends Component {
             mainDragons: [],
         };
 
-        axios.get(`http://localhost:${sidechainApiPort}/api/dragons`)
-        .then(res => {
-            this.setState({ sideDragons: res.data });
-            console.log(this.state);
-        });
-
-        axios.get(`http://localhost:${sidechainApiPort}/api/dragons`)
-        .then(res => {
-            this.setState({ oracleDragons: res.data });
-            console.log(this.state);
-        });
-
-        axios.get(`http://localhost:${mainchainApiPort}/api/dragons`)
-        .then(res => {
-            this.setState({ mainDragons: res.data });
-            console.log(this.state);
-        });
+        this.getDragonsFromSide();
+        this.getDragonsFromOracle();
+        this.getDragonsFromMain();
     }  
 
     getDragonsFromMain = () => {

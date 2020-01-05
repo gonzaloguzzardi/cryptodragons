@@ -48,7 +48,7 @@ class Dragon extends Component {
                         {this.state.id}
                     </Typography>
                     <CardMedia>
-                        <img src={require('../../assets/dragonsito.jpg')} alt="" width="200" height="200"/>
+                        <img src={require('../../assets/dragonsito.jpg')} alt="" width="100" height="100"/>
                     </CardMedia>
                 </CardContent>
                 <CardActions style={{justifyContent: 'center'}}>  

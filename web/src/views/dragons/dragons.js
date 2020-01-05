@@ -3,6 +3,7 @@ import axios from 'axios';
 import Dragon from './dragon.js';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
+import sleep from '../../utils/sleep';
 
 import './dragons.scss';
 
@@ -45,7 +46,16 @@ class Dragons extends Component {
 
     getDragonsFromOracle = () => {
         axios.get(`${oracleUrl}:${oracleApiPort}/api/dragons`)
-            .then(res => this.setState({ oracleDragons: res.data }));
+            .then(res => {
+                if (res.data && res.data.length > 0) {
+                    sleep(1000).then(() => {
+                        this.getDragonsFromMain();
+                        this.getDragonsFromSide();
+                        this.getDragonsFromOracle();
+                    });
+                }
+                this.setState({ oracleDragons: res.data })
+            });
     }
 
     buyDragonInSideChain = () => {
@@ -58,18 +68,18 @@ class Dragons extends Component {
             .then(res => this.getDragonsFromMain());
     }
 
-    transferFromSideToMain = (dragonId, callback) => (
+    transferFromSideToMain = dragonId => (
         axios.get(`${sidechainApiUrl}:${sidechainApiPort}/api/dragon/transfer`, {
             params: { id: dragonId },
         })
-        .then(() => callback())
+        .then(() => this.getDragonsFromOracle())
     );
 
-    transferFromMainToSide = (dragonId, callback) => (
+    transferFromMainToSide = dragonId => (
         axios.get(`${mainchainUrl}:${mainchainApiPort}/api/dragon/transfer`, {
             params: { id: dragonId },
         })
-        .then(() => callback())
+        .then(() => this.getDragonsFromOracle())
     );
 
     render() {
@@ -100,7 +110,6 @@ class Dragons extends Component {
                                     <Grid key={value} item>
                                         <Dragon
                                             id={value}
-                                            parentMethod={this.getDragonsFromSide}
                                             transferMethod={this.transferFromSideToMain}
                                         />
                                     </Grid>
@@ -118,7 +127,6 @@ class Dragons extends Component {
                                     <Grid key={value} item>
                                         <Dragon
                                             id={value}
-                                            parentMethod={this.getDragonsFromMain}
                                             transferMethod={this.transferFromMainToSide}
                                         />
                                     </Grid>
@@ -136,10 +144,7 @@ class Dragons extends Component {
                         <Grid container justify="center" spacing={2}>
                             {this.state.oracleDragons.map(value => (
                             <Grid key={value} item>
-                                <Dragon
-                                    id={value["id"]}
-                                    parentMethod={this.getDragonsFromOracle}
-                                />
+                                <Dragon id={value["id"]} />
                             </Grid>
                             ))}
                         </Grid>

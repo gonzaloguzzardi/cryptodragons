@@ -17,10 +17,8 @@ class Dragon extends Component {
         };
     }  
 
-    getDragons = () => this.props.parentMethod();
-
     transfer = () => (
-        this.props.transferMethod(this.state.id, this.getDragons)
+        this.props.transferMethod(this.state.id)
     );
 
     render() {

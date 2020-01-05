@@ -288,22 +288,19 @@ app.get('/api/dragon/transfer', WAsync.wrapAsync(async function transferFunction
 }))
 
 app.get('/api/dragons', WAsync.wrapAsync(async function getDragonFunction(req, res, next) {
-  const { account, web3js, client } = loadLoomAccount(req.query.account)
-  var data = ""
+  const { account, web3js, client } = loadLoomAccount(req.query.account);
+  var data = "";
   try {
-    data = await getMyDragons(web3js, account, req.query.gas || 350000)
-    console.log(`\nAddress ${account} holds dragons with id ${data}\n`) 
+    data = await getMyDragons(web3js, account, req.query.gas || 350000);
+    console.log(`\nAddress ${account} holds dragons with id ${data}\n`);
+    res.status(200).send(data);
   } catch (err) {
-    res.status(400).send(err)
+    res.status(400).send(err);
   } finally {
-    if (client) {
-      client.disconnect()
-    }
-    res.status(200).send(data)
+    if (client) client.disconnect();
   }
-}))
+}));
 
 http.createServer(app).listen(8001, () => {
   console.log('Server started at http://localhost:8001');
 });
-  

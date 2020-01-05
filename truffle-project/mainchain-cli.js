@@ -138,6 +138,7 @@ app.get('/api/dragons', WAsync.wrapAsync(async function getDragonFunction(req, r
   }
 }))
 
-http.createServer(app).listen(8001, () => {
-  console.log('Server started at http://localhost:8001');
+const PORT = 8002;
+http.createServer(app).listen(PORT, () => {
+  console.log(`Server started at http://localhost:${PORT}`);
 });

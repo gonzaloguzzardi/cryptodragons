@@ -8,6 +8,7 @@ import './dragons.scss';
 
 const sidechainApiPort = 8001;
 const mainchainApiPort = 8002;
+const oracleApiPort = 8081;
 
 const namespace = 'ui-view-dragons';
 
@@ -42,27 +43,27 @@ class Dragons extends Component {
     }  
 
     getDragonsFromMain = () => {
-        axios.get("http://localhost:8002/api/dragons")
+        axios.get(`http://localhost:${mainchainApiPort}/api/dragons`)
         .then(res => this.setState({ mainDragons: res.data }));
     }
 
     getDragonsFromSide = () => {
-        axios.get("http://localhost:8001/api/dragons")
+        axios.get(`http://localhost:${sidechainApiPort}/api/dragons`)
         .then(res => this.setState({ sideDragons: res.data }));
     }
 
     getDragonsFromOracle = () => {
-        axios.get("http://localhost:8081/api/dragons")
+        axios.get(`http://localhost:${oracleApiPort}/api/dragons`)
         .then(res => this.setState({ oracleDragons: res.data }));
     }
 
     buyDragonInSideChain = () => {
-        axios.get("http://localhost:8001/api/dragon/create")
+        axios.get(`http://localhost:${sidechainApiPort}/api/dragon/create`)
         .then(res => this.getDragonsFromSide());
     }
 
     buyDragonInMainChain = () => {
-        axios.get("http://localhost:8002/api/dragon/create")
+        axios.get(`http://localhost:${mainchainApiPort}/api/dragon/create`)
         .then(res => this.getDragonsFromMain());
     }
 

@@ -25,11 +25,11 @@ services:
      - "8545:8545"
 
  web:
-   container_name: web_container
    build:
      context: ./web
      dockerfile: Dockerfile
-   image: nicomoccagatta/web_container
+   expose:
+     - "3000"
    ports:
      - "3000:3000"
    volumes:

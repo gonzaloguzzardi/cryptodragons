@@ -47,38 +47,6 @@ async function getMyDragons(web3js, ownerAccount, gas) {
 }
 
 program
-  .command('create-dragon')
-  .description('Create test dragon')
-  .option("-g, --gas <number>", "Gas for the tx")
-  .option("-a, --account <accountName>", "File countaining private key of the account to use for this transaction")
-  .action(async function() {
-    const { account, web3js } = loadGanacheAccount()
-    try {
-      const tx = await createDragonToken(web3js, account, 350000)
-      console.log(`Dragon created`)
-      console.log(`tx hash: ${tx.transactionHash}`)
-    } catch (err) {
-      console.error(err)
-    }
-  })
-
-program
-  .command('my-dragons')
-  .description('Create test dragon')
-  .option("-g, --gas <number>", "Gas for the tx")
-  .option("-a, --account <accountName>", "File countaining private key of the account to use for this transaction")
-  .action(async function() {
-    const { account, web3js } = loadGanacheAccount()
-    try {
-      const data = await getMyDragons(web3js, account, 350000)
-      console.log(`\nAddress ${account} holds dragons with id ${data}\n`) 
-    } catch (err) {
-      console.error(err)
-    }
-  })
-
-
-program
   .version('0.1.0')
   .parse(process.argv)
 

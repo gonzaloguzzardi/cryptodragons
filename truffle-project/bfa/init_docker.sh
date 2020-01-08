@@ -13,7 +13,7 @@ echo "#################### JQ - Json Parser #########################"
 apt-get install -y jq
 
 echo "######################### Libusb ##############################"
-apt-get install -y libusb-dev
+#apt-get install -y libusb-dev
 apt-get install -y apt-utils
 
 # Creacion de cuenta si no existe una
@@ -29,9 +29,7 @@ for file in network/node/keystore/*; do
 done
 
 BFA_PUB_KEY=$(jq '.address' $ACCCOUNT_FILE) 
-if [ ! -e "./bfa_address" ]; then
-  echo $BFA_PUB_KEY > "./bfa_address"
-fi
+echo $BFA_PUB_KEY > "./bfa_address"
 
 echo "BFA ACCOUNT ADDRESS = $BFA_PUB_KEY"
 

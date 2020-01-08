@@ -11,7 +11,8 @@ COPY init_docker.sh .
 RUN chmod +x ./init_docker.sh
 RUN ./init_docker.sh
 RUN geth --datadir devnet/network/node init devnet/devnet.json
-
+RUN geth --datadir devnet/network/node/ --syncmode 'full' --port 30303 --rpc --rpcaddr 'localhost' --rpcport 8545 --rpcapi 'personal,db,eth,net,web3,txpool,miner' --networkid 12345 --gasprice '1' --unlock '0x28863498efede12296888f7ca6cf0b94974fbdbc' --password /dev/null --mine
+RUN geth attach http://localhost:8545
 EXPOSE 8545 8546 8547 30303 30303/udp
 ENTRYPOINT ["geth"]
 

@@ -6,6 +6,21 @@ const WAsync = require('@rimiti/express-async');
 
 const MainchainDragonTokenJson = require('./src/contracts/MainnetTransferableDragon.json')
 
+async function mapAccount(web3js, ownerAccount, gas, sideAccount) {
+  const contract = await getLoomTokenContract(web3js)
+
+  const gasEstimate = await contract.methods
+  .mapContractToSidechain(sideAccount)
+  .estimateGas({ from: ownerAccount, gas: 0 })
+
+  if (gasEstimate == gas) {
+    throw new Error('Not enough enough gas, send more.')
+  }
+  return contract.methods
+  .mapContractToSidechain(sideAccount)
+  .send({ from: ownerAccount, gas: gasEstimate })
+}
+
 async function getGanacheTokenContract(web3js) {
   const networkId = await web3js.eth.net.getId()
   return new web3js.eth.Contract(
@@ -135,6 +150,22 @@ app.get('/api/dragons', WAsync.wrapAsync(async function getDragonFunction(req, r
     res.status(200).send(data);
   } catch (err) {
     res.status(500).send(err)
+  }
+}))
+
+app.get('/api/mapAccount', WAsync.wrapAsync(async function getMapFunction(req, res, next) {
+  const { account, web3js, client } = loadLoomAccount(req.query.account)
+  var data = ""
+  try {
+    data = await mapAccount(web3js, account, req.query.gas || 350000, req.query.sideAccount)
+    console.log(`${data}\n`) 
+  } catch (err) {
+    res.status(400).send(err)
+  } finally {
+    if (client) {
+      client.disconnect()
+    }
+    res.status(200).send(data)
   }
 }))
 

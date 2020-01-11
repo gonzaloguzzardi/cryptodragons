@@ -86,6 +86,21 @@ function loadLoomAccount(accountName) {
   }
 }
 
+async function mapAccount(web3js, ownerAccount, gas, mainAccount) {
+  const contract = await getLoomTokenContract(web3js)
+
+  const gasEstimate = await contract.methods
+  .mapContractToMainnet(mainAccount)
+  .estimateGas({ from: ownerAccount, gas: 0 })
+
+  if (gasEstimate == gas) {
+    throw new Error('Not enough enough gas, send more.')
+  }
+  return contract.methods
+  .mapContractToMainnet(mainAccount)
+  .send({ from: ownerAccount, gas: gasEstimate })
+}
+
 async function createDragonToken(web3js, ownerAccount, gas) {
   const contract = await getLoomTokenContract(web3js)
 // createDragon(string memory _name, uint64 _creationTime, uint32 _dadId, uint32 _motherId)
@@ -278,19 +293,39 @@ app.get('/api/dragon/transfer', WAsync.wrapAsync(async function transferFunction
 }));
 
 app.get('/api/dragons', WAsync.wrapAsync(async function getDragonFunction(req, res, next) {
-  const { account, web3js, client } = loadLoomAccount(req.query.account);
-  var data = "";
+  const { account, web3js, client } = loadLoomAccount(req.query.account)
+  var data = ""
   try {
-    data = await getMyDragons(web3js, account, req.query.gas || 350000);
-    console.log(`\nAddress ${account} holds dragons with id ${data}\n`);
-    res.status(200).send(data);
+    data = await getMyDragons(web3js, account, req.query.gas || 350000)
+    console.log(`\nAddress ${account} holds dragons with id ${data}\n`) 
   } catch (err) {
-    res.status(400).send(err);
+    res.status(400).send(err)
   } finally {
-    if (client) client.disconnect();
+    if (client) {
+      client.disconnect()
+    }
+    res.status(200).send(data)
   }
-}));
+}))
+
+app.get('/api/mapAccount', WAsync.wrapAsync(async function getMapFunction(req, res, next) {
+  const { account, web3js, client } = loadLoomAccount(req.query.account)
+  var data = ""
+  try {
+    data = await mapAccount(web3js, account, req.query.gas || 350000, req.query.mainAccount)
+    console.log(`${data}\n`) 
+  } catch (err) {
+    res.status(400).send(err)
+  } finally {
+    if (client) {
+      client.disconnect()
+    }
+    res.status(200).send(data)
+  }
+}))
+
 
 http.createServer(app).listen(8001, () => {
   console.log('Server started at http://localhost:8001');
 });
+  

@@ -296,31 +296,27 @@ app.get('/api/dragons', WAsync.wrapAsync(async function getDragonFunction(req, r
   const { account, web3js, client } = loadLoomAccount(req.query.account)
   var data = ""
   try {
-    data = await getMyDragons(web3js, account, req.query.gas || 350000)
-    console.log(`\nAddress ${account} holds dragons with id ${data}\n`) 
+    data = await getMyDragons(web3js, account, req.query.gas || 350000);
+    console.log(`\nAddress ${account} holds dragons with id ${data}\n`);
+    res.status(200).send(data);
   } catch (err) {
     res.status(400).send(err)
   } finally {
-    if (client) {
-      client.disconnect()
-    }
-    res.status(200).send(data)
+    if (client) client.disconnect();
   }
 }))
 
 app.get('/api/mapAccount', WAsync.wrapAsync(async function getMapFunction(req, res, next) {
-  const { account, web3js, client } = loadLoomAccount(req.query.account)
-  var data = ""
+  const { account, web3js, client } = loadLoomAccount(req.query.account);
+  var data = "";
   try {
-    data = await mapAccount(web3js, account, req.query.gas || 350000, req.query.mainAccount)
-    console.log(`${data}\n`) 
+    data = await mapAccount(web3js, account, req.query.gas || 350000, req.query.mainAccount);
+    console.log(`${data}\n`);
+    res.status(200).send(data);
   } catch (err) {
     res.status(400).send(err)
   } finally {
-    if (client) {
-      client.disconnect()
-    }
-    res.status(200).send(data)
+    if (client) client.disconnect();
   }
 }))
 

@@ -92,6 +92,23 @@ app.get('/api/dragon/create',  WAsync.wrapAsync(async function createFunction(re
   }
 }))
 
+app.post('/api/dragon/receive', WAsync.wrapAsync(async function transferFunction(req, res, next) {
+  const { account, web3js } = loadGanacheAccount();
+  let hash = "";
+  try {
+    // POR AHORA VAMOS A CREAR UNO
+    const tx = await createDragonToken(web3js, account, req.query.gas || 350000);
+    console.log(`Dragon created`);
+    console.log(`tx hash: ${tx.transactionHash}`);
+    hash = tx.transactionHash;
+    res.status(200).send(hash);
+    // console.log(`\n Token with id ${req.query.id} was successfully transfered from gateway \n`);
+    // res.status(200).send(`Token with id ${req.query.id} was successfully transfered to gateway`);
+  } catch (err) {
+    res.status(500).send(err);
+  }
+}))
+
 //app.get('/api/dragon/transfer', WAsync.wrapAsync(async function transferFunction(req, res, next) {
   // const { account, web3js, client } = loadLoomAccount(req.query.account)
   // try {

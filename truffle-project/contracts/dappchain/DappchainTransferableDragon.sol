@@ -47,6 +47,11 @@ contract DappchainTransferableDragon is DragonFactory {
         transferFrom(msg.sender, _gateway, _tokenId);
 
         IDappchainGateway gateway = IDappchainGateway(_gateway);
-        gateway.depositDragon(msg.sender, _mainnetMapping[msg.sender], _tokenId, encodedDragon);
+        // @TODO: HAY QUE USAR LA LINEA COMENTADA, POR AHORA HARDCODEO EL USER DE GANACHE!!!
+        // @TODO: HAY QUE USAR LA LINEA COMENTADA, POR AHORA HARDCODEO EL USER DE GANACHE!!!
+        // @TODO: HAY QUE USAR LA LINEA COMENTADA, POR AHORA HARDCODEO EL USER DE GANACHE!!!
+        // @TODO: HAY QUE USAR LA LINEA COMENTADA, POR AHORA HARDCODEO EL USER DE GANACHE!!!
+        //gateway.depositDragon(msg.sender, _mainnetMapping[msg.sender], _tokenId, encodedDragon);
+        gateway.depositDragon(msg.sender, address(0x9d1ED83B6aECf0eAb8ec0A1357486b0B0FF3F3de), _tokenId, encodedDragon);
     }
 }

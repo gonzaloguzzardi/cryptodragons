@@ -19,6 +19,15 @@ const collection = "transactions";
 const database = "crypto-dragons";
 const url = "mongodb://0.0.0.0:27017/" + database;
 
+const sidechainApiUrl = 'http://localhost';
+const sidechainApiPort = 8001;
+
+const mainchainUrl = 'http://localhost';
+const mainchainApiPort = 8002;
+
+const oracleUrl = 'http://localhost';
+const oracleApiPort = 8081;
+
 const {
 	NonceTxMiddleware, SignedTxMiddleware, Client,
 	LocalAddress, CryptoUtils, LoomProvider
@@ -47,55 +56,55 @@ function _getCurrentNetwork() {
 	const writeUrl = 'http://0.0.0.0:46658/rpc'
 	const readUrl = 'http://0.0.0.0:46658/query'
 
-    //let writeUrl = 'ws://127.0.0.1:46658/websocket'
-    //let readUrl = 'ws://127.0.0.1:46658/queryws'
-    //let networkId = 'default'
-    let client = new Client(networkId, writeUrl, readUrl)
+	//let writeUrl = 'ws://127.0.0.1:46658/websocket'
+	//let readUrl = 'ws://127.0.0.1:46658/queryws'
+	//let networkId = 'default'
+	let client = new Client(networkId, writeUrl, readUrl)
 
 
 	const web3 = new Web3()
 	const chainIdHash = web3.utils.soliditySha3(client.chainId)
-	.slice(2) // Removes 0x
-	.slice(0, 13) // Produces safe Number less than 9007199254740991
-	const chainId =  new BN(chainIdHash).toString()	
+		.slice(2) // Removes 0x
+		.slice(0, 13) // Produces safe Number less than 9007199254740991
+	const chainId = new BN(chainIdHash).toString()
 	return chainId
 }
 
 function _createClient() {
-    let privateKey = CryptoUtils.generatePrivateKey()
-    let publicKey = CryptoUtils.publicKeyFromPrivateKey(privateKey)
+	let privateKey = CryptoUtils.generatePrivateKey()
+	let publicKey = CryptoUtils.publicKeyFromPrivateKey(privateKey)
 	const networkId = 'default'
 	const writeUrl = 'http://0.0.0.0:46658/rpc'
 	const readUrl = 'http://0.0.0.0:46658/query'
 
-    //let writeUrl = 'ws://127.0.0.1:46658/websocket'
-    //let readUrl = 'ws://127.0.0.1:46658/queryws'
-    //let networkId = 'default'
+	//let writeUrl = 'ws://127.0.0.1:46658/websocket'
+	//let readUrl = 'ws://127.0.0.1:46658/queryws'
+	//let networkId = 'default'
 
-    let client = new Client(networkId, writeUrl, readUrl)
+	let client = new Client(networkId, writeUrl, readUrl)
 
-    client.on('error', msg => {
-      console.error('Error on connect to client', msg)
-      console.warn('Please verify if loom command is running')
+	client.on('error', msg => {
+		console.error('Error on connect to client', msg)
+		console.warn('Please verify if loom command is running')
 	})
-	
+
 	return LocalAddress.fromPublicKey(publicKey).toString();
 }
 
 function listenSideChainEvents() {
 	var accountPath = '../truffle-project/loom_private_key'
-    const privateKeyStr = fs.readFileSync(path.join(__dirname, accountPath), 'utf-8')
-    const privateKey = CryptoUtils.B64ToUint8Array(privateKeyStr)
+	const privateKeyStr = fs.readFileSync(path.join(__dirname, accountPath), 'utf-8')
+	const privateKey = CryptoUtils.B64ToUint8Array(privateKeyStr)
 	const publicKey = CryptoUtils.publicKeyFromPrivateKey(privateKey)
-    const client = new Client(CHAIN_ID, WRITE_URL, READ_URL)
-    client.txMiddleware = [
-      new NonceTxMiddleware(publicKey, client),
-      new SignedTxMiddleware(privateKey)
-    ]
-    client.on('error', msg => {
-      console.error('Loom connection error', msg)
+	const client = new Client(CHAIN_ID, WRITE_URL, READ_URL)
+	client.txMiddleware = [
+		new NonceTxMiddleware(publicKey, client),
+		new SignedTxMiddleware(privateKey)
+	]
+	client.on('error', msg => {
+		console.error('Loom connection error', msg)
 	})
-	
+
 	const web3 = new Web3(new LoomProvider(client, privateKey));
 	const ABI = Gateway.abi;
 
@@ -108,13 +117,16 @@ function listenSideChainEvents() {
 		Gateway.networks["13654820909954"].address
 	)
 
-	gatewayInstance.events.allEvents((err, event) => {
+	// Listen transfer 2 mainchain events
+	gatewayInstance.events.SendDragonToMainchainAttempt((err, event) => {
 		if (err) {
 			console.error('Error on event', err);
 		} else {
 			console.log("[SIDECHAIN]: NewDragon event!!!!!");
-			console.log(event);
-			insertOnMongo(database,url,transforEventIntoTransactionObj(event),collection)
+			// console.log(event);
+			sideList.push(transforEventIntoTransactionObj(event));
+			console.log("Dragon agregado a la sidelist que es ejecutada por el cron");
+			// insertOnMongo(database, url, transforEventIntoTransactionObj(event), collection)
 		}
 	})
 }
@@ -150,32 +162,31 @@ function eventGetter() {
 	//listenMainChainEvents();
 }
 
-function insertOnMongo(database,url,transaction,collection) {
-	MongoClient.connect(url, function(err, db) {
-	  if (err) throw err;
-	  var dbo = db.db(database);
-	  dbo.collection(collection).insertOne(transaction, function(err, res) {
+function insertOnMongo(database, url, transaction, collection) {
+	MongoClient.connect(url, function (err, db) {
 		if (err) throw err;
-		console.log("inserted...");
-		db.close();
-	  });
-	});	
+		var dbo = db.db(database);
+		dbo.collection(collection).insertOne(transaction, function (err, res) {
+			if (err) throw err;
+			console.log("inserted...");
+			db.close();
+		});
+	});
 	return transaction;
-} 
+}
 
-fs.readFile( __dirname + "/" + "config.json", 'utf8', function (err, data) {
-  var mainEndpoint = data.mainEndpoint;
-  var sideEndpoint = data.sideEndpoint;
-  var mainIp = data.mainIp;
-  var sideIp = data.sideIp;
-  var mainPort = data.mainPort;
-  var sidePort = data.sidePort;
-  
-  var thisMainEnpoint = data.thisMainEnpoint;
-  var thisSideEnpoint = data.thisSideEnpoint;
-  var thisIp = data.thisIp;
-  var thisPort = data.thisPort;
-  
+fs.readFile(__dirname + "/" + "config.json", 'utf8', function (err, data) {
+	var mainEndpoint = data.mainEndpoint;
+	var sideEndpoint = data.sideEndpoint;
+	var mainIp = data.mainIp;
+	var sideIp = data.sideIp;
+	var mainPort = data.mainPort;
+	var sidePort = data.sidePort;
+
+	var thisMainEnpoint = data.thisMainEnpoint;
+	var thisSideEnpoint = data.thisSideEnpoint;
+	var thisIp = data.thisIp;
+	var thisPort = data.thisPort;
 });
 
 app.post('/addToMainNet', function (req, res) {
@@ -183,11 +194,11 @@ app.post('/addToMainNet', function (req, res) {
 	sideList.push(msj);
 
 	msj.status = 0;
-	aMsj = checkSender(msj); 
+	aMsj = checkSender(msj);
 	if (aMsj != null) {
-		msj = insertOnMongo(database,url,msj,collection);
+		msj = insertOnMongo(database, url, msj, collection);
 	}
-	else{
+	else {
 		msj = aMsj;
 	}
 	msjStatus.push(msj);
@@ -197,13 +208,13 @@ app.post('/addToMainNet', function (req, res) {
 app.post('/addToSideNet', function (req, res) {
 	msj = req.body;
 	mainList.push(mjs);
-	
+
 	msj.status = 0;
-	aMsj = checkSender(msj); 
+	aMsj = checkSender(msj);
 	if (aMsj != null) {
-		msj = insertOnMongo(database,url,msj,collection);
+		msj = insertOnMongo(database, url, msj, collection);
 	}
-	else{
+	else {
 		msj = aMsj;
 	}
 	msjStatus.push(msj);
@@ -211,88 +222,89 @@ app.post('/addToSideNet', function (req, res) {
 });
 
 app.get('/api/dragons', function (req, res) {
-	var dragons = "";
-	MongoClient.connect(url, function(err, db) {
-		if (err) throw err;
-		var dbo = db.db(database);
-		dbo.collection(collection).find({}).toArray(
-			function(err, result) {
-				if (err) throw err;
-				res.send(result);
-				console.log(result);
-				db.close();
-			}
-		) 
-	});	
+	// MongoClient.connect(url, function (err, db) {
+	// 	if (err) throw err;
+	// 	var dbo = db.db(database);
+	// 	dbo.collection(collection).find({}).toArray(
+	// 		function (err, result) {
+	// 			if (err) throw err;
+	// 			res.send(result);
+	// 			console.log(result);
+	// 			db.close();
+	// 		}
+	// 	)
+	// });
+	res.send(sideList);
 });
 
 function insertInMain() {
-	i=0;
+	i = 0;
 	while (sideList.length > 0 && i < 10) {
 		message = sideList.shift();
+		console.log(`Enviando dragon con id ${message.id} a la mainchain`);
 		sendMessageToMain(message);
 		i++;
 	}
-} 
+}
 
 function insertInSide() {
-	i=0;
+	i = 0;
 	while (mainList.length > 0 && i < 10) {
 		message = mainList.shift();
 		sendMessageToSide(message);
 		i++;
 	}
-} 
+}
 
 function sendMessageToMain(message) {
 	request.post(
-		{ 
-			headers: {'content-type' : 'application/json'}, 
-			url: "http://127.0.0.1:8085/mainNet", 
+		{
+			headers: { 'content-type': 'application/json' },
+			url: `${mainchainUrl}:${mainchainApiPort}/api/dragon/receive`,
 			body: message,
-			json: true
-		}, 
-		function(error, response, body){
-			if (error == null && body.status == 200) {
-				console.log("Envio exitoso...");				
-			}	
-			else{
+			json: true,
+		},
+		function (error, response, body) {
+			if (error) {
 				console.log("Starting roll back...");
 				console.log(body);
-				sendMessageToSide(message);
+				// sideList.push(message);
+				// sendMessageToSide(message);
+			} else {
+				console.log(`url: ${mainchainUrl}:${mainchainApiPort}/api/dragon/receive`);
+				console.log("Envio exitoso...");
 			}
-
 		}
-	);	
-	console.log("enviando mensaje a la main net");
+	);
+	console.log("enviando mensaje a la main chain...");
 }
 
 function sendMessageToSide(message) {
 	request.post(
-		{ 
-			headers: {'content-type' : 'application/json'}, 
-			url: "http://127.0.0.1:8086/sideNet", 
+		{
+			headers: { 'content-type': 'application/json' },
+			url: "http://127.0.0.1:8086/sideNet",
 			body: message,
 			json: true
-		}, 
-		function(error, response, body){
+		},
+		function (error, response, body) {
 			if (error == null && body.status == 200) {
-				console.log("Envio exitoso...");				
-			}	
-			else{
+				console.log("Envio exitoso...");
+			}
+			else {
 				console.log("Starting roll back...");
 				console.log(body);
 				sendMessageToMain(message);
 			}
 		}
-	);	
+	);
 	console.log("enviando mensaje a la side net");
 }
 
 var server = app.listen(API_PORT, '0.0.0.0', function () {
-   var host = server.address().address
-   var port = server.address().port
-   console.log("Example app listening at http://%s:%s", host, port)
+	var host = server.address().address
+	var port = server.address().port
+	console.log("Example app listening at http://%s:%s", host, port)
 })
 
 cron.schedule("*/5 * * * * *", () => {
@@ -301,16 +313,16 @@ cron.schedule("*/5 * * * * *", () => {
 	chekStatus();
 });
 
-function chekStatus(){
-	for( var i = 0; i < msjStatus.length; i++){ 
-		if ( msjFinish(msjStatus[i])) {
-			msjStatus.splice(i, 1); 
+function chekStatus() {
+	for (var i = 0; i < msjStatus.length; i++) {
+		if (msjFinish(msjStatus[i])) {
+			msjStatus.splice(i, 1);
 			i--;
 		}
 	}
 }
 
-function checkSender(msj){
+function checkSender(msj) {
 	return null;
 }
 
@@ -320,7 +332,6 @@ function msjFinish(msj) {
 }
 
 function transforEventIntoTransactionObj(event) {
-	console.log(event);
 	var transaction = new Object();
 	transaction.id = event.returnValues.uid;
 	transaction.data = event.raw.data;

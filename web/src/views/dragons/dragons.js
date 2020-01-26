@@ -47,14 +47,19 @@ class Dragons extends Component {
     getDragonsFromOracle = () => {
         axios.get(`${oracleUrl}:${oracleApiPort}/api/dragons`)
             .then(res => {
+                this.setState({ oracleDragons: res.data });
                 if (res.data && res.data.length > 0) {
-                    sleep(1000).then(() => {
+                    sleep(500).then(() => {
+                        this.getDragonsFromOracle();
                         this.getDragonsFromMain();
                         this.getDragonsFromSide();
-                        this.getDragonsFromOracle();
+                    });
+                } else {
+                    sleep(500).then(() => {
+                        this.getDragonsFromMain();
+                        this.getDragonsFromSide();
                     });
                 }
-                this.setState({ oracleDragons: res.data })
             });
     }
 

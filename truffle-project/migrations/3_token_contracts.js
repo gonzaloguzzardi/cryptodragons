@@ -14,7 +14,7 @@ module.exports = function (deployer, network, accounts) {
   console.log("Deploying sidechain contracts to " + network + "...")
 
   const [_, user] = accounts
-  const validator = accounts[9]
+  const validator = accounts[0]
   deployer.deploy(Gateway, [validator], 3, 4).then(async () => {
     const gatewayInstance = await Gateway.deployed()
 

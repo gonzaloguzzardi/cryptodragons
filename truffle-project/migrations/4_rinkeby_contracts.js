@@ -6,6 +6,8 @@ const DragonToken = artifacts.require('./mainnet/MainnetTransferableDragon.sol')
 const DragonCoin = artifacts.require('./mainnet/MainnetDragonCoin.sol')
 const Gateway = artifacts.require('./mainnet/gateway/MainnetGateway.sol')
 
+
+
 module.exports = function (deployer, network, accounts) {
   if (network !== 'rinkeby' && network !== 'ganache') {
     return
@@ -14,9 +16,12 @@ module.exports = function (deployer, network, accounts) {
   console.log("Deploying mainnet contracts to " + network + "...")
 
   const [_, user] = accounts
-  const validator = accounts[9]
 
-  deployer.deploy(Gateway, [validator], 3, 4).then(async () => {
+  const validator = accounts[0]
+
+  console.log("VALIDATOR = " + validator)
+
+  deployer.deploy(Gateway, accounts, 3, 4).then(async () => {
     const gatewayInstance = await Gateway.deployed()
 
     console.log(`Gateway deployed at address: ${gatewayInstance.address}`)

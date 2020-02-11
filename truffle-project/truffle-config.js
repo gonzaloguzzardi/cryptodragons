@@ -138,7 +138,6 @@ module.exports = {
       host: '127.0.0.1',
       port: 8545,
       gas: 4700000,
-      skipDryRun: true,
       from: "0x28863498efede12296888f7ca6cf0b94974fbdbc"
     }
   }

@@ -131,7 +131,8 @@ module.exports = {
     },
     bfa: {
       provider: function() {
-          return new PrivateKeyProvider("dff874fa1f53c713f31b5831c25fe56657808bd0b379a7f28442af8a6de79cb2", "http://127.0.0.1:8545/");
+        // create provider using the private key of the prefunded bfa account 0x28863498efede12296888f7ca6cf0b94974fbdbc
+        return new PrivateKeyProvider("dff874fa1f53c713f31b5831c25fe56657808bd0b379a7f28442af8a6de79cb2", "http://127.0.0.1:8545/");
       },
       network_id: '12345',
       host: '127.0.0.1',

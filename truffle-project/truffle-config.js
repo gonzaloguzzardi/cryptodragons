@@ -128,6 +128,17 @@ module.exports = {
       host: '127.0.0.1',
       port: 8545,
       gas: 8700000
+    },
+    bfa: {
+      provider: function() {
+        // create provider using the private key of the prefunded bfa account 0x28863498efede12296888f7ca6cf0b94974fbdbc
+        return new PrivateKeyProvider("dff874fa1f53c713f31b5831c25fe56657808bd0b379a7f28442af8a6de79cb2", "http://127.0.0.1:8545/");
+      },
+      network_id: '12345',
+      host: '127.0.0.1',
+      port: 8545,
+      gas: 4700000,
+      from: "0x28863498efede12296888f7ca6cf0b94974fbdbc"
     }
   }
 }

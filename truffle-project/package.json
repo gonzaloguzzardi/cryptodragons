@@ -3,7 +3,10 @@
   "description": "Simple example of Truffle interacting with Loom DappChain",
   "scripts": {
     "truffle": "truffle",
-    "ganache:run": "./scripts/start_ganache.sh",
+    "run:bfa": "./scripts/run_bfa.sh",
+    "deploy:bfa": "truffle deploy --network bfa",
+    "deploy:reset:bfa": "truffle deploy --reset --network bfa",
+    "run:ganache": "./scripts/start_ganache.sh",
     "deploy:reset:ganache": "truffle deploy --reset --network ganache",
     "deploy:ganache": "truffle deploy --network ganache",
     "deploy:reset": "truffle deploy --reset --network loom_dapp_chain",
@@ -31,6 +34,7 @@
     "ethereumjs-tx": "^1.3.7",
     "ethereumjs-wallet": "^0.6.2",
     "js-sha256": "^0.9.0",
+    "keythereum": "^1.0.4",
     "loom-js": "1.55.0",
     "loom-truffle-provider": "^0.11.0",
     "openzeppelin-solidity": "^2.3.0",
@@ -51,7 +55,7 @@
     "react-router-dom": "^4.3.1",
     "regenerator-runtime": "^0.11.1",
     "request-promise": "^4.2.2",
-    "web3": "1.2.2",
+    "web3": "1.0.0-beta.37",
     "webpack": "4.19.1",
     "webpack-cli": "3.3.9",
     "webpack-dev-server": "3.9.0"

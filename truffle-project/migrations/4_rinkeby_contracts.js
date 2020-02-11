@@ -9,7 +9,7 @@ const Gateway = artifacts.require('./mainnet/gateway/MainnetGateway.sol')
 
 
 module.exports = function (deployer, network, accounts) {
-  if (network !== 'rinkeby' && network !== 'ganache') {
+  if (network !== 'rinkeby' && network !== 'ganache' && network !== 'bfa') {
     return
   }
 

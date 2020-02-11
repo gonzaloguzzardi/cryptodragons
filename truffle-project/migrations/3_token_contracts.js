@@ -7,7 +7,7 @@ const DragonCoin = artifacts.require('./dappchain/DappchainDragonCoin.sol')
 const Gateway = artifacts.require('./dappchain/gateway/DappchainGateway.sol')
 
 module.exports = function (deployer, network, accounts) { 
-  if (network === 'rinkeby' || network === 'ganache') {
+  if (network === 'rinkeby' || network === 'ganache' || network === 'bfa') {
     return
   }
 

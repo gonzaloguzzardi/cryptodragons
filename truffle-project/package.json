@@ -3,7 +3,10 @@
   "description": "Simple example of Truffle interacting with Loom DappChain",
   "scripts": {
     "truffle": "truffle",
-    "ganache:run": "./scripts/start_ganache.sh",
+    "run:bfa": "./scripts/run_bfa.sh",
+    "deploy:bfa": "truffle deploy --network bfa",
+    "deploy:reset:bfa": "truffle deploy --reset --network bfa",
+    "run:ganache": "./scripts/start_ganache.sh",
     "deploy:reset:ganache": "truffle deploy --reset --network ganache",
     "deploy:ganache": "truffle deploy --network ganache",
     "deploy:reset": "truffle deploy --reset --network loom_dapp_chain",

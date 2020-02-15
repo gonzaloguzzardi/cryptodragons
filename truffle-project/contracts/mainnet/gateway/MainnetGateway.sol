@@ -34,7 +34,7 @@ contract MainnetGateway is IERC20Receiver, IERC721Receiver, MainnetValidatorMana
   event ERC721Received(address from, uint256 uid, address contractAddress, bytes data);
 
   event SendDragonToSidechainAttempt(address from, uint256 uid, address toSidechainAddress, bytes data);
-  event DragonSuccessfullyRetrievedInSidechain(address sidechainAddress, uint256 uid, bytes data);
+  event DragonSuccessfullyRetrievedInMainchain(address mainchainAddress, uint256 uid, bytes data);
   event DragonWithdrawal(address sidechainAddress, uint256 uid);
 
   enum TokenKind {

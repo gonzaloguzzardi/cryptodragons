@@ -7,7 +7,7 @@
     "deploy:bfa": "truffle deploy --network bfa",
     "deploy:reset:bfa": "truffle deploy --reset --network bfa",
     "run:loom": "./scripts/run_loom.sh",
-    "deploy:loom": "truffle deploy --network loom_dapp_chain",
+    "deploy:loom": "truffle deploy --reset --network loom_dapp_chain",
     "deploy:reset:loom": "truffle deploy --reset --network loom_dapp_chain",
 
     "run:ganache": "./scripts/start_ganache.sh",
@@ -26,7 +26,7 @@
     "get:loom": "if [ ! -d loom ]; then mkdir loom && cd loom && curl https://raw.githubusercontent.com/loomnetwork/loom-sdk-documentation/master/scripts/get_loom.sh | sh && chmod +x ./loom && cd ..; fi",
     "gen:extdev-key": "npm run get:loom && ./loom/loom genkey -k extdev_private_key -a extdev_public_key",
     "gen:loom-key": "npm run get:loom && ./loom/loom genkey -k loom_private_key -a loom_public_key",
-    "loom:init": "cd loom && chmod +x loom && ./loom init -f && cd ..",
+    "loom:init": "cd loom && chmod +x loom && ./loom init -f && cd .."
   },
   "dependencies": {
     "bip39": "^3.0.2",

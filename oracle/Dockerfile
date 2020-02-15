@@ -9,4 +9,4 @@ EXPOSE 46658
 EXPOSE 27017
 EXPOSE 8545
 EXPOSE 8081
-CMD [ "npm", "start" ]
+CMD [ "npm", "init" ]

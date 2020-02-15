@@ -22,7 +22,7 @@ async function mapAccount(web3js, ownerAccount, gas, sideAccount) {
 }
 
 async function getGanacheTokenContract(web3js) {
-  const networkId = await web3js.eth.net.getId()
+  const networkId = await web3js.eth.net.getId();
   return new web3js.eth.Contract(
     MainchainDragonTokenJson.abi,
     MainchainDragonTokenJson.networks[networkId].address
@@ -134,6 +134,7 @@ app.get('/api/dragons', WAsync.wrapAsync(async function getDragonFunction(req, r
     console.log(`\nAddress ${account} holds dragons with id ${data}\n`);
     res.status(200).send(data);
   } catch (err) {
+    console.log(err);
     res.status(500).send(err)
   }
 }))

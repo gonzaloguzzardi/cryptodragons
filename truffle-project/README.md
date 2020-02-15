@@ -13,6 +13,7 @@ Make sure the following requirements are met and then follow the steps in the ne
 ```text
 Node >= 8
 yarn or npm
+docker
 ```
 
 ## Install
@@ -33,6 +34,12 @@ and run:
 
 ```bash
 yarn install
+```
+
+### Docker
+```
+https://medium.com/@sebagomez/installing-the-docker-client-on-ubuntus-windows-subsystem-for-linux-612b392a44c4
+https://medium.com/free-code-camp/how-to-run-geth-from-a-docker-container-b6d30620ca74
 ```
 
 ## Run against Loom Testnet
@@ -156,7 +163,7 @@ yarn serve
 
 2. Also is possible to call truffle command directly with `yarn truffle`.
 
-2. We're not versioning the build directory for this particular example, although is recommended to versioning, the limitation can be removed by editing the `.gitignore` file.
+3. We're not versioning the build directory for this particular example, although is recommended to versioning, the limitation can be removed by editing the `.gitignore` file.
 
 
 ## Current limitations

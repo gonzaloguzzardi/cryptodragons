@@ -9,7 +9,6 @@
     "run:loom": "./scripts/run_loom.sh",
     "deploy:loom": "truffle deploy --reset --network loom_dapp_chain",
     "deploy:reset:loom": "truffle deploy --reset --network loom_dapp_chain",
-
     "run:ganache": "./scripts/start_ganache.sh",
     "deploy:reset:ganache": "truffle deploy --reset --network ganache",
     "deploy:ganache": "truffle deploy --network ganache",

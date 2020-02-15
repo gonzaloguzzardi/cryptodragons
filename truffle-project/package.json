@@ -7,7 +7,7 @@
     "deploy:bfa": "truffle deploy --network bfa",
     "deploy:reset:bfa": "truffle deploy --reset --network bfa",
     "run:loom": "./scripts/run_loom.sh",
-    "deploy:loom": "truffle deploy --network loom_dapp_chain",
+    "deploy:loom": "truffle deploy --reset --network loom_dapp_chain",
     "deploy:reset:loom": "truffle deploy --reset --network loom_dapp_chain",
 
     "run:ganache": "./scripts/start_ganache.sh",

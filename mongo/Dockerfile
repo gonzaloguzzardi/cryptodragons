@@ -5,4 +5,5 @@ RUN apt-get install -y mongodb
 VOLUME ["/data/db"]
 WORKDIR /data
 EXPOSE 27017
+EXPOSE 28017
 CMD ["mongod", "--smallfiles"]

@@ -37,6 +37,7 @@ var collection = "transactions";
 var database = "crypto-dragons";
 var url = "mongodb://localhost:27017/" + database;
 
+const bfaNetworkId = "12345"
 
 function _getCurrentNetwork() {
 	const networkId = 'default'
@@ -131,7 +132,7 @@ function listenMainChainEvents() {
 
 	var mainChainGatewayInstance = new web3MainChain.eth.Contract(
 		MainChainABI,
-		MainChainGateway.networks["5777"].address
+		MainChainGateway.networks[bfaNetworkId].address
 	)
 
 	mainChainGatewayInstance.events.NewDragon((err, event) => {

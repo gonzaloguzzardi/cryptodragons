@@ -143,3 +143,10 @@ node mainchain-cli.js my-dragons
 GNU GPLv3
  
 docker-compose up
+
+### DOCKER WEB
+```bash
+docker build -t nicomoccagatta/web_container:1.0.0 .
+docker push nicomoccagatta/web_container:1.0.0
+docker pull nicomoccagatta/web_container:1.0.0
+```

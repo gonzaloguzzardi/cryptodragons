@@ -61,6 +61,22 @@ async function getMyDragons(web3js, ownerAccount, gas) {
     .call({ from: ownerAccount, gas });
 }
 
+
+async function transferDragonToGateway(web3js, gas, ownerAccount, dragonId) {
+  const contract = await getGanacheTokenContract(web3js)
+  const gasEstimate = await contract.methods
+    .transferToGateway(dragonId)
+    .estimateGas({ from: ownerAccount, gas: 0 })
+    if (gasEstimate == gas) {
+      console.log("Not enough enough gas, send more.");
+      throw new Error('Not enough enough gas, send more.')
+    }
+  console.log("Succesfully transfered the dragon");
+  return await contract.methods
+    .transferToGateway(dragonId)
+    .send({ from: ownerAccount, gas: gasEstimate });
+}
+
 program
   .version('0.1.0')
   .parse(process.argv)
@@ -109,23 +125,17 @@ app.post('/api/dragon/receive', WAsync.wrapAsync(async function transferFunction
   }
 }))
 
-//app.get('/api/dragon/transfer', WAsync.wrapAsync(async function transferFunction(req, res, next) {
-  // const { account, web3js, client } = loadLoomAccount(req.query.account)
-  // try {
-  //   if (req.query.id === undefined) {
-  //   }
-  //   const data = await transferDragonToGateway(web3js, req.query.gas || 350000, account, req.query.id)
-
-  //   console.log(`\n Token with id ${req.query.id} was successfully transfered to gateway \n`) 
-  // } catch (err) {
-  //   res.status(400).send(err)
-  // } finally {
-  //   if (client) {
-  //     client.disconnect()
-  //   }
-  //   res.status(200).send(`Token with id ${req.query.id} was successfully transfered to gateway`)
-  // }
-//}))
+app.get('/api/dragon/transfer', WAsync.wrapAsync(async function transferToSideFunction(req, res, next) {
+  const { account, web3js } = loadGanacheAccount();
+    try {
+      const data = await transferDragonToGateway(web3js, req.query.gas || 350000, account, req.query.id)
+      console.log(`\n Token with id ${req.query.id} was successfully transfered to gateway \n`) 
+    } catch (err) {
+      console.log(err);
+      res.status(400).send(err)
+    }
+    res.status(200).send(`Token with id ${req.query.id} was successfully transfered to gateway`)
+}))
 
 app.get('/api/dragons', WAsync.wrapAsync(async function getDragonFunction(req, res, next) {
   const { account, web3js } = loadGanacheAccount();

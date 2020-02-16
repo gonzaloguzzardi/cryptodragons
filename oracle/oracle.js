@@ -8,7 +8,8 @@ const Gateway = require("../truffle-project/src/contracts/DappchainGateway");
 //const Gateway = require("../truffle-project/src/contracts/DappchainTransferableDragon");
 //const Gateway = require("../truffle-project/src/contracts/DappchainGateway");
 //const Gateway = require("../truffle-project/src/contracts/DappchainTransferableDragon");
-const MainChainGateway = require("../truffle-project/src/contracts/MainnetTransferableDragon");
+//const MainChainGateway = require("../truffle-project/src/contracts/MainnetTransferableDragon");
+const MainChainGateway = require("../truffle-project/src/contracts/MainnetGateway");
 
 const CHAIN_ID = "default";
 const WRITE_URL = "ws://0.0.0.0:46658/websocket";
@@ -132,34 +133,41 @@ function listenSideChainEvents() {
 }
 
 function listenMainChainEvents() {
-	const web3MainChain = new Web3(new Web3.providers.WebsocketProvider(MAIN_CHAIN_URL));
+	const web3js = new Web3(new Web3.providers.HttpProvider('http://127.0.0.1:8545'));
+	const ownerAccount = fs.readFileSync(path.join(__dirname, '../truffle-project/ganache_account'), 'utf-8')
+	web3js.eth.accounts.wallet.add(ownerAccount)
+	const networkId = "12345";
+	
 	const MainChainABI = MainChainGateway.abi;
 
 	if (!MainChainGateway.networks) {
 		throw Error('Contract not deployed on Mainchain')
 	}
 
-	var mainChainGatewayInstance = new web3MainChain.eth.Contract(
+	console.log(networkId);
+	console.log(MainChainGateway.networks);
+
+	var mainChainGatewayInstance = new web3js.eth.Contract(
 		MainChainABI,
-		MainChainGateway.networks["5777"].address
+		MainChainGateway.networks[networkId].address
 	)
 
-	mainChainGatewayInstance.events.NewDragon((err, event) => {
+	mainChainGatewayInstance.events.SendDragonToSidechainAttempt((err, event) => {
 		if (err) {
 			console.error('Error on event', err);
 		} else {
-			console.log("[MAINCHAIN]: NewDragon event!!!!!");
-			console.log(event);
-			if (this.onEvent) {
-				console.log("Entro el evento!!!!");
-			}
+			console.log("[SIDECHAIN]: NewDragon event!!!!!");
+			// console.log(event);
+			mainList.push(transforEventIntoTransactionObj(event));
+			console.log("Dragon agregado a la sidelist que es ejecutada por el cron");
+			// insertOnMongo(database, url, transforEventIntoTransactionObj(event), collection)
 		}
 	})
 }
 
 function eventGetter() {
 	listenSideChainEvents();
-	//listenMainChainEvents();
+	listenMainChainEvents();
 }
 
 function insertOnMongo(database, url, transaction, collection) {
@@ -283,22 +291,23 @@ function sendMessageToSide(message) {
 	request.post(
 		{
 			headers: { 'content-type': 'application/json' },
-			url: "http://127.0.0.1:8086/sideNet",
+			url: `${sidechainApiUrl}:${sidechainApiPort}/api/dragon/receive`,
 			body: message,
-			json: true
+			json: true,
 		},
 		function (error, response, body) {
-			if (error == null && body.status == 200) {
-				console.log("Envio exitoso...");
-			}
-			else {
+			if (error) {
 				console.log("Starting roll back...");
 				console.log(body);
-				sendMessageToMain(message);
+				// sideList.push(message);
+				// sendMessageToSide(message);
+			} else {
+				console.log(`url: ${sidechainApiUrl}:${sidechainApiPort}/api/dragon/receive`);
+				console.log("Envio exitoso...");
 			}
 		}
 	);
-	console.log("enviando mensaje a la side net");
+	console.log("enviando mensaje a la side chain...");
 }
 
 var server = app.listen(API_PORT, '0.0.0.0', function () {

@@ -93,7 +93,7 @@ contract MainnetGateway is IERC20Receiver, IERC721Receiver, MainnetValidatorMana
     IDragonContract(mainchainAddress).retrieveToken(mainchainAddress, uid, data);
     delete lockedDragons[uid];
     delete balances[mainchainAddress].erc721[mainchainAddress][uid];
-    emit DragonSuccessfullyRetrievedInSidechain(mainchainAddress, uid, data);
+    emit DragonSuccessfullyRetrievedInMainchain(mainchainAddress, uid, data);
   }
 
   //@TODO hacer onlyOracle

@@ -16,7 +16,7 @@ RUN geth --datadir devnet/network/node init devnet/devnet.json
 EXPOSE 8545 8546 8547 30303 30303/udp
 #ENTRYPOINT ["geth"]
 
-CMD ["geth", "--datadir", "devnet/network/node", "--syncmode", "full", "--port", "30303", "--rpc", "--rpcaddr", "localhost", "--rpcport", "8545", "--rpcaddr", "0.0.0.0", "--rpccorsdomain", "*", "--rpcapi", "'personal,db,eth,net,web3,txpool,miner'", "--networkid", "12345", "--gasprice", "1", "--unlock", "0x28863498efede12296888f7ca6cf0b94974fbdbc", "--password", "/dev/null", "--mine", "--allow-insecure-unlock"]
+CMD ["geth", "--datadir", "devnet/network/node", "--syncmode", "full", "--port", "30303", "--rpc", "--rpcaddr", "localhost", "--rpcport", "8545", "--rpcaddr", "0.0.0.0", "--rpccorsdomain", "*", "--rpcapi", "'personal,db,eth,net,web3,txpool,miner'", "--networkid", "12345", "--ws", "--wsaddr", "0.0.0.0", "--wsport", "8546", "--wsorigins", "*", "--gasprice", "1", "--unlock", "0x28863498efede12296888f7ca6cf0b94974fbdbc", "--password", "/dev/null", "--mine", "--allow-insecure-unlock"]
 
 # Resorces
 # https://ethereum.stackexchange.com/questions/12436/how-to-communicate-with-a-remote-node/12439#12439

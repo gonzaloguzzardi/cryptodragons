@@ -3,7 +3,7 @@ FROM node:10.15.0
 WORKDIR /usr/src/app
 COPY . .
 RUN if test -d node_modules; then rm -r node_modules; fi
-RUN npm install
+RUN npm install --silent
 EXPOSE 8001
 EXPOSE 8002
 EXPOSE 8081

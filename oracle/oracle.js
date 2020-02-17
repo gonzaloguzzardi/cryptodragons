@@ -133,7 +133,7 @@ function listenSideChainEvents() {
 }
 
 function listenMainChainEvents() {
-	const web3js = new Web3(new Web3.providers.WebsocketProvider("ws://localhost:8546"));
+	const web3js = new Web3(new Web3.providers.WebsocketProvider("ws://0.0.0.0:8546"));
 	const ownerAccount = fs.readFileSync(path.join(__dirname, '../truffle-project/ganache_account'), 'utf-8')
 	web3js.eth.accounts.wallet.add(ownerAccount)
 	const networkId = "12345";

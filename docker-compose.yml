@@ -23,9 +23,8 @@ services:
 
   oracle:
     build:
-      context: './oracle'
+      context: ./oracle
     ports:
-      - "8081:8081"
       - "8001:8001"
       - "8002:8002"
 

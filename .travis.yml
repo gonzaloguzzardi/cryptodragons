@@ -29,3 +29,5 @@ script:
   - sleep 5
   - yarn deploy:reset
   - yarn serve > /dev/null 2>&1 &
+  # https://create-react-app.dev/docs/running-tests/#travis-ci
+  - cd ../web && npm install && npm test

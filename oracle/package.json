@@ -9,14 +9,7 @@
     "url": "https://bitbucket.org/nitzardi/cryptodragons.git"
   },
   "scripts": {
-    "start": "webpack-dev-server --hot --content-base ./dist",
-    "test": "jest --config=jest.config.js",
-    "build:dev": "npm run clean && webpack --mode development",
-    "build": "npm run clean && BABEL_ENV=production webpack --mode production",
-    "init": "node oracle.js",
-    "ganache-cli": "ganache-cli -p 8545 -v -m \"trade nothing tag piece anger smoke clay reveal burst behave dose brave\"",
-    "stats": "webpack --profile --json > stats.json",
-    "clean": "rimraf dist"
+    "init": "node oracle.js"
   },
   "devDependencies": {
     "body-parser": "latest",

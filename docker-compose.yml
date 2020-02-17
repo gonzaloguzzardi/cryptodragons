@@ -1,22 +1,35 @@
 version: '3'
-
 services:
-  mongo:
-    build: './mongo'
-    expose:
-      - "27017"
+  loom:
+    image: gonzaloguzzardi/cryptodragons:loom_node_v001
     ports:
-      - "27017:27017"
+      - "46656:46656"
+      - "46658:46658"
+
+  bfa:
+    image: gonzaloguzzardi/cryptodragons:bfa_node_v003
+    ports:
+      - "8545:8545"
+      - "8546:8546"
+      - "8547:8547"
+      - "30303:30303"
+
+  mongo:
+    build:
+      context: ./mongo
+    ports:
+      - "27017:27017" # process
+      - "28017:28017" # http
 
   oracle:
     build:
-      context: '.'
-      dockerfile: 'oracle/Dockerfile'
-    command: "node oracle.js"
-    expose:
-      - "8081"
-      - "46658"
+      context: ./oracle
     ports:
-      - "8081:8081"
-      - "46658:46658"
-      
+      - "8001:8001"
+      - "8002:8002"
+
+  web:
+    build:
+      context: ./web
+    ports:
+      - "3000:3000"

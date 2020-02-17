@@ -7,7 +7,7 @@ services:
       - "46658:46658"
 
   bfa:
-    image: gonzaloguzzardi/cryptodragons:bfa_node_v002
+    image: gonzaloguzzardi/cryptodragons:bfa_node_v003
     ports:
       - "8545:8545"
       - "8546:8546"

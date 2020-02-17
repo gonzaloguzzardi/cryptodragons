@@ -33,3 +33,6 @@ services:
       context: ./web
     ports:
       - "3000:3000"
+    volumes:
+      - ./web:/usr/src/app/web
+      - '/usr/src/app/web/node_modules'

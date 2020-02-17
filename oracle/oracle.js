@@ -3,13 +3,13 @@ const Web3 = require('web3');
 const path = require('path')
 const BN = require('bn.js');
 
-const Gateway = require("../truffle-project/src/contracts/DappchainGateway");
+const Gateway = require("./contracts_jsons/DappchainGateway");
 //const Gateway = require("./dependencies/DappchainGateway");
-//const Gateway = require("../truffle-project/src/contracts/DappchainTransferableDragon");
-//const Gateway = require("../truffle-project/src/contracts/DappchainGateway");
-//const Gateway = require("../truffle-project/src/contracts/DappchainTransferableDragon");
-//const MainChainGateway = require("../truffle-project/src/contracts/MainnetTransferableDragon");
-const MainChainGateway = require("../truffle-project/src/contracts/MainnetGateway");
+//const Gateway = require("./contracts_jsons/DappchainTransferableDragon");
+//const Gateway = require("./contracts_jsons/DappchainGateway");
+//const Gateway = require("./contracts_jsons/DappchainTransferableDragon");
+//const MainChainGateway = require("./contracts_jsons/MainnetTransferableDragon");
+const MainChainGateway = require("./contracts_jsons/MainnetGateway");
 
 const CHAIN_ID = "default";
 const WRITE_URL = "ws://0.0.0.0:46658/websocket";
@@ -93,7 +93,7 @@ function _createClient() {
 }
 
 function listenSideChainEvents() {
-	var accountPath = '../truffle-project/loom_private_key'
+	var accountPath = './loom_private_key'
 	const privateKeyStr = fs.readFileSync(path.join(__dirname, accountPath), 'utf-8')
 	const privateKey = CryptoUtils.B64ToUint8Array(privateKeyStr)
 	const publicKey = CryptoUtils.publicKeyFromPrivateKey(privateKey)
@@ -134,7 +134,7 @@ function listenSideChainEvents() {
 
 function listenMainChainEvents() {
 	const web3js = new Web3(new Web3.providers.WebsocketProvider("ws://0.0.0.0:8546"));
-	const ownerAccount = fs.readFileSync(path.join(__dirname, '../truffle-project/mainchain_account'), 'utf-8')
+	const ownerAccount = fs.readFileSync(path.join(__dirname, './mainchain_account'), 'utf-8')
 	web3js.eth.accounts.wallet.add(ownerAccount)
 	const networkId = "12345";
 	

@@ -23,12 +23,12 @@ services:
 
   oracle:
     build:
-      context: './oracle'
+      context: ./oracle
     ports:
-      - "8081:8081"
       - "8001:8001"
       - "8002:8002"
-
+      - "8081:8081"
+      
 # Levantamos un docker? Vi que el dockerfile no hacia nada por ahora     
 #web:
 #   build:

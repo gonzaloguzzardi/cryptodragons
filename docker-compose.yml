@@ -29,11 +29,8 @@ services:
       - "8001:8001"
       - "8002:8002"
 
-# Levantamos un docker? Vi que el dockerfile no hacia nada por ahora     
-#web:
-#   build:
-#     context: ./web
-#   ports:
-#     - "3000:3000"
-#   volumes:
-#     - ./web:/usr/src/app/web
+  web:
+    build:
+      context: ./web
+    ports:
+      - "3000:3000"

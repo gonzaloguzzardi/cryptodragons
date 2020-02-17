@@ -15,7 +15,7 @@ module.exports = async function(deployer, network, accounts) {
         // Write the abi to a new file in the unityAbis directory
         fs.writeFileSync(path.resolve(unityAbisPath, contract), JSON.stringify(json.abi))
 
-        // Write the abi to a new file in the unityAbis directory
+        // Write the abi to a new file in the oracle directory
         fs.writeFileSync(path.resolve(oracleJsonsPath, contract), JSON.stringify(json))
     });
 }

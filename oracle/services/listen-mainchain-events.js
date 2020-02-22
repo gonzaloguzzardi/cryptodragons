@@ -6,13 +6,13 @@ var fs = require("fs");
 const { insertOnMongo, transforEventIntoTransactionObj } = require('../mongo-utils');
 
 // CONSTANTS
-const { collection, database, url, MainChainGateway } = require ('./config');
+const { collection, database, url, MainChainGateway } = require ('../config');
 
 let mainList = [];
 
 function listenMainChainEvents() {
 	const web3js = new Web3(new Web3.providers.WebsocketProvider("ws://0.0.0.0:8546"));
-	const ownerAccount = fs.readFileSync(path.join(__dirname, 'misc', 'mainchain_account'), 'utf-8')
+	const ownerAccount = fs.readFileSync(path.join(__dirname, '../misc', 'mainchain_account'), 'utf-8')
 	web3js.eth.accounts.wallet.add(ownerAccount)
 	const networkId = "12345";
 	
@@ -21,9 +21,6 @@ function listenMainChainEvents() {
 	if (!MainChainGateway.networks) {
 		throw Error('Contract not deployed on Mainchain')
 	}
-
-	console.log(networkId);
-	console.log(MainChainGateway.networks);
 
 	var mainChainGatewayInstance = new web3js.eth.Contract(
 		MainChainABI,
@@ -42,6 +39,4 @@ function listenMainChainEvents() {
 	})
 }
 
-module.exports = {
-    listenMainChainEvents,
-};
+module.exports = listenMainChainEvents;

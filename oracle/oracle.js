@@ -1,12 +1,12 @@
 // IMPORTS
 const cron = require("node-cron");
-var express = require('express');
-var app = express();
-var cors = require('cors')
-var bodyParser = require("body-parser");
+const express = require('express');
+const app = express();
+const cors = require('cors')
+const bodyParser = require("body-parser");
 
 // CONSTANTS
-const { API_PORT } = require ('./config');
+const { API_PORT } = require('./config');
 
 // CONTROLLERS
 const {

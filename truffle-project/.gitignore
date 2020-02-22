@@ -11,7 +11,6 @@ src/contracts
 /rinkeby_account
 /rinkeby_mnemonic
 /extdev_private_key
-misc
 .DS_Store
 extdev_public_key
 loom_mnemonic

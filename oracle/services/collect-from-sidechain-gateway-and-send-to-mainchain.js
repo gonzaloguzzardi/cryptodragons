@@ -36,6 +36,4 @@ function collectFromSidechainGatewayAndSendToMainchain() {
 	}
 }
 
-module.exports = {
-    collectFromSidechainGatewayAndSendToMainchain,
-};
+module.exports = collectFromSidechainGatewayAndSendToMainchain;

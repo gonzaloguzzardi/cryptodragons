@@ -35,6 +35,4 @@ function sendMessageToSide(message) {
 	console.log("enviando mensaje a la side chain...");
 }
 
-module.exports = {
-    collectFromMainchainGatewayAndSendToSidechain,
-};
+module.exports = collectFromMainchainGatewayAndSendToSidechain;

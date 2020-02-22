@@ -4,14 +4,14 @@ function insertOnMongo(database, url, transaction, collection) {
 	MongoClient.connect(url, function (err, db) {
 		if (err) throw err;
 		var dbo = db.db(database);
-		dbo.collection(collection).insertOne(transaction, function (err, res) {
+		dbo.collection(collection).insertOne(transaction, function (err) {
 			if (err) throw err;
 			console.log("Transaction inserted on mongo", transaction);
 			db.close();
 		});
 	});
 	return transaction;
-};
+}
 
 function transforEventIntoTransactionObj(event) {
 	var transaction = new Object();
@@ -21,7 +21,7 @@ function transforEventIntoTransactionObj(event) {
 	transaction.from = event.returnValues.from;
 	transaction.type = event.event;
 	return transaction
-};
+}
 
 module.exports = {
     insertOnMongo,

@@ -9,7 +9,8 @@
     "url": "https://bitbucket.org/nitzardi/cryptodragons.git"
   },
   "scripts": {
-    "init": "node oracle.js"
+    "init": "node oracle.js",
+    "eslint": "eslint ."
   },
   "devDependencies": {
     "body-parser": "latest",

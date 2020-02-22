@@ -25,6 +25,8 @@ const {
 	insertOnMongo, transforEventIntoTransactionObj,
 } = require('./utils/mongo-utils');
 
+let sideList = [], mainList = [], message = {};
+
 function listenSideChainEvents() {
 	var accountPath = './loom_private_key'
 	const privateKeyStr = fs.readFileSync(path.join(__dirname, accountPath), 'utf-8')
@@ -97,7 +99,7 @@ function listenMainChainEvents() {
 }
 
 function insertInMain() {
-	i = 0;
+	let i = 0;
 	while (sideList.length > 0 && i < 10) {
 		message = sideList.shift();
 		console.log(`Enviando dragon con id ${message.id} a la mainchain`);

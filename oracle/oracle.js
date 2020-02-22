@@ -23,12 +23,16 @@ const {
 
 const {
 	insertOnMongo, transforEventIntoTransactionObj,
-} = require('./utils/mongo-utils');
+} = require('./mongo-utils');
+
+const {
+	getDragonsInSidechainGateway,
+} = require('./controllers');
 
 let sideList = [], mainList = [], message = {};
 
 function listenSideChainEvents() {
-	var accountPath = './loom_private_key'
+	var accountPath = './misc/loom_private_key'
 	const privateKeyStr = fs.readFileSync(path.join(__dirname, accountPath), 'utf-8')
 	const privateKey = CryptoUtils.B64ToUint8Array(privateKeyStr)
 	const publicKey = CryptoUtils.publicKeyFromPrivateKey(privateKey)
@@ -68,7 +72,7 @@ function listenSideChainEvents() {
 
 function listenMainChainEvents() {
 	const web3js = new Web3(new Web3.providers.WebsocketProvider("ws://0.0.0.0:8546"));
-	const ownerAccount = fs.readFileSync(path.join(__dirname, './mainchain_account'), 'utf-8')
+	const ownerAccount = fs.readFileSync(path.join(__dirname, 'misc', 'mainchain_account'), 'utf-8')
 	web3js.eth.accounts.wallet.add(ownerAccount)
 	const networkId = "12345";
 	
@@ -98,7 +102,7 @@ function listenMainChainEvents() {
 	})
 }
 
-function insertInMain() {
+function sendToMain() {
 	let i = 0;
 	while (sideList.length > 0 && i < 10) {
 		message = sideList.shift();
@@ -108,7 +112,7 @@ function insertInMain() {
 	}
 }
 
-function insertInSide() {
+function sendToSide() {
 	let i = 0;
 	while (mainList.length > 0 && i < 10) {
 		message = mainList.shift();
@@ -163,35 +167,25 @@ function sendMessageToSide(message) {
 	console.log("enviando mensaje a la side chain...");
 }
 
+// MIDDLEWARES
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.get('/api/dragons', function (req, res) {
-	// MongoClient.connect(url, function (err, db) {
-	// 	if (err) throw err;
-	// 	var dbo = db.db(database);
-	// 	dbo.collection(collection).find({}).toArray(
-	// 		function (err, result) {
-	// 			if (err) throw err;
-	// 			res.send(result);
-	// 			console.log(result);
-	// 			db.close();
-	// 		}
-	// 	)
-	// });
-	res.send(sideList);
-});
+// API ROUTES
+app.get('/api/dragons/sidechain-gateway', getDragonsInSidechainGateway);
 
+// SERVER LISTEN
 const server = app.listen(API_PORT, '0.0.0.0', function () {
 	const host = server.address().address;
 	const port = server.address().port;
 	console.log("Example app listening at http://%s:%s", host, port);
-})
+});
 
+// CRON
 cron.schedule("*/15 * * * * *", () => {
-	insertInMain();
-	insertInSide();
+	sendToMain();
+	sendToSide();
 });
 
 // MAIN

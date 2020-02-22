@@ -55,7 +55,7 @@ function createAccount(accountName) {
 }
 
 function loadLoomAccount(accountName) {
-  var accountPath = './loom_private_key'
+  var accountPath = './misc/loom_private_key';
 
   if (accountName !== undefined)  {
     const paramFile = `${dirPath}/${accountName}`

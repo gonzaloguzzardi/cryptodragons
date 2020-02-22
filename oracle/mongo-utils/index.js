@@ -26,4 +26,4 @@ function transforEventIntoTransactionObj(event) {
 module.exports = {
     insertOnMongo,
     transforEventIntoTransactionObj,
-}
+};

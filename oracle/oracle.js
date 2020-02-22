@@ -107,7 +107,7 @@ function insertInMain() {
 }
 
 function insertInSide() {
-	i = 0;
+	let i = 0;
 	while (mainList.length > 0 && i < 10) {
 		message = mainList.shift();
 		sendMessageToSide(message);

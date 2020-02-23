@@ -148,68 +148,6 @@ async function transferDragonToGateway(web3js, gas, ownerAccount, dragonId) {
     .send({ from: ownerAccount, gas: gasEstimate });
 }
 
-program
-  .command('create-account <accountName>')
-  .description('Create a new loom acount')
-  .action(async function(accountName) {
-    createAccount(accountName)
-  });
-
-program
-  .command('my-dragons')
-  .description('Create test dragon')
-  .option("-g, --gas <number>", "Gas for the tx")
-  .option("-a, --account <accountName>", "File countaining private key of the account to use for this transaction")
-  .action(async function(options) {
-    console.log("account on the options is:" + options.account)
-    const { account, web3js, client } = loadLoomAccount(options.account)
-    try {
-      const data = await getMyDragons(web3js, account, options.gas || 350000)
-      console.log(`\nAddress ${account} holds dragons with id ${data}\n`) 
-    } catch (err) {
-      console.error(err)
-    } finally {
-      if (client) {
-        client.disconnect()
-      }
-    }
-  });
-
-program
-  .command('deposit-coin <amount>')
-  .description('deposit the specified amount of ERC20 tokens into the Transfer Gateway')
-  .option("-g, --gas <number>", "Gas for the tx")
-  .action(async function(amount, options) {
-    const { account, web3js } = loadLoomAccount()
-    try {
-      const actualAmount = new BN(amount).mul(coinMultiplier)
-      const tx = await depositCoinToRinkebyGateway(
-        web3js, actualAmount, account.address, options.gas || 350000
-      )
-      console.log(`${amount} tokens deposited to Ethereum Gateway.`)
-      console.log(`Rinkeby tx hash: ${tx.transactionHash}`)
-    } catch (err) {
-      console.error(err)
-    } finally {
-      if (client) {
-        client.disconnect()
-      }
-    }
-  });
-
-program
-  .command('test')
-  .description('deposit the specified amount of ERC20 tokens into the Transfer Gateway')
-  .action(async function() {
-    const { account, web3js, client } = loadLoomAccount()
-    console.log("address = " + getLoomCoinContract(web3js))
-  });
-
-program
-  .version('0.1.0')
-  .parse(process.argv);
-
-
 var express = require('express');
 var http = require('http');
 var cors = require('cors');

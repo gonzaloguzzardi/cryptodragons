@@ -9,18 +9,20 @@
     "url": "https://bitbucket.org/nitzardi/cryptodragons.git"
   },
   "scripts": {
-    "init": "node oracle.js"
+    "init": "node oracle.js",
+    "eslint": "eslint ."
   },
   "devDependencies": {
     "body-parser": "latest",
+    "eslint": "^6.8.0",
+    "eslint-plugin-react": "^7.18.3",
     "express": "latest",
     "fs": "latest",
+    "loom-js": "latest",
+    "mongodb": "latest",
     "node-cron": "latest",
     "request": "latest",
-    "mongodb": "latest",
-    "web3": "1.0.0-beta.37",
-    "loom-js": "latest",
-    "bn": "latest"
+    "web3": "1.0.0-beta.37"
   },
   "dependencies": {
     "web3": "1.0.0-beta.37"

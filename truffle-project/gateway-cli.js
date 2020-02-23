@@ -449,9 +449,9 @@ function loadRinkebyAccount() {
 }
 
 function loadExtdevAccount() {
-  const privateKeyStr = fs.readFileSync(path.join(__dirname, './loom_private_key'), 'utf-8')
-  const privateKey = CryptoUtils.B64ToUint8Array(privateKeyStr)
-  const publicKey = CryptoUtils.publicKeyFromPrivateKey(privateKey)
+  const privateKeyStr = fs.readFileSync(path.join(__dirname, 'misc', 'loom_private_key'), 'utf-8');
+  const privateKey = CryptoUtils.B64ToUint8Array(privateKeyStr);
+  const publicKey = CryptoUtils.publicKeyFromPrivateKey(privateKey);
   const client = new Client(
     loomChainId,
     'wss://extdev-plasma-us1.dappchains.com/websocket',
@@ -462,13 +462,13 @@ function loadExtdevAccount() {
     new SignedTxMiddleware(privateKey)
   ]
   client.on('error', msg => {
-    console.error('PlasmaChain connection error', msg)
+    console.error('PlasmaChain connection error', msg);
   })
 
   return {
     account: LocalAddress.fromPublicKey(publicKey).toString(),
     web3js: new Web3(new LoomProvider(client, privateKey)),
-    client
+    client,
   }
 }
 
@@ -478,12 +478,12 @@ async function mapContracts({
   tokenRinkebyAddress,
   tokenExtdevAddress,
   ownerExtdevAddress,
-  rinkebyTxHash
+  rinkebyTxHash,
 }) {
-  const ownerExtdevAddr = Address.fromString(`${client.chainId}:${ownerExtdevAddress}`)
-  const gatewayContract = await TransferGateway.createAsync(client, ownerExtdevAddr)
-  const foreignContract = Address.fromString(`eth:${tokenRinkebyAddress}`)
-  const localContract = Address.fromString(`${client.chainId}:${tokenExtdevAddress}`)
+  const ownerExtdevAddr = Address.fromString(`${client.chainId}:${ownerExtdevAddress}`);
+  const gatewayContract = await TransferGateway.createAsync(client, ownerExtdevAddr);
+  const foreignContract = Address.fromString(`eth:${tokenRinkebyAddress}`);
+  const localContract = Address.fromString(`${client.chainId}:${tokenExtdevAddress}`);
 
   const hash = soliditySha3(
     { type: 'address', value: tokenRinkebyAddress.slice(2) },

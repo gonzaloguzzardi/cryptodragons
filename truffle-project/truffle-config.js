@@ -37,18 +37,18 @@ module.exports = {
   networks: {
     loom_dapp_chain: {
       provider: function() {
-        const chainId = 'default'
-        const writeUrl = 'http://127.0.0.1:46658/rpc'
-        const readUrl = 'http://127.0.0.1:46658/query'
-        const mnemonicPath = path.join(__dirname, 'loom_mnemonic')
-        const privateKeyPath = path.join(__dirname, 'loom_private_key')
+        const chainId = 'default';
+        const writeUrl = 'http://127.0.0.1:46658/rpc';
+        const readUrl = 'http://127.0.0.1:46658/query';
+        const mnemonicPath = path.join(__dirname, 'misc', 'loom_mnemonic');
+        const privateKeyPath = path.join(__dirname, 'misc', 'loom_private_key');
         if (fs.existsSync(privateKeyPath)) {
-          const loomTruffleProvider = getLoomProviderWithPrivateKey(privateKeyPath, chainId, writeUrl, readUrl)
-          loomTruffleProvider.createExtraAccountsFromMnemonic("gravity top burden flip student usage spell purchase hundred improve check genre", 10)
-          return loomTruffleProvider
+          const loomTruffleProvider = getLoomProviderWithPrivateKey(privateKeyPath, chainId, writeUrl, readUrl);
+          loomTruffleProvider.createExtraAccountsFromMnemonic("gravity top burden flip student usage spell purchase hundred improve check genre", 10);
+          return loomTruffleProvider;
         } else if (fs.existsSync(mnemonicPath)) {
-          const loomTruffleProvider = getLoomProviderWithMnemonic(mnemonicPath, chainId, writeUrl, readUrl)
-          return loomTruffleProvider
+          const loomTruffleProvider = getLoomProviderWithMnemonic(mnemonicPath, chainId, writeUrl, readUrl);
+          return loomTruffleProvider;
         }
       },
       network_id: '*'
@@ -137,7 +137,7 @@ module.exports = {
       network_id: '12345',
       host: '127.0.0.1',
       port: 8545,
-      gas: 5635351,
+      gas: 4727597,
       from: "0x28863498efede12296888f7ca6cf0b94974fbdbc"
     }
   }

@@ -1,0 +1,11 @@
+# Base Image
+FROM node:10.15.0
+
+WORKDIR /usr/src/app
+COPY . .
+RUN if test -d node_modules; then rm -r node_modules; fi
+RUN apt-get update
+RUN npm install --silent
+EXPOSE 8001
+
+CMD yarn deploy:reset:loom && node sidechain-cli.js

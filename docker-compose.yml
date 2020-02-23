@@ -6,6 +6,14 @@ services:
       - "46656:46656"
       - "46658:46658"
 
+  # PROBLEMAS PARA CONECTARSE A LA SIDE..
+  # sidechain-deploy-and-cli:
+  #   build:
+  #     context: ./truffle-project
+  #     dockerfile: DockerfileSidechainSetup
+  #   ports:
+  #     - "8001:8001"
+
   bfa:
     image: gonzaloguzzardi/cryptodragons:bfa_node_v003
     ports:

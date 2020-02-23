@@ -1,33 +1,30 @@
-# Documentation
-# https://docs.travis-ci.com/user/languages/javascript-with-nodejs/
-
 os: linux
-
-sudo: required
-
 language: node_js
+
 node_js:
-  - "10"
+- '10'
 
 cache:
-  - npm
-  - yarn
+- npm
+- yarn
+
+env:
+  matrix:
+  - DOCKER_COMPOSE_VERSION=1.25.4
+  global:
+  - secure: L9S4Pe+Q1tCRjHcM3wiDm+0o0BfgBLKLqF4UfK1nRK+rUveUjEyP8qIFGRyvSz08xspXgnQWoXiKNlS9ivOdyfMxfHRE47r+kHTRYFhykWRE08FVfmw8y+7/FvgRBLqksYrtl9aBIGm88FT5TU9ib02KdicM8g2etrG3XdAwjuwHbnewQtLzYZfa/nJ5WvKHVF3Ix8uFddTm7xM55StigWd0Ba77GFTE8FcxKp7zARxjbSTOBf/YNReYFeezi6I4kg25KZDl1twS8UfbN4/fVlPm5WT1TKT3bNhg3OX2ptQSiQ4EZOZMnhS+J2oUpuMkjmC6BoRUp7kE7NNsynpTZ5IpdslfgPpd99kpY8yuQChok9iwk/fiQa/RfLOI7xV8jFcrWCW92Tq9uTIsUdt+uQdJg1lEy9gY95WI7cbhRFAMYz+cYQJmEJ2SbdHzJ8MeJLkIMMxaUC+zW263aKjjAtNS//XdhcG3peG1LLtZVk+RCGOr4oROiwrqPK1QDXgsZyu2C3U60vfKrfXPeDPkOS1ccdXIH/tEg2w68+iA8iBx4Bg1qKRWZ/FZBQj+cfQvsvhfJ8KJ0l25KJz/omf4yuhnsjYzP98WslCePCkkK2LLbXPb0PpEGOPMbFxzwQKy0ZzikFbdpA5fSiDdnRfmdkvKObCLWdqzHSOvxmcsU9M=
+  - secure: vqVtkz6kRB43pVtZTIckzVDd3XcnEjrppd2iFvIWbwkH2k/RD/XriMShjuYQtvhF4ESww9Y5RV69HTP/oPtI2E0UK/90X64ahoIxBTx5HuIhCo4ojbcACUvnXx1INPbH7VogfDKhhBm9HwvMQ5+9o4Wi4Gqyj5SmIQEIb9UDyjE8J8OaxDiGOHqkNCmcfozT1pxSbwhB2EM/YH05xUzEtOfbNu/jGzyM5W1dFa6wpUxpe9yKNcoaj44joj5YswAQhMbXP9N/alaQK+/oPgEQUWkwcwcWES5BeMj1gXZnPynMpPovBtNb7z7d3MWvoJdzeBnzezXWjRF3/q9TZQhTnIKrlrTeqjMf5nwPYHwg6VE6j0FKitcq6JZaX8CGcnCCgTWrUp2MYVggsl7Y38MpbqEFkKjx5J14L7ZE/uy6J4nCQh5f5bgm8oUILCenccVA2pK7AJEXeBx4T5sbzz6bP407TrhAiCuHrcyMFBxLG02cZZbw4OBAUkh3+fZxVyaUiFlhMbQkO3n35T7b0OP6GBPr/QLTOdhI07a9OFr8Gt7N0DGsb2se5hbCOgDok1egd+D4LRhUMslRJ9qLhOVemegNVn63cLRZ0Y5075v2+q08fJ3YTLfwGJewQlEwrm370syZ4WYot4/8sFwx2IGTlIciH3wtnpTA4pbTlp8CoxU=
 
 before_install:
-  - npm install -g node-gyp
-  - npm install -g truffle
-  - npm install -g yarn
-
-before_script:
-  - cd truffle-project
+- echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+- docker pull gonzaloguzzardi/cryptodragons:bfa_node_v003
+- docker pull gonzaloguzzardi/cryptodragons:loom_node_v001
+- sudo rm /usr/local/bin/docker-compose
+- curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname
+  -s`-`uname -m` > docker-compose
+- chmod +x docker-compose
+- sudo mv docker-compose /usr/local/bin
 
 script:
-  - npm install
-  - yarn gen:loom-key
-  - yarn loom:init > /dev/null 2>&1 &
-  - yarn loom:run &
-  - sleep 5
-  - yarn deploy:reset
-  - yarn serve > /dev/null 2>&1 &
-  # https://create-react-app.dev/docs/running-tests/#travis-ci
-  - cd ../web && npm install && npm test
+- docker-compose build
+- docker-compose up -d

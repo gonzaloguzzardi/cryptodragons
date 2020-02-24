@@ -7,9 +7,9 @@ const fs = require('fs');
 
 const path = require('path');
 const {
-    Client, NonceTxMiddleware, SignedTxMiddleware, Address,
-    LocalAddress, CryptoUtils, LoomProvider,
-    Contracts, Web3Signer, soliditySha3
+  Client, NonceTxMiddleware, SignedTxMiddleware, Address,
+  LocalAddress, CryptoUtils, LoomProvider,
+  Contracts, Web3Signer, soliditySha3
 } = require('loom-js');
 // TODO: fix this export in loom-js
 const { OfflineWeb3Signer } = require('loom-js/dist/solidity-helpers');
@@ -32,10 +32,10 @@ async function getLoomCoinContract(web3js) {
 }
 
 async function getLoomTokenContract(web3js) {
-    return new web3js.eth.Contract(
-        DappchainDragonTokenJson.abi,
-        DappchainDragonTokenJson.networks[loomChainId].address,
-    )
+  return new web3js.eth.Contract(
+    DappchainDragonTokenJson.abi,
+    DappchainDragonTokenJson.networks[loomChainId].address,
+  )
 }
 
 function createAccount(accountName) {
@@ -46,8 +46,8 @@ function createAccount(accountName) {
   const buffer = new Buffer(privateKey);
   fs.writeFile(`${dirPath}/${accountName}`, buffer.toString('base64'), function(err) {
     if(err) {
-        console.log("error creating account " + accountName);
-        console.log(err.message)
+      console.log("error creating account " + accountName);
+      console.log(err.message)
     } else {
       console.log("Account " + accountName + " created with private key: " + privateKey.toString());
     }
@@ -70,14 +70,14 @@ function loadLoomAccount(accountName) {
     'default',
     'ws://127.0.0.1:46658/websocket',
     'ws://127.0.0.1:46658/queryws'
-  )
+  );
   client.txMiddleware = [
     new NonceTxMiddleware(publicKey, client),
     new SignedTxMiddleware(privateKey)
-  ]
+  ];
   client.on('error', msg => {
     console.error('Loom connection error', msg)
-  })
+  });
 
   return {
     account: LocalAddress.fromPublicKey(publicKey).toString(),
@@ -90,15 +90,15 @@ async function mapAccount(web3js, ownerAccount, gas, mainAccount) {
   const contract = await getLoomTokenContract(web3js)
 
   const gasEstimate = await contract.methods
-  .mapContractToMainnet(mainAccount)
-  .estimateGas({ from: ownerAccount, gas: 0 })
+    .mapContractToMainnet(mainAccount)
+    .estimateGas({ from: ownerAccount, gas: 0 })
 
   if (gasEstimate == gas) {
     throw new Error('Not enough enough gas, send more.')
   }
   return contract.methods
-  .mapContractToMainnet(mainAccount)
-  .send({ from: ownerAccount, gas: gasEstimate })
+    .mapContractToMainnet(mainAccount)
+    .send({ from: ownerAccount, gas: gasEstimate })
 }
 
 async function createDragonToken(web3js, ownerAccount, gas) {

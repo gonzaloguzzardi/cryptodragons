@@ -1,7 +1,10 @@
 const request = require('request');
-const { mainchainApiUrl, mainchainApiPort } = require ('../config');
 
-let sideList = [], message = {};
+const { 
+	mainchainApiUrl, mainchainApiPort,
+	collection, database, mongoUrl
+} = require('../config');
+const { collectEventsFromSidechainGateway } = require('../mongo-utils');
 
 function sendMessageToMain(message) {
 	request.post(
@@ -27,13 +30,16 @@ function sendMessageToMain(message) {
 }
 
 function collectFromSidechainGatewayAndSendToMainchain() {
-	let i = 0;
-	while (sideList.length > 0 && i < 10) {
-		message = sideList.shift();
-		console.log(`Enviando dragon con id ${message.id} a la mainchain`);
-		sendMessageToMain(message);
-		i++;
-	}
+	collectEventsFromSidechainGateway(database, mongoUrl, collection)
+		.then((result) => {
+			const dragonsToSend = result;
+			while (dragonsToSend.length > 0) {
+				const message = dragonsToSend.shift();
+				console.log("MENSAJE", message.event);
+				// BIEN, ahora hay que mandarlo!
+				// sendMessageToMain(message);
+			}
+		});
 }
 
 module.exports = collectFromSidechainGatewayAndSendToMainchain;

@@ -1,5 +1,23 @@
 const MongoClient = require('mongodb').MongoClient;
 
+function collectEventsFromSidechainGateway(database, url, collection) {
+	return _collectEvents('SendDragonToMainchainAttempt', database, url, collection);
+}
+
+function _collectEvents(event, database, url, collection) {
+	return new Promise((res) => {
+		MongoClient.connect(url, function (err, db) {
+			if (err) throw err;
+			var dbo = db.db(database);
+			dbo.collection(collection).find({ event }).toArray(function(err, results) {
+				db.close();
+				if (err) throw err;
+				return res(results);
+			});
+		});
+	});
+}
+
 function insertOnMongo(database, url, transaction, collection) {
 	MongoClient.connect(url, function (err, db) {
 		if (err) throw err;
@@ -34,6 +52,7 @@ function transforEventIntoTransactionObj(event) {
 }
 
 module.exports = {
+	collectEventsFromSidechainGateway,
     insertOnMongo,
     transforEventIntoTransactionObj,
 };

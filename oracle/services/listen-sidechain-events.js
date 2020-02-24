@@ -1,14 +1,15 @@
 const Web3 = require('web3');
 const path = require('path');
-var fs = require("fs");
+const fs = require("fs");
 
 // MONGO-DB
-const { insertOnMongo, transforEventIntoTransactionObj } = require('../mongo-utils');
+// const { insertOnMongo, transforEventIntoTransactionObj } = require('../mongo-utils');
 
 // CONSTANTS
 const {
 	CHAIN_ID, WRITE_URL, READ_URL,
-    collection, database, url, SidechainGateway
+	// collection, database, url,
+	SidechainDragonContract, SidechainGatewayContract,
 } = require ('../config');
 
 // LOOM-JS
@@ -16,8 +17,6 @@ const {
 	NonceTxMiddleware, SignedTxMiddleware, Client,
 	CryptoUtils, LoomProvider,
 } = require('loom-js');
-
-let sideList = [];
 
 function listenSideChainEvents() {
 	const privateKeyStr = fs.readFileSync(path.join(__dirname, '../misc', 'loom_private_key'), 'utf-8')
@@ -33,28 +32,65 @@ function listenSideChainEvents() {
 	})
 
 	const web3 = new Web3(new LoomProvider(client, privateKey));
-	const ABI = SidechainGateway.abi;
+	const ABIDragon = SidechainDragonContract.abi;
+	const ABIGateway = SidechainGatewayContract.abi;
 
-	if (!SidechainGateway.networks) {
-		throw Error('Contract not deployed on DAppChain')
+	if (!SidechainDragonContract.networks) {
+		throw Error('Dragons contract not deployed on DAppChain')
 	}
 
-	var sidechainGatewayInstance = new web3.eth.Contract(
-		ABI,
-		SidechainGateway.networks["13654820909954"].address
+	if (!SidechainGatewayContract.networks) {
+		throw Error('Sidechain Gateway contract not deployed on DAppChain')
+	}
+
+	const sidechainDragonsInstance = new web3.eth.Contract(
+		ABIDragon,
+		SidechainDragonContract.networks["13654820909954"].address
+	)
+	const sidechainGatewayInstance = new web3.eth.Contract(
+		ABIGateway,
+		SidechainGatewayContract.networks["13654820909954"].address
 	)
 
-	// Listen transfer 2 mainchain events
-	sidechainGatewayInstance.events.SendDragonToMainchainAttempt((err, event) => {
-		if (err) {
-			console.error('Error on event', err);
-		} else {
-			console.log("[SIDECHAIN]: NewDragon event!!!!!");
-			sideList.push(transforEventIntoTransactionObj(event));
-			console.log("Dragon agregado a la sidelist que es ejecutada por el cron");
-			insertOnMongo(database, url, transforEventIntoTransactionObj(event), collection)
+	sidechainDragonsInstance.events.allEvents((err, event) => {
+		if (err) console.err(err);
+		if (event) {
+			switch(event.event) {
+				case 'NewDragon':
+					console.log("sidechainDragonsInstance", "EVENTO NewDragon!!!!", event);
+					break;
+				case 'Approval':
+				case 'ApprovalForAll':
+				case 'OwnershipTransferred':
+				case 'Transfer':
+				default:
+					// console.log("sidechainDragonsInstance", "OTRO EVENTO ->", event.event);
+					break;
+			}
 		}
-	})
+	});
+
+	sidechainGatewayInstance.events.allEvents((err, event) => {
+		if (err) console.err(err);
+		if (event) {
+			switch(event.event) {
+				case 'SendDragonToMainchainAttempt':
+					console.log("sidechainGatewayInstance", "Evento SendDragonToMainchainAttempt!!!!", event);
+					break;
+				case 'AddedValidator':
+				case 'DragonSuccessfullyRetrievedInSidechain':
+				case 'ERC20Received':
+				case 'ERC721Received':
+				case 'ETHReceived':
+				case 'OwnershipTransferred':
+				case 'RemovedValidator':
+				case 'TokenWithdrawn':
+				default:
+					// console.log("sidechainGatewayInstance", "Evento de sidechain ->", event.event);
+					break;
+			}
+		}
+	});
 }
 
 module.exports = listenSideChainEvents;

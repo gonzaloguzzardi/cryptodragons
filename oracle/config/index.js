@@ -15,8 +15,8 @@ const mainchainApiPort = 8002;
 const oracleApiUrl = 'http://localhost';
 const oracleApiPort = 8081;
 
-const SidechainGateway = require("../contracts_jsons/DappchainGateway");
-//const SidechainGateway = require("../contracts_jsons/DappchainTransferableDragon");
+const SidechainDragonContract = require("../contracts_jsons/DappchainTransferableDragon");
+const SidechainGatewayContract = require("../contracts_jsons/DappchainGateway");
 
 const MainChainGateway = require("../contracts_jsons/MainnetGateway");
 //const MainChainGateway = require("../contracts_jsons/MainnetTransferableDragon");
@@ -35,6 +35,7 @@ module.exports = {
     mainchainApiPort,
     oracleApiUrl,
     oracleApiPort,
-    SidechainGateway,
+    SidechainDragonContract,
+    SidechainGatewayContract,
     MainChainGateway,
 };

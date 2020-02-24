@@ -3,12 +3,12 @@ const path = require('path');
 const fs = require("fs");
 
 // MONGO-DB
-// const { insertOnMongo, transforEventIntoTransactionObj } = require('../mongo-utils');
+const { insertOnMongo, transforEventIntoTransactionObj } = require('../mongo-utils');
 
 // CONSTANTS
 const {
 	CHAIN_ID, WRITE_URL, READ_URL,
-	// collection, database, url,
+	collection, database, mongoUrl,
 	SidechainDragonContract, SidechainGatewayContract,
 } = require ('../config');
 
@@ -57,7 +57,7 @@ function listenSideChainEvents() {
 		if (event) {
 			switch(event.event) {
 				case 'NewDragon':
-					console.log("sidechainDragonsInstance", "EVENTO NewDragon!!!!", event);
+					console.log("sidechainDragonsInstance:", "EVENTO NewDragon");
 					break;
 				case 'Approval':
 				case 'ApprovalForAll':
@@ -75,7 +75,8 @@ function listenSideChainEvents() {
 		if (event) {
 			switch(event.event) {
 				case 'SendDragonToMainchainAttempt':
-					console.log("sidechainGatewayInstance", "Evento SendDragonToMainchainAttempt!!!!", event);
+					console.log("sidechainGatewayInstance:", "EVENTO SendDragonToMainchainAttempt");
+					insertOnMongo(database, mongoUrl, transforEventIntoTransactionObj(event), collection)
 					break;
 				case 'AddedValidator':
 				case 'DragonSuccessfullyRetrievedInSidechain':

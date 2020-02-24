@@ -6,7 +6,6 @@ function insertOnMongo(database, url, transaction, collection) {
 		var dbo = db.db(database);
 		dbo.collection(collection).insertOne(transaction, function (err) {
 			if (err) throw err;
-			console.log("Transaction inserted on mongo", transaction);
 			db.close();
 		});
 	});

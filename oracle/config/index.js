@@ -4,7 +4,7 @@ const READ_URL = "ws://0.0.0.0:46658/queryws";
 const API_PORT = 8081;
 const collection = "transactions";
 const database = "crypto-dragons";
-const url = "mongodb://0.0.0.0:27017/" + database;
+const mongoUrl = "mongodb://0.0.0.0:27017/" + database;
 
 const sidechainApiUrl = 'http://localhost';
 const sidechainApiPort = 8001;
@@ -28,7 +28,7 @@ module.exports = {
     API_PORT,
     collection,
     database,
-    url,
+    mongoUrl,
     sidechainApiUrl,
     sidechainApiPort,
     mainchainApiUrl,

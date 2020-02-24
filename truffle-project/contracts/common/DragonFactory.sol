@@ -25,7 +25,9 @@ contract DragonFactory is DragonBase {
         bytes32 nameInBytes = _stringToBytes32(_name);
         uint id = _createDragon(nameInBytes, _creationTime, newGenes, _dadId, _motherId);
 
+        // ESTE MINT ESTA LANZANDO UN EVENTO "Transfer" por el _mint() de ERC721
         _mint(msg.sender, id);
+
         emit NewDragon(id, newGenes);
     }
 
@@ -89,29 +91,30 @@ contract DragonFactory is DragonBase {
         uint16 _fortitude,
         uint16 _hatchTime) private returns(uint256 id) {
 
-        id = dragons.push(Dragon(
-        {
-            genes: 0,
-            name: _name,
+        id = dragons.push(
+            Dragon({
+                genes: 0,
+                name: _name,
 
-            creationTime: _creationTime,
+                creationTime: _creationTime,
 
-            // level attributes
-            currentExperience: _currentExperience,
+                // level attributes
+                currentExperience: _currentExperience,
 
-            // parents information
-            dadId: _dadId,
-            motherId: _motherId,
+                // parents information
+                dadId: _dadId,
+                motherId: _motherId,
 
-            actionCooldown: _actionCooldown,
-            
-            health: _health,
-            strength: _strength,
-            agility: _agility,
-            fortitude: _fortitude,
+                actionCooldown: _actionCooldown,
 
-            hatchTime: _hatchTime
-            })) - 1;
+                health: _health,
+                strength: _strength,
+                agility: _agility,
+                fortitude: _fortitude,
+
+                hatchTime: _hatchTime
+            })
+        ) - 1;
 
         // Assign genes in different function as a workaround to the stack too deep exception
         _assignGenes(id, _genes);

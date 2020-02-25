@@ -1,4 +1,4 @@
-function getDragonsInSidechainGateway(req, res) {
+function getDragonsInGateways(req, res) {
 	// MongoClient.connect(url, function (err, db) {
 	// 	if (err) throw err;
 	// 	var dbo = db.db(database);
@@ -16,5 +16,5 @@ function getDragonsInSidechainGateway(req, res) {
 }
 
 module.exports = {
-    getDragonsInSidechainGateway,
+    getDragonsInGateways,
 };

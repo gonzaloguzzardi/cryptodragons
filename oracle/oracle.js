@@ -10,7 +10,7 @@ const { API_PORT } = require('./config');
 
 // CONTROLLERS
 const {
-	getDragonsInSidechainGateway,
+	getDragonsInGateways,
 } = require('./controllers');
 
 // SERVICES
@@ -31,7 +31,7 @@ listenSideChainEvents();
 listenMainChainEvents();
 
 // API ROUTES
-app.get('/api/dragons/sidechain-gateway', getDragonsInSidechainGateway);
+app.get('/api/dragons', getDragonsInGateways);
 
 // SERVER LISTEN
 const server = app.listen(API_PORT, '0.0.0.0', function () {

@@ -1,6 +1,10 @@
 const CHAIN_ID = "default";
 const WRITE_URL = "ws://0.0.0.0:46658/websocket";
 const READ_URL = "ws://0.0.0.0:46658/queryws";
+
+const BFA_SOCKET_CONNECTION = "ws://0.0.0.0:8546";
+const BFA_NETWORK_ID = "12345";
+
 const collection = "transactions";
 const database = "crypto-dragons";
 const mongoUrl = "mongodb://0.0.0.0:27017/" + database;
@@ -24,6 +28,8 @@ module.exports = {
     CHAIN_ID,
     WRITE_URL,
     READ_URL,
+    BFA_NETWORK_ID,
+    BFA_SOCKET_CONNECTION,
     collection,
     database,
     mongoUrl,

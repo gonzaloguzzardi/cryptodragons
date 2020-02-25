@@ -6,15 +6,15 @@ var fs = require("fs");
 const { insertOnMongo, transforEventIntoTransactionObj } = require('../mongo-utils');
 
 // CONSTANTS
-const { collection, database, url, MainChainGateway } = require ('../config');
-
-let mainList = [];
+const {
+	collection, database, mongoUrl,
+	MainChainGateway, BFA_SOCKET_CONNECTION, BFA_NETWORK_ID,
+} = require ('../config');
 
 function listenMainChainEvents() {
-	const web3js = new Web3(new Web3.providers.WebsocketProvider("ws://0.0.0.0:8546"));
+	const web3js = new Web3(new Web3.providers.WebsocketProvider(BFA_SOCKET_CONNECTION));
 	const ownerAccount = fs.readFileSync(path.join(__dirname, '../misc', 'mainchain_account'), 'utf-8')
 	web3js.eth.accounts.wallet.add(ownerAccount)
-	const networkId = "12345";
 	
 	const MainChainABI = MainChainGateway.abi;
 
@@ -24,19 +24,31 @@ function listenMainChainEvents() {
 
 	var mainChainGatewayInstance = new web3js.eth.Contract(
 		MainChainABI,
-		MainChainGateway.networks[networkId].address
+		MainChainGateway.networks[BFA_NETWORK_ID].address
 	)
 
-	mainChainGatewayInstance.events.SendDragonToSidechainAttempt((err, event) => {
-		if (err) {
-			console.error('Error on event', err);
-		} else {
-			console.log("[SIDECHAIN]: NewDragon event!!!!!");
-			mainList.push(transforEventIntoTransactionObj(event));
-			console.log("Dragon agregado a la sidelist que es ejecutada por el cron");
-			insertOnMongo(database, url, transforEventIntoTransactionObj(event), collection)
+	mainChainGatewayInstance.events.allEvents((err, event) => {
+		if (err) console.error('Error on event', err);
+		if (event) {
+			switch(event.event) {
+				case 'SendDragonToSidechainAttempt':
+					console.log("mainchainGatewayInstance:", "EVENTO SendDragonToSidechainAttempt");
+					insertOnMongo(database, mongoUrl, transforEventIntoTransactionObj(event), collection)
+					break;
+				case 'AddedValidator':
+				case 'DragonSuccessfullyRetrievedInMainchain':
+				case 'ERC20Received':
+				case 'ERC721Received':
+				case 'ETHReceived':
+				case 'OwnershipTransferred':
+				case 'RemovedValidator':
+				case 'TokenWithdrawn':
+				default:
+					// console.log("sidechainGatewayInstance", "Evento de sidechain ->", event.event);
+					break;
+			}
 		}
-	})
+	});
 }
 
 module.exports = listenMainChainEvents;

@@ -8,7 +8,7 @@ function getDragonsFromSidechainGateway() {
 		collectEventsFromSidechainGateway(database, mongoUrl, collection)
 			.then(result => res(result))
 			.catch(err => rej(err));
-	})
+	});
 }
 
 function getDragonsFromMainchainGateway() {
@@ -16,7 +16,7 @@ function getDragonsFromMainchainGateway() {
 		collectEventsFromMainchainGateway(database, mongoUrl, collection)
 			.then(result => res(result))
 			.catch(err => rej(err));
-	})
+	});
 }
 
 function getDragonsInGateways(req, res) {

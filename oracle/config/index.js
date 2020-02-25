@@ -1,7 +1,6 @@
 const CHAIN_ID = "default";
 const WRITE_URL = "ws://0.0.0.0:46658/websocket";
 const READ_URL = "ws://0.0.0.0:46658/queryws";
-const API_PORT = 8081;
 const collection = "transactions";
 const database = "crypto-dragons";
 const mongoUrl = "mongodb://0.0.0.0:27017/" + database;
@@ -25,7 +24,6 @@ module.exports = {
     CHAIN_ID,
     WRITE_URL,
     READ_URL,
-    API_PORT,
     collection,
     database,
     mongoUrl,

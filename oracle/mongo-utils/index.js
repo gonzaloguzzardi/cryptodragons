@@ -5,13 +5,13 @@ function collectEventsFromSidechainGateway(database, url, collection) {
 }
 
 function _collectEvents(event, database, url, collection) {
-	return new Promise((res) => {
+	return new Promise((res, rej) => {
 		MongoClient.connect(url, function (err, db) {
-			if (err) throw err;
+			if (err) return rej(err);
 			var dbo = db.db(database);
 			dbo.collection(collection).find({ event }).toArray(function(err, results) {
 				db.close();
-				if (err) throw err;
+				if (err) return rej(err);
 				return res(results);
 			});
 		});

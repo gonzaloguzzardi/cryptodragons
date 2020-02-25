@@ -39,7 +39,8 @@ function collectFromSidechainGatewayAndSendToMainchain() {
 				// BIEN, ahora hay que mandarlo!
 				// sendMessageToMain(message);
 			}
-		});
+		})
+		.catch(err => console.error(err));
 }
 
 module.exports = collectFromSidechainGatewayAndSendToMainchain;

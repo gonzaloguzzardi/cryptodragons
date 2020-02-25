@@ -77,11 +77,6 @@ async function transferDragonToGateway(web3js, gas, ownerAccount, dragonId) {
     .send({ from: ownerAccount, gas: gasEstimate });
 }
 
-program
-  .version('0.1.0')
-  .parse(process.argv)
-
-
 // API SERVER
 var express = require('express')
 var http = require('http')
@@ -113,8 +108,8 @@ app.post('/api/dragon/receive', WAsync.wrapAsync(async function transferFunction
   let hash = "";
   try {
     // POR AHORA VAMOS A CREAR UNO
-    const tx = await createDragonToken(web3js, account, req.query.gas || 350000);
-    console.log(`Dragon created`);
+    //const tx = await createDragonToken(web3js, account, req.query.gas || 350000);
+    console.log("MENSAJE RECIBIDO", req.body);
     console.log(`tx hash: ${tx.transactionHash}`);
     hash = tx.transactionHash;
     res.status(200).send(hash);

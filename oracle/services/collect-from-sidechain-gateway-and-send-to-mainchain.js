@@ -30,9 +30,9 @@ function sendMessageToMain(message) {
 function collectFromSidechainGatewayAndSendToMainchain() {
 	collectEventsFromSidechainGateway(database, mongoUrl, collection)
 		.then((result) => {
-			// console.log(result);
-			// BIEN, ahora hay que mandarlo!
-			// sendMessageToMain(result);
+			const dragosIds = result.map(event => event.returnValues.uid);
+			console.log("DRAGOS IDS", dragosIds);
+			sendMessageToMain(dragosIds);
 		})
 		.catch(err => console.error(err));
 }

@@ -78,7 +78,7 @@ function listenSideChainEvents() {
 			switch(event.event) {
 				case 'SendDragonToMainchainAttempt':
 					console.log("sidechainGatewayInstance:", "EVENTO SendDragonToMainchainAttempt");
-					insertOnMongo(database, mongoUrl, transforEventIntoTransactionObj(event), collection)
+					insertOnMongo(database, mongoUrl, transforEventIntoTransactionObj(event), collection);
 					break;
 				case 'AddedValidator':
 				case 'DragonSuccessfullyRetrievedInSidechain':

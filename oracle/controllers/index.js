@@ -1,18 +1,28 @@
+const {
+	collection, database, mongoUrl
+} = require('../config');
+const { collectEventsFromSidechainGateway, collectEventsFromMainchainGateway } = require('../mongo-utils');
+
+function getDragonsFromSidechainGateway() {
+	return new Promise((res, rej) => {
+		collectEventsFromSidechainGateway(database, mongoUrl, collection)
+			.then(result => res(result))
+			.catch(err => rej(err));
+	})
+}
+
+function getDragonsFromMainchainGateway() {
+	return new Promise((res, rej) => {
+		collectEventsFromMainchainGateway(database, mongoUrl, collection)
+			.then(result => res(result))
+			.catch(err => rej(err));
+	})
+}
+
 function getDragonsInGateways(req, res) {
-	// MongoClient.connect(url, function (err, db) {
-	// 	if (err) throw err;
-	// 	var dbo = db.db(database);
-	// 	dbo.collection(collection).find({}).toArray(
-	// 		function (err, result) {
-	// 			if (err) throw err;
-	// 			res.send(result);
-	// 			console.log(result);
-	// 			db.close();
-	// 		}
-	// 	)
-	// });
-    // res.send(sideList);
-    res.send([]);
+	Promise.all([ getDragonsFromSidechainGateway, getDragonsFromMainchainGateway ])
+		.then(values => res.send(values))
+		.catch(err => console.error(err));
 }
 
 module.exports = {

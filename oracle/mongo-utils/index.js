@@ -4,6 +4,10 @@ function collectEventsFromSidechainGateway(database, url, collection) {
 	return _collectEvents('SendDragonToMainchainAttempt', database, url, collection);
 }
 
+function collectEventsFromMainchainGateway(database, url, collection) {
+	return _collectEvents('SendDragonToSidechainAttempt', database, url, collection);
+}
+
 function _collectEvents(event, database, url, collection) {
 	return new Promise((res, rej) => {
 		MongoClient.connect(url, function (err, db) {
@@ -53,6 +57,7 @@ function transforEventIntoTransactionObj(event) {
 
 module.exports = {
 	collectEventsFromSidechainGateway,
+	collectEventsFromMainchainGateway,
     insertOnMongo,
     transforEventIntoTransactionObj,
 };

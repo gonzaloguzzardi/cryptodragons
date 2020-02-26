@@ -17,7 +17,13 @@ const getDragonsFromMainchainGateway = new Promise((res, rej) => {
 
 function getDragonsInGateways(req, res) {
 	Promise.all([ getDragonsFromSidechainGateway, getDragonsFromMainchainGateway ])
-		.then(values => res.status(200).send(values))
+		.then(
+			values => {
+				result = [];
+				result.concat(values[0]['sidechain-gateway-results'])
+				result.concat(values[1]['mainchain-gateway-results'])
+				res.status(200).send(result)
+			})
 		.catch(err => res.status(500).send(err));
 }
 

@@ -10,7 +10,6 @@ const {
 } = require('../mongo-utils');
 
 function sendMessageToMain(dragons) {
-	console.log(dragons);
 	request.post(
 		{
 			headers: { 'content-type': 'application/json' },
@@ -20,25 +19,22 @@ function sendMessageToMain(dragons) {
 		},
 		function (error, response, body) {
 			if (error) {
-				console.log("Starting roll back...");
-				console.log(body);
+				console.log("[RECEIVE-MAINCHAIN-ERROR]: Starting roll back...");
 			} else {
-				console.log(`url: ${mainchainApiUrl}:${mainchainApiPort}/api/dragon/receive`);
-				console.log("Envio exitoso...");
+				console.log("[RECEIVE-MAINCHAIN-SUCCESS]:", response);
+				console.log(`URL: ${mainchainApiUrl}:${mainchainApiPort}/api/dragon/receive`);
 			}
 		}
 	);
-	console.log("enviando mensaje a la main chain...");
 }
 
 function collectFromSidechainGatewayAndSendToMainchain() {
 	collectEventsFromSidechainGateway(database, mongoUrl, collection)
 		.then((result) => {
 			const dragons = result.map(event => ( event.returnValues ));
-			console.log("DRAGONS IDS", dragons);
+			console.log("[DRAGONS IDS]:", dragons);
 			if (dragons.length > 0) {
 				sendMessageToMain(dragons);
-				console.log(dragons);
 				deleteDragons(database, mongoUrl, collection, dragons);
 			}
 		})

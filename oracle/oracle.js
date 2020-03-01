@@ -11,6 +11,7 @@ const { oracleApiPort } = require('./config');
 // CONTROLLERS
 const {
 	getDragonsInGateways,
+	transferDragon,
 } = require('./controllers');
 
 // SERVICES
@@ -32,6 +33,7 @@ listenMainChainEvents();
 
 // API ROUTES
 app.get('/api/dragons', getDragonsInGateways);
+app.get('/api/dragon/transfer', transferDragon);
 
 // SERVER LISTEN
 const server = app.listen(oracleApiPort, '0.0.0.0', function () {

@@ -74,15 +74,15 @@ class Dragons extends Component {
     }
 
     transferFromSideToMain = dragonId => (
-        axios.get(`${sidechainApiUrl}:${sidechainApiPort}/api/dragon/transfer`, {
-            params: { id: dragonId },
+        axios.get(`${oracleUrl}:${oracleApiPort}/api/dragon/transfer`, {
+            params: { id: dragonId, toMain: true },
         })
         .then(() => this.getDragonsFromOracle())
     );
 
     transferFromMainToSide = dragonId => (
-        axios.get(`${mainchainUrl}:${mainchainApiPort}/api/dragon/transfer`, {
-            params: { id: dragonId },
+        axios.get(`${oracleUrl}:${oracleApiPort}/api/dragon/transfer`, {
+            params: { id: dragonId, toMain: false },
         })
         .then(() => this.getDragonsFromOracle())
     );

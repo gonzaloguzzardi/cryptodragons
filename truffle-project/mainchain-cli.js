@@ -5,6 +5,7 @@ const path = require('path')
 const WAsync = require('@rimiti/express-async');
 
 const MainchainDragonTokenJson = require('./src/contracts/MainnetTransferableDragon.json')
+const GatewayJson = require('./src/contracts/MainnetGateway.json');
 
 async function mapAccount(web3js, ownerAccount, gas, sideAccount) {
   const contract = await getLoomTokenContract(web3js)
@@ -28,6 +29,15 @@ async function getGanacheTokenContract(web3js) {
     MainchainDragonTokenJson.networks[networkId].address
   )
 }
+
+async function getGanacheGatewayContract(web3js) {
+  const networkId = await web3js.eth.net.getId();
+  return new web3js.eth.Contract(
+    GatewayJson.abi,
+    GatewayJson.networks[networkId].address
+  )
+}
+
 
 function loadGanacheAccount() {
   //const privateKey = fs.readFileSync(path.join(__dirname, './ganache_private_key'), 'utf-8')
@@ -62,10 +72,10 @@ async function getMyDragons(web3js, ownerAccount, gas) {
 }
 
 
-async function transferDragonToGateway(web3js, gas, ownerAccount, dragonId) {
-  const contract = await getGanacheTokenContract(web3js)
+async function transferDragonToGateway(web3js, gas, ownerAccount, dragonId, data) {
+  const contract = await getGanacheGatewayContract(web3js)
   const gasEstimate = await contract.methods
-    .transferToGateway(dragonId)
+    .receiveDragon(ownerAccount,dragonId,data)//address mainchainAddress, uint256 uid, bytes memory data
     .estimateGas({ from: ownerAccount, gas: 0 })
     if (gasEstimate == gas) {
       console.log("Not enough enough gas, send more.");
@@ -73,7 +83,7 @@ async function transferDragonToGateway(web3js, gas, ownerAccount, dragonId) {
     }
   console.log("Succesfully transfered the dragon");
   return await contract.methods
-    .transferToGateway(dragonId)
+    .receiveDragon(ownerAccount,dragonId,data)
     .send({ from: ownerAccount, gas: gasEstimate });
 }
 
@@ -123,7 +133,7 @@ app.post('/api/dragon/receive', WAsync.wrapAsync(async function transferFunction
 app.get('/api/dragon/transfer', WAsync.wrapAsync(async function transferToSideFunction(req, res, next) {
   const { account, web3js } = loadGanacheAccount();
     try {
-      const data = await transferDragonToGateway(web3js, req.query.gas || 350000, account, req.query.id)
+      const data = await transferDragonToGateway(web3js, req.query.gas || 350000, account, req.query.id, req.query.data)
       console.log(`\n Token with id ${req.query.id} was successfully transfered to gateway \n`) 
     } catch (err) {
       console.log(err);

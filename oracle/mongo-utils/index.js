@@ -8,6 +8,20 @@ function collectEventsFromMainchainGateway(database, url, collection) {
 	return _collectEvents('SendDragonToSidechainAttempt', database, url, collection);
 }
 
+function collectEventsWithId(database, url, collection, an_id) {
+	return new Promise((res, rej) => {
+		MongoClient.connect(url, function (err, db) {
+			if (err) return rej(err);
+			var dbo = db.db(database);
+			dbo.collection(collection).find({ id: { $eq: an_id } }).toArray(function(err, results) {
+				db.close();
+				if (err) return rej(err);
+				return res(results);
+			});
+		});
+	});
+}
+
 function _collectEvents(event, database, url, collection) {
 	return new Promise((res, rej) => {
 		MongoClient.connect(url, function (err, db) {

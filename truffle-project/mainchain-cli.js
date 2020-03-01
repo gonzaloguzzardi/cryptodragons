@@ -37,7 +37,6 @@ async function getGanacheGatewayContract(web3js) {
   )
 }
 
-
 function loadGanacheAccount() {
   //const privateKey = fs.readFileSync(path.join(__dirname, './ganache_private_key'), 'utf-8')
   //const ownerAccount = web3js.eth.accounts.privateKeyToAccount(privateKey)
@@ -70,7 +69,6 @@ async function getMyDragons(web3js, ownerAccount, gas) {
     .call({ from: ownerAccount, gas });
 }
 
-
 async function transferDragonToGateway(web3js, gas, ownerAccount, dragonId) {
   const contract = await getGanacheTokenContract(web3js)
   const gasEstimate = await contract.methods
@@ -78,7 +76,7 @@ async function transferDragonToGateway(web3js, gas, ownerAccount, dragonId) {
     .estimateGas({ from: ownerAccount, gas: 0 })
     if (gasEstimate == gas) {
       console.log("Not enough enough gas, send more.");
-      throw new Error('Not enough enough gas, send more.')
+      throw new Error('Not enough enough gas, send more.');
     }
   console.log("Succesfully transfered the dragon");
   return await contract.methods
@@ -87,19 +85,17 @@ async function transferDragonToGateway(web3js, gas, ownerAccount, dragonId) {
 }
 
 async function receiveDragonFromOracle(web3js, ownerAccount, gas, dragonId, data) {
-  console.log(data);
-  console.log(dragonId);
   const contract = await getGanacheGatewayContract(web3js)
   const gasEstimate = await contract.methods
-    .receiveDragon(ownerAccount,dragonId,data)//address mainchainAddress, uint256 uid, bytes memory data
-    .estimateGas({ from: ownerAccount, gas: 0 })
-    if (gasEstimate == gas) {
-      console.log("Not enough enough gas, send more.");
-      throw new Error('Not enough enough gas, send more.')
-    }
+    .receiveDragon(ownerAccount, dragonId, data)//address mainchainAddress, uint256 uid, bytes memory data
+    .estimateGas({ from: ownerAccount, gas: 0 });
+  if (gasEstimate == gas) {
+    console.log("Not enough enough gas, send more.");
+    throw new Error('Not enough enough gas, send more.');
+  }
   console.log("Succesfully transfered the dragon");
   return await contract.methods
-    .receiveDragon(ownerAccount,dragonId,data)
+    .receiveDragon(ownerAccount, dragonId, data)
     .send({ from: ownerAccount, gas: gasEstimate });
 }
 
@@ -135,9 +131,8 @@ app.get('/api/dragon/create',  WAsync.wrapAsync(async function createFunction(re
 app.post('/api/dragon/receive', WAsync.wrapAsync(async function transferFunction(req, res, next) {
   const { account, web3js } = loadGanacheAccount();
   let hash = "";
-  console.log("llega al receive del main...");
+  console.log("Llega al receive del main-cli.");
   try {
-    console.log(req.body);
     for (let dragon of req.body) {
       const tx = await receiveDragonFromOracle(web3js, account, req.query.gas || 350000, dragon.uid, dragon['2']);
     }

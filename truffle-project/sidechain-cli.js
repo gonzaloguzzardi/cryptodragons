@@ -132,6 +132,21 @@ async function transferDragonToGateway(web3js, gas, ownerAccount, dragonId) {
     .send({ from: ownerAccount, gas: gasEstimate });
 }
 
+async function receiveDragonFromOracle(web3js, ownerAccount, gas, dragonId, data) {
+  const contract = await getLoomTokenContract(web3js)
+  const gasEstimate = await contract.methods
+    .receiveDragon(ownerAccount, dragonId, data)
+    .estimateGas({ from: ownerAccount, gas: 0 });
+  if (gasEstimate == gas) {
+    console.log("Not enough enough gas, send more.");
+    throw new Error('Not enough enough gas, send more.');
+  }
+  console.log("Succesfully transfered the dragon");
+  return await contract.methods
+    .receiveDragon(ownerAccount, dragonId, data)
+    .send({ from: ownerAccount, gas: gasEstimate });
+}
+
 const express = require('express');
 const http = require('http');
 const cors = require('cors');
@@ -157,6 +172,26 @@ app.get('/api/dragon/create',  WAsync.wrapAsync(async function createFunction(re
     res.status(200).send(hash);
   } catch (err) {
     res.status(400).send(err);
+  } finally {
+    if (client) client.disconnect();
+  }
+}));
+
+app.post('/api/dragon/receive', WAsync.wrapAsync(async function transferFunction(req, res, next) {
+  const { account, web3js, client } = loadLoomAccount(req.query.account);
+  let hash = "";
+  console.log("Llega al receive del side-cli.");
+  try {
+    for (let dragon of req.body) {
+      const tx = await receiveDragonFromOracle(web3js, account, req.query.gas || 350000, dragon.uid, dragon['2']);
+    }
+    console.log("MENSAJE RECIBIDO", req.body);
+    console.log(`tx hash: ${tx.transactionHash}`);
+    hash = tx.transactionHash;
+    res.status(200).send(hash);
+  } catch (err) {
+    console.log("Auch... error on receive..." + err);
+    res.status(500).send(err);
   } finally {
     if (client) client.disconnect();
   }

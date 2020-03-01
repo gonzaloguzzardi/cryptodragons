@@ -1,9 +1,7 @@
-const Web3 = require('web3')
-const program = require('commander')
-const fs = require('fs')
-const path = require('path')
+const Web3 = require('web3');
+const fs = require('fs');
+const path = require('path');
 const WAsync = require('@rimiti/express-async');
-const bodyParser = require('body-parser')
 
 const MainchainDragonTokenJson = require('./src/contracts/MainnetTransferableDragon.json')
 const GatewayJson = require('./src/contracts/MainnetGateway.json');
@@ -106,17 +104,19 @@ async function receiveDragonFromOracle(web3js, ownerAccount, gas, dragonId, data
 }
 
 // API SERVER
-var express = require('express')
-var http = require('http')
-var cors = require('cors')
-var app = express()
+const express = require('express');
+const http = require('http');
+const cors = require('cors');
+const app = express();
+const bodyParser = require('body-parser');
 
-app.use(cors())
+app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
 app.get('/', (req, res) => {
   res.status(200).send("Welcome to API REST")
-})
+});
 
 app.get('/api/dragon/create',  WAsync.wrapAsync(async function createFunction(req, res, next) {
   const { account, web3js } = loadGanacheAccount();
@@ -130,7 +130,7 @@ app.get('/api/dragon/create',  WAsync.wrapAsync(async function createFunction(re
   } catch (err) {
     res.status(500).send(err);
   }
-}))
+}));
 
 app.post('/api/dragon/receive', WAsync.wrapAsync(async function transferFunction(req, res, next) {
   const { account, web3js } = loadGanacheAccount();
@@ -151,7 +151,7 @@ app.post('/api/dragon/receive', WAsync.wrapAsync(async function transferFunction
     console.log("auch... error on receive..." + err);
     res.status(500).send(err);
   }
-}))
+}));
 
 app.get('/api/dragon/transfer', WAsync.wrapAsync(async function transferToSideFunction(req, res, next) {
   const { account, web3js } = loadGanacheAccount();
@@ -163,7 +163,7 @@ app.get('/api/dragon/transfer', WAsync.wrapAsync(async function transferToSideFu
       res.status(400).send(err)
     }
     res.status(200).send(`Token with id ${req.query.id} was successfully transfered to gateway`)
-}))
+}));
 
 app.get('/api/dragons', WAsync.wrapAsync(async function getDragonFunction(req, res, next) {
   const { account, web3js } = loadGanacheAccount();
@@ -175,7 +175,7 @@ app.get('/api/dragons', WAsync.wrapAsync(async function getDragonFunction(req, r
     console.log(err);
     res.status(500).send(err)
   }
-}))
+}));
 
 app.get('/api/mapAccount', WAsync.wrapAsync(async function getMapFunction(req, res, next) {
   const { account, web3js, client } = loadLoomAccount(req.query.account)
@@ -191,7 +191,7 @@ app.get('/api/mapAccount', WAsync.wrapAsync(async function getMapFunction(req, r
     }
     res.status(200).send(data)
   }
-}))
+}));
 
 const PORT = 8002;
 http.createServer(app).listen(PORT, () => {

@@ -1,35 +1,19 @@
 const WAsync = require('@rimiti/express-async');
 
-const Tx = require('ethereumjs-tx');
 const Web3 = require('web3');
-const program = require('commander');
 const fs = require('fs');
-
 const path = require('path');
+
 const {
-  Client, NonceTxMiddleware, SignedTxMiddleware, Address,
+  Client, NonceTxMiddleware, SignedTxMiddleware,
   LocalAddress, CryptoUtils, LoomProvider,
-  Contracts, Web3Signer, soliditySha3
 } = require('loom-js');
-// TODO: fix this export in loom-js
-const { OfflineWeb3Signer } = require('loom-js/dist/solidity-helpers');
-const BN = require('bn.js');
 
 const DappchainDragonTokenJson = require('./src/contracts/DappchainTransferableDragon.json');
-const DaapchainCoinJson = require('./src/contracts/DappchainDragonCoin.json');
 
 const dirPath = "../loom_test_accounts";
 
 const loomChainId = '13654820909954'; // TODO ver si cambia o si es siempre el mismo
-
-const coinMultiplier = new BN(10).pow(new BN(18)); // TODO analizar esto
-
-async function getLoomCoinContract(web3js) {
-  return new web3js.eth.Contract(
-    DaapchainCoinJson.abi,
-    DaapchainCoinJson.networks[loomChainId].address,
-  )
-}
 
 async function getLoomTokenContract(web3js) {
   return new web3js.eth.Contract(
@@ -38,7 +22,7 @@ async function getLoomTokenContract(web3js) {
   )
 }
 
-function createAccount(accountName) {
+/*function createAccount(accountName) {
   if (!fs.existsSync(dirPath)){
     fs.mkdirSync(dirPath)
   }
@@ -52,7 +36,7 @@ function createAccount(accountName) {
       console.log("Account " + accountName + " created with private key: " + privateKey.toString());
     }
   })
-}
+}*/
 
 function loadLoomAccount(accountName) {
   var accountPath = './misc/loom_private_key';
@@ -148,12 +132,15 @@ async function transferDragonToGateway(web3js, gas, ownerAccount, dragonId) {
     .send({ from: ownerAccount, gas: gasEstimate });
 }
 
-var express = require('express');
-var http = require('http');
-var cors = require('cors');
-var app = express();
+const express = require('express');
+const http = require('http');
+const cors = require('cors');
+const app = express();
+const bodyParser = require('body-parser')
 
 app.use(cors());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/', (req, res) => {
   res.status(200).send("Welcome to API REST")

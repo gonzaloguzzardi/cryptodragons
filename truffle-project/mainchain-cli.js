@@ -3,6 +3,7 @@ const program = require('commander')
 const fs = require('fs')
 const path = require('path')
 const WAsync = require('@rimiti/express-async');
+const bodyParser = require('body-parser')
 
 const MainchainDragonTokenJson = require('./src/contracts/MainnetTransferableDragon.json')
 const GatewayJson = require('./src/contracts/MainnetGateway.json');
@@ -72,7 +73,24 @@ async function getMyDragons(web3js, ownerAccount, gas) {
 }
 
 
-async function transferDragonToGateway(web3js, gas, ownerAccount, dragonId, data) {
+async function transferDragonToGateway(web3js, gas, ownerAccount, dragonId) {
+  const contract = await getGanacheTokenContract(web3js)
+  const gasEstimate = await contract.methods
+    .transferToGateway(dragonId)
+    .estimateGas({ from: ownerAccount, gas: 0 })
+    if (gasEstimate == gas) {
+      console.log("Not enough enough gas, send more.");
+      throw new Error('Not enough enough gas, send more.')
+    }
+  console.log("Succesfully transfered the dragon");
+  return await contract.methods
+    .transferToGateway(dragonId)
+    .send({ from: ownerAccount, gas: gasEstimate });
+}
+
+async function receiveDragonFromOracle(web3js, ownerAccount, gas, dragonId, data) {
+  console.log(data);
+  console.log(dragonId);
   const contract = await getGanacheGatewayContract(web3js)
   const gasEstimate = await contract.methods
     .receiveDragon(ownerAccount,dragonId,data)//address mainchainAddress, uint256 uid, bytes memory data
@@ -94,7 +112,8 @@ var cors = require('cors')
 var app = express()
 
 app.use(cors())
-
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.get('/', (req, res) => {
   res.status(200).send("Welcome to API REST")
 })
@@ -116,9 +135,12 @@ app.get('/api/dragon/create',  WAsync.wrapAsync(async function createFunction(re
 app.post('/api/dragon/receive', WAsync.wrapAsync(async function transferFunction(req, res, next) {
   const { account, web3js } = loadGanacheAccount();
   let hash = "";
+  console.log("llega al receive del main...");
   try {
-    // POR AHORA VAMOS A CREAR UNO
-    //const tx = await createDragonToken(web3js, account, req.query.gas || 350000);
+    console.log(req.body);
+    for (let dragon of req.body) {
+      const tx = await receiveDragonFromOracle(web3js, account, req.query.gas || 350000, dragon.uid, dragon['2']);
+    }
     console.log("MENSAJE RECIBIDO", req.body);
     console.log(`tx hash: ${tx.transactionHash}`);
     hash = tx.transactionHash;
@@ -126,6 +148,7 @@ app.post('/api/dragon/receive', WAsync.wrapAsync(async function transferFunction
     // console.log(`\n Token with id ${req.query.id} was successfully transfered from gateway \n`);
     // res.status(200).send(`Token with id ${req.query.id} was successfully transfered to gateway`);
   } catch (err) {
+    console.log("auch... error on receive..." + err);
     res.status(500).send(err);
   }
 }))

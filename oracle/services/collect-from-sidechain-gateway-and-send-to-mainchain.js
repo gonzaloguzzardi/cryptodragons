@@ -4,14 +4,18 @@ const {
 	mainchainApiUrl, mainchainApiPort,
 	collection, database, mongoUrl
 } = require('../config');
-const { collectEventsFromSidechainGateway } = require('../mongo-utils');
+const { 
+	collectEventsFromSidechainGateway,
+	deleteDragons,
+} = require('../mongo-utils');
 
-function sendMessageToMain(message) {
+function sendMessageToMain(dragons) {
+	console.log(dragons);
 	request.post(
 		{
 			headers: { 'content-type': 'application/json' },
 			url: `${mainchainApiUrl}:${mainchainApiPort}/api/dragon/receive`,
-			body: message,
+			body: dragons,
 			json: true,
 		},
 		function (error, response, body) {
@@ -30,9 +34,13 @@ function sendMessageToMain(message) {
 function collectFromSidechainGatewayAndSendToMainchain() {
 	collectEventsFromSidechainGateway(database, mongoUrl, collection)
 		.then((result) => {
-			const dragosIds = result.map(event => event.returnValues.uid);
-			console.log("DRAGOS IDS", dragosIds);
-			sendMessageToMain(dragosIds);
+			const dragons = result.map(event => ( event.returnValues ));
+			console.log("DRAGONS IDS", dragons);
+			if (dragons.length > 0) {
+				sendMessageToMain(dragons);
+				console.log(dragons);
+				deleteDragons(database, mongoUrl, collection, dragons);
+			}
 		})
 		.catch(err => console.error(err));
 }

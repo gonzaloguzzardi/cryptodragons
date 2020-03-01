@@ -48,12 +48,30 @@ function insertOnMongo(database, url, transaction, collection) {
 	return transaction;
 }
 
+function deleteDragons(database,url,collection, dragons) {
+	console.log(dragons);
+	MongoClient.connect(url, function (err, db) {
+		var dbo = db.db(database);
+		for (let dragon of dragons) {
+			console.log(dragon.uid);
+			dbo.collection(collection).deleteOne({uid: dragon.uid}, function(err, result) {
+				if (err) {
+					console.log(err);
+				}
+				db.close();
+			});
+		}
+	});
+
+}
+
 // @TODO: Repensar si esto es necesario, si queremos agregar algo más al evento
 // 			Si no alteramos el evento podríamos mandarlo como viene, al mongo.
 function transforEventIntoTransactionObj(event) {
 	let transaction = {};
 	transaction.event = event.event;
-
+	
+	transaction.uid = event.returnValues.uid;
 	transaction.transactionHash = event.transactionHash;
 	transaction.logIndex = event.logIndex;
 	transaction.transactionIndex = event.transactionIndex;
@@ -72,6 +90,8 @@ function transforEventIntoTransactionObj(event) {
 module.exports = {
 	collectEventsFromSidechainGateway,
 	collectEventsFromMainchainGateway,
-    insertOnMongo,
+	collectEventsWithId,
+	insertOnMongo,
+	deleteDragons,
     transforEventIntoTransactionObj,
 };

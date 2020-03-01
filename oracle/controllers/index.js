@@ -1,4 +1,8 @@
+const request = require('request');
+
 const {
+	sidechainApiPort,sidechainApiUrl,
+	mainchainApiPort,mainchainApiUrl,
 	collection, database, mongoUrl
 } = require('../config');
 const { 
@@ -6,7 +10,7 @@ const {
 	collectEventsFromMainchainGateway,
 	collectEventsWithId,
 } = require('../mongo-utils');
-	
+
 const getDragonsFromSidechainGateway = new Promise((res, rej) => {
 	collectEventsFromSidechainGateway(database, mongoUrl, collection)
 		.then(result => res({ 'sidechain-gateway-results': result }))
@@ -39,7 +43,35 @@ function getDragonsInGateways(req, res) {
 		.catch(err => res.status(500).send(err));
 }
 
-function transferDragon(req, res) {
+function transferDragon (req, res) {
+	console.log("aca res: " + req);
+	if (req.query.toMain) {
+		request.get(
+			{
+				headers: { 'content-type': 'application/json' },
+				url: `${sidechainApiUrl}:${sidechainApiPort}/api/dragon/transfer?id=` + req.query.id,
+				json: true,
+			},
+			function (error, response, body) {
+				res.status(200).send(response);
+			}
+		);
+	} else {
+		request.get(
+			{
+				headers: { 'content-type': 'application/json' },
+				url: `${mainchainApiUrl}:${mainchainApiPort}/api/dragon/transfer?id=` + req.query.id,
+				json: true,
+			},
+			function (error, response, body) {
+				res.status(200).send(response);
+			}
+		);
+	}
+}
+
+
+function reciveDragon(req, res) {
 	console.log("entro al transfer oracle...");
 	_dragonId = req.id;
 	console.log(_dragonId);
@@ -47,8 +79,7 @@ function transferDragon(req, res) {
 		.then(result => {
 			console.log(result);
 			console.log("pasa por aqui...");
-			res.status(200).send(result);
-			//res({ 'result': result });
+			res({ 'result': result });
 			//console.log("aca hay algo... " + result);
 			//if (req.toMain) {
 			//	transferFromSideToMain = dragonId => (

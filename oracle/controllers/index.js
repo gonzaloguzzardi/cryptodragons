@@ -19,11 +19,13 @@ const getDragonsFromMainchainGateway = new Promise((res, rej) => {
 		.catch(err => rej(err));
 });
 
-const getDragonWithId = new Promise((res, rej) => {
-	collectEventsWithId(database, mongoUrl, collection,res.id)
-		.then(result => res({ 'result': result }))
-		.catch(err => rej(err));
-});
+function getDragonWithId(id) {
+	new Promise((res, rej) => {
+		collectEventsWithId(database, mongoUrl, collection, id)
+			.then(result => res({ 'result': result }))
+			.catch(err => rej(err));
+	});
+}
 
 function getDragonsInGateways(req, res) {
 	Promise.all([ getDragonsFromSidechainGateway, getDragonsFromMainchainGateway ])
@@ -38,36 +40,36 @@ function getDragonsInGateways(req, res) {
 }
 
 function transferDragon(req, res) {
-	//req.id req.toMain
 	console.log("entro al transfer oracle...");
 	_dragonId = req.id;
-	console.log(req.id);
 	console.log(_dragonId);
-	const asd = new Promise((res, rej) => {
-		getDragonWithId(database, mongoUrl, collection,res.id)
-			//.then(result => res({ 'result': result }))
-			.then(result => {
-				console.log("aca hay algo... " + result);
-				if (req.toMain) {
-					transferFromSideToMain = dragonId => (
-						axios.get(`${sidechainurl}:${sidechainApiPort}/api/dragon/transfer`, {
-							params: { id: _dragonId, data: _data },
-						})
-					);	
-				} else {
-					transferFromMainToSide = dragonId => (
-						axios.get(`${mainchainUrl}:${mainchainApiPort}/api/dragon/transfer`, {
-							params: { id: _dragonId, data: _data },
-						})
-					);
-				
-				}
-			})
-			.catch(err => {
-				console.log("aca no hay nada...");
-				rej(err);
-			});
-	});
+	Promise.all([ getDragonWithId(3) ])
+		.then(result => {
+			console.log(result);
+			console.log("pasa por aqui...");
+			res.status(200).send(result);
+			//res({ 'result': result });
+			//console.log("aca hay algo... " + result);
+			//if (req.toMain) {
+			//	transferFromSideToMain = dragonId => (
+			//		axios.get(`${sidechainurl}:${sidechainApiPort}/api/dragon/transfer`, {
+			//			params: { id: _dragonId, data: _data },
+			//		})
+			//	);	
+			//} else {
+			//	transferFromMainToSide = dragonId => (
+			//		axios.get(`${mainchainUrl}:${mainchainApiPort}/api/dragon/transfer`, {
+			//			params: { id: _dragonId, data: _data },
+			//		})
+			//	);
+			//
+			//}
+		}).catch(err => {
+			console.log("aca no hay nada...");
+			console.log(err);
+			rej(err);
+		});
+	
 }
 
 module.exports = {

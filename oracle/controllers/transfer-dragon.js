@@ -5,7 +5,7 @@ const {
 } = require('../config');
 
 function transferDragon(req, res) {
-	if (req.query.toMain) {
+	if (req.query.toMain === 'true') {
 		request.get(
 			{
 				headers: { 'content-type': 'application/json' },

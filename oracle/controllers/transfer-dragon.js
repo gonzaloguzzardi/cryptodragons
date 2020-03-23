@@ -1,4 +1,8 @@
 const request = require('request');
+const {
+	sidechainApiUrl, sidechainApiPort,
+	mainchainApiUrl, mainchainApiPort,
+} = require('../config');
 
 function transferDragon(req, res) {
 	if (req.query.toMain) {

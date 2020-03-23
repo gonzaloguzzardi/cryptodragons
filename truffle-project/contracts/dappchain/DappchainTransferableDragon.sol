@@ -52,6 +52,6 @@ contract DappchainTransferableDragon is DragonFactory {
         // @TODO: HAY QUE USAR LA LINEA COMENTADA, POR AHORA HARDCODEO EL USER DE GANACHE!!!
         // @TODO: HAY QUE USAR LA LINEA COMENTADA, POR AHORA HARDCODEO EL USER DE GANACHE!!!
         //gateway.depositDragon(msg.sender, _mainnetMapping[msg.sender], _tokenId, encodedDragon);
-        gateway.depositDragon(msg.sender, address(0x9d1ED83B6aECf0eAb8ec0A1357486b0B0FF3F3de), _tokenId, encodedDragon);
+        gateway.depositDragon(msg.sender, address(0x28863498efede12296888f7ca6cf0b94974fbdbc), _tokenId, encodedDragon);
     }
 }

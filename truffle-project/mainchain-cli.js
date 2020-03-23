@@ -52,8 +52,8 @@ async function createDragonToken(web3js, ownerAccount, gas) {
   const gasEstimate = await contract.methods
     .createDragon("test dragon", 1, 2, 2)
     .estimateGas({ from: ownerAccount, gas })
-  
-  if (gasEstimate == gas) {
+
+  if (gasEstimate >= gas) {
     throw new Error('Not enough enough gas, send more.')
   }
   
@@ -74,7 +74,7 @@ async function transferDragonToGateway(web3js, gas, ownerAccount, dragonId) {
   const gasEstimate = await contract.methods
     .transferToGateway(dragonId)
     .estimateGas({ from: ownerAccount, gas: 0 })
-    if (gasEstimate == gas) {
+    if (gasEstimate >= gas) {
       console.log("Not enough enough gas, send more.");
       throw new Error('Not enough enough gas, send more.');
     }
@@ -84,19 +84,20 @@ async function transferDragonToGateway(web3js, gas, ownerAccount, dragonId) {
     .send({ from: ownerAccount, gas: gasEstimate });
 }
 
-async function receiveDragonFromOracle(web3js, ownerAccount, gas, dragonId, data) {
+async function receiveDragonFromOracle(web3js, ownerAccount, gas, dragonId, data, receiverAddress) {
   const contract = await getGanacheGatewayContract(web3js)
-  const gasEstimate = await contract.methods
-    .receiveDragon(ownerAccount, dragonId, data)//address mainchainAddress, uint256 uid, bytes memory data
+
+  /*const gasEstimate = await contract.methods
+    .receiveDragon(receiverAddress, dragonId, data)
     .estimateGas({ from: ownerAccount, gas: 0 });
   if (gasEstimate == gas) {
     console.log("Not enough enough gas, send more.");
     throw new Error('Not enough enough gas, send more.');
-  }
-  console.log("Succesfully transfered the dragon");
+  }*/
+
   return await contract.methods
-    .receiveDragon(ownerAccount, dragonId, data)
-    .send({ from: ownerAccount, gas: gasEstimate });
+    .receiveDragon(receiverAddress, dragonId, data)
+    .send({ from: ownerAccount, gas: gas });
 }
 
 // API SERVER
@@ -134,7 +135,11 @@ app.post('/api/dragon/receive', WAsync.wrapAsync(async function transferFunction
   console.log("Llega al receive del main-cli.");
   try {
     for (let dragon of req.body) {
-      const tx = await receiveDragonFromOracle(web3js, account, req.query.gas || 350000, dragon.uid, dragon['2']);
+      console.log("Awaiting receiveDragonFromOracle with dragon " + JSON.stringify(dragon, null, 2));
+      const bfaAccount = dragon.toMainchainAddress;
+      const data = dragon.data;
+      console.log("GAS = " + req.query.gas);
+      const tx = await receiveDragonFromOracle(web3js, account, req.query.gas || 350000, dragon.uid, data, bfaAccount);
     }
     console.log("MENSAJE RECIBIDO", req.body);
     console.log(`tx hash: ${tx.transactionHash}`);

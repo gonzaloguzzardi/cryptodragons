@@ -23,6 +23,7 @@ function sendMessageToMain(dragons) {
 			} else {
 				// console.log("[RECEIVE-MAINCHAIN-SUCCESS]:", response);
 				console.log(`URL: ${mainchainApiUrl}:${mainchainApiPort}/api/dragon/receive`);
+				deleteDragons(database, mongoUrl, collection, dragons);
 			}
 		}
 	);
@@ -35,7 +36,6 @@ function collectFromSidechainGatewayAndSendToMainchain() {
 			// console.log("[DRAGONS IDS]:", dragons);
 			if (dragons.length > 0) {
 				sendMessageToMain(dragons);
-				deleteDragons(database, mongoUrl, collection, dragons);
 			}
 		})
 		.catch(err => console.error(err));

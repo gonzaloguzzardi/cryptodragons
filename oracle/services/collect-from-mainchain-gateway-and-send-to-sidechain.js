@@ -22,6 +22,7 @@ function sendMessageToSide(message) {
 			} else {
 				console.log("[RECEIVE-SIDECHAIN-SUCCESS]:", response);
 				console.log(`URL: ${sidechainApiUrl}:${sidechainApiPort}/api/dragon/receive`);
+				deleteDragons(database, mongoUrl, collection, message);
 			}
 		}
 	);
@@ -35,7 +36,6 @@ function collectFromMainchainGatewayAndSendToSidechain() {
 			// console.log("[DRAGONS IDS]:", dragons);
 			if (dragons.length > 0) {
 				sendMessageToSide(dragons);
-				deleteDragons(database, mongoUrl, collection, dragons);
 			}
 		})
 		.catch(err => console.error(err));

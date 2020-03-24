@@ -73,6 +73,8 @@ function loadLoomAccount(accountName) {
 async function mapAccount(web3js, ownerAccount, gas, mainAccount) {
   const contract = await getLoomTokenContract(web3js)
 
+  console.log("Map account: " + ownerAccount + "/n with main account: " + mainAccount + "/n");
+
   const gasEstimate = await contract.methods
     .mapContractToMainnet(mainAccount)
     .estimateGas({ from: ownerAccount, gas: 0 })

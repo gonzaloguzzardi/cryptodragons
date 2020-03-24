@@ -87,6 +87,7 @@ async function transferDragonToGateway(web3js, gas, ownerAccount, dragonId) {
 async function receiveDragonFromOracle(web3js, ownerAccount, gas, dragonId, data, receiverAddress) {
   const contract = await getGanacheGatewayContract(web3js)
 
+  // TODO ver porque no funca
   /*const gasEstimate = await contract.methods
     .receiveDragon(receiverAddress, dragonId, data)
     .estimateGas({ from: ownerAccount, gas: 0 });
@@ -132,19 +133,19 @@ app.get('/api/dragon/create',  WAsync.wrapAsync(async function createFunction(re
 app.post('/api/dragon/receive', WAsync.wrapAsync(async function transferFunction(req, res, next) {
   const { account, web3js } = loadGanacheAccount();
   let hash = "";
-  console.log("Llega al receive del main-cli.");
+  let tx;
   try {
     for (let dragon of req.body) {
       console.log("Awaiting receiveDragonFromOracle with dragon " + JSON.stringify(dragon, null, 2));
       const bfaAccount = dragon.toMainchainAddress;
       const data = dragon.data;
-      console.log("GAS = " + req.query.gas);
-      const tx = await receiveDragonFromOracle(web3js, account, req.query.gas || 350000, dragon.uid, data, bfaAccount);
+      tx = await receiveDragonFromOracle(web3js, account, req.query.gas || 350000, dragon.uid, data, bfaAccount);
     }
-    console.log("MENSAJE RECIBIDO", req.body);
     console.log(`tx hash: ${tx.transactionHash}`);
+    console.log("MENSAJE RECIBIDO", req.body);
     hash = tx.transactionHash;
     res.status(200).send(hash);
+
     // console.log(`\n Token with id ${req.query.id} was successfully transfered from gateway \n`);
     // res.status(200).send(`Token with id ${req.query.id} was successfully transfered to gateway`);
   } catch (err) {

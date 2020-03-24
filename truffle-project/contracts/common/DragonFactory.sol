@@ -36,9 +36,9 @@ contract DragonFactory is DragonBase {
     // Used by gateway to recreate a dragon from received data
     function _mintDragon(address to, uint _tokenId, bytes memory _data) internal {
         // Token with token id = 0 should be handle as a special token and have tokenId = 0 in both blockchains
-        if ((_mainchainToSidechainIds[_tokenId] > 0) && (_tokenId != 0)) {
+        if ((_mainchainToSidechainIds[_tokenId] == 0) && (_tokenId != 0)) {
             uint tokenId = _createDragonFromData(_data);
-            _mainchainToSidechainIds[_tokenId] = tokenId;
+             _mainchainToSidechainIds[_tokenId] = tokenId;
             _mint(to, tokenId);
         } else {
             _updateDragonFromData(_tokenId, _data);

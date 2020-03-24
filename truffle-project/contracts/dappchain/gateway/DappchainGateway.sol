@@ -90,7 +90,9 @@ contract DappchainGateway is IERC20Receiver, IERC721Receiver, DappchainValidator
     if (lockedDragons[uid]) { // Token isnt new
       require(balances[sidechainAddress].erc721[sidechainAddress][uid].length > 0, "Does not own token");
     }
-    IDragonContract(sidechainAddress).retrieveToken(sidechainAddress, uid, data);
+    
+    IDragonContract(_erc721ContractAddress).retrieveToken(sidechainAddress, uid, data);
+
     delete lockedDragons[uid];
     delete balances[sidechainAddress].erc721[sidechainAddress][uid];
     emit DragonSuccessfullyRetrievedInSidechain(sidechainAddress, uid, data);

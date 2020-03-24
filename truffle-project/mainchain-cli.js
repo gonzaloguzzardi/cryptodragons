@@ -12,15 +12,15 @@ async function mapAccount(web3js, ownerAccount, gas, sideAccount) {
   console.log("Map account: " + ownerAccount + "/n with side account: " + sideAccount + "/n");
 
   const gasEstimate = await contract.methods
-  .mapContractToSidechain(sideAccount)
-  .estimateGas({ from: ownerAccount, gas: 0 })
+    .mapContractToSidechain(sideAccount)
+    .estimateGas({ from: ownerAccount, gas: 0 })
 
   if (gasEstimate == gas) {
     throw new Error('Not enough enough gas, send more.')
   }
   return contract.methods
-  .mapContractToSidechain(sideAccount)
-  .send({ from: ownerAccount, gas: gasEstimate })
+    .mapContractToSidechain(sideAccount)
+    .send({ from: ownerAccount, gas: gasEstimate })
 }
 
 async function getGanacheTokenContract(web3js) {
@@ -140,7 +140,7 @@ app.post('/api/dragon/receive', WAsync.wrapAsync(async function transferFunction
       console.log("Awaiting receiveDragonFromOracle with dragon " + JSON.stringify(dragon, null, 2));
       const bfaAccount = dragon.toMainchainAddress;
       const data = dragon.data;
-      tx = await receiveDragonFromOracle(web3js, account, req.query.gas || 350000, dragon.uid, data, "0x9d1ED83B6aECf0eAb8ec0A1357486b0B0FF3F3de");
+      tx = await receiveDragonFromOracle(web3js, account, req.query.gas || 350000, dragon.uid, data, bfaAccount);
     }
     console.log(`tx hash: ${tx.transactionHash}`);
     console.log("MENSAJE RECIBIDO", req.body);

@@ -63,7 +63,7 @@ contract DappchainGateway is IERC20Receiver, IERC721Receiver, DappchainValidator
   }
 
   /**
-  * @dev Throws if called by any account other than the owner.
+  * @dev Throws if called by any account other than the dragon contract.
   */
   modifier onlyDragonContract() {
       require(msg.sender == _erc721ContractAddress, "Only the erc721 contract can perform this action");
@@ -87,10 +87,12 @@ contract DappchainGateway is IERC20Receiver, IERC721Receiver, DappchainValidator
   * @dev Se llama cuando se recibe un dragon desde la otra blockchain
   */
   function receiveDragon(address sidechainAddress, uint256 uid, bytes memory data) public {
+    require(sidechainAddress != address(0), "sidechainAddress should be a valid address");
+
     if (lockedDragons[uid]) { // Token isnt new
       require(balances[sidechainAddress].erc721[sidechainAddress][uid].length > 0, "Does not own token");
     }
-    
+
     IDragonContract(_erc721ContractAddress).retrieveToken(sidechainAddress, uid, data);
 
     delete lockedDragons[uid];

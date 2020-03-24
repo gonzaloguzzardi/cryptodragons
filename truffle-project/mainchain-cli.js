@@ -97,6 +97,7 @@ async function receiveDragonFromOracle(web3js, ownerAccount, gas, dragonId, data
     throw new Error('Not enough enough gas, send more.');
   }
 
+  console.log("Transfering dragon with address " + receiverAddress);
   return await contract.methods
     .receiveDragon(receiverAddress, dragonId, data)
     .send({ from: ownerAccount, gas: gas });
@@ -138,9 +139,9 @@ app.post('/api/dragon/receive', WAsync.wrapAsync(async function transferFunction
   try {
     for (let dragon of req.body) {
       console.log("Awaiting receiveDragonFromOracle with dragon " + JSON.stringify(dragon, null, 2));
-      const bfaAccount = dragon.toMainchainAddress;
+      const receiverAddress = dragon.toMainchainAddress;
       const data = dragon.data;
-      tx = await receiveDragonFromOracle(web3js, account, req.query.gas || 350000, dragon.uid, data, bfaAccount);
+      tx = await receiveDragonFromOracle(web3js, account, req.query.gas || 350000, dragon.uid, data, receiverAddress);
     }
     console.log(`tx hash: ${tx.transactionHash}`);
     console.log("MENSAJE RECIBIDO", req.body);

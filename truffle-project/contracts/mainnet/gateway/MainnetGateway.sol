@@ -87,6 +87,8 @@ contract MainnetGateway is IERC20Receiver, IERC721Receiver, MainnetValidatorMana
   * @dev Se llama cuando se recibe un dragon desde la otra blockchain
   */
   function receiveDragon(address mainchainAddress, uint256 uid, bytes memory data) public {
+    require(mainchainAddress != address(0), "mainchainAddress should be a valid address");
+
     if (lockedDragons[uid]) { // Token isnt new
       require(balances[mainchainAddress].erc721[mainchainAddress][uid].length > 0, "Does not own token");
     }

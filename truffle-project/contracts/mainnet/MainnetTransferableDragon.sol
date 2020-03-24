@@ -24,6 +24,7 @@ contract MainnetTransferableDragon is DragonFactory {
 
     function retrieveToken(address receiver, uint256 _tokenId, bytes memory _data) public {
         require(msg.sender == _gateway, "only the gateway is allowed to call this function");
+        require(receiver != address(0), "Receiver should be a valid address");
         _mintDragon(receiver, _tokenId, _data);
     }
 

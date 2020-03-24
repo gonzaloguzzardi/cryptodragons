@@ -36,7 +36,7 @@ contract MainnetTransferableDragon is DragonFactory {
 
     function mapContractToSidechain(address sidechainAddress) external {
         require(sidechainAddress != address(0), "Invalid sidechain address to be mapped");
-        require(_sidechainMapping[msg.sender] != address(0), "Address already mapped. Request owner to undo the mapping");
+        require(_sidechainMapping[msg.sender] == address(0), "Address already mapped. Request owner to undo the mapping");
         _sidechainMapping[msg.sender] = sidechainAddress;
     }
 

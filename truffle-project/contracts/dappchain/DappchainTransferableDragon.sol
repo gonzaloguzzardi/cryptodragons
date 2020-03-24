@@ -38,7 +38,7 @@ contract DappchainTransferableDragon is DragonFactory {
 
     function mapContractToMainnet(address mainnetAddress) external {
         require(mainnetAddress != address(0), "Invalid mainnet address to be mapped");
-        require(_mainnetMapping[msg.sender] != address(0), "Address already mapped. Request owner to undo the mapping");
+        require(_mainnetMapping[msg.sender] == address(0), "Address already mapped. Request owner to undo the mapping");
         _mainnetMapping[msg.sender] = mainnetAddress;
     }
 

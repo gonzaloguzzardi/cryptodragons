@@ -12,15 +12,15 @@ async function mapAccount(web3js, ownerAccount, gas, sideAccount) {
   console.log("Map account: " + ownerAccount + "/n with side account: " + sideAccount + "/n");
 
   const gasEstimate = await contract.methods
-  .mapContractToSidechain(sideAccount)
-  .estimateGas({ from: ownerAccount, gas: 0 })
+    .mapContractToSidechain(sideAccount)
+    .estimateGas({ from: ownerAccount, gas: 0 })
 
   if (gasEstimate == gas) {
     throw new Error('Not enough enough gas, send more.')
   }
   return contract.methods
-  .mapContractToSidechain(sideAccount)
-  .send({ from: ownerAccount, gas: gasEstimate })
+    .mapContractToSidechain(sideAccount)
+    .send({ from: ownerAccount, gas: gasEstimate })
 }
 
 async function getGanacheTokenContract(web3js) {

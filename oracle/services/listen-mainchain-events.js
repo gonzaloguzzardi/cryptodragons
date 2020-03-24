@@ -26,7 +26,7 @@ function listenMainChainEvents() {
 
 	const mainchainDragonsInstance = new web3js.eth.Contract(
 		ABIDragon,
-		MainchainDragonContract.networks["12345"].address
+		MainchainDragonContract.networks[BFA_NETWORK_ID].address
 	);
 
 	var mainChainGatewayInstance = new web3js.eth.Contract(

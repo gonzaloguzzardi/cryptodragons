@@ -3,6 +3,9 @@ import axios from 'axios';
 import Dragon from './dragon.js';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
+import Input  from '@material-ui/core/Input';
+import FormLabel  from '@material-ui/core/FormLabel';
+
 import sleep from '../../utils/sleep';
 
 import './dragons.scss';
@@ -24,6 +27,10 @@ class Dragons extends Component {
         super(props);
 
         this.state = {
+            defSideAccount:'0xfee39fad945754831b59b92a1a8339f65358792d',
+            defMainAccount:'0x28863498efede12296888f7ca6cf0b94974fbdbc',
+            sideAccount:'0xfee39fad945754831b59b92a1a8339f65358792d',
+            mainAccount:'0x28863498efede12296888f7ca6cf0b94974fbdbc',
             sideDragons:[],
             oracleDragons:[],
             mainDragons: [],
@@ -87,9 +94,45 @@ class Dragons extends Component {
         .then(() => this.getDragonsFromOracle())
     );
 
+    mapAccounts = () => {
+        axios.get(`${oracleUrl}:${oracleApiPort}/api/mapAccounts`, {
+            params: { mainAccount: this.state.mainAccount, sideAccount: this.state.sideAccount },
+        });
+    }
+
+    onChangeMainAccount = event => {
+        this.setState({ mainAccount: event.target.value });
+    }
+
+    onChangeSideAccount = event => {
+        this.setState({ sideAccount: event.target.value });
+    }
+
     render() {
         return (
             <div className={`${namespace}__container-div`}>
+
+                { /* Map accounts */ }
+                <Grid container justify="center" spacing={2}>
+                    <Grid item>
+                        <FormLabel>
+                            SideChain Account:
+                            <Input type="text" name="sideAccount" defaultValue={this.state.defSideAccount} onChange={this.onChangeSideAccount} />
+                        </FormLabel>
+                    </Grid>
+                    <Grid item>
+                        <Button variant="contained" color="primary" onClick={this.mapAccounts}>
+                            Map Accounts
+                        </Button>
+                    </Grid>
+                    <Grid item>
+                        <FormLabel>
+                            MainChain Account:
+                            <Input type="text" name="mainAccount" defaultValue={this.state.defMainAccount} onChange={this.onChangeMainAccount}/>
+                        </FormLabel>
+                    </Grid>
+                </Grid>
+
                 { /* Buttons */ }
                 <Grid container justify="center" spacing={2}>
                     <Grid item>

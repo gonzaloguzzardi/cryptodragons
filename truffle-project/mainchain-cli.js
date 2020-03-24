@@ -7,7 +7,9 @@ const MainchainDragonTokenJson = require('./src/contracts/MainnetTransferableDra
 const GatewayJson = require('./src/contracts/MainnetGateway.json');
 
 async function mapAccount(web3js, ownerAccount, gas, sideAccount) {
-  const contract = await getLoomTokenContract(web3js)
+  const contract = await getGanacheTokenContract(web3js)
+
+  console.log("Map account: " + ownerAccount + "/n with side account: " + sideAccount + "/n");
 
   const gasEstimate = await contract.methods
   .mapContractToSidechain(sideAccount)
@@ -89,7 +91,7 @@ async function receiveDragonFromOracle(web3js, ownerAccount, gas, dragonId, data
 
   const gasEstimate = await contract.methods
     .receiveDragon(receiverAddress, dragonId, data)
-    .estimateGas({ from: ownerAccount, gas: 0 });
+    .estimateGas({ from: ownerAccount, gas });
   if (gasEstimate == gas) {
     console.log("Not enough enough gas, send more.");
     throw new Error('Not enough enough gas, send more.');
@@ -179,19 +181,14 @@ app.get('/api/dragons', WAsync.wrapAsync(async function getDragonFunction(req, r
 }));
 
 app.get('/api/mapAccount', WAsync.wrapAsync(async function getMapFunction(req, res, next) {
-  const { account, web3js, client } = loadLoomAccount(req.query.account)
+  const { account, web3js } = loadGanacheAccount(req.query.account)
   var data = ""
   try {
     data = await mapAccount(web3js, account, req.query.gas || 350000, req.query.sideAccount)
     console.log(`${data}\n`) 
   } catch (err) {
     res.status(400).send(err)
-  } finally {
-    if (client) {
-      client.disconnect()
-    }
-    res.status(200).send(data)
-  }
+  } 
 }));
 
 const PORT = 8002;

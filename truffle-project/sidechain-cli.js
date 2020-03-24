@@ -235,6 +235,7 @@ app.get('/api/mapAccount', WAsync.wrapAsync(async function getMapFunction(req, r
     console.log(`${data}\n`);
     res.status(200).send(data);
   } catch (err) {
+    console.log("Error mapping sidechain to mainchain " + err);
     res.status(400).send(err)
   } finally {
     if (client) client.disconnect();

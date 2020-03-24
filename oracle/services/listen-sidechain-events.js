@@ -67,6 +67,7 @@ function listenSideChainEvents() {
 				case 'Transfer':
 				default:
 					console.log("sidechainDragonsInstance", "OTRO EVENTO ->", event.event);
+					console.log(JSON.stringify(event.returnValues, null, 2));
 					break;
 			}
 		}
@@ -91,6 +92,7 @@ function listenSideChainEvents() {
 				default:
 					//
 					console.log("sidechainGatewayInstance", "Evento de sidechain ->", event.event);
+					console.log(JSON.stringify(event.returnValues, null, 2));
 					break;
 			}
 		}

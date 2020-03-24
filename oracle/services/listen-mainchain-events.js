@@ -47,6 +47,7 @@ function listenMainChainEvents() {
 				case 'Transfer':
 				default:
 					console.log("mainchainDragonsInstance", "OTRO EVENTO ->", event.event);
+					console.log(JSON.stringify(event.returnValues, null, 2));
 					break;
 			}
 		}
@@ -71,6 +72,7 @@ function listenMainChainEvents() {
 				case 'TokenWithdrawn':
 				default:
 					console.log("mainchainGatewayInstance", "Evento de mainchain ->", event.event);
+					console.log(JSON.stringify(event.returnValues, null, 2));
 					break;
 			}
 		}

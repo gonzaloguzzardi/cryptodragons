@@ -7,7 +7,7 @@ const { insertOnMongo, transforEventIntoTransactionObj } = require('../mongo-uti
 
 // CONSTANTS
 const {
-	collection, database, mongoUrl,
+	collection, database, mongoUrl, MainchainDragonContract,
 	MainChainGateway, BFA_SOCKET_CONNECTION, BFA_NETWORK_ID,
 } = require ('../config');
 
@@ -17,19 +17,45 @@ function listenMainChainEvents() {
 	web3js.eth.accounts.wallet.add(ownerAccount)
 	
 	const MainChainABI = MainChainGateway.abi;
+	const ABIDragon = MainchainDragonContract.abi;
+
 
 	if (!MainChainGateway.networks) {
 		throw Error('Contract not deployed on Mainchain')
 	}
+
+	const mainchainDragonsInstance = new web3js.eth.Contract(
+		ABIDragon,
+		MainchainDragonContract.networks["12345"].address
+	);
 
 	var mainChainGatewayInstance = new web3js.eth.Contract(
 		MainChainABI,
 		MainChainGateway.networks[BFA_NETWORK_ID].address
 	)
 
+	mainchainDragonsInstance.events.allEvents((err, event) => {
+		if (err) console.err(err);
+		if (event) {
+			switch(event.event) {
+				case 'NewDragon':
+					console.log("mainchainDragonsInstance:", "EVENTO NewDragon");
+					break;
+				case 'Approval':
+				case 'ApprovalForAll':
+				case 'OwnershipTransferred':
+				case 'Transfer':
+				default:
+					console.log("mainchainDragonsInstance", "OTRO EVENTO ->", event.event);
+					break;
+			}
+		}
+	});
+
 	mainChainGatewayInstance.events.allEvents((err, event) => {
 		if (err) console.error('Error on event', err);
 		if (event) {
+			console.log("LLEGO UN EVENTO");
 			switch(event.event) {
 				case 'SendDragonToSidechainAttempt':
 					console.log("mainchainGatewayInstance:", "EVENTO SendDragonToSidechainAttempt");
@@ -44,7 +70,7 @@ function listenMainChainEvents() {
 				case 'RemovedValidator':
 				case 'TokenWithdrawn':
 				default:
-					// console.log("sidechainGatewayInstance", "Evento de sidechain ->", event.event);
+					console.log("mainchainGatewayInstance", "Evento de mainchain ->", event.event);
 					break;
 			}
 		}

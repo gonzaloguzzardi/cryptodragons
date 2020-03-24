@@ -22,6 +22,7 @@ const SidechainDragonContract = require("../contracts_jsons/DappchainTransferabl
 const SidechainGatewayContract = require("../contracts_jsons/DappchainGateway");
 
 const MainChainGateway = require("../contracts_jsons/MainnetGateway");
+const MainchainDragonContract = require("../contracts_jsons/MainnetTransferableDragon");
 //const MainChainGateway = require("../contracts_jsons/MainnetTransferableDragon");
 
 module.exports = {
@@ -42,4 +43,5 @@ module.exports = {
     SidechainDragonContract,
     SidechainGatewayContract,
     MainChainGateway,
+    MainchainDragonContract
 };

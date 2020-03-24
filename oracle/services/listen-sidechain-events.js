@@ -66,7 +66,7 @@ function listenSideChainEvents() {
 				case 'OwnershipTransferred':
 				case 'Transfer':
 				default:
-					// console.log("sidechainDragonsInstance", "OTRO EVENTO ->", event.event);
+					console.log("sidechainDragonsInstance", "OTRO EVENTO ->", event.event);
 					break;
 			}
 		}
@@ -89,7 +89,8 @@ function listenSideChainEvents() {
 				case 'RemovedValidator':
 				case 'TokenWithdrawn':
 				default:
-					// console.log("sidechainGatewayInstance", "Evento de sidechain ->", event.event);
+					//
+					console.log("sidechainGatewayInstance", "Evento de sidechain ->", event.event);
 					break;
 			}
 		}

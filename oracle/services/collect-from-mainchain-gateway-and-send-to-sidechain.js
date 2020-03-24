@@ -32,7 +32,7 @@ function collectFromMainchainGatewayAndSendToSidechain() {
 	collectEventsFromMainchainGateway(database, mongoUrl, collection)
 		.then((result) => {
 			const dragons = result.map(event => ( event.returnValues ));
-			console.log("[DRAGONS IDS]:", dragons);
+			// console.log("[DRAGONS IDS]:", dragons);
 			if (dragons.length > 0) {
 				sendMessageToSide(dragons);
 				deleteDragons(database, mongoUrl, collection, dragons);

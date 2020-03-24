@@ -79,7 +79,7 @@ async function mapAccount(web3js, ownerAccount, gas, mainAccount) {
     .mapContractToMainnet(mainAccount)
     .estimateGas({ from: ownerAccount, gas: 0 })
 
-  if (gasEstimate == gas) {
+  if (gasEstimate >= gas) {
     throw new Error('Not enough enough gas, send more.')
   }
   return contract.methods
@@ -95,7 +95,7 @@ async function createDragonToken(web3js, ownerAccount, gas) {
     .createDragon("test dragon", 1, 2, 2)
     .estimateGas({ from: ownerAccount, gas: 0 })
 
-    if (gasEstimate == gas) {
+    if (gasEstimate >= gas) {
     throw new Error('Not enough enough gas, send more.')
   }
 
@@ -110,7 +110,7 @@ async function getMyDragons(web3js, ownerAccount, gas) {
     .getDragonsIdsByOwner(ownerAccount)
     .estimateGas({ from: ownerAccount, gas: 0 })
 
-    if (gasEstimate == gas) {
+    if (gasEstimate >= gas) {
     throw new Error('Not enough enough gas, send more.')
   }
 
@@ -125,7 +125,7 @@ async function transferDragonToGateway(web3js, gas, ownerAccount, dragonId) {
     .transferToGateway(dragonId)
     .estimateGas({ from: ownerAccount, gas: 0 })
 
-    if (gasEstimate == gas) {
+    if (gasEstimate >= gas) {
     throw new Error('Not enough enough gas, send more.')
   }
 
@@ -139,7 +139,7 @@ async function receiveDragonFromOracle(web3js, ownerAccount, gas, dragonId, data
   const gasEstimate = await contract.methods
     .receiveDragon(ownerAccount, dragonId, data)
     .estimateGas({ from: ownerAccount, gas: 0 });
-  if (gasEstimate == gas) {
+  if (gasEstimate >= gas) {
     console.log("Not enough enough gas, send more.");
     throw new Error('Not enough enough gas, send more.');
   }
@@ -165,6 +165,7 @@ app.get('/', (req, res) => {
 
 app.get('/api/dragon/create',  WAsync.wrapAsync(async function createFunction(req, res, next) {
   const { account, web3js, client } = loadLoomAccount(req.query.account);
+
   var hash = "";
   try {
     const tx = await createDragonToken(web3js, account, req.query.gas || 350000);

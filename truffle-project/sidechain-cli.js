@@ -77,7 +77,7 @@ async function mapAccount(web3js, ownerAccount, gas, mainAccount) {
 
   const gasEstimate = await contract.methods
     .mapContractToMainnet(mainAccount)
-    .estimateGas({ from: ownerAccount, gas: 0 })
+    .estimateGas({ from: ownerAccount, gas })
 
   if (gasEstimate == gas) {
     throw new Error('Not enough enough gas, send more.')

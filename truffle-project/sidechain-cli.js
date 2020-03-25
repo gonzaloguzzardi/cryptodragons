@@ -119,6 +119,17 @@ async function getMyDragons(web3js, ownerAccount, gas) {
     .call({ from: ownerAccount, gas: gasEstimate });
 }
 
+async function getDragonDataById(web3js, ownerAccount, dragonId) {
+  const contract = await getLoomTokenContract(web3js);
+  const gasEstimate = await contract.methods
+  .getDragonById(dragonId)
+  .estimateGas({ from: ownerAccount, gas: 0 })
+
+  return await contract.methods
+    .getDragonById(dragonId)
+    .call({ from: ownerAccount, gasEstimate });
+}
+
 async function transferDragonToGateway(web3js, gas, ownerAccount, dragonId) {
   const contract = await getLoomTokenContract(web3js)
   const gasEstimate = await contract.methods
@@ -219,8 +230,19 @@ app.get('/api/dragons', WAsync.wrapAsync(async function getDragonFunction(req, r
   try {
     data = await getMyDragons(web3js, account, req.query.gas || 350000);
     console.log(`\nAddress ${account} holds dragons with id ${data}\n`);
+
+    //@TODO para probar. Sacar
+    if (Array.isArray(data) && data.length > 0) {
+      for (dragonId in data) {
+        const dragonData = await getDragonDataById(web3js, account, dragonId);
+        console.log("\n Data for dragon with id " + dragonId);
+        console.log(JSON.stringify(dragonData, null, 2));
+      }
+    }
+
     res.status(200).send(data);
   } catch (err) {
+    console.log("Error mapping sidechain to mainchain " + err);
     res.status(400).send(err)
   } finally {
     if (client) client.disconnect();

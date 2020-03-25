@@ -79,6 +79,27 @@ contract DragonBase is ERC721Enumerable, Ownable {
         return dragons[_dragonId].name;
     }
 
+    function getDragonById(uint _dragonId) external view returns (
+        bytes32 name,
+        uint32 dadId,
+        uint32 motherId,
+        uint32 currentExperience,
+        uint16 health,
+        uint16 strength,
+        uint16 agility,
+        uint16 fortitude
+    ) {
+        Dragon storage dragon = dragons[_dragonId];
+        name = dragon.name;
+        dadId = dragon.dadId;
+        motherId = dragon.motherId;
+        currentExperience = dragon.currentExperience;
+        health = dragon.health;
+        strength = dragon.strength;
+        agility = dragon.agility;
+        fortitude = dragon.fortitude;
+    }
+
     /*******************************************************************************************
         ONLY OWNER ACTIONS
     ********************************************************************************************/

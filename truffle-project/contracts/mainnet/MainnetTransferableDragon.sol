@@ -41,6 +41,8 @@ contract MainnetTransferableDragon is DragonFactory {
     }
 
     function transferToGateway(uint256 _tokenId) public onlyDragonOwner(_tokenId) {
+        require(_sidechainMapping[msg.sender] != address(0), "Blockchains should be mapped to allow transferences");
+
         Dragon storage dragon = dragons[_tokenId];
         bytes memory encodedDragon = _encodeDragonToBytes(dragon);
         transferFrom(msg.sender, _gateway, _tokenId);
@@ -48,6 +50,4 @@ contract MainnetTransferableDragon is DragonFactory {
         IMainnetGateway gateway = IMainnetGateway(_gateway);
         gateway.depositDragon(msg.sender, _sidechainMapping[msg.sender], _tokenId, encodedDragon);
     }
-
-    function register(uint256 _uid) public pure {}
 }

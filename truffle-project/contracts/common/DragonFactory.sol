@@ -7,8 +7,9 @@ contract DragonFactory is DragonBase {
     uint constant dnaDigits = 16;
     uint constant dnaModulus = 10 ** dnaDigits;
 
-    // Maps mainchain ids to sidechain ids
-    mapping(uint => uint) internal  _mainchainToSidechainIds;
+    // Maps other token ids from the other blockchain to token ids of this blockchain
+    mapping(uint => uint) internal  _tokenIdsMapper;
+    mapping(uint => bool) internal _tokenMapped; // If we allow token destruction we should be careful with token ids reorder
 
     event NewDragon(uint dragonId, uint dna);
 
@@ -31,14 +32,17 @@ contract DragonFactory is DragonBase {
         emit NewDragon(id, newGenes);
     }
 
-    //TODO implement burn function which should update mainchainToSidechainIds mapping and avoid burning genesis token
+    //TODO implement burn function which should update mainchainToSidechainIds mapping
 
-    // Used by gateway to recreate a dragon from received data
+    // 
+    /** Used by gateway to recreate a dragon from received data
+        If has not been mapped, it means this token only exists on the other blockchain. We should recreate it and assign it a new local id mapped to its original
+     */
     function _mintDragon(address to, uint _tokenId, bytes memory _data) internal {
-        // Token with token id = 0 should be handle as a special token and have tokenId = 0 in both blockchains
-        if ((_mainchainToSidechainIds[_tokenId] == 0) && (_tokenId != 0)) {
+        if (_tokenMapped[_tokenId] == false) {
             uint tokenId = _createDragonFromData(_data);
-             _mainchainToSidechainIds[_tokenId] = tokenId;
+             _tokenIdsMapper[_tokenId] = tokenId;
+             _tokenMapped[_tokenId] = true;
             _mint(to, tokenId);
         } else {
             _updateDragonFromData(_tokenId, _data);
@@ -70,6 +74,8 @@ contract DragonFactory is DragonBase {
         uint16 _agility,
         uint16 _fortitude,
         uint16 _hatchTime) = _decodeDragonFromBytes(_data);
+
+        
 
         uint id = _createDragonWithStats(_genes, _name, _creationTime, _dadId, _motherId, _currentExperience,
                     _actionCooldown, _health, _strength, _agility, _fortitude,_hatchTime);
@@ -158,8 +164,8 @@ contract DragonFactory is DragonBase {
         uint16 _fortitude,
         uint16 _hatchTime) private {
 
-        uint tokenId = _mainchainToSidechainIds[_sidechainId];
-        require(tokenId != 0, "invalid token id");
+        uint tokenId = _tokenIdsMapper[_sidechainId];
+        require(tokenId != 0, "invalid token id. Token doesn't exist in blockchain so it can't be updated");
 
         Dragon storage dragon = dragons[tokenId];
         dragon.genes = _genes;

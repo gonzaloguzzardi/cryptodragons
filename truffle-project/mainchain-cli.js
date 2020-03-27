@@ -15,7 +15,7 @@ async function mapAccount(web3js, ownerAccount, gas, sideAccount) {
     .mapContractToSidechain(sideAccount)
     .estimateGas({ from: ownerAccount, gas })
 
-  if (gasEstimate == gas) {
+  if (gasEstimate >= gas) {
     throw new Error('Not enough enough gas, send more.')
   }
   return contract.methods
@@ -66,9 +66,28 @@ async function createDragonToken(web3js, ownerAccount, gas) {
 
 async function getMyDragons(web3js, ownerAccount, gas) {
   const contract = await getGanacheTokenContract(web3js)
+
+  const gasEstimate = await contract.methods
+  .getDragonsIdsByOwner(ownerAccount)
+  .estimateGas({ from: ownerAccount, gas: 0 })
+
+  if (gasEstimate >= gas) {
+  throw new Error('Not enough enough gas, send more.')
+}
   return await contract.methods
     .getDragonsIdsByOwner(ownerAccount)
-    .call({ from: ownerAccount, gas });
+    .call({ from: ownerAccount, gasEstimate });
+}
+
+async function getDragonDataById(web3js, ownerAccount, dragonId, gas) {
+  const contract = await getGanacheTokenContract(web3js)
+  const gasEstimate = await contract.methods
+  .getDragonById(dragonId)
+  .estimateGas({ from: ownerAccount, gas: 0 })
+
+  return await contract.methods
+    .getDragonById(dragonId)
+    .call({ from: ownerAccount, gasEstimate });
 }
 
 async function transferDragonToGateway(web3js, gas, ownerAccount, dragonId) {
@@ -173,6 +192,16 @@ app.get('/api/dragons', WAsync.wrapAsync(async function getDragonFunction(req, r
   try {
     const data = await getMyDragons(web3js, account, req.query.gas || 350000);
     console.log(`\nAddress ${account} holds dragons with id ${data}\n`);
+
+    //@TODO para probar. Sacar
+    if (Array.isArray(data) && data.length > 0) {
+      for (dragonId in data) {
+        const dragonData = await getDragonDataById(web3js, account, dragonId);
+        console.log("\n Data for dragon with id " + dragonId);
+        console.log(JSON.stringify(dragonData, null, 2));
+      }
+    }
+
     res.status(200).send(data);
   } catch (err) {
     console.log(err);
@@ -187,6 +216,7 @@ app.get('/api/mapAccount', WAsync.wrapAsync(async function getMapFunction(req, r
     data = await mapAccount(web3js, account, req.query.gas || 350000, req.query.sideAccount)
     console.log(`${data}\n`) 
   } catch (err) {
+    console.log("Error mapping mainchain to sidechain " + err);
     res.status(400).send(err)
   } 
 }));

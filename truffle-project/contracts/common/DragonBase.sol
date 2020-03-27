@@ -79,6 +79,27 @@ contract DragonBase is ERC721Enumerable, Ownable {
         return dragons[_dragonId].name;
     }
 
+    function getDragonById(uint _dragonId) external view returns (
+        bytes32 name,
+        uint32 dadId,
+        uint32 motherId,
+        uint32 currentExperience,
+        uint16 health,
+        uint16 strength,
+        uint16 agility,
+        uint16 fortitude
+    ) {
+        Dragon storage dragon = dragons[_dragonId];
+        name = dragon.name;
+        dadId = dragon.dadId;
+        motherId = dragon.motherId;
+        currentExperience = dragon.currentExperience;
+        health = dragon.health;
+        strength = dragon.strength;
+        agility = dragon.agility;
+        fortitude = dragon.fortitude;
+    }
+
     /*******************************************************************************************
         ONLY OWNER ACTIONS
     ********************************************************************************************/
@@ -125,7 +146,7 @@ contract DragonBase is ERC721Enumerable, Ownable {
         // encode 32 bytes from genes
         for (uint i = 0; i < 32; i++)
         {
-            encodedData[counter] = byte(uint8(_dragon.genes / (2 ** (8 * (31 - i))))); 
+            encodedData[counter] = byte(uint8(_dragon.genes >> ((8 * i) & uint32(255) ))); 
             counter++;
         }
 
@@ -139,70 +160,70 @@ contract DragonBase is ERC721Enumerable, Ownable {
         // encode 8 bytes from creation time
         for (uint i = 0; i < 8; i++)
         {
-            encodedData[counter] = byte(uint8(_dragon.creationTime / (2 ** (8 * (8 - i))))); 
+            encodedData[counter] = byte(uint8(_dragon.creationTime >> ((8 * i) & uint32(255)))); 
             counter++;
         }
 
         // encode 4 bytes from dad id
         for (uint i = 0; i < 4; i++)
         {
-            encodedData[counter] = byte(uint8(_dragon.dadId / (2 ** (8 * (4 - i))))); 
+            encodedData[counter] = byte(uint8(_dragon.dadId >> ((8 * i) & uint32(255)))); 
             counter++;
         }
 
         // encode 4 bytes from mother id
         for (uint i = 0; i < 4; i++)
         {
-            encodedData[counter] = byte(uint8(_dragon.motherId / (2 ** (8 * (4 - i))))); 
+            encodedData[counter] = byte(uint8(_dragon.motherId >> ((8 * i) & uint32(255)))); 
             counter++;
         }
 
         // encode 4 bytes from current experience
         for (uint i = 0; i < 4; i++)
         {
-            encodedData[counter] = byte(uint8(_dragon.currentExperience / (2 ** (8 * (4 - i))))); 
+            encodedData[counter] = byte(uint8(_dragon.currentExperience >> ((8 * i) & uint32(255)))); 
             counter++;
         }
 
         // encode 2 bytes from action cooldown
         for (uint i = 0; i < 2; i++)
         {
-            encodedData[counter] = byte(uint8(_dragon.actionCooldown / (2 ** (8 * (2 - i))))); 
+            encodedData[counter] = byte(uint8(_dragon.actionCooldown >> ((8 * i) & uint32(255)))); 
             counter++;
         }
 
         // encode 2 bytes from health
         for (uint i = 0; i < 2; i++)
         {
-            encodedData[counter] = byte(uint8(_dragon.health / (2 ** (8 * (2 - i))))); 
+            encodedData[counter] = byte(uint8(_dragon.health >> ((8 * i) & uint32(255)))); 
             counter++;
         }
 
         // encode 2 bytes from strength
         for (uint i = 0; i < 2; i++)
         {
-            encodedData[counter] = byte(uint8(_dragon.strength / (2 ** (8 * (2 - i))))); 
+            encodedData[counter] = byte(uint8(_dragon.strength >> ((8 * i) & uint32(255)))); 
             counter++;
         }
 
         // encode 2 bytes from agility
         for (uint i = 0; i < 2; i++)
         {
-            encodedData[counter] = byte(uint8(_dragon.agility / (2 ** (8 * (2 - i))))); 
+            encodedData[counter] = byte(uint8(_dragon.agility >> ((8 * i) & uint32(255)))); 
             counter++;
         }
 
         // encode 2 bytes from fortitude
         for (uint i = 0; i < 2; i++)
         {
-            encodedData[counter] = byte(uint8(_dragon.fortitude / (2 ** (8 * (2 - i))))); 
+            encodedData[counter] = byte(uint8(_dragon.fortitude >> ((8 * i) & uint32(255)))); 
             counter++;
         }
 
         // encode 2 bytes from hatch time
         for (uint i = 0; i < 2; i++)
         {
-            encodedData[counter] = byte(uint8(_dragon.hatchTime / (2 ** (8 * (2 - i))))); 
+            encodedData[counter] = byte(uint8(_dragon.hatchTime >> ((8 * i) & uint32(255)))); 
             counter++;
         }
         return encodedData;
@@ -211,7 +232,7 @@ contract DragonBase is ERC721Enumerable, Ownable {
     /**
         Decodes dragon data from an array of bytes
     */
-    function _decodeDragonFromBytes(bytes memory _data) internal pure 
+    function _decodeDragonFromBytes(bytes memory _data) internal pure
     returns(uint genes, bytes32 name, uint64 creationTime, uint32 dadId, uint32 motherId, uint32 currentExperience, uint16 actionCooldown,
             uint16 health, uint16 strength, uint16 agility, uint16 fortitude, uint16 hatchTime) {
         uint counter = 0;

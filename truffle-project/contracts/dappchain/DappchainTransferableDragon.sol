@@ -43,13 +43,13 @@ contract DappchainTransferableDragon is DragonFactory {
     }
 
     function transferToGateway(uint256 _tokenId) public onlyDragonOwner(_tokenId) {
+        require(_mainnetMapping[msg.sender] != address(0), "Blockchains should be mapped to allow transferences");
+
         Dragon storage dragon = dragons[_tokenId];
         bytes memory encodedDragon = _encodeDragonToBytes(dragon);
         transferFrom(msg.sender, _gateway, _tokenId);
 
         IDappchainGateway gateway = IDappchainGateway(_gateway);
-        // @TODO: HAY QUE USAR LA LINEA COMENTADA, POR AHORA HARDCODEO EL USER DE GANACHE!!!
         gateway.depositDragon(msg.sender, _mainnetMapping[msg.sender], _tokenId, encodedDragon);
-        //gateway.depositDragon(msg.sender, address(0x28863498efede12296888f7ca6cf0b94974fbdbc), _tokenId, encodedDragon);
     }
 }

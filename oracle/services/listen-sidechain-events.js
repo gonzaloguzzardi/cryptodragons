@@ -3,7 +3,9 @@ const path = require('path');
 const fs = require("fs");
 
 // MONGO-DB
-const { insertOnMongo, transforEventIntoTransactionObj } = require('../mongo-utils');
+const {
+	insertOnMongo, transforEventIntoTransactionObj, deleteDragon,
+} = require('../mongo-utils');
 
 // CONSTANTS
 const {
@@ -77,11 +79,14 @@ function listenSideChainEvents() {
 		if (event) {
 			switch(event.event) {
 				case 'SendDragonToMainchainAttempt':
-					console.log("sidechainGatewayInstance:", "EVENTO SendDragonToMainchainAttempt");
+					console.log("sidechainGatewayInstance", "Evento de sidechain ->", event.event);
 					insertOnMongo(database, mongoUrl, transforEventIntoTransactionObj(event), collection);
 					break;
-				case 'AddedValidator':
 				case 'DragonSuccessfullyRetrievedInSidechain':
+					console.log("BORRANDO ESTO", event.returnValues);
+					deleteDragon(database, mongoUrl, collection, event.returnValues);
+					break;
+				case 'AddedValidator':
 				case 'ERC20Received':
 				case 'ERC721Received':
 				case 'ETHReceived':
@@ -89,7 +94,6 @@ function listenSideChainEvents() {
 				case 'RemovedValidator':
 				case 'TokenWithdrawn':
 				default:
-					//
 					console.log("sidechainGatewayInstance", "Evento de sidechain ->", event.event);
 					break;
 			}

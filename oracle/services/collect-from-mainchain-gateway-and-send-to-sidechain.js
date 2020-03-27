@@ -5,7 +5,6 @@ const {
 } = require ('../config');
 const { 
 	collectEventsFromMainchainGateway,
-	deleteDragons,
 } = require('../mongo-utils');
 
 function sendMessageToSide(message) {
@@ -20,9 +19,8 @@ function sendMessageToSide(message) {
 			if (error) {
 				console.log("[RECEIVE-SIDECHAIN-ERROR]: Starting roll back...");
 			} else {
-				console.log("[RECEIVE-SIDECHAIN-SUCCESS]:", response);
+				console.log("[RECEIVE-SIDECHAIN-SUCCESS]:");
 				console.log(`URL: ${sidechainApiUrl}:${sidechainApiPort}/api/dragon/receive`);
-				deleteDragons(database, mongoUrl, collection, message);
 			}
 		}
 	);
@@ -33,7 +31,6 @@ function collectFromMainchainGatewayAndSendToSidechain() {
 	collectEventsFromMainchainGateway(database, mongoUrl, collection)
 		.then((result) => {
 			const dragons = result.map(event => ( event.returnValues ));
-			// console.log("[DRAGONS IDS]:", dragons);
 			if (dragons.length > 0) {
 				sendMessageToSide(dragons);
 			}

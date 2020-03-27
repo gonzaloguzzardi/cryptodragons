@@ -3,7 +3,9 @@ const path = require('path');
 var fs = require("fs");
 
 // MONGO-DB
-const { insertOnMongo, transforEventIntoTransactionObj } = require('../mongo-utils');
+const {
+	insertOnMongo, transforEventIntoTransactionObj, deleteDragon,
+} = require('../mongo-utils');
 
 // CONSTANTS
 const {
@@ -39,14 +41,12 @@ function listenMainChainEvents() {
 		if (event) {
 			switch(event.event) {
 				case 'NewDragon':
-					console.log("mainchainDragonsInstance:", "EVENTO NewDragon");
-					break;
 				case 'Approval':
 				case 'ApprovalForAll':
 				case 'OwnershipTransferred':
 				case 'Transfer':
 				default:
-					console.log("mainchainDragonsInstance", "OTRO EVENTO ->", event.event);
+					console.log("mainchainDragonsInstance", "Evento ->", event.event);
 					break;
 			}
 		}
@@ -58,11 +58,14 @@ function listenMainChainEvents() {
 			console.log("LLEGO UN EVENTO");
 			switch(event.event) {
 				case 'SendDragonToSidechainAttempt':
-					console.log("mainchainGatewayInstance:", "EVENTO SendDragonToSidechainAttempt");
+					console.log("mainchainGatewayInstance", "Evento ->", event.event);
 					insertOnMongo(database, mongoUrl, transforEventIntoTransactionObj(event), collection)
 					break;
-				case 'AddedValidator':
 				case 'DragonSuccessfullyRetrievedInMainchain':
+					console.log("BORRANDO ESTE", event.returnValues);
+					deleteDragon(database, mongoUrl, collection, event.returnValues);
+					break;
+				case 'AddedValidator':
 				case 'ERC20Received':
 				case 'ERC721Received':
 				case 'ETHReceived':
@@ -70,7 +73,7 @@ function listenMainChainEvents() {
 				case 'RemovedValidator':
 				case 'TokenWithdrawn':
 				default:
-					console.log("mainchainGatewayInstance", "Evento de mainchain ->", event.event);
+					console.log("mainchainGatewayInstance", "Evento ->", event.event);
 					break;
 			}
 		}

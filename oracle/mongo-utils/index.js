@@ -34,19 +34,15 @@ function insertOnMongo(database, url, transaction, collection) {
 	return transaction;
 }
 
-function deleteDragons(database,url,collection, dragons) {
-	console.log(dragons);
+function deleteDragon(database,url,collection, dragon) {
 	MongoClient.connect(url, function (err, db) {
 		var dbo = db.db(database);
-		for (let dragon of dragons) {
-			console.log(dragon.uid);
-			dbo.collection(collection).deleteOne({uid: dragon.uid}, function(err, result) {
-				if (err) {
-					console.log(err);
-				}
-				db.close();
-			});
-		}
+		dbo.collection(collection).deleteOne({uid: dragon.uid}, function(err, result) {
+			if (err) {
+				console.log(err);
+			}
+			db.close();
+		});
 	});
 
 }
@@ -77,6 +73,6 @@ module.exports = {
 	collectEventsFromSidechainGateway,
 	collectEventsFromMainchainGateway,
 	insertOnMongo,
-	deleteDragons,
+	deleteDragon,
     transforEventIntoTransactionObj,
 };

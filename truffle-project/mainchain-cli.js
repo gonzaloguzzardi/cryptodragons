@@ -13,7 +13,7 @@ async function mapAccount(web3js, ownerAccount, gas, sideAccount) {
 
   const gasEstimate = await contract.methods
     .mapContractToSidechain(sideAccount)
-    .estimateGas({ from: ownerAccount, gas: 0 })
+    .estimateGas({ from: ownerAccount, gas })
 
   if (gasEstimate == gas) {
     throw new Error('Not enough enough gas, send more.')

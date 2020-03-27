@@ -6,7 +6,6 @@ const {
 } = require('../config');
 const { 
 	collectEventsFromSidechainGateway,
-	deleteDragons,
 } = require('../mongo-utils');
 
 function sendMessageToMain(dragons) {
@@ -21,9 +20,8 @@ function sendMessageToMain(dragons) {
 			if (error) {
 				console.log("[RECEIVE-MAINCHAIN-ERROR]: Starting roll back...");
 			} else {
-				// console.log("[RECEIVE-MAINCHAIN-SUCCESS]:", response);
+				console.log("[RECEIVE-MAINCHAIN-SUCCESS]:");
 				console.log(`URL: ${mainchainApiUrl}:${mainchainApiPort}/api/dragon/receive`);
-				deleteDragons(database, mongoUrl, collection, dragons);
 			}
 		}
 	);
@@ -33,7 +31,6 @@ function collectFromSidechainGatewayAndSendToMainchain() {
 	collectEventsFromSidechainGateway(database, mongoUrl, collection)
 		.then((result) => {
 			const dragons = result.map(event => ( event.returnValues ));
-			// console.log("[DRAGONS IDS]:", dragons);
 			if (dragons.length > 0) {
 				sendMessageToMain(dragons);
 			}

@@ -73,7 +73,7 @@ function loadLoomAccount(accountName) {
 async function mapAccount(web3js, ownerAccount, gas, mainAccount) {
   const contract = await getLoomTokenContract(web3js)
 
-  console.log("Map account: " + ownerAccount + "/n with main account: " + mainAccount + "/n");
+  console.log("Map account: " + ownerAccount + " with main account: " + mainAccount);
 
   const gasEstimate = await contract.methods
     .mapContractToMainnet(mainAccount)
@@ -253,8 +253,7 @@ app.get('/api/mapAccount', WAsync.wrapAsync(async function getMapFunction(req, r
   const { account, web3js, client } = loadLoomAccount(req.query.account);
   var data = "";
   try {
-    data = await mapAccount(web3js, account, req.query.gas || 350000, req.query.mainAccount);
-    console.log(`${data}\n`);
+    await mapAccount(web3js, account, req.query.gas || 350000, req.query.mainAccount);
     res.status(200).send(data);
   } catch (err) {
     console.log("Error mapping sidechain to mainchain " + err);

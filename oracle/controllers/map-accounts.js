@@ -14,7 +14,7 @@ function mapAccounts(req, res) {
             json: true,
         },
         function (error, response, body) {
-            console.log(error);
+            if (error) console.error(error);
         }
     );
     request.get(

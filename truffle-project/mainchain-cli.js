@@ -9,7 +9,7 @@ const GatewayJson = require('./src/contracts/MainnetGateway.json');
 async function mapAccount(web3js, ownerAccount, gas, sideAccount) {
   const contract = await getGanacheTokenContract(web3js)
 
-  console.log("Map account: " + ownerAccount + "/n with side account: " + sideAccount + "/n");
+  console.log("Map account: " + ownerAccount + " with side account: " + sideAccount);
 
   const gasEstimate = await contract.methods
     .mapContractToSidechain(sideAccount)
@@ -205,19 +205,17 @@ app.get('/api/dragons', WAsync.wrapAsync(async function getDragonFunction(req, r
     res.status(200).send(data);
   } catch (err) {
     console.log(err);
-    res.status(500).send(err)
+    res.status(500).send(err);
   }
 }));
 
 app.get('/api/mapAccount', WAsync.wrapAsync(async function getMapFunction(req, res, next) {
   const { account, web3js } = loadGanacheAccount(req.query.account)
-  var data = ""
   try {
-    data = await mapAccount(web3js, account, req.query.gas || 350000, req.query.sideAccount)
-    console.log(`${data}\n`) 
+    await mapAccount(web3js, account, req.query.gas || 350000, req.query.sideAccount);
   } catch (err) {
     console.log("Error mapping mainchain to sidechain " + err);
-    res.status(400).send(err)
+    res.status(400).send(err);
   } 
 }));
 

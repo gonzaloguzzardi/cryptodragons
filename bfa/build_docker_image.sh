@@ -1,6 +1,6 @@
 #!/bin/bash
 
-docker image build -t gonzaloguzzardi/cryptodragons:bfa_node_v003 . 
+docker image build -t gonzaloguzzardi/cryptodragons:bfa_node_v004 .
 
 # push image --> docker push gonzaloguzzardi/cryptodragons:bfa_node
 # login --> docker login --username <userId>

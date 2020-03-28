@@ -213,6 +213,7 @@ app.get('/api/mapAccount', WAsync.wrapAsync(async function getMapFunction(req, r
   const { account, web3js } = loadGanacheAccount(req.query.account)
   try {
     await mapAccount(web3js, account, req.query.gas || 350000, req.query.sideAccount);
+    res.status(200).send("OK");
   } catch (err) {
     console.log("Error mapping mainchain to sidechain " + err);
     res.status(400).send(err);

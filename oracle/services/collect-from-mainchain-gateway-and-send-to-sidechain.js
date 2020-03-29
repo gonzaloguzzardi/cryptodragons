@@ -16,11 +16,11 @@ function sendMessageToSide(message) {
 			json: true,
 		},
 		function (error, response, body) {
-			if (error) {
+			console.log(`URL: ${sidechainApiUrl}:${sidechainApiPort}/api/dragon/receive`);
+			if (response.statusCode != 200) {
 				console.log("[RECEIVE-SIDECHAIN-ERROR]: Starting roll back...");
 			} else {
 				console.log("[RECEIVE-SIDECHAIN-SUCCESS]:");
-				console.log(`URL: ${sidechainApiUrl}:${sidechainApiPort}/api/dragon/receive`);
 			}
 		}
 	);

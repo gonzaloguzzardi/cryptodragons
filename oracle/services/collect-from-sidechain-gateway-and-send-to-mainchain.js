@@ -17,11 +17,11 @@ function sendMessageToMain(dragons) {
 			json: true,
 		},
 		function (error, response, body) {
-			if (error) {
+			console.log(`URL: ${mainchainApiUrl}:${mainchainApiPort}/api/dragon/receive`);
+			if (response.statusCode != 200) {
 				console.log("[RECEIVE-MAINCHAIN-ERROR]: Starting roll back...");
 			} else {
 				console.log("[RECEIVE-MAINCHAIN-SUCCESS]:");
-				console.log(`URL: ${mainchainApiUrl}:${mainchainApiPort}/api/dragon/receive`);
 			}
 		}
 	);

@@ -59,16 +59,14 @@ function listenSideChainEvents() {
 	sidechainDragonsInstance.events.allEvents((err, event) => {
 		if (err) console.err(err);
 		if (event) {
+			console.log("sidechainDragonsInstance", "EVENTO ->", event.event);
 			switch(event.event) {
 				case 'NewDragon':
-					console.log("sidechainDragonsInstance:", "EVENTO NewDragon");
-					break;
 				case 'Approval':
 				case 'ApprovalForAll':
 				case 'OwnershipTransferred':
 				case 'Transfer':
 				default:
-					console.log("sidechainDragonsInstance", "OTRO EVENTO ->", event.event);
 					console.log(JSON.stringify(event.returnValues, null, 2));
 					break;
 			}
@@ -78,13 +76,13 @@ function listenSideChainEvents() {
 	sidechainGatewayInstance.events.allEvents((err, event) => {
 		if (err) console.err(err);
 		if (event) {
+			console.log("sidechainGatewayInstance", "Evento de sidechain ->", event.event);
 			switch(event.event) {
 				case 'SendDragonToMainchainAttempt':
-					console.log("sidechainGatewayInstance", "Evento de sidechain ->", event.event);
 					insertOnMongo(database, mongoUrl, transforEventIntoTransactionObj(event), collection);
 					break;
 				case 'DragonSuccessfullyRetrievedInSidechain':
-					console.log("BORRANDO ESTO", event.returnValues);
+					console.log("BORRANDO ESTE", event.returnValues);
 					deleteDragon(database, mongoUrl, collection, event.returnValues);
 					break;
 				case 'AddedValidator':
@@ -95,7 +93,6 @@ function listenSideChainEvents() {
 				case 'RemovedValidator':
 				case 'TokenWithdrawn':
 				default:
-					console.log("sidechainGatewayInstance", "Evento de sidechain ->", event.event);
 					console.log(JSON.stringify(event.returnValues, null, 2));
 					break;
 			}

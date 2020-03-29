@@ -1,5 +1,5 @@
 const WAsync = require('@rimiti/express-async');
-const request = require('request');
+const axios = require('axios');
 const oracleApiUrl = 'http://localhost';
 const oracleApiPort = 8081;
 const Web3 = require('web3');
@@ -265,16 +265,9 @@ app.get('/api/mapAccount', WAsync.wrapAsync(async function getMapFunction(req, r
 }));
 
 function saveDragonOnOracle(dragon) {
-  request.get(
-    {
-      headers: { 'content-type': 'application/json' },
-      url: `${oracleApiUrl}:${oracleApiPort}/api/saveDragon?dragon=` + dragon,
-      json: true,
-    },
-    function (error, response, body) {
-      res.status(200).send(response);
-    }
-  );
+  axios.get(`${oracleApiUrl}:${oracleApiPort}/api/saveDragon` ,{
+    params: { dragon: dragon},
+  });
 } 
 
 http.createServer(app).listen(8001, () => {

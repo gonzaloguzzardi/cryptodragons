@@ -1,5 +1,7 @@
 const WAsync = require('@rimiti/express-async');
-
+const request = require('request');
+const oracleApiUrl = 'http://localhost';
+const oracleApiPort = 8081;
 const Web3 = require('web3');
 const fs = require('fs');
 const path = require('path');
@@ -73,7 +75,7 @@ function loadLoomAccount(accountName) {
 async function mapAccount(web3js, ownerAccount, gas, mainAccount) {
   const contract = await getLoomTokenContract(web3js)
 
-  console.log("Map account: " + ownerAccount + " with main account: " + mainAccount);
+  console.log("Map account: " + ownerAccount + "\n with main account: " + mainAccount + "\n");
 
   const gasEstimate = await contract.methods
     .mapContractToMainnet(mainAccount)
@@ -204,7 +206,7 @@ app.post('/api/dragon/receive', WAsync.wrapAsync(async function transferFunction
     hash = tx.transactionHash;
     res.status(200).send(hash);
   } catch (err) {
-    console.log("Auch... error on receive..." + err);
+    saveDragonOnOracle(req.body);
     res.status(500).send(err);
   } finally {
     if (client) client.disconnect();
@@ -261,6 +263,19 @@ app.get('/api/mapAccount', WAsync.wrapAsync(async function getMapFunction(req, r
     if (client) client.disconnect();
   }
 }));
+
+function saveDragonOnOracle(dragon) {
+  request.get(
+    {
+      headers: { 'content-type': 'application/json' },
+      url: `${oracleApiUrl}:${oracleApiPort}/api/saveDragon?dragon=` + dragon,
+      json: true,
+    },
+    function (error, response, body) {
+      res.status(200).send(response);
+    }
+  );
+} 
 
 http.createServer(app).listen(8001, () => {
   console.log('Server started at http://localhost:8001');

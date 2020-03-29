@@ -2,7 +2,9 @@ const Web3 = require('web3');
 const fs = require('fs');
 const path = require('path');
 const WAsync = require('@rimiti/express-async');
-
+const request = require('request');
+const oracleApiUrl = 'http://localhost';
+const oracleApiPort = 8081;
 const MainchainDragonTokenJson = require('./src/contracts/MainnetTransferableDragon.json')
 const GatewayJson = require('./src/contracts/MainnetGateway.json');
 
@@ -166,11 +168,8 @@ app.post('/api/dragon/receive', WAsync.wrapAsync(async function transferFunction
     console.log("MENSAJE RECIBIDO", req.body);
     hash = tx.transactionHash;
     res.status(200).send(hash);
-
-    // console.log(`\n Token with id ${req.query.id} was successfully transfered from gateway \n`);
-    // res.status(200).send(`Token with id ${req.query.id} was successfully transfered to gateway`);
   } catch (err) {
-    console.log("auch... error on receive..." + err);
+    saveDragonOnOracle(req.body);
     res.status(500).send(err);
   }
 }));
@@ -219,6 +218,19 @@ app.get('/api/mapAccount', WAsync.wrapAsync(async function getMapFunction(req, r
     res.status(400).send(err);
   } 
 }));
+
+function saveDragonOnOracle(dragon) {
+  request.get(
+    {
+      headers: { 'content-type': 'application/json' },
+      url: `${oracleApiUrl}:${oracleApiPort}/api/saveDragon?dragon=` + dragon,
+      json: true,
+    },
+    function (error, response, body) {
+      res.status(200).send(response);
+    }
+  );
+} 
 
 const PORT = 8002;
 http.createServer(app).listen(PORT, () => {

@@ -108,12 +108,12 @@ async function transferDragonToGateway(web3js, gas, ownerAccount, dragonId) {
 }
 
 async function receiveDragonFromOracle(web3js, ownerAccount, gas, dragonId, data, receiverAddress) {
-  const contract = await getGanacheGatewayContract(web3js)
+  const contract = await getGanacheGatewayContract(web3js);
 
   const gasEstimate = await contract.methods
     .receiveDragon(receiverAddress, dragonId, data)
     .estimateGas({ from: ownerAccount, gas });
-  if (gasEstimate == gas) {
+  if (gasEstimate >= gas) {
     console.log("Not enough enough gas, send more.");
     throw new Error('Not enough enough gas, send more.');
   }
@@ -121,7 +121,7 @@ async function receiveDragonFromOracle(web3js, ownerAccount, gas, dragonId, data
   console.log("Transfering dragon with address " + receiverAddress);
   return await contract.methods
     .receiveDragon(receiverAddress, dragonId, data)
-    .send({ from: ownerAccount, gas: gas });
+    .send({ from: ownerAccount, gas });
 }
 
 // API SERVER
@@ -161,8 +161,7 @@ app.post('/api/dragon/receive', WAsync.wrapAsync(async function transferFunction
     for (let dragon of req.body) {
       console.log("Awaiting receiveDragonFromOracle with dragon " + JSON.stringify(dragon, null, 2));
       const receiverAddress = dragon.toMainchainAddress;
-      const data = dragon.data;
-      tx = await receiveDragonFromOracle(web3js, account, req.query.gas || 350000, dragon.uid, data, receiverAddress);
+      tx = await receiveDragonFromOracle(web3js, account, req.query.gas || 350000, dragon.uid, dragon.data, receiverAddress);
     }
     console.log(`tx hash: ${tx.transactionHash}`);
     console.log("MENSAJE RECIBIDO", req.body);
@@ -203,7 +202,7 @@ app.get('/api/dragons', WAsync.wrapAsync(async function getDragonFunction(req, r
 
     res.status(200).send(data);
   } catch (err) {
-    console.log(err);
+    console.log("Error getting dragons data:" + err);
     res.status(500).send(err);
   }
 }));

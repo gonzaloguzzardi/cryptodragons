@@ -1,4 +1,5 @@
 const MongoClient = require('mongodb').MongoClient;
+const mongoClientOptions = { useUnifiedTopology: true, useNewUrlParser: true };
 
 function collectEventsFromSidechainGateway(database, url, collection) {
 	return _collectEvents('SendDragonToMainchainAttempt', database, url, collection);
@@ -10,7 +11,7 @@ function collectEventsFromMainchainGateway(database, url, collection) {
 
 function _collectEvents(event, database, url, collection) {
 	return new Promise((res, rej) => {
-		MongoClient.connect(url, function (err, db) {
+		MongoClient.connect(url, mongoClientOptions, function (err, db) {
 			if (err) return rej(err);
 			var dbo = db.db(database);
 			dbo.collection(collection).find({ event }).toArray(function(err, results) {
@@ -23,7 +24,7 @@ function _collectEvents(event, database, url, collection) {
 }
 
 function insertOnMongo(database, url, transaction, collection) {
-	MongoClient.connect(url, function (err, db) {
+	MongoClient.connect(url, mongoClientOptions, function (err, db) {
 		if (err) throw err;
 		var dbo = db.db(database);
 		dbo.collection(collection).insertOne(transaction, function (err) {
@@ -35,7 +36,7 @@ function insertOnMongo(database, url, transaction, collection) {
 }
 
 function deleteDragon(database,url,collection, dragon) {
-	MongoClient.connect(url, function (err, db) {
+	MongoClient.connect(url, mongoClientOptions, function (err, db) {
 		var dbo = db.db(database);
 		dbo.collection(collection).deleteOne({uid: dragon.uid}, function(err, result) {
 			if (err) {

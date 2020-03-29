@@ -39,6 +39,7 @@ function listenMainChainEvents() {
 	mainchainDragonsInstance.events.allEvents((err, event) => {
 		if (err) console.err(err);
 		if (event) {
+			console.log("mainchainDragonsInstance", "Evento ->", event.event);
 			switch(event.event) {
 				case 'NewDragon':
 				case 'Approval':
@@ -46,7 +47,6 @@ function listenMainChainEvents() {
 				case 'OwnershipTransferred':
 				case 'Transfer':
 				default:
-					console.log("mainchainDragonsInstance", "Evento ->", event.event);
 					console.log("Return values", JSON.stringify(event.returnValues, null, 2));
 					break;
 			}
@@ -56,15 +56,14 @@ function listenMainChainEvents() {
 	mainChainGatewayInstance.events.allEvents((err, event) => {
 		if (err) console.error('Error on event', err);
 		if (event) {
-			console.log("LLEGO UN EVENTO");
+			console.log("mainchainGatewayInstance", "Evento ->", event.event);
 			switch(event.event) {
 				case 'SendDragonToSidechainAttempt':
-					console.log("mainchainGatewayInstance", "Evento ->", event.event);
 					insertOnMongo(database, mongoUrl, transforEventIntoTransactionObj(event), collection)
 					break;
 				case 'DragonSuccessfullyRetrievedInMainchain':
 					console.log("BORRANDO ESTE", event.returnValues);
-					deleteDragon(database, mongoUrl, collection, event.returnValues);
+					// deleteDragon(database, mongoUrl, collection, event.returnValues);
 					break;
 				case 'AddedValidator':
 				case 'ERC20Received':
@@ -74,7 +73,6 @@ function listenMainChainEvents() {
 				case 'RemovedValidator':
 				case 'TokenWithdrawn':
 				default:
-					console.log("mainchainGatewayInstance", "Evento ->", event.event);
 					console.log("Return values", JSON.stringify(event.returnValues, null, 2));
 					break;
 			}

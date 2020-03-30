@@ -6,19 +6,22 @@ const {
 	collectEventsFromMainchainGateway,
 } = require('../mongo-utils');
 
-const getDragonsFromSidechainGateway = new Promise((res, rej) => {
+const getDragonsFromSidechainGatewayPromise = () => new Promise((res, rej) => {
 	collectEventsFromSidechainGateway(database, mongoUrl, collection)
 		.then(result => res({ 'sidechain-gateway-results': result }))
 		.catch(err => rej(err));
 });
 
-const getDragonsFromMainchainGateway = new Promise((res, rej) => {
+const getDragonsFromMainchainGatewayPromise = () => new Promise((res, rej) => {
 	collectEventsFromMainchainGateway(database, mongoUrl, collection)
 		.then(result => res({ 'mainchain-gateway-results': result }))
 		.catch(err => rej(err));
 });
 
 function getDragonsInGateways(req, res) {
+	const getDragonsFromSidechainGateway = getDragonsFromSidechainGatewayPromise();
+	const getDragonsFromMainchainGateway = getDragonsFromMainchainGatewayPromise();
+
 	Promise.all([ getDragonsFromSidechainGateway, getDragonsFromMainchainGateway ])
 		.then(
 			values => {

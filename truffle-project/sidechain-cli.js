@@ -204,21 +204,21 @@ app.get('/api/dragon/create',  WAsync.wrapAsync(async function createFunction(re
 }));
 
 app.post('/api/dragon/receive', WAsync.wrapAsync(async function transferFunction(req, res, next) {
-  const { account, web3js, client } = loadLoomAccount(req.query.account);
+  const { account, web3js, client } = loadLoomAccount();
   let hash = "";
   let tx;
   try {
-    for (let dragon of req.body) {
+    for (let dragon of req.body.dragons) {
       console.log("Awaiting receiveDragonFromOracle with dragon " + JSON.stringify(dragon, null, 2));
       const receiverAddress = dragon.toSidechainAddress;
       tx = await receiveDragonFromOracle(web3js, account, req.query.gas || 350000, dragon.uid, dragon.data, receiverAddress);
     }
     console.log(`tx hash: ${tx.transactionHash}`);
-    console.log("MENSAJE RECIBIDO", req.body);
+    console.log("MENSAJE RECIBIDO", req.body.dragons);
     hash = tx.transactionHash;
     res.status(200).send(hash);
   } catch (err) {
-    saveDragonOnOracle(req.body);
+    saveDragonOnOracle(req.body.dragons);
     res.status(500).send(err);
   } finally {
     if (client) client.disconnect();

@@ -8,23 +8,13 @@ const {
 } = require('../mongo-utils');
 
 function sendMessageToSide(message) {
-	axios.post(
-		{
-			headers: { 'content-type': 'application/json' },
-			url: `${sidechainApiUrl}:${sidechainApiPort}/api/dragon/receive`,
-			body: message,
-			json: true,
-		},
-		function (error, response, body) {
+	axios
+		.post(`${sidechainApiUrl}:${sidechainApiPort}/api/dragon/receive`, { dragons: message })
+		.then(res => {
 			console.log(`URL: ${sidechainApiUrl}:${sidechainApiPort}/api/dragon/receive`);
-			if (response && response.statusCode === 200) {
-				console.log("[RECEIVE-SIDECHAIN-SUCCESS]:");
-			} else {
-				console.log("[RECEIVE-SIDECHAIN-ERROR]: Starting roll back...");
-			}
-		}
-	);
-	console.log("enviando mensaje a la side chain...");
+			console.log("[RECEIVE-SIDECHAIN-SUCCESS]:", res.status);
+		})
+		.catch(err => console.error("[RECEIVE-SIDECHAIN-ERROR]:", err));
 }
 
 function collectFromMainchainGatewayAndSendToSidechain() {

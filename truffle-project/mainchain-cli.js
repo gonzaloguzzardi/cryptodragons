@@ -158,7 +158,7 @@ app.post('/api/dragon/receive', WAsync.wrapAsync(async function transferFunction
   let hash = "";
   let tx;
   try {
-    for (let dragon of req.body) {
+    for (let dragon of req.body.dragons) {
       console.log("Awaiting receiveDragonFromOracle with dragon " + JSON.stringify(dragon, null, 2));
       const receiverAddress = dragon.toMainchainAddress;
       tx = await receiveDragonFromOracle(web3js, account, req.query.gas || 350000, dragon.uid, dragon.data, receiverAddress);
@@ -168,7 +168,7 @@ app.post('/api/dragon/receive', WAsync.wrapAsync(async function transferFunction
     hash = tx.transactionHash;
     res.status(200).send(hash);
   } catch (err) {
-    saveDragonOnOracle(req.body);
+    saveDragonOnOracle(req.body.dragons);
     res.status(500).send(err);
   }
 }));

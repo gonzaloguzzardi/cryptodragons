@@ -9,22 +9,13 @@ const {
 } = require('../mongo-utils');
 
 function sendMessageToMain(dragons) {
-	axios.post(
-		{
-			headers: { 'content-type': 'application/json' },
-			url: `${mainchainApiUrl}:${mainchainApiPort}/api/dragon/receive`,
-			body: dragons,
-			json: true,
-		},
-		function (error, response, body) {
+	axios
+		.post(`${mainchainApiUrl}:${mainchainApiPort}/api/dragon/receive`, { dragons })
+		.then(res => {
 			console.log(`URL: ${mainchainApiUrl}:${mainchainApiPort}/api/dragon/receive`);
-			if (response && response.statusCode === 200) {
-				console.log("[RECEIVE-MAINCHAIN-SUCCESS]:");
-			} else {
-				console.log("[RECEIVE-MAINCHAIN-ERROR]: Starting roll back...");
-			}
-		}
-	);
+			console.log("[RECEIVE-MAINCHAIN-SUCCESS]:", res.status);
+		})
+		.catch(err => console.error("[RECEIVE-MAINCHAIN-ERROR]:", err));
 }
 
 function collectFromSidechainGatewayAndSendToMainchain() {

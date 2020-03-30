@@ -1,4 +1,4 @@
-const request = require('request');
+const axios = require('axios');
 const {
 	sidechainApiUrl, sidechainApiPort,
 	mainchainApiUrl, mainchainApiPort,
@@ -6,7 +6,7 @@ const {
 
 function transferDragon(req, res) {
 	if (req.query.toMain === 'true') {
-		request.get(
+		axios.get(
 			{
 				headers: { 'content-type': 'application/json' },
 				url: `${sidechainApiUrl}:${sidechainApiPort}/api/dragon/transfer?id=` + req.query.id,
@@ -17,7 +17,7 @@ function transferDragon(req, res) {
 			}
 		);
 	} else {
-		request.get(
+		axios.get(
 			{
 				headers: { 'content-type': 'application/json' },
 				url: `${mainchainApiUrl}:${mainchainApiPort}/api/dragon/transfer?id=` + req.query.id,

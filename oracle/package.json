@@ -20,11 +20,10 @@
     "fs": "latest",
     "loom-js": "latest",
     "mongodb": "latest",
-    "node-cron": "latest",
-    "request": "latest",
-    "web3": "1.0.0-beta.37"
+    "node-cron": "latest"
   },
   "dependencies": {
+    "axios": "0.19.2",
     "web3": "1.0.0-beta.37"
   }
 }

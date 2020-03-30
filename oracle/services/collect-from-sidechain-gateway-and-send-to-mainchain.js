@@ -1,4 +1,4 @@
-const request = require('request');
+const axios = require('axios');
 
 const {
 	mainchainApiUrl, mainchainApiPort,
@@ -9,7 +9,7 @@ const {
 } = require('../mongo-utils');
 
 function sendMessageToMain(dragons) {
-	request.post(
+	axios.post(
 		{
 			headers: { 'content-type': 'application/json' },
 			url: `${mainchainApiUrl}:${mainchainApiPort}/api/dragon/receive`,
@@ -18,10 +18,10 @@ function sendMessageToMain(dragons) {
 		},
 		function (error, response, body) {
 			console.log(`URL: ${mainchainApiUrl}:${mainchainApiPort}/api/dragon/receive`);
-			if (response.statusCode != 200) {
-				console.log("[RECEIVE-MAINCHAIN-ERROR]: Starting roll back...");
-			} else {
+			if (response && response.statusCode === 200) {
 				console.log("[RECEIVE-MAINCHAIN-SUCCESS]:");
+			} else {
+				console.log("[RECEIVE-MAINCHAIN-ERROR]: Starting roll back...");
 			}
 		}
 	);

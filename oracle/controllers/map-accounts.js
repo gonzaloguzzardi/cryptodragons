@@ -1,4 +1,4 @@
-const request = require('request');
+const axios = require('axios');
 const {
 	sidechainApiUrl, sidechainApiPort,
 	mainchainApiUrl, mainchainApiPort,
@@ -7,7 +7,7 @@ const {
 function mapAccounts(req, res) {
     console.log("Main account: " + req.query.mainAccount);
     console.log("Side account: " + req.query.sideAccount);
-    request.get(
+    axios.get(
         {
             headers: { 'content-type': 'application/json' },
             url: `${sidechainApiUrl}:${sidechainApiPort}/api/mapAccount?mainAccount=` + req.query.mainAccount + `&account=` + req.query.sideAccount,
@@ -17,7 +17,7 @@ function mapAccounts(req, res) {
             if (error) console.error(error);
         }
     );
-    request.get(
+    axios.get(
         {
             headers: { 'content-type': 'application/json' },
             url: `${mainchainApiUrl}:${mainchainApiPort}/api/mapAccount?sideAccount=` + req.query.sideAccount + `&account=` + req.query.mainAccount,

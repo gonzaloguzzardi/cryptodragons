@@ -1,4 +1,4 @@
-const request = require('request');
+const axios = require('axios');
 const {
 	sidechainApiUrl, sidechainApiPort,
 	collection, database, mongoUrl,
@@ -8,7 +8,7 @@ const {
 } = require('../mongo-utils');
 
 function sendMessageToSide(message) {
-	request.post(
+	axios.post(
 		{
 			headers: { 'content-type': 'application/json' },
 			url: `${sidechainApiUrl}:${sidechainApiPort}/api/dragon/receive`,
@@ -17,10 +17,10 @@ function sendMessageToSide(message) {
 		},
 		function (error, response, body) {
 			console.log(`URL: ${sidechainApiUrl}:${sidechainApiPort}/api/dragon/receive`);
-			if (response.statusCode != 200) {
-				console.log("[RECEIVE-SIDECHAIN-ERROR]: Starting roll back...");
-			} else {
+			if (response && response.statusCode === 200) {
 				console.log("[RECEIVE-SIDECHAIN-SUCCESS]:");
+			} else {
+				console.log("[RECEIVE-SIDECHAIN-ERROR]: Starting roll back...");
 			}
 		}
 	);

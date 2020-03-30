@@ -63,7 +63,7 @@ function listenMainChainEvents() {
 					break;
 				case 'DragonSuccessfullyRetrievedInMainchain':
 					console.log("BORRANDO ESTE", event.returnValues);
-					// deleteDragon(database, mongoUrl, collection, event.returnValues);
+					deleteDragon(database, mongoUrl, collection, event.returnValues);
 					break;
 				case 'AddedValidator':
 				case 'ERC20Received':

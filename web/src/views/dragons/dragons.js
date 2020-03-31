@@ -56,10 +56,8 @@ class Dragons extends Component {
             .then(res => {
                 this.setState({ oracleDragons: res.data });
                 if (res.data && res.data.length > 0) {
-                    sleep(500).then(() => {
+                    sleep(1000).then(() => {
                         this.getDragonsFromOracle();
-                        this.getDragonsFromMain();
-                        this.getDragonsFromSide();
                     });
                 } else {
                     sleep(500).then(() => {
@@ -84,14 +82,22 @@ class Dragons extends Component {
         axios.get(`${oracleUrl}:${oracleApiPort}/api/dragon/transfer`, {
             params: { id: dragonId, toMain: true },
         })
-        .then(() => this.getDragonsFromOracle())
+        .then(() => {
+            this.getDragonsFromOracle();
+            this.getDragonsFromSide();
+        })
+        .catch((err) => { throw err.response.data })
     );
 
     transferFromMainToSide = dragonId => (
         axios.get(`${oracleUrl}:${oracleApiPort}/api/dragon/transfer`, {
             params: { id: dragonId, toMain: false },
         })
-        .then(() => this.getDragonsFromOracle())
+        .then(() => {
+            this.getDragonsFromOracle();
+            this.getDragonsFromMain();
+        })
+        .catch((err) => { throw err.response.data })
     );
 
     mapAccounts = () => {
@@ -133,7 +139,7 @@ class Dragons extends Component {
                     </Grid>
                 </Grid>
 
-                { /* Buttons */ }
+                { /* Buttons - Buy Dragons in blockchains */ }
                 <Grid container justify="center" spacing={2}>
                     <Grid item>
                         <Button variant="contained" color="primary" onClick={this.buyDragonInSideChain}>

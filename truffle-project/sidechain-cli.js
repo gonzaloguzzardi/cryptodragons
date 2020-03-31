@@ -276,6 +276,19 @@ app.get('/api/mapAccount', WAsync.wrapAsync(async function getMapFunction(req, r
   }
 }));
 
+app.get('/api/dragon', WAsync.wrapAsync(async function getMapFunction(req, res, next) { //getDragonDataById(web3js, ownerAccount, dragonId) {
+  const { account, web3js, client } = loadLoomAccount(req.query.account);
+  try {
+    const data = await getDragonDataById(web3js, account, req.query.id);
+    res.status(200).send(data);
+  } catch (err) {
+    console.log("Error getting dragon with id: " + req.id);
+    res.status(400).send(err)
+  } finally {
+    if (client) client.disconnect();
+  }
+}));
+
 function saveDragonOnOracle(dragon) {
   axios.get(`${oracleApiUrl}:${oracleApiPort}/api/saveDragon` ,{
     params: { dragon: dragon},

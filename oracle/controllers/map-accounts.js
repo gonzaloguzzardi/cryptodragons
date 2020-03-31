@@ -7,26 +7,13 @@ const {
 function mapAccounts(req, res) {
     console.log("Main account: " + req.query.mainAccount);
     console.log("Side account: " + req.query.sideAccount);
-    axios.get(
-        {
-            headers: { 'content-type': 'application/json' },
-            url: `${sidechainApiUrl}:${sidechainApiPort}/api/mapAccount?mainAccount=` + req.query.mainAccount + `&account=` + req.query.sideAccount,
-            json: true,
-        },
-        function (error, response, body) {
-            if (error) console.error(error);
-        }
-    );
-    axios.get(
-        {
-            headers: { 'content-type': 'application/json' },
-            url: `${mainchainApiUrl}:${mainchainApiPort}/api/mapAccount?sideAccount=` + req.query.sideAccount + `&account=` + req.query.mainAccount,
-            json: true,
-        },
-        function (error, response, body) {
-            res.status(200).send(response);
-        }
-    );
+
+    axios.get(`${sidechainApiUrl}:${sidechainApiPort}/api/mapAccount?mainAccount=` + req.query.mainAccount + `&account=` + req.query.sideAccount)
+        .catch(err => res.status(500).send(err));
+
+    axios.get(`${mainchainApiUrl}:${mainchainApiPort}/api/mapAccount?sideAccount=` + req.query.sideAccount + `&account=` + req.query.mainAccount)
+        .then(response => res.status(200).send(response))
+        .catch(err => res.status(500).send(err));
 }
 
 module.exports = {

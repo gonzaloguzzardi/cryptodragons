@@ -26,7 +26,6 @@ function getDragonsInGateways(req, res) {
 		.then(
 			values => {
 				let result = [];
-				console.log("RESULTS", values);
 				result = result.concat(values[0]['sidechain-gateway-results'])
 				result = result.concat(values[1]['mainchain-gateway-results'])
 				res.status(200).send(result)

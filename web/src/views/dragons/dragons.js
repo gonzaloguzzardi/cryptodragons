@@ -122,8 +122,14 @@ class Dragons extends Component {
                 <Grid container justify="center" spacing={2}>
                     <Grid item>
                         <FormLabel>
-                            SideChain Account:
-                            <Input type="text" name="sideAccount" defaultValue={this.state.defSideAccount} onChange={this.onChangeSideAccount} />
+                            <b>SideChain Account:</b>&nbsp;
+                            <Input
+                                type="text"
+                                name="sideAccount"
+                                className={`${namespace}__container-div__map-acounts__input`}
+                                defaultValue={this.state.defSideAccount}
+                                onChange={this.onChangeSideAccount}
+                            />
                         </FormLabel>
                     </Grid>
                     <Grid item>
@@ -133,8 +139,14 @@ class Dragons extends Component {
                     </Grid>
                     <Grid item>
                         <FormLabel>
-                            MainChain Account:
-                            <Input type="text" name="mainAccount" defaultValue={this.state.defMainAccount} onChange={this.onChangeMainAccount}/>
+                            <b>MainChain Account:</b>&nbsp;
+                            <Input
+                                type="text"
+                                name="mainAccount"
+                                className={`${namespace}__container-div__map-acounts__input`}
+                                defaultValue={this.state.defMainAccount}
+                                onChange={this.onChangeMainAccount}
+                            />
                         </FormLabel>
                     </Grid>
                 </Grid>
@@ -155,7 +167,7 @@ class Dragons extends Component {
 
                 { /* Sidechain dragons - Mainchain dragons */ }
                 <Grid container justify="center" spacing={2}>
-                    <Grid item xs={6}>
+                    <Grid item xs={6} className={`${namespace}__container-grid__dragons-items`}>
                         <h3 className={`${namespace}__chains-headings`}>Side Chain Dragons</h3>
                         <Grid container spacing={2}>
                             <Grid item>
@@ -172,7 +184,7 @@ class Dragons extends Component {
                             </Grid>
                         </Grid>
                     </Grid>
-                    <Grid item xs={6}>
+                    <Grid item xs={6} className={`${namespace}__container-grid__dragons-items`}>
                         <h3 className={`${namespace}__chains-headings`}>Main Chain Dragons</h3>
                         <Grid container spacing={2}>
                             <Grid item>
@@ -194,11 +206,11 @@ class Dragons extends Component {
                 { /* Oracle dragons */ }
                 <h3 className={`${namespace}__oracle-heading`}>Oracle Dragons</h3>
                 <Grid container spacing={2}>
-                    <Grid item xs={12}>
+                    <Grid item xs={12} className={`${namespace}__container-grid__dragons-items`}>
                         <Grid container justify="center" spacing={2}>
                             {this.state.oracleDragons.map(value => (
                             <Grid key={value} item>
-                                <Dragon id={value["id"]} />
+                                <Dragon id={value["uid"]} />
                             </Grid>
                             ))}
                         </Grid>

@@ -27,12 +27,15 @@ class Dragons extends Component {
         super(props);
 
         this.state = {
-            defSideAccount:'0xfee39fad945754831b59b92a1a8339f65358792d',
-            defMainAccount:'0x28863498efede12296888f7ca6cf0b94974fbdbc',
-            sideAccount:'0xfee39fad945754831b59b92a1a8339f65358792d',
-            mainAccount:'0x28863498efede12296888f7ca6cf0b94974fbdbc',
-            sideDragons:[],
-            oracleDragons:[],
+            defSideAccount: '0xfee39fad945754831b59b92a1a8339f65358792d',
+            defMainAccount: '0x28863498efede12296888f7ca6cf0b94974fbdbc',
+            sideAccount: '0xfee39fad945754831b59b92a1a8339f65358792d',
+            mainAccount: '0x28863498efede12296888f7ca6cf0b94974fbdbc',
+            sideDragons: [],
+            sidechainGatewayDragons: [],
+            mainchainGatewayDragons: [],
+            dragonsInSidechainGateway: 0,
+            dragonsInMainchainGateway: 0,
             mainDragons: [],
         };
 
@@ -54,8 +57,28 @@ class Dragons extends Component {
     getDragonsFromOracle = () => {
         axios.get(`${oracleUrl}:${oracleApiPort}/api/dragons`)
             .then(res => {
-                this.setState({ oracleDragons: res.data });
-                if (res.data && res.data.length > 0) {
+                if (!res || !res.data) return;
+
+                if (
+                    res.data[0]['sidechain-gateway-results'].length < this.state.dragonsInSidechainGateway ||
+                    res.data[1]['mainchain-gateway-results'].length < this.state.dragonsInMainchainGateway
+                ) {
+                    this.getDragonsFromMain();
+                    this.getDragonsFromSide();
+                }
+
+                this.setState({
+                    dragonsInSidechainGateway: res.data[0]['sidechain-gateway-results'].length,
+                    dragonsInMainchainGateway: res.data[1]['mainchain-gateway-results'].length,
+
+                    sidechainGatewayDragons: res.data[0]['sidechain-gateway-results'],
+                    mainchainGatewayDragons: res.data[1]['mainchain-gateway-results'],
+                });
+
+                if (
+                    res.data[0]['sidechain-gateway-results'].length > 0 ||
+                    res.data[1]['mainchain-gateway-results'].length > 0
+                ) {
                     sleep(1000).then(() => {
                         this.getDragonsFromOracle();
                     });
@@ -204,11 +227,21 @@ class Dragons extends Component {
                 </Grid>
 
                 { /* Oracle dragons */ }
-                <h3 className={`${namespace}__oracle-heading`}>Oracle Dragons</h3>
                 <Grid container spacing={2}>
-                    <Grid item xs={12} className={`${namespace}__container-grid__dragons-items`}>
+                    <Grid item xs={6} className={`${namespace}__container-grid__dragons-items`}>
+                        <h3 className={`${namespace}__oracle-heading`}>Sidechain Gateway Dragons</h3>
                         <Grid container justify="center" spacing={2}>
-                            {this.state.oracleDragons.map(value => (
+                            {this.state.sidechainGatewayDragons.map(value => (
+                            <Grid key={value} item>
+                                <Dragon id={value["uid"]} />
+                            </Grid>
+                            ))}
+                        </Grid>
+                    </Grid>
+                    <Grid item xs={6} className={`${namespace}__container-grid__dragons-items`}>
+                        <h3 className={`${namespace}__oracle-heading`}>Mainchain Gateway Dragons</h3>
+                        <Grid container justify="center" spacing={2}>
+                            {this.state.mainchainGatewayDragons.map(value => (
                             <Grid key={value} item>
                                 <Dragon id={value["uid"]} />
                             </Grid>

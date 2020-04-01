@@ -5,7 +5,7 @@ const {
 } = require('../config');
 
 function getDragon(req, res) {
-    switch(req.query.account) {
+    switch (req.query.location) {
         case 'side':  // if (x === 'value1')
             axios.get(`${sidechainApiUrl}:${sidechainApiPort}/api/dragon?id=` + req.query.id)
                 .then(response => res.status(200).send(response.data))

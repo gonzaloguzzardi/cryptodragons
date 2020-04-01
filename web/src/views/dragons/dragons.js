@@ -198,6 +198,7 @@ class Dragons extends Component {
                                     {this.state.sideDragons.map(value => (
                                     <Grid key={value} item>
                                         <Dragon
+                                            location="side"
                                             id={value}
                                             transferMethod={this.transferFromSideToMain}
                                         />
@@ -215,6 +216,7 @@ class Dragons extends Component {
                                     {this.state.mainDragons.map(value => (
                                     <Grid key={value} item>
                                         <Dragon
+                                            location="main"
                                             id={value}
                                             transferMethod={this.transferFromMainToSide}
                                         />
@@ -243,7 +245,7 @@ class Dragons extends Component {
                         <Grid container justify="center" spacing={2}>
                             {this.state.mainchainGatewayDragons.map(value => (
                             <Grid key={value} item>
-                                <Dragon id={value["uid"]} />
+                                <Dragon id={value["uid"]} location="oracle" />
                             </Grid>
                             ))}
                         </Grid>

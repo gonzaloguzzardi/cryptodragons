@@ -14,6 +14,7 @@ const {
 	transferDragon,
 	mapAccounts,
 	saveDragon,
+	getDragon
 } = require('./controllers');
 
 // SERVICES
@@ -38,6 +39,7 @@ app.get('/api/dragons', getDragonsInGateways);
 app.get('/api/dragon/transfer', transferDragon);
 app.get('/api/mapAccounts', mapAccounts);
 app.get('/api/saveDragon', saveDragon);
+app.get('/api/dragon',getDragon);
 
 // SERVER LISTEN
 const server = app.listen(oracleApiPort, '0.0.0.0', function () {

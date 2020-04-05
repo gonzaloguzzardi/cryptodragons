@@ -5,6 +5,7 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 const oracleApiUrl = 'http://localhost';
 const oracleApiPort = 8081;
@@ -14,7 +15,7 @@ class Dragon extends Component {
 
     constructor(props) {
         super(props);
-        
+        this.getDragon = this.getDragon.bind(this);
         this.state = {
             location: props.location,
             name: "dragon",
@@ -22,13 +23,24 @@ class Dragon extends Component {
             pic: "onepic",
             fetching: false,
         };
-        // this.getDragon();
+        this.getDragon();
     }  
 
     getDragon = () => {
         axios.get(`${oracleApiUrl}:${oracleApiPort}/api/dragon?id=` + this.state.id + `&location=` + this.state.location )
             .then(res => { 
-                    this.setState({ data: res.data });
+                    this.setState(
+                        { 
+                            data: res.data,
+                            health: res.data.health,
+                            agility: res.data.agility,
+                            strength: res.data.strength,
+                            fortitude: res.data.fortitude,
+                            name: res.data.name,
+                            dadId: res.data.dadId,
+                            motherId: res.data.motherId,
+                            currentExperience: res.data.currentExperience
+                        });
                     console.log(res.data);
                 });
     }
@@ -49,6 +61,24 @@ class Dragon extends Component {
                     <CardMedia>
                         <img src={require('../../assets/dragonsito.jpg')} alt="" width="100" height="100"/>
                     </CardMedia>
+                    <Grid container justify="center" spacing={2}>
+                        <Grid item>
+                            <img src={require('../../assets/heart.png')} alt="" width="20" height="20"/>
+                            <p>{this.state.health}</p>
+                        </Grid>
+                        <Grid item>
+                            <img src={require('../../assets/agility.png')} alt="" width="20" height="20"/>
+                            <p>{this.state.agility}</p>
+                        </Grid>
+                        <Grid item>
+                            <img src={require('../../assets/stregth.png')} alt="" width="20" height="20"/>
+                            <p>{this.state.strength}</p>
+                        </Grid>
+                        <Grid item>
+                            <img src={require('../../assets/fortitude.png')} alt="" width="20" height="20"/>
+                            <p>{this.state.fortitude}</p>
+                        </Grid>
+                    </Grid>
                 </CardContent>
                 <CardActions style={{justifyContent: 'center'}}>
                     { this.props.transferMethod && !this.state.fetching &&

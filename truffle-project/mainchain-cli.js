@@ -213,7 +213,7 @@ app.get('/api/dragon', WAsync.wrapAsync(async function getDragonFunction(req, re
     const dragonData = await getDragonDataById(web3js, account, req.query.id);
     console.log("\n Data for dragon with id " + dragonId);
     console.log(JSON.stringify(dragonData, null, 2));
-    res.status(200).send(data);
+    res.status(200).send(dragonData);
   } catch (err) {
     console.log("Error getting dragon data with id: " + req.query.id);
     res.status(500).send(err);

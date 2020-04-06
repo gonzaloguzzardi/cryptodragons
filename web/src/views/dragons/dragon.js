@@ -63,19 +63,19 @@ class Dragon extends Component {
                     </CardMedia>
                     <Grid container justify="center" spacing={2}>
                         <Grid item>
-                            <img src={require('../../assets/heart.png')} alt="" width="20" height="20"/>
+                            <img src={require('../../assets/corazon.svg')} alt="" width="20" height="20"/>
                             <p>{this.state.health}</p>
                         </Grid>
                         <Grid item>
-                            <img src={require('../../assets/agility.png')} alt="" width="20" height="20"/>
+                            <img src={require('../../assets/reloj.svg')} alt="" width="20" height="20"/>
                             <p>{this.state.agility}</p>
                         </Grid>
                         <Grid item>
-                            <img src={require('../../assets/stregth.png')} alt="" width="20" height="20"/>
+                            <img src={require('../../assets/espada.svg')} alt="" width="20" height="20"/>
                             <p>{this.state.strength}</p>
                         </Grid>
                         <Grid item>
-                            <img src={require('../../assets/fortitude.png')} alt="" width="20" height="20"/>
+                            <img src={require('../../assets/escudo.svg')} alt="" width="20" height="20"/>
                             <p>{this.state.fortitude}</p>
                         </Grid>
                     </Grid>

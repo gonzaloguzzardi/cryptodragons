@@ -20,7 +20,7 @@ module.exports = function (deployer, network, accounts) {
 
     console.log(`Gateway deployed at address: ${gatewayInstance.address}`)
 
-    const dragonTokenContract = await deployer.deploy(DragonToken, gatewayInstance.address)
+    const dragonTokenContract = await deployer.deploy(DragonToken, gatewayInstance.address, 255)
     const dragonTokenInstance = await DragonToken.deployed()
 
     console.log(`DragonToken deployed at address: ${dragonTokenInstance.address}`)

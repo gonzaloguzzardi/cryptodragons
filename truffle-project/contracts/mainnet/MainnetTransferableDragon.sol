@@ -10,9 +10,9 @@ contract MainnetTransferableDragon is DragonFactory {
     address private _gateway;
 
     // map mainnet address to sidechain address
-    mapping (address => address) private _sidechainMapping;
+    mapping (address => address) private _mainnetAddressToSidechain;
 
-    constructor(address gateway) DragonBase() public {
+    constructor(address gateway, uint8 blockchainId) DragonFactory(blockchainId) public {
         require(gateway != address(0), "Invalid gateway address");
         _gateway = gateway;
     }
@@ -25,29 +25,33 @@ contract MainnetTransferableDragon is DragonFactory {
     function retrieveToken(address receiver, uint256 _tokenId, bytes memory _data) public {
         require(msg.sender == _gateway, "only the gateway is allowed to call this function");
         require(receiver != address(0), "Receiver should be a valid address");
-        _mintDragon(receiver, _tokenId, _data);
+        _mintReceivedDragon(receiver, _tokenId, _data);
     }
 
     function undoMapping(address owner, address sidechainAddress) external onlyOwner {
         require(owner != address(0), "Invalid owner address to be mapped");
         require(sidechainAddress != address(0), "Invalid sidechain address to be mapped");
-        _sidechainMapping[owner] = sidechainAddress;
+        _mainnetAddressToSidechain[owner] = sidechainAddress;
     }
 
     function mapContractToSidechain(address sidechainAddress) external {
         require(sidechainAddress != address(0), "Invalid sidechain address to be mapped");
-        require(_sidechainMapping[msg.sender] == address(0), "Address already mapped. Request owner to undo the mapping");
-        _sidechainMapping[msg.sender] = sidechainAddress;
+        require(_mainnetAddressToSidechain[msg.sender] == address(0), "Address already mapped. Request owner to undo the mapping");
+        _mainnetAddressToSidechain[msg.sender] = sidechainAddress;
     }
 
     function transferToGateway(uint256 _tokenId) public onlyDragonOwner(_tokenId) {
-        require(_sidechainMapping[msg.sender] != address(0), "Blockchains should be mapped to allow transferences");
+        require(_mainnetAddressToSidechain[msg.sender] != address(0), "Blockchains should be mapped to allow transferences");
 
         Dragon storage dragon = dragons[_tokenId];
         bytes memory encodedDragon = _encodeDragonToBytes(dragon);
+
+        // Transfer ownership
         transferFrom(msg.sender, _gateway, _tokenId);
 
+        // Trigger trnsference in gateway
         IMainnetGateway gateway = IMainnetGateway(_gateway);
-        gateway.depositDragon(msg.sender, _sidechainMapping[msg.sender], _tokenId, encodedDragon);
+        uint originalTokenId = dragon.blockchainOriginId == _blockchainId ? _tokenId : _getForeignTokenId(_tokenId);
+        gateway.depositDragon(msg.sender, _mainnetAddressToSidechain[msg.sender], originalTokenId, encodedDragon);
     }
 }

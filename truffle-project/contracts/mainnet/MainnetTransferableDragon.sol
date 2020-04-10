@@ -42,6 +42,7 @@ contract MainnetTransferableDragon is DragonFactory {
 
     function transferToGateway(uint256 _tokenId) public onlyDragonOwner(_tokenId) {
         require(_mainnetAddressToSidechain[msg.sender] != address(0), "Blockchains should be mapped to allow transferences");
+        require(_tokenId < dragons.length, "Invalid token Id");
 
         Dragon storage dragon = dragons[_tokenId];
         bytes memory encodedDragon = _encodeDragonToBytes(dragon);

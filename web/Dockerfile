@@ -10,10 +10,9 @@ ENV PATH /usr/src/app/web/node_modules/.bin:$PATH
 
 # Copy the file from your host to your current location
 COPY package.json .
-COPY package-lock.json .
 
 # Run the command inside your image filesystem
-RUN npm install --silent
+RUN npm install
 RUN npm install react-scripts@3.3.0 -g --silent
 
 # Copy the rest of your app's source code from your host to your image filesystem.

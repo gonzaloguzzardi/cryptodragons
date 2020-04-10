@@ -98,7 +98,6 @@ async function transferDragonToGateway(web3js, gas, ownerAccount, dragonId) {
     .transferToGateway(dragonId)
     .estimateGas({ from: ownerAccount, gas: 0 })
     if (gasEstimate >= gas) {
-      console.log("Not enough enough gas, send more.");
       throw new Error('Not enough enough gas, send more.');
     }
   console.log("Succesfully transfered the dragon");

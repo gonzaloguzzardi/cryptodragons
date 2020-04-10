@@ -140,7 +140,7 @@ contract DragonBase is ERC721Enumerable, Ownable {
     */
     function _encodeDragonToBytes(Dragon memory _dragon) internal pure returns(bytes memory) {
         // TODO update size in bytes whenever dragon struct is updated
-        uint size = 96; //32 + 32 + 8 + 4 + 4 + 4 + 2 + 2 + 2 + 2 + 2 + 2;
+        uint size = 97; //32 + 32 + 8 + 4 + 4 + 4 + 2 + 2 + 2 + 2 + 2 + 2 + 1;
         bytes memory encodedData = new bytes(size);
 
         uint counter = 0;

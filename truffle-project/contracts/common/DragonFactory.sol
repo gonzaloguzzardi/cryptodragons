@@ -80,19 +80,21 @@ contract DragonFactory is DragonBase {
     }
 
     function _createDragonFromData(bytes memory _data) private returns(uint256) {
+
         (uint _genes,
         bytes32 _name,
         uint64 _creationTime,
         uint32 _dadId,
         uint32 _motherId,
-        uint32 _currentExperience,
-        uint16 _actionCooldown,
+        uint32 _currentExperience) = _decodeFirstHalfOfDragonFromBytes(_data);
+
+        (uint16 _actionCooldown,
         uint16 _health,
         uint16 _strength,
         uint16 _agility,
         uint16 _fortitude,
         uint16 _hatchTime,
-        uint8 _blockchainOriginId) = _decodeDragonFromBytes(_data);
+        uint8 _blockchainOriginId) = _decodeSecondHalfOfDragonFromBytes(_data);
 
         uint id = _createDragonWithStats(_genes, _name, _creationTime, _dadId, _motherId, _currentExperience,
                     _actionCooldown, _health, _strength, _agility, _fortitude, _hatchTime, _blockchainOriginId);
@@ -118,7 +120,7 @@ contract DragonFactory is DragonBase {
         id = dragons.push(
             Dragon({
                 genes: 0,
-                name: _name,
+                name: 0,
 
                 creationTime: _creationTime,
 
@@ -142,29 +144,30 @@ contract DragonFactory is DragonBase {
         ) - 1;
 
         // Assign genes in different function as a workaround to the stack too deep exception
-        _assignGenes(id, _genes);
+        _assignGenesAndName(id, _genes, _name);
     }
 
-    function _assignGenes(uint256 _dragonId, uint256 _genes) private {
+    function _assignGenesAndName(uint256 _dragonId, uint256 _genes, bytes32 _name) private {
         Dragon storage dragon = dragons[_dragonId];
         dragon.genes = _genes;
-        dragon.blockchainOriginId = _blockchainOriginId;
+        dragon.name = _name;
     }
 
     function _updateDragonFromData(uint _tokenId, bytes memory _data) private {
-        (uint256 _genes,
+        (uint _genes,
         bytes32 _name,
         uint64 _creationTime,
         uint32 _dadId,
         uint32 _motherId,
-        uint32 _currentExperience,
-        uint16 _actionCooldown,
+        uint32 _currentExperience) = _decodeFirstHalfOfDragonFromBytes(_data);
+
+        (uint16 _actionCooldown,
         uint16 _health,
         uint16 _strength,
         uint16 _agility,
         uint16 _fortitude,
         uint16 _hatchTime,
-        uint8 _blockchainOriginId) = _decodeDragonFromBytes(_data);
+        uint8 _blockchainOriginId) = _decodeSecondHalfOfDragonFromBytes(_data);
 
         _updateDragonWithStats(_tokenId, _genes, _name, _creationTime, _dadId, _motherId, _currentExperience,
                     _actionCooldown, _health, _strength, _agility, _fortitude, _hatchTime, _blockchainOriginId);

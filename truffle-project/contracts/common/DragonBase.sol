@@ -239,12 +239,9 @@ contract DragonBase is ERC721Enumerable, Ownable {
         return encodedData;
     }
 
-    /**
-        Decodes dragon data from an array of bytes
-    */
-    function _decodeDragonFromBytes(bytes memory _data) internal pure
-    returns(uint genes, bytes32 name, uint64 creationTime, uint32 dadId, uint32 motherId, uint32 currentExperience, uint16 actionCooldown,
-            uint16 health, uint16 strength, uint16 agility, uint16 fortitude, uint16 hatchTime, uint8 blockchainOriginId) {
+    function _decodeFirstHalfOfDragonFromBytes(bytes memory _data) internal pure 
+        returns(uint genes, bytes32 name, uint64 creationTime, uint32 dadId, uint32 motherId, uint32 currentExperience) {
+        
         uint counter = 0;
 
         // Decode genes
@@ -295,6 +292,11 @@ contract DragonBase is ERC721Enumerable, Ownable {
             currentExperience ^= temp;
             counter++;
         }
+    }
+
+    function _decodeSecondHalfOfDragonFromBytes(bytes memory _data) internal pure
+        returns(uint16 actionCooldown, uint16 health, uint16 strength, uint16 agility, uint16 fortitude, uint16 hatchTime, uint8 blockchainOriginId) {
+        uint counter = 52;
 
         // Decode action cooldown
         for (uint i = 0; i < 2; i++)

@@ -14,7 +14,7 @@ contract DappchainDragonCoin is DragonGoldERC20 {
         gateway = _gateway;
     }
 
-        // Used by the DAppChain Gateway to mint tokens that have been deposited to the Ethereum Gateway
+    // Used by the DAppChain Gateway to mint tokens that have been deposited to the Ethereum Gateway
     function mintToGateway(uint256 _amount) public {
         require(msg.sender == gateway, "only the gateway is allowed to mint");
         _mint(gateway, _amount);

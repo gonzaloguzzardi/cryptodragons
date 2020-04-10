@@ -7,6 +7,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
+const web3 = require('web3');
 const oracleApiUrl = 'http://localhost';
 const oracleApiPort = 8081;
 const axios = require('axios');
@@ -39,7 +40,8 @@ class Dragon extends Component {
                             name: res.data.name,
                             dadId: res.data.dadId,
                             motherId: res.data.motherId,
-                            currentExperience: res.data.currentExperience
+                            currentExperience: res.data.currentExperience,
+                            sname:  web3.utils.toUtf8(res.data.name)
                         });
                     console.log(res.data);
                 });
@@ -56,7 +58,7 @@ class Dragon extends Component {
             <Card>
                 <CardContent>
                     <Typography color="textSecondary" align="center" gutterBottom>
-                        {this.state.id}
+                        #{this.state.id} {this.state.sname}
                     </Typography>
                     <CardMedia>
                         <img src={require('../../assets/dragonsito.jpg')} alt="" width="100" height="100"/>

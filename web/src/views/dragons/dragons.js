@@ -10,13 +10,13 @@ import sleep from '../../utils/sleep';
 
 import './dragons.scss';
 
-const sidechainApiUrl = 'http://localhost';
+const sidechainApiUrl = !process.env.DOCKERENV ? 'http://localhost' : 'http://loom';
 const sidechainApiPort = 8001;
 
-const mainchainUrl = 'http://localhost';
+const mainchainApiUrl = !process.env.DOCKERENV ? 'http://localhost' : 'http://bfa';
 const mainchainApiPort = 8002;
 
-const oracleUrl = 'http://localhost';
+const oracleApiUrl = !process.env.DOCKERENV ? 'http://localhost' : 'http://oracle';
 const oracleApiPort = 8081;
 
 const namespace = 'ui-view-dragons';
@@ -45,7 +45,7 @@ class Dragons extends Component {
     }  
 
     getDragonsFromMain = () => {
-        axios.get(`${mainchainUrl}:${mainchainApiPort}/api/dragons`)
+        axios.get(`${mainchainApiUrl}:${mainchainApiPort}/api/dragons`)
             .then(res => this.setState({ mainDragons: res.data }));
     }
 
@@ -55,7 +55,7 @@ class Dragons extends Component {
     }
 
     getDragonsFromOracle = () => {
-        axios.get(`${oracleUrl}:${oracleApiPort}/api/dragons`)
+        axios.get(`${oracleApiUrl}:${oracleApiPort}/api/dragons`)
             .then(res => {
                 if (!res || !res.data) return;
 
@@ -97,12 +97,12 @@ class Dragons extends Component {
     }
 
     buyDragonInMainChain = () => {
-        axios.get(`${mainchainUrl}:${mainchainApiPort}/api/dragon/create`)
+        axios.get(`${mainchainApiUrl}:${mainchainApiPort}/api/dragon/create`)
             .then(res => this.getDragonsFromMain());
     }
 
     transferFromSideToMain = dragonId => (
-        axios.get(`${oracleUrl}:${oracleApiPort}/api/dragon/transfer`, {
+        axios.get(`${oracleApiUrl}:${oracleApiPort}/api/dragon/transfer`, {
             params: { id: dragonId, toMain: true },
         })
         .then(() => {
@@ -113,7 +113,7 @@ class Dragons extends Component {
     );
 
     transferFromMainToSide = dragonId => (
-        axios.get(`${oracleUrl}:${oracleApiPort}/api/dragon/transfer`, {
+        axios.get(`${oracleApiUrl}:${oracleApiPort}/api/dragon/transfer`, {
             params: { id: dragonId, toMain: false },
         })
         .then(() => {
@@ -124,7 +124,7 @@ class Dragons extends Component {
     );
 
     mapAccounts = () => {
-        axios.get(`${oracleUrl}:${oracleApiPort}/api/mapAccounts`, {
+        axios.get(`${oracleApiUrl}:${oracleApiPort}/api/mapAccounts`, {
             params: { mainAccount: this.state.mainAccount, sideAccount: this.state.sideAccount },
         });
     }

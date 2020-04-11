@@ -1,7 +1,5 @@
 const WAsync = require('@rimiti/express-async');
 const axios = require('axios');
-const oracleApiUrl = 'http://localhost';
-const oracleApiPort = 8081;
 const Web3 = require('web3');
 const fs = require('fs');
 const path = require('path');
@@ -173,9 +171,8 @@ async function receiveDragonFromOracle(web3js, ownerAccount, gas, dragonId, data
 }
 
 const express = require('express');
-const http = require('http');
-const cors = require('cors');
 const app = express();
+const cors = require('cors');
 const bodyParser = require('body-parser')
 
 app.use(cors());
@@ -289,12 +286,17 @@ app.get('/api/dragon', WAsync.wrapAsync(async function getMapFunction(req, res, 
   }
 }));
 
+const oracleApiUrl = !process.env.DOCKERENV ? 'http://localhost' : 'http://oracle';
+const oracleApiPort = 8081;
 function saveDragonOnOracle(dragon) {
   axios.get(`${oracleApiUrl}:${oracleApiPort}/api/saveDragon` ,{
-    params: { dragon: dragon},
+    params: { dragon: dragon },
   });
 } 
 
-http.createServer(app).listen(8001, () => {
-  console.log('Server started at http://localhost:8001');
+const PORT = 8001;
+const server = app.listen(PORT, () => {
+	const host = server.address().address;
+	const port = server.address().port;
+	console.log("Sidechain CLI listening at http://%s:%s", host, port);
 });

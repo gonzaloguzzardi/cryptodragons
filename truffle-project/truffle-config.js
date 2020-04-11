@@ -38,10 +38,11 @@ module.exports = {
     loom_dapp_chain: {
       provider: function() {
         const chainId = 'default';
-        const writeUrl = 'http://127.0.0.1:46658/rpc';
-        const readUrl = 'http://127.0.0.1:46658/query';
-        const mnemonicPath = path.join(__dirname, 'misc', 'loom_mnemonic');
+        const writeUrl = `http://${process.env.SIDECHAIN_URL}:46658/rpc`;
+        const readUrl = `http://${process.env.SIDECHAIN_URL}:46658/query`;
+
         const privateKeyPath = path.join(__dirname, 'misc', 'loom_private_key');
+        const mnemonicPath = path.join(__dirname, 'misc', 'loom_mnemonic');
         if (fs.existsSync(privateKeyPath)) {
           const loomTruffleProvider = getLoomProviderWithPrivateKey(privateKeyPath, chainId, writeUrl, readUrl);
           loomTruffleProvider.createExtraAccountsFromMnemonic("gravity top burden flip student usage spell purchase hundred improve check genre", 10);
@@ -52,40 +53,6 @@ module.exports = {
         }
       },
       network_id: '*'
-    },
-    loomv2b: {
-      provider: function() {
-        const chainId = 'loomv2b'
-        const writeUrl = 'http://loomv2b.dappchains.com:46658/rpc'
-        const readUrl = 'http://loomv2b.dappchains.com:46658/query'
-        const mnemonicPath = path.join(__dirname, 'loomv2b_mnemonic')
-        const privateKeyPath = path.join(__dirname, 'loomv2b_pk')
-        if (fs.existsSync(privateKeyPath)) {
-          const loomTruffleProvider = getLoomProviderWithPrivateKey(privateKeyPath, chainId, writeUrl, readUrl)
-          return loomTruffleProvider
-        } else if (fs.existsSync(mnemonicPath)) {
-          const loomTruffleProvider = getLoomProviderWithMnemonic(mnemonicPath, chainId, writeUrl, readUrl)
-          return loomTruffleProvider
-        }
-      },
-      network_id: '12106039541279'
-    },
-    extdev_plasma_us1: {
-      provider: function() {
-        const chainId = 'extdev-plasma-us1'
-        const writeUrl = 'http://extdev-plasma-us1.dappchains.com:80/rpc'
-        const readUrl = 'http://extdev-plasma-us1.dappchains.com:80/query'
-        const mnemonicPath = path.join(__dirname, 'extdev_mnemonic')
-        const privateKeyPath = path.join(__dirname, 'extdev_private_key')
-        if (fs.existsSync(privateKeyPath)) {
-          const loomTruffleProvider = getLoomProviderWithPrivateKey(privateKeyPath, chainId, writeUrl, readUrl)
-          return loomTruffleProvider
-        } else if (fs.existsSync(mnemonicPath)) {
-          const loomTruffleProvider = getLoomProviderWithMnemonic(mnemonicPath, chainId, writeUrl, readUrl)
-          return loomTruffleProvider
-        }
-      },
-      network_id: '9545242630824'
     },
     loom_mainnet: {
       provider: function () {
@@ -104,38 +71,13 @@ module.exports = {
       },
       network_id: '*'
     },
-    rinkeby: {
-      provider: function() {
-        if (!process.env.INFURA_API_KEY) {
-          throw new Error("INFURA_API_KEY env var not set")
-        }
-        const mnemonicPath = path.join(__dirname, 'rinkeby_mnemonic')
-        const privateKeyPath = path.join(__dirname, 'rinkeby_private_key')
-        if (fs.existsSync(privateKeyPath)) {
-          const privateKey = readFileSync(path.join(__dirname, 'rinkeby_private_key'), 'utf-8')
-          return new PrivateKeyProvider(privateKey, `https://rinkeby.infura.io/v3/${process.env.INFURA_API_KEY}`, 0, 10)
-        } else if (fs.existsSync(mnemonicPath)) {
-          const mnemonic = readFileSync(path.join(__dirname, 'rinkeby_mnemonic'), 'utf-8')
-          return new HDWalletProvider(mnemonic, `https://rinkeby.infura.io/v3/${process.env.INFURA_API_KEY}`, 0, 10)
-        }
-      },
-      network_id: 4,
-      gasPrice: 15000000001,
-      skipDryRun: true
-    },
-    ganache: {
-      network_id: '5777',
-      host: '127.0.0.1',
-      port: 8545,
-      gas: 8700000
-    },
     bfa: {
       provider: function() {
         // create provider using the private key of the prefunded bfa account 0x28863498efede12296888f7ca6cf0b94974fbdbc
         return new PrivateKeyProvider("dff874fa1f53c713f31b5831c25fe56657808bd0b379a7f28442af8a6de79cb2", "http://127.0.0.1:8545/");
       },
       network_id: '12345',
-      host: '127.0.0.1',
+      host: `${process.env.MAINCHAIN_URL}`,
       port: 8545,
       gas: 4727597,
       from: "0x28863498efede12296888f7ca6cf0b94974fbdbc"

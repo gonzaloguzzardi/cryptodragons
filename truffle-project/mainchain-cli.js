@@ -3,8 +3,6 @@ const fs = require('fs');
 const path = require('path');
 const WAsync = require('@rimiti/express-async');
 const axios = require('axios');
-const oracleApiUrl = 'http://localhost';
-const oracleApiPort = 8081;
 const MainchainDragonTokenJson = require('./src/contracts/MainnetTransferableDragon.json')
 const GatewayJson = require('./src/contracts/MainnetGateway.json');
 
@@ -126,7 +124,6 @@ async function receiveDragonFromOracle(web3js, ownerAccount, gas, dragonId, data
 
 // API SERVER
 const express = require('express');
-const http = require('http');
 const cors = require('cors');
 const app = express();
 const bodyParser = require('body-parser');
@@ -231,13 +228,18 @@ app.get('/api/mapAccount', WAsync.wrapAsync(async function getMapFunction(req, r
   } 
 }));
 
+const oracleApiUrl = !process.env.DOCKERENV ? 'http://localhost' : 'http://oracle';
+const oracleApiPort = 8081;
 function saveDragonOnOracle(dragon) {
   axios.get(`${oracleApiUrl}:${oracleApiPort}/api/saveDragon` ,{
-    params: { dragon: dragon},
+    params: { dragon: dragon },
   });
-} 
+}
 
+// SERVER LISTEN
 const PORT = 8002;
-http.createServer(app).listen(PORT, () => {
-  console.log(`Server started at http://localhost:${PORT}`);
+const server = app.listen(PORT, () => {
+	const host = server.address().address;
+	const port = server.address().port;
+	console.log("Mainchain CLI listening at http://%s:%s", host, port);
 });

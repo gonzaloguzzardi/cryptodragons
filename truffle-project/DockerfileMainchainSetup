@@ -5,6 +5,6 @@ COPY . .
 RUN if test -d node_modules; then rm -r node_modules; fi
 RUN apt-get update
 RUN npm install --silent
-EXPOSE 8001
+EXPOSE 8002
 
-CMD yarn deploy:reset:loom:docker && node sidechain-cli.js
+CMD yarn deploy:reset:bfa:docker && node mainchain-cli.js

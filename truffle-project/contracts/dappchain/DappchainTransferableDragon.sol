@@ -7,15 +7,11 @@ contract IDappchainGateway {
 }
 
 contract DappchainTransferableDragon is DragonFactory {
-    address private _gateway;
 
     // map sidechain address to mainchain address
     mapping (address => address) private _sidechainAddressToMainchain;
 
-    constructor(address gateway, uint8 blockchainId) DragonFactory(blockchainId) public {
-        require(gateway != address(0), "Invalid gateway address");
-        _gateway = gateway;
-    }
+    constructor(address gateway, uint8 blockchainId) DragonFactory(gateway, blockchainId) public {}
 
     // Setter to update who the gateway is
     function setGatewayAddress(address gateway) external onlyOwner {

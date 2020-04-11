@@ -7,15 +7,11 @@ contract IMainnetGateway {
 }
 
 contract MainnetTransferableDragon is DragonFactory {
-    address private _gateway;
 
     // map mainnet address to sidechain address
     mapping (address => address) private _mainnetAddressToSidechain;
 
-    constructor(address gateway, uint8 blockchainId) DragonFactory(blockchainId) public {
-        require(gateway != address(0), "Invalid gateway address");
-        _gateway = gateway;
-    }
+    constructor(address gateway, uint8 blockchainId) DragonFactory(gateway, blockchainId) public {}
 
     // Setter to update who the gateway is
     function setGatewayAddress(address gateway) external onlyOwner {

@@ -296,7 +296,7 @@ contract DragonBase is ERC721Enumerable, Ownable {
 
     function _decodeSecondHalfOfDragonFromBytes(bytes memory _data) internal pure
         returns(uint16 actionCooldown, uint16 health, uint16 strength, uint16 agility, uint16 fortitude, uint16 hatchTime, uint8 blockchainOriginId) {
-        uint counter = 52;
+        uint counter = 84;
 
         // Decode action cooldown
         for (uint i = 0; i < 2; i++)

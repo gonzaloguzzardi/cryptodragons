@@ -45,7 +45,7 @@ services:
     ports:
       - 8001
     volumes:
-      - ./:/usr/src/app/
+      - ./truffle-project:/usr/src/app/
 
   mainchain-deploy-and-cli:
     environment:
@@ -56,7 +56,7 @@ services:
     ports:
       - 8002
     volumes:
-      - ./:/usr/src/app/
+      - ./truffle-project:/usr/src/app/
 
   web:
     environment:

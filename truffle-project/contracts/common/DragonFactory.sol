@@ -216,7 +216,7 @@ contract DragonFactory is DragonBase {
         return rand % dnaModulus;
     }
 
-    function _getForeignTokenId(uint _localTokenId) internal pure returns (uint) {
+    function _getForeignTokenId(uint _localTokenId) internal view returns (uint) {
         require (_tokenMapped[_localTokenId], "Cannot obtain foreign if token was never mapped");
         return _localIdToForeignId[_localTokenId];
     }

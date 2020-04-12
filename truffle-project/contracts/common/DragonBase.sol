@@ -353,13 +353,8 @@ contract DragonBase is ERC721Enumerable, Ownable {
         }
 
         // Decode blockchain origin id
-        for (uint i = 0; i < 1; i++)
-        {
-            uint8 temp = uint8(uint8(_data[counter]));
-            temp <<= 8 * i;
-            blockchainOriginId ^= temp;
-            counter++;
-        }
+        blockchainOriginId ^= uint8(_data[counter]);
+        counter++;
     }
 
     function _decodeName(bytes memory _data, uint _dataIndex) private pure returns(bytes32 name) {
@@ -369,8 +364,6 @@ contract DragonBase is ERC721Enumerable, Ownable {
     }
 
     function _decodeBlockchainIdFromData(bytes memory _data) internal pure returns(uint8 blockchainId) {
-        uint8 temp = uint8(uint8(_data[96]));
-        temp <<= 8;
-        blockchainId ^= temp;
+        blockchainId = uint8(_data[96]);
     }
 }

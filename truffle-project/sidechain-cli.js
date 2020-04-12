@@ -1,6 +1,6 @@
 const WAsync = require('@rimiti/express-async');
 const axios = require('axios');
-const oracleApiUrl = 'http://localhost';
+const oracleApiUrl = 'oracle';
 const oracleApiPort = 8081;
 const Web3 = require('web3');
 const fs = require('fs');
@@ -62,8 +62,8 @@ function loadLoomAccount(accountName) {
   const publicKey = CryptoUtils.publicKeyFromPrivateKey(privateKey)
   const client = new Client(
     'default',
-    'ws://127.0.0.1:46658/websocket',
-    'ws://127.0.0.1:46658/queryws'
+    'ws://loom:46658/websocket',
+    'ws://loom:46658/queryws'
   );
   client.txMiddleware = [
     new NonceTxMiddleware(publicKey, client),

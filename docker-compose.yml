@@ -22,6 +22,24 @@ services:
       - "8547:8547"
       - "30303:30303"
 
+  side: 
+    build: 
+      context: .
+      dockerfile: truffle-project/DockerfileSide.yml
+    depends_on:
+      - loom
+    ports:
+      - "8001:8001"
+
+  main: 
+    build: 
+      context: .
+      dockerfile: truffle-project/DockerfileMain.yml
+    depends_on:
+      - bfa
+    ports:
+      - "8002:8002"
+
   mongo:
     build:
       context: ./mongo
@@ -32,14 +50,18 @@ services:
   oracle:
     build:
       context: ./oracle
+    depends_on:
+      - main
+      - side
+      - mongo
     ports:
-      - "8001:8001"
-      - "8002:8002"
       - "8081:8081"
 
   web:
     build:
       context: ./web
+    depends_on:
+      - oracle
     ports:
       - "3000:3000"
     volumes:

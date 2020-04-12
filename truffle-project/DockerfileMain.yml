@@ -1,0 +1,9 @@
+FROM node:10.16.0
+
+WORKDIR /usr/src/app
+COPY . .
+WORKDIR /usr/src/app/truffle-project/
+RUN if test -d node_modules; then rm -r node_modules; fi
+RUN npm install --silent
+EXPOSE 8002
+CMD yarn deploy:reset:bfa && node mainchain-cli.js

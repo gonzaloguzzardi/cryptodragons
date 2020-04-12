@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class BlueprintDemo : MonoBehaviour {
-    public string BackendHost = "127.0.0.1";
+    public string BackendHost = "loom";
     public TextAsset ContractAbi;
 
     public InputField KeyText;

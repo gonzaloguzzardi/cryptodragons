@@ -17,8 +17,8 @@ export default class Contract {
   _createClient() {
     this.privateKey = CryptoUtils.generatePrivateKey()
     this.publicKey = CryptoUtils.publicKeyFromPrivateKey(this.privateKey)
-    let writeUrl = 'ws://127.0.0.1:46658/websocket'
-    let readUrl = 'ws://127.0.0.1:46658/queryws'
+    let writeUrl = 'ws://loom:46658/websocket'
+    let readUrl = 'ws://loom:46658/queryws'
     let networkId = 'default'
     if (process.env.NETWORK == 'extdev') {
       writeUrl = 'ws://extdev-plasma-us1.dappchains.com:80/websocket'

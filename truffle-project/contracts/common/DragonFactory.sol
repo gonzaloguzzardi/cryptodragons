@@ -14,9 +14,13 @@ contract DragonFactory is DragonBase {
     mapping(uint => uint) private  _localIdToForeignId;
     mapping(uint => bool) private _tokenMapped; // If we allow token destruction we should be careful with token ids reorder
 
+    address internal _gateway;
+
     event NewDragon(uint dragonId, uint dna);
 
-    constructor(uint8 blockchainId) DragonBase() public {
+    constructor(address gateway, uint8 blockchainId) DragonBase() public {
+        require(gateway != address(0), "Invalid gateway address");
+        _gateway = gateway;
         _blockchainId = blockchainId;
     }
 
@@ -48,6 +52,7 @@ contract DragonFactory is DragonBase {
         bool originatedInThisBlockchain = blockchainId == _blockchainId;
 
         if (originatedInThisBlockchain) {
+            safeTransferFrom(_gateway,  to, _originalTokenId, _data);
             _updateDragonFromData(_originalTokenId, _data);
         } else {
             // If token was created in other blockchain and never mapped. Recreated
@@ -62,6 +67,7 @@ contract DragonFactory is DragonBase {
             // If token was mapped, it means it was already recreated in this blockchain. Update it!
             } else {
                 uint tokenId = _foreignIdToLocalId[_originalTokenId];
+                safeTransferFrom(_gateway,  to, tokenId, _data);
                 _updateDragonFromData(tokenId, _data);
             }
         }
@@ -210,7 +216,7 @@ contract DragonFactory is DragonBase {
         return rand % dnaModulus;
     }
 
-    function _getForeignTokenId(uint _localTokenId) internal view returns (uint) {
+    function _getForeignTokenId(uint _localTokenId) internal pure returns (uint) {
         require (_tokenMapped[_localTokenId], "Cannot obtain foreign if token was never mapped");
         return _localIdToForeignId[_localTokenId];
     }

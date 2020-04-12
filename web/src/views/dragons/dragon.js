@@ -39,7 +39,8 @@ class Dragon extends Component {
                             name: res.data.name,
                             dadId: res.data.dadId,
                             motherId: res.data.motherId,
-                            currentExperience: res.data.currentExperience
+                            currentExperience: res.data.currentExperience,
+                            sname:  res.data.sname
                         });
                     console.log(res.data);
                 });
@@ -56,7 +57,7 @@ class Dragon extends Component {
             <Card>
                 <CardContent>
                     <Typography color="textSecondary" align="center" gutterBottom>
-                        {this.state.id}
+                        #{this.state.id} {this.state.sname}
                     </Typography>
                     <CardMedia>
                         <img src={require('../../assets/dragonsito.jpg')} alt="" width="100" height="100"/>

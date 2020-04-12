@@ -25,7 +25,7 @@ services:
       - 8081
     volumes:
       - ./oracle:/usr/src/app/oracle
-      - '/usr/src/app/oracle/node_modules'
+      - /usr/src/app/oracle/node_modules
 
   mongo:
     environment:
@@ -45,7 +45,8 @@ services:
     ports:
       - 8001
     volumes:
-      - ./truffle-project:/usr/src/app/
+      - ./truffle-project:/usr/src/app/side-sv
+      - /usr/src/app/side-sv/node_modules
 
   mainchain-deploy-and-cli:
     environment:
@@ -56,7 +57,8 @@ services:
     ports:
       - 8002
     volumes:
-      - ./truffle-project:/usr/src/app/
+      - ./truffle-project:/usr/src/app/main-sv
+      - /usr/src/app/main-sv/node_modules
 
   web:
     environment:
@@ -69,4 +71,4 @@ services:
       - oracle
     volumes:
       - ./web:/usr/src/app/web
-      - '/usr/src/app/web/node_modules'
+      - /usr/src/app/web/node_modules

@@ -26,6 +26,7 @@ contract DappchainTransferableDragon is DragonFactory {
     // Used by the DAppChain Gateway to mint tokens that have been deposited to the Ethereum Gateway
     function retrieveToken(address receiver, uint256 _tokenId, bytes memory _data) public {
         require(msg.sender == _gateway, "only the gateway is allowed to call this function");
+        require(receiver != address(0), "Receiver should be a valid address");
         _mintDragon(receiver, _tokenId, _data);
     }
 
@@ -37,21 +38,18 @@ contract DappchainTransferableDragon is DragonFactory {
 
     function mapContractToMainnet(address mainnetAddress) external {
         require(mainnetAddress != address(0), "Invalid mainnet address to be mapped");
-        require(_mainnetMapping[msg.sender] != address(0), "Address already mapped. Request owner to undo the mapping");
+        require(_mainnetMapping[msg.sender] == address(0), "Address already mapped. Request owner to undo the mapping");
         _mainnetMapping[msg.sender] = mainnetAddress;
     }
 
     function transferToGateway(uint256 _tokenId) public onlyDragonOwner(_tokenId) {
+        require(_mainnetMapping[msg.sender] != address(0), "Blockchains should be mapped to allow transferences");
+
         Dragon storage dragon = dragons[_tokenId];
         bytes memory encodedDragon = _encodeDragonToBytes(dragon);
         transferFrom(msg.sender, _gateway, _tokenId);
 
         IDappchainGateway gateway = IDappchainGateway(_gateway);
-        // @TODO: HAY QUE USAR LA LINEA COMENTADA, POR AHORA HARDCODEO EL USER DE GANACHE!!!
-        // @TODO: HAY QUE USAR LA LINEA COMENTADA, POR AHORA HARDCODEO EL USER DE GANACHE!!!
-        // @TODO: HAY QUE USAR LA LINEA COMENTADA, POR AHORA HARDCODEO EL USER DE GANACHE!!!
-        // @TODO: HAY QUE USAR LA LINEA COMENTADA, POR AHORA HARDCODEO EL USER DE GANACHE!!!
-        //gateway.depositDragon(msg.sender, _mainnetMapping[msg.sender], _tokenId, encodedDragon);
-        gateway.depositDragon(msg.sender, address(0x9d1ED83B6aECf0eAb8ec0A1357486b0B0FF3F3de), _tokenId, encodedDragon);
+        gateway.depositDragon(msg.sender, _mainnetMapping[msg.sender], _tokenId, encodedDragon);
     }
 }

@@ -1,17 +1,22 @@
 const MongoClient = require('mongodb').MongoClient;
+const mongoClientOptions = { useUnifiedTopology: true, useNewUrlParser: true };
 
 function collectEventsFromSidechainGateway(database, url, collection) {
 	return _collectEvents('SendDragonToMainchainAttempt', database, url, collection);
 }
 
+function collectEventsFromMainchainGateway(database, url, collection) {
+	return _collectEvents('SendDragonToSidechainAttempt', database, url, collection);
+}
+
 function _collectEvents(event, database, url, collection) {
-	return new Promise((res) => {
-		MongoClient.connect(url, function (err, db) {
-			if (err) throw err;
+	return new Promise((res, rej) => {
+		MongoClient.connect(url, mongoClientOptions, function (err, db) {
+			if (err) return rej(err);
 			var dbo = db.db(database);
 			dbo.collection(collection).find({ event }).toArray(function(err, results) {
 				db.close();
-				if (err) throw err;
+				if (err) return rej(err);
 				return res(results);
 			});
 		});
@@ -19,7 +24,7 @@ function _collectEvents(event, database, url, collection) {
 }
 
 function insertOnMongo(database, url, transaction, collection) {
-	MongoClient.connect(url, function (err, db) {
+	MongoClient.connect(url, mongoClientOptions, function (err, db) {
 		if (err) throw err;
 		var dbo = db.db(database);
 		dbo.collection(collection).insertOne(transaction, function (err) {
@@ -30,12 +35,26 @@ function insertOnMongo(database, url, transaction, collection) {
 	return transaction;
 }
 
+function deleteDragon(database,url,collection, dragon) {
+	MongoClient.connect(url, mongoClientOptions, function (err, db) {
+		var dbo = db.db(database);
+		dbo.collection(collection).deleteOne({uid: dragon.uid}, function(err, result) {
+			if (err) {
+				console.log(err);
+			}
+			db.close();
+		});
+	});
+
+}
+
 // @TODO: Repensar si esto es necesario, si queremos agregar algo más al evento
 // 			Si no alteramos el evento podríamos mandarlo como viene, al mongo.
 function transforEventIntoTransactionObj(event) {
 	let transaction = {};
 	transaction.event = event.event;
-
+	
+	transaction.uid = event.returnValues.uid;
 	transaction.transactionHash = event.transactionHash;
 	transaction.logIndex = event.logIndex;
 	transaction.transactionIndex = event.transactionIndex;
@@ -53,6 +72,8 @@ function transforEventIntoTransactionObj(event) {
 
 module.exports = {
 	collectEventsFromSidechainGateway,
-    insertOnMongo,
+	collectEventsFromMainchainGateway,
+	insertOnMongo,
+	deleteDragon,
     transforEventIntoTransactionObj,
 };

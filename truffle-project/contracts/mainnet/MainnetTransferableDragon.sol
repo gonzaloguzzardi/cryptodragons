@@ -24,6 +24,7 @@ contract MainnetTransferableDragon is DragonFactory {
 
     function retrieveToken(address receiver, uint256 _tokenId, bytes memory _data) public {
         require(msg.sender == _gateway, "only the gateway is allowed to call this function");
+        require(receiver != address(0), "Receiver should be a valid address");
         _mintDragon(receiver, _tokenId, _data);
     }
 
@@ -35,11 +36,13 @@ contract MainnetTransferableDragon is DragonFactory {
 
     function mapContractToSidechain(address sidechainAddress) external {
         require(sidechainAddress != address(0), "Invalid sidechain address to be mapped");
-        require(_sidechainMapping[msg.sender] != address(0), "Address already mapped. Request owner to undo the mapping");
+        require(_sidechainMapping[msg.sender] == address(0), "Address already mapped. Request owner to undo the mapping");
         _sidechainMapping[msg.sender] = sidechainAddress;
     }
 
     function transferToGateway(uint256 _tokenId) public onlyDragonOwner(_tokenId) {
+        require(_sidechainMapping[msg.sender] != address(0), "Blockchains should be mapped to allow transferences");
+
         Dragon storage dragon = dragons[_tokenId];
         bytes memory encodedDragon = _encodeDragonToBytes(dragon);
         transferFrom(msg.sender, _gateway, _tokenId);
@@ -47,6 +50,4 @@ contract MainnetTransferableDragon is DragonFactory {
         IMainnetGateway gateway = IMainnetGateway(_gateway);
         gateway.depositDragon(msg.sender, _sidechainMapping[msg.sender], _tokenId, encodedDragon);
     }
-
-    function register(uint256 _uid) public pure {}
 }

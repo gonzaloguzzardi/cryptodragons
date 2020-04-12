@@ -1,20 +1,13 @@
-function getDragonsInSidechainGateway(req, res) {
-	// MongoClient.connect(url, function (err, db) {
-	// 	if (err) throw err;
-	// 	var dbo = db.db(database);
-	// 	dbo.collection(collection).find({}).toArray(
-	// 		function (err, result) {
-	// 			if (err) throw err;
-	// 			res.send(result);
-	// 			console.log(result);
-	// 			db.close();
-	// 		}
-	// 	)
-	// });
-    // res.send(sideList);
-    res.send([]);
-}
+const { getDragonsInGateways } = require('./get-dragons-in-gateways');
+const { transferDragon } = require('./transfer-dragon');
+const { mapAccounts } = require('./map-accounts');
+const { saveDragon } = require('./save-dragon');
+const { getDragon } = require('./get-dragon');
 
 module.exports = {
-    getDragonsInSidechainGateway,
+	getDragonsInGateways,
+	transferDragon,
+	mapAccounts,
+	saveDragon,
+	getDragon
 };

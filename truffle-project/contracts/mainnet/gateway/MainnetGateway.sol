@@ -63,7 +63,7 @@ contract MainnetGateway is IERC20Receiver, IERC721Receiver, MainnetValidatorMana
   }
 
   /**
-  * @dev Throws if called by any account other than the owner.
+  * @dev Throws if called by any account other than the dragon contract.
   */
   modifier onlyDragonContract() {
       require(msg.sender == _erc721ContractAddress, "Only the erc721 contract can perform this action");
@@ -87,10 +87,14 @@ contract MainnetGateway is IERC20Receiver, IERC721Receiver, MainnetValidatorMana
   * @dev Se llama cuando se recibe un dragon desde la otra blockchain
   */
   function receiveDragon(address mainchainAddress, uint256 uid, bytes memory data) public {
+    require(mainchainAddress != address(0), "mainchainAddress should be a valid address");
+
     if (lockedDragons[uid]) { // Token isnt new
       require(balances[mainchainAddress].erc721[mainchainAddress][uid].length > 0, "Does not own token");
     }
-    IDragonContract(mainchainAddress).retrieveToken(mainchainAddress, uid, data);
+    
+    IDragonContract(_erc721ContractAddress).retrieveToken(mainchainAddress, uid, data);
+
     delete lockedDragons[uid];
     delete balances[mainchainAddress].erc721[mainchainAddress][uid];
     emit DragonSuccessfullyRetrievedInMainchain(mainchainAddress, uid, data);
@@ -103,7 +107,9 @@ contract MainnetGateway is IERC20Receiver, IERC721Receiver, MainnetValidatorMana
   function withdrawDragon(address mainchainAddress, uint256 uid) public {
     require(balances[mainchainAddress].erc721[mainchainAddress][uid].length > 0, "Does not own token");
     bytes storage dragonData = balances[mainchainAddress].erc721[mainchainAddress][uid];
-    IDragonContract(mainchainAddress).retrieveToken(mainchainAddress, uid, dragonData);
+
+    IDragonContract(_erc721ContractAddress).retrieveToken(mainchainAddress, uid, dragonData);
+
     delete lockedDragons[uid];
     delete balances[mainchainAddress].erc721[mainchainAddress][uid];
     emit DragonWithdrawal(mainchainAddress, uid);

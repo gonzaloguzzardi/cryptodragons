@@ -1,35 +1,22 @@
 const WAsync = require('@rimiti/express-async');
-
-const Tx = require('ethereumjs-tx');
+const axios = require('axios');
+const oracleApiUrl = 'http://localhost';
+const oracleApiPort = 8081;
 const Web3 = require('web3');
-const program = require('commander');
 const fs = require('fs');
-
 const path = require('path');
+
 const {
-  Client, NonceTxMiddleware, SignedTxMiddleware, Address,
+  Client, NonceTxMiddleware, SignedTxMiddleware,
   LocalAddress, CryptoUtils, LoomProvider,
-  Contracts, Web3Signer, soliditySha3
 } = require('loom-js');
-// TODO: fix this export in loom-js
-const { OfflineWeb3Signer } = require('loom-js/dist/solidity-helpers');
-const BN = require('bn.js');
 
 const DappchainDragonTokenJson = require('./src/contracts/DappchainTransferableDragon.json');
-const DaapchainCoinJson = require('./src/contracts/DappchainDragonCoin.json');
+const GatewayJson = require('./src/contracts/DappchainGateway');
 
 const dirPath = "../loom_test_accounts";
 
 const loomChainId = '13654820909954'; // TODO ver si cambia o si es siempre el mismo
-
-const coinMultiplier = new BN(10).pow(new BN(18)); // TODO analizar esto
-
-async function getLoomCoinContract(web3js) {
-  return new web3js.eth.Contract(
-    DaapchainCoinJson.abi,
-    DaapchainCoinJson.networks[loomChainId].address,
-  )
-}
 
 async function getLoomTokenContract(web3js) {
   return new web3js.eth.Contract(
@@ -38,7 +25,14 @@ async function getLoomTokenContract(web3js) {
   )
 }
 
-function createAccount(accountName) {
+async function getLoomGatewayContract(web3js) {
+  return new web3js.eth.Contract(
+    GatewayJson.abi,
+    GatewayJson.networks[loomChainId].address
+  )
+}
+
+/*function createAccount(accountName) {
   if (!fs.existsSync(dirPath)){
     fs.mkdirSync(dirPath)
   }
@@ -52,7 +46,7 @@ function createAccount(accountName) {
       console.log("Account " + accountName + " created with private key: " + privateKey.toString());
     }
   })
-}
+}*/
 
 function loadLoomAccount(accountName) {
   var accountPath = './misc/loom_private_key';
@@ -89,11 +83,13 @@ function loadLoomAccount(accountName) {
 async function mapAccount(web3js, ownerAccount, gas, mainAccount) {
   const contract = await getLoomTokenContract(web3js)
 
+  console.log("Map account: " + ownerAccount + " with main account: " + mainAccount);
+
   const gasEstimate = await contract.methods
     .mapContractToMainnet(mainAccount)
-    .estimateGas({ from: ownerAccount, gas: 0 })
+    .estimateGas({ from: ownerAccount, gas })
 
-  if (gasEstimate == gas) {
+  if (gasEstimate >= gas) {
     throw new Error('Not enough enough gas, send more.')
   }
   return contract.methods
@@ -109,7 +105,7 @@ async function createDragonToken(web3js, ownerAccount, gas) {
     .createDragon("test dragon", 1, 2, 2)
     .estimateGas({ from: ownerAccount, gas: 0 })
 
-    if (gasEstimate == gas) {
+    if (gasEstimate >= gas) {
     throw new Error('Not enough enough gas, send more.')
   }
 
@@ -124,7 +120,7 @@ async function getMyDragons(web3js, ownerAccount, gas) {
     .getDragonsIdsByOwner(ownerAccount)
     .estimateGas({ from: ownerAccount, gas: 0 })
 
-    if (gasEstimate == gas) {
+    if (gasEstimate >= gas) {
     throw new Error('Not enough enough gas, send more.')
   }
 
@@ -133,13 +129,24 @@ async function getMyDragons(web3js, ownerAccount, gas) {
     .call({ from: ownerAccount, gas: gasEstimate });
 }
 
+async function getDragonDataById(web3js, ownerAccount, dragonId) {
+  const contract = await getLoomTokenContract(web3js);
+  const gasEstimate = await contract.methods
+  .getDragonById(dragonId)
+  .estimateGas({ from: ownerAccount, gas: 0 })
+
+  return await contract.methods
+    .getDragonById(dragonId)
+    .call({ from: ownerAccount, gasEstimate });
+}
+
 async function transferDragonToGateway(web3js, gas, ownerAccount, dragonId) {
   const contract = await getLoomTokenContract(web3js)
   const gasEstimate = await contract.methods
     .transferToGateway(dragonId)
     .estimateGas({ from: ownerAccount, gas: 0 })
 
-    if (gasEstimate == gas) {
+    if (gasEstimate >= gas) {
     throw new Error('Not enough enough gas, send more.')
   }
 
@@ -148,12 +155,32 @@ async function transferDragonToGateway(web3js, gas, ownerAccount, dragonId) {
     .send({ from: ownerAccount, gas: gasEstimate });
 }
 
-var express = require('express');
-var http = require('http');
-var cors = require('cors');
-var app = express();
+async function receiveDragonFromOracle(web3js, ownerAccount, gas, dragonId, data, receiverAddress) {
+  const contract = await getLoomGatewayContract(web3js);
+
+  const gasEstimate = await contract.methods
+    .receiveDragon(receiverAddress, dragonId, data)
+    .estimateGas({ from: ownerAccount, gas: 0 });
+  if (gasEstimate >= gas) {
+    console.log("Not enough enough gas, send more.");
+    throw new Error('Not enough enough gas, send more.');
+  }
+
+  console.log("Transfering dragon with address " + receiverAddress);
+  return await contract.methods
+    .receiveDragon(receiverAddress, dragonId, data)
+    .send({ from: ownerAccount, gas });
+}
+
+const express = require('express');
+const http = require('http');
+const cors = require('cors');
+const app = express();
+const bodyParser = require('body-parser')
 
 app.use(cors());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/', (req, res) => {
   res.status(200).send("Welcome to API REST")
@@ -161,6 +188,7 @@ app.get('/', (req, res) => {
 
 app.get('/api/dragon/create',  WAsync.wrapAsync(async function createFunction(req, res, next) {
   const { account, web3js, client } = loadLoomAccount(req.query.account);
+
   var hash = "";
   try {
     const tx = await createDragonToken(web3js, account, req.query.gas || 350000);
@@ -170,6 +198,28 @@ app.get('/api/dragon/create',  WAsync.wrapAsync(async function createFunction(re
     res.status(200).send(hash);
   } catch (err) {
     res.status(400).send(err);
+  } finally {
+    if (client) client.disconnect();
+  }
+}));
+
+app.post('/api/dragon/receive', WAsync.wrapAsync(async function transferFunction(req, res, next) {
+  const { account, web3js, client } = loadLoomAccount();
+  let hash = "";
+  let tx;
+  try {
+    for (let dragon of req.body.dragons) {
+      console.log("Awaiting receiveDragonFromOracle with dragon " + JSON.stringify(dragon, null, 2));
+      const receiverAddress = dragon.toSidechainAddress;
+      tx = await receiveDragonFromOracle(web3js, account, req.query.gas || 350000, dragon.uid, dragon.data, receiverAddress);
+    }
+    console.log(`tx hash: ${tx.transactionHash}`);
+    console.log("MENSAJE RECIBIDO", req.body.dragons);
+    hash = tx.transactionHash;
+    res.status(200).send(hash);
+  } catch (err) {
+    saveDragonOnOracle(req.body.dragons);
+    res.status(500).send(err);
   } finally {
     if (client) client.disconnect();
   }
@@ -194,9 +244,20 @@ app.get('/api/dragons', WAsync.wrapAsync(async function getDragonFunction(req, r
   try {
     data = await getMyDragons(web3js, account, req.query.gas || 350000);
     console.log(`\nAddress ${account} holds dragons with id ${data}\n`);
+/*
+    //@TODO para probar. Sacar
+    if (Array.isArray(data) && data.length > 0) {
+      for (dragonId in data) {
+        const dragonData = await getDragonDataById(web3js, account, dragonId);
+        console.log("\n Data for dragon with id " + dragonId);
+        console.log(JSON.stringify(dragonData, null, 2));
+      }
+    }
+*/
     res.status(200).send(data);
   } catch (err) {
-    res.status(400).send(err)
+    console.log("Error getting dragons data:" + err);
+    res.status(500).send(err)
   } finally {
     if (client) client.disconnect();
   }
@@ -204,17 +265,36 @@ app.get('/api/dragons', WAsync.wrapAsync(async function getDragonFunction(req, r
 
 app.get('/api/mapAccount', WAsync.wrapAsync(async function getMapFunction(req, res, next) {
   const { account, web3js, client } = loadLoomAccount(req.query.account);
-  var data = "";
   try {
-    data = await mapAccount(web3js, account, req.query.gas || 350000, req.query.mainAccount);
-    console.log(`${data}\n`);
-    res.status(200).send(data);
+    await mapAccount(web3js, account, req.query.gas || 350000, req.query.mainAccount);
+    res.status(200).send("OK");
   } catch (err) {
+    console.log("Error mapping sidechain to mainchain " + err);
     res.status(400).send(err)
   } finally {
     if (client) client.disconnect();
   }
 }));
+
+app.get('/api/dragon', WAsync.wrapAsync(async function getMapFunction(req, res, next) { //getDragonDataById(web3js, ownerAccount, dragonId) {
+  const { account, web3js, client } = loadLoomAccount(req.query.account);
+  try {
+    const data = await getDragonDataById(web3js, account, req.query.id);
+    data["sname"] = web3js.utils.toUtf8(data.name);
+    res.status(200).send(data);
+  } catch (err) {
+    console.log("Error getting dragon with id: " + req.id);
+    res.status(400).send(err)
+  } finally {
+    if (client) client.disconnect();
+  }
+}));
+
+function saveDragonOnOracle(dragon) {
+  axios.get(`${oracleApiUrl}:${oracleApiPort}/api/saveDragon` ,{
+    params: { dragon: dragon},
+  });
+} 
 
 http.createServer(app).listen(8001, () => {
   console.log('Server started at http://localhost:8001');

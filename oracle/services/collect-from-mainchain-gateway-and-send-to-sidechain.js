@@ -1,38 +1,31 @@
-const request = require('request');
-const { sidechainApiUrl, sidechainApiPort } = require ('../config');
-
-let mainList = [], message = {};
-
-function collectFromMainchainGatewayAndSendToSidechain() {
-	let i = 0;
-	while (mainList.length > 0 && i < 10) {
-		message = mainList.shift();
-		sendMessageToSide(message);
-		i++;
-	}
-}
+const axios = require('axios');
+const {
+	sidechainApiUrl, sidechainApiPort,
+	collection, database, mongoUrl,
+} = require ('../config');
+const { 
+	collectEventsFromMainchainGateway,
+} = require('../mongo-utils');
 
 function sendMessageToSide(message) {
-	request.post(
-		{
-			headers: { 'content-type': 'application/json' },
-			url: `${sidechainApiUrl}:${sidechainApiPort}/api/dragon/receive`,
-			body: message,
-			json: true,
-		},
-		function (error, response, body) {
-			if (error) {
-				console.log("Starting roll back...");
-				console.log(body);
-				// sideList.push(message);
-				// sendMessageToSide(message);
-			} else {
-				console.log(`url: ${sidechainApiUrl}:${sidechainApiPort}/api/dragon/receive`);
-				console.log("Envio exitoso...");
+	axios
+		.post(`${sidechainApiUrl}:${sidechainApiPort}/api/dragon/receive`, { dragons: message })
+		.then(res => {
+			console.log(`URL: ${sidechainApiUrl}:${sidechainApiPort}/api/dragon/receive`);
+			console.log("[RECEIVE-SIDECHAIN-SUCCESS]:", res.status);
+		})
+		.catch(err => console.error("[RECEIVE-SIDECHAIN-ERROR]:", err));
+}
+
+function collectFromMainchainGatewayAndSendToSidechain() {
+	collectEventsFromMainchainGateway(database, mongoUrl, collection)
+		.then((result) => {
+			const dragons = result.map(event => ( event.returnValues ));
+			if (dragons.length > 0) {
+				sendMessageToSide(dragons);
 			}
-		}
-	);
-	console.log("enviando mensaje a la side chain...");
+		})
+		.catch(err => console.error(err));
 }
 
 module.exports = collectFromMainchainGatewayAndSendToSidechain;

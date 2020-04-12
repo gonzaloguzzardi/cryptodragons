@@ -1,7 +1,10 @@
 const CHAIN_ID = "default";
 const WRITE_URL = "ws://0.0.0.0:46658/websocket";
 const READ_URL = "ws://0.0.0.0:46658/queryws";
-const API_PORT = 8081;
+
+const BFA_SOCKET_CONNECTION = "ws://0.0.0.0:8546";
+const BFA_NETWORK_ID = "12345";
+
 const collection = "transactions";
 const database = "crypto-dragons";
 const mongoUrl = "mongodb://0.0.0.0:27017/" + database;
@@ -19,13 +22,15 @@ const SidechainDragonContract = require("../contracts_jsons/DappchainTransferabl
 const SidechainGatewayContract = require("../contracts_jsons/DappchainGateway");
 
 const MainChainGateway = require("../contracts_jsons/MainnetGateway");
+const MainchainDragonContract = require("../contracts_jsons/MainnetTransferableDragon");
 //const MainChainGateway = require("../contracts_jsons/MainnetTransferableDragon");
 
 module.exports = {
     CHAIN_ID,
     WRITE_URL,
     READ_URL,
-    API_PORT,
+    BFA_NETWORK_ID,
+    BFA_SOCKET_CONNECTION,
     collection,
     database,
     mongoUrl,
@@ -38,4 +43,5 @@ module.exports = {
     SidechainDragonContract,
     SidechainGatewayContract,
     MainChainGateway,
+    MainchainDragonContract
 };

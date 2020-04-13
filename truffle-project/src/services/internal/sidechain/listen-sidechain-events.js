@@ -20,7 +20,7 @@ const {
 } = require('../../oracleActions');
 
 function listenSideChainEvents() {
-	const privateKeyStr = fs.readFileSync(path.join(__dirname, '../misc', 'loom_private_key'), 'utf-8');
+	const privateKeyStr = fs.readFileSync(path.join(__dirname, '../../../../misc/', 'loom_private_key'), 'utf-8');
 	const privateKey = CryptoUtils.B64ToUint8Array(privateKeyStr);
 	const publicKey = CryptoUtils.publicKeyFromPrivateKey(privateKey);
 	const client = new Client(CHAIN_ID, WRITE_URL, READ_URL);

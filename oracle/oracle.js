@@ -21,8 +21,10 @@ const {
 const {
 	collectFromSidechainGatewayAndSendToMainchain,
 	collectFromMainchainGatewayAndSendToSidechain,
-	listenSideChainEvents,
+	//listenSideChainEvents,
 	listenMainChainEvents,
+	deleteADragon,
+	insertDragon
 } = require('./services');
 
 // MIDDLEWARES
@@ -31,15 +33,18 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // MAIN
-listenSideChainEvents();
+//listenSideChainEvents();
 listenMainChainEvents();
 
 // API ROUTES
 app.get('/api/dragons', getDragonsInGateways);
 app.get('/api/dragon/transfer', transferDragon);
 app.get('/api/mapAccounts', mapAccounts);
-app.get('/api/saveDragon', saveDragon);
 app.get('/api/dragon',getDragon);
+
+app.post('/api/saveDragon', saveDragon);
+app.post('/api/deleteDragon',deleteADragon);
+app.post('/api/insertDragon',insertDragon);
 
 // SERVER LISTEN
 const server = app.listen(oracleApiPort, '0.0.0.0', function () {

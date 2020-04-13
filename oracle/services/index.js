@@ -3,11 +3,16 @@ const collectFromMainchainGatewayAndSendToSidechain = require('./collect-from-ma
 
 const listenSideChainEvents = require('./listen-sidechain-events');
 const listenMainChainEvents = require('./listen-mainchain-events');
+const {
+    insertDragon,
+    deleteADragon
+} = require('./commonActions');
 
 module.exports = {
     collectFromSidechainGatewayAndSendToMainchain,
     collectFromMainchainGatewayAndSendToSidechain,
-
+	deleteADragon,
+	insertDragon,
     listenSideChainEvents,
     listenMainChainEvents,
 };

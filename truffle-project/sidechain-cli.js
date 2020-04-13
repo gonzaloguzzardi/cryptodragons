@@ -277,6 +277,7 @@ app.get('/api/dragon', WAsync.wrapAsync(async function getMapFunction(req, res, 
   const { account, web3js, client } = loadLoomAccount(req.query.account);
   try {
     const data = await getDragonDataById(web3js, account, req.query.id);
+    data["sname"] = web3js.utils.toUtf8(data.name);
     res.status(200).send(data);
   } catch (err) {
     console.log("Error getting dragon with id: " + req.id);

@@ -3,6 +3,7 @@ const fs = require('fs');
 const path = require('path');
 const WAsync = require('@rimiti/express-async');
 const axios = require('axios');
+
 const MainchainDragonTokenJson = require('./src/contracts/MainnetTransferableDragon.json')
 const GatewayJson = require('./src/contracts/MainnetGateway.json');
 
@@ -207,10 +208,9 @@ app.get('/api/dragons', WAsync.wrapAsync(async function getDragonFunction(req, r
 app.get('/api/dragon', WAsync.wrapAsync(async function getDragonFunction(req, res, next) {
   const { account, web3js } = loadGanacheAccount();
   try {
-    const dragonData = await getDragonDataById(web3js, account, req.query.id);
-    console.log("\n Data for dragon with id " + dragonId);
-    console.log(JSON.stringify(dragonData, null, 2));
-    res.status(200).send(dragonData);
+    const data = await getDragonDataById(web3js, account, req.query.id);
+    data["sname"] = web3js.utils.toUtf8(data.name);
+    res.status(200).send(data);
   } catch (err) {
     console.log("Error getting dragon data with id: " + req.query.id);
     res.status(500).send(err);

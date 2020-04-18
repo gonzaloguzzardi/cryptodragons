@@ -1,5 +1,6 @@
 const { 
-    _sMapAccount,
+    _sMapAccountSideChain,
+    _sMapAccountMainChain,
     _sCreateDragonToken,
     _sGetMyDragons,
     _sGetDragonDataById,
@@ -13,7 +14,8 @@ const {
 } = require('./oracleActions')
 
 module.exports = {
-    _sMapAccount,
+    _sMapAccountSideChain,
+    _sMapAccountMainChain,
     _sCreateDragonToken,
     _sGetMyDragons,
     _sGetDragonDataById,

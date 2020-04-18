@@ -1,4 +1,4 @@
-async function _sMapAccount(contract, ownerAccount, gas, mainAccount) {
+async function _sMapAccountSideChain(contract, ownerAccount, gas, mainAccount) {
     console.log("Map account: " + ownerAccount + " with main account: " + mainAccount);
   
     const gasEstimate = await contract.methods
@@ -11,6 +11,22 @@ async function _sMapAccount(contract, ownerAccount, gas, mainAccount) {
     return contract.methods
       .mapContractToMainnet(mainAccount)
       .send({ from: ownerAccount, gas: gasEstimate })
+}
+
+async function _sMapAccountMainChain(contract, ownerAccount, gas, sideAccount) {
+
+  console.log("Map account: " + ownerAccount + " with side account: " + sideAccount);
+
+  const gasEstimate = await contract.methods
+    .mapContractToSidechain(sideAccount)
+    .estimateGas({ from: ownerAccount, gas })
+
+  if (gasEstimate >= gas) {
+    throw new Error('Not enough enough gas, send more.')
+  }
+  return contract.methods
+    .mapContractToSidechain(sideAccount)
+    .send({ from: ownerAccount, gas: gasEstimate })
 }
 
 async function _sCreateDragonToken(contract, ownerAccount, gas) {
@@ -84,7 +100,8 @@ async function _sReceiveDragonFromOracle(contract, ownerAccount, gas, dragonId, 
 }
 
 module.exports = {
-    _sMapAccount,
+    _sMapAccountSideChain,
+    _sMapAccountMainChain,
     _sCreateDragonToken,
     _sGetMyDragons,
     _sGetDragonDataById,

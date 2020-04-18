@@ -2,44 +2,35 @@ const Web3 = require('web3');
 const fs = require('fs');
 const path = require('path');
 const WAsync = require('@rimiti/express-async');
-const axios = require('axios');
-const oracleApiUrl = 'http://localhost';
-const oracleApiPort = 8081;
-const MainchainDragonTokenJson = require('./src/contracts/MainnetTransferableDragon.json')
-const GatewayJson = require('./src/contracts/MainnetGateway.json');
 
-async function mapAccount(web3js, ownerAccount, gas, sideAccount) {
-  const contract = await getGanacheTokenContract(web3js)
+// API SERVER
+const express = require('express');
+const http = require('http');
+const cors = require('cors');
+const app = express();
+const bodyParser = require('body-parser');
 
-  console.log("Map account: " + ownerAccount + " with side account: " + sideAccount);
+const {
+  mapAccount,
+  createDragonToken,
+  getMyDragons,
+  getDragonDataById,
+  transferDragonToGateway,
+  receiveDragonFromOracle,
+  saveDragonOnOracle,
+	listenMainChainEvents,
+} = require('./src/services/internal/mainchain');
 
-  const gasEstimate = await contract.methods
-    .mapContractToSidechain(sideAccount)
-    .estimateGas({ from: ownerAccount, gas })
+//MAIN:
+listenMainChainEvents();
 
-  if (gasEstimate >= gas) {
-    throw new Error('Not enough enough gas, send more.')
-  }
-  return contract.methods
-    .mapContractToSidechain(sideAccount)
-    .send({ from: ownerAccount, gas: gasEstimate })
-}
+app.use(cors());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
-async function getGanacheTokenContract(web3js) {
-  const networkId = await web3js.eth.net.getId();
-  return new web3js.eth.Contract(
-    MainchainDragonTokenJson.abi,
-    MainchainDragonTokenJson.networks[networkId].address
-  )
-}
-
-async function getGanacheGatewayContract(web3js) {
-  const networkId = await web3js.eth.net.getId();
-  return new web3js.eth.Contract(
-    GatewayJson.abi,
-    GatewayJson.networks[networkId].address
-  )
-}
+app.get('/', (req, res) => {
+  res.status(200).send("Welcome to API REST")
+});
 
 function loadGanacheAccount() {
   //const privateKey = fs.readFileSync(path.join(__dirname, './ganache_private_key'), 'utf-8')
@@ -49,95 +40,6 @@ function loadGanacheAccount() {
   web3js.eth.accounts.wallet.add(ownerAccount)
   return { account: ownerAccount, web3js }
 }
-
-async function createDragonToken(web3js, ownerAccount, gas) {
-  const contract = await getGanacheTokenContract(web3js);
-  
-  const gasEstimate = await contract.methods
-    .createDragon("test dragon", 1, 2, 2)
-    .estimateGas({ from: ownerAccount, gas })
-
-  if (gasEstimate >= gas) {
-    throw new Error('Not enough enough gas, send more.')
-  }
-  
-  return contract.methods
-    .createDragon("test dragon", 1, 2, 2)
-    .send({ from: ownerAccount, gas })
-}
-
-async function getMyDragons(web3js, ownerAccount, gas) {
-  const contract = await getGanacheTokenContract(web3js)
-
-  const gasEstimate = await contract.methods
-  .getDragonsIdsByOwner(ownerAccount)
-  .estimateGas({ from: ownerAccount, gas: 0 })
-
-  if (gasEstimate >= gas) {
-  throw new Error('Not enough enough gas, send more.')
-}
-  return await contract.methods
-    .getDragonsIdsByOwner(ownerAccount)
-    .call({ from: ownerAccount, gasEstimate });
-}
-
-async function getDragonDataById(web3js, ownerAccount, dragonId, gas) {
-  const contract = await getGanacheTokenContract(web3js)
-  const gasEstimate = await contract.methods
-  .getDragonById(dragonId)
-  .estimateGas({ from: ownerAccount, gas: 0 })
-
-  return await contract.methods
-    .getDragonById(dragonId)
-    .call({ from: ownerAccount, gasEstimate });
-}
-
-async function transferDragonToGateway(web3js, gas, ownerAccount, dragonId) {
-  const contract = await getGanacheTokenContract(web3js)
-  const gasEstimate = await contract.methods
-    .transferToGateway(dragonId)
-    .estimateGas({ from: ownerAccount, gas: 0 })
-    if (gasEstimate >= gas) {
-      console.log("Not enough enough gas, send more.");
-      throw new Error('Not enough enough gas, send more.');
-    }
-  console.log("Succesfully transfered the dragon");
-  return await contract.methods
-    .transferToGateway(dragonId)
-    .send({ from: ownerAccount, gas: gasEstimate });
-}
-
-async function receiveDragonFromOracle(web3js, ownerAccount, gas, dragonId, data, receiverAddress) {
-  const contract = await getGanacheGatewayContract(web3js);
-
-  const gasEstimate = await contract.methods
-    .receiveDragon(receiverAddress, dragonId, data)
-    .estimateGas({ from: ownerAccount, gas });
-  if (gasEstimate >= gas) {
-    console.log("Not enough enough gas, send more.");
-    throw new Error('Not enough enough gas, send more.');
-  }
-
-  console.log("Transfering dragon with address " + receiverAddress);
-  return await contract.methods
-    .receiveDragon(receiverAddress, dragonId, data)
-    .send({ from: ownerAccount, gas });
-}
-
-// API SERVER
-const express = require('express');
-const http = require('http');
-const cors = require('cors');
-const app = express();
-const bodyParser = require('body-parser');
-
-app.use(cors());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-
-app.get('/', (req, res) => {
-  res.status(200).send("Welcome to API REST")
-});
 
 app.get('/api/dragon/create',  WAsync.wrapAsync(async function createFunction(req, res, next) {
   const { account, web3js } = loadGanacheAccount();
@@ -229,12 +131,6 @@ app.get('/api/mapAccount', WAsync.wrapAsync(async function getMapFunction(req, r
     res.status(400).send(err);
   } 
 }));
-
-function saveDragonOnOracle(dragon) {
-  axios.get(`${oracleApiUrl}:${oracleApiPort}/api/saveDragon` ,{
-    params: { dragon: dragon},
-  });
-} 
 
 const PORT = 8002;
 http.createServer(app).listen(PORT, () => {

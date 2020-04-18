@@ -22,19 +22,13 @@ const {
 // SERVICES
 const {
 	collectFromSidechainGatewayAndSendToMainchain,
-	collectFromMainchainGatewayAndSendToSidechain,
-	//listenSideChainEvents,
-	listenMainChainEvents
+	collectFromMainchainGatewayAndSendToSidechain
 } = require('./services');
 
 // MIDDLEWARES
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
-// MAIN
-//listenSideChainEvents();
-listenMainChainEvents();
 
 // API ROUTES
 app.get('/api/dragons', getDragonsInGateways);

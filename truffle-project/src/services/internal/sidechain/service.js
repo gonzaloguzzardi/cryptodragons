@@ -1,5 +1,5 @@
 const {
-    _sMapAccount,
+    _sMapAccountSideChain,
     _sCreateDragonToken,
     _sGetMyDragons,
     _sGetDragonDataById,
@@ -42,7 +42,7 @@ async function getLoomGatewayContract(web3js) {
   
 async function mapAccount(web3js, ownerAccount, gas, mainAccount) {
     const contract = await getLoomTokenContract(web3js)
-    return _sMapAccount(contract, ownerAccount, gas, mainAccount );
+    return _sMapAccountSideChain(contract, ownerAccount, gas, mainAccount );
 }
   
 async function createDragonToken(web3js, ownerAccount, gas) {

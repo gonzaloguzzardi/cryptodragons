@@ -18,12 +18,10 @@
     "eslint-plugin-react": "^7.18.3",
     "express": "latest",
     "fs": "latest",
-    "loom-js": "latest",
     "mongodb": "latest",
     "node-cron": "latest"
   },
   "dependencies": {
-    "axios": "0.19.2",
-    "web3": "1.0.0-beta.37"
+    "axios": "0.19.2"
   }
 }

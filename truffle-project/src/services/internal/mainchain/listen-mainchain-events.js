@@ -10,7 +10,7 @@ const {
 const {
     deleteDragonInOracle,
     insertDragonInOracle
-} = require('../../oracleActions');
+} = require('../../oracle-actions');
 
 function listenMainChainEvents() {
 	const web3js = new Web3(new Web3.providers.WebsocketProvider(BFA_SOCKET_CONNECTION));

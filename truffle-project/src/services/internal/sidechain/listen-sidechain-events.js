@@ -17,7 +17,7 @@ const {
 const {
     deleteDragonInOracle,
     insertDragonInOracle
-} = require('../../oracleActions');
+} = require('../../oracle-actions');
 
 function listenSideChainEvents() {
 	const privateKeyStr = fs.readFileSync(path.join(__dirname, '../../../../misc/', 'loom_private_key'), 'utf-8');

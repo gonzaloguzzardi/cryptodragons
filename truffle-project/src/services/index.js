@@ -6,9 +6,9 @@ const {
     _sGetDragonDataById,
     _sTransferDragonToGateway,
     _sReceiveDragonFromOracle
-} = require('./common');
+} = require('./commons');
 
-const { saveDragonOnOracle } = require('./oracleActions')
+const { saveDragonOnOracle } = require('./oracle-actions')
 
 module.exports = {
     _sMapAccountSideChain,

@@ -1,4 +1,4 @@
-const {_cMapAccount} = require('./common');
+const {_cMapAccount} = require('./commons');
 
 module.exports = {
     _cMapAccount

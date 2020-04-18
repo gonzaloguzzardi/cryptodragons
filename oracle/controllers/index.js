@@ -6,7 +6,7 @@ const { getDragon } = require('./get-dragon');
 const {
     deleteDragon,
     insertDragon
-} = require('./common');
+} = require('./commons');
 
 module.exports = {
 	getDragonsInGateways,

@@ -1,7 +1,7 @@
 const axios = require('axios');
 const {
     oracleApiPort,
-    oracleApiUrl
+    oracleApiUrl,
 } = require('../config');
 
 function saveDragonOnOracle(dragon) {

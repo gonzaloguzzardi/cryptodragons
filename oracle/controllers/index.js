@@ -4,8 +4,8 @@ const { mapAccounts } = require('./map-accounts');
 const { saveDragon } = require('./save-dragon');
 const { getDragon } = require('./get-dragon');
 const {
-    _deleteDragon,
-    _insertDragon
+    deleteDragon,
+    insertDragon
 } = require('./common');
 
 module.exports = {
@@ -14,6 +14,6 @@ module.exports = {
 	mapAccounts,
 	saveDragon,
 	getDragon,
-	_deleteDragon,
-    _insertDragon
+	deleteDragon,
+    insertDragon
 };

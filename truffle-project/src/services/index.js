@@ -8,10 +8,7 @@ const {
     _sReceiveDragonFromOracle
 } = require('./common');
 
-const {
-    saveDragonOnOracle,
-
-} = require('./oracleActions')
+const { saveDragonOnOracle } = require('./oracleActions')
 
 module.exports = {
     _sMapAccountSideChain,

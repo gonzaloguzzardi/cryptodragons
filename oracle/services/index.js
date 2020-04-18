@@ -2,13 +2,13 @@ const collectFromSidechainGatewayAndSendToMainchain = require('./collect-from-si
 const collectFromMainchainGatewayAndSendToSidechain = require('./collect-from-mainchain-gateway-and-send-to-sidechain');
 
 const {
-    insertDragon,
-    deleteADragon
-} = require('./commonActions');
+    insertDragonInMongo,
+    deleteDragonFromMongo
+} = require('./common-actions');
 
 module.exports = {
     collectFromSidechainGatewayAndSendToMainchain,
     collectFromMainchainGatewayAndSendToSidechain,
-	deleteADragon,
-	insertDragon,
+	deleteDragonFromMongo,
+	insertDragonInMongo,
 };

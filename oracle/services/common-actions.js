@@ -8,15 +8,15 @@ const {
 	collection, database, mongoUrl,
 } = require ('../config');
 
-function insertDragon(event) {
+function insertDragonInMongo(event) {
 	insertOnMongo(database, mongoUrl, transforEventIntoTransactionObj(event), collection);
 }
 
-function deleteADragon(event) {
+function deleteDragonFromMongo(event) {
 	deleteDragon(database, mongoUrl, collection, event.returnValues);
 }
 
 module.exports = {
-	deleteADragon,
-	insertDragon
+	deleteDragonFromMongo,
+	insertDragonInMongo
 };

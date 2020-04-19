@@ -2,7 +2,6 @@ const fs = require('fs')
 const path = require('path')
 const contracts = path.resolve(__dirname, '../src/contracts/')
 const unityAbisPath = path.resolve(__dirname, '../../UnityClient/Assets/Contracts/Resources')
-const oracleJsonsPath = path.resolve(__dirname, '../../oracle/contracts_jsons')
 
 module.exports = async function(deployer, network, accounts) {
     let builtContracts = fs.readdirSync(contracts)
@@ -15,7 +14,5 @@ module.exports = async function(deployer, network, accounts) {
         // Write the abi to a new file in the unityAbis directory
         fs.writeFileSync(path.resolve(unityAbisPath, contract), JSON.stringify(json.abi))
 
-        // Write the abi to a new file in the oracle directory
-        fs.writeFileSync(path.resolve(oracleJsonsPath, contract), JSON.stringify(json))
     });
 }

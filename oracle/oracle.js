@@ -14,15 +14,15 @@ const {
 	transferDragon,
 	mapAccounts,
 	saveDragon,
-	getDragon
+	getDragon,
+	deleteDragon,
+	insertDragon
 } = require('./controllers');
 
 // SERVICES
 const {
 	collectFromSidechainGatewayAndSendToMainchain,
-	collectFromMainchainGatewayAndSendToSidechain,
-	listenSideChainEvents,
-	listenMainChainEvents,
+	collectFromMainchainGatewayAndSendToSidechain
 } = require('./services');
 
 // MIDDLEWARES
@@ -30,16 +30,15 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// MAIN
-listenSideChainEvents();
-listenMainChainEvents();
-
 // API ROUTES
 app.get('/api/dragons', getDragonsInGateways);
 app.get('/api/dragon/transfer', transferDragon);
 app.get('/api/mapAccounts', mapAccounts);
-app.get('/api/saveDragon', saveDragon);
 app.get('/api/dragon',getDragon);
+
+app.post('/api/saveDragon', saveDragon);
+app.post('/api/deleteDragon', deleteDragon); // Revisar implementación, puede faltar una promise en la llamada a mongo
+app.post('/api/insertDragon', insertDragon); // Revisar implementación, puede faltar una promise en la llamada a mongo
 
 // SERVER LISTEN
 const server = app.listen(oracleApiPort, '0.0.0.0', function () {

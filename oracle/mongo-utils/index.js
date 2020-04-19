@@ -24,28 +24,30 @@ function _collectEvents(event, database, url, collection) {
 }
 
 function insertOnMongo(database, url, transaction, collection) {
-	MongoClient.connect(url, mongoClientOptions, function (err, db) {
-		if (err) throw err;
-		var dbo = db.db(database);
-		dbo.collection(collection).insertOne(transaction, function (err) {
+	return new Promise((res, rej) => {
+		MongoClient.connect(url, mongoClientOptions, function (err, db) {
 			if (err) throw err;
-			db.close();
+			var dbo = db.db(database);
+			dbo.collection(collection).insertOne(transaction, function (err) {
+				db.close();
+				if (err) return rej(err);
+				return res('OK');
+			});
 		});
 	});
-	return transaction;
 }
 
 function deleteDragon(database,url,collection, dragon) {
-	MongoClient.connect(url, mongoClientOptions, function (err, db) {
-		var dbo = db.db(database);
-		dbo.collection(collection).deleteOne({uid: dragon.uid}, function(err, result) {
-			if (err) {
-				console.log(err);
-			}
-			db.close();
+	return new Promise((res, rej) => {
+		MongoClient.connect(url, mongoClientOptions, function (err, db) {
+			var dbo = db.db(database);
+			dbo.collection(collection).deleteOne({uid: dragon.uid}, function(err, result) {
+				db.close();
+				if (err) return rej(err);
+				return res(result);
+			});
 		});
 	});
-
 }
 
 // @TODO: Repensar si esto es necesario, si queremos agregar algo más al evento
@@ -75,5 +77,5 @@ module.exports = {
 	collectEventsFromMainchainGateway,
 	insertOnMongo,
 	deleteDragon,
-    transforEventIntoTransactionObj,
+	transforEventIntoTransactionObj,
 };

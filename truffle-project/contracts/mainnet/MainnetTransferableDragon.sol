@@ -3,7 +3,7 @@ pragma solidity ^0.5.0;
 import "../common/DragonFactory.sol";
 
 contract IMainnetGateway {
-  function depositDragon(address from, address to, uint256 uid, bytes memory data) public {}
+  function depositDragon(address from, address to, uint256 uid, bytes calldata data) external;
 }
 
 contract MainnetTransferableDragon is DragonFactory {
@@ -47,6 +47,7 @@ contract MainnetTransferableDragon is DragonFactory {
         transferFrom(msg.sender, _gateway, _tokenId);
 
         // Trigger trnsference in gateway
+
         IMainnetGateway gateway = IMainnetGateway(_gateway);
         uint originalTokenId = dragon.blockchainOriginId == _blockchainId ? _tokenId : _getForeignTokenId(_tokenId);
         gateway.depositDragon(msg.sender, _mainnetAddressToSidechain[msg.sender], originalTokenId, encodedDragon);

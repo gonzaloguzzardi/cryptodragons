@@ -3,7 +3,7 @@ pragma solidity ^0.5.0;
 import "../common/DragonFactory.sol";
 
 contract IDappchainGateway {
-  function depositDragon(address from, address to, uint256 uid, bytes memory data) public {}
+  function depositDragon(address from, address to, uint256 uid, bytes calldata data) external;
 }
 
 contract DappchainTransferableDragon is DragonFactory {

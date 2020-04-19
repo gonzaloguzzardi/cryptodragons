@@ -217,7 +217,6 @@ contract DragonFactory is DragonBase {
     }
 
     function _getForeignTokenId(uint _localTokenId) internal view returns (uint) {
-        require (_tokenMapped[_localTokenId], "Cannot obtain foreign if token was never mapped");
         return _localIdToForeignId[_localTokenId];
     }
 }

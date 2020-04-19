@@ -1,23 +1,12 @@
 const Web3 = require('web3');
 const path = require('path');
-const fs = require("fs");
+const fs = require('fs');
 
 // CONSTANTS
-const {
-	CHAIN_ID, WRITE_URL, READ_URL,
-	SidechainDragonContract, SidechainGatewayContract,
-} = require ('../../../config');
+const { NonceTxMiddleware, SignedTxMiddleware, Client, CryptoUtils, LoomProvider } = require('loom-js');
+const { CHAIN_ID, WRITE_URL, READ_URL, SidechainDragonContract, SidechainGatewayContract } = require('../../../config');
 
-// LOOM-JS
-const {
-	NonceTxMiddleware, SignedTxMiddleware, Client,
-	CryptoUtils, LoomProvider,
-} = require('loom-js');
-
-const {
-    deleteDragonInOracle,
-    insertDragonInOracle
-} = require('../../oracle-actions');
+const { deleteDragonInOracle, insertDragonInOracle } = require('../../oracle-actions');
 
 function listenSideChainEvents() {
 	const privateKeyStr = fs.readFileSync(path.join(__dirname, '../../../../misc/', 'loom_private_key'), 'utf-8');
@@ -25,13 +14,10 @@ function listenSideChainEvents() {
 	const publicKey = CryptoUtils.publicKeyFromPrivateKey(privateKey);
 	const client = new Client(CHAIN_ID, WRITE_URL, READ_URL);
 
-	client.txMiddleware = [
-		new NonceTxMiddleware(publicKey, client),
-		new SignedTxMiddleware(privateKey)
-	]
-	client.on('error', msg => {
-		console.error('Loom connection error', msg)
-	})
+	client.txMiddleware = [new NonceTxMiddleware(publicKey, client), new SignedTxMiddleware(privateKey)];
+	client.on('error', (msg) => {
+		console.error('Loom connection error', msg);
+	});
 
 	const web3 = new Web3(new LoomProvider(client, privateKey));
 	const ABIDragon = SidechainDragonContract.abi;
@@ -47,19 +33,19 @@ function listenSideChainEvents() {
 
 	const sidechainDragonsInstance = new web3.eth.Contract(
 		ABIDragon,
-		SidechainDragonContract.networks["13654820909954"].address
+		SidechainDragonContract.networks['13654820909954'].address,
 	);
 
 	const sidechainGatewayInstance = new web3.eth.Contract(
 		ABIGateway,
-		SidechainGatewayContract.networks["13654820909954"].address
+		SidechainGatewayContract.networks['13654820909954'].address,
 	);
 
 	sidechainDragonsInstance.events.allEvents((err, event) => {
 		if (err) console.err(err);
 		if (event) {
-			console.log("sidechainDragonsInstance", "EVENTO ->", event.event);
-			switch(event.event) {
+			console.log('sidechainDragonsInstance', 'EVENTO ->', event.event);
+			switch (event.event) {
 				case 'NewDragon':
 				case 'Approval':
 				case 'ApprovalForAll':
@@ -75,15 +61,15 @@ function listenSideChainEvents() {
 	sidechainGatewayInstance.events.allEvents((err, event) => {
 		if (err) console.err(err);
 		if (event) {
-			console.log("sidechainGatewayInstance", "Evento de sidechain ->", event.event);
-			switch(event.event) {
+			console.log('sidechainGatewayInstance', 'Evento de sidechain ->', event.event);
+			switch (event.event) {
 				case 'SendDragonToMainchainAttempt':
-					//TODO:
+					// TODO:
 					insertDragonInOracle(event);
 					break;
 				case 'DragonSuccessfullyRetrievedInSidechain':
-					console.log("BORRANDO ESTE", event.returnValues);
-					//TODO:
+					console.log('BORRANDO ESTE', event.returnValues);
+					// TODO:
 					deleteDragonInOracle(event);
 					break;
 				case 'AddedValidator':

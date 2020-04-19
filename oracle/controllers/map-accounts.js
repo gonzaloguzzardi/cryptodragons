@@ -8,8 +8,8 @@ function mapAccounts(req, res) {
 	console.log("Main account: " + req.query.mainAccount);
 	console.log("Side account: " + req.query.sideAccount);
 
-	axios.
-		get(`${sidechainApiUrl}:${sidechainApiPort}/api/mapAccount?mainAccount=` + req.query.mainAccount + `&account=` + req.query.sideAccount)
+	axios
+		.get(`${sidechainApiUrl}:${sidechainApiPort}/api/mapAccount?mainAccount=` + req.query.mainAccount + `&account=` + req.query.sideAccount)
 		.catch(err => res.status(500).send(err));
 
 	axios

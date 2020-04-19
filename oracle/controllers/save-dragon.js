@@ -9,8 +9,9 @@ const {
 } = require ('../config');
 
 function saveDragon(req, res) {
-	insertOnMongo(database, mongoUrl, req.query.dragon, "errors");
-	res.status(200).send(true);
+	insertOnMongo(database, mongoUrl, req.query.dragon, "errors")
+		.then(result => res.status(200).send(result))
+		.catch(err => res.status(500).send(err));
 }
 
 module.exports =  { saveDragon };

@@ -9,11 +9,11 @@ const {
 } = require ('../config');
 
 function insertDragonInMongo(event) {
-	insertOnMongo(database, mongoUrl, transforEventIntoTransactionObj(event), collection);
+	return insertOnMongo(database, mongoUrl, transforEventIntoTransactionObj(event), collection);
 }
 
 function deleteDragonFromMongo(event) {
-	deleteDragon(database, mongoUrl, collection, event.returnValues);
+	return deleteDragon(database, mongoUrl, collection, event.returnValues);
 }
 
 module.exports = {

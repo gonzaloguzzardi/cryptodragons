@@ -1,9 +1,10 @@
 // IMPORTS
-const cron = require("node-cron");
+const cron = require('node-cron');
 const express = require('express');
+
 const app = express();
-const cors = require('cors')
-const bodyParser = require("body-parser");
+const cors = require('cors');
+const bodyParser = require('body-parser');
 
 // CONSTANTS
 const { oracleApiPort } = require('./config');
@@ -14,15 +15,15 @@ const {
 	transferDragon,
 	mapAccounts,
 	saveDragon,
-	getDragon
+	getDragon,
+	deleteDragon,
+	insertDragon,
 } = require('./controllers');
 
 // SERVICES
 const {
 	collectFromSidechainGatewayAndSendToMainchain,
 	collectFromMainchainGatewayAndSendToSidechain,
-	listenSideChainEvents,
-	listenMainChainEvents,
 } = require('./services');
 
 // MIDDLEWARES
@@ -30,26 +31,24 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// MAIN
-listenSideChainEvents();
-listenMainChainEvents();
-
 // API ROUTES
 app.get('/api/dragons', getDragonsInGateways);
 app.get('/api/dragon/transfer', transferDragon);
 app.get('/api/mapAccounts', mapAccounts);
-app.get('/api/saveDragon', saveDragon);
-app.get('/api/dragon',getDragon);
+app.get('/api/dragon', getDragon);
+
+app.post('/api/saveDragon', saveDragon);
+app.post('/api/deleteDragon', deleteDragon); // Revisar implementación, puede faltar una promise en la llamada a mongo
+app.post('/api/insertDragon', insertDragon); // Revisar implementación, puede faltar una promise en la llamada a mongo
 
 // SERVER LISTEN
-const server = app.listen(oracleApiPort, '0.0.0.0', function () {
-	const host = server.address().address;
-	const port = server.address().port;
-	console.log("Example app listening at http://%s:%s", host, port);
+const server = app.listen(oracleApiPort, '0.0.0.0', () => {
+	const { address, port } = server.address();
+	console.log('Example app listening at http://%s:%s', address, port);
 });
 
 // CRON
-cron.schedule("*/15 * * * * *", () => {
+cron.schedule('*/15 * * * * *', () => {
 	collectFromSidechainGatewayAndSendToMainchain();
 	collectFromMainchainGatewayAndSendToSidechain();
 });

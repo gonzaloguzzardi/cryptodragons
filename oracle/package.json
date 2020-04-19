@@ -10,20 +10,26 @@
   },
   "scripts": {
     "init": "node oracle.js",
-    "eslint": "eslint ."
-  },
-  "devDependencies": {
-    "body-parser": "latest",
-    "eslint": "^6.8.0",
-    "eslint-plugin-react": "^7.18.3",
-    "express": "latest",
-    "fs": "latest",
-    "loom-js": "latest",
-    "mongodb": "latest",
-    "node-cron": "latest"
+    "lint": "eslint .",
+    "lint-fix": "eslint --fix ."
   },
   "dependencies": {
     "axios": "0.19.2",
-    "web3": "1.0.0-beta.37"
+    "cors": "2.8.5",
+    "express": "latest",
+    "fs": "latest",
+    "mongodb": "latest",
+    "body-parser": "latest",
+    "node-cron": "latest"
+  },
+  "devDependencies": {
+    "eslint": "5.16.0",
+    "eslint-config-airbnb": "18.1.0",
+    "eslint-config-prettier": "6.7.0",
+    "eslint-plugin-prettier": "3.1.1",
+    "eslint-plugin-import": "2.20.2",
+    "eslint-plugin-jsx-a11y": "6.2.3",
+    "eslint-plugin-react": "7.19.0",
+    "prettier": "2.0.4"
   }
 }

@@ -1,59 +1,66 @@
-const MongoClient = require('mongodb').MongoClient;
+const { MongoClient } = require('mongodb');
+
 const mongoClientOptions = { useUnifiedTopology: true, useNewUrlParser: true };
 
+function collectEvents(event, database, url, collection) {
+	return new Promise((res, rej) => {
+		MongoClient.connect(url, mongoClientOptions, (err, db) => {
+			if (err) return rej(err);
+			const dbo = db.db(database);
+			dbo
+				.collection(collection)
+				.find({ event })
+				.toArray((error, results) => {
+					db.close();
+					if (error) return rej(error);
+					return res(results);
+				});
+			return null;
+		});
+	});
+}
+
 function collectEventsFromSidechainGateway(database, url, collection) {
-	return _collectEvents('SendDragonToMainchainAttempt', database, url, collection);
+	return collectEvents('SendDragonToMainchainAttempt', database, url, collection);
 }
 
 function collectEventsFromMainchainGateway(database, url, collection) {
-	return _collectEvents('SendDragonToSidechainAttempt', database, url, collection);
+	return collectEvents('SendDragonToSidechainAttempt', database, url, collection);
 }
 
-function _collectEvents(event, database, url, collection) {
+function insertOnMongo(database, url, transaction, collection) {
 	return new Promise((res, rej) => {
-		MongoClient.connect(url, mongoClientOptions, function (err, db) {
-			if (err) return rej(err);
-			var dbo = db.db(database);
-			dbo.collection(collection).find({ event }).toArray(function(err, results) {
+		MongoClient.connect(url, mongoClientOptions, (err, db) => {
+			if (err) throw err;
+			const dbo = db.db(database);
+			dbo.collection(collection).insertOne(transaction, (error) => {
 				db.close();
-				if (err) return rej(err);
-				return res(results);
+				if (error) return rej(error);
+				return res('OK');
 			});
 		});
 	});
 }
 
-function insertOnMongo(database, url, transaction, collection) {
-	MongoClient.connect(url, mongoClientOptions, function (err, db) {
-		if (err) throw err;
-		var dbo = db.db(database);
-		dbo.collection(collection).insertOne(transaction, function (err) {
-			if (err) throw err;
-			db.close();
+function deleteDragon(database, url, collection, dragon) {
+	return new Promise((res, rej) => {
+		MongoClient.connect(url, mongoClientOptions, (err, db) => {
+			const dbo = db.db(database);
+			dbo.collection(collection).deleteOne({ uid: dragon.uid }, (error, result) => {
+				db.close();
+				if (error) return rej(error);
+				return res(result);
+			});
 		});
 	});
-	return transaction;
-}
-
-function deleteDragon(database,url,collection, dragon) {
-	MongoClient.connect(url, mongoClientOptions, function (err, db) {
-		var dbo = db.db(database);
-		dbo.collection(collection).deleteOne({uid: dragon.uid}, function(err, result) {
-			if (err) {
-				console.log(err);
-			}
-			db.close();
-		});
-	});
-
 }
 
 // @TODO: Repensar si esto es necesario, si queremos agregar algo más al evento
 // 			Si no alteramos el evento podríamos mandarlo como viene, al mongo.
 function transforEventIntoTransactionObj(event) {
-	let transaction = {};
+	const transaction = {};
 	transaction.event = event.event;
-	
+
 	transaction.uid = event.returnValues.uid;
 	transaction.transactionHash = event.transactionHash;
 	transaction.logIndex = event.logIndex;
@@ -75,5 +82,5 @@ module.exports = {
 	collectEventsFromMainchainGateway,
 	insertOnMongo,
 	deleteDragon,
-    transforEventIntoTransactionObj,
+	transforEventIntoTransactionObj,
 };

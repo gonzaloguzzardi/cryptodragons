@@ -1,17 +1,13 @@
 // MONGO-DB
-const {
-	insertOnMongo
-} = require('../mongo-utils');
+const { insertOnMongo } = require('../mongo-utils');
 
 // CONSTANTS
-const {
-	database, mongoUrl
-} = require ('../config');
+const { database, mongoUrl } = require('../config');
 
 function saveDragon(req, res) {
-	insertOnMongo(database, mongoUrl, req.query.dragon, "errors")
-		.then(result => res.status(200).send(result))
-		.catch(err => res.status(500).send(err));
+	insertOnMongo(database, mongoUrl, req.query.dragon, 'errors')
+		.then((result) => res.status(200).send(result))
+		.catch((err) => res.status(500).send(err));
 }
 
-module.exports =  { saveDragon };
+module.exports = { saveDragon };

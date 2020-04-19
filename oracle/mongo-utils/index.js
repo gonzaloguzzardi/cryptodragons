@@ -1,4 +1,5 @@
-const MongoClient = require('mongodb').MongoClient;
+const { MongoClient } = require('mongodb');
+
 const mongoClientOptions = { useUnifiedTopology: true, useNewUrlParser: true };
 
 function collectEventsFromSidechainGateway(database, url, collection) {
@@ -13,12 +14,15 @@ function _collectEvents(event, database, url, collection) {
 	return new Promise((res, rej) => {
 		MongoClient.connect(url, mongoClientOptions, function (err, db) {
 			if (err) return rej(err);
-			var dbo = db.db(database);
-			dbo.collection(collection).find({ event }).toArray(function(err, results) {
-				db.close();
-				if (err) return rej(err);
-				return res(results);
-			});
+			const dbo = db.db(database);
+			dbo
+				.collection(collection)
+				.find({ event })
+				.toArray(function (err, results) {
+					db.close();
+					if (err) return rej(err);
+					return res(results);
+				});
 		});
 	});
 }
@@ -27,7 +31,7 @@ function insertOnMongo(database, url, transaction, collection) {
 	return new Promise((res, rej) => {
 		MongoClient.connect(url, mongoClientOptions, function (err, db) {
 			if (err) throw err;
-			var dbo = db.db(database);
+			const dbo = db.db(database);
 			dbo.collection(collection).insertOne(transaction, function (err) {
 				db.close();
 				if (err) return rej(err);
@@ -37,11 +41,11 @@ function insertOnMongo(database, url, transaction, collection) {
 	});
 }
 
-function deleteDragon(database,url,collection, dragon) {
+function deleteDragon(database, url, collection, dragon) {
 	return new Promise((res, rej) => {
 		MongoClient.connect(url, mongoClientOptions, function (err, db) {
-			var dbo = db.db(database);
-			dbo.collection(collection).deleteOne({uid: dragon.uid}, function(err, result) {
+			const dbo = db.db(database);
+			dbo.collection(collection).deleteOne({ uid: dragon.uid }, function (err, result) {
 				db.close();
 				if (err) return rej(err);
 				return res(result);
@@ -53,9 +57,9 @@ function deleteDragon(database,url,collection, dragon) {
 // @TODO: Repensar si esto es necesario, si queremos agregar algo más al evento
 // 			Si no alteramos el evento podríamos mandarlo como viene, al mongo.
 function transforEventIntoTransactionObj(event) {
-	let transaction = {};
+	const transaction = {};
 	transaction.event = event.event;
-	
+
 	transaction.uid = event.returnValues.uid;
 	transaction.transactionHash = event.transactionHash;
 	transaction.logIndex = event.logIndex;

@@ -3,10 +3,7 @@ const { transferDragon } = require('./transfer-dragon');
 const { mapAccounts } = require('./map-accounts');
 const { saveDragon } = require('./save-dragon');
 const { getDragon } = require('./get-dragon');
-const {
-	deleteDragon,
-	insertDragon
-} = require('./commons');
+const { deleteDragon, insertDragon } = require('./commons');
 
 module.exports = {
 	getDragonsInGateways,
@@ -15,5 +12,5 @@ module.exports = {
 	saveDragon,
 	getDragon,
 	deleteDragon,
-	insertDragon
+	insertDragon,
 };

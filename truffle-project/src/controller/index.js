@@ -1,5 +1,5 @@
-const {_cMapAccount} = require('./commons');
+const { _cMapAccount } = require('./commons');
 
 module.exports = {
-    _cMapAccount
+	_cMapAccount,
 };

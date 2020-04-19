@@ -11,18 +11,12 @@ const GatewayJson = require('../../../contracts/MainnetGateway.json');
 
 async function getMainNetTokenContract(web3js) {
 	const networkId = await web3js.eth.net.getId();
-	return new web3js.eth.Contract(
-		MainchainDragonTokenJson.abi,
-		MainchainDragonTokenJson.networks[networkId].address
-	);
+	return new web3js.eth.Contract(MainchainDragonTokenJson.abi, MainchainDragonTokenJson.networks[networkId].address);
 }
 
 async function getMainNetGatewayContract(web3js) {
 	const networkId = await web3js.eth.net.getId();
-	return new web3js.eth.Contract(
-		GatewayJson.abi,
-		GatewayJson.networks[networkId].address
-	);
+	return new web3js.eth.Contract(GatewayJson.abi, GatewayJson.networks[networkId].address);
 }
 
 async function mapAccount(web3js, ownerAccount, gas, sideAccount) {
@@ -50,23 +44,9 @@ async function transferDragonToGateway(web3js, gas, ownerAccount, dragonId) {
 	return _sTransferDragonToGateway(contract, gas, ownerAccount, dragonId);
 }
 
-async function receiveDragonFromOracle(
-	web3js,
-	ownerAccount,
-	gas,
-	dragonId,
-	data,
-	receiverAddress
-) {
+async function receiveDragonFromOracle(web3js, ownerAccount, gas, dragonId, data, receiverAddress) {
 	const contract = await getMainNetGatewayContract(web3js);
-	return _sReceiveDragonFromOracle(
-		contract,
-		ownerAccount,
-		gas,
-		dragonId,
-		data,
-		receiverAddress
-	);
+	return _sReceiveDragonFromOracle(contract, ownerAccount, gas, dragonId, data, receiverAddress);
 }
 
 module.exports = {

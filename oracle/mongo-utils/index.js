@@ -2,39 +2,40 @@ const { MongoClient } = require('mongodb');
 
 const mongoClientOptions = { useUnifiedTopology: true, useNewUrlParser: true };
 
-function collectEventsFromSidechainGateway(database, url, collection) {
-	return _collectEvents('SendDragonToMainchainAttempt', database, url, collection);
-}
-
-function collectEventsFromMainchainGateway(database, url, collection) {
-	return _collectEvents('SendDragonToSidechainAttempt', database, url, collection);
-}
-
-function _collectEvents(event, database, url, collection) {
+function collectEvents(event, database, url, collection) {
 	return new Promise((res, rej) => {
-		MongoClient.connect(url, mongoClientOptions, function (err, db) {
+		MongoClient.connect(url, mongoClientOptions, (err, db) => {
 			if (err) return rej(err);
 			const dbo = db.db(database);
 			dbo
 				.collection(collection)
 				.find({ event })
-				.toArray(function (err, results) {
+				.toArray((error, results) => {
 					db.close();
-					if (err) return rej(err);
+					if (error) return rej(error);
 					return res(results);
 				});
+			return null;
 		});
 	});
 }
 
+function collectEventsFromSidechainGateway(database, url, collection) {
+	return collectEvents('SendDragonToMainchainAttempt', database, url, collection);
+}
+
+function collectEventsFromMainchainGateway(database, url, collection) {
+	return collectEvents('SendDragonToSidechainAttempt', database, url, collection);
+}
+
 function insertOnMongo(database, url, transaction, collection) {
 	return new Promise((res, rej) => {
-		MongoClient.connect(url, mongoClientOptions, function (err, db) {
+		MongoClient.connect(url, mongoClientOptions, (err, db) => {
 			if (err) throw err;
 			const dbo = db.db(database);
-			dbo.collection(collection).insertOne(transaction, function (err) {
+			dbo.collection(collection).insertOne(transaction, (error) => {
 				db.close();
-				if (err) return rej(err);
+				if (error) return rej(error);
 				return res('OK');
 			});
 		});
@@ -43,11 +44,11 @@ function insertOnMongo(database, url, transaction, collection) {
 
 function deleteDragon(database, url, collection, dragon) {
 	return new Promise((res, rej) => {
-		MongoClient.connect(url, mongoClientOptions, function (err, db) {
+		MongoClient.connect(url, mongoClientOptions, (err, db) => {
 			const dbo = db.db(database);
-			dbo.collection(collection).deleteOne({ uid: dragon.uid }, function (err, result) {
+			dbo.collection(collection).deleteOne({ uid: dragon.uid }, (error, result) => {
 				db.close();
-				if (err) return rej(err);
+				if (error) return rej(error);
 				return res(result);
 			});
 		});

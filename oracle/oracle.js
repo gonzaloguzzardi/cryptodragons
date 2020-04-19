@@ -42,7 +42,7 @@ app.post('/api/deleteDragon', deleteDragon); // Revisar implementación, puede f
 app.post('/api/insertDragon', insertDragon); // Revisar implementación, puede faltar una promise en la llamada a mongo
 
 // SERVER LISTEN
-const server = app.listen(oracleApiPort, '0.0.0.0', () => {
+const server = app.listen(oracleApiPort, () => {
 	const { address, port } = server.address();
 	console.log('Example app listening at http://%s:%s', address, port);
 });

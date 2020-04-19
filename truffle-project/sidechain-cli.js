@@ -15,9 +15,9 @@ const {
 	getDragonDataById,
 	transferDragonToGateway,
 	receiveDragonFromOracle,
-	saveDragonOnOracle,
 	listenSideChainEvents,
 } = require('./src/services/internal/sidechain');
+const { saveDragonOnOracle } = require('./src/services');
 
 function loadLoomAccount(accountName) {
 	const accountPath = './misc/loom_private_key';

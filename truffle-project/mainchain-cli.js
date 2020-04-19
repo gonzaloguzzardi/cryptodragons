@@ -17,9 +17,9 @@ const {
 	getDragonDataById,
 	transferDragonToGateway,
 	receiveDragonFromOracle,
-	saveDragonOnOracle,
 	listenMainChainEvents,
 } = require('./src/services/internal/mainchain');
+const { saveDragonOnOracle } = require('./src/services');
 
 // MAIN:
 listenMainChainEvents();

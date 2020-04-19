@@ -3,45 +3,80 @@ services:
   loom:
     image: gonzaloguzzardi/cryptodragons:loom_node_v001
     ports:
-      - "46656:46656"
-      - "46658:46658"
+      - 46656
+      - 46658
 
-  # PROBLEMAS PARA CONECTARSE A LA SIDE..
-  # sidechain-deploy-and-cli:
-  #   build:
-  #     context: ./truffle-project
-  #     dockerfile: DockerfileSidechainSetup
-  #   ports:
-  #     - "8001:8001"
+  sidechain-deploy-and-cli:
+    environment:
+      DOCKERENV: 1
+    build:
+      context: ./truffle-project
+      dockerfile: DockerfileSidechainSetup
+    ports:
+      - 8001
+    depends_on:
+      - loom
+    volumes:
+      - ./truffle-project:/usr/src/app/side-sv
+      - /usr/src/app/side-sv/node_modules
 
   bfa:
     image: gonzaloguzzardi/cryptodragons:bfa_node_v004
     ports:
-      - "8545:8545"
-      - "8546:8546"
-      - "8547:8547"
-      - "30303:30303"
+      - 8545
+      - 8546
+      - 8547
+      - 30303
+
+  mainchain-deploy-and-cli:
+    environment:
+      DOCKERENV: 1
+    build:
+      context: ./truffle-project
+      dockerfile: DockerfileMainchainSetup
+    ports:
+      - 8002
+    depends_on:
+      - bfa
+    volumes:
+      - ./truffle-project:/usr/src/app/main-sv
+      - /usr/src/app/main-sv/node_modules
 
   mongo:
+    environment:
+      DOCKERENV: 1
     build:
       context: ./mongo
     ports:
-      - "27017:27017" # process
-      - "28017:28017" # http
+      - 27017 # process
+      - 28017 # http
 
   oracle:
+    environment:
+      DOCKERENV: 1
     build:
       context: ./oracle
     ports:
-      - "8001:8001"
-      - "8002:8002"
-      - "8081:8081"
+      - 8001
+      - 8002
+      - 8081
+    depends_on:
+      - sidechain-deploy-and-cli
+      - mainchain-deploy-and-cli
+      - mongo
+    volumes:
+      - ./oracle:/usr/src/app/oracle
+      - /usr/src/app/oracle/node_modules
 
   web:
+    environment:
+      DOCKERENV: 1
     build:
       context: ./web
     ports:
-      - "3000:3000"
+      - 3000
+    depends_on:
+      - oracle
     volumes:
       - ./web:/usr/src/app/web
-      - '/usr/src/app/web/node_modules'
+      - /usr/src/app/web/node_modules

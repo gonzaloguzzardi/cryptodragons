@@ -2,23 +2,22 @@
 FROM node:10.15.0
 
 # Set the working directory
-RUN mkdir -p /usr/src/app/oracle
-WORKDIR /usr/src/app/oracle
+RUN mkdir -p /usr/src/app/main-sv
+WORKDIR /usr/src/app/main-sv
 
 # add `/app/node_modules/.bin` to $PATH
-ENV PATH /usr/src/app/oracle/node_modules/.bin:$PATH
+ENV PATH /usr/src/app/main-sv/node_modules/.bin:$PATH
 
 # Copy your app's source code from your host to your image filesystem.
 COPY . .
 RUN if test -d node_modules; then rm -r node_modules; fi
 
 # Run the command inside your image filesystem
+RUN apt-get update
 RUN npm install --silent
 
 # Inform Docker that the container is listening on the specified port at runtime.
-EXPOSE 8001
 EXPOSE 8002
-EXPOSE 8081
 
 # Run the specified command within the container.
-CMD ["node", "oracle.js"]
+CMD npm run deploy:reset:bfa:docker && node mainchain-cli.js

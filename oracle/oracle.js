@@ -15,8 +15,8 @@ const {
 	mapAccounts,
 	saveDragon,
 	getDragon,
-    deleteDragon,
-    insertDragon
+	deleteDragon,
+	insertDragon
 } = require('./controllers');
 
 // SERVICES

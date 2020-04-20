@@ -14,6 +14,8 @@ services:
       dockerfile: DockerfileSidechainSetup
     ports:
       - "8001:8001"
+      - 46656
+      - 46658
     depends_on:
       - loom
     volumes:
@@ -36,6 +38,10 @@ services:
       dockerfile: DockerfileMainchainSetup
     ports:
       - "8002:8002"
+      - 8545
+      - 8546
+      - 8547
+      - 30303
     depends_on:
       - bfa
     volumes:
@@ -48,8 +54,8 @@ services:
     build:
       context: ./mongo
     ports:
-      - "27017:27017" # process
-      - "28017:28017" # http
+      - 27017 # process
+      - 28017 # http
 
   oracle:
     environment:
@@ -57,8 +63,8 @@ services:
     build:
       context: ./oracle
     ports:
-      - "8001:8001"
-      - "8002:8002"
+      - 8001
+      - 8002
       - "8081:8081"
     depends_on:
       - sidechain-deploy-and-cli

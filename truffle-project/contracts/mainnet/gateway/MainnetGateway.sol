@@ -8,7 +8,7 @@ import "../../common/token/IERC20Receiver.sol";
 import "./MainnetValidatorManagerContract.sol";
 
 contract IDragonContract {
-    function retrieveToken(address receiver, uint256 _tokenId, bytes memory _data) public {}
+    function retrieveToken(address receiver, uint256 _tokenId, bytes calldata _data) external;
 }
 
 contract MainnetGateway is IERC20Receiver, IERC721Receiver, MainnetValidatorManagerContract {

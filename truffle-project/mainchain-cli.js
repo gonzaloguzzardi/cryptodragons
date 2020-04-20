@@ -35,7 +35,8 @@ app.get('/', (req, res) => {
 function loadGanacheAccount() {
 	// const privateKey = fs.readFileSync(path.join(__dirname, './ganache_private_key'), 'utf-8')
 	// const ownerAccount = web3js.eth.accounts.privateKeyToAccount(privateKey)
-	const web3js = new Web3(new Web3.providers.HttpProvider('http://127.0.0.1:8545'));
+	const bfaAddress = !process.env.DOCKERENV ? 'http://127.0.0.1:8545' : 'http://bfa:8545';
+	const web3js = new Web3(new Web3.providers.HttpProvider(bfaAddress));
 	const ownerAccount = fs.readFileSync(path.join(__dirname, './misc/mainchain_account'), 'utf-8');
 	web3js.eth.accounts.wallet.add(ownerAccount);
 	return { account: ownerAccount, web3js };

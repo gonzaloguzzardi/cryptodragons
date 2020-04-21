@@ -23,7 +23,7 @@ services:
       - /usr/src/app/side-sv/node_modules
 
   bfa:
-    image: gonzaloguzzardi/cryptodragons:bfa_node_v004
+    image: nicomoccagatta/cryptodragons:bfa_node_v004-docker_v005
     ports:
       - "8545:8545"
       - "8546:8546"

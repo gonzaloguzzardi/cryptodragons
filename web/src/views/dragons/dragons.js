@@ -10,13 +10,13 @@ import sleep from '../../utils/sleep';
 
 import './dragons.scss';
 
-const sidechainApiUrl = !process.env.DOCKERENV ? 'http://localhost' : 'http://loom';
+const sidechainApiUrl = 'http://localhost';
 const sidechainApiPort = 8001;
 
-const mainchainApiUrl = !process.env.DOCKERENV ? 'http://localhost' : 'http://bfa';
+const mainchainApiUrl = 'http://localhost';
 const mainchainApiPort = 8002;
 
-const oracleApiUrl = !process.env.DOCKERENV ? 'http://localhost' : 'http://oracle';
+const oracleApiUrl = 'http://localhost';
 const oracleApiPort = 8081;
 
 const namespace = 'ui-view-dragons';

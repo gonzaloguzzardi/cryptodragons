@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker pull gonzaloguzzardi/cryptodragons:bfa_node_v002
+docker pull nicomoccagatta/cryptodragons:bfa_node_v010

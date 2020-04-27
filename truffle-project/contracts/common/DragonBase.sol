@@ -30,6 +30,8 @@ contract DragonBase is ERC721Enumerable, Ownable {
         uint16 fortitude;
 
         uint16 hatchTime; // in minutes, capped to 45 days - Maybe it would be nice to reuse some variable like current exp
+    
+        uint8 blockchainOriginId;
     }
 
     // Holds all dragons in game
@@ -138,7 +140,7 @@ contract DragonBase is ERC721Enumerable, Ownable {
     */
     function _encodeDragonToBytes(Dragon memory _dragon) internal pure returns(bytes memory) {
         // TODO update size in bytes whenever dragon struct is updated
-        uint size = 96; //32 + 32 + 8 + 4 + 4 + 4 + 2 + 2 + 2 + 2 + 2 + 2;
+        uint size = 97; //32 + 32 + 8 + 4 + 4 + 4 + 2 + 2 + 2 + 2 + 2 + 2 + 1;
         bytes memory encodedData = new bytes(size);
 
         uint counter = 0;
@@ -226,15 +228,20 @@ contract DragonBase is ERC721Enumerable, Ownable {
             encodedData[counter] = byte(uint8(_dragon.hatchTime >> ((8 * i) & uint32(255)))); 
             counter++;
         }
+
+        
+        // encode  byte from blockchain origin id
+        for (uint i = 0; i < 1; i++)
+        {
+            encodedData[counter] = byte(uint8(_dragon.blockchainOriginId >> ((8 * i) & uint32(255)))); 
+            counter++;
+        }
         return encodedData;
     }
 
-    /**
-        Decodes dragon data from an array of bytes
-    */
-    function _decodeDragonFromBytes(bytes memory _data) internal pure
-    returns(uint genes, bytes32 name, uint64 creationTime, uint32 dadId, uint32 motherId, uint32 currentExperience, uint16 actionCooldown,
-            uint16 health, uint16 strength, uint16 agility, uint16 fortitude, uint16 hatchTime) {
+    function _decodeFirstHalfOfDragonFromBytes(bytes memory _data) internal pure 
+        returns(uint genes, bytes32 name, uint64 creationTime, uint32 dadId, uint32 motherId, uint32 currentExperience) {
+        
         uint counter = 0;
 
         // Decode genes
@@ -285,6 +292,11 @@ contract DragonBase is ERC721Enumerable, Ownable {
             currentExperience ^= temp;
             counter++;
         }
+    }
+
+    function _decodeSecondHalfOfDragonFromBytes(bytes memory _data) internal pure
+        returns(uint16 actionCooldown, uint16 health, uint16 strength, uint16 agility, uint16 fortitude, uint16 hatchTime, uint8 blockchainOriginId) {
+        uint counter = 84;
 
         // Decode action cooldown
         for (uint i = 0; i < 2; i++)
@@ -339,12 +351,19 @@ contract DragonBase is ERC721Enumerable, Ownable {
             hatchTime ^= temp;
             counter++;
         }
+
+        // Decode blockchain origin id
+        blockchainOriginId ^= uint8(_data[counter]);
+        counter++;
     }
 
     function _decodeName(bytes memory _data, uint _dataIndex) private pure returns(bytes32 name) {
         for (uint i = 0; i < 32; i++) {
             name |= bytes32(_data[_dataIndex + i] & 0xFF) >> (i * 8);
         }
-    
+    }
+
+    function _decodeBlockchainIdFromData(bytes memory _data) internal pure returns(uint8 blockchainId) {
+        blockchainId = uint8(_data[96]);
     }
 }

@@ -8,7 +8,7 @@ import "../../common/token/IERC20Receiver.sol";
 import "./DappchainValidatorManagerContract.sol";
 
 contract IDragonContract {
-    function retrieveToken(address receiver, uint256 _tokenId, bytes memory _data) public {}
+    function retrieveToken(address receiver, uint256 _tokenId, bytes calldata _data) external;
 }
 
 contract DappchainGateway is IERC20Receiver, IERC721Receiver, DappchainValidatorManagerContract {

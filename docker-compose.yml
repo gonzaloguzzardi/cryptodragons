@@ -76,7 +76,6 @@ services:
 
   web:
     environment:
-      - DOCKERENV=1
       - CHOKIDAR_USEPOLLING=true
     build:
       context: ./web

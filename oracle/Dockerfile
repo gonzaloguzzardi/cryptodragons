@@ -21,4 +21,4 @@ EXPOSE 8002
 EXPOSE 8081
 
 # Run the specified command within the container.
-CMD ["node", "oracle.js"]
+CMD ["npm", "run", "start-dev"]

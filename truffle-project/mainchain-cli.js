@@ -67,7 +67,7 @@ app.post('/api/dragon/receive', async function transferFunction(req, res, next) 
 			tx = await receiveDragonFromOracle(
 				web3js,
 				account,
-				req.query.gas || 350000,
+				req.query.gas || 450000,
 				dragon.uid,
 				dragon.data,
 				receiverAddress,

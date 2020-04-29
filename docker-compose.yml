@@ -49,8 +49,6 @@ services:
       - /usr/src/app/main-sv/node_modules
 
   mongo:
-    environment:
-      DOCKERENV: 1
     build:
       context: ./mongo
     ports:

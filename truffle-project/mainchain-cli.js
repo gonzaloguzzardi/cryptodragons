@@ -32,17 +32,27 @@ app.get('/', (req, res) => {
 	res.status(200).send('Welcome to API REST');
 });
 
-function loadGanacheAccount() {
-	// const privateKey = fs.readFileSync(path.join(__dirname, './ganache_private_key'), 'utf-8')
-	// const ownerAccount = web3js.eth.accounts.privateKeyToAccount(privateKey)
+function loadGanacheAccount(account) {
 	const web3js = new Web3(new Web3.providers.HttpProvider('http://127.0.0.1:8545'));
-	const ownerAccount = fs.readFileSync(path.join(__dirname, './misc/mainchain_account'), 'utf-8');
+	var ownerAccount = account;
+	if(!ownerAccount) {
+		console.log("Getting default account");
+		ownerAccount = fs.readFileSync(path.join(__dirname, './misc/mainchain_account'), 'utf-8');
+	}
 	web3js.eth.accounts.wallet.add(ownerAccount);
 	return { account: ownerAccount, web3js };
 }
 
+app.get('/api/account/create', async function createAccountFunction(req, res, next) {
+	const web3js = new Web3(new Web3.providers.HttpProvider('http://127.0.0.1:8545'));
+	const privateKey = web3js.eth.accounts.create().privateKey;
+	const address = web3js.eth.accounts.create().address;
+	// const publicKey = web3.eth.accounts.privateKeyToAccount(privateKey);
+	res.status(200).send(address);
+});
+
 app.get('/api/dragon/create', async function createFunction(req, res, next) {
-	const { account, web3js } = loadGanacheAccount();
+	const { account, web3js } = loadGanacheAccount(req.query.account);
 	let hash = '';
 	try {
 		const tx = await createDragonToken(web3js, account, req.query.gas || 350000);
@@ -56,7 +66,7 @@ app.get('/api/dragon/create', async function createFunction(req, res, next) {
 });
 
 app.post('/api/dragon/receive', async function transferFunction(req, res, next) {
-	const { account, web3js } = loadGanacheAccount();
+	const { account, web3js } = loadGanacheAccount(req.query.account);
 	let hash = '';
 	let tx;
 	try {
@@ -95,7 +105,7 @@ app.get('/api/dragon/transfer', async function transferToSideFunction(req, res, 
 });
 
 app.get('/api/dragons', async function getDragonFunction(req, res, next) {
-	const { account, web3js } = loadGanacheAccount();
+	const { account, web3js } = loadGanacheAccount(req.query.account);
 	try {
 		const data = await getMyDragons(web3js, account, req.query.gas || 350000);
 		console.log(`\nAddress ${account} holds dragons with id ${data}\n`);
@@ -117,7 +127,7 @@ app.get('/api/dragons', async function getDragonFunction(req, res, next) {
 });
 
 app.get('/api/dragon', async function getDragonFunction(req, res, next) {
-	const { account, web3js } = loadGanacheAccount();
+	const { account, web3js } = loadGanacheAccount(req.query.account);
 	try {
 		const data = await getDragonDataById(web3js, account, req.query.id);
 		data.sname = web3js.utils.toUtf8(data.name);

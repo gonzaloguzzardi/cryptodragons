@@ -4,6 +4,8 @@ const { mapAccounts } = require('./map-accounts');
 const { saveDragon } = require('./save-dragon');
 const { getDragon } = require('./get-dragon');
 const { deleteDragon, insertDragon } = require('./commons');
+const { createAccount } = require('./create-account');
+const { login } = require('./login');
 
 module.exports = {
 	getDragonsInGateways,
@@ -13,4 +15,6 @@ module.exports = {
 	getDragon,
 	deleteDragon,
 	insertDragon,
+	createAccount,
+	login
 };

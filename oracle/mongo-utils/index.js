@@ -20,6 +20,24 @@ function collectEvents(event, database, url, collection) {
 	});
 }
 
+function collectAll (event, database, url, collection) {
+	return new Promise((res, rej) => {
+		MongoClient.connect(url, mongoClientOptions, (err, db) => {
+			if (err) return rej(err);
+			const dbo = db.db(database);
+			dbo
+				.collection(collection)
+				.find(event)
+				.toArray((error, results) => {
+					db.close();
+					if (error) return rej(error);
+					return res(results);
+				});
+			return null;
+		});
+	});
+}
+
 function collectEventsFromSidechainGateway(database, url, collection) {
 	return collectEvents('SendDragonToMainchainAttempt', database, url, collection);
 }
@@ -82,5 +100,6 @@ module.exports = {
 	collectEventsFromMainchainGateway,
 	insertOnMongo,
 	deleteDragon,
+	collectAll,
 	transforEventIntoTransactionObj,
 };

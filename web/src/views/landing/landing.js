@@ -15,23 +15,12 @@ const namespace = 'ui-view-landing';
 
 export class Landing extends Component {
 
-  login = () => {
-    axios.get(`${oracleUrl}:${oracleApiPort}/api/login`, {
-        params: { account: this.state.account, password: this.state.password },
-    }).then(res => this.setState(
-      { 
-        mainAccount: res.data.mainAccount,
-        sideAccount: res.data.sideAccount
-      }));
-  }
-
-  onChangeAccount = event => {
-      this.setState({ account: event.target.value });
-  }
-
-  onChangePassword = event => {
-      this.setState({ password: event.target.value });
-  }
+  constructor(props) {
+    super(props);
+    this.state = {
+        props: props
+    };
+  }  
 
   render() {
     return (
@@ -42,34 +31,8 @@ export class Landing extends Component {
         </div>
         <Grid container justify="center" spacing={2}>
           <Grid item>
-            <FormLabel>
-                <b>Account</b>&nbsp;
-                <Input
-                    type="text"
-                    name="account"
-                    className={`${namespace}__container-div__map-acounts__input`}
-                    onChange={this.onChangeAccount}
-                />
-            </FormLabel>
-          </Grid>
-        </Grid>
-        <Grid container justify="center" spacing={2}>
-          <Grid item>
-            <FormLabel>
-                <b>Password</b>&nbsp;
-                <Input
-                    type="text"
-                    name="password"
-                    className={`${namespace}__container-div__map-acounts__input`}
-                    onChange={this.onChangePassword}
-                />
-            </FormLabel>
-          </Grid>
-        </Grid>
-        <Grid container justify="center" spacing={2}>
-          <Grid item>
-            <Button variant="contained" color="primary" onClick={this.login}>
-              Login
+            <Button variant="contained" color="primary" href="/dragons">
+              Go To Dragons
             </Button>
           </Grid>
         </Grid>

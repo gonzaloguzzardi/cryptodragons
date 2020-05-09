@@ -1,4 +1,5 @@
 const Web3 = require('web3');
+var Personal = require('web3-eth-personal');
 const fs = require('fs');
 const path = require('path');
 
@@ -34,21 +35,27 @@ app.get('/', (req, res) => {
 
 function loadGanacheAccount(account) {
 	const web3js = new Web3(new Web3.providers.HttpProvider('http://127.0.0.1:8545'));
-	var ownerAccount = account;
-	if(!ownerAccount) {
-		console.log("Getting default account");
-		ownerAccount = fs.readFileSync(path.join(__dirname, './misc/mainchain_account'), 'utf-8');
+	var ownerAccount = fs.readFileSync(path.join(__dirname, './misc/mainchain_account'), 'utf-8');
+	if(account) {
+		var an_account = web3js.eth.accounts.privateKeyToAccount(account);
+		ownerAccount = an_account.address;
 	}
+	console.log("ORIGINAL ACCOUNT: " + ownerAccount);
 	web3js.eth.accounts.wallet.add(ownerAccount);
 	return { account: ownerAccount, web3js };
 }
 
 app.get('/api/account/create', async function createAccountFunction(req, res, next) {
 	const web3js = new Web3(new Web3.providers.HttpProvider('http://127.0.0.1:8545'));
-	const privateKey = web3js.eth.accounts.create().privateKey;
-	const address = web3js.eth.accounts.create().address;
+	var personal = new Personal(new Web3.providers.HttpProvider('http://127.0.0.1:8545'));
+	const account = await web3js.eth.personal.newAccount('!@superpassword');
+	console.log(account);
+	// const privateKey = account.privateKey;
+	// const address = account.address;
 	// const publicKey = web3.eth.accounts.privateKeyToAccount(privateKey);
-	res.status(200).send(address);
+	// web3js.eth.accounts.wallet.add(address);
+	console.log(await web3js.eth.getAccounts());
+	res.status(200).send(account);
 });
 
 app.get('/api/dragon/create', async function createFunction(req, res, next) {
@@ -61,6 +68,7 @@ app.get('/api/dragon/create', async function createFunction(req, res, next) {
 		hash = tx.transactionHash;
 		res.status(200).send(hash);
 	} catch (err) {
+		console.log(err);
 		res.status(500).send(err);
 	}
 });

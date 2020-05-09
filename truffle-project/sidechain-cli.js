@@ -21,21 +21,21 @@ const {
 
 function loadLoomAccount(accountName) {
 	const accountPath = './misc/loom_private_key';
-	const privateKeyStr = fs.readFileSync(path.join(__dirname, accountPath), 'utf-8');
+	var privateKeyStr = fs.readFileSync(path.join(__dirname, accountPath), 'utf-8');
 	if (accountName) {
-		console.log("using account: " + accountName);
 		privateKeyStr = accountName;
 	} 
 	const privateKey = CryptoUtils.B64ToUint8Array(privateKeyStr);
 	const publicKey = CryptoUtils.publicKeyFromPrivateKey(privateKey);
+	const account = LocalAddress.fromPublicKey(publicKey).toString();
 	const client = new Client('default', 'ws://127.0.0.1:46658/websocket', 'ws://127.0.0.1:46658/queryws');
 	client.txMiddleware = [new NonceTxMiddleware(publicKey, client), new SignedTxMiddleware(privateKey)];
 	client.on('error', (msg) => {
-		console.error('Loom connection error', msg);
+		console.error('Loom connection error', msg);b 
 	});
 
 	return {
-		account: LocalAddress.fromPublicKey(publicKey).toString(),
+		account: account,
 		web3js: new Web3(new LoomProvider(client, privateKey)),
 		client,
 	};
@@ -54,8 +54,7 @@ app.get('/', (req, res) => {
 
 app.get('/api/account/create', async function createAccountFunction(req, res, next) {
 	const privateKey = CryptoUtils.generatePrivateKey();
-	const publicKey = CryptoUtils.publicKeyFromPrivateKey(privateKey);
-	res.status(200).send(LocalAddress.fromPublicKey(publicKey).toString());
+	res.status(200).send(CryptoUtils.Uint8ArrayToB64(privateKey));
 });
 
 app.get('/api/dragon/create', async function createFunction(req, res, next) {
@@ -69,6 +68,7 @@ app.get('/api/dragon/create', async function createFunction(req, res, next) {
 		hash = tx.transactionHash;
 		res.status(200).send(hash);
 	} catch (err) {
+		console.log(err);
 		res.status(400).send(err);
 	} finally {
 		if (client) client.disconnect();

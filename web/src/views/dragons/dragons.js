@@ -5,6 +5,7 @@ import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import Input  from '@material-ui/core/Input';
 import FormLabel  from '@material-ui/core/FormLabel';
+import Popup from "reactjs-popup";
 
 import sleep from '../../utils/sleep';
 
@@ -27,9 +28,9 @@ class Dragons extends Component {
         super(props);
 
         this.state = {
-            defSideAccount: '0xfee39fad945754831b59b92a1a8339f65358792d',
+            defSideAccount: undefined,
             defMainAccount: '0x28863498efede12296888f7ca6cf0b94974fbdbc',
-            sideAccount: '0xfee39fad945754831b59b92a1a8339f65358792d',
+            sideAccount: undefined,
             mainAccount: '0x28863498efede12296888f7ca6cf0b94974fbdbc',
             sideDragons: [],
             sidechainGatewayDragons: [],
@@ -45,12 +46,16 @@ class Dragons extends Component {
     }  
 
     getDragonsFromMain = () => {
-        axios.get(`${mainchainUrl}:${mainchainApiPort}/api/dragons`)
+        axios.get(`${mainchainUrl}:${mainchainApiPort}/api/dragons`, {
+            params: { account: this.state.mainAccount },
+        })
             .then(res => this.setState({ mainDragons: res.data }));
     }
 
     getDragonsFromSide = () => {
-        axios.get(`${sidechainApiUrl}:${sidechainApiPort}/api/dragons`)
+        axios.get(`${sidechainApiUrl}:${sidechainApiPort}/api/dragons`, {
+            params: { account: this.state.sideAccount },
+        })
             .then(res => this.setState({ sideDragons: res.data }));
     }
 
@@ -92,18 +97,22 @@ class Dragons extends Component {
     }
 
     buyDragonInSideChain = () => {
-        axios.get(`${sidechainApiUrl}:${sidechainApiPort}/api/dragon/create`)
+        axios.get(`${sidechainApiUrl}:${sidechainApiPort}/api/dragon/create`, {
+            params: { account: this.state.sideAccount },
+        })
             .then(res => this.getDragonsFromSide());
     }
 
     buyDragonInMainChain = () => {
-        axios.get(`${mainchainUrl}:${mainchainApiPort}/api/dragon/create`)
+        axios.get(`${mainchainUrl}:${mainchainApiPort}/api/dragon/create`, {
+            params: { account: this.state.mainAccount },
+        })
             .then(res => this.getDragonsFromMain());
     }
 
     transferFromSideToMain = dragonId => (
         axios.get(`${oracleUrl}:${oracleApiPort}/api/dragon/transfer`, {
-            params: { id: dragonId, toMain: true },
+            params: { id: dragonId, toMain: true, account: this.state.sideAccount },
         })
         .then(() => {
             this.getDragonsFromOracle();
@@ -114,7 +123,7 @@ class Dragons extends Component {
 
     transferFromMainToSide = dragonId => (
         axios.get(`${oracleUrl}:${oracleApiPort}/api/dragon/transfer`, {
-            params: { id: dragonId, toMain: false },
+            params: { id: dragonId, toMain: false, account: this.state.mainAccount },
         })
         .then(() => {
             this.getDragonsFromOracle();
@@ -123,19 +132,72 @@ class Dragons extends Component {
         .catch((err) => { throw err.response.data })
     );
 
-    mapAccounts = () => {
-        axios.get(`${oracleUrl}:${oracleApiPort}/api/mapAccounts`, {
-            params: { mainAccount: this.state.mainAccount, sideAccount: this.state.sideAccount },
-        });
+    login = () => {
+        if (this.state.account === "admin" && this.state.password === "admin") {
+            this.setState({ 
+                mainAccount: this.state.defMainAccount,
+                sideAccount: this.state.defSideAccount
+            })
+        } else {
+            axios.get(`${oracleUrl}:${oracleApiPort}/api/login`, {
+                params: { account: this.state.account, password: this.state.password },
+            }).then(res => this.setState({ 
+                mainAccount: res.data.mainAccount,
+                sideAccount: res.data.sideAccount
+            }));
+        }
+        this.getDragonsFromSide();
+        this.getDragonsFromOracle();
+        this.getDragonsFromMain();
     }
 
-    onChangeMainAccount = event => {
-        this.setState({ mainAccount: event.target.value });
+    onChangeAccount = event => {
+        this.setState({ account: event.target.value });
+    }
+  
+    onChangePassword = event => {
+        this.setState({ password: event.target.value });
     }
 
-    onChangeSideAccount = event => {
-        this.setState({ sideAccount: event.target.value });
-    }
+    openLoginPopUp = () => {
+        return (
+            <div>
+                <Grid container justify="center" spacing={2}>
+                <Grid item>
+                    <FormLabel>
+                        <b>Account</b>&nbsp;
+                        <Input
+                            type="text"
+                            name="account"
+                            className={`${namespace}__container-div__map-acounts__input`}
+                            onChange={this.onChangeAccount}
+                        />
+                    </FormLabel>
+                </Grid>
+                </Grid>
+                <Grid container justify="center" spacing={2}>
+                <Grid item>
+                    <FormLabel>
+                        <b>Password</b>&nbsp;
+                        <Input
+                            type="text"
+                            name="password"
+                            className={`${namespace}__container-div__map-acounts__input`}
+                            onChange={this.onChangePassword}
+                        />
+                    </FormLabel>
+                </Grid>
+                </Grid>
+                <Grid container justify="center" spacing={2}>
+                <Grid item>
+                    <Button variant="contained" color="primary" onClick={this.login}>
+                        Submit
+                    </Button>
+                </Grid>
+                </Grid>
+            </div>
+        );
+    } 
 
     render() {
         return (
@@ -144,33 +206,12 @@ class Dragons extends Component {
                 { /* Map accounts */ }
                 <Grid container justify="center" spacing={2}>
                     <Grid item>
-                        <FormLabel>
-                            <b>SideChain Account:</b>&nbsp;
-                            <Input
-                                type="text"
-                                name="sideAccount"
-                                className={`${namespace}__container-div__map-acounts__input`}
-                                defaultValue={this.state.defSideAccount}
-                                onChange={this.onChangeSideAccount}
-                            />
-                        </FormLabel>
+                        <Popup trigger={<Button variant="contained" color="primary" onClick={this.openLogin}>Login</Button>} modal position="top left">
+                            {this.openLoginPopUp}
+                        </Popup>
                     </Grid>
                     <Grid item>
-                        <Button variant="contained" color="primary" onClick={this.mapAccounts}>
-                            Map Accounts
-                        </Button>
-                    </Grid>
-                    <Grid item>
-                        <FormLabel>
-                            <b>MainChain Account:</b>&nbsp;
-                            <Input
-                                type="text"
-                                name="mainAccount"
-                                className={`${namespace}__container-div__map-acounts__input`}
-                                defaultValue={this.state.defMainAccount}
-                                onChange={this.onChangeMainAccount}
-                            />
-                        </FormLabel>
+                        <Button variant="contained" color="primary" href="/">Home</Button>
                     </Grid>
                 </Grid>
 
@@ -251,7 +292,10 @@ class Dragons extends Component {
                         </Grid>
                     </Grid>
                 </Grid>
+
+                {this.state.showLogin && this.openLoginPopUp()}
             </div>
+ 
         );
     }
 }

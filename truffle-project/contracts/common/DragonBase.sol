@@ -9,7 +9,7 @@ contract DragonBase is ERC721Enumerable, Ownable {
     uint constant dnaModulus = 10 ** dnaDigits;
 
     struct Dragon {
-        uint256 genes;
+        bytes32 genes;
         bytes32 name; // maybe we can avoid saving the name in teh blockchain
 
         uint64 creationTime; // Initialzed at egg instantiation
@@ -148,7 +148,7 @@ contract DragonBase is ERC721Enumerable, Ownable {
         // encode 32 bytes from genes
         for (uint i = 0; i < 32; i++)
         {
-            encodedData[counter] = byte(uint8(_dragon.genes >> ((8 * i) & uint32(255) ))); 
+            encodedData[counter] = _dragon.genes[i];
             counter++;
         }
 
@@ -240,16 +240,13 @@ contract DragonBase is ERC721Enumerable, Ownable {
     }
 
     function _decodeFirstHalfOfDragonFromBytes(bytes memory _data) internal pure 
-        returns(uint genes, bytes32 name, uint64 creationTime, uint32 dadId, uint32 motherId, uint32 currentExperience) {
+        returns(bytes32 genes, bytes32 name, uint64 creationTime, uint32 dadId, uint32 motherId, uint32 currentExperience) {
         
         uint counter = 0;
 
         // Decode genes
-        for (uint i = 0; i < 32; i++)
-        {
-            uint256 temp = uint256(uint8(_data[counter]));
-            temp <<= 8 * i;
-            genes ^= temp;
+        for (uint i = 0; i < 32; i++) {
+            genes |= bytes32(_data[counter + i] & 0xFF) >> (i * 8);
             counter++;
         }
 

@@ -16,7 +16,7 @@ contract DragonFactory is DragonBase {
 
     address internal _gateway;
 
-    event NewDragon(uint dragonId, uint dna);
+    event NewDragon(uint dragonId, bytes32 genes);
 
     constructor(address gateway, uint8 blockchainId) DragonBase() public {
         require(gateway != address(0), "Invalid gateway address");
@@ -32,7 +32,7 @@ contract DragonFactory is DragonBase {
         //Dragon storage father = dragons[_dadId];
        // Dragon storage mother = dragons[_motherId];
 
-        uint256 newGenes = 14564515454;
+        bytes32 newGenes = bytes32("0x14564515454");
 
         bytes32 nameInBytes = _stringToBytes32(_name);
         uint id = _createDragon(nameInBytes, _creationTime, newGenes, _dadId, _motherId);
@@ -73,7 +73,7 @@ contract DragonFactory is DragonBase {
         }
     }
 
-    function _createDragon(bytes32 _name, uint64 _creationTime, uint256 _genes, uint32 _dadId, uint32 _motherId) private returns(uint256 id) {
+    function _createDragon(bytes32 _name, uint64 _creationTime, bytes32 _genes, uint32 _dadId, uint32 _motherId) private returns(uint256 id) {
         uint32 currentExperience = 0;
         uint16 actionCooldown = 0;
         uint16 health = 50;
@@ -87,7 +87,7 @@ contract DragonFactory is DragonBase {
 
     function _createDragonFromData(bytes memory _data) private returns(uint256) {
 
-        (uint _genes,
+        (bytes32 _genes,
         bytes32 _name,
         uint64 _creationTime,
         uint32 _dadId,
@@ -109,7 +109,7 @@ contract DragonFactory is DragonBase {
     }
 
     function _createDragonWithStats
-        (uint256 _genes,
+        (bytes32 _genes,
         bytes32 _name,
         uint64 _creationTime,
         uint32 _dadId,
@@ -153,14 +153,14 @@ contract DragonFactory is DragonBase {
         _assignGenesAndName(id, _genes, _name);
     }
 
-    function _assignGenesAndName(uint256 _dragonId, uint256 _genes, bytes32 _name) private {
+    function _assignGenesAndName(uint256 _dragonId, bytes32 _genes, bytes32 _name) private {
         Dragon storage dragon = dragons[_dragonId];
         dragon.genes = _genes;
         dragon.name = _name;
     }
 
     function _updateDragonFromData(uint _tokenId, bytes memory _data) private {
-        (uint _genes,
+        (bytes32 _genes,
         bytes32 _name,
         uint64 _creationTime,
         uint32 _dadId,
@@ -181,7 +181,7 @@ contract DragonFactory is DragonBase {
 
     function _updateDragonWithStats
         (uint _tokenId,
-        uint _genes,
+        bytes32 _genes,
         bytes32 _name,
         uint64 _creationTime,
         uint32 _dadId,

@@ -158,8 +158,6 @@ class Dragons extends Component {
                 params: { account: this.state.account, password: this.state.password },
             }).then(res => 
                 {
-                    console.log("hola");
-                    console.log(res.data);
                     this.setState({ 
                         mainAccount: res.data.mainAccount,
                         sideAccount: res.data.sideAccount,
@@ -194,7 +192,6 @@ class Dragons extends Component {
            { mainAccount: this.state.mapAccountMain, sideAccount: this.state.mapAccountSide, sideprivateAccount:this.state.mapPrivateAccountSide }
         ).then(res => 
             {
-                console.log(res.data);
                 this.setState({ 
                     isMap: res.data
                 });

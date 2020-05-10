@@ -39,18 +39,14 @@ function loadGanacheAccount(account) {
 	var ownerAccount = fs.readFileSync(path.join(__dirname, './misc/mainchain_account'), 'utf-8');
 	if(account) {
 		ownerAccount = account;
-		console.log(account);
 		web3js.eth.personal.unlockAccount(account,"asd", 15000);
 	}
-	console.log("ORIGINAL ACCOUNT: " + ownerAccount);
 	web3js.eth.accounts.wallet.add(ownerAccount);
 	return { account: ownerAccount, web3js };
 }
 
 async function giveSomeMoney(account) {
 	const web3js = new Web3(new Web3.providers.HttpProvider('http://127.0.0.1:8545'));
-	console.log('free money here');
-	console.log(account);
 	transactionObject = {
 		from: '0x28863498efede12296888f7ca6cf0b94974fbdbc',
 		to: account,
@@ -59,7 +55,6 @@ async function giveSomeMoney(account) {
 	console.log(await web3js.eth.sendTransaction(transactionObject));
 	console.log(await web3js.eth.getBalance(account));
 	console.log(await web3js.eth.getBalance('0x28863498efede12296888f7ca6cf0b94974fbdbc'));
-	
 }
 
 app.get('/api/account/create', async function createAccountFunction(req, res, next) {
@@ -114,7 +109,7 @@ app.post('/api/dragon/receive', async function transferFunction(req, res, next) 
 });
 
 app.get('/api/dragon/transfer', async function transferToSideFunction(req, res, next) {
-	const { account, web3js } = loadGanacheAccount();
+	const { account, web3js } = loadGanacheAccount(req.query.account);
 	try {
 		const data = await transferDragonToGateway(web3js, req.query.gas || 350000, account, req.query.id, req.query.data);
 		console.log(`\n Token with id ${req.query.id} was successfully transfered to gateway \n`);

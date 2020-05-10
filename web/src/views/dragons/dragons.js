@@ -147,6 +147,11 @@ class Dragons extends Component {
                 mapAccountMain: this.state.mapDefAccountMain,
                 mapAccountSide: this.state.mapDefAccountSide,
                 mapPrivateAccountSide: this.state.mapDefPrivateAccountSide
+            }, () => {
+                this.getDragonsFromSide();
+                this.getDragonsFromOracle();
+                this.getDragonsFromMain();                
+                this.isMap();
             })
         } else {
             axios.get(`${oracleUrl}:${oracleApiPort}/api/login`, {

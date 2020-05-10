@@ -36,7 +36,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // API ROUTES
 app.get('/api/dragons', getDragonsInGateways);
 app.get('/api/dragon/transfer', transferDragon);
-app.get('/api/mapAccounts', mapAccounts);
+app.post('/api/mapAccounts', mapAccounts);
 app.get('/api/dragon', getDragon);
 
 app.post('/api/saveDragon', saveDragon);

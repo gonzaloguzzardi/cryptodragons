@@ -37,11 +37,14 @@ class Dragons extends Component {
             mainchainGatewayDragons: [],
             dragonsInSidechainGateway: 0,
             dragonsInMainchainGateway: 0,
+            mapAccountSide: '0xfee39fad945754831b59b92a1a8339f65358792d',
+            mapAccountMain: '0x28863498efede12296888f7ca6cf0b94974fbdbc',
+            mapPrivateAccountSide: 'OwM4hj6RcjBecJSrObLjyB4R/5dbQFk0ZpAyrIn7kYAFsuBAV7RoOIbw9V3tGB9I2WodYtN373D46UHn3EtgqQ==',
+            mapDefAccountSide: '0xfee39fad945754831b59b92a1a8339f65358792d',
+            mapDefAccountMain: '0x28863498efede12296888f7ca6cf0b94974fbdbc',
+            mapDefPrivateAccountSide: 'OwM4hj6RcjBecJSrObLjyB4R/5dbQFk0ZpAyrIn7kYAFsuBAV7RoOIbw9V3tGB9I2WodYtN373D46UHn3EtgqQ==',
             mainDragons: [],
         };
-        axios.get(`${oracleUrl}:${oracleApiPort}/api/mapAccounts`, {
-            params: { mainAccount: '0x28863498efede12296888f7ca6cf0b94974fbdbc', sideAccount: '0xfee39fad945754831b59b92a1a8339f65358792d' },
-        });
         this.getDragonsFromSide();
         this.getDragonsFromOracle();
         this.getDragonsFromMain();
@@ -138,16 +141,28 @@ class Dragons extends Component {
         if (this.state.account === "admin" && this.state.password === "admin") {
             this.setState({ 
                 mainAccount: this.state.defMainAccount,
-                sideAccount: this.state.defSideAccount
+                sideAccount: this.state.defSideAccount,
+                mapAccountMain: this.state.mapDefAccountMain,
+                mapAccountSide: this.state.mapDefAccountSide,
+                mapPrivateAccountSide: this.state.mapDefPrivateAccountSide
             })
         } else {
             axios.get(`${oracleUrl}:${oracleApiPort}/api/login`, {
                 params: { account: this.state.account, password: this.state.password },
-            }).then(res => this.setState({ 
-                mainAccount: res.data.mainAccount,
-                sideAccount: res.data.sideAccount
-            }));
-        }
+            }).then(res => 
+                {
+                    console.log("hola");
+                    console.log(res.data);
+                    this.setState({ 
+                        mainAccount: res.data.mainAccount,
+                        sideAccount: res.data.sideAccount,
+                        sideMapAccount: res.data.sideMapAccount,
+                        mapAccountMain: res.data.mainAccount,
+                        mapAccountSide: res.data.sideMapAccount,
+                        mapPrivateAccountSide: res.data.sideAccount
+                    });
+                }
+        );}
         this.getDragonsFromSide();
         this.getDragonsFromOracle();
         this.getDragonsFromMain();
@@ -160,42 +175,46 @@ class Dragons extends Component {
     onChangePassword = event => {
         this.setState({ password: event.target.value });
     }
-
+    mapAccounts = () => {
+        axios.post(`${oracleUrl}:${oracleApiPort}/api/mapAccounts`, 
+           { mainAccount: this.state.mapAccountMain, sideAccount: this.state.mapAccountSide, sideprivateAccount:this.state.mapPrivateAccountSide }
+        );
+    } 
     openLoginPopUp = () => {
         return (
             <div>
                 <Grid container justify="center" spacing={2}>
-                <Grid item>
-                    <FormLabel>
-                        <b>Account</b>&nbsp;
-                        <Input
-                            type="text"
-                            name="account"
-                            className={`${namespace}__container-div__map-acounts__input`}
-                            onChange={this.onChangeAccount}
-                        />
-                    </FormLabel>
-                </Grid>
-                </Grid>
-                <Grid container justify="center" spacing={2}>
-                <Grid item>
-                    <FormLabel>
-                        <b>Password</b>&nbsp;
-                        <Input
-                            type="text"
-                            name="password"
-                            className={`${namespace}__container-div__map-acounts__input`}
-                            onChange={this.onChangePassword}
-                        />
-                    </FormLabel>
-                </Grid>
-                </Grid>
-                <Grid container justify="center" spacing={2}>
-                <Grid item>
-                    <Button variant="contained" color="primary" onClick={this.login}>
-                        Submit
-                    </Button>
-                </Grid>
+                    <Grid item>
+                        <FormLabel>
+                            <b>Account</b>&nbsp;
+                            <Input
+                                type="text"
+                                name="account"
+                                className={`${namespace}__container-div__map-acounts__input`}
+                                onChange={this.onChangeAccount}
+                            />
+                        </FormLabel>
+                    </Grid>
+                    </Grid>
+                    <Grid container justify="center" spacing={2}>
+                    <Grid item>
+                        <FormLabel>
+                            <b>Password</b>&nbsp;
+                            <Input
+                                type="text"
+                                name="password"
+                                className={`${namespace}__container-div__map-acounts__input`}
+                                onChange={this.onChangePassword}
+                            />
+                        </FormLabel>
+                    </Grid>
+                    </Grid>
+                    <Grid container justify="center" spacing={2}>
+                    <Grid item>
+                        <Button variant="contained" color="primary" onClick={this.login}>
+                            Submit
+                        </Button>
+                    </Grid>
                 </Grid>
             </div>
         );
@@ -205,7 +224,7 @@ class Dragons extends Component {
         return (
             <div className={`${namespace}__container-div`}>
 
-                { /* Map accounts */ }
+                { /* Login */ }
                 <Grid container justify="center" spacing={2}>
                     <Grid item>
                         <Popup trigger={<Button variant="contained" color="primary" onClick={this.openLogin}>Login</Button>} modal position="top left">
@@ -214,6 +233,27 @@ class Dragons extends Component {
                     </Grid>
                     <Grid item>
                         <Button variant="contained" color="primary" href="/">Home</Button>
+                    </Grid>
+                </Grid>
+
+                { /* Map accounts */ }
+                <Grid container justify="center" spacing={2}>
+                    <Grid item>
+                        <FormLabel>
+                            <b>SideChain Account:</b>&nbsp;
+                            <b>{this.state.mapAccountSide}</b>
+                        </FormLabel>
+                    </Grid>
+                    <Grid item>
+                        <Button variant="contained" color="primary" onClick={this.mapAccounts}>
+                            Map Accounts
+                        </Button>
+                    </Grid>
+                    <Grid item>
+                        <FormLabel>
+                            <b>MainChain Account:</b>&nbsp;
+                            <b>{this.state.mapAccountMain}</b>
+                        </FormLabel>
                     </Grid>
                 </Grid>
 

@@ -5,9 +5,12 @@ const { insertOnMongo } = require('../mongo-utils');
 const { database, mongoUrl } = require('../config');
 
 function saveDragon(req, res) {
-	insertOnMongo(database, mongoUrl, req.query.dragon, 'errors')
+	new Promise((res, rej) => {
+		insertOnMongo(database, mongoUrl, req.query.dragon, 'errors')
 		.then((result) => res.status(200).send(result))
 		.catch((err) => res.status(500).send(err));
+	});
+
 }
 
 module.exports = { saveDragon };

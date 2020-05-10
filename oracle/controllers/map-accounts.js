@@ -2,18 +2,22 @@ const axios = require('axios');
 const { sidechainApiUrl, sidechainApiPort, mainchainApiUrl, mainchainApiPort } = require('../config');
 
 function mapAccounts(req, res) {
-	console.log(`Main account: ${req.query.mainAccount}`);
-	console.log(`Side account: ${req.query.sideAccount}`);
+	console.log(`Main account: ${req.body.mainAccount}`);
+	console.log(`Side account: ${req.body.sideAccount}`);
+	console.log(`Side private: ${req.body.sideprivateAccount}`);
 
 	axios
-		.get(
-			`${sidechainApiUrl}:${sidechainApiPort}/api/mapAccount?mainAccount=${req.query.mainAccount}&account=${req.query.sideAccount}`,
+		.post(
+			`${sidechainApiUrl}:${sidechainApiPort}/api/mapAccount`,{
+				mainAccount: req.body.mainAccount,
+				account: req.body.sideprivateAccount
+			}
 		)
 		.catch((err) => res.status(500).send(err));
 
 	axios
 		.get(
-			`${mainchainApiUrl}:${mainchainApiPort}/api/mapAccount?sideAccount=${req.query.sideAccount}&account=${req.query.mainAccount}`,
+			`${mainchainApiUrl}:${mainchainApiPort}/api/mapAccount?sideAccount=${req.body.sideAccount}&account=${req.body.mainAccount}`,
 		)
 		.then((response) => res.status(200).send(response))
 		.catch((err) => res.status(500).send(err));

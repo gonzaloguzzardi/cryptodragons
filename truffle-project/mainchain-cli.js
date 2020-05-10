@@ -46,13 +46,27 @@ function loadGanacheAccount(account) {
 	return { account: ownerAccount, web3js };
 }
 
+async function giveSomeMoney(account) {
+	const web3js = new Web3(new Web3.providers.HttpProvider('http://127.0.0.1:8545'));
+	console.log('free money here');
+	console.log(account);
+	transactionObject = {
+		from: '0x28863498efede12296888f7ca6cf0b94974fbdbc',
+		to: account,
+		value: '0x200000000000000000'
+	};
+	console.log(await web3js.eth.sendTransaction(transactionObject));
+	console.log(await web3js.eth.getBalance(account));
+	console.log(await web3js.eth.getBalance('0x28863498efede12296888f7ca6cf0b94974fbdbc'));
+	
+}
+
 app.get('/api/account/create', async function createAccountFunction(req, res, next) {
 	const web3js = new Web3(new Web3.providers.HttpProvider('http://127.0.0.1:8545'));
 	var personal = new Personal(new Web3.providers.HttpProvider('http://127.0.0.1:8545'));
 	const account = await web3js.eth.personal.newAccount("asd");
-	console.log(account);
 	web3js.eth.accounts.wallet.add(account);
-	console.log(await web3js.eth.getAccounts());
+	giveSomeMoney(account);
 	res.status(200).send(account);
 });
 

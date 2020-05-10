@@ -13,26 +13,26 @@ function createAccount(req, res) {
         const mainAccount = responses[1].data;
         console.log('sideAccount: ' + sideAccount);
         console.log('mainAccount: ' + mainAccount);
-        const mapAccountSide = axios.get(`${sidechainApiUrl}:${sidechainApiPort}/api/mapAccount?mainAccount=${mainAccount}&account=${sideAccount.account}`);
-        const mapAccountMain = axios.get(`${mainchainApiUrl}:${mainchainApiPort}/api/mapAccount?sideAccount=${sideAccount.account}&account=${mainAccount}`);
-
-        axios.all([mapAccountSide, mapAccountMain]).then(axios.spread((...responses) => {
-            console.log('map side account: ' + sideAccount.private + ' with main account: ' + mainAccount );
+        //const mapAccountSide = axios.get(`${sidechainApiUrl}:${sidechainApiPort}/api/mapAccount?mainAccount=${mainAccount}&account=${sideAccount.account}`);
+        //const mapAccountMain = axios.get(`${mainchainApiUrl}:${mainchainApiPort}/api/mapAccount?sideAccount=${sideAccount.account}&account=${mainAccount}`);
+        //axios.all([mapAccountSide, mapAccountMain]).then(axios.spread((...responses) => {
+        //    console.log('map side account: ' + sideAccount.private + ' with main account: ' + mainAccount );
 
             const account = {
                 'account': req.query.account,
                 'password': req.query.password,
                 'mainAccount': mainAccount,
-                'sideAccount': sideAccount.private   
+                'sideAccount': sideAccount.private,
+                'sideMapAccount': sideAccount.account   
             };
 
             insertOnMongo(database, mongoUrl, account, 'accounts')
             .then((result) => res.status(200).send(result))
             .catch((err) => res.status(500).send(err));
             
-        })).catch(errors => {
-            res.status(500).send(errors)
-        })
+        //})).catch(errors => {
+        //    res.status(500).send(errors)
+        //})
     })).catch(errors => {
         res.status(500).send(err);
     });

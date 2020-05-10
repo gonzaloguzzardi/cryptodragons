@@ -26,7 +26,12 @@ before_install:
 - chmod +x docker-compose
 - sudo mv docker-compose /usr/local/bin
 
-script:
-- truffle test
-- docker-compose build
-- docker-compose up -d
+jobs:
+  include:
+    - stage: tests
+      script: npm install
+      script: truffle test
+    - stage: docker
+      script: docker-compose build
+      script: docker-compose up -d
+

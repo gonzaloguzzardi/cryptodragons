@@ -22,6 +22,18 @@ async function _sMapAccountMainChain(contract, ownerAccount, gas, sideAccount) {
 	return contract.methods.mapContractToSidechain(sideAccount).send({ from: ownerAccount, gas: gasEstimate });
 }
 
+async function _isMap(contract, ownerAccount, gas, account) {
+
+	const gasEstimate = await contract.methods
+		.isMap(account)
+		.estimateGas({ from: ownerAccount, gas });
+
+	if (gasEstimate >= gas) {
+		throw new Error('Not enough enough gas, send more.');
+	}
+	return contract.methods.isMap(account).call({ from: ownerAccount, gas: gasEstimate });
+}
+
 async function _sCreateDragonToken(contract, ownerAccount, gas) {
 	// createDragon(string memory _name, uint64 _creationTime, uint32 _dadId, uint32 _motherId)
 
@@ -78,6 +90,7 @@ async function _sReceiveDragonFromOracle(contract, ownerAccount, gas, dragonId, 
 }
 
 module.exports = {
+	_isMap,
 	_sMapAccountSideChain,
 	_sMapAccountMainChain,
 	_sCreateDragonToken,

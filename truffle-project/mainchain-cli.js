@@ -12,6 +12,7 @@ const app = express();
 const bodyParser = require('body-parser');
 
 const {
+	isMap,
 	mapAccount,
 	createDragonToken,
 	getMyDragons,
@@ -163,6 +164,17 @@ app.get('/api/mapAccount', async function getMapFunction(req, res, next) {
 	try {
 		await mapAccount(web3js, account, req.query.gas || 350000, req.query.sideAccount);
 		res.status(200).send('OK');
+	} catch (err) {
+		console.log(`Error mapping mainchain to sidechain ${err}`);
+		res.status(400).send(err);
+	}
+});
+
+app.get('/api/isMap', async function getisMapFunction(req, res, next) {
+	const { account, web3js } = loadGanacheAccount(req.query.account);
+	try {
+		var result = await isMap(web3js, account, req.query.gas || 350000, req.query.sideAccount);
+		res.status(200).send(result);
 	} catch (err) {
 		console.log(`Error mapping mainchain to sidechain ${err}`);
 		res.status(400).send(err);

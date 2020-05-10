@@ -30,6 +30,7 @@ class Dragons extends Component {
         this.state = {
             defSideAccount: undefined,
             defMainAccount: undefined,
+            isMap: false,
             sideAccount: undefined,
             mainAccount: undefined,
             sideDragons: [],
@@ -45,6 +46,7 @@ class Dragons extends Component {
             mapDefPrivateAccountSide: 'OwM4hj6RcjBecJSrObLjyB4R/5dbQFk0ZpAyrIn7kYAFsuBAV7RoOIbw9V3tGB9I2WodYtN373D46UHn3EtgqQ==',
             mainDragons: [],
         };
+        this.isMap();
         this.getDragonsFromSide();
         this.getDragonsFromOracle();
         this.getDragonsFromMain();
@@ -160,12 +162,14 @@ class Dragons extends Component {
                         mapAccountMain: res.data.mainAccount,
                         mapAccountSide: res.data.sideMapAccount,
                         mapPrivateAccountSide: res.data.sideAccount
+                    }, () => {
+                        this.getDragonsFromSide();
+                        this.getDragonsFromOracle();
+                        this.getDragonsFromMain();                
+                        this.isMap();
                     });
                 }
         );}
-        this.getDragonsFromSide();
-        this.getDragonsFromOracle();
-        this.getDragonsFromMain();
     }
 
     onChangeAccount = event => {
@@ -178,6 +182,18 @@ class Dragons extends Component {
     mapAccounts = () => {
         axios.post(`${oracleUrl}:${oracleApiPort}/api/mapAccounts`, 
            { mainAccount: this.state.mapAccountMain, sideAccount: this.state.mapAccountSide, sideprivateAccount:this.state.mapPrivateAccountSide }
+        ).then(this.isMap());
+    } 
+    isMap = () => {
+        axios.post(`${oracleUrl}:${oracleApiPort}/api/isMap`, 
+           { mainAccount: this.state.mapAccountMain, sideAccount: this.state.mapAccountSide, sideprivateAccount:this.state.mapPrivateAccountSide }
+        ).then(res => 
+            {
+                console.log(res.data);
+                this.setState({ 
+                    isMap: res.data
+                });
+            }
         );
     } 
     openLoginPopUp = () => {
@@ -219,7 +235,21 @@ class Dragons extends Component {
             </div>
         );
     } 
-
+    showMapButton = () => {
+        if (this.state.isMap) {
+            return (
+                <Button variant="contained" color="primary" className="botonVerde" onClick={this.mapAccounts}>
+                    Map Accounts
+                </Button>
+            );
+        } else {
+            return (
+                <Button variant="contained" color="primary" onClick={this.mapAccounts}>
+                    Map Accounts
+                </Button>
+            );
+        }
+    } 
     render() {
         return (
             <div className={`${namespace}__container-div`}>
@@ -245,9 +275,7 @@ class Dragons extends Component {
                         </FormLabel>
                     </Grid>
                     <Grid item>
-                        <Button variant="contained" color="primary" onClick={this.mapAccounts}>
-                            Map Accounts
-                        </Button>
+                        {this.showMapButton()}
                     </Grid>
                     <Grid item>
                         <FormLabel>

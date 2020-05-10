@@ -6,10 +6,12 @@ const { getDragon } = require('./get-dragon');
 const { deleteDragon, insertDragon } = require('./commons');
 const { createAccount } = require('./create-account');
 const { login } = require('./login');
+const { isMap } = require('./is-map');
 
 module.exports = {
 	getDragonsInGateways,
 	transferDragon,
+	isMap,
 	mapAccounts,
 	saveDragon,
 	getDragon,

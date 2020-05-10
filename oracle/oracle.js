@@ -13,6 +13,7 @@ const { oracleApiPort } = require('./config');
 const {
 	getDragonsInGateways,
 	transferDragon,
+	isMap,
 	mapAccounts,
 	saveDragon,
 	getDragon,
@@ -37,6 +38,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.get('/api/dragons', getDragonsInGateways);
 app.get('/api/dragon/transfer', transferDragon);
 app.post('/api/mapAccounts', mapAccounts);
+app.post('/api/isMap', isMap);
 app.get('/api/dragon', getDragon);
 
 app.post('/api/saveDragon', saveDragon);

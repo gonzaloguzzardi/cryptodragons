@@ -1,4 +1,5 @@
 const {
+	_isMap,
 	_sMapAccountSideChain,
 	_sCreateDragonToken,
 	_sGetMyDragons,
@@ -17,6 +18,11 @@ async function getLoomTokenContract(web3js) {
 
 async function getLoomGatewayContract(web3js) {
 	return new web3js.eth.Contract(GatewayJson.abi, GatewayJson.networks[loomChainId].address);
+}
+
+async function isMap(web3js, ownerAccount, gas, mainAccount) {
+	const contract = await getLoomTokenContract(web3js);
+	return _isMap(contract, ownerAccount, gas, mainAccount);
 }
 
 async function mapAccount(web3js, ownerAccount, gas, mainAccount) {
@@ -50,6 +56,7 @@ async function receiveDragonFromOracle(web3js, ownerAccount, gas, dragonId, data
 }
 
 module.exports = {
+	isMap,
 	mapAccount,
 	createDragonToken,
 	getMyDragons,

@@ -9,6 +9,7 @@ const cors = require('cors');
 const app = express();
 const bodyParser = require('body-parser');
 const {
+	isMap,
 	mapAccount,
 	createDragonToken,
 	getMyDragons,
@@ -150,6 +151,23 @@ app.post('/api/mapAccount', async function getMapFunction(req, res, next) {
 		console.log(req.body.mainAccount);
 		await mapAccount(web3js, account, req.body.gas || 350000, req.body.mainAccount);
 		res.status(200).send('OK');
+	} catch (err) {
+		console.log(`Error mapping sidechain to mainchain ${err}`);
+		res.status(400).send(err);
+	} finally {
+		if (client) client.disconnect();
+	}
+});
+
+app.post('/api/isMap', async function getIsMapFunction(req, res, next) {
+	console.log(req.body.account);
+	const { account, web3js, client } = loadLoomAccount(req.body.account);
+	try {
+		console.log('MAPPING:');
+		console.log(account);
+		console.log(req.body.mainAccount);
+		var result = await isMap(web3js, account, req.body.gas || 350000, req.body.mainAccount);
+		res.status(200).send(result);
 	} catch (err) {
 		console.log(`Error mapping sidechain to mainchain ${err}`);
 		res.status(400).send(err);

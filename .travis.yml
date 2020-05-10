@@ -16,7 +16,7 @@ env:
   - secure: I92OrqRF7rN8cVp9hdvyKBoh8flXgEy8jBmowDq9Ev3G6Ehu54NXCNU+nWDp9ObbVESEDqBNA/F7WWz1BrK/4E4RUwFbRLGhws5T1hprVj2fcc1Hn3yifi/eQsBgmQvpgPVhzCZdQawfq8VeRJcI54WCyRlfs8MRPNGwMj+pPCw1wOUapJeSI8lkyfuFlv9iQbafgvqwT6gAqh4OEkvTkZuaim0CCd8piCt0cFfl2GGhMV7gARoDHszTcicROPaqBN3/GzgiSnfBFAmHm6O5CsYr4l+zziy1W9VkIf6h3JoRB/SkHiUjALioK3kh9THbLo6fsbXnZChad0l3H87/t51/tFKh8RmdMThlHAKj9i2omxroo4uzuSDj1bnn5rC+pMkVUBSE8zAFP0XSAJZyFY0xBqq3AKdIKdfPV+UKTqHxmMTbXZL1AswWKcZS0BOZ+THYWYsnKjv1FhqScgrostK2CYkl25IDgWmx/cqurJ0ZVZL1e0tnA88X4IU+v45vlkthPukbHxocgoCuipNIi2rIgL3JqlFBhXntEQV6Pfv9q8PgakLcO0n9yE724nnqBZcpoCQNdDWXk+Mb1lEdqKL4DOr8d6e3UwuuXp/83QDfzUjsib+lynxHy+1mPQ1ur1/EkIAluaGqGq3aWEBmUKi9uYAHMNVkoYGIcKssXnY=
 
 before_install:
-- npm install -g truffle
+- sudo npm install -g truffle
 - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
 - docker pull nicomoccagatta/cryptodragons:bfa_node_v010
 - docker pull gonzaloguzzardi/cryptodragons:loom_node_v001

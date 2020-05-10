@@ -54,7 +54,13 @@ app.get('/', (req, res) => {
 
 app.get('/api/account/create', async function createAccountFunction(req, res, next) {
 	const privateKey = CryptoUtils.generatePrivateKey();
-	res.status(200).send(CryptoUtils.Uint8ArrayToB64(privateKey));
+	const publicKey = CryptoUtils.publicKeyFromPrivateKey(privateKey);
+	const account = LocalAddress.fromPublicKey(publicKey).toString();
+	var r = {
+		private: CryptoUtils.Uint8ArrayToB64(privateKey),
+		account: account
+	};
+	res.status(200).send(r);
 });
 
 app.get('/api/dragon/create', async function createFunction(req, res, next) {

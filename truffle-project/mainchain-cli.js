@@ -37,8 +37,9 @@ function loadGanacheAccount(account) {
 	const web3js = new Web3(new Web3.providers.HttpProvider('http://127.0.0.1:8545'));
 	var ownerAccount = fs.readFileSync(path.join(__dirname, './misc/mainchain_account'), 'utf-8');
 	if(account) {
-		var an_account = web3js.eth.accounts.privateKeyToAccount(account);
-		ownerAccount = an_account.address;
+		ownerAccount = account;
+		console.log(account);
+		web3js.eth.personal.unlockAccount(account,"asd", 15000);
 	}
 	console.log("ORIGINAL ACCOUNT: " + ownerAccount);
 	web3js.eth.accounts.wallet.add(ownerAccount);
@@ -48,12 +49,9 @@ function loadGanacheAccount(account) {
 app.get('/api/account/create', async function createAccountFunction(req, res, next) {
 	const web3js = new Web3(new Web3.providers.HttpProvider('http://127.0.0.1:8545'));
 	var personal = new Personal(new Web3.providers.HttpProvider('http://127.0.0.1:8545'));
-	const account = await web3js.eth.personal.newAccount('!@superpassword');
+	const account = await web3js.eth.personal.newAccount("asd");
 	console.log(account);
-	// const privateKey = account.privateKey;
-	// const address = account.address;
-	// const publicKey = web3.eth.accounts.privateKeyToAccount(privateKey);
-	// web3js.eth.accounts.wallet.add(address);
+	web3js.eth.accounts.wallet.add(account);
 	console.log(await web3js.eth.getAccounts());
 	res.status(200).send(account);
 });

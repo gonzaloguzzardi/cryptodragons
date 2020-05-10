@@ -29,9 +29,9 @@ class Dragons extends Component {
 
         this.state = {
             defSideAccount: undefined,
-            defMainAccount: '0x28863498efede12296888f7ca6cf0b94974fbdbc',
+            defMainAccount: undefined,
             sideAccount: undefined,
-            mainAccount: '0x28863498efede12296888f7ca6cf0b94974fbdbc',
+            mainAccount: undefined,
             sideDragons: [],
             sidechainGatewayDragons: [],
             mainchainGatewayDragons: [],
@@ -39,7 +39,9 @@ class Dragons extends Component {
             dragonsInMainchainGateway: 0,
             mainDragons: [],
         };
-
+        axios.get(`${oracleUrl}:${oracleApiPort}/api/mapAccounts`, {
+            params: { mainAccount: '0x28863498efede12296888f7ca6cf0b94974fbdbc', sideAccount: '0xfee39fad945754831b59b92a1a8339f65358792d' },
+        });
         this.getDragonsFromSide();
         this.getDragonsFromOracle();
         this.getDragonsFromMain();

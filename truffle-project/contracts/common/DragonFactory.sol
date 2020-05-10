@@ -16,7 +16,7 @@ contract DragonFactory is DragonBase {
 
     address internal _gateway;
 
-    event NewDragon(uint dragonId, bytes32 genes);
+    event NewDragon(uint dragonId, uint256 genes);
 
     constructor(address gateway, uint8 blockchainId) DragonBase() public {
         require(gateway != address(0), "Invalid gateway address");
@@ -38,7 +38,7 @@ contract DragonFactory is DragonBase {
         uint id = _createDragon(nameInBytes, _creationTime, newGenes, _dadId, _motherId);
 
         _mint(msg.sender, id);
-        emit NewDragon(id, newGenes);
+        emit NewDragon(id, uint256(newGenes));
     }
 
     //TODO implement burn function which should update mainchainToSidechainIds mapping

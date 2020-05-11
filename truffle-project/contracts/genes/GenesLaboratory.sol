@@ -31,7 +31,7 @@ contract GenesLaboratory {
 
     }
 
-    function generateChildValue(uint16 fatherValue, uint16 motherValue) private pure returns (uint16 value) {
+    function generateChildValue(uint16 fatherValue, uint16 motherValue) private returns (uint16 value) {
         uint fatherFixedValue = fatherValue * 10000;
         uint motherFixedValue = motherValue * 10000;
 

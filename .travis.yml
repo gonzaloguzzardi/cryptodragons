@@ -28,10 +28,9 @@ before_install:
 
 jobs:
   include:
-    - stage: tests
+    - stage: truffle_tests
       script: npm install
-      script: cd project/truffle-project
-      script: truffle test
+      script: ./run_truffle_tests.sh
     - stage: docker
       script: docker-compose build
       script: docker-compose up -d

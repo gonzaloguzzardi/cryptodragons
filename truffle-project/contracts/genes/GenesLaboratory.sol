@@ -24,8 +24,8 @@ contract GenesLaboratory {
     }
 
     function getChildStrength(bytes32 childGenes, bytes32 fatherGenes, bytes32 motherGenes) private returns (bytes32) {
-        uint fatherInitialHealth = getInitialHealthFromBytes(fatherGenes);
-        uint motherInitialHealth = getInitialHealthFromBytes(motherGenes);
+        uint16 fatherInitialHealth = getInitialHealthFromBytes(fatherGenes);
+        uint16 motherInitialHealth = getInitialHealthFromBytes(motherGenes);
 
         uint16 childInitialHealth = generateChildValue(fatherInitialHealth, motherInitialHealth);
 

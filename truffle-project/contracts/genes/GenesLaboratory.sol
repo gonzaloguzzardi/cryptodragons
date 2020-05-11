@@ -47,12 +47,12 @@ contract GenesLaboratory {
 
         // Increase variance by 7500 to allow stats jump on lower values
         minimumValue = (minimumValue * 95 / 100) - 7500;
-        if (minimumValue < 1) {
-            minimumValue = 1;
+        if (minimumValue < 10000) {
+            minimumValue = 10000;
         }
         maximumValue = (maximumValue * 105 / 100) + 7500;
 
-        // adds 5000 to calculate floor value and clamp to 65535 to avoid int overflow
+        // adds 5000 to round positive integer value and clamp value to prevent int overflow
         uint randomValue = (random(minimumValue, maximumValue) + 5000) / 10000;
         if (randomValue > 65535) {
             randomValue = 65535;
@@ -62,8 +62,9 @@ contract GenesLaboratory {
 
     // This is vulnerable, but I don't think it is worth protecting for this use case.
     // A safer, more complex and expensive solution is using an oracle like Provable
-    function random(uint start, uint endExclusive) private returns (uint) {
-        uint randomnumber = uint(keccak256(abi.encodePacked(now, msg.sender, _randomNonce))) % endExclusive;
+    function random(uint start, uint end) private returns (uint) {
+        uint n = end - start + 1;
+        uint randomnumber = uint(keccak256(abi.encodePacked(now, msg.sender, _randomNonce))) % n;
         randomnumber = randomnumber + start;
         _randomNonce++;
         return randomnumber;

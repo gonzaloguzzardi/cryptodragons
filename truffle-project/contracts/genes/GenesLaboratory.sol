@@ -24,8 +24,40 @@ contract GenesLaboratory {
     }
 
     function getChildStrength(bytes32 childGenes, bytes32 fatherGenes, bytes32 motherGenes) private returns (bytes32) {
-        uint16 fatherInitialHealth = getInitialHealthFromBytes(fatherGenes);
-        uint16 motherInitialHealth = getInitialHealthFromBytes(motherGenes);
+        uint fatherInitialHealth = getInitialHealthFromBytes(fatherGenes);
+        uint motherInitialHealth = getInitialHealthFromBytes(motherGenes);
+
+        uint16 childInitialHealth = generateChildValue(fatherInitialHealth, motherInitialHealth);
+
+    }
+
+    function generateChildValue(uint16 fatherValue, uint16 motherValue) private pure returns (uint16 value) {
+        uint fatherFixedValue = fatherValue * 10000;
+        uint motherFixedValue = motherValue * 10000;
+
+        uint minimumValue;
+        uint maximumValue;
+        if (fatherFixedValue < motherFixedValue) {
+            minimumValue = fatherFixedValue;
+            maximumValue = motherFixedValue;
+        } else {
+            minimumValue = motherFixedValue;
+            maximumValue = fatherFixedValue;
+        }
+
+        // Increase variance by 7500 to allow stats jump on lower values
+        minimumValue = (minimumValue * 95 / 100) - 7500;
+        if (minimumValue < 1) {
+            minimumValue = 1
+        }
+        maximumValue = (maximumValue * 105 / 100) + 7500;
+
+        // adds 500 to calculate floor value and clamp to 65535 to avoid int overflow
+        uint randomValue = (random(minimumValue, maximumValue) + 5000) / 10000;
+        if (randomValue > 65535) {
+            randomValue = 65535;
+        }
+        return uint16(randomValue);
     }
 
     // This is vulnerable, but I don't think it is worth protecting for this use case.

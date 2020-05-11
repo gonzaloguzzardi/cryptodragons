@@ -30,7 +30,7 @@ jobs:
   include:
     - stage: tests
       script: npm install
-      script: cd truffle-project
+      script: cd project/truffle-project
       script: truffle test
     - stage: docker
       script: docker-compose build

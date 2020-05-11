@@ -48,11 +48,11 @@ contract GenesLaboratory {
         // Increase variance by 7500 to allow stats jump on lower values
         minimumValue = (minimumValue * 95 / 100) - 7500;
         if (minimumValue < 1) {
-            minimumValue = 1
+            minimumValue = 1;
         }
         maximumValue = (maximumValue * 105 / 100) + 7500;
 
-        // adds 500 to calculate floor value and clamp to 65535 to avoid int overflow
+        // adds 5000 to calculate floor value and clamp to 65535 to avoid int overflow
         uint randomValue = (random(minimumValue, maximumValue) + 5000) / 10000;
         if (randomValue > 65535) {
             randomValue = 65535;

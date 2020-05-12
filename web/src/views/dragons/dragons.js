@@ -21,12 +21,13 @@ const oracleUrl = 'http://localhost';
 const oracleApiPort = 8081;
 
 const namespace = 'ui-view-dragons';
+const Web3 = require('web3');
 
 class Dragons extends Component {
 
     constructor(props) {
         super(props);
-
+        this.isLocked = this.isMetamaskConnected.bind(this);
         this.state = {
             defSideAccount: undefined,
             defMainAccount: undefined,
@@ -50,8 +51,27 @@ class Dragons extends Component {
         this.getDragonsFromSide();
         this.getDragonsFromOracle();
         this.getDragonsFromMain();
+        this.isMetamaskConnected();
     }  
 
+    isMetamaskConnected() {
+        window.addEventListener('load', async () => {
+          // Modern dapp browsers...
+          let ethereum = window.ethereum;
+          if (ethereum) {
+              var web3 = new Web3(ethereum);
+              try {
+                  // Request account access if needed
+                  await ethereum.enable();
+                  // Acccounts now exposed
+                  web3.eth.getAccounts().then(e => console.log(e));
+              } catch (error) {
+                  // User denied account access...
+              }
+          }
+        });
+    }
+    
     getDragonsFromMain = () => {
         axios.get(`${mainchainUrl}:${mainchainApiPort}/api/dragons`, {
             params: { account: this.state.mainAccount },

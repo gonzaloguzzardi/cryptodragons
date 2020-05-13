@@ -15,20 +15,127 @@ contract GenesLaboratory {
         _;
     }
 
-    function createChildGenes(bytes32 fatherGenes, bytes32 motherGenes) public onlyFromDragonContract {
-        require(fatherGenes[0] != 0, "father genes should have value");
-        require(motherGenes[0] != 0, "father genes should have value");
-
-        bytes32 childGenes;
-
+    function createChildGenes(bytes32 fatherGenes, bytes32 motherGenes) public /*onlyFromDragonContract*/ returns (bytes32 childGenes) {
+        childGenes = addChildInitialHealth(childGenes, fatherGenes, motherGenes);
+        addChildMaxHealth(childGenes, fatherGenes, motherGenes);
+        addChildInitialStrength(childGenes, fatherGenes, motherGenes);
+        addChildMaxStrength(childGenes, fatherGenes, motherGenes);
+        addChildInitialAgility(childGenes, fatherGenes, motherGenes);
+        addChildMaxAgility(childGenes, fatherGenes, motherGenes);
+        addChildInitialFortitude(childGenes, fatherGenes, motherGenes);
+        addChildMaxFortitude(childGenes, fatherGenes, motherGenes);
+        addChildActionCooldown(childGenes, fatherGenes, motherGenes);
+        addChildHatchTime(childGenes, fatherGenes, motherGenes);
     }
 
-    function getChildStrength(bytes32 childGenes, bytes32 fatherGenes, bytes32 motherGenes) private returns (bytes32) {
+    function addChildInitialHealth(bytes32 childGenes, bytes32 fatherGenes, bytes32 motherGenes) private returns (bytes32) {
         uint16 fatherInitialHealth = getInitialHealthFromBytes(fatherGenes);
         uint16 motherInitialHealth = getInitialHealthFromBytes(motherGenes);
 
-        uint16 childInitialHealth = generateChildValue(fatherInitialHealth, motherInitialHealth);
+        uint childInitialHealth = generateChildValue(fatherInitialHealth, motherInitialHealth);
+        
+        uint shiftedValue = childInitialHealth << (30 * 8);
+        uint result = shiftedValue | uint(childGenes);
+        assembly { mstore(add(childGenes, 32), result) }
+    }
 
+    function addChildMaxHealth(bytes32 childGenes, bytes32 fatherGenes, bytes32 motherGenes) private {
+        uint16 fatherMaxHealth = getMaxHealthFromBytes(fatherGenes);
+        uint16 motherMaxHealth = getMaxHealthFromBytes(motherGenes);
+
+        uint childMaxHealth = generateChildValue(fatherMaxHealth, motherMaxHealth);
+        
+        uint shiftedValue = childMaxHealth << (28 * 8);
+        uint result = shiftedValue | uint(childGenes);
+        assembly { mstore(add(childGenes, 32), result) }
+    }
+
+    function addChildInitialStrength(bytes32 childGenes, bytes32 fatherGenes, bytes32 motherGenes) private {
+        uint16 fatherInitialStrength = getInitialStrengthFromBytes(fatherGenes);
+        uint16 motherInitialStrength = getInitialStrengthFromBytes(motherGenes);
+
+        uint childInitialStrength = generateChildValue(fatherInitialStrength, motherInitialStrength);
+        
+        uint shiftedValue = childInitialStrength << (26 * 8);
+        uint result = shiftedValue | uint(childGenes);
+        assembly { mstore(add(childGenes, 32), result) }
+    }
+
+    function addChildMaxStrength(bytes32 childGenes, bytes32 fatherGenes, bytes32 motherGenes) private {
+        uint16 fatherMaxStrength = getMaxStrengthFromBytes(fatherGenes);
+        uint16 motherMaxStrength = getMaxStrengthFromBytes(motherGenes);
+
+        uint childMaxStrength = generateChildValue(fatherMaxStrength, motherMaxStrength);
+        
+        uint shiftedValue = childMaxStrength << (24 * 8);
+        uint result = shiftedValue | uint(childGenes);
+        assembly { mstore(add(childGenes, 32), result) }
+    }
+
+    function addChildInitialAgility(bytes32 childGenes, bytes32 fatherGenes, bytes32 motherGenes) private {
+        uint16 fatherInitialAgility = getInitialAgilityFromBytes(fatherGenes);
+        uint16 motherInitialAgility = getInitialAgilityFromBytes(motherGenes);
+
+        uint childInitialAgility = generateChildValue(fatherInitialAgility, motherInitialAgility);
+        
+        uint shiftedValue = childInitialAgility << (22 * 8);
+        uint result = shiftedValue | uint(childGenes);
+        assembly { mstore(add(childGenes, 32), result) }
+    }
+
+    function addChildMaxAgility(bytes32 childGenes, bytes32 fatherGenes, bytes32 motherGenes) private {
+        uint16 fatherMaxAgility = getMaxAgilityFromBytes(fatherGenes);
+        uint16 motherMaxAgility = getMaxAgilityFromBytes(motherGenes);
+
+        uint childMaxAgility = generateChildValue(fatherMaxAgility, motherMaxAgility);
+        
+        uint shiftedValue = childMaxAgility << (20 * 8);
+        uint result = shiftedValue | uint(childGenes);
+        assembly { mstore(add(childGenes, 32), result) }
+    }
+
+    function addChildInitialFortitude(bytes32 childGenes, bytes32 fatherGenes, bytes32 motherGenes) private {
+        uint16 fatherInitialFortitude = getInitialFortitudeFromBytes(fatherGenes);
+        uint16 motherInitialFortitude = getInitialFortitudeFromBytes(motherGenes);
+
+        uint childInitialFortitude = generateChildValue(fatherInitialFortitude, motherInitialFortitude);
+        
+        uint shiftedValue = childInitialFortitude << (18 * 8);
+        uint result = shiftedValue | uint(childGenes);
+        assembly { mstore(add(childGenes, 32), result) }
+    }
+
+    function addChildMaxFortitude(bytes32 childGenes, bytes32 fatherGenes, bytes32 motherGenes) private {
+        uint16 fatherMaxFortitude = getMaxStrengthFromBytes(fatherGenes);
+        uint16 motherMaxFortitude = getMaxStrengthFromBytes(motherGenes);
+
+        uint childMaxFortitude = generateChildValue(fatherMaxFortitude, motherMaxFortitude);
+        
+        uint shiftedValue = childMaxFortitude << (16 * 8);
+        uint result = shiftedValue | uint(childGenes);
+        assembly { mstore(add(childGenes, 32), result) }
+    }
+
+    function addChildActionCooldown(bytes32 childGenes, bytes32 fatherGenes, bytes32 motherGenes) private {
+        uint16 fatherActionCooldown = getActionCooldownFromBytes(fatherGenes);
+        uint16 motherActionCooldown = getActionCooldownFromBytes(motherGenes);
+
+        uint childActionCooldown = generateChildValue(fatherActionCooldown, motherActionCooldown);
+        
+        uint shiftedValue = childActionCooldown << (14 * 8);
+        uint result = shiftedValue | uint(childGenes);
+        assembly { mstore(add(childGenes, 32), result) }
+    }
+
+    function addChildHatchTime(bytes32 childGenes, bytes32 fatherGenes, bytes32 motherGenes) private {
+        uint16 fatherHatchTime = getHatchTimeFromBytes(fatherGenes);
+        uint16 motherHatchTime = getHatchTimeFromBytes(motherGenes);
+
+        uint childHatchTime = generateChildValue(fatherHatchTime, motherHatchTime);
+        
+        uint shiftedValue = childHatchTime << (12 * 8);
+        uint result = shiftedValue | uint(childGenes);
+        assembly { mstore(add(childGenes, 32), result) }
     }
 
     function generateChildValue(uint16 fatherValue, uint16 motherValue) private returns (uint16 value) {
@@ -60,16 +167,6 @@ contract GenesLaboratory {
         return uint16(randomValue);
     }
 
-    // This is vulnerable, but I don't think it is worth protecting for this use case.
-    // A safer, more complex and expensive solution is using an oracle like Provable
-    function random(uint start, uint end) private returns (uint) {
-        uint n = end - start + 1;
-        uint randomnumber = uint(keccak256(abi.encodePacked(now, msg.sender, _randomNonce))) % n;
-        randomnumber = randomnumber + start;
-        _randomNonce++;
-        return randomnumber;
-    }
-
     function getInitialHealthFromBytes(bytes32 genes) public pure returns (uint16) {
         return uint16(uint256(genes) >> (30 * 8) );
     }
@@ -82,7 +179,7 @@ contract GenesLaboratory {
         return uint16(uint256(genes) >> (26 * 8) );
     }
 
-    function getMaxAStrengthFromBytes(bytes32 genes) public pure returns (uint16) {
+    function getMaxStrengthFromBytes(bytes32 genes) public pure returns (uint16) {
         return uint16(uint256(genes) >> (24 * 8) );
     }
 
@@ -121,5 +218,17 @@ contract GenesLaboratory {
 
     function getWingsAttributeFromBytes(bytes32 genes) public pure returns (uint16) {
         return uint16(uint256(genes) >> (6 * 8) );
+    }
+
+    /********************* Utils *************************************** */
+
+    // This is vulnerable, but I don't think it is worth protecting for this use case.
+    // A safer, more complex and expensive solution is using an oracle like Provable
+    function random(uint start, uint end) private returns (uint) {
+        uint n = end - start + 1;
+        uint randomnumber = uint(keccak256(abi.encodePacked(now, msg.sender, _randomNonce))) % n;
+        randomnumber = randomnumber + start;
+        _randomNonce++;
+        return randomnumber;
     }
 }

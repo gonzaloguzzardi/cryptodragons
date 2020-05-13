@@ -36,7 +36,7 @@ contract GenesLaboratory {
         
         uint shiftedValue = childInitialHealth << (30 * 8);
         uint result = shiftedValue | uint(childGenes);
-        assembly { mstore(add(childGenes, 32), result) }
+        bytes32(result);
     }
 
     function addChildMaxHealth(bytes32 childGenes, bytes32 fatherGenes, bytes32 motherGenes) private {
@@ -139,8 +139,8 @@ contract GenesLaboratory {
     }
 
     function generateChildValue(uint16 fatherValue, uint16 motherValue) private returns (uint16 value) {
-        uint fatherFixedValue = fatherValue * 10000;
-        uint motherFixedValue = motherValue * 10000;
+        uint fatherFixedValue = uint(fatherValue) * 10000;
+        uint motherFixedValue = uint(motherValue) * 10000;
 
         uint minimumValue;
         uint maximumValue;

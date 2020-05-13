@@ -39,9 +39,14 @@ function loadGanacheAccount(account) {
 	var ownerAccount = fs.readFileSync(path.join(__dirname, './misc/mainchain_account'), 'utf-8');
 	if(account) {
 		ownerAccount = account;
-		web3js.eth.personal.unlockAccount(account,"asd", 15000);
+		//web3js.eth.personal.unlockAccount(account,"asd", 15000);
 	}
+	web3js.eth.getAccounts().then(e => console.log(e));
 	web3js.eth.accounts.wallet.add(ownerAccount);
+
+	//const aaaaccount = web3js.eth.accounts.privateKeyToAccount('0x' + '6B798D2C57F158F78DB01E071C42066D282828F4438F2B1A4B48DBA5CB73653C');
+	//web3js.eth.accounts.wallet.add(aaaaccount);
+
 	return { account: ownerAccount, web3js };
 }
 
@@ -56,6 +61,11 @@ async function giveSomeMoney(account) {
 	console.log(await web3js.eth.getBalance(account));
 	console.log(await web3js.eth.getBalance('0x28863498efede12296888f7ca6cf0b94974fbdbc'));
 }
+
+app.get('/api/giveSomeMoney', async function freeMoney(req, res, next) {
+	giveSomeMoney(req.query.account);
+	res.status(200).send(account);
+});
 
 app.get('/api/account/create', async function createAccountFunction(req, res, next) {
 	const web3js = new Web3(new Web3.providers.HttpProvider('http://127.0.0.1:8545'));

@@ -64,7 +64,12 @@ class Dragons extends Component {
                   // Request account access if needed
                   await ethereum.enable();
                   // Acccounts now exposed
-                  web3.eth.getAccounts().then(e => console.log(e));
+                  web3.eth.getAccounts().then(accounts =>
+                    {   
+                        if (accounts != null && accounts.length > 0) {
+                            this.getOrCreateSideAccount(accounts[0]);
+                        }
+                    });
               } catch (error) {
                   // User denied account access...
               }
@@ -72,6 +77,19 @@ class Dragons extends Component {
         });
     }
     
+    getOrCreateSideAccount = (account) => {
+        axios.get(`${oracleUrl}:${oracleApiPort}/api/getOrCreateSideAccount?account=` + account, {
+            params: { account: this.state.mainAccount },
+        })
+        .then(res => {
+            this.setState({
+                mapAccountMain: res.data.mainAccount,
+                mapAccountSide: res.data.sideMapAccount,
+                mapPrivateAccountSide: res.data.sideAccount
+            })
+        });
+    }
+
     getDragonsFromMain = () => {
         axios.get(`${mainchainUrl}:${mainchainApiPort}/api/dragons`, {
             params: { account: this.state.mainAccount },

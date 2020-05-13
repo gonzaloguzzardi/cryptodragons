@@ -20,6 +20,7 @@ const {
 	deleteDragon,
 	insertDragon,
 	createAccount,
+	getOrCreateSideAccount,
 	login
 } = require('./controllers');
 
@@ -46,6 +47,7 @@ app.post('/api/deleteDragon', deleteDragon); // Revisar implementación, puede f
 app.post('/api/insertDragon', insertDragon); // Revisar implementación, puede faltar una promise en la llamada a mongo
 
 app.get('/api/createAccount', createAccount);
+app.get('/api/getOrCreateSideAccount', getOrCreateSideAccount);
 app.get('/api/login', login);
 
 // SERVER LISTEN

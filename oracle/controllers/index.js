@@ -4,7 +4,7 @@ const { mapAccounts } = require('./map-accounts');
 const { saveDragon } = require('./save-dragon');
 const { getDragon } = require('./get-dragon');
 const { deleteDragon, insertDragon } = require('./commons');
-const { createAccount } = require('./create-account');
+const { createAccount, getOrCreateSideAccount } = require('./create-account');
 const { login } = require('./login');
 const { isMap } = require('./is-map');
 
@@ -18,5 +18,6 @@ module.exports = {
 	deleteDragon,
 	insertDragon,
 	createAccount,
+	getOrCreateSideAccount,
 	login
 };

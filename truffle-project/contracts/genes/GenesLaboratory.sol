@@ -17,15 +17,15 @@ contract GenesLaboratory {
 
     function createChildGenes(bytes32 fatherGenes, bytes32 motherGenes) public /*onlyFromDragonContract*/ returns (bytes32 childGenes) {
         childGenes = addChildInitialHealth(childGenes, fatherGenes, motherGenes);
-        addChildMaxHealth(childGenes, fatherGenes, motherGenes);
-        addChildInitialStrength(childGenes, fatherGenes, motherGenes);
-        addChildMaxStrength(childGenes, fatherGenes, motherGenes);
-        addChildInitialAgility(childGenes, fatherGenes, motherGenes);
-        addChildMaxAgility(childGenes, fatherGenes, motherGenes);
-        addChildInitialFortitude(childGenes, fatherGenes, motherGenes);
-        addChildMaxFortitude(childGenes, fatherGenes, motherGenes);
-        addChildActionCooldown(childGenes, fatherGenes, motherGenes);
-        addChildHatchTime(childGenes, fatherGenes, motherGenes);
+        childGenes = addChildMaxHealth(childGenes, fatherGenes, motherGenes);
+        childGenes = addChildInitialStrength(childGenes, fatherGenes, motherGenes);
+        childGenes = addChildMaxStrength(childGenes, fatherGenes, motherGenes);
+        childGenes = addChildInitialAgility(childGenes, fatherGenes, motherGenes);
+        childGenes = addChildMaxAgility(childGenes, fatherGenes, motherGenes);
+        childGenes = addChildInitialFortitude(childGenes, fatherGenes, motherGenes);
+        childGenes = addChildMaxFortitude(childGenes, fatherGenes, motherGenes);
+        childGenes = addChildActionCooldown(childGenes, fatherGenes, motherGenes);
+        childGenes = addChildHatchTime(childGenes, fatherGenes, motherGenes);
     }
 
     function addChildInitialHealth(bytes32 childGenes, bytes32 fatherGenes, bytes32 motherGenes) private returns (bytes32) {
@@ -36,10 +36,10 @@ contract GenesLaboratory {
         
         uint shiftedValue = childInitialHealth << (30 * 8);
         uint result = shiftedValue | uint(childGenes);
-        bytes32(result);
+        return bytes32(result);
     }
 
-    function addChildMaxHealth(bytes32 childGenes, bytes32 fatherGenes, bytes32 motherGenes) private {
+    function addChildMaxHealth(bytes32 childGenes, bytes32 fatherGenes, bytes32 motherGenes) private returns (bytes32) {
         uint16 fatherMaxHealth = getMaxHealthFromBytes(fatherGenes);
         uint16 motherMaxHealth = getMaxHealthFromBytes(motherGenes);
 
@@ -47,10 +47,10 @@ contract GenesLaboratory {
         
         uint shiftedValue = childMaxHealth << (28 * 8);
         uint result = shiftedValue | uint(childGenes);
-        assembly { mstore(add(childGenes, 32), result) }
+        return bytes32(result);
     }
 
-    function addChildInitialStrength(bytes32 childGenes, bytes32 fatherGenes, bytes32 motherGenes) private {
+    function addChildInitialStrength(bytes32 childGenes, bytes32 fatherGenes, bytes32 motherGenes) private returns (bytes32) {
         uint16 fatherInitialStrength = getInitialStrengthFromBytes(fatherGenes);
         uint16 motherInitialStrength = getInitialStrengthFromBytes(motherGenes);
 
@@ -58,10 +58,10 @@ contract GenesLaboratory {
         
         uint shiftedValue = childInitialStrength << (26 * 8);
         uint result = shiftedValue | uint(childGenes);
-        assembly { mstore(add(childGenes, 32), result) }
+        return bytes32(result);
     }
 
-    function addChildMaxStrength(bytes32 childGenes, bytes32 fatherGenes, bytes32 motherGenes) private {
+    function addChildMaxStrength(bytes32 childGenes, bytes32 fatherGenes, bytes32 motherGenes) private returns (bytes32) {
         uint16 fatherMaxStrength = getMaxStrengthFromBytes(fatherGenes);
         uint16 motherMaxStrength = getMaxStrengthFromBytes(motherGenes);
 
@@ -69,10 +69,10 @@ contract GenesLaboratory {
         
         uint shiftedValue = childMaxStrength << (24 * 8);
         uint result = shiftedValue | uint(childGenes);
-        assembly { mstore(add(childGenes, 32), result) }
+        return bytes32(result);
     }
 
-    function addChildInitialAgility(bytes32 childGenes, bytes32 fatherGenes, bytes32 motherGenes) private {
+    function addChildInitialAgility(bytes32 childGenes, bytes32 fatherGenes, bytes32 motherGenes) private returns (bytes32) {
         uint16 fatherInitialAgility = getInitialAgilityFromBytes(fatherGenes);
         uint16 motherInitialAgility = getInitialAgilityFromBytes(motherGenes);
 
@@ -80,10 +80,10 @@ contract GenesLaboratory {
         
         uint shiftedValue = childInitialAgility << (22 * 8);
         uint result = shiftedValue | uint(childGenes);
-        assembly { mstore(add(childGenes, 32), result) }
+        return bytes32(result);
     }
 
-    function addChildMaxAgility(bytes32 childGenes, bytes32 fatherGenes, bytes32 motherGenes) private {
+    function addChildMaxAgility(bytes32 childGenes, bytes32 fatherGenes, bytes32 motherGenes) private returns (bytes32) {
         uint16 fatherMaxAgility = getMaxAgilityFromBytes(fatherGenes);
         uint16 motherMaxAgility = getMaxAgilityFromBytes(motherGenes);
 
@@ -91,10 +91,10 @@ contract GenesLaboratory {
         
         uint shiftedValue = childMaxAgility << (20 * 8);
         uint result = shiftedValue | uint(childGenes);
-        assembly { mstore(add(childGenes, 32), result) }
+        return bytes32(result);
     }
 
-    function addChildInitialFortitude(bytes32 childGenes, bytes32 fatherGenes, bytes32 motherGenes) private {
+    function addChildInitialFortitude(bytes32 childGenes, bytes32 fatherGenes, bytes32 motherGenes) private returns (bytes32) {
         uint16 fatherInitialFortitude = getInitialFortitudeFromBytes(fatherGenes);
         uint16 motherInitialFortitude = getInitialFortitudeFromBytes(motherGenes);
 
@@ -102,10 +102,10 @@ contract GenesLaboratory {
         
         uint shiftedValue = childInitialFortitude << (18 * 8);
         uint result = shiftedValue | uint(childGenes);
-        assembly { mstore(add(childGenes, 32), result) }
+        return bytes32(result);
     }
 
-    function addChildMaxFortitude(bytes32 childGenes, bytes32 fatherGenes, bytes32 motherGenes) private {
+    function addChildMaxFortitude(bytes32 childGenes, bytes32 fatherGenes, bytes32 motherGenes) private returns (bytes32) {
         uint16 fatherMaxFortitude = getMaxStrengthFromBytes(fatherGenes);
         uint16 motherMaxFortitude = getMaxStrengthFromBytes(motherGenes);
 
@@ -113,10 +113,10 @@ contract GenesLaboratory {
         
         uint shiftedValue = childMaxFortitude << (16 * 8);
         uint result = shiftedValue | uint(childGenes);
-        assembly { mstore(add(childGenes, 32), result) }
+        return bytes32(result);
     }
 
-    function addChildActionCooldown(bytes32 childGenes, bytes32 fatherGenes, bytes32 motherGenes) private {
+    function addChildActionCooldown(bytes32 childGenes, bytes32 fatherGenes, bytes32 motherGenes) private returns (bytes32) {
         uint16 fatherActionCooldown = getActionCooldownFromBytes(fatherGenes);
         uint16 motherActionCooldown = getActionCooldownFromBytes(motherGenes);
 
@@ -124,10 +124,10 @@ contract GenesLaboratory {
         
         uint shiftedValue = childActionCooldown << (14 * 8);
         uint result = shiftedValue | uint(childGenes);
-        assembly { mstore(add(childGenes, 32), result) }
+        return bytes32(result);
     }
 
-    function addChildHatchTime(bytes32 childGenes, bytes32 fatherGenes, bytes32 motherGenes) private {
+    function addChildHatchTime(bytes32 childGenes, bytes32 fatherGenes, bytes32 motherGenes) private returns (bytes32) {
         uint16 fatherHatchTime = getHatchTimeFromBytes(fatherGenes);
         uint16 motherHatchTime = getHatchTimeFromBytes(motherGenes);
 
@@ -135,7 +135,7 @@ contract GenesLaboratory {
         
         uint shiftedValue = childHatchTime << (12 * 8);
         uint result = shiftedValue | uint(childGenes);
-        assembly { mstore(add(childGenes, 32), result) }
+        return bytes32(result);
     }
 
     function generateChildValue(uint16 fatherValue, uint16 motherValue) private returns (uint16 value) {

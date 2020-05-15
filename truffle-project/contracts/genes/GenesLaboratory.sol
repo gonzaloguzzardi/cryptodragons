@@ -16,19 +16,23 @@ contract GenesLaboratory {
     }
 
     function createChildGenes(bytes32 fatherGenes, bytes32 motherGenes) public /*onlyFromDragonContract*/ returns (bytes32 childGenes) {
-        childGenes = addChildInitialHealth(childGenes, fatherGenes, motherGenes);
-        childGenes = addChildMaxHealth(childGenes, fatherGenes, motherGenes);
-        childGenes = addChildInitialStrength(childGenes, fatherGenes, motherGenes);
-        childGenes = addChildMaxStrength(childGenes, fatherGenes, motherGenes);
-        childGenes = addChildInitialAgility(childGenes, fatherGenes, motherGenes);
-        childGenes = addChildMaxAgility(childGenes, fatherGenes, motherGenes);
-        childGenes = addChildInitialFortitude(childGenes, fatherGenes, motherGenes);
-        childGenes = addChildMaxFortitude(childGenes, fatherGenes, motherGenes);
-        childGenes = addChildActionCooldown(childGenes, fatherGenes, motherGenes);
-        childGenes = addChildHatchTime(childGenes, fatherGenes, motherGenes);
+        childGenes = getChildInitialHealth(childGenes, fatherGenes, motherGenes);
+        childGenes = getChildMaxHealth(childGenes, fatherGenes, motherGenes);
+        childGenes = getChildInitialStrength(childGenes, fatherGenes, motherGenes);
+        childGenes = getChildMaxStrength(childGenes, fatherGenes, motherGenes);
+        childGenes = getChildInitialAgility(childGenes, fatherGenes, motherGenes);
+        childGenes = getChildMaxAgility(childGenes, fatherGenes, motherGenes);
+        childGenes = getChildInitialFortitude(childGenes, fatherGenes, motherGenes);
+        childGenes = getChildMaxFortitude(childGenes, fatherGenes, motherGenes);
+        childGenes = getChildActionCooldown(childGenes, fatherGenes, motherGenes);
+        childGenes = getChildHatchTime(childGenes, fatherGenes, motherGenes);
+        childGenes = getChildHead(childGenes, fatherGenes, motherGenes);
+        childGenes = getChildBody(childGenes, fatherGenes, motherGenes);
+        childGenes = getChildWings(childGenes, fatherGenes, motherGenes);
+        childGenes = getChildGeneration(childGenes, fatherGenes, motherGenes);
     }
 
-    function addChildInitialHealth(bytes32 childGenes, bytes32 fatherGenes, bytes32 motherGenes) private returns (bytes32) {
+    function getChildInitialHealth(bytes32 childGenes, bytes32 fatherGenes, bytes32 motherGenes) private returns (bytes32) {
         uint16 fatherInitialHealth = getInitialHealthFromBytes(fatherGenes);
         uint16 motherInitialHealth = getInitialHealthFromBytes(motherGenes);
 
@@ -39,7 +43,7 @@ contract GenesLaboratory {
         return bytes32(result);
     }
 
-    function addChildMaxHealth(bytes32 childGenes, bytes32 fatherGenes, bytes32 motherGenes) private returns (bytes32) {
+    function getChildMaxHealth(bytes32 childGenes, bytes32 fatherGenes, bytes32 motherGenes) private returns (bytes32) {
         uint16 fatherMaxHealth = getMaxHealthFromBytes(fatherGenes);
         uint16 motherMaxHealth = getMaxHealthFromBytes(motherGenes);
 
@@ -50,7 +54,7 @@ contract GenesLaboratory {
         return bytes32(result);
     }
 
-    function addChildInitialStrength(bytes32 childGenes, bytes32 fatherGenes, bytes32 motherGenes) private returns (bytes32) {
+    function getChildInitialStrength(bytes32 childGenes, bytes32 fatherGenes, bytes32 motherGenes) private returns (bytes32) {
         uint16 fatherInitialStrength = getInitialStrengthFromBytes(fatherGenes);
         uint16 motherInitialStrength = getInitialStrengthFromBytes(motherGenes);
 
@@ -61,7 +65,7 @@ contract GenesLaboratory {
         return bytes32(result);
     }
 
-    function addChildMaxStrength(bytes32 childGenes, bytes32 fatherGenes, bytes32 motherGenes) private returns (bytes32) {
+    function getChildMaxStrength(bytes32 childGenes, bytes32 fatherGenes, bytes32 motherGenes) private returns (bytes32) {
         uint16 fatherMaxStrength = getMaxStrengthFromBytes(fatherGenes);
         uint16 motherMaxStrength = getMaxStrengthFromBytes(motherGenes);
 
@@ -72,7 +76,7 @@ contract GenesLaboratory {
         return bytes32(result);
     }
 
-    function addChildInitialAgility(bytes32 childGenes, bytes32 fatherGenes, bytes32 motherGenes) private returns (bytes32) {
+    function getChildInitialAgility(bytes32 childGenes, bytes32 fatherGenes, bytes32 motherGenes) private returns (bytes32) {
         uint16 fatherInitialAgility = getInitialAgilityFromBytes(fatherGenes);
         uint16 motherInitialAgility = getInitialAgilityFromBytes(motherGenes);
 
@@ -83,7 +87,7 @@ contract GenesLaboratory {
         return bytes32(result);
     }
 
-    function addChildMaxAgility(bytes32 childGenes, bytes32 fatherGenes, bytes32 motherGenes) private returns (bytes32) {
+    function getChildMaxAgility(bytes32 childGenes, bytes32 fatherGenes, bytes32 motherGenes) private returns (bytes32) {
         uint16 fatherMaxAgility = getMaxAgilityFromBytes(fatherGenes);
         uint16 motherMaxAgility = getMaxAgilityFromBytes(motherGenes);
 
@@ -94,7 +98,7 @@ contract GenesLaboratory {
         return bytes32(result);
     }
 
-    function addChildInitialFortitude(bytes32 childGenes, bytes32 fatherGenes, bytes32 motherGenes) private returns (bytes32) {
+    function getChildInitialFortitude(bytes32 childGenes, bytes32 fatherGenes, bytes32 motherGenes) private returns (bytes32) {
         uint16 fatherInitialFortitude = getInitialFortitudeFromBytes(fatherGenes);
         uint16 motherInitialFortitude = getInitialFortitudeFromBytes(motherGenes);
 
@@ -105,7 +109,7 @@ contract GenesLaboratory {
         return bytes32(result);
     }
 
-    function addChildMaxFortitude(bytes32 childGenes, bytes32 fatherGenes, bytes32 motherGenes) private returns (bytes32) {
+    function getChildMaxFortitude(bytes32 childGenes, bytes32 fatherGenes, bytes32 motherGenes) private returns (bytes32) {
         uint16 fatherMaxFortitude = getMaxStrengthFromBytes(fatherGenes);
         uint16 motherMaxFortitude = getMaxStrengthFromBytes(motherGenes);
 
@@ -116,7 +120,7 @@ contract GenesLaboratory {
         return bytes32(result);
     }
 
-    function addChildActionCooldown(bytes32 childGenes, bytes32 fatherGenes, bytes32 motherGenes) private returns (bytes32) {
+    function getChildActionCooldown(bytes32 childGenes, bytes32 fatherGenes, bytes32 motherGenes) private returns (bytes32) {
         uint16 fatherActionCooldown = getActionCooldownFromBytes(fatherGenes);
         uint16 motherActionCooldown = getActionCooldownFromBytes(motherGenes);
 
@@ -127,7 +131,7 @@ contract GenesLaboratory {
         return bytes32(result);
     }
 
-    function addChildHatchTime(bytes32 childGenes, bytes32 fatherGenes, bytes32 motherGenes) private returns (bytes32) {
+    function getChildHatchTime(bytes32 childGenes, bytes32 fatherGenes, bytes32 motherGenes) private returns (bytes32) {
         uint16 fatherHatchTime = getHatchTimeFromBytes(fatherGenes);
         uint16 motherHatchTime = getHatchTimeFromBytes(motherGenes);
 
@@ -135,6 +139,49 @@ contract GenesLaboratory {
         
         uint shiftedValue = childHatchTime << (12 * 8);
         uint result = shiftedValue | uint(childGenes);
+        return bytes32(result);
+    }
+
+    function getChildHead(bytes32 childGenes, bytes32 fatherGenes, bytes32 motherGenes) private returns (bytes32) {
+        uint16 fatherHead = getHeadAttributeFromBytes(fatherGenes);
+        uint16 motherHead = getHeadAttributeFromBytes(motherGenes);
+
+        uint childHead = generateChildHeadValue(fatherHead, motherHead);
+        
+        uint shiftedValue = childHead << (10 * 8);
+        uint result = shiftedValue | uint(childGenes);
+        return bytes32(result);
+    }
+
+    function getChildBody(bytes32 childGenes, bytes32 fatherGenes, bytes32 motherGenes) private returns (bytes32) {
+        uint16 fatherBody = getBodyAttributeFromBytes(fatherGenes);
+        uint16 motherBody = getBodyAttributeFromBytes(motherGenes);
+
+        uint childBody = generateChildBodyValue(fatherBody, motherBody);
+        
+        uint shiftedValue = childBody << (10 * 6);
+        uint result = shiftedValue | uint(childGenes);
+        return bytes32(result);
+    }
+
+    function getChildWings(bytes32 childGenes, bytes32 fatherGenes, bytes32 motherGenes) private returns (bytes32) {
+        uint16 fatherWings = getBodyAttributeFromBytes(fatherGenes);
+        uint16 motherWings = getBodyAttributeFromBytes(motherGenes);
+
+        uint childWings = generateChildWingsValue(fatherWings, motherWings);
+        
+        uint shiftedValue = childWings << (10 * 4);
+        uint result = shiftedValue | uint(childGenes);
+        return bytes32(result);
+    }
+
+    function getChildGeneration(bytes32 childGenes, bytes32 fatherGenes, bytes32 motherGenes) private returns (bytes32) {
+        uint16 fatherGeneration = getGenerationAttributeFromBytes(fatherGenes);
+        uint16 motherGeneration = getGenerationAttributeFromBytes(motherGenes);
+
+        uint childGeneration = generateChildGeneration(fatherGeneration, motherGeneration);
+        
+        uint result = childGeneration | uint(childGenes);
         return bytes32(result);
     }
 
@@ -166,6 +213,50 @@ contract GenesLaboratory {
         }
         return uint16(randomValue);
     }
+
+    function generateChildHeadValue(uint16 fatherValue, uint16 motherValue) private returns (uint16 value) {
+        uint roll = random(0, 10000);
+        if (roll < 4000) {
+            value = fatherValue;
+        } else if (roll < 8000) {
+            value = motherValue;
+        } else {
+            value = uint16(random(1, 4));
+        }
+    }
+
+    function generateChildBodyValue(uint16 fatherValue, uint16 motherValue) private returns (uint16 value) {
+        uint roll = random(0, 10000);
+        if (roll < 4000) {
+            value = fatherValue;
+        } else if (roll < 8000) {
+            value = motherValue;
+        } else {
+            value = uint16(random(1, 4));
+        }
+    }
+
+    function generateChildWingsValue(uint16 fatherValue, uint16 motherValue) private returns (uint16 value) {
+        uint roll = random(0, 10000);
+        if (roll < 4000) {
+            value = fatherValue;
+        } else if (roll < 8000) {
+            value = motherValue;
+        } else {
+            value = uint16(random(1, 4));
+        }
+    }
+
+    function generateChildGeneration(uint16 fatherValue, uint16 motherValue) private returns (uint16) {
+        uint maxValue = (fatherValue > motherValue) ? fatherValue : motherValue;
+        maxValue = maxValue + 1;
+        if (maxValue > 65535) {
+            maxValue = 65535;
+        }
+        return uint16(maxValue);
+    }
+
+    /**************************** Getters *********************************************** */
 
     function getInitialHealthFromBytes(bytes32 genes) public pure returns (uint16) {
         return uint16(uint256(genes) >> (30 * 8) );
@@ -218,6 +309,10 @@ contract GenesLaboratory {
 
     function getWingsAttributeFromBytes(bytes32 genes) public pure returns (uint16) {
         return uint16(uint256(genes) >> (6 * 8) );
+    }
+
+    function getGenerationAttributeFromBytes(bytes32 genes) public pure returns (uint16) {
+        return uint16(uint256(genes));
     }
 
     /********************* Utils *************************************** */

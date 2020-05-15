@@ -2,7 +2,7 @@ const GenesLaboratory = artifacts.require('GenesLaboratory');
 
 contract('GenesLaboratory', accounts => {
     let genesLaboratory;
-    let genes = "0x001400C8000500500006004A0004004B00F00026000100010001000100010101";
+    let genes = "0x001400C8000500500006004A0004004B00F00026000100010001000100010001";
 
 	beforeEach(async () => {
 		genesLaboratory = await GenesLaboratory.new('0x1234567890123456789012345678901234567891');

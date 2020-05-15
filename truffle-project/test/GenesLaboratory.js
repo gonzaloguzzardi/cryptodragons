@@ -116,6 +116,14 @@ contract('GenesLaboratory', accounts => {
             assert.equal(wingsAttribute, expectedValue);
         });
     });
+
+    it('Should get generation attribute value from bytes', async () => {
+        const expectedValue = 2;
+        await genesLaboratory.getGenerationAttributeFromBytes(motherGenes, { from: accounts[0] })
+        .then(generation => {
+            assert.equal(generation, expectedValue);
+        });
+    });
     
     /*it('Should add child genes', async () => {
         const expectedValue = 0x165464551151;

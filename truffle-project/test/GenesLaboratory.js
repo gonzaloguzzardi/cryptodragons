@@ -3,6 +3,7 @@ const GenesLaboratory = artifacts.require('GenesLaboratory');
 contract('GenesLaboratory', accounts => {
     let genesLaboratory;
     let genes = "0x001400C8000500500006004A0004004B00F00026000100010001000100010001";
+    let motherGenes = "0x001900CA000400700005004C0005004A00E00024000200030001000100010002";
 
 	beforeEach(async () => {
 		genesLaboratory = await GenesLaboratory.new('0x1234567890123456789012345678901234567891');
@@ -116,11 +117,11 @@ contract('GenesLaboratory', accounts => {
         });
     });
     
-    it('Should add child genes', async () => {
+    /*it('Should add child genes', async () => {
         const expectedValue = 0x165464551151;
-        await genesLaboratory.createChildGenes.call(genes, genes, { from: accounts[0] })
+        await genesLaboratory.createChildGenes.call(genes, motherGenes, { from: accounts[0] })
         .then(tx => {
             assert.equal(tx, expectedValue);
         });
-	});
+	});*/
 });

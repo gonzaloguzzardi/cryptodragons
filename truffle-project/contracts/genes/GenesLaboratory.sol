@@ -15,7 +15,7 @@ contract GenesLaboratory {
         _;
     }
 
-    function createChildGenes(bytes32 fatherGenes, bytes32 motherGenes) public /*onlyFromDragonContract*/ returns (bytes32 childGenes) {
+    function createChildGenes(bytes32 fatherGenes, bytes32 motherGenes) public onlyFromDragonContract returns (bytes32 childGenes) {
         childGenes = getChildInitialHealth(childGenes, fatherGenes, motherGenes);
         childGenes = getChildMaxHealth(childGenes, fatherGenes, motherGenes);
         childGenes = getChildInitialStrength(childGenes, fatherGenes, motherGenes);
@@ -218,7 +218,7 @@ contract GenesLaboratory {
         uint roll = random(0, 10000);
         if (roll < 4000) {
             value = fatherValue;
-        } else if (roll < 8000) {
+        } else if (roll < 7500) {
             value = motherValue;
         } else {
             value = uint16(random(1, 4));
@@ -227,9 +227,9 @@ contract GenesLaboratory {
 
     function generateChildBodyValue(uint16 fatherValue, uint16 motherValue) private returns (uint16 value) {
         uint roll = random(0, 10000);
-        if (roll < 4000) {
+        if (roll < 3750) {
             value = fatherValue;
-        } else if (roll < 8000) {
+        } else if (roll < 7500) {
             value = motherValue;
         } else {
             value = uint16(random(1, 4));
@@ -238,9 +238,9 @@ contract GenesLaboratory {
 
     function generateChildWingsValue(uint16 fatherValue, uint16 motherValue) private returns (uint16 value) {
         uint roll = random(0, 10000);
-        if (roll < 4000) {
+        if (roll < 3500) {
             value = fatherValue;
-        } else if (roll < 8000) {
+        } else if (roll < 7500) {
             value = motherValue;
         } else {
             value = uint16(random(1, 4));

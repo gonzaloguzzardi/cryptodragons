@@ -15,6 +15,23 @@ contract GenesLaboratory {
         _;
     }
 
+    function createNewDragonGenes() public /*onlyFromDragonContract*/ returns (bytes32 genes) {
+        genes = createInitialHealthValue(genes);
+        genes = createMaxHealthValue(genes);
+        genes = createInitialStrengthValue(genes);
+        genes = createMaxStrengthValue(genes);
+        genes = createInitialAgilityValue(genes);
+        genes = createMaxAgilityValue(genes);
+        genes = createInitialFortitudeValue(genes);
+        genes = createMaxFortitudeValue(genes);
+        genes = createActionCooldown(genes);
+        genes = createHatchTime(genes);
+        genes = createHead(genes);
+        genes = createBody(genes);
+        genes = createWings(genes);
+        genes = createGeneration(genes);
+    }
+    
     function createChildGenes(bytes32 fatherGenes, bytes32 motherGenes) public onlyFromDragonContract returns (bytes32 childGenes) {
         childGenes = getChildInitialHealth(childGenes, fatherGenes, motherGenes);
         childGenes = getChildMaxHealth(childGenes, fatherGenes, motherGenes);
@@ -31,6 +48,113 @@ contract GenesLaboratory {
         childGenes = getChildWings(childGenes, fatherGenes, motherGenes);
         childGenes = getChildGeneration(childGenes, fatherGenes, motherGenes);
     }
+
+    /************************** Genes creation ***************************************** */
+    
+    function createInitialHealthValue(bytes32 genes) private returns (bytes32) {
+        uint value = random(16, 22);
+        uint shiftedValue = value << (30 * 8);
+        uint result = shiftedValue | uint(genes);
+        return bytes32(result);
+    }
+
+    function createMaxHealthValue(bytes32 genes) private returns (bytes32) {
+        uint value = random(175, 225);
+        uint shiftedValue = value << (28 * 8);
+        uint result = shiftedValue | uint(genes);
+        return bytes32(result);
+    }
+
+    function createInitialStrengthValue(bytes32 genes) private returns (bytes32) {
+        uint value = random(4, 6);
+        uint shiftedValue = value << (26 * 8);
+        uint result = shiftedValue | uint(genes);
+        return bytes32(result);
+    }
+
+    function createMaxStrengthValue(bytes32 genes) private returns (bytes32) {
+        uint value = random(50, 75);
+        uint shiftedValue = value << (24 * 8);
+        uint result = shiftedValue | uint(genes);
+        return bytes32(result);
+    }
+
+    function createInitialAgilityValue(bytes32 genes) private returns (bytes32) {
+        uint value = random(4, 6);
+        uint shiftedValue = value << (22 * 8);
+        uint result = shiftedValue | uint(genes);
+        return bytes32(result);
+    }
+
+    function createMaxAgilityValue(bytes32 genes) private returns (bytes32) {
+        uint value = random(50, 75);
+        uint shiftedValue = value << (20 * 8);
+        uint result = shiftedValue | uint(genes);
+        return bytes32(result);
+    }
+
+    function createInitialFortitudeValue(bytes32 genes) private returns (bytes32) {
+        uint value = random(4, 6);
+        uint shiftedValue = value << (18 * 8);
+        uint result = shiftedValue | uint(genes);
+        return bytes32(result);
+    }
+
+    function createMaxFortitudeValue(bytes32 genes) private returns (bytes32) {
+        uint value = random(50, 75);
+        uint shiftedValue = value << (16 * 8);
+        uint result = shiftedValue | uint(genes);
+        return bytes32(result);
+    }
+
+     function createActionCooldown(bytes32 genes) private returns (bytes32) {
+        uint value = 180;
+        uint shiftedValue = value << (14 * 8);
+        uint result = shiftedValue | uint(genes);
+        return bytes32(result);
+    }
+
+    function createHatchTime(bytes32 genes) private returns (bytes32) {
+        uint value = 360;
+        uint shiftedValue = value << (12 * 8);
+        uint result = shiftedValue | uint(genes);
+        return bytes32(result);
+    }
+
+    function createHead(bytes32 genes) private returns (bytes32) {
+        uint headsAmount = 5;
+        uint value = random(0, headsAmount);
+        
+        uint shiftedValue = value << (10 * 8);
+        uint result = shiftedValue | uint(genes);
+        return bytes32(result);
+    }
+
+    function createBody(bytes32 genes) private returns (bytes32) {
+        uint bodyAmount = 5;
+        uint value = random(0, bodyAmount);
+        
+        uint shiftedValue = value << (8 * 8);
+        uint result = shiftedValue | uint(genes);
+        return bytes32(result);
+    }
+
+    function createWings(bytes32 genes) private returns (bytes32) {
+        uint wingsAmount = 5;
+        uint value = random(0, wingsAmount);
+        
+        uint shiftedValue = value << (6 * 8);
+        uint result = shiftedValue | uint(genes);
+        return bytes32(result);
+    }
+
+    function createGeneration(bytes32 genes) private returns (bytes32) {
+        uint generation = 1;
+        uint result = generation | uint(genes);
+        return bytes32(result);
+    }
+
+    /******************************* Genes propagation ****************************************************/
 
     function getChildInitialHealth(bytes32 childGenes, bytes32 fatherGenes, bytes32 motherGenes) private returns (bytes32) {
         uint16 fatherInitialHealth = getInitialHealthFromBytes(fatherGenes);
@@ -121,12 +245,18 @@ contract GenesLaboratory {
     }
 
     function getChildActionCooldown(bytes32 childGenes, bytes32 fatherGenes, bytes32 motherGenes) private returns (bytes32) {
-        uint16 fatherActionCooldown = getActionCooldownFromBytes(fatherGenes);
-        uint16 motherActionCooldown = getActionCooldownFromBytes(motherGenes);
+        uint16 fatherHatchTime = getHatchTimeFromBytes(fatherGenes);
+        uint16 motherHatchTime = getHatchTimeFromBytes(motherGenes);
 
-        uint childActionCooldown = generateChildValue(fatherActionCooldown, motherActionCooldown);
-        
-        uint shiftedValue = childActionCooldown << (14 * 8);
+        uint maxValue;
+        if (fatherHatchTime > motherHatchTime) {
+             maxValue = fatherHatchTime;
+        } else {
+            maxValue = motherHatchTime;
+        }
+
+        uint value = (uint(maxValue) * 1100) / 1000;        
+        uint shiftedValue = value << (14 * 8);
         uint result = shiftedValue | uint(childGenes);
         return bytes32(result);
     }
@@ -135,9 +265,15 @@ contract GenesLaboratory {
         uint16 fatherHatchTime = getHatchTimeFromBytes(fatherGenes);
         uint16 motherHatchTime = getHatchTimeFromBytes(motherGenes);
 
-        uint childHatchTime = generateChildValue(fatherHatchTime, motherHatchTime);
-        
-        uint shiftedValue = childHatchTime << (12 * 8);
+        uint maxValue;
+        if (fatherHatchTime > motherHatchTime) {
+             maxValue = fatherHatchTime;
+        } else {
+            maxValue = motherHatchTime;
+        }
+
+        uint value = (uint(maxValue) * 1100) / 1000;        
+        uint shiftedValue = value << (12 * 8);
         uint result = shiftedValue | uint(childGenes);
         return bytes32(result);
     }

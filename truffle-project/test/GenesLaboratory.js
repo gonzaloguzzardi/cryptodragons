@@ -127,9 +127,9 @@ contract('GenesLaboratory', accounts => {
     
     /*it('Should add child genes', async () => {
         const expectedValue = 0x165464551151;
-        await genesLaboratory.createChildGenes.call(genes, motherGenes, { from: accounts[0] })
+        await genesLaboratory.createNewDragonGenes.call( { from: accounts[0] })
         .then(tx => {
-            assert.equal(tx, expectedValue);
+            assert.equal(tx, expectedValue);*/
         });
-	});*/
+	});
 });

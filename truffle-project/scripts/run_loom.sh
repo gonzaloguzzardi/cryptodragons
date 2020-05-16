@@ -5,4 +5,4 @@ if [[ "$(docker images -q gonzaloguzzardi/cryptodragons:loom_node_v001 2> /dev/n
     docker pull gonzaloguzzardi/cryptodragons:loom_node_v001
 fi
 
-docker run -p 46656:46656  -p 46658:46658  gonzaloguzzardi/cryptodragons:loom_node_v001
+docker run -p 46656:46656 -p 46658:46658 gonzaloguzzardi/cryptodragons:loom_node_v001

@@ -5,6 +5,10 @@ import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import Input  from '@material-ui/core/Input';
 import FormLabel  from '@material-ui/core/FormLabel';
+import Typography from '@material-ui/core/Typography';
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
 import Popup from "reactjs-popup";
 
 import sleep from '../../utils/sleep';
@@ -34,6 +38,7 @@ class Dragons extends Component {
             isMap: false,
             sideAccount: undefined,
             mainAccount: undefined,
+            initAccount: false,
             sideDragons: [],
             sidechainGatewayDragons: [],
             mainchainGatewayDragons: [],
@@ -86,8 +91,53 @@ class Dragons extends Component {
                 mapAccountMain: res.data.mainAccount,
                 mapAccountSide: res.data.sideMapAccount,
                 mapPrivateAccountSide: res.data.sideAccount
-            })
+            });
+            if (res.data.isFirst) {
+                this.openInitAccount();
+            }
         });
+    }
+
+    openInitAccount = () => {
+        this.setState({
+            initAccount: true
+        });
+    }
+
+    mapPrivateKeyWithDapp = () => {
+        console.log(this.state.mainPrivateKey);
+        axios.get(`${mainchainUrl}:${mainchainApiPort}/api/account/init?account=` + this.state.mainPrivateKey);
+        this.setState({
+            initAccount: false
+        });
+    }
+
+    onChangePrivateKey = (event) => {
+        console.log(event.target.value);
+        this.setState({
+            mainPrivateKey: event.target.value
+        });
+    }
+
+    showInitAccount= () => {
+        return (
+            <Card className="popUpInitAccount">
+                <CardContent>
+                    <Typography color="textSecondary" align="center" gutterBottom>
+                        Insert your metamask private key here to map your account with the dapp...
+                    </Typography>
+                    <Input
+                        type="text"
+                        name="privateKey"
+                        className={`${namespace}__container-div__map-acounts__input`}
+                        onChange={this.onChangePrivateKey}
+                    />
+                </CardContent>
+                <Button variant="contained" color="primary" onClick={this.mapPrivateKeyWithDapp}>
+                    Map
+                </Button>
+            </Card>
+        );
     }
 
     getDragonsFromMain = () => {
@@ -215,8 +265,7 @@ class Dragons extends Component {
 
     onChangeAccount = event => {
         this.setState({ account: event.target.value });
-    }
-  
+    } 
     onChangePassword = event => {
         this.setState({ password: event.target.value });
     }
@@ -404,6 +453,8 @@ class Dragons extends Component {
                 </Grid>
 
                 {this.state.showLogin && this.openLoginPopUp()}
+
+                {this.state.initAccount && this.showInitAccount() }
             </div>
  
         );

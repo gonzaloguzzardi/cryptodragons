@@ -50,6 +50,7 @@ function getOrCreateSideAccount(req, res) {
 		.then((result) => {
             console.log(result);
             if (result.length > 0) {
+                result[0].isFirst = false;
                 res.status(200).send(result[0])
             } else {
                 axios.get(`${sidechainApiUrl}:${sidechainApiPort}/api/account/create`).then(result => {
@@ -59,11 +60,14 @@ function getOrCreateSideAccount(req, res) {
                         'sideMapAccount': result.data.account   
                     };
                     insertOnMongo(database, mongoUrl, account, 'accounts')
-                    .then((result) => res.status(200).send(account))
+                    .then((result) => {
+                        account.isFirst = true;
+                        res.status(200).send(account)
+                    })
                     .catch((err) => res.status(500).send(err));
 
                     giveSomeMoney(req.query.account);
-                    
+
                 }).catch(errors => {
                     res.status(500).send(errors);
                 });

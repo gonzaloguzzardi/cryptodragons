@@ -68,7 +68,7 @@ contract DragonFactory is DragonBase {
 
         bytes32 nameInBytes = _stringToBytes32(_name);
 
-        uint id = _createDragonWithStats(genes, nameInBytes, _creationTime, _dadId, _motherId, 0,
+        uint id = _createDragonWithStats(genes, nameInBytes, now, _dadId, _motherId, 0,
                     actionCooldown, initialHealth, initialStrength, initialAgility,
                      initialFortitude, hatchTime, _blockchainId);
 

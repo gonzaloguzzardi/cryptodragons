@@ -46,7 +46,6 @@ contract DragonFactory is DragonBase {
     }
 
     function setGenesLaboratoryAddress(address genesLaboratoryAddress) external onlyOwner {
-        //TODO check address is a gateway
         require(genesLaboratoryAddress != address(0), "address should have a valid value");
         _genesLaboratory = genesLaboratoryAddress;
     } 

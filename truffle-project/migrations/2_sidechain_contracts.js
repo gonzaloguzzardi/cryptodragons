@@ -42,6 +42,9 @@ module.exports = function (deployer, network, accounts) {
 		// map gateway and contract addresses
 		await gatewayInstance.setERC721ContractAddress(dragonTokenInstance.address);
 
+		// setup dragon contract
+		await dragonTokenInstance.setGenesLaboratoryAddress(genesContractInstance.address);
+
 		// await gatewayInstance.toggleToken(dragonTokenInstance.address, { from: validator })
 		// await dragonTokenInstance.register(user)
 

@@ -129,7 +129,7 @@ contract('GenesLaboratory', accounts => {
         const expectedValue = 0x165464551151;
         await genesLaboratory.createNewDragonGenes.call( { from: accounts[0] })
         .then(tx => {
-            assert.equal(tx, expectedValue);*/
+            assert.equal(tx, expectedValue);
         });
-	});
+	});*/
 });

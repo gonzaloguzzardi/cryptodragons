@@ -49,6 +49,9 @@ module.exports = function (deployer, network, accounts) {
 		// map gateway and contract addresses
 		await gatewayInstance.setERC721ContractAddress(dragonTokenInstance.address);
 
+		// setup dragon contract
+		await dragonTokenInstance.setGenesLaboratoryAddress(genesContractInstance.address);
+
 		writeFileSync('../mainnet_gateway_address', gatewayInstance.address);
 		writeFileSync('../mainnet_dragon_token_address', dragonTokenInstance.address);
 		writeFileSync('../mainnet_dragon_token_tx_hash', dragonTokenContract.transactionHash);

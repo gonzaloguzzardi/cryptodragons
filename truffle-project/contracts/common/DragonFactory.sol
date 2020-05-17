@@ -2,6 +2,26 @@ pragma solidity ^0.5.0;
 
 import "./DragonBase.sol";
 
+contract IGenesLaboratory {
+    function createNewDragonGenes() external returns (
+        bytes32 genes,
+        uint16 initialHealth,
+        uint16 initialStrength,
+        uint16 initialAgility,
+        uint16 initialFortitude,
+        uint16 actionCooldown,
+        uint16 hatchTime);
+
+    function createChildGenes(bytes32 fatherGenes, bytes32 motherGenes) external returns (
+        bytes32 childGenes,
+        uint16 initialHealth,
+        uint16 initialStrength,
+        uint16 initialAgility,
+        uint16 initialFortitude,
+        uint16 actionCooldown,
+        uint16 hatchTime);
+}
+
 contract DragonFactory is DragonBase {
 
     uint constant dnaDigits = 16;
@@ -15,6 +35,7 @@ contract DragonFactory is DragonBase {
     mapping(uint => bool) private _tokenMapped; // If we allow token destruction we should be careful with token ids reorder
 
     address internal _gateway;
+    address internal _genesLaboratory;
 
     event NewDragon(uint dragonId, uint256 genes);
 
@@ -24,6 +45,12 @@ contract DragonFactory is DragonBase {
         _blockchainId = blockchainId;
     }
 
+    function setGenesLaboratoryAddress(address genesLaboratoryAddress) external onlyOwner {
+        //TODO check address is a gateway
+        require(genesLaboratoryAddress != address(0), "address should have a valid value");
+        _genesLaboratory = genesLaboratoryAddress;
+    } 
+
     // TODO RESTRICT ACCESS
     /**
      Creates new Dragon and give it to its creator.
@@ -32,13 +59,22 @@ contract DragonFactory is DragonBase {
         //Dragon storage father = dragons[_dadId];
        // Dragon storage mother = dragons[_motherId];
 
-        bytes32 newGenes = bytes32("0x14564515454");
+        (bytes32 genes,
+        uint16 initialHealth,
+        uint16 initialStrength,
+        uint16 initialAgility,
+        uint16 initialFortitude,
+        uint16 actionCooldown,
+        uint16 hatchTime) = IGenesLaboratory(_genesLaboratory).createNewDragonGenes();
 
         bytes32 nameInBytes = _stringToBytes32(_name);
-        uint id = _createDragon(nameInBytes, _creationTime, newGenes, _dadId, _motherId);
+
+        uint id = _createDragonWithStats(genes, nameInBytes, _creationTime, _dadId, _motherId, 0,
+                    actionCooldown, initialHealth, initialStrength, initialAgility,
+                     initialFortitude, hatchTime, _blockchainId);
 
         _mint(msg.sender, id);
-        emit NewDragon(id, uint256(newGenes));
+        emit NewDragon(id, uint256(genes));
     }
 
     //TODO implement burn function which should update mainchainToSidechainIds mapping
@@ -71,18 +107,6 @@ contract DragonFactory is DragonBase {
                 _updateDragonFromData(tokenId, _data);
             }
         }
-    }
-
-    function _createDragon(bytes32 _name, uint64 _creationTime, bytes32 _genes, uint32 _dadId, uint32 _motherId) private returns(uint256 id) {
-        uint32 currentExperience = 0;
-        uint16 actionCooldown = 0;
-        uint16 health = 50;
-        uint16 strength = 7;
-        uint16 agility = 7;
-        uint16 fortitude = 7;
-        uint16 hatchTime = 60;
-        id = _createDragonWithStats(_genes, _name, _creationTime, _dadId, _motherId, currentExperience,
-                    actionCooldown, health, strength, agility, fortitude,hatchTime, _blockchainId);
     }
 
     function _createDragonFromData(bytes memory _data) private returns(uint256) {

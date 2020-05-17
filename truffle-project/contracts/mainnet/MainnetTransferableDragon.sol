@@ -15,6 +15,7 @@ contract MainnetTransferableDragon is DragonFactory {
 
     // Setter to update who the gateway is
     function setGatewayAddress(address gateway) external onlyOwner {
+        require(gateway != address(0), "gateway should have a valid address");
         _gateway = gateway;
     }
 

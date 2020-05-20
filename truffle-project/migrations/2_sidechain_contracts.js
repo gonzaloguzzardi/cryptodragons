@@ -53,17 +53,4 @@ module.exports = function (deployer, network, accounts) {
 		writeFileSync('../loom_dragon_token_tx_hash', dragonTokenContract.transactionHash);
 		writeFileSync('../loom_dragon_coin_address', dragonCoinInstance.address);
 		writeFileSync('../loom_dragon_coin_tx_hash', dragonCoinContract.transactionHash);
-
-		// Example
-		await deployer.deploy(MyToken, gatewayInstance.address);
-		const myTokenInstance = await MyToken.deployed();
-
-		await deployer.deploy(MyCoin, gatewayInstance.address);
-		const myCoinInstance = await MyCoin.deployed();
-
-		console.log('\n*************************************************************************\n');
-		console.log(`MyToken Contract Address: ${myTokenInstance.address}`);
-		console.log(`MyCoin Contract Address: ${myCoinInstance.address}`);
-		console.log('\n*************************************************************************\n');
-	});
 };

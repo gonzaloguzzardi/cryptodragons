@@ -3,7 +3,6 @@ const { writeFileSync } = require('fs');
 const MyRinkebyToken = artifacts.require('./MyRinkebyToken.sol');
 const MyRinkebyCoin = artifacts.require('./MyRinkebyCoin.sol');
 const DragonToken = artifacts.require('./mainnet/MainnetTransferableDragon.sol');
-const DragonCoin = artifacts.require('./mainnet/MainnetDragonCoin.sol');
 const Gateway = artifacts.require('./mainnet/gateway/MainnetGateway.sol');
 const GenesLaboratory = artifacts.require('./genes/GenesLaboratory.sol');
 
@@ -37,12 +36,6 @@ module.exports = function (deployer, network, accounts) {
 		console.log(`GenesLaboratory deployed at address: ${genesContractInstance.address}`);
 		console.log(`GenesLaboratory transaction at hash: ${genesContract.transactionHash}`);
 
-		const dragonCoinContract = await deployer.deploy(DragonCoin, gatewayInstance.address);
-		const dragonCoinInstance = await DragonCoin.deployed();
-
-		console.log(`DragonCoin deployed at address: ${dragonCoinInstance.address}`);
-		console.log(`DragonCoin transaction at hash: ${dragonCoinContract.transactionHash}`);
-
 		// await gatewayInstance.toggleToken(dragonTokenInstance.address, { from: validator })
 		// await dragonTokenInstance.register(user)
 
@@ -55,19 +48,5 @@ module.exports = function (deployer, network, accounts) {
 		writeFileSync('../mainnet_gateway_address', gatewayInstance.address);
 		writeFileSync('../mainnet_dragon_token_address', dragonTokenInstance.address);
 		writeFileSync('../mainnet_dragon_token_tx_hash', dragonTokenContract.transactionHash);
-		writeFileSync('../loom_dragon_coin_address', dragonCoinInstance.address);
-		writeFileSync('../loom_dragon_coin_tx_hash', dragonCoinContract.transactionHash);
-
-		// Example
-		await deployer.deploy(MyRinkebyToken);
-		const myTokenInstance = await MyRinkebyToken.deployed();
-
-		await deployer.deploy(MyRinkebyCoin);
-		const myCoinInstance = await MyRinkebyCoin.deployed();
-
-		console.log('\n*************************************************************************\n');
-		console.log(`MyRinkebyToken Contract Address: ${myTokenInstance.address}`);
-		console.log(`MyRinkebyCoin Contract Address: ${myCoinInstance.address}`);
-		console.log('\n*************************************************************************\n');
 	});
 };

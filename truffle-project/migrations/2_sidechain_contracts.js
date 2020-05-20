@@ -51,4 +51,5 @@ module.exports = function (deployer, network, accounts) {
 		writeFileSync('../loom_dragon_token_tx_hash', dragonTokenContract.transactionHash);
 		writeFileSync('../loom_dragon_coin_address', dragonCoinInstance.address);
 		writeFileSync('../loom_dragon_coin_tx_hash', dragonCoinContract.transactionHash);
+	});
 };

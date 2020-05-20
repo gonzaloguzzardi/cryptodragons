@@ -1,7 +1,5 @@
 const { writeFileSync } = require('fs');
 
-const MyToken = artifacts.require('./MyToken.sol');
-const MyCoin = artifacts.require('./MyCoin.sol');
 const DragonToken = artifacts.require('./dappchain/DappchainTransferableDragon.sol');
 const DragonCoin = artifacts.require('./dappchain/DappchainDragonCoin.sol');
 const Gateway = artifacts.require('./dappchain/gateway/DappchainGateway.sol');

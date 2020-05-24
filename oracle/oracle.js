@@ -38,11 +38,11 @@ app.get('/api/mapAccounts', mapAccounts);
 app.get('/api/dragon', getDragon);
 
 app.post('/api/saveDragon', saveDragon);
-app.post('/api/deleteDragon', deleteDragon); // Revisar implementación, puede faltar una promise en la llamada a mongo
-app.post('/api/insertDragon', insertDragon); // Revisar implementación, puede faltar una promise en la llamada a mongo
+app.post('/api/deleteDragon', deleteDragon);
+app.post('/api/insertDragon', insertDragon);
 
 // SERVER LISTEN
-const server = app.listen(oracleApiPort, '0.0.0.0', () => {
+const server = app.listen(oracleApiPort, () => {
 	const { address, port } = server.address();
 	console.log('Example app listening at http://%s:%s', address, port);
 });

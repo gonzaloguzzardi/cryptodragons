@@ -15,16 +15,17 @@ const {
 	getDragonDataById,
 	transferDragonToGateway,
 	receiveDragonFromOracle,
-	saveDragonOnOracle,
 	listenSideChainEvents,
 } = require('./src/services/internal/sidechain');
+const { saveDragonOnOracle } = require('./src/services');
 
 function loadLoomAccount(accountName) {
 	const accountPath = './misc/loom_private_key';
 	const privateKeyStr = fs.readFileSync(path.join(__dirname, accountPath), 'utf-8');
 	const privateKey = CryptoUtils.B64ToUint8Array(privateKeyStr);
 	const publicKey = CryptoUtils.publicKeyFromPrivateKey(privateKey);
-	const client = new Client('default', 'ws://127.0.0.1:46658/websocket', 'ws://127.0.0.1:46658/queryws');
+	const loomAddress = !process.env.DOCKERENV ? 'ws://127.0.0.1:46658' : 'ws://loom:46658';
+	const client = new Client('default', `${loomAddress}/websocket`, `${loomAddress}/queryws`);
 	client.txMiddleware = [new NonceTxMiddleware(publicKey, client), new SignedTxMiddleware(privateKey)];
 	client.on('error', (msg) => {
 		console.error('Loom connection error', msg);

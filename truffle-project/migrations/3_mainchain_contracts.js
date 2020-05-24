@@ -35,7 +35,7 @@ module.exports = function (deployer, network, accounts) {
 		console.log(`GenesLaboratory deployed at address: ${genesContractInstance.address}`);
 		console.log(`GenesLaboratory transaction at hash: ${genesContract.transactionHash}`);
 
-		const marketplaceContract = await deployer.deploy(Marketplace);
+		const marketplaceContract = await deployer.deploy(Marketplace, dragonTokenInstance.address);
 		const marketplaceContractInstance = await Marketplace.deployed();
 
 		console.log(`Marketplace deployed at address: ${marketplaceContractInstance.address}`);

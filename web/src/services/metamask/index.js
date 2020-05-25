@@ -6,17 +6,23 @@ const getNetworkID = () => {
   return window.ethereum && window.ethereum.networkVersion;
 };
 
-const loadBFAAccount = (setAddressCallback) => {
-  if (window.ethereum) {
-    window.ethereum.enable()
-      .then(accounts => setAddressCallback(accounts[0]))
-      .catch(err => {
-        console.error(err);
-        setAddressCallback(null)
-      });
-  } else {
-    alert("Metamask is not loaded!");
-  };
+const loadMainchainAccount = setAddressCallback => {
+  if (!window.ethereum) return alert("Metamask is not loaded!");
+
+  window.ethereum.enable()
+    .then(accounts => setAddressCallback(accounts[0]))
+    .catch(err => {
+      console.error(err);
+      setAddressCallback(null)
+    });
+};
+
+const onAccountChange = setAddressCallback => {
+  if (!window.ethereum) return alert("Metamask is not loaded!");
+
+  window.ethereum.on('accountsChanged', accounts => {
+    setAddressCallback(accounts[0]);
+  });
 };
 
 const metamaskLoaded = () => {
@@ -26,6 +32,7 @@ const metamaskLoaded = () => {
 export {
   getCurrentAccount,
   getNetworkID,
-  loadBFAAccount,
+  loadMainchainAccount,
   metamaskLoaded,
+  onAccountChange,
 };

@@ -4,7 +4,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 
-import { getCurrentAccount, getNetworkID, loadBFAAccount, metamaskLoaded } from '../../services/metamask'
+import { getCurrentAccount, getNetworkID, loadMainchainAccount, metamaskLoaded, onAccountChange } from '../../services/metamask'
 
 import './index.scss';
 
@@ -17,6 +17,8 @@ export class Metamask extends Component {
     this.state = {
       mainchainAccount: getCurrentAccount(),
     };
+
+    onAccountChange(this.setMainchainAccount);
   }
 
   setMainchainAccount = address => {
@@ -38,7 +40,7 @@ export class Metamask extends Component {
           <FormControlLabel control={<Checkbox checked={!!getNetworkID()}/>} label={`Network ID: ${getNetworkID()}`} />
         </FormGroup>
 
-        <Button variant="contained" color="primary" href="" onClick={() => loadBFAAccount(this.setMainchainAccount)} disabled={!!this.state.mainchainAccount}>
+        <Button variant="contained" color="primary" href="" onClick={() => loadMainchainAccount(this.setMainchainAccount)} disabled={!!this.state.mainchainAccount}>
           Connect BFA account
         </Button>
       </div>

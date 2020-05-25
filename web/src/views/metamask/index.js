@@ -26,7 +26,11 @@ export class Metamask extends Component {
   render() {
     return (
       <div className={`${namespace}__div-container`}>
-        <h1>Integration with metamask</h1>
+        <h1 className={`${namespace}__div-container__header`}>Integration with metamask</h1>
+        <hr/>
+        <span>Use this account please: <b>28863498efede12296888f7ca6cf0b94974fbdbc</b></span><br/>
+        <span>Private key: <b>dff874fa1f53c713f31b5831c25fe56657808bd0b379a7f28442af8a6de79cb2</b></span>
+        <hr/>
 
         <FormGroup>
           <FormControlLabel control={<Checkbox checked={!!metamaskLoaded()}/>} label="Metamask Loaded" />

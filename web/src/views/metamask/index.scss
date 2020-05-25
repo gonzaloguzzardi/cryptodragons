@@ -2,5 +2,10 @@
   &__div-container {
     display: table;
     margin: 0 auto;
+
+    &__header {
+      display: flex;
+      justify-content: center;
+    } 
   }
 }

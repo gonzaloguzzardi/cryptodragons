@@ -14,17 +14,17 @@ export class Landing extends Component {
           <img src={logo} className={`${namespace}__header-logo`} alt="logo" />
           <h2>Welcome to CryptoDragons</h2>
         </div>
-				<div>
-					<Button variant="contained" color="primary" href="dragons">
-						Start
-					</Button>
+        <div>
+          <Button variant="contained" color="primary" href="dragons">
+            Start
+          </Button>
 
-					<br/><br/><br/><br/>
+          <br/><br/><br/><br/>
 
-					<Button variant="contained" color="secondary" href="metamask">
-						Metamask Integration
-					</Button>
-				</div>
+          <Button variant="contained" color="secondary" href="metamask">
+            Metamask Integration
+          </Button>
+        </div>
       </div>
     );
   }

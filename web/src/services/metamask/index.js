@@ -13,7 +13,7 @@ const loadMainchainAccount = setAddressCallback => {
     .then(accounts => setAddressCallback(accounts[0]))
     .catch(err => {
       console.error(err);
-      setAddressCallback(null)
+      setAddressCallback(null);
     });
 };
 

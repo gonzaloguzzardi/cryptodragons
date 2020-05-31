@@ -16,7 +16,7 @@ class MetamaskHelper {
   };
   
   static loadMainchainAccount() {
-    if ((typeof window.ethereum === 'undefined') || window.ethereum.isMetaMask) {
+    if ((typeof window.ethereum === 'undefined') || !window.ethereum.isMetaMask) {
       return alert("Metamask is not loaded!");
     }
     window.ethereum.enable()

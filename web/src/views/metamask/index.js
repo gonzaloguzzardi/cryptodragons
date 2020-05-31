@@ -22,9 +22,7 @@ export class Metamask extends Component {
     onAccountChange(this.setMainchainAccount);
   }
 
-  setMainchainAccount = mainchainAccount => {
-    this.setState({ mainchainAccount });
-  }
+  setMainchainAccount = mainchainAccount => this.setState({ mainchainAccount });
 
   render() {
     getCurrentAccount().then(mainchainAccount => this.setState({ mainchainAccount }));

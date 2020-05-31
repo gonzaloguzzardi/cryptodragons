@@ -77,7 +77,19 @@ async function _sReceiveDragonFromOracle(contract, ownerAccount, gas, dragonId, 
 	return await contract.methods.receiveDragon(receiverAddress, dragonId, data).send({ from: ownerAccount, gas });
 }
 
+async function _isMap(contract, ownerAccount, gas, account) {
+	const gasEstimate = await contract.methods
+		.isMap(account)
+		.estimateGas({ from: ownerAccount, gas });
+
+	if (gasEstimate >= gas) {
+		throw new Error('Not enough enough gas, send more.');
+	}
+	return contract.methods.isMap(account).call({ from: ownerAccount, gas: gasEstimate });
+}
+
 module.exports = {
+	_isMap,
 	_sMapAccountSideChain,
 	_sMapAccountMainChain,
 	_sCreateDragonToken,

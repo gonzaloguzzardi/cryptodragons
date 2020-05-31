@@ -9,6 +9,7 @@ const getNetworkID = async () => {
   return web3.eth.net.getId().then(netId => netId);
 };
 
+
 const loadMainchainAccount = setAddressCallback => {
   if (!window.ethereum) return alert("Metamask is not loaded!");
 

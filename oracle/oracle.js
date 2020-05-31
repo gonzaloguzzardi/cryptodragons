@@ -11,6 +11,7 @@ const { oracleApiPort } = require('./config');
 
 // CONTROLLERS
 const {
+	isMap,
 	getDragonsInGateways,
 	transferDragon,
 	mapAccounts,
@@ -18,6 +19,7 @@ const {
 	getDragon,
 	deleteDragon,
 	insertDragon,
+	getOrCreateSideAccount,
 } = require('./controllers');
 
 // SERVICES
@@ -36,7 +38,8 @@ app.get('/api/dragons', getDragonsInGateways);
 app.get('/api/dragon/transfer', transferDragon);
 app.get('/api/mapAccounts', mapAccounts);
 app.get('/api/dragon', getDragon);
-
+app.post('/api/isMap', isMap);
+app.get('/api/getOrCreateSideAccount', getOrCreateSideAccount);
 app.post('/api/saveDragon', saveDragon);
 app.post('/api/deleteDragon', deleteDragon);
 app.post('/api/insertDragon', insertDragon);

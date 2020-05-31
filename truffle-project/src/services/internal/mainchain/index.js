@@ -1,4 +1,5 @@
 const {
+	isMap,
 	mapAccount,
 	createDragonToken,
 	getMyDragons,
@@ -9,6 +10,7 @@ const {
 const listenMainChainEvents = require('./listen-mainchain-events');
 
 module.exports = {
+	isMap,
 	mapAccount,
 	createDragonToken,
 	getMyDragons,

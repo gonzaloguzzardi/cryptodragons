@@ -1,4 +1,5 @@
 const {
+	_isMap,
 	_sMapAccountMainChain,
 	_sCreateDragonToken,
 	_sGetMyDragons,
@@ -49,7 +50,13 @@ async function receiveDragonFromOracle(web3js, ownerAccount, gas, dragonId, data
 	return _sReceiveDragonFromOracle(contract, ownerAccount, gas, dragonId, data, receiverAddress);
 }
 
+async function isMap(web3js, ownerAccount, gas, sideAccount) {
+	const contract = await getMainNetTokenContract(web3js);
+	return _isMap(contract, ownerAccount, gas, sideAccount);
+}
+
 module.exports = {
+	isMap,
 	mapAccount,
 	createDragonToken,
 	getMyDragons,

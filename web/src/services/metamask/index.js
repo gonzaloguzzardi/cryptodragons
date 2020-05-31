@@ -1,9 +1,12 @@
-const getCurrentAccount = () => {
-  return window.ethereum && window.ethereum.selectedAddress
+import Web3 from 'web3';
+const web3 = new Web3(Web3.givenProvider || "ws://localhost:8545");
+
+const getCurrentAccount = async () => {
+  return web3.eth.getAccounts().then(accounts => accounts[0]);
 };
 
-const getNetworkID = () => {
-  return window.ethereum && window.ethereum.networkVersion;
+const getNetworkID = async () => {
+  return web3.eth.net.getId().then(netId => netId);
 };
 
 const loadMainchainAccount = setAddressCallback => {

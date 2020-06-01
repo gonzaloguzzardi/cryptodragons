@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 const {
 	_sMapAccountMainChain,
 	_sCreateDragonToken,
@@ -6,18 +7,21 @@ const {
 	_sTransferDragonToGateway,
 	_sReceiveDragonFromOracle,
 } = require('../../index.js');
-const MainchainDragonTokenJson = require('../../../contracts/MainnetTransferableDragon.json');
-const GatewayJson = require('../../../contracts/MainnetGateway.json');
 
-async function getMainNetTokenContract(web3js) {
-	const networkId = await web3js.eth.net.getId();
-	return new web3js.eth.Contract(MainchainDragonTokenJson.abi, MainchainDragonTokenJson.networks[networkId].address);
-}
+// -> MOVIDO
+					const MainchainDragonTokenJson = require('../../../contracts/MainnetTransferableDragon.json');
+					const GatewayJson = require('../../../contracts/MainnetGateway.json');
 
-async function getMainNetGatewayContract(web3js) {
-	const networkId = await web3js.eth.net.getId();
-	return new web3js.eth.Contract(GatewayJson.abi, GatewayJson.networks[networkId].address);
-}
+					async function getMainNetTokenContract(web3js) {
+						const networkId = await web3js.eth.net.getId();
+						return new web3js.eth.Contract(MainchainDragonTokenJson.abi, MainchainDragonTokenJson.networks[networkId].address);
+					}
+
+					async function getMainNetGatewayContract(web3js) {
+						const networkId = await web3js.eth.net.getId();
+						return new web3js.eth.Contract(GatewayJson.abi, GatewayJson.networks[networkId].address);
+					}
+// <- MOVIDO
 
 async function mapAccount(web3js, ownerAccount, gas, sideAccount) {
 	const contract = await getMainNetTokenContract(web3js);

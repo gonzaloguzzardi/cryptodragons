@@ -5,6 +5,7 @@ import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 import MetamaskHelper from '../../services/metamask';
+import MainchainAPI from '../../services/blockchain-interaction/mainchain';
 
 import './index.scss';
 
@@ -43,6 +44,10 @@ export class Metamask extends Component {
         <FormControlLabel control={<Checkbox checked={!!this.state.metamask && !!this.state.metamask.netId}/>} label={`Network ID: ${!!this.state.metamask && this.state.metamask.netId}`} />
       </FormGroup>
 
+
+      <Button variant="contained" color="primary" href="" onClick={() => MainchainAPI.createDragon().then(res => console.log("RESPONSEE", res))}>
+        Create dragon Mainchain
+      </Button>
     </div>
   );
 }

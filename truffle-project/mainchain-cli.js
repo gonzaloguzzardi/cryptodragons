@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 const Web3 = require('web3');
 const fs = require('fs');
 const path = require('path');
@@ -32,29 +33,31 @@ app.get('/', (req, res) => {
 	res.status(200).send('Welcome to API REST');
 });
 
-function loadGanacheAccount() {
-	// const privateKey = fs.readFileSync(path.join(__dirname, './ganache_private_key'), 'utf-8')
-	// const ownerAccount = web3js.eth.accounts.privateKeyToAccount(privateKey)
-	const bfaAddress = !process.env.DOCKERENV ? 'http://127.0.0.1:8545' : 'http://bfa:8545';
-	const web3js = new Web3(new Web3.providers.HttpProvider(bfaAddress));
-	const ownerAccount = fs.readFileSync(path.join(__dirname, './misc/mainchain_account'), 'utf-8');
-	web3js.eth.accounts.wallet.add(ownerAccount);
-	return { account: ownerAccount, web3js };
-}
+// -> MOVIDO
+								function loadGanacheAccount() {
+									// const privateKey = fs.readFileSync(path.join(__dirname, './ganache_private_key'), 'utf-8')
+									// const ownerAccount = web3js.eth.accounts.privateKeyToAccount(privateKey)
+									const bfaAddress = !process.env.DOCKERENV ? 'http://127.0.0.1:8545' : 'http://bfa:8545';
+									const web3js = new Web3(new Web3.providers.HttpProvider(bfaAddress));
+									const ownerAccount = fs.readFileSync(path.join(__dirname, './misc/mainchain_account'), 'utf-8');
+									web3js.eth.accounts.wallet.add(ownerAccount);
+									return { account: ownerAccount, web3js };
+								}
 
-app.get('/api/dragon/create', async function createFunction(req, res, next) {
-	const { account, web3js } = loadGanacheAccount();
-	let hash = '';
-	try {
-		const tx = await createDragonToken(web3js, account, req.query.gas || 350000);
-		console.log(`Dragon created`);
-		console.log(`tx hash: ${tx.transactionHash}`);
-		hash = tx.transactionHash;
-		res.status(200).send(hash);
-	} catch (err) {
-		res.status(500).send(err);
-	}
-});
+								app.get('/api/dragon/create', async function createFunction(req, res, next) {
+									const { account, web3js } = loadGanacheAccount();
+									let hash = '';
+									try {
+										const tx = await createDragonToken(web3js, account, req.query.gas || 350000);
+										console.log(`Dragon created`);
+										console.log(`tx hash: ${tx.transactionHash}`);
+										hash = tx.transactionHash;
+										res.status(200).send(hash);
+									} catch (err) {
+										res.status(500).send(err);
+									}
+								});
+// <- MOVIDO
 
 app.post('/api/dragon/receive', async function transferFunction(req, res, next) {
 	const { account, web3js } = loadGanacheAccount();

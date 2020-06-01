@@ -5,7 +5,6 @@ import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 import MetamaskHelper from '../../services/metamask';
-import MainchainAPI from '../../services/blockchain-interaction/mainchain';
 
 import './index.scss';
 

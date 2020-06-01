@@ -24,6 +24,12 @@ export class Landing extends Component {
           <Button variant="contained" color="secondary" href="metamask">
             Metamask Integration
           </Button>
+
+          <br/><br/><br/><br/>
+
+          <Button variant="contained" color="secondary" href="migration">
+            Migration
+          </Button>
         </div>
       </div>
     );

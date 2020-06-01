@@ -12,7 +12,7 @@ import CommonAPI from '../common';
 let client;
 
 class MainchainAPI {
-  // private
+
   static async getClientHelper() {
     if (!client) {
       client = await clientFactory();
@@ -21,22 +21,20 @@ class MainchainAPI {
     }
     return client;
   };
-  
-  // public
-  static loadMainchainAccount() {
-    if ((typeof window.ethereum === 'undefined') || !window.ethereum.isMetaMask) {
-      return alert("Metamask is not loaded!");
-    }
-    window.ethereum.enable()
-      .then(accounts => MainchainAPI.getClientHelper().then(client => client.account = accounts[0]))
-      .catch(err => console.error(err));
-  };
 
-  static onAccountChange(setter) {
-    window.ethereum && window.ethereum.on('accountsChanged', accounts => setter(accounts[0]));
-  }
+  // static loadMainchainAccount() {
+  //   if ((typeof window.ethereum === 'undefined') || !window.ethereum.isMetaMask) {
+  //     return alert("Metamask is not loaded!");
+  //   }
+  //   window.ethereum.enable()
+  //     .then(accounts => MainchainAPI.getClientHelper().then(client => client.account = accounts[0]))
+  //     .catch(err => console.error(err));
+  // };
 
-  // Blockchain apicalls
+  // static onAccountChange(setter) {
+  //   window.ethereum && window.ethereum.on('accountsChanged', accounts => setter(accounts[0]));
+  // }
+
   static async createDragon(gas) {
     return CommonAPI.sCreateDragonToken(MainchainAPI, gas)
       .then(res => res)

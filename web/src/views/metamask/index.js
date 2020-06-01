@@ -44,10 +44,6 @@ export class Metamask extends Component {
         <FormControlLabel control={<Checkbox checked={!!this.state.metamask && !!this.state.metamask.netId}/>} label={`Network ID: ${!!this.state.metamask && this.state.metamask.netId}`} />
       </FormGroup>
 
-
-      <Button variant="contained" color="primary" href="" onClick={() => MainchainAPI.createDragon().then(res => console.log("RESPONSEE", res))}>
-        Create dragon Mainchain
-      </Button>
     </div>
   );
 }

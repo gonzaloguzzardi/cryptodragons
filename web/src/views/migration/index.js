@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Button from '@material-ui/core/Button';
 
 import MainchainAPI from '../../services/blockchain-interaction/mainchain';
+import SidechainAPI from '../../services/blockchain-interaction/sidechain';
 
 import './index.scss';
 
@@ -22,6 +23,10 @@ export class Migration extends Component {
 
       <Button variant="contained" color="primary" href="" onClick={() => MainchainAPI.createDragon().then(res => console.log("RESPONSEE", res))}>
         Create dragon Mainchain
+      </Button>
+      <hr/>
+      <Button variant="contained" color="primary" href="" onClick={() => SidechainAPI.createDragon().then(res => console.log("RESPONSEE", res))}>
+        Create dragon Sidechain
       </Button>
     </div>
   );

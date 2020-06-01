@@ -21,6 +21,7 @@ class CommonAPI {
           console.log(`Dragon created`);
           console.log(`tx hash: ${tx.transactionHash}`);
           hash = tx.transactionHash;
+          // if (client.loomClient) client.disconnect();
           return hash;
         })
     }).catch(err => console.error(err));

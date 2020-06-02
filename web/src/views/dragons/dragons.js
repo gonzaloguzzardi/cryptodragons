@@ -113,7 +113,7 @@ class Dragons extends Component {
     }
 
     isMap = () => {
-        _isMap(this.state.mapAccountMain, this.state.mapAccountSide, this.state.mapPrivateAccountSide).then(res => 
+        _isMap(this.state.mainAccount, this.state.sideAccount, this.state.sideAccount).then(res => 
             {
                 this.setState({ 
                     isMap: res.data

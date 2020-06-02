@@ -11,6 +11,7 @@ const app = express();
 const bodyParser = require('body-parser');
 
 const {
+	isMap,
 	mapAccount,
 	createDragonToken,
 	getMyDragons,

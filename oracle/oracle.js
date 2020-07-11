@@ -32,6 +32,7 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// LISTENING BLOCKCHAINS
 listenMainChainEvents();
 listenSideChainEvents();
 

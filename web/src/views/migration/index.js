@@ -17,13 +17,22 @@ export class Migration extends Component {
       <span>Private key: <b>dff874fa1f53c713f31b5831c25fe56657808bd0b379a7f28442af8a6de79cb2</b></span>
       <hr/>
 
+      <Button variant="contained" color="primary" href="" onClick={() => MainchainAPI.getMyDragons().then(res => console.log("RESPONSEE", res))}>
+        Get dragons Mainchain
+      </Button>
+      <hr/>
       <Button variant="contained" color="primary" href="" onClick={() => MainchainAPI.createDragon().then(res => console.log("RESPONSEE", res))}>
         Create dragon Mainchain
+      </Button>
+      <hr/>
+      <Button variant="contained" color="primary" href="" onClick={() => SidechainAPI.getMyDragons().then(res => console.log("RESPONSEE", res))}>
+        Get dragons Sidechain
       </Button>
       <hr/>
       <Button variant="contained" color="primary" href="" onClick={() => SidechainAPI.createDragon().then(res => console.log("RESPONSEE", res))}>
         Create dragon Sidechain
       </Button>
+      <hr/>
     </div>
   );
 }

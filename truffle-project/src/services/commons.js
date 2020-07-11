@@ -38,19 +38,19 @@ async function _sMapAccountMainChain(contract, ownerAccount, gas, sideAccount) {
 
 										return contract.methods.createDragon('test dragon', 1, 2, 2).send({ from: ownerAccount, gas: gasEstimate });
 									}
+
+									async function _sGetMyDragons(contract, ownerAccount, gas) {
+										const gasEstimate = await contract.methods
+											.getDragonsIdsByOwner(ownerAccount)
+											.estimateGas({ from: ownerAccount, gas: 0 });
+
+										if (gasEstimate >= gas) {
+											throw new Error('Not enough enough gas, send more.');
+										}
+
+										return await contract.methods.getDragonsIdsByOwner(ownerAccount).call({ from: ownerAccount, gas: gasEstimate });
+									}
 // <- Movido
-
-async function _sGetMyDragons(contract, ownerAccount, gas) {
-	const gasEstimate = await contract.methods
-		.getDragonsIdsByOwner(ownerAccount)
-		.estimateGas({ from: ownerAccount, gas: 0 });
-
-	if (gasEstimate >= gas) {
-		throw new Error('Not enough enough gas, send more.');
-	}
-
-	return await contract.methods.getDragonsIdsByOwner(ownerAccount).call({ from: ownerAccount, gas: gasEstimate });
-}
 
 async function _sGetDragonDataById(contract, ownerAccount, dragonId) {
 	const gasEstimate = await contract.methods.getDragonById(dragonId).estimateGas({ from: ownerAccount, gas: 0 });

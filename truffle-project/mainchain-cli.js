@@ -14,8 +14,12 @@ const bodyParser = require('body-parser');
 const {
 	isMap,
 	mapAccount,
+
+// -> MOVIDO
 	createDragonToken,
 	getMyDragons,
+// <- MOVIDO
+
 	getDragonDataById,
 	transferDragonToGateway,
 	receiveDragonFromOracle,
@@ -138,17 +142,19 @@ app.get('/api/dragons', async function getDragonFunction(req, res, next) {
 	}
 });
 
-app.get('/api/dragon', async function getDragonFunction(req, res, next) {
-	const { account, web3js } = loadGanacheAccount();
-	try {
-		const data = await getDragonDataById(web3js, account, req.query.id);
-		data.sname = web3js.utils.toUtf8(data.name);
-		res.status(200).send(data);
-	} catch (err) {
-		console.log(`Error getting dragon data with id: ${req.query.id}`);
-		res.status(500).send(err);
-	}
-});
+// -> MOVIDO
+							app.get('/api/dragon', async function getDragonFunction(req, res, next) {
+								const { account, web3js } = loadGanacheAccount();
+								try {
+									const data = await getDragonDataById(web3js, account, req.query.id);
+									data.sname = web3js.utils.toUtf8(data.name);
+									res.status(200).send(data);
+								} catch (err) {
+									console.log(`Error getting dragon data with id: ${req.query.id}`);
+									res.status(500).send(err);
+								}
+							});
+// <- MOVIDO
 
 app.get('/api/mapAccount', async function getMapFunction(req, res, next) {
 	const { account, web3js } = loadGanacheAccount(req.query.account);

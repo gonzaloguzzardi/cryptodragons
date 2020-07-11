@@ -28,6 +28,13 @@ class SidechainAPI {
       .then(res => res)
       .catch(err => err);
   }
+
+  static async getMyDragons(gas) {
+    return CommonAPI.sGetMyDragons(SidechainAPI, gas)
+      .then(res => res)
+      .catch(err => err);
+  }
+
 };
 
 export default SidechainAPI;

@@ -34,12 +34,12 @@ async function mapAccount(web3js, ownerAccount, gas, sideAccount) {
 						const contract = await getMainNetTokenContract(web3js);
 						return _sCreateDragonToken(contract, ownerAccount, gas);
 					}
-// <- MOVIDO
 
-async function getMyDragons(web3js, ownerAccount, gas) {
-	const contract = await getMainNetTokenContract(web3js);
-	return _sGetMyDragons(contract, ownerAccount, gas);
-}
+					async function getMyDragons(web3js, ownerAccount, gas) {
+						const contract = await getMainNetTokenContract(web3js);
+						return _sGetMyDragons(contract, ownerAccount, gas);
+					}
+// <- MOVIDO
 
 async function getDragonDataById(web3js, ownerAccount, dragonId, gas) {
 	const contract = await getMainNetTokenContract(web3js);

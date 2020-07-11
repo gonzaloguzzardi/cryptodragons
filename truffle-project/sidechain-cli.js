@@ -16,8 +16,12 @@ const bodyParser = require('body-parser');
 const {
 	isMap,
 	mapAccount,
+
+// -> MOVIDO
 	createDragonToken,
 	getMyDragons,
+// <- MOVIDO
+
 	getDragonDataById,
 	transferDragonToGateway,
 	receiveDragonFromOracle,
@@ -118,20 +122,22 @@ app.get('/api/dragon/transfer', async function transferFunction(req, res, next) 
 	}
 });
 
-app.get('/api/dragons', async function getDragonFunction(req, res, next) {
-	const { account, web3js, client } = loadLoomAccount(req.query.account);
-	let data = '';
-	try {
-		data = await getMyDragons(web3js, account, req.query.gas || 350000);
-		console.log(`\nAddress ${account} holds dragons with id ${data}\n`);
-		res.status(200).send(data);
-	} catch (err) {
-		console.log(`Error getting dragons data:${err}`);
-		res.status(500).send(err);
-	} finally {
-		if (client) client.disconnect();
-	}
-});
+// -> MOVIDO
+							app.get('/api/dragons', async function getDragonFunction(req, res, next) {
+								const { account, web3js, client } = loadLoomAccount(req.query.account);
+								let data = '';
+								try {
+									data = await getMyDragons(web3js, account, req.query.gas || 350000);
+									console.log(`\nAddress ${account} holds dragons with id ${data}\n`);
+									res.status(200).send(data);
+								} catch (err) {
+									console.log(`Error getting dragons data:${err}`);
+									res.status(500).send(err);
+								} finally {
+									if (client) client.disconnect();
+								}
+							});
+// <- MOVIDO							
 
 app.get('/api/mapAccount', async function getMapFunction(req, res, next) {
 	const { account, web3js, client } = loadLoomAccount(req.query.account);

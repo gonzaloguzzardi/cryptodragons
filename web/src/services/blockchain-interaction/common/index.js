@@ -29,6 +29,27 @@ class CommonAPI {
     }).catch(err => console.error(err));
   }
 
+  static async sGetMyDragons(api, gas) {
+    return api.getClientHelper().then(client => {
+      const contract = client.tokenContract;
+      const ownerAccount = client.account;
+
+      // const gasEstimate = await contract.methods
+      //   .getDragonsIdsByOwner(ownerAccount)
+      //   .estimateGas({ from: ownerAccount, gas: 0 });
+
+      // if (gasEstimate >= gas) {
+      //   throw new Error('Not enough enough gas, send more.');
+      // }
+
+      const gasEstimate = gas || 350000;
+      return contract.methods
+        .getDragonsIdsByOwner(ownerAccount)
+        .call({ from: ownerAccount, gas: gasEstimate })
+        .then(res => res)
+        .catch(err => console.error(err));
+    }).catch(err => console.error(err));
+  }
 
 };
 

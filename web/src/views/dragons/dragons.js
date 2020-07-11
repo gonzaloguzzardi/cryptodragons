@@ -103,6 +103,7 @@ class Dragons extends Component {
 
     render = () => (
       <div className={`${namespace}__container-div`}>
+
         { /* Map accounts */ }
         <Grid container justify="center" spacing={2}>
           <Grid item>

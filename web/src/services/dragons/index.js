@@ -44,7 +44,7 @@ const _mapAccounts = async (_mainAccount, _sideAccount) => {
     }).then(res => res);
 };  
 
-const _isMap = async (_mapAccountMain, _mapAccountSide, _mapPrivateAccountSide) => {
+const _accountsAreMapped = async (_mapAccountMain, _mapAccountSide, _mapPrivateAccountSide) => {
     return axios.post(`${oracleApiUrl}:${oracleApiPort}/api/isMap`, { 
         mainAccount: _mapAccountMain, sideAccount: _mapAccountSide, sideprivateAccount: _mapPrivateAccountSide 
     }).then(res => res);
@@ -52,7 +52,7 @@ const _isMap = async (_mapAccountMain, _mapAccountSide, _mapPrivateAccountSide) 
 
 
 export {
-    _isMap,
+    _accountsAreMapped,
     _getDragon,
     _getDragonsFromMain,
     _getDragonsFromSide,

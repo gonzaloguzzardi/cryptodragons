@@ -2,6 +2,24 @@ const { MongoClient } = require('mongodb');
 
 const mongoClientOptions = { useUnifiedTopology: true, useNewUrlParser: true };
 
+function collectAll (event, database, url, collection) {
+	return new Promise((res, rej) => {
+		MongoClient.connect(url, mongoClientOptions, (err, db) => {
+			if (err) return rej(err);
+			const dbo = db.db(database);
+			dbo
+				.collection(collection)
+				.find(event)
+				.toArray((error, results) => {
+					db.close();
+					if (error) return rej(error);
+					return res(results);
+				});
+			return null;
+		});
+	});
+}
+
 function collectEvents(event, database, url, collection) {
 	return new Promise((res, rej) => {
 		MongoClient.connect(url, mongoClientOptions, (err, db) => {
@@ -82,5 +100,6 @@ module.exports = {
 	collectEventsFromMainchainGateway,
 	insertOnMongo,
 	deleteDragon,
+	collectAll,
 	transforEventIntoTransactionObj,
 };

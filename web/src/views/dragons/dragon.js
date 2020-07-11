@@ -7,9 +7,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-const oracleApiUrl = 'http://localhost';
-const oracleApiPort = 8081;
-const axios = require('axios');
+import { _getDragon } from '../../services/dragons'
 
 class Dragon extends Component {
 
@@ -27,7 +25,7 @@ class Dragon extends Component {
     }  
 
     getDragon = () => {
-        axios.get(`${oracleApiUrl}:${oracleApiPort}/api/dragon?id=` + this.state.id + `&location=` + this.state.location )
+        _getDragon( this.state.id, this.state.location )
             .then(res => { 
                     this.setState(
                         { 

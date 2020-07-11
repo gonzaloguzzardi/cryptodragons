@@ -12,7 +12,6 @@ const bodyParser = require('body-parser');
 const {
 	isMap,
 	mapAccount,
-	getDragonDataById,
 	transferDragonToGateway,
 	receiveDragonFromOracle,
 	listenMainChainEvents,
@@ -83,28 +82,6 @@ app.get('/api/dragon/transfer', async function transferToSideFunction(req, res, 
 	} catch (err) {
 		console.log(err);
 		res.status(400).send(err);
-	}
-});
-
-app.get('/api/dragons', async function getDragonFunction(req, res, next) {
-	const { account, web3js } = loadGanacheAccount();
-	try {
-		const data = await getMyDragons(web3js, account, req.query.gas || 350000);
-		console.log(`\nAddress ${account} holds dragons with id ${data}\n`);
-
-		// @TODO para probar. Sacar
-		if (Array.isArray(data) && data.length > 0) {
-			for (dragonId in data) {
-				const dragonData = await getDragonDataById(web3js, account, dragonId);
-				console.log(`\n Data for dragon with id ${dragonId}`);
-				console.log(JSON.stringify(dragonData, null, 2));
-			}
-		}
-
-		res.status(200).send(data);
-	} catch (err) {
-		console.log(`Error getting dragons data:${err}`);
-		res.status(500).send(err);
 	}
 });
 

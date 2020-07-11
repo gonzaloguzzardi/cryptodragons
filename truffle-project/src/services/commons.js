@@ -24,12 +24,6 @@ async function _sMapAccountMainChain(contract, ownerAccount, gas, sideAccount) {
 	return contract.methods.mapContractToSidechain(sideAccount).send({ from: ownerAccount, gas: gasEstimate });
 }
 
-async function _sGetDragonDataById(contract, ownerAccount, dragonId) {
-	const gasEstimate = await contract.methods.getDragonById(dragonId).estimateGas({ from: ownerAccount, gas: 0 });
-
-	return await contract.methods.getDragonById(dragonId).call({ from: ownerAccount, gasEstimate });
-}
-
 async function _sTransferDragonToGateway(contract, gas, ownerAccount, dragonId) {
 	const gasEstimate = await contract.methods.transferToGateway(dragonId).estimateGas({ from: ownerAccount, gas: 0 });
 
@@ -68,7 +62,6 @@ module.exports = {
 	_isMap,
 	_sMapAccountSideChain,
 	_sMapAccountMainChain,
-	_sGetDragonDataById,
 	_sTransferDragonToGateway,
 	_sReceiveDragonFromOracle,
 };

@@ -7,7 +7,6 @@ const bodyParser = require('body-parser');
 const {
 	isMap,
 	mapAccount,
-	getDragonDataById,
 	transferDragonToGateway,
 	receiveDragonFromOracle,
 	listenSideChainEvents,
@@ -65,7 +64,7 @@ app.get('/api/dragon/transfer', async function transferFunction(req, res, next) 
 	} finally {
 		if (client) client.disconnect();
 	}
-});			
+});
 
 app.get('/api/mapAccount', async function getMapFunction(req, res, next) {
 	const { account, web3js, client } = loadLoomAccount(req.query.account);
@@ -99,9 +98,9 @@ app.get('/api/account/create', async function createAccountFunction(req, res, ne
 	const privateKey = CryptoUtils.generatePrivateKey();
 	const publicKey = CryptoUtils.publicKeyFromPrivateKey(privateKey);
 	const account = LocalAddress.fromPublicKey(publicKey).toString();
-	var r = {
+	const r = {
 		private: CryptoUtils.Uint8ArrayToB64(privateKey),
-		account: account
+		account,
 	};
 	res.status(200).send(r);
 });

@@ -79,7 +79,7 @@ class Dragons extends Component {
   );
 
   mapAccounts = () => {
-      _mapAccounts(this.state.mainAccount,this.state.sideAccount)
+    _mapAccounts(this.state.mainAccount,this.state.sideAccount)
   }
 
   accountsAreMapped = () => {

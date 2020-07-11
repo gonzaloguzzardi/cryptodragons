@@ -14,8 +14,10 @@ class CommonAPI {
       //   throw new Error('Not enough enough gas, send more.');
       // }
 
-      const gasEstimate = gas;
-      return contract.methods.createDragon('test dragon', 1, 2, 2).send({ from: ownerAccount, gas: gasEstimate })
+      const gasEstimate = gas || 350000;
+      return contract.methods
+        .createDragon('test dragon', 1, 2, 2)
+        .send({ from: ownerAccount, gas: gasEstimate })
         .then(tx => {
           let hash = '';
           console.log(`Dragon created`);

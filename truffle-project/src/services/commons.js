@@ -24,34 +24,6 @@ async function _sMapAccountMainChain(contract, ownerAccount, gas, sideAccount) {
 	return contract.methods.mapContractToSidechain(sideAccount).send({ from: ownerAccount, gas: gasEstimate });
 }
 
-// -> Movido
-									async function _sCreateDragonToken(contract, ownerAccount, gas) {
-										// createDragon(string memory _name, uint64 _creationTime, uint32 _dadId, uint32 _motherId)
-
-										const gasEstimate = await contract.methods
-											.createDragon('test dragon', 1, 2, 2)
-											.estimateGas({ from: ownerAccount, gas: 0 });
-
-										if (gasEstimate >= gas) {
-											throw new Error('Not enough enough gas, send more.');
-										}
-
-										return contract.methods.createDragon('test dragon', 1, 2, 2).send({ from: ownerAccount, gas: gasEstimate });
-									}
-
-									async function _sGetMyDragons(contract, ownerAccount, gas) {
-										const gasEstimate = await contract.methods
-											.getDragonsIdsByOwner(ownerAccount)
-											.estimateGas({ from: ownerAccount, gas: 0 });
-
-										if (gasEstimate >= gas) {
-											throw new Error('Not enough enough gas, send more.');
-										}
-
-										return await contract.methods.getDragonsIdsByOwner(ownerAccount).call({ from: ownerAccount, gas: gasEstimate });
-									}
-// <- Movido
-
 async function _sGetDragonDataById(contract, ownerAccount, dragonId) {
 	const gasEstimate = await contract.methods.getDragonById(dragonId).estimateGas({ from: ownerAccount, gas: 0 });
 
@@ -96,8 +68,6 @@ module.exports = {
 	_isMap,
 	_sMapAccountSideChain,
 	_sMapAccountMainChain,
-	_sCreateDragonToken,
-	_sGetMyDragons,
 	_sGetDragonDataById,
 	_sTransferDragonToGateway,
 	_sReceiveDragonFromOracle,

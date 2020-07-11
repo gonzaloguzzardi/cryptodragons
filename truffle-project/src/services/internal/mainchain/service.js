@@ -2,8 +2,6 @@
 const {
 	_isMap,
 	_sMapAccountMainChain,
-	_sCreateDragonToken,
-	_sGetMyDragons,
 	_sGetDragonDataById,
 	_sTransferDragonToGateway,
 	_sReceiveDragonFromOracle,
@@ -29,18 +27,6 @@ async function mapAccount(web3js, ownerAccount, gas, sideAccount) {
 	return _sMapAccountMainChain(contract, ownerAccount, gas, sideAccount);
 }
 
-// -> MOVIDO
-					async function createDragonToken(web3js, ownerAccount, gas) {
-						const contract = await getMainNetTokenContract(web3js);
-						return _sCreateDragonToken(contract, ownerAccount, gas);
-					}
-
-					async function getMyDragons(web3js, ownerAccount, gas) {
-						const contract = await getMainNetTokenContract(web3js);
-						return _sGetMyDragons(contract, ownerAccount, gas);
-					}
-// <- MOVIDO
-
 async function getDragonDataById(web3js, ownerAccount, dragonId, gas) {
 	const contract = await getMainNetTokenContract(web3js);
 	return _sGetDragonDataById(contract, ownerAccount, dragonId, gas);
@@ -64,8 +50,6 @@ async function isMap(web3js, ownerAccount, gas, sideAccount) {
 module.exports = {
 	isMap,
 	mapAccount,
-	createDragonToken,
-	getMyDragons,
 	getDragonDataById,
 	transferDragonToGateway,
 	receiveDragonFromOracle,

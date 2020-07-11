@@ -1,8 +1,6 @@
 /* eslint-disable prettier/prettier */
 const {
 	_sMapAccountSideChain,
-	_sCreateDragonToken,
-	_sGetMyDragons,
 	_sGetDragonDataById,
 	_sTransferDragonToGateway,
 	_sReceiveDragonFromOracle,
@@ -30,18 +28,6 @@ async function mapAccount(web3js, ownerAccount, gas, mainAccount) {
 	return _sMapAccountSideChain(contract, ownerAccount, gas, mainAccount);
 }
 
-// -> MOVIDO
-						async function createDragonToken(web3js, ownerAccount, gas) {
-							const contract = await getLoomTokenContract(web3js);
-							return _sCreateDragonToken(contract, ownerAccount, gas);
-						}
-// <- MOVIDO
-
-async function getMyDragons(web3js, ownerAccount, gas) {
-	const contract = await getLoomTokenContract(web3js);
-	return _sGetMyDragons(contract, ownerAccount, gas);
-}
-
 async function getDragonDataById(web3js, ownerAccount, dragonId) {
 	const contract = await getLoomTokenContract(web3js);
 	return _sGetDragonDataById(contract, ownerAccount, dragonId);
@@ -65,8 +51,6 @@ async function isMap(web3js, ownerAccount, gas, mainAccount) {
 module.exports = {
 	isMap,
 	mapAccount,
-	createDragonToken,
-	getMyDragons,
 	getDragonDataById,
 	transferDragonToGateway,
 	receiveDragonFromOracle,

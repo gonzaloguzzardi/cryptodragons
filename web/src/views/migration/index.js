@@ -9,10 +9,6 @@ import './index.scss';
 const namespace = 'ui-view-migration';
 
 export class Migration extends Component {
-  constructor(props) {
-    super(props);
-  };
-
   render = () => (
     <div className={`${namespace}__div-container`}>
       <h1 className={`${namespace}__div-container__header`}>Migration</h1>

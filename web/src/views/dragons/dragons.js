@@ -36,183 +36,183 @@ class Dragons extends Component {
     this.accountsAreMapped();
   }
 
-    getDragonsFromMain = () => {
-      MainchainAPI.getMyDragons().then(mainDragons => this.setState({ mainDragons }));
-    };
+  getDragonsFromMain = () => {
+    MainchainAPI.getMyDragons().then(mainDragons => this.setState({ mainDragons }));
+  };
 
-    getDragonsFromSide = () => {
-      SidechainAPI.getMyDragons().then(sideDragons => this.setState({ sideDragons }));
-    };
+  getDragonsFromSide = () => {
+    SidechainAPI.getMyDragons().then(sideDragons => this.setState({ sideDragons }));
+  };
 
-    getDragonsFromOracle = () => {};
+  getDragonsFromOracle = () => {};
 
-    buyDragonInSideChain = () => {
-      SidechainAPI.createDragon().then(res => console.log("RESPONSEE", res))
-    }
+  buyDragonInSideChain = () => {
+    SidechainAPI.createDragon().then(res => console.log("RESPONSEE", res))
+  }
 
-    buyDragonInMainChain = () => {
-      MainchainAPI.createDragon().then(res => console.log("RESPONSEE", res));
-    }
+  buyDragonInMainChain = () => {
+    MainchainAPI.createDragon().then(res => console.log("RESPONSEE", res));
+  }
 
-    transferFromSideToMain = dragonId => (
-        _transferDragon(dragonId,true)
-        .then(() => {
-            this.getDragonsFromOracle();
-            this.getDragonsFromSide();
-        })
-        .catch((err) => { throw err.response.data })
+  transferFromSideToMain = dragonId => (
+      _transferDragon(dragonId,true)
+      .then(() => {
+          this.getDragonsFromOracle();
+          this.getDragonsFromSide();
+      })
+      .catch((err) => { throw err.response.data })
+  );
+
+  transferFromMainToSide = dragonId => (
+      _transferDragon(dragonId,false)
+      .then(() => {
+          this.getDragonsFromOracle();
+          this.getDragonsFromMain();
+      })
+      .catch((err) => { throw err.response.data })
+  );
+
+  mapAccounts = () => {
+      _mapAccounts(this.state.mainAccount,this.state.sideAccount)
+  }
+
+  accountsAreMapped = () => {
+    _accountsAreMapped(this.state.mainAccount, this.state.sideAccount, this.state.sideAccount)
+      .then(res => this.setState({ accountsAreMapped: res.data }));
+  } 
+
+  onChangeMainAccount = event => {
+    this.setState({ mainAccount: event.target.value });
+  }
+
+  onChangeSideAccount = event => {
+    this.setState({ sideAccount: event.target.value });
+  }
+
+  showMapButton = () => {
+    return this.state.accountsAreMapped ? (
+      <Button variant="contained" color="primary" className="botonVerde" onClick={this.mapAccounts}>
+        Map Accounts
+      </Button>
+    ) : (
+      <Button variant="contained" color="primary" onClick={this.mapAccounts}>
+        Map Accounts
+      </Button>
     );
+  } 
 
-    transferFromMainToSide = dragonId => (
-        _transferDragon(dragonId,false)
-        .then(() => {
-            this.getDragonsFromOracle();
-            this.getDragonsFromMain();
-        })
-        .catch((err) => { throw err.response.data })
-    );
+  render = () => (
+    <div className={`${namespace}__container-div`}>
 
-    mapAccounts = () => {
-        _mapAccounts(this.state.mainAccount,this.state.sideAccount)
-    }
-
-    accountsAreMapped = () => {
-      _accountsAreMapped(this.state.mainAccount, this.state.sideAccount, this.state.sideAccount)
-        .then(res => this.setState({ accountsAreMapped: res.data }));
-    } 
-
-    onChangeMainAccount = event => {
-      this.setState({ mainAccount: event.target.value });
-    }
-
-    onChangeSideAccount = event => {
-      this.setState({ sideAccount: event.target.value });
-    }
-
-    showMapButton = () => {
-      return this.state.accountsAreMapped ? (
-        <Button variant="contained" color="primary" className="botonVerde" onClick={this.mapAccounts}>
-          Map Accounts
-        </Button>
-      ) : (
-        <Button variant="contained" color="primary" onClick={this.mapAccounts}>
-          Map Accounts
-        </Button>
-      );
-    } 
-
-    render = () => (
-      <div className={`${namespace}__container-div`}>
-
-        { /* Map accounts */ }
-        <Grid container justify="center" spacing={2}>
+      { /* Map accounts */ }
+      <Grid container justify="center" spacing={2}>
+        <Grid item>
+          <FormLabel>
+            <b>SideChain Account:</b>&nbsp;
+            <Input
+              type="text"
+              name="sideAccount"
+              className={`${namespace}__container-div__map-acounts__input`}
+              defaultValue={this.state.sideAccount}
+              onChange={this.onChangeSideAccount}
+            />
+          </FormLabel>
+        </Grid>
           <Grid item>
-            <FormLabel>
-              <b>SideChain Account:</b>&nbsp;
-              <Input
-                type="text"
-                name="sideAccount"
-                className={`${namespace}__container-div__map-acounts__input`}
-                defaultValue={this.state.sideAccount}
-                onChange={this.onChangeSideAccount}
-              />
-            </FormLabel>
-          </Grid>
+            {this.showMapButton()}
+        </Grid>
+        <Grid item>
+          <FormLabel>
+            <b>MainChain Account:</b>&nbsp;
+            <Input
+              type="text"
+              name="mainAccount"
+              className={`${namespace}__container-div__map-acounts__input`}
+              defaultValue={this.state.mainAccount}
+              onChange={this.onChangeMainAccount}
+            />
+          </FormLabel>
+        </Grid>
+      </Grid>
+
+      { /* Buttons - Buy Dragons in blockchains */ }
+      <Grid container justify="center" spacing={2}>
+        <Grid item>
+          <Button variant="contained" color="primary" onClick={this.buyDragonInSideChain}>
+            Buy New Dragon in Sidechain
+          </Button>
+        </Grid>
+        <Grid item>
+          <Button variant="contained" color="primary" onClick={this.buyDragonInMainChain}>
+            Buy New Dragon in MainChain
+          </Button>
+        </Grid>
+      </Grid>
+
+      { /* Sidechain dragons - Mainchain dragons */ }
+      <Grid container justify="center" spacing={2}>
+        <Grid item xs={6} className={`${namespace}__container-grid__dragons-items`}>
+          <h3 className={`${namespace}__chains-headings`}>Side Chain Dragons</h3>
+          <Grid container spacing={2}>
             <Grid item>
-              {this.showMapButton()}
-          </Grid>
-          <Grid item>
-            <FormLabel>
-              <b>MainChain Account:</b>&nbsp;
-              <Input
-                type="text"
-                name="mainAccount"
-                className={`${namespace}__container-div__map-acounts__input`}
-                defaultValue={this.state.mainAccount}
-                onChange={this.onChangeMainAccount}
-              />
-            </FormLabel>
-          </Grid>
-        </Grid>
-
-        { /* Buttons - Buy Dragons in blockchains */ }
-        <Grid container justify="center" spacing={2}>
-          <Grid item>
-            <Button variant="contained" color="primary" onClick={this.buyDragonInSideChain}>
-              Buy New Dragon in Sidechain
-            </Button>
-          </Grid>
-          <Grid item>
-            <Button variant="contained" color="primary" onClick={this.buyDragonInMainChain}>
-              Buy New Dragon in MainChain
-            </Button>
+              <Grid container spacing={2}>
+                {this.state.sideDragons.map(value => (
+                <Grid key={value} item>
+                  <Dragon
+                    location="side"
+                    id={value}
+                    transferMethod={this.transferFromSideToMain}
+                  />
+                </Grid>
+                ))}
+              </Grid>
+            </Grid>
           </Grid>
         </Grid>
-
-        { /* Sidechain dragons - Mainchain dragons */ }
-        <Grid container justify="center" spacing={2}>
-          <Grid item xs={6} className={`${namespace}__container-grid__dragons-items`}>
-            <h3 className={`${namespace}__chains-headings`}>Side Chain Dragons</h3>
-            <Grid container spacing={2}>
-              <Grid item>
-                <Grid container spacing={2}>
-                  {this.state.sideDragons.map(value => (
+        <Grid item xs={6} className={`${namespace}__container-grid__dragons-items`}>
+          <h3 className={`${namespace}__chains-headings`}>Main Chain Dragons</h3>
+          <Grid container spacing={2}>
+            <Grid item>
+              <Grid container spacing={2}>
+                {this.state.mainDragons.map(value => (
                   <Grid key={value} item>
                     <Dragon
-                      location="side"
-                      id={value}
-                      transferMethod={this.transferFromSideToMain}
+                        location="main"
+                        id={value}
+                        transferMethod={this.transferFromMainToSide}
                     />
                   </Grid>
-                  ))}
-                </Grid>
-              </Grid>
-            </Grid>
-          </Grid>
-          <Grid item xs={6} className={`${namespace}__container-grid__dragons-items`}>
-            <h3 className={`${namespace}__chains-headings`}>Main Chain Dragons</h3>
-            <Grid container spacing={2}>
-              <Grid item>
-                <Grid container spacing={2}>
-                  {this.state.mainDragons.map(value => (
-                    <Grid key={value} item>
-                      <Dragon
-                          location="main"
-                          id={value}
-                          transferMethod={this.transferFromMainToSide}
-                      />
-                    </Grid>
-                  ))}
-                </Grid>
+                ))}
               </Grid>
             </Grid>
           </Grid>
         </Grid>
+      </Grid>
 
-        { /* Oracle dragons */ }
-        <Grid container spacing={2}>
-            <Grid item xs={6} className={`${namespace}__container-grid__dragons-items`}>
-              <h3 className={`${namespace}__oracle-heading`}>Sidechain Gateway Dragons</h3>
-              <Grid container justify="center" spacing={2}>
-                {this.state.sidechainGatewayDragons.map(value => (
-                  <Grid key={value} item>
-                    <Dragon id={value["uid"]} />
-                  </Grid>
-                ))}
-              </Grid>
-            </Grid>
-            <Grid item xs={6} className={`${namespace}__container-grid__dragons-items`}>
-              <h3 className={`${namespace}__oracle-heading`}>Mainchain Gateway Dragons</h3>
-              <Grid container justify="center" spacing={2}>
-                {this.state.mainchainGatewayDragons.map(value => (
-                  <Grid key={value} item>
-                    <Dragon id={value["uid"]} location="oracle" />
-                  </Grid>
-                ))}
-              </Grid>
+      { /* Oracle dragons */ }
+      <Grid container spacing={2}>
+          <Grid item xs={6} className={`${namespace}__container-grid__dragons-items`}>
+            <h3 className={`${namespace}__oracle-heading`}>Sidechain Gateway Dragons</h3>
+            <Grid container justify="center" spacing={2}>
+              {this.state.sidechainGatewayDragons.map(value => (
+                <Grid key={value} item>
+                  <Dragon id={value["uid"]} />
+                </Grid>
+              ))}
             </Grid>
           </Grid>
-      </div>
+          <Grid item xs={6} className={`${namespace}__container-grid__dragons-items`}>
+            <h3 className={`${namespace}__oracle-heading`}>Mainchain Gateway Dragons</h3>
+            <Grid container justify="center" spacing={2}>
+              {this.state.mainchainGatewayDragons.map(value => (
+                <Grid key={value} item>
+                  <Dragon id={value["uid"]} location="oracle" />
+                </Grid>
+              ))}
+            </Grid>
+          </Grid>
+        </Grid>
+    </div>
   );
 }
 

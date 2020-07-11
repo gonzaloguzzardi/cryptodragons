@@ -17,8 +17,9 @@ class SidechainAPI {
   static async getClientHelper() {
     if (!client) {
       client = await clientFactory();
-      console.log("SIDECHAIN CLIENT", client);
+      console.log("SIDECHAIN CLIENT CREATED");
     }
+    console.log("SIDECHAIN CLIENT", client);
     return client;
   };
 

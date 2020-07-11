@@ -16,11 +16,19 @@ class MainchainAPI {
   static async getClientHelper() {
     if (!client) {
       client = await clientFactory();
-      console.log("MAINCHAIN CLIENT", client);
+      console.log("MAINCHAIN CLIENT CREATED");
       // client.web3js.eth.accounts.wallet.add(client.account);
     }
+    console.log("MAINCHAIN CLIENT", client);
     return client;
   };
+
+  static async createDragon(gas) {
+    return CommonAPI.sCreateDragonToken(MainchainAPI, gas)
+      .then(res => res)
+      .catch(err => err);
+  }
+
 
   // static loadMainchainAccount() {
   //   if ((typeof window.ethereum === 'undefined') || !window.ethereum.isMetaMask) {
@@ -35,11 +43,6 @@ class MainchainAPI {
   //   window.ethereum && window.ethereum.on('accountsChanged', accounts => setter(accounts[0]));
   // }
 
-  static async createDragon(gas) {
-    return CommonAPI.sCreateDragonToken(MainchainAPI, gas)
-      .then(res => res)
-      .catch(err => err);
-  }
 };
 
 export default MainchainAPI;

@@ -3,9 +3,9 @@ const path = require('path');
 const fs = require('fs');
 
 // CONSTANTS
-const { MainchainDragonContract, MainChainGateway, BFA_SOCKET_CONNECTION, BFA_NETWORK_ID } = require('../../../config');
+const { MainchainDragonContract, MainChainGateway, BFA_SOCKET_CONNECTION, BFA_NETWORK_ID } = require('../config');
 
-const { deleteDragonInOracle, insertDragonInOracle } = require('../../oracle-actions');
+const { deleteDragonFromMongo, insertDragonInMongo } = require('./index');
 
 function listenMainChainEvents() {
 	const web3js = new Web3(new Web3.providers.WebsocketProvider(BFA_SOCKET_CONNECTION));
@@ -52,11 +52,11 @@ function listenMainChainEvents() {
 			console.log('mainchainGatewayInstance', 'Evento ->', event.event);
 			switch (event.event) {
 				case 'SendDragonToSidechainAttempt':
-					insertDragonInOracle(event);
+					insertDragonInMongo(event);
 					break;
 				case 'DragonSuccessfullyRetrievedInMainchain':
 					console.log('BORRANDO ESTE', event.returnValues);
-					deleteDragonInOracle(event);
+					deleteDragonFromMongo(event);
 					break;
 				case 'AddedValidator':
 				case 'ERC20Received':

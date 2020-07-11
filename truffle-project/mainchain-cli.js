@@ -14,12 +14,8 @@ const {
 	mapAccount,
 	transferDragonToGateway,
 	receiveDragonFromOracle,
-	listenMainChainEvents,
 } = require('./src/services/internal/mainchain');
 const { saveDragonOnOracle } = require('./src/services');
-
-// MAIN:
-listenMainChainEvents();
 
 app.use(cors());
 app.use(bodyParser.json());

@@ -4,9 +4,9 @@ const fs = require('fs');
 
 // CONSTANTS
 const { NonceTxMiddleware, SignedTxMiddleware, Client, CryptoUtils, LoomProvider } = require('loom-js');
-const { CHAIN_ID, WRITE_URL, READ_URL, SidechainDragonContract, SidechainGatewayContract } = require('../../../config');
+const { CHAIN_ID, WRITE_URL, READ_URL, SidechainDragonContract, SidechainGatewayContract } = require('../config');
 
-const { deleteDragonInOracle, insertDragonInOracle } = require('../../oracle-actions');
+const { deleteDragonFromMongo, insertDragonInMongo } = require('./index');
 
 function listenSideChainEvents() {
 	const privateKeyStr = fs.readFileSync(path.join(__dirname, '../../../../misc/', 'loom_private_key'), 'utf-8');
@@ -64,13 +64,11 @@ function listenSideChainEvents() {
 			console.log('sidechainGatewayInstance', 'Evento de sidechain ->', event.event);
 			switch (event.event) {
 				case 'SendDragonToMainchainAttempt':
-					// TODO:
-					insertDragonInOracle(event);
+					insertDragonInMongo(event);
 					break;
 				case 'DragonSuccessfullyRetrievedInSidechain':
 					console.log('BORRANDO ESTE', event.returnValues);
-					// TODO:
-					deleteDragonInOracle(event);
+					deleteDragonFromMongo(event);
 					break;
 				case 'AddedValidator':
 				case 'ERC20Received':

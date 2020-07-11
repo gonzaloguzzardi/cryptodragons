@@ -9,12 +9,8 @@ const {
 	mapAccount,
 	transferDragonToGateway,
 	receiveDragonFromOracle,
-	listenSideChainEvents,
 } = require('./src/services/internal/sidechain');
 const { saveDragonOnOracle } = require('./src/services');
-
-// MAIN:
-listenSideChainEvents();
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -73,21 +69,6 @@ app.get('/api/mapAccount', async function getMapFunction(req, res, next) {
 		res.status(200).send('OK');
 	} catch (err) {
 		console.log(`Error mapping sidechain to mainchain ${err}`);
-		res.status(400).send(err);
-	} finally {
-		if (client) client.disconnect();
-	}
-});
-
-app.get('/api/dragon', async function getMapFunction(req, res, next) {
-	// getDragonDataById(web3js, ownerAccount, dragonId) {
-	const { account, web3js, client } = loadLoomAccount(req.query.account);
-	try {
-		const data = await getDragonDataById(web3js, account, req.query.id);
-		data.sname = web3js.utils.toUtf8(data.name);
-		res.status(200).send(data);
-	} catch (err) {
-		console.log(`Error getting dragon with id: ${req.id}`);
 		res.status(400).send(err);
 	} finally {
 		if (client) client.disconnect();

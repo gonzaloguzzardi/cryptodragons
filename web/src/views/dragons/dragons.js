@@ -1,23 +1,15 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import Dragon from './dragon.js';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import Input  from '@material-ui/core/Input';
 import FormLabel  from '@material-ui/core/FormLabel';
-
+import { _getDragonsFromMain, _getDragonsFromSide, _getDragonsFromOracle, 
+    _buyDragonInMainChain, _buyDragonInSideChain, _transferDragon, 
+    _mapAccounts, _isMap } from '../../services/dragons'
 import sleep from '../../utils/sleep';
 
 import './dragons.scss';
-
-const sidechainApiUrl = 'http://localhost';
-const sidechainApiPort = 8001;
-
-const mainchainApiUrl = 'http://localhost';
-const mainchainApiPort = 8002;
-
-const oracleApiUrl = 'http://localhost';
-const oracleApiPort = 8081;
 
 const namespace = 'ui-view-dragons';
 
@@ -37,74 +29,69 @@ class Dragons extends Component {
             dragonsInSidechainGateway: 0,
             dragonsInMainchainGateway: 0,
             mainDragons: [],
+            isMap: false
         };
 
         this.getDragonsFromSide();
         this.getDragonsFromOracle();
         this.getDragonsFromMain();
+        this.isMap();
     }  
 
     getDragonsFromMain = () => {
-        axios.get(`${mainchainApiUrl}:${mainchainApiPort}/api/dragons`)
-            .then(res => this.setState({ mainDragons: res.data }));
+        _getDragonsFromMain().then(mainDragons => this.setState({mainDragons: mainDragons}));
     }
 
     getDragonsFromSide = () => {
-        axios.get(`${sidechainApiUrl}:${sidechainApiPort}/api/dragons`)
-            .then(res => this.setState({ sideDragons: res.data }));
+        _getDragonsFromSide().then(sideDragons => this.setState({sideDragons: sideDragons}));
     }
 
     getDragonsFromOracle = () => {
-        axios.get(`${oracleApiUrl}:${oracleApiPort}/api/dragons`)
-            .then(res => {
-                if (!res || !res.data) return;
+        _getDragonsFromOracle().then(res => {
+            if (!res || !res.data) return;
 
-                if (
-                    res.data[0]['sidechain-gateway-results'].length < this.state.dragonsInSidechainGateway ||
-                    res.data[1]['mainchain-gateway-results'].length < this.state.dragonsInMainchainGateway
-                ) {
+            if (
+                res.data[0]['sidechain-gateway-results'].length < this.state.dragonsInSidechainGateway ||
+                res.data[1]['mainchain-gateway-results'].length < this.state.dragonsInMainchainGateway
+            ) {
+                this.getDragonsFromMain();
+                this.getDragonsFromSide();
+            }
+
+            this.setState({
+                dragonsInSidechainGateway: res.data[0]['sidechain-gateway-results'].length,
+                dragonsInMainchainGateway: res.data[1]['mainchain-gateway-results'].length,
+
+                sidechainGatewayDragons: res.data[0]['sidechain-gateway-results'],
+                mainchainGatewayDragons: res.data[1]['mainchain-gateway-results'],
+            });
+
+            if (
+                res.data[0]['sidechain-gateway-results'].length > 0 ||
+                res.data[1]['mainchain-gateway-results'].length > 0
+            ) {
+                sleep(1000).then(() => {
+                    this.getDragonsFromOracle();
+                });
+            } else {
+                sleep(500).then(() => {
                     this.getDragonsFromMain();
                     this.getDragonsFromSide();
-                }
-
-                this.setState({
-                    dragonsInSidechainGateway: res.data[0]['sidechain-gateway-results'].length,
-                    dragonsInMainchainGateway: res.data[1]['mainchain-gateway-results'].length,
-
-                    sidechainGatewayDragons: res.data[0]['sidechain-gateway-results'],
-                    mainchainGatewayDragons: res.data[1]['mainchain-gateway-results'],
                 });
-
-                if (
-                    res.data[0]['sidechain-gateway-results'].length > 0 ||
-                    res.data[1]['mainchain-gateway-results'].length > 0
-                ) {
-                    sleep(1000).then(() => {
-                        this.getDragonsFromOracle();
-                    });
-                } else {
-                    sleep(500).then(() => {
-                        this.getDragonsFromMain();
-                        this.getDragonsFromSide();
-                    });
-                }
-            });
+            }
+        });
     }
 
     buyDragonInSideChain = () => {
-        axios.get(`${sidechainApiUrl}:${sidechainApiPort}/api/dragon/create`)
-            .then(res => this.getDragonsFromSide());
+        _buyDragonInSideChain().then(this.getDragonsFromSide());
     }
 
     buyDragonInMainChain = () => {
-        axios.get(`${mainchainApiUrl}:${mainchainApiPort}/api/dragon/create`)
-            .then(res => this.getDragonsFromMain());
+        _buyDragonInMainChain().then(this.getDragonsFromMain());
     }
 
     transferFromSideToMain = dragonId => (
-        axios.get(`${oracleApiUrl}:${oracleApiPort}/api/dragon/transfer`, {
-            params: { id: dragonId, toMain: true },
-        })
+        _transferDragon(dragonId,true)
         .then(() => {
             this.getDragonsFromOracle();
             this.getDragonsFromSide();
@@ -113,9 +100,7 @@ class Dragons extends Component {
     );
 
     transferFromMainToSide = dragonId => (
-        axios.get(`${oracleApiUrl}:${oracleApiPort}/api/dragon/transfer`, {
-            params: { id: dragonId, toMain: false },
-        })
+        _transferDragon(dragonId,false)
         .then(() => {
             this.getDragonsFromOracle();
             this.getDragonsFromMain();
@@ -124,10 +109,18 @@ class Dragons extends Component {
     );
 
     mapAccounts = () => {
-        axios.get(`${oracleApiUrl}:${oracleApiPort}/api/mapAccounts`, {
-            params: { mainAccount: this.state.mainAccount, sideAccount: this.state.sideAccount },
-        });
+        _mapAccounts(this.state.mainAccount,this.state.sideAccount)
     }
+
+    isMap = () => {
+        _isMap(this.state.mainAccount, this.state.sideAccount, this.state.sideAccount).then(res => 
+            {
+                this.setState({ 
+                    isMap: res.data
+                });
+            }
+        );
+    } 
 
     onChangeMainAccount = event => {
         this.setState({ mainAccount: event.target.value });
@@ -136,6 +129,22 @@ class Dragons extends Component {
     onChangeSideAccount = event => {
         this.setState({ sideAccount: event.target.value });
     }
+
+    showMapButton = () => {
+        if (this.state.isMap) {
+            return (
+                <Button variant="contained" color="primary" className="botonVerde" onClick={this.mapAccounts}>
+                    Map Accounts
+                </Button>
+            );
+        } else {
+            return (
+                <Button variant="contained" color="primary" onClick={this.mapAccounts}>
+                    Map Accounts
+                </Button>
+            );
+        }
+    } 
 
     render() {
         return (
@@ -155,10 +164,8 @@ class Dragons extends Component {
                             />
                         </FormLabel>
                     </Grid>
-                    <Grid item>
-                        <Button variant="contained" color="primary" onClick={this.mapAccounts}>
-                            Map Accounts
-                        </Button>
+                     <Grid item>
+                        {this.showMapButton()}
                     </Grid>
                     <Grid item>
                         <FormLabel>

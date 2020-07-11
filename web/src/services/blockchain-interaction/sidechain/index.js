@@ -35,6 +35,12 @@ class SidechainAPI {
       .catch(err => err);
   }
 
+  static async transferDragon(dragonId, gas) {
+    return CommonAPI.sTransferDragon(SidechainAPI, dragonId, gas)
+      .then(res => res)
+      .catch(err => err);
+  }
+
 };
 
 export default SidechainAPI;

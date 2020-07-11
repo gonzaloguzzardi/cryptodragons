@@ -4,6 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import Input  from '@material-ui/core/Input';
 import FormLabel  from '@material-ui/core/FormLabel';
+import sleep from '../../utils';
 import { _transferDragon, _mapAccounts, _accountsAreMapped } from '../../services/dragons'
 
 import MainchainAPI from '../../services/blockchain-interaction/mainchain';
@@ -60,14 +61,15 @@ class Dragons extends Component {
     });
   }
 
-  transferFromSideToMain = dragonId => (
-      _transferDragon(dragonId,true)
-      .then(() => {
-          this.getDragonsFromOracle();
-          this.getDragonsFromSide();
-      })
-      .catch((err) => { throw err.response.data })
-  );
+  transferFromSideToMain = dragonId => {
+    SidechainAPI.transferDragon(dragonId).then(res => {
+      console.log("RESPONSEE", res);
+      sleep(2000).then(() => {
+        this.getDragonsFromSide();
+        this.getDragonsFromMain();
+      });
+    })
+  };
 
   transferFromMainToSide = dragonId => (
       _transferDragon(dragonId,false)

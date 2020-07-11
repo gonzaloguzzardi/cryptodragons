@@ -12,7 +12,6 @@ const bodyParser = require('body-parser');
 const {
 	isMap,
 	mapAccount,
-	transferDragonToGateway,
 	receiveDragonFromOracle,
 } = require('./src/services/internal/mainchain');
 const { saveDragonOnOracle } = require('./src/services');
@@ -66,18 +65,6 @@ app.post('/api/dragon/receive', async function transferFunction(req, res, next) 
 	} catch (err) {
 		saveDragonOnOracle(req.body.dragons);
 		res.status(500).send(err);
-	}
-});
-
-app.get('/api/dragon/transfer', async function transferToSideFunction(req, res, next) {
-	const { account, web3js } = loadGanacheAccount();
-	try {
-		const data = await transferDragonToGateway(web3js, req.query.gas || 350000, account, req.query.id, req.query.data);
-		console.log(`\n Token with id ${req.query.id} was successfully transfered to gateway \n`);
-		res.status(200).send(`Token with id ${req.query.id} was successfully transfered to gateway, data: ${data}`);
-	} catch (err) {
-		console.log(err);
-		res.status(400).send(err);
 	}
 });
 

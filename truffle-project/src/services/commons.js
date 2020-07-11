@@ -24,16 +24,6 @@ async function _sMapAccountMainChain(contract, ownerAccount, gas, sideAccount) {
 	return contract.methods.mapContractToSidechain(sideAccount).send({ from: ownerAccount, gas: gasEstimate });
 }
 
-async function _sTransferDragonToGateway(contract, gas, ownerAccount, dragonId) {
-	const gasEstimate = await contract.methods.transferToGateway(dragonId).estimateGas({ from: ownerAccount, gas: 0 });
-
-	if (gasEstimate >= gas) {
-		throw new Error('Not enough enough gas, send more.');
-	}
-
-	return await contract.methods.transferToGateway(dragonId).send({ from: ownerAccount, gas: gasEstimate });
-}
-
 async function _sReceiveDragonFromOracle(contract, ownerAccount, gas, dragonId, data, receiverAddress) {
 	const gasEstimate = await contract.methods
 		.receiveDragon(receiverAddress, dragonId, data)
@@ -62,6 +52,5 @@ module.exports = {
 	_isMap,
 	_sMapAccountSideChain,
 	_sMapAccountMainChain,
-	_sTransferDragonToGateway,
 	_sReceiveDragonFromOracle,
 };

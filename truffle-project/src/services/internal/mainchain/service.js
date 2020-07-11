@@ -2,7 +2,6 @@
 const {
 	_isMap,
 	_sMapAccountMainChain,
-	_sTransferDragonToGateway,
 	_sReceiveDragonFromOracle,
 } = require('../../index.js');
 
@@ -26,11 +25,6 @@ async function mapAccount(web3js, ownerAccount, gas, sideAccount) {
 	return _sMapAccountMainChain(contract, ownerAccount, gas, sideAccount);
 }
 
-async function transferDragonToGateway(web3js, gas, ownerAccount, dragonId) {
-	const contract = await getMainNetTokenContract(web3js);
-	return _sTransferDragonToGateway(contract, gas, ownerAccount, dragonId);
-}
-
 async function receiveDragonFromOracle(web3js, ownerAccount, gas, dragonId, data, receiverAddress) {
 	const contract = await getMainNetGatewayContract(web3js);
 	return _sReceiveDragonFromOracle(contract, ownerAccount, gas, dragonId, data, receiverAddress);
@@ -44,6 +38,5 @@ async function isMap(web3js, ownerAccount, gas, sideAccount) {
 module.exports = {
 	isMap,
 	mapAccount,
-	transferDragonToGateway,
 	receiveDragonFromOracle,
 };

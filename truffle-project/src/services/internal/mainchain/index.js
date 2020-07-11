@@ -1,8 +1,7 @@
-const { isMap, mapAccount, transferDragonToGateway, receiveDragonFromOracle } = require('./service');
+const { isMap, mapAccount, receiveDragonFromOracle } = require('./service');
 
 module.exports = {
 	isMap,
 	mapAccount,
-	transferDragonToGateway,
 	receiveDragonFromOracle,
 };

@@ -35,6 +35,11 @@ class MainchainAPI {
       .catch(err => err);
   }
 
+  static async transferDragon(dragonId, gas) {
+    return CommonAPI.sTransferDragon(MainchainAPI, dragonId, gas)
+      .then(res => res)
+      .catch(err => err);
+  }
 
   // static loadMainchainAccount() {
   //   if ((typeof window.ethereum === 'undefined') || !window.ethereum.isMetaMask) {

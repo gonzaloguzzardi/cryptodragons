@@ -4,12 +4,7 @@ const cors = require('cors');
 
 const app = express();
 const bodyParser = require('body-parser');
-const {
-	isMap,
-	mapAccount,
-	transferDragonToGateway,
-	receiveDragonFromOracle,
-} = require('./src/services/internal/sidechain');
+const { isMap, mapAccount, receiveDragonFromOracle } = require('./src/services/internal/sidechain');
 const { saveDragonOnOracle } = require('./src/services');
 
 app.use(cors());
@@ -49,19 +44,6 @@ app.post('/api/dragon/receive', async function transferFunction(req, res, next) 
 	}
 });
 
-app.get('/api/dragon/transfer', async function transferFunction(req, res, next) {
-	const { account, web3js, client } = loadLoomAccount(req.query.account);
-	try {
-		const data = await transferDragonToGateway(web3js, req.query.gas || 350000, account, req.query.id);
-		console.log(`\n Token with id ${req.query.id} was successfully transfered to gateway \n`);
-		res.status(200).send(`Token with id ${req.query.id} was successfully transfered to gateway`);
-	} catch (err) {
-		res.status(400).send(err);
-	} finally {
-		if (client) client.disconnect();
-	}
-});
-
 app.get('/api/mapAccount', async function getMapFunction(req, res, next) {
 	const { account, web3js, client } = loadLoomAccount(req.query.account);
 	try {
@@ -89,7 +71,7 @@ app.get('/api/account/create', async function createAccountFunction(req, res, ne
 app.post('/api/isMap', async function getIsMapFunction(req, res, next) {
 	const { account, web3js, client } = loadLoomAccount(req.body.account);
 	try {
-		var result = await isMap(web3js, account, req.body.gas || 350000, req.body.mainAccount);
+		const result = await isMap(web3js, account, req.body.gas || 350000, req.body.mainAccount);
 		res.status(200).send(result);
 	} catch (err) {
 		console.log(`Error mapping sidechain to mainchain ${err}`);

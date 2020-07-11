@@ -40,6 +40,7 @@ export class Migration extends Component {
       <hr/>
 
       { /* Actions */ }
+      { /* Mainchain Actions */ }
       <Button variant="contained" color="primary" href="" onClick={() => MainchainAPI.getMyDragons().then(mainDragons => this.setState({ mainDragons }))}>
         Get dragons Mainchain
       </Button>
@@ -57,10 +58,12 @@ export class Migration extends Component {
         </Grid>
       </Grid>
       <hr/>
-      <Button variant="contained" color="primary" href="" onClick={() => MainchainAPI.createDragon().then() } >
+      <Button variant="contained" color="primary" href="" onClick={() => MainchainAPI.createDragon().then(res => console.log("RESPONSEE", res)) } >
         Create dragon Mainchain
       </Button>
       <hr/>
+
+      { /* Sidechain Actions */ }
       <Button variant="contained" color="primary" href="" onClick={() => SidechainAPI.getMyDragons().then(sideDragons => this.setState({ sideDragons }))}>
         Get dragons Sidechain
       </Button>

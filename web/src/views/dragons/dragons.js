@@ -97,7 +97,7 @@ class Dragons extends Component {
 
   showMapButton = () => {
     return this.state.accountsAreMapped ? (
-      <Button variant="contained" color="primary" className="botonVerde" onClick={this.mapAccounts}>
+      <Button variant="contained" color="primary" className="green-button" onClick={this.mapAccounts}>
         Map Accounts
       </Button>
     ) : (

@@ -1,26 +1,26 @@
 .ui-view-dragons {
-    &__container-div {
-        margin-top: 20px;
+  &__container-div {
+    margin-top: 20px;
 
-        &__map-acounts__input {
-            width: 360px;
-        }
+    &__map-acounts__input {
+      width: 360px;
     }
+  }
 
-    &__chains-headings {
-        text-align: center;
-    }
+  &__chains-headings {
+    text-align: center;
+  }
 
-    &__oracle-heading {
-        text-align: center;
-        padding-top: 50px;
-    }
+  &__oracle-heading {
+    text-align: center;
+    padding-top: 50px;
+  }
 
-    &__container-grid__dragons-items {
-        min-height: 300px;
-    }
+  &__container-grid__dragons-items {
+    min-height: 300px;
+  }
 }
 
-.botonVerde {
-    background-color: green !important
-} 
+.green-button {
+  background-color: green;
+}

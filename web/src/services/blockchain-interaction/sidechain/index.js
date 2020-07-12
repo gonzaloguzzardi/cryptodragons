@@ -64,6 +64,12 @@ class SidechainAPI {
     }).catch(err => console.error(err));
   }
 
+  static async areAccountsMapped(mainAccount, gas) {
+    return CommonAPI.sAreAccountsMapped(SidechainAPI, mainAccount, gas)
+      .then(res => res)
+      .catch(err => err);
+  }
+
 };
 
 export default SidechainAPI;

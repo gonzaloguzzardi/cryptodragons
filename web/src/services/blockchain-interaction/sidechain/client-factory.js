@@ -53,4 +53,5 @@ export default async function clientFactory() {
         }))
     ))
     .catch(err => console.error(err));
+
 };

@@ -5,7 +5,6 @@ import Button from '@material-ui/core/Button';
 import Input  from '@material-ui/core/Input';
 import FormLabel  from '@material-ui/core/FormLabel';
 import sleep from '../../utils/sleep';
-// import { _accountsAreMapped } from '../../services/dragons'
 
 import MainchainAPI from '../../services/blockchain-interaction/mainchain';
 import SidechainAPI from '../../services/blockchain-interaction/sidechain';
@@ -92,8 +91,14 @@ class Dragons extends Component {
   }
 
   accountsAreMapped = () => {
-    // _accountsAreMapped(this.state.mainAccount, this.state.sideAccount, this.state.sideAccount)
-    //   .then(res => this.setState({ accountsAreMapped: res.data }));
+    console.log("Are accounts mapped?");
+    Promise.all([
+      MainchainAPI.areAccountsMapped(this.state.sideAccount),
+      SidechainAPI.areAccountsMapped(this.state.mainAccount)
+    ]).then(values => {
+      console.log("VALUES", values);
+      // this.setState({ accountsAreMapped: values[0] && values[1] })
+    });
   } 
 
   onChangeMainAccount = event => {

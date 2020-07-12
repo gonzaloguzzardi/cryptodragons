@@ -10,7 +10,7 @@ const bodyParser = require('body-parser');
 const { oracleApiPort } = require('./config');
 
 // CONTROLLERS
-const { isMap, getDragonsInGateways, saveDragon, getOrCreateSideAccount } = require('./controllers');
+const { getDragonsInGateways, getOrCreateSideAccount } = require('./controllers');
 
 // SERVICES
 const {
@@ -31,9 +31,7 @@ listenSideChainEvents();
 
 // API ROUTES
 app.get('/api/dragons', getDragonsInGateways);
-app.post('/api/isMap', isMap);
 app.get('/api/getOrCreateSideAccount', getOrCreateSideAccount);
-app.post('/api/saveDragon', saveDragon);
 
 // SERVER LISTEN
 const server = app.listen(oracleApiPort, () => {

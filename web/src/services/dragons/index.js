@@ -7,13 +7,6 @@ const _getDragonsFromOracle = async () => {
   return axios.get(`${oracleApiUrl}:${oracleApiPort}/api/dragons`).then(res => res);
 };
 
-const _accountsAreMapped = async (_mapAccountMain, _mapAccountSide, _mapPrivateAccountSide) => {
-  return axios.post(`${oracleApiUrl}:${oracleApiPort}/api/isMap`, { 
-    mainAccount: _mapAccountMain, sideAccount: _mapAccountSide, sideprivateAccount: _mapPrivateAccountSide 
-  }).then(res => res);
-};
-
 export {
-  _accountsAreMapped,
   _getDragonsFromOracle,
 };

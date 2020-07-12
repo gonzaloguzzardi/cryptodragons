@@ -64,6 +64,14 @@ class MainchainAPI {
     }).catch(err => console.error(err));
   }
 
+  static async areAccountsMapped(sideAccount, gas) {
+    return CommonAPI.sAreAccountsMapped(MainchainAPI, sideAccount, gas)
+      .then(res => res)
+      .catch(err => err);
+  }
+
+
+
 
 
   // static loadMainchainAccount() {

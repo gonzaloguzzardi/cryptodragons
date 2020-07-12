@@ -30,4 +30,5 @@ export default async function clientFactory() {
       gatewayContract: values[3],
     })
   ).catch(err => console.error(err));
+
 };

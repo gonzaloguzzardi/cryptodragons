@@ -165,15 +165,15 @@ class Dragons extends Component {
           <Grid container spacing={2}>
             <Grid item>
               <Grid container spacing={2}>
-                {this.state.sideDragons.map(value => (
-                <Grid key={value} item>
-                  <Dragon
-                    location="side"
-                    id={value}
-                    transferMethod={this.transferFromSideToMain}
-                  />
-                </Grid>
-                ))}
+                {this.state.sideDragons ? this.state.sideDragons.map(value => (
+                  <Grid key={value} item>
+                    <Dragon
+                      location="side"
+                      id={value}
+                      transferMethod={this.transferFromSideToMain}
+                    />
+                  </Grid>
+                )) : null }
               </Grid>
             </Grid>
           </Grid>
@@ -183,7 +183,7 @@ class Dragons extends Component {
           <Grid container spacing={2}>
             <Grid item>
               <Grid container spacing={2}>
-                {this.state.mainDragons.map(value => (
+                {this.state.mainDragons ? this.state.mainDragons.map(value => (
                   <Grid key={value} item>
                     <Dragon
                         location="main"
@@ -191,7 +191,7 @@ class Dragons extends Component {
                         transferMethod={this.transferFromMainToSide}
                     />
                   </Grid>
-                ))}
+                )) : null }
               </Grid>
             </Grid>
           </Grid>
@@ -203,21 +203,21 @@ class Dragons extends Component {
           <Grid item xs={6} className={`${namespace}__container-grid__dragons-items`}>
             <h3 className={`${namespace}__oracle-heading`}>Sidechain Gateway Dragons</h3>
             <Grid container justify="center" spacing={2}>
-              {this.state.sidechainGatewayDragons.map(value => (
+              {this.state.sidechainGatewayDragons ? this.state.sidechainGatewayDragons.map(value => (
                 <Grid key={value} item>
                   <Dragon id={value["uid"]} />
                 </Grid>
-              ))}
+              )) : null }
             </Grid>
           </Grid>
           <Grid item xs={6} className={`${namespace}__container-grid__dragons-items`}>
             <h3 className={`${namespace}__oracle-heading`}>Mainchain Gateway Dragons</h3>
             <Grid container justify="center" spacing={2}>
-              {this.state.mainchainGatewayDragons.map(value => (
+              {this.state.mainchainGatewayDragons ? this.state.mainchainGatewayDragons.map(value => (
                 <Grid key={value} item>
                   <Dragon id={value["uid"]} location="oracle" />
                 </Grid>
-              ))}
+              )) : null }
             </Grid>
           </Grid>
         </Grid>

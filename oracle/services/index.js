@@ -7,10 +7,10 @@ const listenSideChainEvents = require('./listen-sidechain-events');
 const { insertDragonInMongo, deleteDragonFromMongo } = require('./common-actions');
 
 module.exports = {
-	collectFromSidechainGatewayAndSendToMainchain,
-	collectFromMainchainGatewayAndSendToSidechain,
-	deleteDragonFromMongo,
-	insertDragonInMongo,
-	listenMainChainEvents,
-	listenSideChainEvents,
+  collectFromSidechainGatewayAndSendToMainchain,
+  collectFromMainchainGatewayAndSendToSidechain,
+  deleteDragonFromMongo,
+  insertDragonInMongo,
+  listenMainChainEvents,
+  listenSideChainEvents,
 };

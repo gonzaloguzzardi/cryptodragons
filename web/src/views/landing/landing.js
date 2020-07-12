@@ -14,11 +14,9 @@ export class Landing extends Component {
           <img src={logo} className={`${namespace}__header-logo`} alt="logo" />
           <h2>Welcome to CryptoDragons</h2>
         </div>
-        <div>
-          <Button variant="contained" color="primary" href="dragons">
-            Start
-          </Button>
-        </div>
+        <Button variant="contained" color="primary" href="dragons">
+          Start
+        </Button>
       </div>
     );
   }

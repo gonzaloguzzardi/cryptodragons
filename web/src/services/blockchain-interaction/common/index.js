@@ -80,7 +80,6 @@ class CommonAPI {
       // if (gasEstimate >= gas) { throw new Error('Not enough enough gas, send more.'); }
       const gasEstimate = gas || 350000;
 
-      console.log("A VER LOS METODOS", contract.methods);
       return contract.methods
         .isMap(account)
         .call({ from: ownerAccount, gas: gasEstimate })

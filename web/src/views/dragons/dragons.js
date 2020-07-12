@@ -4,8 +4,8 @@ import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import Input  from '@material-ui/core/Input';
 import FormLabel  from '@material-ui/core/FormLabel';
-import sleep from '../../utils';
-import { _mapAccounts, _accountsAreMapped } from '../../services/dragons'
+import sleep from '../../utils/sleep';
+// import { _mapAccounts, _accountsAreMapped } from '../../services/dragons'
 
 import MainchainAPI from '../../services/blockchain-interaction/mainchain';
 import SidechainAPI from '../../services/blockchain-interaction/sidechain';
@@ -61,7 +61,7 @@ class Dragons extends Component {
     });
   }
 
-  transferFromSideToMain = dragonId => {
+  transferFromSideToMain = dragonId => (
     SidechainAPI.transferDragon(dragonId).then(res => {
       console.log("RESPONSEE", res);
       sleep(2000).then(() => {
@@ -69,7 +69,7 @@ class Dragons extends Component {
         this.getDragonsFromMain();
       });
     })
-  };
+  );
 
   transferFromMainToSide = dragonId => (
     MainchainAPI.transferDragon(dragonId).then(res => {
@@ -82,12 +82,12 @@ class Dragons extends Component {
   );
 
   mapAccounts = () => {
-    _mapAccounts(this.state.mainAccount,this.state.sideAccount)
+    // _mapAccounts(this.state.mainAccount,this.state.sideAccount)
   }
 
   accountsAreMapped = () => {
-    _accountsAreMapped(this.state.mainAccount, this.state.sideAccount, this.state.sideAccount)
-      .then(res => this.setState({ accountsAreMapped: res.data }));
+    // _accountsAreMapped(this.state.mainAccount, this.state.sideAccount, this.state.sideAccount)
+    //   .then(res => this.setState({ accountsAreMapped: res.data }));
   } 
 
   onChangeMainAccount = event => {
@@ -107,8 +107,8 @@ class Dragons extends Component {
       <Button variant="contained" color="primary" onClick={this.mapAccounts}>
         Map Accounts
       </Button>
-    );
-  } 
+    )
+  };
 
   render = () => (
     <div className={`${namespace}__container-div`}>

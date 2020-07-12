@@ -23,7 +23,6 @@ const _accountsAreMapped = async (_mapAccountMain, _mapAccountSide, _mapPrivateA
 export {
   _accountsAreMapped,
   _getDragonsFromOracle,
-  _transferDragon,
   _mapAccounts,
 };
   

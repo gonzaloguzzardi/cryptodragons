@@ -7,7 +7,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import { _getDragon } from '../../services/dragons'
+// import { _getDragon } from '../../services/dragons'
 
 class Dragon extends Component {
 
@@ -25,23 +25,23 @@ class Dragon extends Component {
   }
 
   getDragon = () => {
-    _getDragon(this.state.id, this.state.location)
-      .then(res => { 
-        this.setState(
-        { 
-          data: res.data,
-          health: res.data.health,
-          agility: res.data.agility,
-          strength: res.data.strength,
-          fortitude: res.data.fortitude,
-          name: res.data.name,
-          dadId: res.data.dadId,
-          motherId: res.data.motherId,
-          currentExperience: res.data.currentExperience,
-          sname:  res.data.sname
-        });
-        console.log(res.data);
-      });
+    // _getDragon(this.state.id, this.state.location)
+    //   .then(res => { 
+    //     this.setState(
+    //     { 
+    //       data: res.data,
+    //       health: res.data.health,
+    //       agility: res.data.agility,
+    //       strength: res.data.strength,
+    //       fortitude: res.data.fortitude,
+    //       name: res.data.name,
+    //       dadId: res.data.dadId,
+    //       motherId: res.data.motherId,
+    //       currentExperience: res.data.currentExperience,
+    //       sname:  res.data.sname
+    //     });
+    //     console.log(res.data);
+    //   });
   }
 
   transfer = () => {

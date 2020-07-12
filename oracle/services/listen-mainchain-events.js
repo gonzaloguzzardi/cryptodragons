@@ -9,7 +9,7 @@ const { deleteDragonFromMongo, insertDragonInMongo } = require('./index');
 
 function listenMainChainEvents() {
 	const web3js = new Web3(new Web3.providers.WebsocketProvider(BFA_SOCKET_CONNECTION));
-	const ownerAccount = fs.readFileSync(path.join(__dirname, '../../../../misc/', 'mainchain_account'), 'utf-8');
+	const ownerAccount = fs.readFileSync(path.join(__dirname, '../misc/', 'mainchain_account'), 'utf-8');
 	web3js.eth.accounts.wallet.add(ownerAccount);
 
 	const MainChainABI = MainChainGateway.abi;

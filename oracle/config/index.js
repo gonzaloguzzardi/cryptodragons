@@ -18,11 +18,11 @@ const READ_URL = !process.env.DOCKERENV ? 'ws://0.0.0.0:46658/queryws' : 'ws://l
 const BFA_SOCKET_CONNECTION = !process.env.DOCKERENV ? 'ws://0.0.0.0:8546' : 'ws://bfa:8546';
 const BFA_NETWORK_ID = '12345';
 
-const SidechainDragonContract = require('../../truffle-project/src/contracts/DappchainTransferableDragon');
-const SidechainGatewayContract = require('../../truffle-project/src/contracts/DappchainGateway');
+const SidechainDragonContract = require('../contracts/DappchainTransferableDragon');
+const SidechainGatewayContract = require('../contracts/DappchainGateway');
 
-const MainChainGateway = require('../../truffle-project/src/contracts/MainnetGateway');
-const MainchainDragonContract = require('../../truffle-project/src/contracts/MainnetTransferableDragon');
+const MainChainGateway = require('../contracts/MainnetGateway');
+const MainchainDragonContract = require('../contracts/MainnetTransferableDragon');
 
 module.exports = {
 	collection,

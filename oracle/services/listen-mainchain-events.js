@@ -1,37 +1,12 @@
-const Web3 = require('web3');
-const path = require('path');
-const fs = require('fs');
-
-// CONSTANTS
-const { MainchainDragonContract, MainChainGateway, BFA_SOCKET_CONNECTION, BFA_NETWORK_ID } = require('../config');
-
 // FUNCTIONS
 const { deleteDragonFromMongo, insertDragonInMongo } = require('./common-actions');
 
+// CONTRACTS INSTANCES
+const { mainChainDragonsInstance, mainChainGatewayInstance } = require('./contracts-instances');
+
 // MAIN
 function listenMainChainEvents() {
-  const web3js = new Web3(new Web3.providers.WebsocketProvider(BFA_SOCKET_CONNECTION));
-  const ownerAccount = fs.readFileSync(path.join(__dirname, '../misc/', 'mainchain_account'), 'utf-8');
-  web3js.eth.accounts.wallet.add(ownerAccount);
-
-  const MainChainABI = MainChainGateway.abi;
-  const ABIDragon = MainchainDragonContract.abi;
-
-  if (!MainChainGateway.networks) {
-    throw Error('Contract not deployed on Mainchain');
-  }
-
-  const mainchainDragonsInstance = new web3js.eth.Contract(
-    ABIDragon,
-    MainchainDragonContract.networks[BFA_NETWORK_ID].address,
-  );
-
-  const mainChainGatewayInstance = new web3js.eth.Contract(
-    MainChainABI,
-    MainChainGateway.networks[BFA_NETWORK_ID].address,
-  );
-
-  mainchainDragonsInstance.events.allEvents((err, event) => {
+  mainChainDragonsInstance.events.allEvents((err, event) => {
     if (err) console.err(err);
     if (event) {
       console.log('mainchainDragonsInstance', 'Evento ->', event.event);

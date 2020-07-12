@@ -1,6 +1,5 @@
-const { receiveDragonFromOracle, isMap } = require('./service');
+const { isMap } = require('./service');
 
 module.exports = {
 	isMap,
-	receiveDragonFromOracle,
 };

@@ -1,7 +1,6 @@
 const Web3 = require('web3');
 
-const { isMap, receiveDragonFromOracle } = require('./src/services/internal/mainchain');
-const { saveDragonOnOracle } = require('./src/services');
+const { isMap } = require('./src/services/internal/mainchain');
 
 async function giveSomeMoney(account) {
 	const web3js = new Web3(new Web3.providers.HttpProvider('http://127.0.0.1:8545'));
@@ -18,33 +17,6 @@ async function giveSomeMoney(account) {
 app.get('/api/giveSomeMoney', async function freeMoney(req, res, next) {
 	giveSomeMoney(req.query.account);
 	res.status(200).send('OK');
-});
-
-app.post('/api/dragon/receive', async function transferFunction(req, res, next) {
-	const { account, web3js } = loadGanacheAccount();
-	let hash = '';
-	let tx;
-	try {
-		for (const dragon of req.body.dragons) {
-			console.log(`Awaiting receiveDragonFromOracle with dragon ${JSON.stringify(dragon, null, 2)}`);
-			const receiverAddress = dragon.toMainchainAddress;
-			tx = await receiveDragonFromOracle(
-				web3js,
-				account,
-				req.query.gas || 450000,
-				dragon.uid,
-				dragon.data,
-				receiverAddress,
-			);
-		}
-		console.log(`tx hash: ${tx.transactionHash}`);
-		console.log('MENSAJE RECIBIDO', req.body);
-		hash = tx.transactionHash;
-		res.status(200).send(hash);
-	} catch (err) {
-		saveDragonOnOracle(req.body.dragons);
-		res.status(500).send(err);
-	}
 });
 
 app.get('/api/isMap', async function getisMapFunction(req, res, next) {

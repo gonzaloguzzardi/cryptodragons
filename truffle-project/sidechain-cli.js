@@ -1,19 +1,5 @@
-const express = require('express');
-const http = require('http');
-const cors = require('cors');
-
-const app = express();
-const bodyParser = require('body-parser');
-const { isMap, mapAccount, receiveDragonFromOracle } = require('./src/services/internal/sidechain');
+const { isMap, receiveDragonFromOracle } = require('./src/services/internal/sidechain');
 const { saveDragonOnOracle } = require('./src/services');
-
-app.use(cors());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-
-app.get('/', (req, res) => {
-	res.status(200).send('Welcome to API REST');
-});
 
 app.post('/api/dragon/receive', async function transferFunction(req, res, next) {
 	const { account, web3js, client } = loadLoomAccount();
@@ -44,19 +30,6 @@ app.post('/api/dragon/receive', async function transferFunction(req, res, next) 
 	}
 });
 
-app.get('/api/mapAccount', async function getMapFunction(req, res, next) {
-	const { account, web3js, client } = loadLoomAccount(req.query.account);
-	try {
-		await mapAccount(web3js, account, req.query.gas || 350000, req.query.mainAccount);
-		res.status(200).send('OK');
-	} catch (err) {
-		console.log(`Error mapping sidechain to mainchain ${err}`);
-		res.status(400).send(err);
-	} finally {
-		if (client) client.disconnect();
-	}
-});
-
 app.get('/api/account/create', async function createAccountFunction(req, res, next) {
 	const privateKey = CryptoUtils.generatePrivateKey();
 	const publicKey = CryptoUtils.publicKeyFromPrivateKey(privateKey);
@@ -79,8 +52,4 @@ app.post('/api/isMap', async function getIsMapFunction(req, res, next) {
 	} finally {
 		if (client) client.disconnect();
 	}
-});
-
-http.createServer(app).listen(8001, () => {
-	console.log('Server started at http://localhost:8001');
 });

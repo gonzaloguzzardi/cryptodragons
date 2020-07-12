@@ -5,7 +5,7 @@ import Button from '@material-ui/core/Button';
 import Input  from '@material-ui/core/Input';
 import FormLabel  from '@material-ui/core/FormLabel';
 import sleep from '../../utils/sleep';
-// import { _mapAccounts, _accountsAreMapped } from '../../services/dragons'
+// import { _accountsAreMapped } from '../../services/dragons'
 
 import MainchainAPI from '../../services/blockchain-interaction/mainchain';
 import SidechainAPI from '../../services/blockchain-interaction/sidechain';
@@ -82,7 +82,13 @@ class Dragons extends Component {
   );
 
   mapAccounts = () => {
-    // _mapAccounts(this.state.mainAccount,this.state.sideAccount)
+    SidechainAPI.mapAccountToMainchainAccount(this.state.mainAccount)
+      .then(res => console.log("MAPEO EN SIDECHAIN", res))
+      .catch(err => console.error("ERROR MAPEO SIDECHAIN", err));
+
+    MainchainAPI.mapAccountToSidechainAccount(this.state.sideAccount)
+      .then(res => console.log("MAPEO EN MAINCHAIN", res))
+      .catch(err => console.error("ERROR MAPEO MAINCHAIN", err));
   }
 
   accountsAreMapped = () => {

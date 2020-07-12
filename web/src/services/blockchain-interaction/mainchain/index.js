@@ -41,6 +41,31 @@ class MainchainAPI {
       .catch(err => err);
   }
 
+  static async mapAccountToSidechainAccount(sideAccount, gas) {
+    return MainchainAPI.getClientHelper().then(client => {
+      const contract = client.tokenContract;
+      const ownerAccount = client.account;
+
+      console.log(`Map mainchain account: ${ownerAccount} with sidechain account: ${sideAccount}`);
+      // const gasEstimate = await contract.methods
+      //   .mapContractToSidechain(sideAccount)
+      //   .estimateGas({ from: ownerAccount, gas });
+
+      // if (gasEstimate >= gas) {
+      //   throw new Error('Not enough enough gas, send more.');
+      // }
+      const gasEstimate = gas || 350000;
+
+      return contract.methods
+        .mapContractToSidechain(sideAccount)
+        .send({ from: ownerAccount, gas: gasEstimate })
+        .then(res => res)
+        .catch(err => console.error(err));
+    }).catch(err => console.error(err));
+  }
+
+
+
   // static loadMainchainAccount() {
   //   if ((typeof window.ethereum === 'undefined') || !window.ethereum.isMetaMask) {
   //     return alert("Metamask is not loaded!");

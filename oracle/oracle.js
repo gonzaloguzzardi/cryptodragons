@@ -10,14 +10,14 @@ const bodyParser = require('body-parser');
 const { oracleApiPort } = require('./config');
 
 // CONTROLLERS
-const { isMap, getDragonsInGateways, mapAccounts, saveDragon, getOrCreateSideAccount } = require('./controllers');
+const { isMap, getDragonsInGateways, saveDragon, getOrCreateSideAccount } = require('./controllers');
 
 // SERVICES
 const {
-	collectFromSidechainGatewayAndSendToMainchain,
-	collectFromMainchainGatewayAndSendToSidechain,
-	listenMainChainEvents,
-	listenSideChainEvents,
+  collectFromSidechainGatewayAndSendToMainchain,
+  collectFromMainchainGatewayAndSendToSidechain,
+  listenMainChainEvents,
+  listenSideChainEvents,
 } = require('./services');
 
 // MIDDLEWARES
@@ -31,19 +31,18 @@ listenSideChainEvents();
 
 // API ROUTES
 app.get('/api/dragons', getDragonsInGateways);
-app.get('/api/mapAccounts', mapAccounts);
 app.post('/api/isMap', isMap);
 app.get('/api/getOrCreateSideAccount', getOrCreateSideAccount);
 app.post('/api/saveDragon', saveDragon);
 
 // SERVER LISTEN
 const server = app.listen(oracleApiPort, () => {
-	const { address, port } = server.address();
-	console.log('Example app listening at http://%s:%s', address, port);
+  const { address, port } = server.address();
+  console.log('Example app listening at http://%s:%s', address, port);
 });
 
 // CRON
 cron.schedule('*/15 * * * * *', () => {
-	collectFromSidechainGatewayAndSendToMainchain();
-	collectFromMainchainGatewayAndSendToSidechain();
+  collectFromSidechainGatewayAndSendToMainchain();
+  collectFromMainchainGatewayAndSendToSidechain();
 });

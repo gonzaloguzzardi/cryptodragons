@@ -1,4 +1,5 @@
 class CommonAPI {
+
   static async sCreateDragonToken(api, gas) {
     return api.getClientHelper().then(client => {
       const contract = client.tokenContract;
@@ -13,8 +14,8 @@ class CommonAPI {
       // if (gasEstimate >= gas) {
       //   throw new Error('Not enough enough gas, send more.');
       // }
-
       const gasEstimate = gas || 350000;
+
       return contract.methods
         .createDragon('test dragon', 1, 2, 2)
         .send({ from: ownerAccount, gas: gasEstimate })
@@ -41,8 +42,8 @@ class CommonAPI {
       // if (gasEstimate >= gas) {
       //   throw new Error('Not enough enough gas, send more.');
       // }
-
       const gasEstimate = gas || 350000;
+
       return contract.methods
         .getDragonsIdsByOwner(ownerAccount)
         .call({ from: ownerAccount, gas: gasEstimate })
@@ -50,7 +51,6 @@ class CommonAPI {
         .catch(err => console.error(err));
     }).catch(err => console.error(err));
   }
-
 
   static async sTransferDragon(api, dragonId, gas) {
     return api.getClientHelper().then(client => {
@@ -64,7 +64,6 @@ class CommonAPI {
       // if (gasEstimate >= gas) {
       //   throw new Error('Not enough enough gas, send more.');
       // }
-
       const gasEstimate = gas || 350000;
 
       return contract.methods

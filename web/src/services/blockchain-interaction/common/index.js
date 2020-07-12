@@ -11,9 +11,7 @@ class CommonAPI {
       //   .createDragon('test dragon', 1, 2, 2)
       //   .estimateGas({ from: ownerAccount, gas: 0 });
   
-      // if (gasEstimate >= gas) {
-      //   throw new Error('Not enough enough gas, send more.');
-      // }
+      // if (gasEstimate >= gas) { throw new Error('Not enough enough gas, send more.'); }
       const gasEstimate = gas || 350000;
 
       return contract.methods
@@ -39,9 +37,7 @@ class CommonAPI {
       //   .getDragonsIdsByOwner(ownerAccount)
       //   .estimateGas({ from: ownerAccount, gas: 0 });
 
-      // if (gasEstimate >= gas) {
-      //   throw new Error('Not enough enough gas, send more.');
-      // }
+      // if (gasEstimate >= gas) { throw new Error('Not enough enough gas, send more.'); }
       const gasEstimate = gas || 350000;
 
       return contract.methods
@@ -61,9 +57,7 @@ class CommonAPI {
       //   .transferToGateway(dragonId)
       //   .estimateGas({ from: ownerAccount, gas: 0 });
 
-      // if (gasEstimate >= gas) {
-      //   throw new Error('Not enough enough gas, send more.');
-      // }
+      // if (gasEstimate >= gas) { throw new Error('Not enough enough gas, send more.'); }
       const gasEstimate = gas || 350000;
 
       return contract.methods
@@ -83,9 +77,7 @@ class CommonAPI {
       //   .isMap(account)
       //   .estimateGas({ from: ownerAccount, gas: 0 });
 
-      // if (gasEstimate >= gas) {
-      //   throw new Error('Not enough enough gas, send more.');
-      // }
+      // if (gasEstimate >= gas) { throw new Error('Not enough enough gas, send more.'); }
       const gasEstimate = gas || 350000;
 
       console.log("A VER LOS METODOS", contract.methods);

@@ -1,15 +1,7 @@
 import clientFactory from './client-factory';
 import CommonAPI from '../common';
 
-// Client structure
-//   client: {
-//     account,
-//     web3js,
-//     loomClient
-//     netId,
-//     tokenContract,
-//     gatewayContract,
-//   }
+// client: { account, web3js, loomClient, netId, tokenContract, gatewayContract }
 let client;
 
 class SidechainAPI {
@@ -51,9 +43,7 @@ class SidechainAPI {
       //   mapContractToMainnet(mainAccount)
       //   .estimateGas({ from: ownerAccount, gas });
 
-      // if (gasEstimate >= gas) {
-      //   throw new Error('Not enough enough gas, send more.');
-      // }
+      // if (gasEstimate >= gas) { throw new Error('Not enough enough gas, send more.'); }
       const gasEstimate = gas || 350000;
 
       return contract.methods

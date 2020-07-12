@@ -1,14 +1,7 @@
 import clientFactory from './client-factory';
 import CommonAPI from '../common';
 
-// Client structure
-//   client: {
-//     web3js,
-//     account,
-//     netId,
-//     tokenContract,
-//     gatewayContract,
-//   }
+// client: { web3js, account, netId, tokenContract, gatewayContract }
 let client;
 
 class MainchainAPI {
@@ -51,9 +44,7 @@ class MainchainAPI {
       //   .mapContractToSidechain(sideAccount)
       //   .estimateGas({ from: ownerAccount, gas });
 
-      // if (gasEstimate >= gas) {
-      //   throw new Error('Not enough enough gas, send more.');
-      // }
+      // if (gasEstimate >= gas) { throw new Error('Not enough enough gas, send more.'); }
       const gasEstimate = gas || 350000;
 
       return contract.methods

@@ -52,8 +52,8 @@ services:
     build:
       context: ./mongo
     ports:
-      - 27017 # process
-      - 28017 # http
+      - "27017:27017" # process
+      - "28017:28017" # http
 
   oracle:
     environment:

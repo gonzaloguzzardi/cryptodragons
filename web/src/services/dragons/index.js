@@ -25,4 +25,3 @@ export {
   _getDragonsFromOracle,
   _mapAccounts,
 };
-  

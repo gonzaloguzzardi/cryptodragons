@@ -18,12 +18,6 @@ export class Landing extends Component {
           <Button variant="contained" color="primary" href="dragons">
             Start
           </Button>
-
-          <br/><br/><br/><br/>
-
-          <Button variant="contained" color="secondary" href="migration">
-            Migration
-          </Button>
         </div>
       </div>
     );

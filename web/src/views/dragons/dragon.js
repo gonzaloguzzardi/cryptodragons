@@ -13,7 +13,7 @@ class Dragon extends Component {
 
   constructor(props) {
     super(props);
-    this.getDragon = this.getDragon.bind(this);
+
     this.state = {
       location: props.location,
       name: "dragon",
@@ -21,6 +21,7 @@ class Dragon extends Component {
       pic: "onepic",
       fetching: false,
     };
+
     this.getDragon();
   }
 

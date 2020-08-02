@@ -13,7 +13,7 @@ function transferDragonsToSide(dragons) {
 
       sideChainGatewayInstance.methods
         .receiveDragon(receiverAddress, dragonId, dragonData)
-        .send({ from: senderAddress, gas: 35000 });
+        .send({ from: senderAddress, gas: 350000 });
     });
   }
 }

@@ -1,5 +1,6 @@
 import clientFactory from './client-factory';
 import CommonAPI from '../common';
+import sleep from '../../../utils/sleep';
 
 // client: { account, web3js, loomClient, netId, tokenContract, gatewayContract }
 let client;
@@ -9,9 +10,8 @@ class SidechainAPI {
   static async getClientHelper() {
     if (!client) {
       client = await clientFactory();
-      console.log("SIDECHAIN CLIENT CREATED");
+      console.log("SIDECHAIN CLIENT CREATED", client);
     }
-    console.log("SIDECHAIN CLIENT", client);
     return client;
   };
 

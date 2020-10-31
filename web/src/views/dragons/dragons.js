@@ -48,22 +48,22 @@ class Dragons extends Component {
 
   buyDragonInSideChain = () => {
     SidechainAPI.createDragon().then(res => {
-      console.log("RESPONSEE", res);
+      console.log("[SIDECHAIN]: Dragon create response", res);
       this.getDragonsFromSide();
     });
   }
 
   buyDragonInMainChain = () => {
     MainchainAPI.createDragon().then(res => {
-      console.log("RESPONSEE", res);
+      console.log("[MAINCHAIN]: Dragon create response", res);
       this.getDragonsFromMain();
     });
   }
 
   transferFromSideToMain = dragonId => (
     SidechainAPI.transferDragon(dragonId).then(res => {
-      console.log("RESPONSEE", res);
-      sleep(2000).then(() => {
+      console.log("[SIDECHAIN]: Transfer to Mainchain response", res);
+      sleep(500).then(() => {
         this.getDragonsFromSide();
         this.getDragonsFromMain();
       });
@@ -72,8 +72,8 @@ class Dragons extends Component {
 
   transferFromMainToSide = dragonId => (
     MainchainAPI.transferDragon(dragonId).then(res => {
-      console.log("RESPONSEE", res);
-      sleep(2000).then(() => {
+      console.log("[MAINCHAIN]: Transfer to Sidechain response", res);
+      sleep(500).then(() => {
         this.getDragonsFromMain();
         this.getDragonsFromSide();
       });
@@ -82,12 +82,12 @@ class Dragons extends Component {
 
   mapAccounts = () => {
     SidechainAPI.mapAccountToMainchainAccount(this.state.mainAccount)
-      .then(res => console.log("MAPEO EN SIDECHAIN", res))
-      .catch(err => console.error("ERROR MAPEO SIDECHAIN", err));
+      .then(res => console.log("[SIDECHAIN]: MAPEO EN SIDECHAIN", res))
+      .catch(err => console.error("[SIDECHAIN]: ERROR MAPEO SIDECHAIN", err));
 
     MainchainAPI.mapAccountToSidechainAccount(this.state.sideAccount)
-      .then(res => console.log("MAPEO EN MAINCHAIN", res))
-      .catch(err => console.error("ERROR MAPEO MAINCHAIN", err));
+      .then(res => console.log("[MAINCHAIN]: MAPEO EN MAINCHAIN", res))
+      .catch(err => console.error("[MAINCHAIN]: ERROR MAPEO MAINCHAIN", err));
   }
 
   accountsAreMapped = () => {
@@ -97,7 +97,7 @@ class Dragons extends Component {
       SidechainAPI.areAccountsMapped(this.state.mainAccount)
     ]).then(values => {
       console.log("MAPEO CUENTAS [SideInMain, MainInSide]", values);
-      // this.setState({ accountsAreMapped: values[0] && values[1] })
+      this.setState({ accountsAreMapped: values[0] && values[1] })
     });
   } 
 
@@ -105,22 +105,10 @@ class Dragons extends Component {
 
   onChangeSideAccount = event => this.setState({ sideAccount: event.target.value });
 
-  showMapButton = () => {
-    return this.state.accountsAreMapped ? (
-      <Button variant="contained" color="primary" className="green-button" onClick={this.mapAccounts}>
-        Map Accounts
-      </Button>
-    ) : (
-      <Button variant="contained" color="primary" onClick={this.mapAccounts}>
-        Map Accounts
-      </Button>
-    )
-  };
-
   render = () => (
     <div className={`${namespace}__container-div`}>
 
-      { /* Map accounts */ }
+      { /* Map accounts section */ }
       <Grid container justify="center" spacing={2}>
         <Grid item>
           <FormLabel>
@@ -135,7 +123,15 @@ class Dragons extends Component {
           </FormLabel>
         </Grid>
           <Grid item>
-            {this.showMapButton()}
+            {this.state.accountsAreMapped ? (
+              <Button variant="contained" disabled>
+                Accounts Mapped! 😁 🎉
+              </Button>
+              ) : (
+              <Button variant="contained" color="primary" onClick={this.mapAccounts}>
+                Map Accounts
+              </Button>
+            )}
         </Grid>
         <Grid item>
           <FormLabel>
@@ -207,27 +203,27 @@ class Dragons extends Component {
 
       { /* Oracle dragons */ }
       <Grid container spacing={2}>
-          <Grid item xs={6} className={`${namespace}__container-grid__dragons-items`}>
-            <h3 className={`${namespace}__oracle-heading`}>Sidechain Gateway Dragons</h3>
-            <Grid container justify="center" spacing={2}>
-              {this.state.sidechainGatewayDragons ? this.state.sidechainGatewayDragons.map(value => (
-                <Grid key={value} item>
-                  <Dragon id={value["uid"]} />
-                </Grid>
-              )) : null }
-            </Grid>
-          </Grid>
-          <Grid item xs={6} className={`${namespace}__container-grid__dragons-items`}>
-            <h3 className={`${namespace}__oracle-heading`}>Mainchain Gateway Dragons</h3>
-            <Grid container justify="center" spacing={2}>
-              {this.state.mainchainGatewayDragons ? this.state.mainchainGatewayDragons.map(value => (
-                <Grid key={value} item>
-                  <Dragon id={value["uid"]} location="oracle" />
-                </Grid>
-              )) : null }
-            </Grid>
+        <Grid item xs={6} className={`${namespace}__container-grid__dragons-items`}>
+          <h3 className={`${namespace}__oracle-heading`}>Sidechain Gateway Dragons</h3>
+          <Grid container justify="center" spacing={2}>
+            {this.state.sidechainGatewayDragons ? this.state.sidechainGatewayDragons.map(value => (
+              <Grid key={value} item>
+                <Dragon id={value["uid"]} />
+              </Grid>
+            )) : null }
           </Grid>
         </Grid>
+        <Grid item xs={6} className={`${namespace}__container-grid__dragons-items`}>
+          <h3 className={`${namespace}__oracle-heading`}>Mainchain Gateway Dragons</h3>
+          <Grid container justify="center" spacing={2}>
+            {this.state.mainchainGatewayDragons ? this.state.mainchainGatewayDragons.map(value => (
+              <Grid key={value} item>
+                <Dragon id={value["uid"]} location="oracle" />
+              </Grid>
+            )) : null }
+          </Grid>
+        </Grid>
+      </Grid>
     </div>
   );
 }

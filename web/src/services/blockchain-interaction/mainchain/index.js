@@ -9,10 +9,9 @@ class MainchainAPI {
   static async getClientHelper() {
     if (!client) {
       client = await clientFactory();
-      console.log("MAINCHAIN CLIENT CREATED");
+      console.log("MAINCHAIN CLIENT CREATED", client);
       // client.web3js.eth.accounts.wallet.add(client.account);
     }
-    console.log("MAINCHAIN CLIENT", client);
     return client;
   };
 

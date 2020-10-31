@@ -6,14 +6,12 @@ class CommonAPI {
       const ownerAccount = client.account;
 
       // // createDragon(string memory _name, uint64 _creationTime, uint32 _dadId, uint32 _motherId)
-
       // const gasEstimate = await contract.methods
       //   .createDragon('test dragon', 1, 2, 2)
       //   .estimateGas({ from: ownerAccount, gas: 0 });
-
       // if (gasEstimate >= gas) { throw new Error('Not enough enough gas, send more.'); }
-      const gasEstimate = gas || 350000;
 
+      const gasEstimate = gas || 350000;
       return contract.methods
         .createDragon('test dragon', 1, 2, 2)
         .send({ from: ownerAccount, gas: gasEstimate })
@@ -36,10 +34,9 @@ class CommonAPI {
       // const gasEstimate = await contract.methods
       //   .getDragonsIdsByOwner(ownerAccount)
       //   .estimateGas({ from: ownerAccount, gas: 0 });
-
       // if (gasEstimate >= gas) { throw new Error('Not enough enough gas, send more.'); }
-      const gasEstimate = gas || 350000;
 
+      const gasEstimate = gas || 350000;
       return contract.methods
         .getDragonsIdsByOwner(ownerAccount)
         .call({ from: ownerAccount, gas: gasEstimate })
@@ -56,10 +53,9 @@ class CommonAPI {
       // const gasEstimate = await contract.methods
       //   .transferToGateway(dragonId)
       //   .estimateGas({ from: ownerAccount, gas: 0 });
-
       // if (gasEstimate >= gas) { throw new Error('Not enough enough gas, send more.'); }
-      const gasEstimate = gas || 350000;
 
+      const gasEstimate = gas || 350000;
       return contract.methods
         .transferToGateway(dragonId)
         .send({ from: ownerAccount, gas: gasEstimate })
@@ -76,10 +72,9 @@ class CommonAPI {
       // const gasEstimate = await contract.methods
       //   .isMap(account)
       //   .estimateGas({ from: ownerAccount, gas: 0 });
-
       // if (gasEstimate >= gas) { throw new Error('Not enough enough gas, send more.'); }
-      const gasEstimate = gas || 350000;
 
+      const gasEstimate = gas || 350000;
       return contract.methods
         .isMap(account)
         .call({ from: ownerAccount, gas: gasEstimate })

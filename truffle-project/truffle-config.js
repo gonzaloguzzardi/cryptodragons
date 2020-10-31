@@ -27,7 +27,7 @@ module.exports = {
 	contracts_build_directory: join(__dirname, './src/contracts'),
 	compilers: {
 		solc: {
-			version: '^0.5.0',
+			version: '0.5.17',
 			optimizer: {
 				enabled: true,
 				runs: 200,
@@ -54,6 +54,7 @@ module.exports = {
 					const loomTruffleProvider = getLoomProviderWithMnemonic(mnemonicPath, chainId, writeUrl, readUrl);
 					return loomTruffleProvider;
 				}
+				return null;
 			},
 			network_id: '*',
 		},
@@ -72,6 +73,7 @@ module.exports = {
 					const loomTruffleProvider = getLoomProviderWithMnemonic(mnemonicPath, chainId, writeUrl, readUrl);
 					return loomTruffleProvider;
 				}
+				return null;
 			},
 			network_id: '*',
 		},

@@ -23,9 +23,16 @@ class MainchainAPI {
   };
 
   static async createDragon(gas) {
-    return CommonAPI.sCreateDragonToken(MainchainAPI, gas)
-      .then(res => res)
-      .catch(err => err);
+    try {
+      const {
+        tokenContract: contract,
+        account: ownerAccount
+      } = await MainchainAPI.getClientHelper();
+
+      return await CommonAPI.sCreateDragonToken(contract, ownerAccount, gas);
+    } catch (err) {
+      console.error(err);
+    }
   }
 
   static async getMyDragons(gas) {

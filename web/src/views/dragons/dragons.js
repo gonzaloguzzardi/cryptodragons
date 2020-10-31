@@ -49,14 +49,16 @@ class Dragons extends Component {
   getDragonsFromOracle = () => {};
 
   buyDragonInSideChain = () => {
-    SidechainAPI.createDragon().then(res => {
+    const gas = 350000;
+    SidechainAPI.createDragon(gas).then(res => {
       console.log("[SIDECHAIN]: Dragon create response", res);
       this.getDragonsFromSide();
     });
   }
 
   buyDragonInMainChain = () => {
-    MainchainAPI.createDragon().then(res => {
+    const gas = 350000;
+    MainchainAPI.createDragon(gas).then(res => {
       console.log("[MAINCHAIN]: Dragon create response", res);
       this.getDragonsFromMain();
     });

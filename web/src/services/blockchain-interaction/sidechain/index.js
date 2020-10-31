@@ -22,9 +22,16 @@ class SidechainAPI {
   };
 
   static async createDragon(gas) {
-    return CommonAPI.sCreateDragonToken(SidechainAPI, gas)
-      .then(res => res)
-      .catch(err => err);
+    try {
+      const {
+        tokenContract: contract,
+        account: ownerAccount
+      } = await SidechainAPI.getClientHelper();
+
+      return await CommonAPI.sCreateDragonToken(contract, ownerAccount, gas);
+    } catch (err) {
+      console.error(err);
+    }
   }
 
   static async getMyDragons(gas) {

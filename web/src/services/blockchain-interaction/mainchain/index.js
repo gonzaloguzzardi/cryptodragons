@@ -76,27 +76,17 @@ class MainchainAPI {
   }
 
   static async areAccountsMapped(sideAccount, gas) {
-    return CommonAPI.sAreAccountsMapped(MainchainAPI, sideAccount, gas)
-      .then(res => res)
-      .catch(err => err);
+    try {
+      const {
+        tokenContract: contract,
+        account: ownerAccount
+      } = await MainchainAPI.getClientHelper();
+
+      return await CommonAPI.sAreAccountsMapped(contract, ownerAccount, sideAccount, gas);
+    } catch (err) {
+      console.error(err);
+    }
   }
-
-
-
-
-
-  // static loadMainchainAccount() {
-  //   if ((typeof window.ethereum === 'undefined') || !window.ethereum.isMetaMask) {
-  //     return alert("Metamask is not loaded!");
-  //   }
-  //   window.ethereum.enable()
-  //     .then(accounts => MainchainAPI.getClientHelper().then(client => client.account = accounts[0]))
-  //     .catch(err => console.error(err));
-  // };
-
-  // static onAccountChange(setter) {
-  //   window.ethereum && window.ethereum.on('accountsChanged', accounts => setter(accounts[0]));
-  // }
 
 };
 

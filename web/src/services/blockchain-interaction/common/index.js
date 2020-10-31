@@ -49,23 +49,17 @@ class CommonAPI {
     }).catch(err => console.error(err));
   }
 
-  static async sAreAccountsMapped(api, account, gas) {
-    return api.getClientHelper().then(client => {
-      const contract = client.tokenContract;
-      const ownerAccount = client.account;
+  static async sAreAccountsMapped(contract, ownerAccount, otherChainAccount, gas) {
+    const gasEstimate = await contract.methods
+      .isMap(otherChainAccount)
+      .estimateGas({ from: ownerAccount, gas: 0 });
 
-      // const gasEstimate = await contract.methods
-      //   .isMap(account)
-      //   .estimateGas({ from: ownerAccount, gas: 0 });
-      // if (gasEstimate >= gas) { throw new Error('Not enough enough gas, send more.'); }
+    console.log(`[COMMON-API_ARE-ACCOUNTS-MAPPED]: Gas sent: ${gas}, Gas Estimate: ${gasEstimate}`);
+    if (gasEstimate >= gas) { throw new Error('Not enough enough gas, send more.'); }
 
-      const gasEstimate = gas || 350000;
-      return contract.methods
-        .isMap(account)
-        .call({ from: ownerAccount, gas: gasEstimate })
-        .then(res => res)
-        .catch(err => console.error(err));
-    }).catch(err => console.error(err));
+    return await contract.methods
+      .isMap(otherChainAccount)
+      .call({ from: ownerAccount, gas: gasEstimate });
   }
 
 };

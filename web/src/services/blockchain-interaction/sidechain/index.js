@@ -75,9 +75,16 @@ class SidechainAPI {
   }
 
   static async areAccountsMapped(mainAccount, gas) {
-    return CommonAPI.sAreAccountsMapped(SidechainAPI, mainAccount, gas)
-      .then(res => res)
-      .catch(err => err);
+    try {
+      const {
+        tokenContract: contract,
+        account: ownerAccount
+      } = await SidechainAPI.getClientHelper();
+
+      return await CommonAPI.sAreAccountsMapped(contract, ownerAccount, mainAccount, gas);
+    } catch (err) {
+      console.error(err);
+    }
   }
 
 };

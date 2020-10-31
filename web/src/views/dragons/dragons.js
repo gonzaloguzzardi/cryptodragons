@@ -13,6 +13,8 @@ import './dragons.scss';
 
 const namespace = 'ui-view-dragons';
 
+const GAS_DEFAULT_VALUE = 350000;
+
 class Dragons extends Component {
 
   constructor(props) {
@@ -37,28 +39,24 @@ class Dragons extends Component {
   }
 
   getDragonsFromMain = () => {
-    const gas = 350000;
-    MainchainAPI.getMyDragons(gas).then(mainDragons => this.setState({ mainDragons }));
+    MainchainAPI.getMyDragons(GAS_DEFAULT_VALUE).then(mainDragons => this.setState({ mainDragons }));
   };
 
   getDragonsFromSide = () => {
-    const gas = 350000;
-    SidechainAPI.getMyDragons(gas).then(sideDragons => this.setState({ sideDragons }));
+    SidechainAPI.getMyDragons(GAS_DEFAULT_VALUE).then(sideDragons => this.setState({ sideDragons }));
   };
 
   getDragonsFromOracle = () => {};
 
   buyDragonInSideChain = () => {
-    const gas = 350000;
-    SidechainAPI.createDragon(gas).then(res => {
+    SidechainAPI.createDragon(GAS_DEFAULT_VALUE).then(res => {
       console.log("[SIDECHAIN]: Dragon create response", res);
       this.getDragonsFromSide();
     });
   }
 
   buyDragonInMainChain = () => {
-    const gas = 350000;
-    MainchainAPI.createDragon(gas).then(res => {
+    MainchainAPI.createDragon(GAS_DEFAULT_VALUE).then(res => {
       console.log("[MAINCHAIN]: Dragon create response", res);
       this.getDragonsFromMain();
     });
@@ -97,8 +95,8 @@ class Dragons extends Component {
   accountsAreMapped = () => {
     console.log("Are accounts mapped?");
     Promise.all([
-      MainchainAPI.areAccountsMapped(this.state.sideAccount),
-      SidechainAPI.areAccountsMapped(this.state.mainAccount)
+      MainchainAPI.areAccountsMapped(this.state.sideAccount, GAS_DEFAULT_VALUE),
+      SidechainAPI.areAccountsMapped(this.state.mainAccount, GAS_DEFAULT_VALUE)
     ]).then(values => {
       console.log("MAPEO CUENTAS [SideInMain, MainInSide]", values);
       this.setState({ accountsAreMapped: values[0] && values[1] })

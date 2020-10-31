@@ -10,7 +10,7 @@ class CommonAPI {
       // const gasEstimate = await contract.methods
       //   .createDragon('test dragon', 1, 2, 2)
       //   .estimateGas({ from: ownerAccount, gas: 0 });
-  
+
       // if (gasEstimate >= gas) { throw new Error('Not enough enough gas, send more.'); }
       const gasEstimate = gas || 350000;
 

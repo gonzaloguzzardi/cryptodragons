@@ -15,10 +15,8 @@ const namespace = 'ui-view-dragons';
 
 class Dragons extends Component {
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
+  constructor() {
+    state = {
       sideAccount: '0xfee39fad945754831b59b92a1a8339f65358792d',
       mainAccount: '0x28863498efede12296888f7ca6cf0b94974fbdbc',
 
@@ -101,13 +99,9 @@ class Dragons extends Component {
     });
   } 
 
-  onChangeMainAccount = event => {
-    this.setState({ mainAccount: event.target.value });
-  }
+  onChangeMainAccount = event => this.setState({ mainAccount: event.target.value });
 
-  onChangeSideAccount = event => {
-    this.setState({ sideAccount: event.target.value });
-  }
+  onChangeSideAccount = event => this.setState({ sideAccount: event.target.value });
 
   showMapButton = () => {
     return this.state.accountsAreMapped ? (

@@ -10,6 +10,7 @@ class MainchainAPI {
 
   static async getClientHelper() {
     while (!client && clientFetching) await sleep(1000);
+
     if (!client) {
       clientFetching = true;
       client = await clientFactory();
@@ -17,6 +18,7 @@ class MainchainAPI {
       console.log("MAINCHAIN CLIENT CREATED", client);
       // client.web3js.eth.accounts.wallet.add(client.account);
     }
+
     return client;
   };
 
@@ -27,9 +29,16 @@ class MainchainAPI {
   }
 
   static async getMyDragons(gas) {
-    return CommonAPI.sGetMyDragons(MainchainAPI, gas)
-      .then(res => res)
-      .catch(err => err);
+    try {
+      const {
+        tokenContract: contract,
+        account: ownerAccount
+      } = await MainchainAPI.getClientHelper();
+
+      return await CommonAPI.sGetMyDragons(contract, ownerAccount, gas);
+    } catch (err) {
+      console.error(err);
+    }
   }
 
   static async transferDragon(dragonId, gas) {

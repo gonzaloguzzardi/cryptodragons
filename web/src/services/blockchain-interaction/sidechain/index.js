@@ -10,12 +10,14 @@ class SidechainAPI {
 
   static async getClientHelper() {
     while (!client && clientFetching) await sleep(1000);
+
     if (!client) {
       clientFetching = true;
       client = await clientFactory();
       clientFetching = false;
       console.log("SIDECHAIN CLIENT CREATED", client);
     }
+
     return client;
   };
 
@@ -26,9 +28,16 @@ class SidechainAPI {
   }
 
   static async getMyDragons(gas) {
-    return CommonAPI.sGetMyDragons(SidechainAPI, gas)
-      .then(res => res)
-      .catch(err => err);
+    try {
+      const {
+        tokenContract: contract,
+        account: ownerAccount
+      } = await SidechainAPI.getClientHelper();
+
+      return await CommonAPI.sGetMyDragons(contract, ownerAccount, gas);
+    } catch (err) {
+      console.error(err);
+    }
   }
 
   static async transferDragon(dragonId, gas) {

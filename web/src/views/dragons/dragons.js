@@ -37,11 +37,13 @@ class Dragons extends Component {
   }
 
   getDragonsFromMain = () => {
-    MainchainAPI.getMyDragons().then(mainDragons => this.setState({ mainDragons }));
+    const gas = 350000;
+    MainchainAPI.getMyDragons(gas).then(mainDragons => this.setState({ mainDragons }));
   };
 
   getDragonsFromSide = () => {
-    SidechainAPI.getMyDragons().then(sideDragons => this.setState({ sideDragons }));
+    const gas = 350000;
+    SidechainAPI.getMyDragons(gas).then(sideDragons => this.setState({ sideDragons }));
   };
 
   getDragonsFromOracle = () => {};

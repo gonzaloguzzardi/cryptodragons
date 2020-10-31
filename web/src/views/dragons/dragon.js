@@ -11,8 +11,10 @@ import Typography from '@material-ui/core/Typography';
 
 class Dragon extends Component {
 
-  constructor() {
-    state = {
+  constructor(props) {
+    super(props);
+
+    this.state = {
       location: props.location,
       name: "dragon",
       id: props.id,

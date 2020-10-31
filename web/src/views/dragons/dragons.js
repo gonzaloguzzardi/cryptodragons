@@ -15,8 +15,10 @@ const namespace = 'ui-view-dragons';
 
 class Dragons extends Component {
 
-  constructor() {
-    state = {
+  constructor(props) {
+    super(props);
+
+    this.state = {
       sideAccount: '0xfee39fad945754831b59b92a1a8339f65358792d',
       mainAccount: '0x28863498efede12296888f7ca6cf0b94974fbdbc',
 
@@ -28,9 +30,9 @@ class Dragons extends Component {
       accountsAreMapped: false
     };
 
+    this.getDragonsFromMain();
     this.getDragonsFromSide();
     this.getDragonsFromOracle();
-    this.getDragonsFromMain();
     this.accountsAreMapped();
   }
 
@@ -94,7 +96,7 @@ class Dragons extends Component {
       MainchainAPI.areAccountsMapped(this.state.sideAccount),
       SidechainAPI.areAccountsMapped(this.state.mainAccount)
     ]).then(values => {
-      console.log("VALUES", values);
+      console.log("MAPEO CUENTAS [SideInMain, MainInSide]", values);
       // this.setState({ accountsAreMapped: values[0] && values[1] })
     });
   } 

@@ -4,12 +4,16 @@ import sleep from '../../../utils/sleep';
 
 // client: { account, web3js, loomClient, netId, tokenContract, gatewayContract }
 let client;
+let clientFetching;
 
 class SidechainAPI {
 
   static async getClientHelper() {
+    while (!client && clientFetching) await sleep(1000);
     if (!client) {
+      clientFetching = true;
       client = await clientFactory();
+      clientFetching = false;
       console.log("SIDECHAIN CLIENT CREATED", client);
     }
     return client;

@@ -1,14 +1,19 @@
 import clientFactory from './client-factory';
 import CommonAPI from '../common';
+import sleep from '../../../utils/sleep';
 
 // client: { web3js, account, netId, tokenContract, gatewayContract }
 let client;
+let clientFetching;
 
 class MainchainAPI {
 
   static async getClientHelper() {
+    while (!client && clientFetching) await sleep(1000);
     if (!client) {
+      clientFetching = true;
       client = await clientFactory();
+      clientFetching = false;
       console.log("MAINCHAIN CLIENT CREATED", client);
       // client.web3js.eth.accounts.wallet.add(client.account);
     }

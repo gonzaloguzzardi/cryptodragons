@@ -65,7 +65,7 @@ class Dragons extends Component {
   transferFromSideToMain = dragonId => (
     SidechainAPI.transferDragon(dragonId, GAS_DEFAULT_VALUE).then(res => {
       console.log("[SIDECHAIN]: Transfer to Mainchain response", res);
-      sleep(500).then(() => {
+      sleep(20000).then(() => {
         this.getDragonsFromSide();
         this.getDragonsFromMain();
       });
@@ -75,7 +75,7 @@ class Dragons extends Component {
   transferFromMainToSide = dragonId => (
     MainchainAPI.transferDragon(dragonId, GAS_DEFAULT_VALUE).then(res => {
       console.log("[MAINCHAIN]: Transfer to Sidechain response", res);
-      sleep(500).then(() => {
+      sleep(5000).then(() => {
         this.getDragonsFromMain();
         this.getDragonsFromSide();
       });
@@ -83,20 +83,21 @@ class Dragons extends Component {
   );
 
   mapAccounts = () => {
-    SidechainAPI.mapAccountToMainchainAccount(this.state.mainAccount, GAS_DEFAULT_VALUE)
-      .then(res => console.log("[SIDECHAIN]: MAPEO EN SIDECHAIN", res))
-      .catch(err => console.error("[SIDECHAIN]: ERROR MAPEO SIDECHAIN", err));
-
-    MainchainAPI.mapAccountToSidechainAccount(this.state.sideAccount, GAS_DEFAULT_VALUE)
-      .then(res => console.log("[MAINCHAIN]: MAPEO EN MAINCHAIN", res))
-      .catch(err => console.error("[MAINCHAIN]: ERROR MAPEO MAINCHAIN", err));
+    Promise.all([
+      SidechainAPI.mapAccountToMainchainAccount(this.state.mainAccount, GAS_DEFAULT_VALUE),
+      MainchainAPI.mapAccountToSidechainAccount(this.state.sideAccount, GAS_DEFAULT_VALUE),
+    ]).then(values => {
+      console.log("[SIDECHAIN]: MAPEO EN SIDECHAIN", values[0]);
+      console.log("[MAINCHAIN]: MAPEO EN MAINCHAIN", values[1]);
+      this.accountsAreMapped();
+    });
   }
 
   accountsAreMapped = () => {
     console.log("Are accounts mapped?");
     Promise.all([
       MainchainAPI.areAccountsMapped(this.state.sideAccount, GAS_DEFAULT_VALUE),
-      SidechainAPI.areAccountsMapped(this.state.mainAccount, GAS_DEFAULT_VALUE)
+      SidechainAPI.areAccountsMapped(this.state.mainAccount, GAS_DEFAULT_VALUE),
     ]).then(values => {
       console.log("MAPEO CUENTAS [SideInMain, MainInSide]", values);
       this.setState({ accountsAreMapped: values[0] && values[1] })

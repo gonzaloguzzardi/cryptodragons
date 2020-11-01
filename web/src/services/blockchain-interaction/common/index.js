@@ -7,7 +7,7 @@ class CommonAPI {
       .estimateGas({ from: ownerAccount, gas });
 
     console.log(`[COMMON-API_CREATE-DRAGON]: Gas sent: ${gas}, Gas Estimate: ${gasEstimate}`);
-    if (gasEstimate >= gas) { throw new Error('Not enough enough gas, send more.'); }
+    if (gasEstimate >= gas) throw new Error('Not enough enough gas, send more.');
 
     const tx = await contract.methods
       .createDragon('test dragon', 1, 2, 2)
@@ -49,7 +49,7 @@ class CommonAPI {
       .estimateGas({ from: ownerAccount, gas });
 
     console.log(`[COMMON-API_ARE-ACCOUNTS-MAPPED]: Gas sent: ${gas}, Gas Estimate: ${gasEstimate}`);
-    if (gasEstimate >= gas) { throw new Error('Not enough enough gas, send more.'); }
+    if (gasEstimate >= gas) throw new Error('Not enough enough gas, send more.');
 
     return await contract.methods
       .isMap(otherChainAccount)

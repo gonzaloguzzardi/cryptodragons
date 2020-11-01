@@ -5,7 +5,7 @@ const oracleApiPort = 8081;
 
 const _getDragonsFromOracle = async () => (
   axios.get(`${oracleApiUrl}:${oracleApiPort}/api/dragons`)
-    .then(res => res)
+    .then(res => res.data)
 );
 
 export {

@@ -49,9 +49,16 @@ class MainchainAPI {
   }
 
   static async transferDragon(dragonId, gas) {
-    return CommonAPI.sTransferDragon(MainchainAPI, dragonId, gas)
-      .then(res => res)
-      .catch(err => err);
+    try {
+      const {
+        tokenContract: contract,
+        account: ownerAccount
+      } = await MainchainAPI.getClientHelper();
+
+      return await CommonAPI.sTransferDragon(contract, ownerAccount, dragonId, gas);
+    } catch (err) {
+      console.error(err);
+    }
   }
 
   static async mapAccountToSidechainAccount(sideAccount, gas) {

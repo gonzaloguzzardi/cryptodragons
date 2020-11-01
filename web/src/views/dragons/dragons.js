@@ -63,7 +63,7 @@ class Dragons extends Component {
   }
 
   transferFromSideToMain = dragonId => (
-    SidechainAPI.transferDragon(dragonId).then(res => {
+    SidechainAPI.transferDragon(dragonId, GAS_DEFAULT_VALUE).then(res => {
       console.log("[SIDECHAIN]: Transfer to Mainchain response", res);
       sleep(500).then(() => {
         this.getDragonsFromSide();
@@ -73,7 +73,7 @@ class Dragons extends Component {
   );
 
   transferFromMainToSide = dragonId => (
-    MainchainAPI.transferDragon(dragonId).then(res => {
+    MainchainAPI.transferDragon(dragonId, GAS_DEFAULT_VALUE).then(res => {
       console.log("[MAINCHAIN]: Transfer to Sidechain response", res);
       sleep(500).then(() => {
         this.getDragonsFromMain();

@@ -70,7 +70,7 @@ class SidechainAPI {
       console.log(`Map sidechain account: ${ownerAccount} with mainchain account: ${mainAccount}`);
 
       const gasEstimate = await contract.methods
-        mapContractToMainnet(mainAccount)
+        .mapContractToMainnet(mainAccount)
         .estimateGas({ from: ownerAccount, gas });
 
       if (gasEstimate >= gas) throw new Error('Not enough enough gas, send more.');

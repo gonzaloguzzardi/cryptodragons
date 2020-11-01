@@ -4,10 +4,10 @@ import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import Input  from '@material-ui/core/Input';
 import FormLabel  from '@material-ui/core/FormLabel';
-import sleep from '../../utils/sleep';
 
 import MainchainAPI from '../../services/blockchain-interaction/mainchain';
 import SidechainAPI from '../../services/blockchain-interaction/sidechain';
+import { _getDragonsFromOracle } from '../../services/oracle';
 
 import './dragons.scss';
 
@@ -32,11 +32,17 @@ class Dragons extends Component {
       accountsAreMapped: false
     };
 
+    this.updateDragons();
+    setInterval(this.updateDragons, 7000);
+
+    this.accountsAreMapped();
+  }
+
+  updateDragons = () => {
     this.getDragonsFromMain();
     this.getDragonsFromSide();
     this.getDragonsFromOracle();
-    this.accountsAreMapped();
-  }
+  };
 
   getDragonsFromMain = () => {
     MainchainAPI.getMyDragons(GAS_DEFAULT_VALUE).then(mainDragons => this.setState({ mainDragons }));
@@ -46,40 +52,37 @@ class Dragons extends Component {
     SidechainAPI.getMyDragons(GAS_DEFAULT_VALUE).then(sideDragons => this.setState({ sideDragons }));
   };
 
-  getDragonsFromOracle = () => {};
+  getDragonsFromOracle = () => {
+    _getDragonsFromOracle().then(result => {
+      this.setState({
+        sidechainGatewayDragons: result[0]['sidechain-gateway-results'],
+        mainchainGatewayDragons: result[1]['mainchain-gateway-results'],
+      })
+    })
+  };
 
   buyDragonInSideChain = () => {
     SidechainAPI.createDragon(GAS_DEFAULT_VALUE).then(res => {
       console.log("[SIDECHAIN]: Dragon create response", res);
-      this.getDragonsFromSide();
     });
   }
 
   buyDragonInMainChain = () => {
-    MainchainAPI.createDragon(GAS_DEFAULT_VALUE).then(res => {
-      console.log("[MAINCHAIN]: Dragon create response", res);
-      this.getDragonsFromMain();
-    });
+    MainchainAPI.createDragon(GAS_DEFAULT_VALUE).then(res =>
+      console.log("[MAINCHAIN]: Dragon create response", res)
+    );
   }
 
   transferFromSideToMain = dragonId => (
-    SidechainAPI.transferDragon(dragonId, GAS_DEFAULT_VALUE).then(res => {
-      console.log("[SIDECHAIN]: Transfer to Mainchain response", res);
-      sleep(20000).then(() => {
-        this.getDragonsFromSide();
-        this.getDragonsFromMain();
-      });
-    })
+    SidechainAPI.transferDragon(dragonId, GAS_DEFAULT_VALUE).then(res =>
+      console.log("[SIDECHAIN]: Transfer to Mainchain response", res)
+    )
   );
 
   transferFromMainToSide = dragonId => (
-    MainchainAPI.transferDragon(dragonId, GAS_DEFAULT_VALUE).then(res => {
-      console.log("[MAINCHAIN]: Transfer to Sidechain response", res);
-      sleep(5000).then(() => {
-        this.getDragonsFromMain();
-        this.getDragonsFromSide();
-      });
-    })
+    MainchainAPI.transferDragon(dragonId, GAS_DEFAULT_VALUE).then(res =>
+      console.log("[MAINCHAIN]: Transfer to Sidechain response", res)
+    )
   );
 
   mapAccounts = () => {
@@ -192,9 +195,9 @@ class Dragons extends Component {
                 {this.state.mainDragons ? this.state.mainDragons.map(value => (
                   <Grid key={value} item>
                     <Dragon
-                        location="main"
-                        id={value}
-                        transferMethod={this.transferFromMainToSide}
+                      location="main"
+                      id={value}
+                      transferMethod={this.transferFromMainToSide}
                     />
                   </Grid>
                 )) : null }

@@ -61,24 +61,26 @@ class SidechainAPI {
   }
 
   static async mapAccountToMainchainAccount(mainAccount, gas) {
-    return SidechainAPI.getClientHelper().then(client => {
-      const contract = client.tokenContract;
-      const ownerAccount = client.account;
+    try {
+      const {
+        tokenContract: contract,
+        account: ownerAccount
+      } = await SidechainAPI.getClientHelper();
 
       console.log(`Map sidechain account: ${ownerAccount} with mainchain account: ${mainAccount}`);
-      // const gasEstimate = await contract.methods
-      //   mapContractToMainnet(mainAccount)
-      //   .estimateGas({ from: ownerAccount, gas });
 
-      // if (gasEstimate >= gas) { throw new Error('Not enough enough gas, send more.'); }
-      const gasEstimate = gas || 350000;
+      const gasEstimate = await contract.methods
+        mapContractToMainnet(mainAccount)
+        .estimateGas({ from: ownerAccount, gas });
 
-      return contract.methods
+      if (gasEstimate >= gas) throw new Error('Not enough enough gas, send more.');
+
+      return await contract.methods
         .mapContractToMainnet(mainAccount)
         .send({ from: ownerAccount, gas: gasEstimate })
-        .then(res => res)
-        .catch(err => console.error(err));
-    }).catch(err => console.error(err));
+    } catch (err) {
+      console.error(err);
+    }
   }
 
   static async areAccountsMapped(mainAccount, gas) {

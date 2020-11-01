@@ -83,11 +83,11 @@ class Dragons extends Component {
   );
 
   mapAccounts = () => {
-    SidechainAPI.mapAccountToMainchainAccount(this.state.mainAccount)
+    SidechainAPI.mapAccountToMainchainAccount(this.state.mainAccount, GAS_DEFAULT_VALUE)
       .then(res => console.log("[SIDECHAIN]: MAPEO EN SIDECHAIN", res))
       .catch(err => console.error("[SIDECHAIN]: ERROR MAPEO SIDECHAIN", err));
 
-    MainchainAPI.mapAccountToSidechainAccount(this.state.sideAccount)
+    MainchainAPI.mapAccountToSidechainAccount(this.state.sideAccount, GAS_DEFAULT_VALUE)
       .then(res => console.log("[MAINCHAIN]: MAPEO EN MAINCHAIN", res))
       .catch(err => console.error("[MAINCHAIN]: ERROR MAPEO MAINCHAIN", err));
   }

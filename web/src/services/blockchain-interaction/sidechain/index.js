@@ -77,7 +77,7 @@ class SidechainAPI {
 
       return await contract.methods
         .mapContractToMainnet(mainAccount)
-        .send({ from: ownerAccount, gas: gasEstimate })
+        .send({ from: ownerAccount, gas: gasEstimate });
     } catch (err) {
       console.error(err);
     }

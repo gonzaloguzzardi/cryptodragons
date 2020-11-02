@@ -7,7 +7,11 @@ import CardMedia from '@material-ui/core/CardMedia';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-// import { _getDragon } from '../../services/dragons'
+
+import MainchainAPI from '../../services/blockchain-interaction/mainchain';
+import SidechainAPI from '../../services/blockchain-interaction/sidechain';
+
+const GAS_DEFAULT_VALUE = 350000;
 
 class Dragon extends Component {
 
@@ -22,27 +26,16 @@ class Dragon extends Component {
       fetching: false,
     };
 
-    this.getDragon();
+    this.getDragonData();
   }
 
-  getDragon = () => {
-    // _getDragon(this.state.id, this.state.location)
-    //   .then(res => { 
-    //     this.setState(
-    //     { 
-    //       data: res.data,
-    //       health: res.data.health,
-    //       agility: res.data.agility,
-    //       strength: res.data.strength,
-    //       fortitude: res.data.fortitude,
-    //       name: res.data.name,
-    //       dadId: res.data.dadId,
-    //       motherId: res.data.motherId,
-    //       currentExperience: res.data.currentExperience,
-    //       sname:  res.data.sname
-    //     });
-    //     console.log(res.data);
-    //   });
+  getDragonData = () => {
+    if (this.state.location === "side") {
+      SidechainAPI.getDragonDataById(this.state.id, GAS_DEFAULT_VALUE).then(dragonData => this.setState(dragonData));
+    }
+    if (this.state.location === "main") {
+      MainchainAPI.getDragonDataById(this.state.id, GAS_DEFAULT_VALUE).then(dragonData => this.setState(dragonData));
+    }
   }
 
   transfer = () => {

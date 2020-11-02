@@ -214,7 +214,10 @@ class Dragons extends Component {
           <Grid container justify="center" spacing={2}>
             {this.state.sidechainGatewayDragons ? this.state.sidechainGatewayDragons.map(value => (
               <Grid key={value} item>
-                <Dragon id={value["uid"]} />
+                <Dragon
+                  location="side"
+                  id={value["uid"]}
+                />
               </Grid>
             )) : null }
           </Grid>
@@ -224,7 +227,11 @@ class Dragons extends Component {
           <Grid container justify="center" spacing={2}>
             {this.state.mainchainGatewayDragons ? this.state.mainchainGatewayDragons.map(value => (
               <Grid key={value} item>
-                <Dragon id={value["uid"]} location="oracle" />
+                <Dragon
+                  location="main"
+                  id={value["uid"]}
+                  location="oracle"
+                />
               </Grid>
             )) : null }
           </Grid>

@@ -96,6 +96,19 @@ class SidechainAPI {
     }
   }
 
+  static async getDragonDataById(dragonId, gas) {
+    try {
+      const {
+        tokenContract: contract,
+        account: ownerAccount
+      } = await SidechainAPI.getClientHelper();
+
+      return await CommonAPI.getDragonDataById(dragonId, contract, ownerAccount, gas);
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
 };
 
 export default SidechainAPI;

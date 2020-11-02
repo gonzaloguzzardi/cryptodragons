@@ -97,6 +97,19 @@ class MainchainAPI {
     }
   }
 
+  static async getDragonDataById(dragonId, gas) {
+    try {
+      const {
+        tokenContract: contract,
+        account: ownerAccount
+      } = await MainchainAPI.getClientHelper();
+
+      return await CommonAPI.getDragonDataById(dragonId, contract, ownerAccount, gas);
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
 };
 
 export default MainchainAPI;

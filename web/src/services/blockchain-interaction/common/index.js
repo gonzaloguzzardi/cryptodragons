@@ -56,6 +56,19 @@ class CommonAPI {
       .call({ from: ownerAccount, gas: gasEstimate });
   }
 
+  static async getDragonDataById(dragonId, contract, ownerAccount, gas) {
+    const gasEstimate = await contract.methods
+      .getDragonById(dragonId)
+      .estimateGas({ from: ownerAccount, gas });
+    
+    console.log(`[COMMON-API_GET-DRAGON-DATA]: Gas sent: ${gas}, Gas Estimate: ${gasEstimate}`);
+    if (gasEstimate >= gas) throw new Error('Not enough enough gas, send more.');
+
+    return await contract.methods
+      .getDragonById(dragonId)
+      .call({ from: ownerAccount, gas: gasEstimate });
+  }
+
 };
 
 export default CommonAPI;

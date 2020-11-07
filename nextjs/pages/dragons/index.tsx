@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
+import Head from 'next/head'
 import Link from 'next/link'
+
+import Layout from '../../components/layout'
+
 // import Dragon from './dragon.js';
 // import Grid from '@material-ui/core/Grid';
 // import Button from '@material-ui/core/Button';
@@ -113,12 +117,7 @@ class Dragons extends Component {
   // onChangeSideAccount = event => this.setState({ sideAccount: event.target.value });
 
   render = () => (
-    <div className={`${namespace}__container-div`}>
-      <p>HOLA MOCCAAAA</p>
-        <Link href="/">
-          <a>Back to home</a>
-        </Link>
-
+    <Layout>
       {/*
       <Grid container justify="center" spacing={2}>
         <Grid item>
@@ -243,7 +242,7 @@ class Dragons extends Component {
         </Grid>
       </Grid> */}
 
-    </div>
+    </Layout>
   );
 }
 

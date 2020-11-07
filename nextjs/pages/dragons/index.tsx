@@ -3,18 +3,18 @@ import Head from 'next/head'
 import Link from 'next/link'
 
 import Layout from '../../components/layout'
+import Dragon from '../../components/dragon';
 
-// import Dragon from './dragon.js';
-// import Grid from '@material-ui/core/Grid';
-// import Button from '@material-ui/core/Button';
-// import Input  from '@material-ui/core/Input';
-// import FormLabel  from '@material-ui/core/FormLabel';
+import Grid from '@material-ui/core/Grid';
+import Button from '@material-ui/core/Button';
+import Input  from '@material-ui/core/Input';
+import FormLabel  from '@material-ui/core/FormLabel';
 
 // import MainchainAPI from '../../services/blockchain-interaction/mainchain';
 // import SidechainAPI from '../../services/blockchain-interaction/sidechain';
 // import { _getDragonsFromOracle } from '../../services/oracle';
 
-// import './dragons.scss';
+import viewStyles from './view.module.scss';
 
 const namespace = 'ui-view-dragons';
 

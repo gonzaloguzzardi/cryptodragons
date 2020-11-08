@@ -1,12 +1,11 @@
-import Layout from '../components/layout';
-import utilStyles from '../styles/utils.module.scss';
-import Button from '@material-ui/core/Button';
+import Layout from '../components/layout'
+import utilStyles from '../styles/utils.module.scss'
+import Button from '@material-ui/core/Button'
 
-import viewStyles from './index.module.scss';
+import viewStyles from './index.module.scss'
+import { ReactElement } from 'react'
 
-const namespace = 'ui-view-landing';
-
-export default function Home() {
+export default function Home(): ReactElement {
   return (
     <Layout>
       <section className={utilStyles.headingMd}>

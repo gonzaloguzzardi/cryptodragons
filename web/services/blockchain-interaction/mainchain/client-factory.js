@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import Web3 from 'web3';
 const bfaAddress = !process.env.DOCKERENV ? 'http://127.0.0.1:8545' : 'http://bfa:8545';
 const web3js = new Web3(new Web3.providers.HttpProvider(bfaAddress));
@@ -31,4 +32,4 @@ export default async function clientFactory() {
     })
   ).catch(err => console.error(err));
 
-};
+}

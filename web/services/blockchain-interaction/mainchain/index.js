@@ -20,7 +20,7 @@ class MainchainAPI {
     }
 
     return client;
-  };
+  }
 
   static async createDragon(gas) {
     try {
@@ -110,6 +110,6 @@ class MainchainAPI {
     }
   }
 
-};
+}
 
 export default MainchainAPI;

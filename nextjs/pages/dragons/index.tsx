@@ -1,41 +1,39 @@
-import React, { Component } from 'react';
-import Head from 'next/head'
-import Link from 'next/link'
+/* eslint-disable @typescript-eslint/ban-types */
+import React, { Component, ReactNode } from 'react'
 
 import Layout from '../../components/layout'
-import Dragon from '../../components/dragon';
+import Dragon from '../../components/dragon'
 
-import Grid from '@material-ui/core/Grid';
-import Button from '@material-ui/core/Button';
-import Input  from '@material-ui/core/Input';
-import FormLabel  from '@material-ui/core/FormLabel';
+import Grid from '@material-ui/core/Grid'
+import Button from '@material-ui/core/Button'
+import Input from '@material-ui/core/Input'
+import FormLabel from '@material-ui/core/FormLabel'
 
-import MainchainAPI from '../../services/blockchain-interaction/mainchain';
-import SidechainAPI from '../../services/blockchain-interaction/sidechain';
-import { _getDragonsFromOracle } from '../../services/oracle';
+import MainchainAPI from '../../services/blockchain-interaction/mainchain'
+import SidechainAPI from '../../services/blockchain-interaction/sidechain'
+import { _getDragonsFromOracle } from '../../services/oracle'
 
-import viewStyles from './view.module.scss';
+import viewStyles from './view.module.scss'
 
-const namespace = 'ui-view-dragons';
+const GAS_DEFAULT_VALUE = 350000
 
-const GAS_DEFAULT_VALUE = 350000;
-
-interface IProps {}
+interface IProps {
+  any
+}
 
 interface IState {
-  sideAccount: string,
-  mainAccount: string,
-  sideDragons: Array<string>,
-  mainDragons: Array<string>,
-  sidechainGatewayDragons: Array<Object>,
-  mainchainGatewayDragons: Array<Object>,
-  accountsAreMapped: boolean,
+  sideAccount: string
+  mainAccount: string
+  sideDragons: Array<string>
+  mainDragons: Array<string>
+  sidechainGatewayDragons: Array<Object>
+  mainchainGatewayDragons: Array<Object>
+  accountsAreMapped: boolean
 }
 
 class Dragons extends Component<IProps, IState> {
-
-  constructor(props) {
-    super(props);
+  constructor(props: IProps) {
+    super(props)
 
     this.state = {
       sideAccount: '0xfee39fad945754831b59b92a1a8339f65358792d',
@@ -46,91 +44,96 @@ class Dragons extends Component<IProps, IState> {
       sidechainGatewayDragons: [],
       mainchainGatewayDragons: [],
 
-      accountsAreMapped: false
-    };
+      accountsAreMapped: false,
+    }
   }
 
-  componentDidMount() {
-    this.updateDragons();
-    setInterval(this.updateDragons, 7000);
+  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+  componentDidMount: () => unknown = () => {
+    this.updateDragons()
+    setInterval(this.updateDragons, 7000)
 
-    this.accountsAreMapped();
+    this.accountsAreMapped()
   }
 
-  updateDragons = () => {
-    this.getDragonsFromMain();
-    this.getDragonsFromSide();
-    this.getDragonsFromOracle();
-  };
+  updateDragons: () => unknown = () => {
+    this.getDragonsFromMain()
+    this.getDragonsFromSide()
+    this.getDragonsFromOracle()
+  }
 
-  getDragonsFromMain = () => {
-    MainchainAPI.getMyDragons(GAS_DEFAULT_VALUE).then(mainDragons => this.setState({ mainDragons }));
-  };
+  getDragonsFromMain: () => unknown = () => {
+    MainchainAPI.getMyDragons(GAS_DEFAULT_VALUE).then((mainDragons) =>
+      this.setState({ mainDragons })
+    )
+  }
 
-  getDragonsFromSide = () => {
-    SidechainAPI.getMyDragons(GAS_DEFAULT_VALUE).then(sideDragons => this.setState({ sideDragons }));
-  };
+  getDragonsFromSide: () => unknown = () => {
+    SidechainAPI.getMyDragons(GAS_DEFAULT_VALUE).then((sideDragons) =>
+      this.setState({ sideDragons })
+    )
+  }
 
-  getDragonsFromOracle = () => {
-    _getDragonsFromOracle().then(result => {
+  getDragonsFromOracle: () => unknown = () => {
+    _getDragonsFromOracle().then((result) => {
       this.setState({
         sidechainGatewayDragons: result[0]['sidechain-gateway-results'],
         mainchainGatewayDragons: result[1]['mainchain-gateway-results'],
       })
     })
-  };
-
-  buyDragonInSideChain = () => {
-    SidechainAPI.createDragon(GAS_DEFAULT_VALUE).then(res => {
-      console.log("[SIDECHAIN]: Dragon create response", res);
-    });
   }
 
-  buyDragonInMainChain = () => {
-    MainchainAPI.createDragon(GAS_DEFAULT_VALUE).then(res =>
-      console.log("[MAINCHAIN]: Dragon create response", res)
-    );
+  buyDragonInSideChain: () => unknown = () => {
+    SidechainAPI.createDragon(GAS_DEFAULT_VALUE).then((res) => {
+      console.log('[SIDECHAIN]: Dragon create response', res)
+    })
   }
 
-  transferFromSideToMain = dragonId => (
-    SidechainAPI.transferDragon(dragonId, GAS_DEFAULT_VALUE).then(res =>
-      console.log("[SIDECHAIN]: Transfer to Mainchain response", res)
+  buyDragonInMainChain: () => unknown = () => {
+    MainchainAPI.createDragon(GAS_DEFAULT_VALUE).then((res) =>
+      console.log('[MAINCHAIN]: Dragon create response', res)
     )
-  );
+  }
 
-  transferFromMainToSide = dragonId => (
-    MainchainAPI.transferDragon(dragonId, GAS_DEFAULT_VALUE).then(res =>
-      console.log("[MAINCHAIN]: Transfer to Sidechain response", res)
+  transferFromSideToMain: (id: string) => Promise<unknown> = (dragonId) =>
+    SidechainAPI.transferDragon(dragonId, GAS_DEFAULT_VALUE).then((res) =>
+      console.log('[SIDECHAIN]: Transfer to Mainchain response', res)
     )
-  );
 
-  mapAccounts = () => {
+  transferFromMainToSide: (id: string) => Promise<unknown> = (dragonId) =>
+    MainchainAPI.transferDragon(dragonId, GAS_DEFAULT_VALUE).then((res) =>
+      console.log('[MAINCHAIN]: Transfer to Sidechain response', res)
+    )
+
+  mapAccounts: () => unknown = () => {
     Promise.all([
       SidechainAPI.mapAccountToMainchainAccount(this.state.mainAccount, GAS_DEFAULT_VALUE),
       MainchainAPI.mapAccountToSidechainAccount(this.state.sideAccount, GAS_DEFAULT_VALUE),
-    ]).then(values => {
-      console.log("[SIDECHAIN]: MAPEO EN SIDECHAIN", values[0]);
-      console.log("[MAINCHAIN]: MAPEO EN MAINCHAIN", values[1]);
-      this.accountsAreMapped();
-    });
+    ]).then((values) => {
+      console.log('[SIDECHAIN]: MAPEO EN SIDECHAIN', values[0])
+      console.log('[MAINCHAIN]: MAPEO EN MAINCHAIN', values[1])
+      this.accountsAreMapped()
+    })
   }
 
-  accountsAreMapped = () => {
-    console.log("Are accounts mapped?");
+  accountsAreMapped: () => unknown = () => {
+    console.log('Are accounts mapped?')
     Promise.all([
       MainchainAPI.areAccountsMapped(this.state.sideAccount, GAS_DEFAULT_VALUE),
       SidechainAPI.areAccountsMapped(this.state.mainAccount, GAS_DEFAULT_VALUE),
-    ]).then(values => {
-      console.log("MAPEO CUENTAS [SideInMain, MainInSide]", values);
+    ]).then((values) => {
+      console.log('MAPEO CUENTAS [SideInMain, MainInSide]', values)
       this.setState({ accountsAreMapped: values[0] && values[1] })
-    });
-  } 
+    })
+  }
 
-  onChangeMainAccount = event => this.setState({ mainAccount: event.target.value });
+  onChangeMainAccount: (event) => unknown = (event) =>
+    this.setState({ mainAccount: event.target.value })
 
-  onChangeSideAccount = event => this.setState({ sideAccount: event.target.value });
+  onChangeSideAccount: (event) => unknown = (event) =>
+    this.setState({ sideAccount: event.target.value })
 
-  render = () => (
+  render: () => ReactNode = () => (
     <Layout>
       <Grid container justify="center" spacing={2}>
         <Grid item>
@@ -145,16 +148,17 @@ class Dragons extends Component<IProps, IState> {
             />
           </FormLabel>
         </Grid>
-          <Grid item>
-            {this.state.accountsAreMapped ? (
-              <Button variant="contained" disabled>
-                Accounts Mapped! 😁 🎉
-              </Button>
-              ) : (
-              <Button variant="contained" color="primary" onClick={this.mapAccounts}>
-                Map Accounts
-              </Button>
-            )}
+        <Grid item>
+          {this.state.accountsAreMapped ? (
+            // eslint-disable-next-line jsx-a11y/accessible-emoji
+            <Button variant="contained" disabled>
+              Accounts Mapped! 😁 🎉
+            </Button>
+          ) : (
+            <Button variant="contained" color="primary" onClick={this.mapAccounts}>
+              Map Accounts
+            </Button>
+          )}
         </Grid>
         <Grid item>
           <FormLabel>
@@ -191,15 +195,17 @@ class Dragons extends Component<IProps, IState> {
           <Grid container spacing={2}>
             <Grid item>
               <Grid container spacing={2}>
-                {this.state.sideDragons ? this.state.sideDragons.map(value => (
-                  <Grid key={value} item>
-                    <Dragon
-                      location="side"
-                      id={value}
-                      transferMethod={this.transferFromSideToMain}
-                    />
-                  </Grid>
-                )) : null }
+                {this.state.sideDragons
+                  ? this.state.sideDragons.map((value) => (
+                      <Grid key={value} item>
+                        <Dragon
+                          location="side"
+                          id={value}
+                          transferMethod={this.transferFromSideToMain}
+                        />
+                      </Grid>
+                    ))
+                  : null}
               </Grid>
             </Grid>
           </Grid>
@@ -209,15 +215,17 @@ class Dragons extends Component<IProps, IState> {
           <Grid container spacing={2}>
             <Grid item>
               <Grid container spacing={2}>
-                {this.state.mainDragons ? this.state.mainDragons.map(value => (
-                  <Grid key={value} item>
-                    <Dragon
-                      location="main"
-                      id={value}
-                      transferMethod={this.transferFromMainToSide}
-                    />
-                  </Grid>
-                )) : null }
+                {this.state.mainDragons
+                  ? this.state.mainDragons.map((value) => (
+                      <Grid key={value} item>
+                        <Dragon
+                          location="main"
+                          id={value}
+                          transferMethod={this.transferFromMainToSide}
+                        />
+                      </Grid>
+                    ))
+                  : null}
               </Grid>
             </Grid>
           </Grid>
@@ -229,35 +237,30 @@ class Dragons extends Component<IProps, IState> {
         <Grid item xs={6} className={viewStyles.containerGridDragonsItems}>
           <h3 className={viewStyles.oracleHeading}>Sidechain Gateway Dragons</h3>
           <Grid container justify="center" spacing={2}>
-            {this.state.sidechainGatewayDragons ? this.state.sidechainGatewayDragons.map(value => (
-              <Grid key={value["uid"]} item>
-                <Dragon
-                  location="side"
-                  id={value["uid"]}
-                  transferMethod={null}
-                />
-              </Grid>
-            )) : null }
+            {this.state.sidechainGatewayDragons
+              ? this.state.sidechainGatewayDragons.map((value) => (
+                  <Grid key={value['uid']} item>
+                    <Dragon location="side" id={value['uid']} transferMethod={null} />
+                  </Grid>
+                ))
+              : null}
           </Grid>
         </Grid>
         <Grid item xs={6} className={viewStyles.containerGridDragonsItems}>
           <h3 className={viewStyles.oracleHeading}>Mainchain Gateway Dragons</h3>
           <Grid container justify="center" spacing={2}>
-            {this.state.mainchainGatewayDragons ? this.state.mainchainGatewayDragons.map(value => (
-              <Grid key={value["uid"]} item>
-                <Dragon
-                  location="oracle"
-                  id={value["uid"]}
-                  transferMethod={null}
-                />
-              </Grid>
-            )) : null }
+            {this.state.mainchainGatewayDragons
+              ? this.state.mainchainGatewayDragons.map((value) => (
+                  <Grid key={value['uid']} item>
+                    <Dragon location="oracle" id={value['uid']} transferMethod={null} />
+                  </Grid>
+                ))
+              : null}
           </Grid>
         </Grid>
       </Grid>
-
     </Layout>
-  );
+  )
 }
 
-export default Dragons;
+export default Dragons

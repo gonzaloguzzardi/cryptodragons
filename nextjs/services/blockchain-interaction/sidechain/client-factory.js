@@ -35,8 +35,6 @@ async function loadLoomAccount() {
 }
 
 export default async function clientFactory() {
-  if (!window.ethereum) return null;
-
   return loadLoomAccount()
     .then(({ account, web3js, client }) => (
       Promise.all([

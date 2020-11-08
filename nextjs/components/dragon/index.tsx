@@ -11,6 +11,8 @@ import Typography from '@material-ui/core/Typography';
 import MainchainAPI from '../../services/blockchain-interaction/mainchain';
 import SidechainAPI from '../../services/blockchain-interaction/sidechain';
 
+import dragonStyles from './dragon.module.scss';
+
 const GAS_DEFAULT_VALUE = 350000;
 
 interface IProps {
@@ -68,7 +70,7 @@ class Dragon extends Component<IProps, IState> {
 
   render() {
     return (
-      <Card>
+      <Card className={dragonStyles.container}>
         <CardContent>
           <Typography color="textSecondary" align="center" gutterBottom>
             #{this.state.id} {this.state.name}

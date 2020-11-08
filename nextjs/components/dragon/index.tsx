@@ -13,7 +13,23 @@ import SidechainAPI from '../../services/blockchain-interaction/sidechain';
 
 const GAS_DEFAULT_VALUE = 350000;
 
-class Dragon extends Component {
+interface IProps {
+  transferMethod: (id: string) => Promise<any>,
+}
+
+interface IState {
+  location: string,
+  name: string,
+  id: string,
+  pic: string,
+  fetching: boolean,
+  health: string,
+  agility: string,
+  strength: string,
+  fortitude: string,
+}
+
+class Dragon extends Component<IProps, IState> {
 
   constructor(props) {
     super(props);
@@ -24,6 +40,10 @@ class Dragon extends Component {
       id: props.id,
       pic: "onepic",
       fetching: false,
+      health: '',
+      agility: '',
+      strength: '',
+      fortitude: '',
     };
 
     this.getDragonData();
@@ -49,7 +69,7 @@ class Dragon extends Component {
       <Card>
         <CardContent>
           <Typography color="textSecondary" align="center" gutterBottom>
-            #{this.state.id} {this.state.sname}
+            #{this.state.id} {this.state.name}
           </Typography>
           <CardMedia>
             <img src={require('../../assets/dragonsito.jpg')} alt="" width="100" height="100"/>

@@ -14,6 +14,8 @@ import SidechainAPI from '../../services/blockchain-interaction/sidechain';
 const GAS_DEFAULT_VALUE = 350000;
 
 interface IProps {
+  location: string,
+  id: string,
   transferMethod: (id: string) => Promise<any>,
 }
 
@@ -72,23 +74,23 @@ class Dragon extends Component<IProps, IState> {
             #{this.state.id} {this.state.name}
           </Typography>
           <CardMedia>
-            <img src={require('../../assets/dragonsito.jpg')} alt="" width="100" height="100"/>
+            <img src={'/assets/dragonsito.jpg'} alt="" width="100" height="100"/>
           </CardMedia>
           <Grid container justify="center" spacing={2}>
             <Grid item>
-              <img src={require('../../assets/corazon.svg')} alt="" width="20" height="20"/>
+              <img src={'/assets/corazon.svg'} alt="" width="20" height="20"/>
               <p>{this.state.health}</p>
             </Grid>
             <Grid item>
-              <img src={require('../../assets/reloj.svg')} alt="" width="20" height="20"/>
+              <img src={'/assets/reloj.svg'} alt="" width="20" height="20"/>
               <p>{this.state.agility}</p>
             </Grid>
             <Grid item>
-              <img src={require('../../assets/espada.svg')} alt="" width="20" height="20"/>
+              <img src={'/assets/espada.svg'} alt="" width="20" height="20"/>
               <p>{this.state.strength}</p>
             </Grid>
             <Grid item>
-              <img src={require('../../assets/escudo.svg')} alt="" width="20" height="20"/>
+              <img src={'/assets/escudo.svg'} alt="" width="20" height="20"/>
               <p>{this.state.fortitude}</p>
             </Grid>
           </Grid>

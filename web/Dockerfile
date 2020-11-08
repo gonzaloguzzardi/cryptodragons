@@ -15,7 +15,6 @@ RUN if test -d node_modules; then rm -r node_modules; fi
 # Run the command inside your image filesystem
 RUN apt-get update
 RUN npm install --silent
-RUN npm install react-scripts@3.4.0 -g --silent
 
 # Inform Docker that the container is listening on the specified port at runtime.
 EXPOSE 3000

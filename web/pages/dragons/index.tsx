@@ -13,7 +13,7 @@ import MainchainAPI from '../../services/blockchain-interaction/mainchain'
 import SidechainAPI from '../../services/blockchain-interaction/sidechain'
 import { _getDragonsFromOracle } from '../../services/oracle'
 
-import viewStyles from './index.module.scss'
+import viewStyles from '../../styles/dragons/dragons.module.scss'
 
 const GAS_DEFAULT_VALUE = 350000
 

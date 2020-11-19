@@ -6,7 +6,22 @@ services:
       - "46656:46656"
       - "46658:46658"
 
-  sidechain-deploy-and-cli:
+  contract-getter:
+    environment:
+      DOCKERENV: 1
+    build:
+      context: ./truffle-project
+      dockerfile: DockerfileContractGetterSetup
+    ports:
+      - "8082:8082"
+    depends_on:
+      - loom
+      - bfa
+    volumes:
+      - ./truffle-project:/usr/src/app/contractGetter
+      - /usr/src/app/contractGetter/node_modules
+
+  sidechain-deploy:
     environment:
       DOCKERENV: 1
     build:
@@ -30,7 +45,7 @@ services:
       - "8547:8547"
       - "30303:30303"
 
-  mainchain-deploy-and-cli:
+  mainchain-deploy:
     environment:
       DOCKERENV: 1
     build:
@@ -52,8 +67,8 @@ services:
     build:
       context: ./mongo
     ports:
-      - 27017 # process
-      - 28017 # http
+      - "27017:27017" # process
+      - "28017:28017" # http
 
   oracle:
     environment:
@@ -65,8 +80,8 @@ services:
       - 8002
       - "8081:8081"
     depends_on:
-      - sidechain-deploy-and-cli
-      - mainchain-deploy-and-cli
+      - sidechain-deploy
+      - mainchain-deploy
       - mongo
     volumes:
       - ./oracle:/usr/src/app/oracle

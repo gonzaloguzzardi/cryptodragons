@@ -13,8 +13,6 @@ import MainchainAPI from '../../services/blockchain-interaction/mainchain'
 import SidechainAPI from '../../services/blockchain-interaction/sidechain'
 import { _getDragonsFromOracle } from '../../services/oracle'
 
-import viewStyles from '../../styles/dragons/dragons.module.scss'
-
 const GAS_DEFAULT_VALUE = 350000
 
 interface IProps {
@@ -142,7 +140,7 @@ class Dragons extends Component<IProps, IState> {
             <Input
               type="text"
               name="sideAccount"
-              className={viewStyles.mapAcountsInput}
+              className="mapAcountsInput"
               defaultValue={this.state.sideAccount}
               onChange={this.onChangeSideAccount}
             />
@@ -166,7 +164,7 @@ class Dragons extends Component<IProps, IState> {
             <Input
               type="text"
               name="mainAccount"
-              className={viewStyles.mapAcountsInput}
+              className="mapAcountsInput"
               defaultValue={this.state.mainAccount}
               onChange={this.onChangeMainAccount}
             />
@@ -190,8 +188,8 @@ class Dragons extends Component<IProps, IState> {
 
       {/* Sidechain dragons - Mainchain dragons */}
       <Grid container justify="center" spacing={2}>
-        <Grid item xs={6} className={viewStyles.containerGridDragonsItems}>
-          <h3 className={viewStyles.chainsHeadings}>Side Chain Dragons</h3>
+        <Grid item xs={6} className="containerGridDragonsItems">
+          <h3 className="chainsHeadings">Side Chain Dragons</h3>
           <Grid container spacing={2}>
             <Grid item>
               <Grid container spacing={2}>
@@ -210,8 +208,8 @@ class Dragons extends Component<IProps, IState> {
             </Grid>
           </Grid>
         </Grid>
-        <Grid item xs={6} className={viewStyles.containerGridDragonsItems}>
-          <h3 className={viewStyles.chainsHeadings}>Main Chain Dragons</h3>
+        <Grid item xs={6} className="containerGridDragonsItems">
+          <h3 className="chainsHeadings">Main Chain Dragons</h3>
           <Grid container spacing={2}>
             <Grid item>
               <Grid container spacing={2}>
@@ -234,8 +232,8 @@ class Dragons extends Component<IProps, IState> {
 
       {/* Oracle dragons */}
       <Grid container spacing={2}>
-        <Grid item xs={6} className={viewStyles.containerGridDragonsItems}>
-          <h3 className={viewStyles.oracleHeading}>Sidechain Gateway Dragons</h3>
+        <Grid item xs={6} className="containerGridDragonsItems">
+          <h3 className="oracleHeading">Sidechain Gateway Dragons</h3>
           <Grid container justify="center" spacing={2}>
             {this.state.sidechainGatewayDragons
               ? this.state.sidechainGatewayDragons.map((value) => (
@@ -246,8 +244,8 @@ class Dragons extends Component<IProps, IState> {
               : null}
           </Grid>
         </Grid>
-        <Grid item xs={6} className={viewStyles.containerGridDragonsItems}>
-          <h3 className={viewStyles.oracleHeading}>Mainchain Gateway Dragons</h3>
+        <Grid item xs={6} className="containerGridDragonsItems">
+          <h3 className="oracleHeading">Mainchain Gateway Dragons</h3>
           <Grid container justify="center" spacing={2}>
             {this.state.mainchainGatewayDragons
               ? this.state.mainchainGatewayDragons.map((value) => (
@@ -259,6 +257,29 @@ class Dragons extends Component<IProps, IState> {
           </Grid>
         </Grid>
       </Grid>
+
+      <style global jsx>{`
+        .container {
+          margin-top: 20px;
+        }
+
+        .mapAcountsInput {
+          width: 360px;
+        }
+
+        .chainsHeadings {
+          text-align: center;
+        }
+
+        .oracleHeading {
+          text-align: center;
+          padding-top: 50px;
+        }
+
+        .containerGridDragonsItems {
+          min-height: 300px;
+        }
+      `}</style>
     </Layout>
   )
 }

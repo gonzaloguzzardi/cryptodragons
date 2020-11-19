@@ -1,8 +1,9 @@
 import type { AppProps /*, AppContext */ } from 'next/app'
+import { ReactElement } from 'react'
 
 import '../styles/globals.scss'
 
-function MyApp({ Component, pageProps }: AppProps) {
+function MyApp({ Component, pageProps }: AppProps): ReactElement {
   return <Component {...pageProps} />
 }
 
@@ -18,4 +19,4 @@ function MyApp({ Component, pageProps }: AppProps) {
 //   return { ...appProps }
 // }
 
-export default MyApp;
+export default MyApp

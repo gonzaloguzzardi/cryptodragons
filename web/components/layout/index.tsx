@@ -1,8 +1,8 @@
-import Head from 'next/head';
+import Head from 'next/head'
 
-import styles from './layout.module.scss';
+import styles from './layout.module.scss'
 
-export const siteTitle = 'CryptoDragons';
+export const siteTitle = 'CryptoDragons'
 
 export default function Layout({ children }) {
   return (
@@ -15,7 +15,6 @@ export default function Layout({ children }) {
       </Head>
 
       <main>{children}</main>
-
     </div>
   )
 }

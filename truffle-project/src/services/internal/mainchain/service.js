@@ -6,6 +6,7 @@ const {
 	_sTransferDragonToGateway,
 	_sReceiveDragonFromOracle,
 } = require('../../index.js');
+//TODO: in future, call localhost:8082/api/contract?contract=MainnetTransferableDragon.json or localhost:8082/api/contract?contract=MainnetGateway.json 
 const MainchainDragonTokenJson = require('../../../contracts/MainnetTransferableDragon.json');
 const GatewayJson = require('../../../contracts/MainnetGateway.json');
 

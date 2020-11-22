@@ -11,6 +11,9 @@ const mainchainApiPort = 8002;
 const oracleApiUrl = !process.env.DOCKERENV ? 'http://localhost' : 'http://oracle';
 const oracleApiPort = 8081;
 
+const contractGetterApiUrl = !process.env.DOCKERENV ? 'http://localhost' : 'http://contractGetter';
+const contractGetterApiPort = 8082;
+
 module.exports = {
 	collection,
 	database,

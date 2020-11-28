@@ -5,6 +5,7 @@ const MyRinkebyCoin = artifacts.require('./MyRinkebyCoin.sol');
 const DragonToken = artifacts.require('./mainnet/MainnetTransferableDragon.sol');
 const DragonCoin = artifacts.require('./mainnet/MainnetDragonCoin.sol');
 const Gateway = artifacts.require('./mainnet/gateway/MainnetGateway.sol');
+const GenesLaboratory = artifacts.require('./genes/GenesLaboratory.sol');
 
 module.exports = function (deployer, network, accounts) {
 	if (network !== 'rinkeby' && network !== 'ganache' && network !== 'bfa') {
@@ -30,6 +31,12 @@ module.exports = function (deployer, network, accounts) {
 		console.log(`DragonToken deployed at address: ${dragonTokenInstance.address}`);
 		console.log(`DragonToken transaction at hash: ${dragonTokenContract.transactionHash}`);
 
+		const genesContract = await deployer.deploy(GenesLaboratory, dragonTokenInstance.address);
+		const genesContractInstance = await GenesLaboratory.deployed();
+
+		console.log(`GenesLaboratory deployed at address: ${genesContractInstance.address}`);
+		console.log(`GenesLaboratory transaction at hash: ${genesContract.transactionHash}`);
+
 		const dragonCoinContract = await deployer.deploy(DragonCoin, gatewayInstance.address);
 		const dragonCoinInstance = await DragonCoin.deployed();
 
@@ -41,6 +48,9 @@ module.exports = function (deployer, network, accounts) {
 
 		// map gateway and contract addresses
 		await gatewayInstance.setERC721ContractAddress(dragonTokenInstance.address);
+
+		// setup dragon contract
+		await dragonTokenInstance.setGenesLaboratoryAddress(genesContractInstance.address);
 
 		writeFileSync('../mainnet_gateway_address', gatewayInstance.address);
 		writeFileSync('../mainnet_dragon_token_address', dragonTokenInstance.address);

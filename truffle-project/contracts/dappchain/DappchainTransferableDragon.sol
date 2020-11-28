@@ -16,6 +16,7 @@ contract DappchainTransferableDragon is DragonFactory {
     // Setter to update who the gateway is
     function setGatewayAddress(address gateway) external onlyOwner {
         //TODO check address is a gateway
+        require(gateway != address(0), "gateway should have a valid address");
         _gateway = gateway;
     }
 

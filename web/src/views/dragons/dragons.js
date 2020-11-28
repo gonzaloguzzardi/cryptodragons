@@ -1,259 +1,244 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import Dragon from './dragon.js';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import Input  from '@material-ui/core/Input';
 import FormLabel  from '@material-ui/core/FormLabel';
 
-import sleep from '../../utils/sleep';
+import MainchainAPI from '../../services/blockchain-interaction/mainchain';
+import SidechainAPI from '../../services/blockchain-interaction/sidechain';
+import { _getDragonsFromOracle } from '../../services/oracle';
 
 import './dragons.scss';
 
-const sidechainApiUrl = 'http://localhost';
-const sidechainApiPort = 8001;
-
-const mainchainApiUrl = 'http://localhost';
-const mainchainApiPort = 8002;
-
-const oracleApiUrl = 'http://localhost';
-const oracleApiPort = 8081;
-
 const namespace = 'ui-view-dragons';
+
+const GAS_DEFAULT_VALUE = 350000;
 
 class Dragons extends Component {
 
-    constructor(props) {
-        super(props);
+  constructor(props) {
+    super(props);
 
-        this.state = {
-            defSideAccount: '0xfee39fad945754831b59b92a1a8339f65358792d',
-            defMainAccount: '0x28863498efede12296888f7ca6cf0b94974fbdbc',
-            sideAccount: '0xfee39fad945754831b59b92a1a8339f65358792d',
-            mainAccount: '0x28863498efede12296888f7ca6cf0b94974fbdbc',
-            sideDragons: [],
-            sidechainGatewayDragons: [],
-            mainchainGatewayDragons: [],
-            dragonsInSidechainGateway: 0,
-            dragonsInMainchainGateway: 0,
-            mainDragons: [],
-        };
+    this.state = {
+      sideAccount: '0xfee39fad945754831b59b92a1a8339f65358792d',
+      mainAccount: '0x28863498efede12296888f7ca6cf0b94974fbdbc',
 
-        this.getDragonsFromSide();
-        this.getDragonsFromOracle();
-        this.getDragonsFromMain();
-    }  
+      sideDragons: [],
+      mainDragons: [],
+      sidechainGatewayDragons: [],
+      mainchainGatewayDragons: [],
 
-    getDragonsFromMain = () => {
-        axios.get(`${mainchainApiUrl}:${mainchainApiPort}/api/dragons`)
-            .then(res => this.setState({ mainDragons: res.data }));
-    }
+      accountsAreMapped: false
+    };
 
-    getDragonsFromSide = () => {
-        axios.get(`${sidechainApiUrl}:${sidechainApiPort}/api/dragons`)
-            .then(res => this.setState({ sideDragons: res.data }));
-    }
+    this.updateDragons();
+    setInterval(this.updateDragons, 7000);
 
-    getDragonsFromOracle = () => {
-        axios.get(`${oracleApiUrl}:${oracleApiPort}/api/dragons`)
-            .then(res => {
-                if (!res || !res.data) return;
+    this.accountsAreMapped();
+  }
 
-                if (
-                    res.data[0]['sidechain-gateway-results'].length < this.state.dragonsInSidechainGateway ||
-                    res.data[1]['mainchain-gateway-results'].length < this.state.dragonsInMainchainGateway
-                ) {
-                    this.getDragonsFromMain();
-                    this.getDragonsFromSide();
-                }
+  updateDragons = () => {
+    this.getDragonsFromMain();
+    this.getDragonsFromSide();
+    this.getDragonsFromOracle();
+  };
 
-                this.setState({
-                    dragonsInSidechainGateway: res.data[0]['sidechain-gateway-results'].length,
-                    dragonsInMainchainGateway: res.data[1]['mainchain-gateway-results'].length,
+  getDragonsFromMain = () => {
+    MainchainAPI.getMyDragons(GAS_DEFAULT_VALUE).then(mainDragons => this.setState({ mainDragons }));
+  };
 
-                    sidechainGatewayDragons: res.data[0]['sidechain-gateway-results'],
-                    mainchainGatewayDragons: res.data[1]['mainchain-gateway-results'],
-                });
+  getDragonsFromSide = () => {
+    SidechainAPI.getMyDragons(GAS_DEFAULT_VALUE).then(sideDragons => this.setState({ sideDragons }));
+  };
 
-                if (
-                    res.data[0]['sidechain-gateway-results'].length > 0 ||
-                    res.data[1]['mainchain-gateway-results'].length > 0
-                ) {
-                    sleep(1000).then(() => {
-                        this.getDragonsFromOracle();
-                    });
-                } else {
-                    sleep(500).then(() => {
-                        this.getDragonsFromMain();
-                        this.getDragonsFromSide();
-                    });
-                }
-            });
-    }
+  getDragonsFromOracle = () => {
+    _getDragonsFromOracle().then(result => {
+      this.setState({
+        sidechainGatewayDragons: result[0]['sidechain-gateway-results'],
+        mainchainGatewayDragons: result[1]['mainchain-gateway-results'],
+      })
+    })
+  };
 
-    buyDragonInSideChain = () => {
-        axios.get(`${sidechainApiUrl}:${sidechainApiPort}/api/dragon/create`)
-            .then(res => this.getDragonsFromSide());
-    }
+  buyDragonInSideChain = () => {
+    SidechainAPI.createDragon(GAS_DEFAULT_VALUE).then(res => {
+      console.log("[SIDECHAIN]: Dragon create response", res);
+    });
+  }
 
-    buyDragonInMainChain = () => {
-        axios.get(`${mainchainApiUrl}:${mainchainApiPort}/api/dragon/create`)
-            .then(res => this.getDragonsFromMain());
-    }
-
-    transferFromSideToMain = dragonId => (
-        axios.get(`${oracleApiUrl}:${oracleApiPort}/api/dragon/transfer`, {
-            params: { id: dragonId, toMain: true },
-        })
-        .then(() => {
-            this.getDragonsFromOracle();
-            this.getDragonsFromSide();
-        })
-        .catch((err) => { throw err.response.data })
+  buyDragonInMainChain = () => {
+    MainchainAPI.createDragon(GAS_DEFAULT_VALUE).then(res =>
+      console.log("[MAINCHAIN]: Dragon create response", res)
     );
+  }
 
-    transferFromMainToSide = dragonId => (
-        axios.get(`${oracleApiUrl}:${oracleApiPort}/api/dragon/transfer`, {
-            params: { id: dragonId, toMain: false },
-        })
-        .then(() => {
-            this.getDragonsFromOracle();
-            this.getDragonsFromMain();
-        })
-        .catch((err) => { throw err.response.data })
-    );
+  transferFromSideToMain = dragonId => (
+    SidechainAPI.transferDragon(dragonId, GAS_DEFAULT_VALUE).then(res =>
+      console.log("[SIDECHAIN]: Transfer to Mainchain response", res)
+    )
+  );
 
-    mapAccounts = () => {
-        axios.get(`${oracleApiUrl}:${oracleApiPort}/api/mapAccounts`, {
-            params: { mainAccount: this.state.mainAccount, sideAccount: this.state.sideAccount },
-        });
-    }
+  transferFromMainToSide = dragonId => (
+    MainchainAPI.transferDragon(dragonId, GAS_DEFAULT_VALUE).then(res =>
+      console.log("[MAINCHAIN]: Transfer to Sidechain response", res)
+    )
+  );
 
-    onChangeMainAccount = event => {
-        this.setState({ mainAccount: event.target.value });
-    }
+  mapAccounts = () => {
+    Promise.all([
+      SidechainAPI.mapAccountToMainchainAccount(this.state.mainAccount, GAS_DEFAULT_VALUE),
+      MainchainAPI.mapAccountToSidechainAccount(this.state.sideAccount, GAS_DEFAULT_VALUE),
+    ]).then(values => {
+      console.log("[SIDECHAIN]: MAPEO EN SIDECHAIN", values[0]);
+      console.log("[MAINCHAIN]: MAPEO EN MAINCHAIN", values[1]);
+      this.accountsAreMapped();
+    });
+  }
 
-    onChangeSideAccount = event => {
-        this.setState({ sideAccount: event.target.value });
-    }
+  accountsAreMapped = () => {
+    console.log("Are accounts mapped?");
+    Promise.all([
+      MainchainAPI.areAccountsMapped(this.state.sideAccount, GAS_DEFAULT_VALUE),
+      SidechainAPI.areAccountsMapped(this.state.mainAccount, GAS_DEFAULT_VALUE),
+    ]).then(values => {
+      console.log("MAPEO CUENTAS [SideInMain, MainInSide]", values);
+      this.setState({ accountsAreMapped: values[0] && values[1] })
+    });
+  } 
 
-    render() {
-        return (
-            <div className={`${namespace}__container-div`}>
+  onChangeMainAccount = event => this.setState({ mainAccount: event.target.value });
 
-                { /* Map accounts */ }
-                <Grid container justify="center" spacing={2}>
-                    <Grid item>
-                        <FormLabel>
-                            <b>SideChain Account:</b>&nbsp;
-                            <Input
-                                type="text"
-                                name="sideAccount"
-                                className={`${namespace}__container-div__map-acounts__input`}
-                                defaultValue={this.state.defSideAccount}
-                                onChange={this.onChangeSideAccount}
-                            />
-                        </FormLabel>
-                    </Grid>
-                    <Grid item>
-                        <Button variant="contained" color="primary" onClick={this.mapAccounts}>
-                            Map Accounts
-                        </Button>
-                    </Grid>
-                    <Grid item>
-                        <FormLabel>
-                            <b>MainChain Account:</b>&nbsp;
-                            <Input
-                                type="text"
-                                name="mainAccount"
-                                className={`${namespace}__container-div__map-acounts__input`}
-                                defaultValue={this.state.defMainAccount}
-                                onChange={this.onChangeMainAccount}
-                            />
-                        </FormLabel>
-                    </Grid>
-                </Grid>
+  onChangeSideAccount = event => this.setState({ sideAccount: event.target.value });
 
-                { /* Buttons - Buy Dragons in blockchains */ }
-                <Grid container justify="center" spacing={2}>
-                    <Grid item>
-                        <Button variant="contained" color="primary" onClick={this.buyDragonInSideChain}>
-                            Buy New Dragon in Sidechain
-                        </Button>
-                    </Grid>
-                    <Grid item>
-                        <Button variant="contained" color="primary" onClick={this.buyDragonInMainChain}>
-                            Buy New Dragon in MainChain
-                        </Button>
-                    </Grid>
-                </Grid>
+  render = () => (
+    <div className={`${namespace}__container-div`}>
 
-                { /* Sidechain dragons - Mainchain dragons */ }
-                <Grid container justify="center" spacing={2}>
-                    <Grid item xs={6} className={`${namespace}__container-grid__dragons-items`}>
-                        <h3 className={`${namespace}__chains-headings`}>Side Chain Dragons</h3>
-                        <Grid container spacing={2}>
-                            <Grid item>
-                                <Grid container spacing={2}>
-                                    {this.state.sideDragons.map(value => (
-                                    <Grid key={value} item>
-                                        <Dragon
-                                            location="side"
-                                            id={value}
-                                            transferMethod={this.transferFromSideToMain}
-                                        />
-                                    </Grid>
-                                    ))}
-                                </Grid>
-                            </Grid>
-                        </Grid>
-                    </Grid>
-                    <Grid item xs={6} className={`${namespace}__container-grid__dragons-items`}>
-                        <h3 className={`${namespace}__chains-headings`}>Main Chain Dragons</h3>
-                        <Grid container spacing={2}>
-                            <Grid item>
-                                <Grid container spacing={2}>
-                                    {this.state.mainDragons.map(value => (
-                                    <Grid key={value} item>
-                                        <Dragon
-                                            location="main"
-                                            id={value}
-                                            transferMethod={this.transferFromMainToSide}
-                                        />
-                                    </Grid>
-                                    ))}
-                                </Grid>
-                            </Grid>
-                        </Grid>
-                    </Grid>
-                </Grid>
+      { /* Map accounts section */ }
+      <Grid container justify="center" spacing={2}>
+        <Grid item>
+          <FormLabel>
+            <b>SideChain Account:</b>&nbsp;
+            <Input
+              type="text"
+              name="sideAccount"
+              className={`${namespace}__container-div__map-acounts__input`}
+              defaultValue={this.state.sideAccount}
+              onChange={this.onChangeSideAccount}
+            />
+          </FormLabel>
+        </Grid>
+          <Grid item>
+            {this.state.accountsAreMapped ? (
+              <Button variant="contained" disabled>
+                Accounts Mapped! 😁 🎉
+              </Button>
+              ) : (
+              <Button variant="contained" color="primary" onClick={this.mapAccounts}>
+                Map Accounts
+              </Button>
+            )}
+        </Grid>
+        <Grid item>
+          <FormLabel>
+            <b>MainChain Account:</b>&nbsp;
+            <Input
+              type="text"
+              name="mainAccount"
+              className={`${namespace}__container-div__map-acounts__input`}
+              defaultValue={this.state.mainAccount}
+              onChange={this.onChangeMainAccount}
+            />
+          </FormLabel>
+        </Grid>
+      </Grid>
 
-                { /* Oracle dragons */ }
-                <Grid container spacing={2}>
-                    <Grid item xs={6} className={`${namespace}__container-grid__dragons-items`}>
-                        <h3 className={`${namespace}__oracle-heading`}>Sidechain Gateway Dragons</h3>
-                        <Grid container justify="center" spacing={2}>
-                            {this.state.sidechainGatewayDragons.map(value => (
-                            <Grid key={value} item>
-                                <Dragon id={value["uid"]} />
-                            </Grid>
-                            ))}
-                        </Grid>
-                    </Grid>
-                    <Grid item xs={6} className={`${namespace}__container-grid__dragons-items`}>
-                        <h3 className={`${namespace}__oracle-heading`}>Mainchain Gateway Dragons</h3>
-                        <Grid container justify="center" spacing={2}>
-                            {this.state.mainchainGatewayDragons.map(value => (
-                            <Grid key={value} item>
-                                <Dragon id={value["uid"]} location="oracle" />
-                            </Grid>
-                            ))}
-                        </Grid>
-                    </Grid>
-                </Grid>
-            </div>
-        );
-    }
+      { /* Buttons - Buy Dragons in blockchains */ }
+      <Grid container justify="center" spacing={2}>
+        <Grid item>
+          <Button variant="contained" color="primary" onClick={this.buyDragonInSideChain}>
+            Buy New Dragon in Sidechain
+          </Button>
+        </Grid>
+        <Grid item>
+          <Button variant="contained" color="primary" onClick={this.buyDragonInMainChain}>
+            Buy New Dragon in MainChain
+          </Button>
+        </Grid>
+      </Grid>
+
+      { /* Sidechain dragons - Mainchain dragons */ }
+      <Grid container justify="center" spacing={2}>
+        <Grid item xs={6} className={`${namespace}__container-grid__dragons-items`}>
+          <h3 className={`${namespace}__chains-headings`}>Side Chain Dragons</h3>
+          <Grid container spacing={2}>
+            <Grid item>
+              <Grid container spacing={2}>
+                {this.state.sideDragons ? this.state.sideDragons.map(value => (
+                  <Grid key={value} item>
+                    <Dragon
+                      location="side"
+                      id={value}
+                      transferMethod={this.transferFromSideToMain}
+                    />
+                  </Grid>
+                )) : null }
+              </Grid>
+            </Grid>
+          </Grid>
+        </Grid>
+        <Grid item xs={6} className={`${namespace}__container-grid__dragons-items`}>
+          <h3 className={`${namespace}__chains-headings`}>Main Chain Dragons</h3>
+          <Grid container spacing={2}>
+            <Grid item>
+              <Grid container spacing={2}>
+                {this.state.mainDragons ? this.state.mainDragons.map(value => (
+                  <Grid key={value} item>
+                    <Dragon
+                      location="main"
+                      id={value}
+                      transferMethod={this.transferFromMainToSide}
+                    />
+                  </Grid>
+                )) : null }
+              </Grid>
+            </Grid>
+          </Grid>
+        </Grid>
+      </Grid>
+
+      { /* Oracle dragons */ }
+      <Grid container spacing={2}>
+        <Grid item xs={6} className={`${namespace}__container-grid__dragons-items`}>
+          <h3 className={`${namespace}__oracle-heading`}>Sidechain Gateway Dragons</h3>
+          <Grid container justify="center" spacing={2}>
+            {this.state.sidechainGatewayDragons ? this.state.sidechainGatewayDragons.map(value => (
+              <Grid key={value} item>
+                <Dragon
+                  location="side"
+                  id={value["uid"]}
+                />
+              </Grid>
+            )) : null }
+          </Grid>
+        </Grid>
+        <Grid item xs={6} className={`${namespace}__container-grid__dragons-items`}>
+          <h3 className={`${namespace}__oracle-heading`}>Mainchain Gateway Dragons</h3>
+          <Grid container justify="center" spacing={2}>
+            {this.state.mainchainGatewayDragons ? this.state.mainchainGatewayDragons.map(value => (
+              <Grid key={value} item>
+                <Dragon
+                  location="main"
+                  id={value["uid"]}
+                  location="oracle"
+                />
+              </Grid>
+            )) : null }
+          </Grid>
+        </Grid>
+      </Grid>
+    </div>
+  );
 }
 
 export default Dragons;

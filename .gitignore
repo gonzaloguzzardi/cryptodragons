@@ -1,3 +1,12 @@
 protobuf-*
 *.meta
 UnityClient/Assets/Contracts/
+
+loom_dragon_coin_address
+loom_dragon_coin_tx_hash
+loom_dragon_token_address
+loom_dragon_token_tx_hash
+loom_gateway_address
+mainnet_dragon_token_address
+mainnet_dragon_token_tx_hash
+mainnet_gateway_address

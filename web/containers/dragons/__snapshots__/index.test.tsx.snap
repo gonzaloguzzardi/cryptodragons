@@ -1,0 +1,228 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Index page should match the snapshot 1`] = `
+<div
+  className="container"
+>
+  <main>
+    <div
+      className="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-justify-xs-center"
+    >
+      <div
+        className="MuiGrid-root MuiGrid-item"
+      >
+        <label
+          className="MuiFormLabel-root"
+        >
+          <b>
+            SideChain Account:
+          </b>
+           
+          <div
+            className="MuiInputBase-root MuiInput-root MuiInput-underline mapAcountsInput"
+            onClick={[Function]}
+          >
+            <input
+              className="MuiInputBase-input MuiInput-input"
+              defaultValue="0xfee39fad945754831b59b92a1a8339f65358792d"
+              name="sideAccount"
+              onAnimationStart={[Function]}
+              onBlur={[Function]}
+              onChange={[Function]}
+              onFocus={[Function]}
+              type="text"
+            />
+          </div>
+        </label>
+      </div>
+      <div
+        className="MuiGrid-root MuiGrid-item"
+      >
+        <button
+          className="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary"
+          disabled={false}
+          onBlur={[Function]}
+          onClick={[Function]}
+          onDragLeave={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onKeyUp={[Function]}
+          onMouseDown={[Function]}
+          onMouseLeave={[Function]}
+          onMouseUp={[Function]}
+          onTouchEnd={[Function]}
+          onTouchMove={[Function]}
+          onTouchStart={[Function]}
+          tabIndex={0}
+          type="button"
+        >
+          <span
+            className="MuiButton-label"
+          >
+            Map Accounts
+          </span>
+        </button>
+      </div>
+      <div
+        className="MuiGrid-root MuiGrid-item"
+      >
+        <label
+          className="MuiFormLabel-root"
+        >
+          <b>
+            MainChain Account:
+          </b>
+           
+          <div
+            className="MuiInputBase-root MuiInput-root MuiInput-underline mapAcountsInput"
+            onClick={[Function]}
+          >
+            <input
+              className="MuiInputBase-input MuiInput-input"
+              defaultValue="0x28863498efede12296888f7ca6cf0b94974fbdbc"
+              name="mainAccount"
+              onAnimationStart={[Function]}
+              onBlur={[Function]}
+              onChange={[Function]}
+              onFocus={[Function]}
+              type="text"
+            />
+          </div>
+        </label>
+      </div>
+    </div>
+    <div
+      className="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-justify-xs-center"
+    >
+      <div
+        className="MuiGrid-root MuiGrid-item"
+      >
+        <button
+          className="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary"
+          disabled={false}
+          onBlur={[Function]}
+          onClick={[Function]}
+          onDragLeave={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onKeyUp={[Function]}
+          onMouseDown={[Function]}
+          onMouseLeave={[Function]}
+          onMouseUp={[Function]}
+          onTouchEnd={[Function]}
+          onTouchMove={[Function]}
+          onTouchStart={[Function]}
+          tabIndex={0}
+          type="button"
+        >
+          <span
+            className="MuiButton-label"
+          >
+            Buy New Dragon in Sidechain
+          </span>
+        </button>
+      </div>
+      <div
+        className="MuiGrid-root MuiGrid-item"
+      >
+        <button
+          className="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary"
+          disabled={false}
+          onBlur={[Function]}
+          onClick={[Function]}
+          onDragLeave={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onKeyUp={[Function]}
+          onMouseDown={[Function]}
+          onMouseLeave={[Function]}
+          onMouseUp={[Function]}
+          onTouchEnd={[Function]}
+          onTouchMove={[Function]}
+          onTouchStart={[Function]}
+          tabIndex={0}
+          type="button"
+        >
+          <span
+            className="MuiButton-label"
+          >
+            Buy New Dragon in MainChain
+          </span>
+        </button>
+      </div>
+    </div>
+    <div
+      className="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-justify-xs-center"
+    >
+      <div
+        className="MuiGrid-root containerGridDragonsItems MuiGrid-item MuiGrid-grid-xs-6"
+      >
+        <h3
+          className="chainsHeadings"
+        >
+          Side Chain Dragons
+        </h3>
+        <div
+          className="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2"
+        >
+          <div
+            className="MuiGrid-root MuiGrid-item"
+          >
+            <div
+              className="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2"
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        className="MuiGrid-root containerGridDragonsItems MuiGrid-item MuiGrid-grid-xs-6"
+      >
+        <h3
+          className="chainsHeadings"
+        >
+          Main Chain Dragons
+        </h3>
+        <div
+          className="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2"
+        >
+          <div
+            className="MuiGrid-root MuiGrid-item"
+          >
+            <div
+              className="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2"
+    >
+      <div
+        className="MuiGrid-root containerGridDragonsItems MuiGrid-item MuiGrid-grid-xs-6"
+      >
+        <h3
+          className="oracleHeading"
+        >
+          Sidechain Gateway Dragons
+        </h3>
+        <div
+          className="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-justify-xs-center"
+        />
+      </div>
+      <div
+        className="MuiGrid-root containerGridDragonsItems MuiGrid-item MuiGrid-grid-xs-6"
+      >
+        <h3
+          className="oracleHeading"
+        >
+          Mainchain Gateway Dragons
+        </h3>
+        <div
+          className="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-justify-xs-center"
+        />
+      </div>
+    </div>
+  </main>
+</div>
+`;

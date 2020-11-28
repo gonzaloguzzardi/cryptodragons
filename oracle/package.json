@@ -19,9 +19,11 @@
 		"cors": "2.8.5",
 		"express": "latest",
 		"fs": "latest",
+		"loom-js": "1.55.0",
 		"mongodb": "latest",
 		"body-parser": "latest",
-		"node-cron": "latest"
+		"node-cron": "latest",
+		"web3": "1.0.0-beta.37"
 	},
 	"devDependencies": {
 		"eslint": "5.16.0",

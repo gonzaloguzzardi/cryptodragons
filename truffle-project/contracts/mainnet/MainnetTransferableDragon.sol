@@ -37,6 +37,11 @@ contract MainnetTransferableDragon is DragonFactory {
         _mainnetAddressToSidechain[msg.sender] = sidechainAddress;
     }
 
+    function isMap(address sidechainAddress) external view returns (bool) {
+        require(sidechainAddress != address(0), "Invalid sidechain address");
+        return _mainnetAddressToSidechain[msg.sender] == sidechainAddress;
+    }
+
     function transferToGateway(uint256 _tokenId) public onlyDragonOwner(_tokenId) {
         require(_mainnetAddressToSidechain[msg.sender] != address(0), "Blockchains should be mapped to allow transferences");
         require(_tokenId < dragons.length, "Invalid token Id");

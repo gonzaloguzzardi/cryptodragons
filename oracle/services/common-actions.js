@@ -4,15 +4,12 @@ const { insertOnMongo, transforEventIntoTransactionObj, deleteDragon } = require
 // CONSTANTS
 const { collection, database, mongoUrl } = require('../config');
 
-function insertDragonInMongo(event) {
-	return insertOnMongo(database, mongoUrl, transforEventIntoTransactionObj(event), collection);
-}
+const insertDragonInMongo = (event) =>
+  insertOnMongo(database, mongoUrl, transforEventIntoTransactionObj(event), collection);
 
-function deleteDragonFromMongo(event) {
-	return deleteDragon(database, mongoUrl, collection, event.returnValues);
-}
+const deleteDragonFromMongo = (event) => deleteDragon(database, mongoUrl, collection, event.returnValues);
 
 module.exports = {
-	deleteDragonFromMongo,
-	insertDragonInMongo,
+  deleteDragonFromMongo,
+  insertDragonInMongo,
 };

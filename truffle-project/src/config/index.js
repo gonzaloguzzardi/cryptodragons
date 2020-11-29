@@ -5,12 +5,6 @@ const READ_URL = !process.env.DOCKERENV ? 'ws://0.0.0.0:46658/queryws' : 'ws://l
 const BFA_SOCKET_CONNECTION = !process.env.DOCKERENV ? 'ws://0.0.0.0:8546' : 'ws://bfa:8546';
 const BFA_NETWORK_ID = '12345';
 
-const sidechainApiUrl = !process.env.DOCKERENV ? 'http://localhost' : 'http://loom';
-const sidechainApiPort = 8001;
-
-const mainchainApiUrl = !process.env.DOCKERENV ? 'http://localhost' : 'http://bfa';
-const mainchainApiPort = 8002;
-
 const oracleApiUrl = !process.env.DOCKERENV ? 'http://localhost' : 'http://oracle';
 const oracleApiPort = 8081;
 
@@ -26,10 +20,6 @@ module.exports = {
 	READ_URL,
 	BFA_NETWORK_ID,
 	BFA_SOCKET_CONNECTION,
-	sidechainApiUrl,
-	sidechainApiPort,
-	mainchainApiUrl,
-	mainchainApiPort,
 	oracleApiUrl,
 	oracleApiPort,
 	SidechainDragonContract,

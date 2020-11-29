@@ -3,7 +3,7 @@ const { readFileSync } = require('fs');
 const path = require('path');
 const { join } = require('path');
 const LoomTruffleProvider = require('loom-truffle-provider');
-const HDWalletProvider = require('truffle-hdwallet-provider');
+// const HDWalletProvider = require('truffle-hdwallet-provider');
 const { sha256 } = require('js-sha256');
 const { CryptoUtils } = require('loom-js');
 const { mnemonicToSeedSync } = require('bip39');
@@ -27,7 +27,7 @@ module.exports = {
 	contracts_build_directory: join(__dirname, './src/contracts'),
 	compilers: {
 		solc: {
-			version: '^0.5.0',
+			version: '0.5.17',
 			optimizer: {
 				enabled: true,
 				runs: 200,
@@ -54,6 +54,7 @@ module.exports = {
 					const loomTruffleProvider = getLoomProviderWithMnemonic(mnemonicPath, chainId, writeUrl, readUrl);
 					return loomTruffleProvider;
 				}
+				return null;
 			},
 			network_id: '*',
 		},
@@ -72,6 +73,7 @@ module.exports = {
 					const loomTruffleProvider = getLoomProviderWithMnemonic(mnemonicPath, chainId, writeUrl, readUrl);
 					return loomTruffleProvider;
 				}
+				return null;
 			},
 			network_id: '*',
 		},

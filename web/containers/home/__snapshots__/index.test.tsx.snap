@@ -1,0 +1,48 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Index page should match the snapshot 1`] = `
+<div
+  className="container"
+>
+  <main>
+    <section
+      className="headingMd"
+    >
+      <div
+        className="container"
+      >
+        <div
+          className="header"
+        >
+          <h2>
+            Welcome to CryptoDragons
+          </h2>
+        </div>
+        <a
+          aria-disabled={false}
+          className="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary"
+          href="dragons"
+          onBlur={[Function]}
+          onDragLeave={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onKeyUp={[Function]}
+          onMouseDown={[Function]}
+          onMouseLeave={[Function]}
+          onMouseUp={[Function]}
+          onTouchEnd={[Function]}
+          onTouchMove={[Function]}
+          onTouchStart={[Function]}
+          tabIndex={0}
+        >
+          <span
+            className="MuiButton-label"
+          >
+            Start
+          </span>
+        </a>
+      </div>
+    </section>
+  </main>
+</div>
+`;

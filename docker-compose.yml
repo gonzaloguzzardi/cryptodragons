@@ -99,3 +99,4 @@ services:
     volumes:
       - ./web:/usr/src/app/web
       - /usr/src/app/web/node_modules
+      - /usr/src/app/web/.next

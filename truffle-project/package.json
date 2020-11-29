@@ -16,14 +16,16 @@
 		"loom:init": "cd loom && chmod +x loom && ./loom init -f && cd ..",
 		"start-dev-mainchain-cli": "nodemon mainchain-cli.js",
 		"start-dev-sidechain-cli": "nodemon sidechain-cli.js",
-		"lint-fix": "eslint --fix ."
+		"lint-fix": "eslint --fix .",
+		"contracts-uml": "sol2uml -f png -o uml/contracts-uml ./contracts",
+		"contracts-uml-custom": "sol2uml -b GenesLaboratory,DappchainDragonCoin,DappchainTransferableDragon,DappchainGateway,DappchainTransferableDragon,DragonBase,DragonFactory,MainnetTransferableDragon -f png -o uml/contracts-uml-custom ./contracts"
 	},
 	"dependencies": {
 		"axios": "latest",
 		"bip39": "3.0.2",
 		"body-parser": "latest",
 		"cors": "2.8.5",
-		"eth-json-rpc-filters": "4.1.1",
+		"eth-json-rpc-filters": "^4.2.1",
 		"ethereumjs-tx": "1.3.7",
 		"ethereumjs-wallet": "0.6.2",
 		"express": "4.17.1",
@@ -33,7 +35,7 @@
 		"loom-truffle-provider": "0.11.0",
 		"openzeppelin-solidity": "2.3.0",
 		"regenerator-runtime": "0.11.1",
-		"truffle": "5.0.1",
+		"truffle": "^5.1.55",
 		"truffle-hdwallet-provider": "1.0.2",
 		"truffle-privatekey-provider": "1.3.0",
 		"web3": "1.0.0-beta.37"
@@ -47,6 +49,7 @@
 		"eslint-plugin-prettier": "3.1.1",
 		"eslint-plugin-react": "7.19.0",
 		"nodemon": "2.0.2",
-		"prettier": "2.0.4"
+		"prettier": "2.0.4",
+		"sol2uml": "^1.1.18"
 	}
 }

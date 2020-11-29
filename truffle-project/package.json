@@ -16,7 +16,9 @@
 		"loom:init": "cd loom && chmod +x loom && ./loom init -f && cd ..",
 		"start-dev-mainchain-cli": "nodemon mainchain-cli.js",
 		"start-dev-sidechain-cli": "nodemon sidechain-cli.js",
-		"lint-fix": "eslint --fix ."
+		"lint-fix": "eslint --fix .",
+		"contracts-uml": "sol2uml -f png -o uml/contracts-uml ./contracts",
+		"contracts-uml-custom": "sol2uml -b DappchainTransferableDragon,DappchainGateway,DragonBase,DragonFactory,MainnetTransferableDragon -f png -o uml/contracts-uml-custom ./contracts"
 	},
 	"dependencies": {
 		"axios": "latest",
@@ -47,6 +49,7 @@
 		"eslint-plugin-prettier": "3.1.1",
 		"eslint-plugin-react": "7.19.0",
 		"nodemon": "2.0.2",
-		"prettier": "2.0.4"
+		"prettier": "2.0.4",
+		"sol2uml": "^1.1.18"
 	}
 }

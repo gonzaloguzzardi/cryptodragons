@@ -83,6 +83,7 @@ services:
       - sidechain-deploy
       - mainchain-deploy
       - mongo
+      - contract-getter
     volumes:
       - ./oracle:/usr/src/app/oracle
       - /usr/src/app/oracle/node_modules
@@ -95,6 +96,7 @@ services:
     ports:
       - "3000:3000"
     depends_on:
+      - contract-getter
       - oracle
     volumes:
       - ./web:/usr/src/app/web

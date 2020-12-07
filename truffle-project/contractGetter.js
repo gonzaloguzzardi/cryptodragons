@@ -19,8 +19,6 @@ function getAbailableContracts(req, res) {
 
 function getContentOfContract(req, res) {
     const filePath = path.join('./src/contracts', req.query.contract);
-    console.log(filePath);
-    console.log(filePath);
     fs.readFile(filePath, 'utf8', function (err,data) {
         if (err) {
             res.status(500).send('Unable to get data: ' + err);

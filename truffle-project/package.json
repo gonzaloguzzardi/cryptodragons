@@ -33,6 +33,7 @@
 		"keythereum": "1.0.4",
 		"loom-js": "1.55.0",
 		"loom-truffle-provider": "0.11.0",
+		"node-hid": "0.7.9",
 		"openzeppelin-solidity": "2.3.0",
 		"regenerator-runtime": "0.11.1",
 		"truffle": "5.0.1",

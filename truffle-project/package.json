@@ -21,9 +21,9 @@
 		"contracts-uml-custom": "sol2uml -b DappchainTransferableDragon,DappchainGateway,DragonBase,DragonFactory,MainnetTransferableDragon -f png -o uml/contracts-uml-custom ./contracts"
 	},
 	"dependencies": {
-		"axios": "latest",
+		"axios": "0.21.1",
 		"bip39": "3.0.2",
-		"body-parser": "latest",
+		"body-parser": "1.19.0",
 		"cors": "2.8.5",
 		"eth-json-rpc-filters": "4.1.1",
 		"ethereumjs-tx": "1.3.7",

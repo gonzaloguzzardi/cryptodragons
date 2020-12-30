@@ -1,10 +1,15 @@
 import Head from 'next/head'
 
 import styles from './layout.module.scss'
+import { ReactNode, ReactElement } from 'react'
 
 export const siteTitle = 'CryptoDragons'
 
-export default function Layout({ children }) {
+interface LayoutProps {
+  children?: ReactNode
+}
+
+export default function Layout({ children }: LayoutProps): ReactElement {
   return (
     <div className={styles.container}>
       <Head>

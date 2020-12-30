@@ -14,7 +14,9 @@ exports[`Index page should match the snapshot 1`] = `
         <label
           className="MuiFormLabel-root"
         >
-          <b>
+          <b
+            className="jsx-2695944139"
+          >
             SideChain Account:
           </b>
            
@@ -69,7 +71,9 @@ exports[`Index page should match the snapshot 1`] = `
         <label
           className="MuiFormLabel-root"
         >
-          <b>
+          <b
+            className="jsx-2695944139"
+          >
             MainChain Account:
           </b>
            
@@ -158,7 +162,7 @@ exports[`Index page should match the snapshot 1`] = `
         className="MuiGrid-root containerGridDragonsItems MuiGrid-item MuiGrid-grid-xs-6"
       >
         <h3
-          className="chainsHeadings"
+          className="jsx-2695944139 chainsHeadings"
         >
           Side Chain Dragons
         </h3>
@@ -178,7 +182,7 @@ exports[`Index page should match the snapshot 1`] = `
         className="MuiGrid-root containerGridDragonsItems MuiGrid-item MuiGrid-grid-xs-6"
       >
         <h3
-          className="chainsHeadings"
+          className="jsx-2695944139 chainsHeadings"
         >
           Main Chain Dragons
         </h3>
@@ -202,7 +206,7 @@ exports[`Index page should match the snapshot 1`] = `
         className="MuiGrid-root containerGridDragonsItems MuiGrid-item MuiGrid-grid-xs-6"
       >
         <h3
-          className="oracleHeading"
+          className="jsx-2695944139 oracleHeading"
         >
           Sidechain Gateway Dragons
         </h3>
@@ -214,7 +218,7 @@ exports[`Index page should match the snapshot 1`] = `
         className="MuiGrid-root containerGridDragonsItems MuiGrid-item MuiGrid-grid-xs-6"
       >
         <h3
-          className="oracleHeading"
+          className="jsx-2695944139 oracleHeading"
         >
           Mainchain Gateway Dragons
         </h3>

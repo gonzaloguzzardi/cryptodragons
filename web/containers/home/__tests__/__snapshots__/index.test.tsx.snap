@@ -6,22 +6,24 @@ exports[`Index page should match the snapshot 1`] = `
 >
   <main>
     <section
-      className="headingMd"
+      className="jsx-683114997"
     >
       <div
-        className="container"
+        className="jsx-683114997 container"
       >
         <div
-          className="header"
+          className="jsx-683114997 header"
         >
-          <h2>
+          <h2
+            className="jsx-683114997"
+          >
             Welcome to CryptoDragons
           </h2>
         </div>
         <a
           aria-disabled={false}
           className="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary"
-          href="dragons"
+          href="demo"
           onBlur={[Function]}
           onDragLeave={[Function]}
           onFocus={[Function]}
@@ -38,7 +40,7 @@ exports[`Index page should match the snapshot 1`] = `
           <span
             className="MuiButton-label"
           >
-            Start
+            Demo
           </span>
         </a>
       </div>

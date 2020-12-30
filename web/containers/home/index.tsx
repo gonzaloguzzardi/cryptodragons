@@ -12,8 +12,8 @@ export default function Home(): ReactElement {
           <div className="header">
             <h2>Welcome to CryptoDragons</h2>
           </div>
-          <Button variant="contained" color="primary" href="dragons">
-            Start
+          <Button variant="contained" color="primary" href="demo">
+            Demo
           </Button>
         </div>
       </section>

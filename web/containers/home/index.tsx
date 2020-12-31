@@ -6,10 +6,9 @@ import { ReactElement } from 'react'
 import Layout from '../../components/layout'
 import AppToolbar from '../../components/app-toolbar/index'
 
-export default function Home(props): ReactElement {
+export default function Home(): ReactElement {
   return (
     <Layout>
-      {console.log(props)}
       <AppToolbar />
       <Container>
         <Box my={2}>

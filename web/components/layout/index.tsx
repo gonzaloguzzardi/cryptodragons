@@ -2,6 +2,9 @@ import Head from 'next/head'
 
 import styles from './layout.module.scss'
 import { ReactNode, ReactElement } from 'react'
+import CssBaseline from '@material-ui/core/CssBaseline'
+import { ThemeProvider } from '@material-ui/core/styles'
+import theme from './theme'
 
 export const siteTitle = 'CryptoDragons'
 
@@ -19,7 +22,10 @@ export default function Layout({ children }: LayoutProps): ReactElement {
         <meta name="og:title" content={siteTitle} />
       </Head>
 
-      <main>{children}</main>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <main>{children}</main>
+      </ThemeProvider>
     </div>
   )
 }

@@ -7,8 +7,7 @@ import HomeDesktop from './home.desktop'
 import { ISSRPropsDeviceOnly } from '../../types/server-side-props-device-only'
 
 export default function Home({ deviceType }: ISSRPropsDeviceOnly): ReactElement {
-  if (deviceType === 'mobile') return <HomeMobile />
+  if (deviceType === 'mobile' || deviceType === 'tablet') return <HomeMobile />
 
   if (deviceType === 'desktop') return <HomeDesktop />
-  if (deviceType === 'tablet') return <HomeDesktop />
 }

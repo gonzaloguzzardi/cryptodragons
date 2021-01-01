@@ -1,9 +1,6 @@
-import { IncomingMessage } from 'http'
-
 import deviceType from '../types/device-types'
 
-export default function getDeviceType(req: IncomingMessage): deviceType {
-  const UA = req.headers['user-agent']
+export default function getDeviceType(UA: string): deviceType {
   const isMobile = Boolean(
     UA.match(
       /android.*(.*Acer.*Iconia.*one.*7|.*KFFOWI.*|.*9006|.*Huawei.T1.*|.*NBX-T7A2I.*|.*Lenovo.A7.*|.*Lenovo.TB3.710F.*|.*Noblex.NBX.T742.*|.*Noblex.NBX.T8A1IE.*|.*PCBox.*|.*BGH-Y210.*|.*Positivo.Y400.*|.*SM-P350.*|.*SM-T231.*|.*SM-T350.*|.*SM-T280.*|.*SM-T560.*|.*SM-T113NU.*|.*Alcatel|.*SM-T116BU|.*SM-T285M|.*SM-T56.|.*SM-T210|.*Nexus.7|.*GT-N5110|.*SM-T110|.*SM-T230NU|.*SM-J710MN.*|.*IdeaTab.A3000|.*A1-810|.*A1_07|.*LG-V500|.*SM-T310.*|.*SM-J710MN.*|.*SM-T230|.*SM-T111|.*SM-T211|.*Tablet.DL.1603|.*GT-N5100|.*GT-P6200|.*SM-T320|.*ME371MG|.*GT-P6210|.*MZ608|.*GT-P6800|.*SM-T330|.*GT-P1000|.*GT-P7300|.*B1-730HD|.*A1-830|.*KFTT|.*PI2000|.*SM-T700|.*SM-T330|.*SGPT12|.*PCB-T700|.*MID7036|.*IdeaTab.A2109A|.*IdeaTab.A3000-F|.*IdeaTab.A2107A-F|.*RAIM7000NBD|.*TwitterAndroid)|PlayBook.*RIM.Tablet|Instagram/i

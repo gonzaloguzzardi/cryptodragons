@@ -1,6 +1,8 @@
 import { IncomingMessage } from 'http'
 
-export default function getDeviceType(req: IncomingMessage): string {
+import deviceType from '../types/device-types'
+
+export default function getDeviceType(req: IncomingMessage): deviceType {
   const UA = req.headers['user-agent']
   const isMobile = Boolean(
     UA.match(

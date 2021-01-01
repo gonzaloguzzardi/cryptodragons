@@ -1,30 +1,14 @@
 import React from 'react'
-import Box from '@material-ui/core/Box'
-import Container from '@material-ui/core/Container'
 import { ReactElement } from 'react'
 
-import Layout from '../../components/layout'
-import AppToolbar from '../../components/app-toolbar/index'
+import HomeMobile from './home.mobile'
+import HomeDesktop from './home.desktop'
 
-import { ISSRPropsDeviceOnly } from '../../types/ssr-device-only'
+import { ISSRPropsDeviceOnly } from '../../types/server-side-props-device-only'
 
 export default function Home({ deviceType }: ISSRPropsDeviceOnly): ReactElement {
-  console.log('deviceType', deviceType)
-  return (
-    <Layout>
-      <AppToolbar />
-      <Container>
-        <Box my={2}>
-          {[...new Array(52)]
-            .map(
-              () => `Cras mattis consectetur purus sit amet fermentum.
-Cras justo odio, dapibus ac facilisis in, egestas eget quam.
-Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
-Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`
-            )
-            .join('\n')}
-        </Box>
-      </Container>
-    </Layout>
-  )
+  if (deviceType === 'mobile') return <HomeMobile />
+
+  if (deviceType === 'desktop') return <HomeDesktop />
+  if (deviceType === 'tablet') return <HomeDesktop />
 }

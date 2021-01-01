@@ -6,7 +6,10 @@ import { ReactElement } from 'react'
 import Layout from '../../components/layout'
 import AppToolbar from '../../components/app-toolbar/index'
 
-export default function Home(): ReactElement {
+import { ISSRPropsDeviceOnly } from '../../types/ssr-device-only'
+
+export default function Home({ deviceType }: ISSRPropsDeviceOnly): ReactElement {
+  console.log('deviceType', deviceType)
   return (
     <Layout>
       <AppToolbar />

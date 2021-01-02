@@ -5,7 +5,7 @@ import AppToolbar from '../../components/app-toolbar'
 
 import Marketplace from './marketplace'
 
-export default function MarketplaceMobile(): ReactElement {
+export default function MarketplaceDesktop(): ReactElement {
   return (
     <Marketplace>
       <AppToolbar deviceType="desktop" section="marketplace" />

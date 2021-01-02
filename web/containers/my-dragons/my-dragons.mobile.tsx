@@ -5,7 +5,7 @@ import AppToolbar from '../../components/app-toolbar'
 
 import MyDragons from './my-dragons'
 
-export default function HomeMobile(): ReactElement {
+export default function MyDragonsMobile(): ReactElement {
   return (
     <MyDragons>
       <AppToolbar deviceType="mobile" section="my-dragons" />

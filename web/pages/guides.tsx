@@ -1,4 +1,4 @@
-import Home from '../containers/home'
+import Guides from '../containers/guides'
 
 import { GetServerSideProps } from 'next'
 import getDeviceType from '../utils/get-device-type'
@@ -9,4 +9,4 @@ export const getServerSideProps: GetServerSideProps = async (context) => ({
   },
 })
 
-export default Home
+export default Guides

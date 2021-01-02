@@ -61,7 +61,7 @@ interface IProps {
 export default function AppToolbar({ deviceType, section }: IProps): ReactElement {
   return (
     <>
-      <AppBar>
+      <AppBar variant="outlined">
         <Toolbar>
           <Link href="/">
             <a className={appbarStyles.homeIconLabelAnchor}>
@@ -123,7 +123,7 @@ export default function AppToolbar({ deviceType, section }: IProps): ReactElemen
 
           {/* Profile | Sign in/up */}
           <div className={appbarStyles.profileSection}>
-            <Button variant="outlined" color="secondary">
+            <Button variant="contained" color="secondary">
               Start
             </Button>
           </div>

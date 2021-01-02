@@ -2,7 +2,6 @@
 
 .homeIconLabelAnchor {
   display: flex;
-  color: $font-color-black;
   margin-right: auto;
   text-decoration: none;
 
@@ -37,8 +36,6 @@
   }
 
   &_Button {
-    color: $font-color-black !important;
-
     &:hover,
     &__selected {
       background-color: transparent !important;

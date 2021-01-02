@@ -2,8 +2,8 @@
 
 .homeIconLabelAnchor {
   display: flex;
-  margin-right: auto;
   color: $font-color-black;
+  margin-right: auto;
   text-decoration: none;
 
   &:hover {
@@ -13,25 +13,18 @@
 
 .homeLabel {
   display: flex;
-  align-items: center;
-  text-decoration: none;
+  color: $font-color-black;
   font-size: 20px;
   font-weight: 500;
+  line-height: 18px;
+  text-decoration: none;
+  align-items: center;
   margin: 0 0 0 12px;
   letter-spacing: -0.3px;
-  line-height: 18px;
 }
 
 .appbarActionLink {
   text-decoration: none;
-
-  &_Button {
-    &:hover,
-    &__selected {
-      background-color: transparent !important;
-      color: $pallete-secondary !important;
-    }
-  }
 
   &_Icon {
     font-size: 18px;
@@ -41,6 +34,16 @@
   &_Label {
     font-size: 16px;
     padding-left: 4px;
+  }
+
+  &_Button {
+    color: $font-color-black !important;
+
+    &:hover,
+    &__selected {
+      background-color: transparent !important;
+      color: $pallete-secondary !important;
+    }
   }
 }
 

@@ -12,15 +12,14 @@ import useScrollTrigger from '@material-ui/core/useScrollTrigger'
 import Zoom from '@material-ui/core/Zoom'
 import Avatar from '@material-ui/core/Avatar'
 
+import classnames from 'classnames'
+
 import { ReactElement } from 'react'
 import Link from 'next/link'
 
 import appbarStyles from './app-toolbar.module.scss'
-import deviceType from 'types/device-types'
 
-interface IProps {
-  children: ReactElement
-}
+import deviceType from 'types/device-types'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -32,7 +31,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 )
 
-function ScrollTop({ children }: IProps): ReactElement {
+function ScrollTop({ children }: { children: ReactElement }): ReactElement {
   const classes = useStyles()
 
   const handleClick = (event: React.MouseEvent<HTMLDivElement>): void => {
@@ -54,7 +53,12 @@ function ScrollTop({ children }: IProps): ReactElement {
   )
 }
 
-export default function AppToolbar({ deviceType }: { deviceType: deviceType }): ReactElement {
+interface IProps {
+  deviceType: deviceType
+  section: 'home' | 'my-dragons' | 'marketplace' | 'guides'
+}
+
+export default function AppToolbar({ deviceType, section }: IProps): ReactElement {
   return (
     <>
       <AppBar>
@@ -69,7 +73,12 @@ export default function AppToolbar({ deviceType }: { deviceType: deviceType }): 
           {/* My dragons */}
           <Link href="/my-dragons">
             <a className={appbarStyles.appbarActionLink}>
-              <IconButton aria-label="my-dragons" className={appbarStyles.appbarActionLink_Button}>
+              <IconButton
+                aria-label="my-dragons"
+                className={classnames(appbarStyles.appbarActionLink_Button, {
+                  [appbarStyles.appbarActionLink_Button__selected]: section === 'my-dragons',
+                })}
+              >
                 <PetsIcon className={appbarStyles.appbarActionLink_Icon} />
                 {deviceType !== 'mobile' && (
                   <span className={appbarStyles.appbarActionLink_Label}>My Dragons</span>
@@ -81,7 +90,12 @@ export default function AppToolbar({ deviceType }: { deviceType: deviceType }): 
           {/* Marketplace */}
           <Link href="/marketplace">
             <a className={appbarStyles.appbarActionLink}>
-              <IconButton aria-label="marketplace" className={appbarStyles.appbarActionLink_Button}>
+              <IconButton
+                aria-label="marketplace"
+                className={classnames(appbarStyles.appbarActionLink_Button, {
+                  [appbarStyles.appbarActionLink_Button__selected]: section === 'marketplace',
+                })}
+              >
                 <StorefrontIcon className={appbarStyles.appbarActionLink_Icon} />
                 {deviceType !== 'mobile' && (
                   <span className={appbarStyles.appbarActionLink_Label}>Marketplace</span>
@@ -93,7 +107,12 @@ export default function AppToolbar({ deviceType }: { deviceType: deviceType }): 
           {/* Guias */}
           <Link href="/guides">
             <a className={appbarStyles.appbarActionLink}>
-              <IconButton aria-label="guides" className={appbarStyles.appbarActionLink_Button}>
+              <IconButton
+                aria-label="guides"
+                className={classnames(appbarStyles.appbarActionLink_Button, {
+                  [appbarStyles.appbarActionLink_Button__selected]: section === 'guides',
+                })}
+              >
                 <MenuBookIcon className={appbarStyles.appbarActionLink_Icon} />
                 {deviceType !== 'mobile' && (
                   <span className={appbarStyles.appbarActionLink_Label}>Guides</span>

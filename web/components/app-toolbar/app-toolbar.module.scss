@@ -26,9 +26,10 @@
   text-decoration: none;
 
   &_Button {
-    &:hover {
+    &:hover,
+    &__selected {
       background-color: transparent !important;
-      color: $pallete-secondary;
+      color: $pallete-secondary !important;
     }
   }
 

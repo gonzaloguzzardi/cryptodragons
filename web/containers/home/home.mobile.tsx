@@ -10,7 +10,7 @@ import Home from './home'
 export default function HomeMobile(): ReactElement {
   return (
     <Home>
-      <AppToolbar />
+      <AppToolbar deviceType="mobile" />
       <Container>
         <Box my={2}>
           {[...new Array(52)]

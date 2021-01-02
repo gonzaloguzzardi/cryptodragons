@@ -2,6 +2,7 @@
 
 .homeIconLabelAnchor {
   display: flex;
+  margin-right: auto;
   color: $font-color-black;
   text-decoration: none;
 
@@ -14,11 +15,36 @@
   display: flex;
   align-items: center;
   text-decoration: none;
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 500;
   margin: 0 0 0 12px;
   letter-spacing: -0.3px;
   line-height: 18px;
+}
+
+.appbarActionLink {
+  text-decoration: none;
+
+  &_Button {
+    &:hover {
+      background-color: transparent !important;
+      color: $pallete-secondary;
+    }
+  }
+
+  &_Icon {
+    font-size: 18px;
+    padding-bottom: 4px;
+  }
+
+  &_Label {
+    font-size: 16px;
+    padding-left: 4px;
+  }
+}
+
+.profileSection {
+  padding-left: 12px;
 }
 
 // /* #### Mobile styles #### */

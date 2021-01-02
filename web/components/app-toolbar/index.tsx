@@ -1,6 +1,11 @@
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Fab from '@material-ui/core/Fab'
+import Button from '@material-ui/core/Button'
+import IconButton from '@material-ui/core/IconButton'
+import PetsIcon from '@material-ui/icons/Pets'
+import MenuBookIcon from '@material-ui/icons/MenuBook'
+import StorefrontIcon from '@material-ui/icons/Storefront'
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp'
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles'
 import useScrollTrigger from '@material-ui/core/useScrollTrigger'
@@ -11,6 +16,7 @@ import { ReactElement } from 'react'
 import Link from 'next/link'
 
 import appbarStyles from './app-toolbar.module.scss'
+import deviceType from 'types/device-types'
 
 interface IProps {
   children: ReactElement
@@ -48,7 +54,7 @@ function ScrollTop({ children }: IProps): ReactElement {
   )
 }
 
-export default function AppToolbar(): ReactElement {
+export default function AppToolbar({ deviceType }: { deviceType: deviceType }): ReactElement {
   return (
     <>
       <AppBar>
@@ -56,12 +62,56 @@ export default function AppToolbar(): ReactElement {
           <Link href="/">
             <a className={appbarStyles.homeIconLabelAnchor}>
               <Avatar alt="CryptoDragons Icon" src="/assets/dragonsito.jpg" />
-              <h6 className={appbarStyles.homeLabel}>CryptoDragons</h6>
+              {deviceType !== 'mobile' && <h6 className={appbarStyles.homeLabel}>CryptoDragons</h6>}
             </a>
           </Link>
+
+          {/* My dragons */}
+          <Link href="/my-dragons">
+            <a className={appbarStyles.appbarActionLink}>
+              <IconButton aria-label="my-dragons" className={appbarStyles.appbarActionLink_Button}>
+                <PetsIcon className={appbarStyles.appbarActionLink_Icon} />
+                {deviceType !== 'mobile' && (
+                  <span className={appbarStyles.appbarActionLink_Label}>My Dragons</span>
+                )}
+              </IconButton>
+            </a>
+          </Link>
+
+          {/* Marketplace */}
+          <Link href="/marketplace">
+            <a className={appbarStyles.appbarActionLink}>
+              <IconButton aria-label="marketplace" className={appbarStyles.appbarActionLink_Button}>
+                <StorefrontIcon className={appbarStyles.appbarActionLink_Icon} />
+                {deviceType !== 'mobile' && (
+                  <span className={appbarStyles.appbarActionLink_Label}>Marketplace</span>
+                )}
+              </IconButton>
+            </a>
+          </Link>
+
+          {/* Guias */}
+          <Link href="/guides">
+            <a className={appbarStyles.appbarActionLink}>
+              <IconButton aria-label="guides" className={appbarStyles.appbarActionLink_Button}>
+                <MenuBookIcon className={appbarStyles.appbarActionLink_Icon} />
+                {deviceType !== 'mobile' && (
+                  <span className={appbarStyles.appbarActionLink_Label}>Guides</span>
+                )}
+              </IconButton>
+            </a>
+          </Link>
+
+          {/* Profile | Sign in/up */}
+          <div className={appbarStyles.profileSection}>
+            <Button variant="outlined" color="secondary">
+              Start
+            </Button>
+          </div>
         </Toolbar>
       </AppBar>
       <Toolbar id="back-to-top-anchor" />
+
       <ScrollTop>
         <Fab color="secondary" size="large" aria-label="Scroll back to top">
           <KeyboardArrowUpIcon />

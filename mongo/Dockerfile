@@ -1,4 +1,4 @@
-FROM node:10.15.0
+FROM node:10.19.0
 WORKDIR /usr/src/app
 RUN apt-get update
 RUN apt-get install -y mongodb

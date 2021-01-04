@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/ban-types */
-import React, { Component, ReactNode } from 'react'
+import React, { Component } from 'react'
 
 import Layout from '../../components/layout'
 import Dragon from '../../components/dragon'
@@ -12,6 +12,7 @@ import FormLabel from '@material-ui/core/FormLabel'
 import MainchainAPI from '../../services/blockchain-interaction/mainchain'
 import SidechainAPI from '../../services/blockchain-interaction/sidechain'
 import { _getDragonsFromOracle } from '../../services/oracle'
+import { ReactElement } from 'react'
 
 const GAS_DEFAULT_VALUE = 350000
 
@@ -20,16 +21,18 @@ interface IProps {
 }
 
 interface IState {
-  sideAccount: string
-  mainAccount: string
-  sideDragons: Array<string>
-  mainDragons: Array<string>
-  sidechainGatewayDragons: Array<Object>
-  mainchainGatewayDragons: Array<Object>
-  accountsAreMapped: boolean
+  sideAccount?: string
+  mainAccount?: string
+  sideDragons?: Array<string>
+  mainDragons?: Array<string>
+  sidechainGatewayDragons?: Array<Object>
+  mainchainGatewayDragons?: Array<Object>
+  accountsAreMapped?: boolean
 }
 
-class Dragons extends Component<IProps, IState> {
+class Demo extends Component<IProps> {
+  state: IState
+
   constructor(props: IProps) {
     super(props)
 
@@ -131,7 +134,7 @@ class Dragons extends Component<IProps, IState> {
   onChangeSideAccount: (event) => unknown = (event) =>
     this.setState({ sideAccount: event.target.value })
 
-  render: () => ReactNode = () => (
+  render: () => ReactElement<IProps> = () => (
     <Layout>
       <Grid container justify="center" spacing={2}>
         <Grid item>
@@ -284,4 +287,4 @@ class Dragons extends Component<IProps, IState> {
   )
 }
 
-export default Dragons
+export default Demo

@@ -1,9 +1,9 @@
 import React from 'react'
-import Box from '@material-ui/core/Box'
-import Container from '@material-ui/core/Container'
 import { ReactElement } from 'react'
 
-import AppToolbar from '../../components/app-toolbar/index'
+import AppToolbar from '../../components/app-toolbar'
+import Landing from '../../components/home/landing-section'
+import BuyADragonSection from '../../components/home/buy-a-dragon'
 
 import Home from './home'
 
@@ -11,19 +11,8 @@ export default function HomeMobile(): ReactElement {
   return (
     <Home>
       <AppToolbar deviceType="mobile" section="home" />
-      <Container>
-        <Box my={2}>
-          {[...new Array(52)]
-            .map(
-              () => `Mobile Mobile Mobile Mobile Mobile Mobile Mobile
-              Mobile Mobile Mobile Mobile Mobile Mobile Mobile Mobile
-              Mobile Mobile Mobile Mobile Mobile Mobile Mobile Mobile
-              Mobile Mobile Mobile Mobile Mobile Mobile Mobile Mobile
-              Mobile Mobile Mobile Mobile Mobile Mobile Mobile Mobile`
-            )
-            .join('\n')}
-        </Box>
-      </Container>
+      <Landing />
+      <BuyADragonSection />
     </Home>
   )
 }

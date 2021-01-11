@@ -1,0 +1,21 @@
+@import '../../../styles/variables.scss';
+
+.main {
+  padding: 60px 0;
+  background-color: $pallete-secondary;
+  display: flex;
+  justify-content: center;
+}
+
+.card {
+  padding: 40px 0;
+  max-width: 80%;
+  border-radius: 50px !important;
+}
+
+.img {
+  margin-top: 8px;
+  height: 300px;
+  width: 300px;
+  margin: 40px;
+}

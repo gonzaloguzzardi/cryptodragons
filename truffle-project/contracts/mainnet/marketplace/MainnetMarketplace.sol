@@ -54,6 +54,8 @@ contract MainnetMarketplace {
         dragonTokenAddress = _dragonTokenAddress;
     }
 
+    // TODO en lugar de mint tiene que pasarle el id, chequear que quien trasnfiere sea dueño del dragon, y hacer la transferencia de dominio al marketplace referenciando al dueño
+
     /// @notice To publish a product as a seller
     /// @param _title The title of the product
     /// @param _description The description of the product
@@ -62,12 +64,14 @@ contract MainnetMarketplace {
     function publishProduct(string memory _title, string memory _description,
                             uint256 _price, string memory _image) public {
         require(bytes(_title).length > 0, 'The title cannot be empty');
-        require(bytes(_description).length > 0, 'The description cannot beempty');
+        require(bytes(_description).length > 0, 'The description cannot be empty');
         require(_price > 0, 'The price cannot be empty');
         require(bytes(_image).length > 0, 'The image cannot be empty');
-        Product memory p = Product(lastId, _title, _description, now,msg.sender, _price, _image);
+        Product memory p = Product(lastId, _title, _description, now, msg.sender, _price, _image);
         products.push(p);
         productById[lastId] = p;
+
+        // TODO marketplace should not mint, it should get get tokens from ERC721 contract, so maybe we should publish from there
         EcommerceToken(token).mint(address(this), lastId); // Create a newtoken for this product which will be owned by this contract until soldl
         lastId++;
     }

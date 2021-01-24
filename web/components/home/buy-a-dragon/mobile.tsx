@@ -31,6 +31,7 @@ export default function BuyADragonSection(): ReactElement {
                 color="secondary"
                 fullWidth
                 endIcon={<img src="/assets/home/dragon-3.png" alt="" height="60px" />}
+                className={styles.cardButton}
               >
                 <Typography variant="body1" component="span">
                   Buy a Dragon

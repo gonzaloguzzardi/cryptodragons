@@ -1,0 +1,17 @@
+@import '../../../styles/variables.scss';
+
+.main {
+  padding: $section-desktop-margins 0;
+  justify-content: center;
+  text-align: center;
+  display: block;
+}
+
+.title {
+  padding-bottom: 30px;
+}
+
+.subtitle {
+  padding: 0 20vw;
+  padding-bottom: 20px;
+}

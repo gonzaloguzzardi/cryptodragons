@@ -22,7 +22,7 @@ export default function BuyADragonSection(): ReactElement {
               <Typography variant="h3" gutterBottom>
                 What is CryptoDragons?
               </Typography>
-              <Typography variant="h5" component="p" gutterBottom>
+              <Typography variant="subtitle1" color="textSecondary" gutterBottom>
                 CryptoDragons is a game centered around breedable, collectible, and oh-so-adorable
                 creatures we call CryptoDragons! Each dragon is one-of-a-kind and 100% owned by you;
                 it cannot be replicated, taken away, or destroyed.

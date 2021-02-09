@@ -4,14 +4,19 @@
   padding: $section-desktop-margins 0;
   justify-content: center;
   text-align: center;
-  display: block;
+  display: flex;
 }
 
-.title {
-  padding-bottom: 30px;
+.container {
+  max-width: $max-width-by-screen;
 }
 
-.subtitle {
-  padding: 0 20vw;
+.title, .subtitle {
   padding-bottom: 20px;
+}
+
+.marketplaceCollections {
+  padding: 20px 0;
+  display: flex;
+  justify-content: center;
 }

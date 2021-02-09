@@ -4,7 +4,7 @@ import { ReactElement } from 'react'
 
 import styles from './desktop.module.scss'
 
-import MarketplaceCollections from '../../card/cards-stacked/desktop'
+import MarketplaceCollections from './cards-stacked/desktop'
 
 export default function MarketplaceSection(): ReactElement {
   return (

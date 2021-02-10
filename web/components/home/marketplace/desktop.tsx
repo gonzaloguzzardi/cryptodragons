@@ -1,10 +1,11 @@
 import Typography from '@material-ui/core/Typography'
 
-import { ReactElement } from 'react'
+import Grid from '@material-ui/core/Grid'
+import FeaturedCard from '../../card/featured-card'
 
 import styles from './desktop.module.scss'
 
-import MarketplaceCollections from '../../card/cards-stacked/desktop'
+import { ReactElement } from 'react'
 
 export default function MarketplaceSection(): ReactElement {
   return (
@@ -20,7 +21,20 @@ export default function MarketplaceSection(): ReactElement {
           </Typography>
         </div>
         <div className={styles.marketplaceCollections}>
-          <MarketplaceCollections />
+          <Grid container justify="space-between">
+            <Grid container item justify="center" xs={12} sm={6} md={3}>
+              <FeaturedCard />
+            </Grid>
+            <Grid container item justify="center" xs={12} sm={6} md={3}>
+              <FeaturedCard />
+            </Grid>
+            <Grid container item justify="center" xs={12} sm={6} md={3}>
+              <FeaturedCard />
+            </Grid>
+            <Grid container item justify="center" xs={12} sm={6} md={3}>
+              <FeaturedCard />
+            </Grid>
+          </Grid>
         </div>
       </div>
     </div>

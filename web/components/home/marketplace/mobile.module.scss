@@ -2,6 +2,21 @@
 
 .main {
   padding: $section-mobile-margins 0;
+  justify-content: center;
+  text-align: center;
+  display: flex;
+}
+
+.container {
+  max-width: $max-width-by-screen;
+}
+
+.title, .subtitle {
+  padding-bottom: 10px;
+}
+
+.marketplaceCollections {
+  padding: 20px 0;
   display: flex;
   justify-content: center;
 }

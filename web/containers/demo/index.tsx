@@ -19,7 +19,6 @@ const GAS_DEFAULT_VALUE = 350000
 interface IProps {
   any
 }
-
 interface IState {
   sideAccount?: string
   mainAccount?: string

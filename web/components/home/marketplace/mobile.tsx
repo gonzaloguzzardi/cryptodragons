@@ -1,6 +1,7 @@
 import Typography from '@material-ui/core/Typography'
 
 import Grid from '@material-ui/core/Grid'
+import Carousel from 'react-material-ui-carousel'
 import FeaturedCard from '../../card/featured-card'
 
 import styles from './mobile.module.scss'
@@ -23,20 +24,12 @@ export default function MarketplaceSection(): ReactElement {
           </Typography>
         </div>
         <div className={styles.marketplaceCollections}>
-          <Grid container justify="space-between">
-            <Grid container item justify="center" xs={12} sm={6} md={3}>
-              <FeaturedCard />
-            </Grid>
-            <Grid container item justify="center" xs={12} sm={6} md={3}>
-              <FeaturedCard />
-            </Grid>
-            <Grid container item justify="center" xs={12} sm={6} md={3}>
-              <FeaturedCard />
-            </Grid>
-            <Grid container item justify="center" xs={12} sm={6} md={3}>
-              <FeaturedCard />
-            </Grid>
-          </Grid>
+            <Carousel>
+                <FeaturedCard />
+                <FeaturedCard />
+                <FeaturedCard />
+                <FeaturedCard />
+            </Carousel>
         </div>
       </div>
     </div>

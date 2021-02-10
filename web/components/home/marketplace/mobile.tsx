@@ -1,3 +1,5 @@
+import Link from 'next/link'
+import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
 
 import Carousel from 'react-material-ui-carousel'
@@ -30,6 +32,18 @@ export default function MarketplaceSection(): ReactElement {
             <FeaturedCard />
           </Carousel>
         </div>
+        <Link href="/marketplace">
+          <Button
+            variant="contained"
+            size="large"
+            color="secondary"
+            className={styles.goMktpButton}
+          >
+            <Typography variant="body1" component="span">
+              Search more in marketplace!
+            </Typography>
+          </Button>
+        </Link>
       </div>
     </div>
   )

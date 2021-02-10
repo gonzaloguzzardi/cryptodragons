@@ -1,6 +1,8 @@
+import Link from 'next/link'
+import Button from '@material-ui/core/Button'
+import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 
-import Grid from '@material-ui/core/Grid'
 import FeaturedCard from '../../card/featured-card'
 
 import styles from './desktop.module.scss'
@@ -36,6 +38,18 @@ export default function MarketplaceSection(): ReactElement {
             </Grid>
           </Grid>
         </div>
+        <Link href="/marketplace">
+          <Button
+            variant="contained"
+            size="large"
+            color="secondary"
+            className={styles.goMktpButton}
+          >
+            <Typography variant="body1" component="span">
+              Search more in marketplace!
+            </Typography>
+          </Button>
+        </Link>
       </div>
     </div>
   )

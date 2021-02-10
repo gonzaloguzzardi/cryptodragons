@@ -5,6 +5,8 @@ import Typography from '@material-ui/core/Typography'
 
 import FeaturedCard from '../../card/featured-card'
 
+import mock from './dragons-data'
+
 import styles from './desktop.module.scss'
 
 import { ReactElement } from 'react'
@@ -24,18 +26,11 @@ export default function MarketplaceSection(): ReactElement {
         </div>
         <div className={styles.marketplaceCollections}>
           <Grid container justify="space-between">
-            <Grid container item justify="center" xs={12} sm={6} md={3}>
-              <FeaturedCard />
-            </Grid>
-            <Grid container item justify="center" xs={12} sm={6} md={3}>
-              <FeaturedCard />
-            </Grid>
-            <Grid container item justify="center" xs={12} sm={6} md={3}>
-              <FeaturedCard />
-            </Grid>
-            <Grid container item justify="center" xs={12} sm={6} md={3}>
-              <FeaturedCard />
-            </Grid>
+            {mock.map((data) => (
+              <Grid key={data.image} container item justify="center" xs={12} sm={6} md={3}>
+                <FeaturedCard image={data.image} name={data.name} owner={data.owner} />
+              </Grid>
+            ))}
           </Grid>
         </div>
         <Link href="/marketplace">

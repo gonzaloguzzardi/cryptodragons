@@ -5,6 +5,8 @@ import Typography from '@material-ui/core/Typography'
 import Carousel from 'react-material-ui-carousel'
 import FeaturedCard from '../../card/featured-card'
 
+import mock from './dragons-data'
+
 import styles from './mobile.module.scss'
 
 import { ReactElement } from 'react'
@@ -26,10 +28,14 @@ export default function MarketplaceSection(): ReactElement {
         </div>
         <div className={styles.marketplaceCollections}>
           <Carousel animation="slide">
-            <FeaturedCard />
-            <FeaturedCard />
-            <FeaturedCard />
-            <FeaturedCard />
+            {mock.map((data) => (
+              <FeaturedCard
+                key={data.image}
+                image={data.image}
+                name={data.name}
+                owner={data.owner}
+              />
+            ))}
           </Carousel>
         </div>
         <Link href="/marketplace">

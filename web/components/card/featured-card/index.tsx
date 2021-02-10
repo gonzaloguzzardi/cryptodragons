@@ -11,7 +11,7 @@ import styles from './index.module.scss'
 
 export default function FeaturedCard(): ReactElement {
   return (
-    <Card className={styles.card}>
+    <Card className={styles.card} raised>
       <CardActionArea>
         <CardContent>
           <Typography variant="h5" component="h2">

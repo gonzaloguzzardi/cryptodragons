@@ -1,6 +1,6 @@
 import Button from '@material-ui/core/Button'
 import Grid from '@material-ui/core/Grid'
-import Paper from '@material-ui/core/Paper'
+import Card from '@material-ui/core/Card'
 import Typography from '@material-ui/core/Typography'
 
 import { ReactElement } from 'react'
@@ -10,7 +10,7 @@ import styles from './mobile.module.scss'
 export default function BuyADragonSection(): ReactElement {
   return (
     <div className={styles.main}>
-      <Paper className={styles.card}>
+      <Card className={styles.card} raised>
         <Grid container justify="center" spacing={4}>
           <img className={styles.img} alt="complex" src="/assets/home/dragon-2.png" />
           <Grid item xs={10}>
@@ -40,7 +40,7 @@ export default function BuyADragonSection(): ReactElement {
             </Grid>
           </Grid>
         </Grid>
-      </Paper>
+      </Card>
     </div>
   )
 }

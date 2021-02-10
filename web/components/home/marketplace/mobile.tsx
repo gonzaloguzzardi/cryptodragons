@@ -23,7 +23,7 @@ export default function MarketplaceSection(): ReactElement {
           </Typography>
         </div>
         <div className={styles.marketplaceCollections}>
-          <Carousel>
+          <Carousel animation="slide">
             <FeaturedCard />
             <FeaturedCard />
             <FeaturedCard />

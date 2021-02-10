@@ -1,6 +1,5 @@
 import Typography from '@material-ui/core/Typography'
 
-import Grid from '@material-ui/core/Grid'
 import Carousel from 'react-material-ui-carousel'
 import FeaturedCard from '../../card/featured-card'
 
@@ -24,12 +23,12 @@ export default function MarketplaceSection(): ReactElement {
           </Typography>
         </div>
         <div className={styles.marketplaceCollections}>
-            <Carousel>
-                <FeaturedCard />
-                <FeaturedCard />
-                <FeaturedCard />
-                <FeaturedCard />
-            </Carousel>
+          <Carousel>
+            <FeaturedCard />
+            <FeaturedCard />
+            <FeaturedCard />
+            <FeaturedCard />
+          </Carousel>
         </div>
       </div>
     </div>

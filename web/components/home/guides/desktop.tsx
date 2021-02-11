@@ -29,7 +29,7 @@ export default function MarketplaceSection(): ReactElement {
               <Typography variant="subtitle1" color="textSecondary">
                 Check the guides and become an expert of Cryptodragons - It is free. <br /> Review
                 the main features features such as purchasing a dragon, train them <br /> and
-                everything you must know to start journey in this magic world.
+                everything you must know to start your journey in this magic world.
               </Typography>
             </div>
             <Link href="/guides">

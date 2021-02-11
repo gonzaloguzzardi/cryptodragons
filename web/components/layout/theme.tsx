@@ -46,7 +46,7 @@ const theme = createMuiTheme({
     },
     overline: {
       fontSize: 14,
-      fontWeight: 500,
+      fontWeight: 600,
       textTransform: 'none',
     },
   },

@@ -10,3 +10,8 @@
   max-width: $max-width-by-screen;
   margin: 20px auto;
 }
+
+.divider {
+  max-width: $max-width-by-screen;
+  margin: 0 auto !important;
+}

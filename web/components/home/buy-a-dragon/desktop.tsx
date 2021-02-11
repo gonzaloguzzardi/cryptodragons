@@ -36,7 +36,7 @@ export default function BuyADragonSection(): ReactElement {
                   size="large"
                   color="secondary"
                   fullWidth
-                  endIcon={<img src="/assets/home/dragon-3.png" alt="" height="60px" />}
+                  endIcon={<img src="/assets/home/dragon-3.png" alt="" height="50px" />}
                   className={styles.cardButton}
                 >
                   <Typography variant="h6" component="span">

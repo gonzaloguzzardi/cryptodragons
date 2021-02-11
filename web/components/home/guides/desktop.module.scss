@@ -1,0 +1,32 @@
+@import '../../../styles/variables.scss';
+
+.main {
+  padding: $section-desktop-margins 0;
+  justify-content: center;
+  text-align: center;
+  display: flex;
+  background-color: #f3f1ee;
+  background-image: url(https://www.cryptokitties.co/images/pattern-tile.svg);
+}
+
+.card {
+  padding: 40px 0;
+  width: $max-width-by-screen;
+  border-radius: 50px !important;
+}
+
+.title, .subtitle {
+  padding-bottom: 20px;
+}
+
+.marketplaceCollections {
+  padding: 20px 0;
+  display: flex;
+  justify-content: center;
+}
+
+.guideButton {
+  margin: 20px !important;
+  border-radius: 10px !important;
+  text-transform: none !important;
+}

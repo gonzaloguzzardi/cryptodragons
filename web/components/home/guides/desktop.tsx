@@ -35,7 +35,7 @@ export default function MarketplaceSection(): ReactElement {
               </Typography>
             </div>
 
-            <Grid container direction="row" justify="space-between" xs={11}>
+            <Grid container direction="row" justify="space-between" item xs={11}>
               <Link href="/guides">
                 <Button
                   variant="contained"

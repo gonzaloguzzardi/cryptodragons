@@ -1,0 +1,34 @@
+@import '../../styles/variables.scss';
+
+.main {
+  padding: 10px 0;
+  background-color: $pallete-secondary;
+  display: block;
+}
+
+.container {
+  max-width: $max-width-by-screen;
+  margin: 20px auto;
+}
+
+.divider {
+  max-width: $max-width-by-screen;
+  margin: 0 auto !important;
+}
+
+.socialMediaText,
+.downloadAppText {
+  width: 100%;
+  height: 20px;
+  margin-bottom: 10px !important;
+}
+
+.downloadAppSection {
+  text-align: end;
+}
+
+.copyRightText,
+.downloadAppText,
+.socialMediaText {
+  user-select: none;
+}

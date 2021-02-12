@@ -7,8 +7,5 @@ import MyDragonsMobile from './my-dragons.mobile'
 import { ISSRPropsDeviceOnly } from '../../types/server-side-props-device-only'
 
 export default function MyDragons({ deviceType }: ISSRPropsDeviceOnly): ReactElement {
-  if (deviceType === 'desktop') return <MyDragonsDesktop />
-
-  // mobile || tablet
-  return <MyDragonsMobile />
+  return deviceType === 'desktop' ? <MyDragonsDesktop /> : <MyDragonsMobile />
 }

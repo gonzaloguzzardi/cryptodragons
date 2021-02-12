@@ -6,7 +6,7 @@ exports[`Index page should match the snapshot 1`] = `
 >
   <main>
     <header
-      className="MuiPaper-root MuiAppBar-root MuiAppBar-positionFixed MuiAppBar-colorPrimary mui-fixed MuiPaper-elevation4"
+      className="MuiPaper-root MuiAppBar-root MuiAppBar-positionFixed MuiAppBar-colorPrimary mui-fixed MuiPaper-outlined"
     >
       <div
         className="MuiToolbar-root MuiToolbar-regular MuiToolbar-gutters"
@@ -174,7 +174,7 @@ exports[`Index page should match the snapshot 1`] = `
           className="profileSection"
         >
           <button
-            className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedSecondary"
+            className="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedSecondary"
             disabled={false}
             onBlur={[Function]}
             onDragLeave={[Function]}

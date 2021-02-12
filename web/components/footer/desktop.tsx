@@ -10,7 +10,7 @@ import { ReactElement } from 'react'
 
 import Icon from './icon'
 
-export default function footerDesktop(): ReactElement {
+export default function FooterDesktop(): ReactElement {
   return (
     <div className={styles.main}>
       <Grid container className={styles.container}>

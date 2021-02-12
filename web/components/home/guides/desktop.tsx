@@ -21,10 +21,12 @@ export default function MarketplaceSection(): ReactElement {
               width="200px"
             />
           </Grid>
+
           <Grid item xs={8} container alignItems="center">
             <div className={styles.title}>
               <Typography variant="h3">Learn how to play CryptoDragons!</Typography>
             </div>
+
             <div className={styles.subtitle}>
               <Typography variant="subtitle1" color="textSecondary">
                 Check the guides and become an expert of Cryptodragons - It is free. <br /> Review
@@ -32,54 +34,60 @@ export default function MarketplaceSection(): ReactElement {
                 everything you must know to start your journey in this magic world.
               </Typography>
             </div>
-            <Link href="/guides">
-              <Button
-                variant="contained"
-                size="large"
-                color="secondary"
-                className={styles.guideButton}
-              >
-                <Typography variant="body1" component="span">
-                  Getting Started
-                </Typography>
-              </Button>
-            </Link>
-            <Link href="/guides">
-              <Button
-                variant="contained"
-                size="large"
-                color="secondary"
-                className={styles.guideButton}
-              >
-                <Typography variant="body1" component="span">
-                  Gas and Fees
-                </Typography>
-              </Button>
-            </Link>
-            <Link href="/guides">
-              <Button
-                variant="contained"
-                size="large"
-                color="secondary"
-                className={styles.guideButton}
-              >
-                <Typography variant="body1" component="span">
-                  Marketplace
-                </Typography>
-              </Button>
-            </Link>
-            <Link href="/guides">
-              <Button
-                variant="contained"
-                size="large"
-                color="secondary"
-                className={styles.guideButton}
-              >
-                <Typography variant="body1" component="span">
-                  FAQs
-                </Typography>
-              </Button>
-            </Link>
+
+            <Grid container direction="row" justify="space-between" xs={11}>
+              <Link href="/guides">
+                <Button
+                  variant="contained"
+                  size="large"
+                  color="secondary"
+                  className={styles.guideButton}
+                >
+                  <Typography variant="body1" component="span">
+                    Getting Started
+                  </Typography>
+                </Button>
+              </Link>
+
+              <Link href="/guides">
+                <Button
+                  variant="contained"
+                  size="large"
+                  color="secondary"
+                  className={styles.guideButton}
+                >
+                  <Typography variant="body1" component="span">
+                    Gas and Fees
+                  </Typography>
+                </Button>
+              </Link>
+
+              <Link href="/guides">
+                <Button
+                  variant="contained"
+                  size="large"
+                  color="secondary"
+                  className={styles.guideButton}
+                >
+                  <Typography variant="body1" component="span">
+                    Marketplace
+                  </Typography>
+                </Button>
+              </Link>
+
+              <Link href="/guides">
+                <Button
+                  variant="contained"
+                  size="large"
+                  color="secondary"
+                  className={styles.guideButton}
+                >
+                  <Typography variant="body1" component="span">
+                    FAQs
+                  </Typography>
+                </Button>
+              </Link>
+            </Grid>
           </Grid>
         </Grid>
       </Card>

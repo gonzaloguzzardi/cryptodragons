@@ -2,19 +2,19 @@ import Grid from '@material-ui/core/Grid'
 import Divider from '@material-ui/core/Divider'
 import Typography from '@material-ui/core/Typography'
 
-import ItemLink from '../item-link'
+import ItemLink from './item-link'
 
 import styles from './desktop.module.scss'
 
 import { ReactElement } from 'react'
 
-import FacebookIcon from '@material-ui/icons/Facebook'
+import Icon from './icon'
 
 export default function footerDesktop(): ReactElement {
   return (
     <div className={styles.main}>
       <Grid container className={styles.container}>
-        <Grid item xs={2}>
+        <Grid item xs={3}>
           <ItemLink href="/..." text="My profile" />
           <ItemLink href="/..." text="Search" />
           <ItemLink href="/..." text="FAQs" />
@@ -22,24 +22,42 @@ export default function footerDesktop(): ReactElement {
           <ItemLink href="/..." text="Privacy" />
           <ItemLink href="/..." text="Terms and Conditions" />
         </Grid>
-        <Grid item xs={2}>
+
+        <Grid item xs={3}>
           <ItemLink href="/..." text="About us" />
           <ItemLink href="/..." text="Join us!" />
           <ItemLink href="/..." text="Contact us" />
         </Grid>
 
-        <Grid item xs={2}></Grid>
+        <Grid item xs={2} />
 
-        <Grid container item xs={3} justify="flex-end">
-          <Typography variant="caption" color="primary" component="p">
+        <Grid item xs={2}>
+          <Typography
+            variant="caption"
+            color="primary"
+            component="p"
+            className={styles.socialMediaText}
+          >
             Follow us
           </Typography>
-          <FacebookIcon />
+
+          <Icon href="https://www.facebook.com" id="facebook" className="mr-6" />
+          <Icon href="https://www.twitter.com" id="twitter" className="mr-6" />
+          <Icon href="https://www.youtube.com" id="youtube" className="mr-6" />
         </Grid>
-        <Grid container item xs={3} justify="flex-end">
-          <Typography variant="caption" color="primary" component="p">
+
+        <Grid item xs={2} className={styles.downloadAppSection}>
+          <Typography
+            variant="caption"
+            color="primary"
+            component="p"
+            className={styles.downloadAppText}
+          >
             Download App
           </Typography>
+
+          <Icon href="https://www.android.com" id="android" className="ml-6" />
+          <Icon href="https://www.apple.com" id="apple" className="ml-6" />
         </Grid>
       </Grid>
 
@@ -47,7 +65,12 @@ export default function footerDesktop(): ReactElement {
 
       <Grid container className={styles.container}>
         <Grid item xs={2}>
-          <Typography variant="overline" color="primary" component="p">
+          <Typography
+            variant="overline"
+            color="primary"
+            component="p"
+            className={styles.copyRightText}
+          >
             CryptoDragons © 2021
           </Typography>
         </Grid>

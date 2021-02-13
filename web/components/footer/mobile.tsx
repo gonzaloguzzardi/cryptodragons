@@ -46,6 +46,7 @@ export default function FooterMobile(): ReactElement {
           <Icon href="https://www.facebook.com" id="facebook" className="mr-6" />
           <Icon href="https://www.twitter.com" id="twitter" className="mr-6" />
           <Icon href="https://www.youtube.com" id="youtube" className="mr-6" />
+          <Icon href="https://www.instagram.com" id="instagram" className="mr-6" />
         </Grid>
       </Grid>
 

@@ -18,8 +18,8 @@ async function getMainNetGatewayContract() {
   return new web3js.eth.Contract(GatewayJson.abi, GatewayJson.networks[networkId].address)
 }
 
-export default async () =>
-  Promise.all([
+export default async function clientFactory() {
+  return Promise.all([
     web3js.eth.getAccounts(),
     web3js.eth.net.getId(),
     getMainNetTokenContract(),
@@ -34,3 +34,4 @@ export default async () =>
       gatewayContract: values[3],
     }))
     .catch((err) => console.error(err))
+}

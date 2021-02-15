@@ -48,8 +48,8 @@ async function loadLoomAccount() {
   }
 }
 
-export default async () =>
-  loadLoomAccount()
+export default async function clientFactory() {
+  return loadLoomAccount()
     .then(({ account, web3js, client }) =>
       Promise.all([getLoomTokenContract(web3js), getLoomGatewayContract(web3js)]).then(
         (values) => ({
@@ -63,3 +63,4 @@ export default async () =>
       )
     )
     .catch((err) => console.error(err))
+}

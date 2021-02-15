@@ -12,9 +12,29 @@ import FooterDesktop from '../../components/footer/desktop'
 function HomeDesktop({ accountsState }): ReactElement {
   console.log('Account state', JSON.stringify(accountsState, null, 2))
 
+  function onClickStart(accountState): null {
+    if (!accountState.state.provider_installed) {
+      console.log('Metamask not detected.')
+    }
+
+    if (accountState.state.provider_installed && !accountState.state.mainchain_account) {
+      console.log('Metamask DETECTED, but no mainchain account found.')
+    }
+
+    if (accountState.state.provider_installed && accountState.state.mainchain_account) {
+      console.log(`Metamask DETECTED, and account: ${accountState.state.mainchain_account} found.`)
+    }
+
+    return null
+  }
+
   return (
     <>
-      <AppToolbar deviceType="desktop" section="home" />
+      <AppToolbar
+        deviceType="desktop"
+        section="home"
+        onClickStart={() => onClickStart(accountsState)}
+      />
       <LandingSection />
       <BuyADragonSection />
       <MarketplaceSection />

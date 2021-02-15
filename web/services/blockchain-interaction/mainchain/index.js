@@ -7,12 +7,17 @@ let client
 let clientFetching
 
 class MainchainAPI {
+  static providerInstalled() {
+    // eslint-disable-next-line no-undef
+    return typeof window !== 'undefined' && window.ethereum
+  }
+
   static async getClientHelper() {
     while (!client && clientFetching) await sleep(1000)
 
     if (!client) {
       clientFetching = true
-      client = await clientFactory()
+      client = MainchainAPI.providerInstalled() ? await clientFactory() : null
       clientFetching = false
       console.log('MAINCHAIN CLIENT CREATED', client)
       // client.web3js.eth.accounts.wallet.add(client.account);

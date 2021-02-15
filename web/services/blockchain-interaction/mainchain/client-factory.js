@@ -18,10 +18,8 @@ async function getMainNetGatewayContract() {
   return new web3js.eth.Contract(GatewayJson.abi, GatewayJson.networks[networkId].address)
 }
 
-export default async function clientFactory() {
-  if (typeof window === 'undefined' || !window.ethereum) return null
-
-  return Promise.all([
+export default async () =>
+  Promise.all([
     web3js.eth.getAccounts(),
     web3js.eth.net.getId(),
     getMainNetTokenContract(),
@@ -30,9 +28,9 @@ export default async function clientFactory() {
     .then((values) => ({
       web3js,
       account: values[0][0],
+      accounts: values[0],
       netId: values[1],
       tokenContract: values[2],
       gatewayContract: values[3],
     }))
     .catch((err) => console.error(err))
-}

@@ -2,7 +2,7 @@ import clientFactory from './client-factory'
 import CommonAPI from '../common'
 import sleep from '../../../utils/sleep'
 
-// client: { web3js, account, netId, tokenContract, gatewayContract }
+// client: { account, netId, tokenContract, gatewayContract }
 let client
 let clientFetching
 
@@ -17,7 +17,7 @@ class MainchainAPI {
 
     if (!client) {
       clientFetching = true
-      client = MainchainAPI.providerInstalled() ? await clientFactory() : null
+      client = await clientFactory()
       clientFetching = false
       console.log('MAINCHAIN CLIENT CREATED', client)
       // client.web3js.eth.accounts.wallet.add(client.account);

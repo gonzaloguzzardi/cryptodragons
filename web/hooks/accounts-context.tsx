@@ -30,28 +30,32 @@ AccountsContext.displayName = 'AccountsContext'
 
 const AccountsProvider = ({ children }: { children: ReactNode }): ReactElement => {
   const [data, setData] = useState({
-    mainchain_data: null,
-    sidechain_data: null,
+    provider_installed: null,
+    mainchain_account: null,
   })
 
-  const state = {
+  useEffect(() => {
+    if (!MainchainAPI.providerInstalled()) {
+      setData({
+        provider_installed: false,
+        mainchain_account: null,
+      })
+    } else {
+      MainchainAPI.getClientHelper().then((mainchainData) => {
+        setData({
+          provider_installed: true,
+          mainchain_account: mainchainData && mainchainData.account,
+        })
+      })
+    }
+  }, [])
+
+  const store = {
     state: data,
     setState: setData,
   }
 
-  useEffect(() => {
-    Promise.all([MainchainAPI.getClientHelper()]).then(([mainchainData]) => {
-      setData({
-        mainchain_data: {
-          account: mainchainData && mainchainData.account,
-          net_id: mainchainData && mainchainData.netId,
-        },
-        sidechain_data: null,
-      })
-    })
-  }, [])
-
-  return <AccountsContext.Provider value={state}>{children}</AccountsContext.Provider>
+  return <AccountsContext.Provider value={store}>{children}</AccountsContext.Provider>
 }
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types

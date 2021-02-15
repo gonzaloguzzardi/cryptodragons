@@ -1,3 +1,6 @@
+// dApp UX IMPORTANT
+// https://rimble.consensys.design/guides/ux/connect-a-wallet-conditions
+
 /*
 ### Use case
 
@@ -16,7 +19,6 @@ Now ComponentWithAccountData has a prop `accountsState` with the fields
 
 */
 
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import React, { createContext, ReactElement, ReactNode, useEffect, useState } from 'react'
 
 import MainchainAPI from '../services/blockchain-interaction/mainchain'
@@ -52,6 +54,7 @@ const AccountsProvider = ({ children }: { children: ReactNode }): ReactElement =
   return <AccountsContext.Provider value={state}>{children}</AccountsContext.Provider>
 }
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 const withAccountsHOC = (Component: any): any => {
   const WithAccounts = (props: any): ReactNode => (
     <AccountsContext.Consumer>

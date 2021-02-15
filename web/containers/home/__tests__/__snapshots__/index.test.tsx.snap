@@ -5,46 +5,1218 @@ exports[`Index page should match the snapshot 1`] = `
   className="container"
 >
   <main>
-    <section
-      className="jsx-683114997"
+    <header
+      className="MuiPaper-root MuiAppBar-root MuiAppBar-positionFixed MuiAppBar-colorPrimary mui-fixed MuiPaper-outlined"
     >
       <div
-        className="jsx-683114997 container"
+        className="MuiToolbar-root MuiToolbar-regular MuiToolbar-gutters"
+      >
+        <a
+          className="homeIconLabelAnchor"
+          href="/"
+          onClick={[Function]}
+          onMouseEnter={[Function]}
+        >
+          <div
+            className="MuiAvatar-root MuiAvatar-circle"
+          >
+            <img
+              alt="CryptoDragons Icon"
+              className="MuiAvatar-img"
+              src="/assets/dragonsito.jpg"
+            />
+          </div>
+          <h6
+            className="homeLabel"
+          >
+            CryptoDragons
+          </h6>
+        </a>
+        <a
+          className="appbarActionLink"
+          href="/my-dragons"
+          onClick={[Function]}
+          onMouseEnter={[Function]}
+        >
+          <button
+            aria-label="my-dragons"
+            className="MuiButtonBase-root MuiIconButton-root appbarActionLink_Button"
+            disabled={false}
+            onBlur={[Function]}
+            onDragLeave={[Function]}
+            onFocus={[Function]}
+            onKeyDown={[Function]}
+            onKeyUp={[Function]}
+            onMouseDown={[Function]}
+            onMouseLeave={[Function]}
+            onMouseUp={[Function]}
+            onTouchEnd={[Function]}
+            onTouchMove={[Function]}
+            onTouchStart={[Function]}
+            tabIndex={0}
+            type="button"
+          >
+            <span
+              className="MuiIconButton-label"
+            >
+              <svg
+                aria-hidden={true}
+                className="MuiSvgIcon-root appbarActionLink_Icon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <circle
+                  cx="4.5"
+                  cy="9.5"
+                  r="2.5"
+                />
+                <circle
+                  cx="9"
+                  cy="5.5"
+                  r="2.5"
+                />
+                <circle
+                  cx="15"
+                  cy="5.5"
+                  r="2.5"
+                />
+                <circle
+                  cx="19.5"
+                  cy="9.5"
+                  r="2.5"
+                />
+                <path
+                  d="M17.34 14.86c-.87-1.02-1.6-1.89-2.48-2.91-.46-.54-1.05-1.08-1.75-1.32-.11-.04-.22-.07-.33-.09-.25-.04-.52-.04-.78-.04s-.53 0-.79.05c-.11.02-.22.05-.33.09-.7.24-1.28.78-1.75 1.32-.87 1.02-1.6 1.89-2.48 2.91-1.31 1.31-2.92 2.76-2.62 4.79.29 1.02 1.02 2.03 2.33 2.32.73.15 3.06-.44 5.54-.44h.18c2.48 0 4.81.58 5.54.44 1.31-.29 2.04-1.31 2.33-2.32.31-2.04-1.3-3.49-2.61-4.8z"
+                />
+              </svg>
+              <span
+                className="appbarActionLink_Label"
+              >
+                My Dragons
+              </span>
+            </span>
+          </button>
+        </a>
+        <a
+          className="appbarActionLink"
+          href="/marketplace"
+          onClick={[Function]}
+          onMouseEnter={[Function]}
+        >
+          <button
+            aria-label="marketplace"
+            className="MuiButtonBase-root MuiIconButton-root appbarActionLink_Button"
+            disabled={false}
+            onBlur={[Function]}
+            onDragLeave={[Function]}
+            onFocus={[Function]}
+            onKeyDown={[Function]}
+            onKeyUp={[Function]}
+            onMouseDown={[Function]}
+            onMouseLeave={[Function]}
+            onMouseUp={[Function]}
+            onTouchEnd={[Function]}
+            onTouchMove={[Function]}
+            onTouchStart={[Function]}
+            tabIndex={0}
+            type="button"
+          >
+            <span
+              className="MuiIconButton-label"
+            >
+              <svg
+                aria-hidden={true}
+                className="MuiSvgIcon-root appbarActionLink_Icon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M21.9 8.89l-1.05-4.37c-.22-.9-1-1.52-1.91-1.52H5.05c-.9 0-1.69.63-1.9 1.52L2.1 8.89c-.24 1.02-.02 2.06.62 2.88.08.11.19.19.28.29V19c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-6.94c.09-.09.2-.18.28-.28.64-.82.87-1.87.62-2.89zm-2.99-3.9l1.05 4.37c.1.42.01.84-.25 1.17-.14.18-.44.47-.94.47-.61 0-1.14-.49-1.21-1.14L16.98 5l1.93-.01zM13 5h1.96l.54 4.52c.05.39-.07.78-.33 1.07-.22.26-.54.41-.95.41-.67 0-1.22-.59-1.22-1.31V5zM8.49 9.52L9.04 5H11v4.69c0 .72-.55 1.31-1.29 1.31-.34 0-.65-.15-.89-.41-.25-.29-.37-.68-.33-1.07zm-4.45-.16L5.05 5h1.97l-.58 4.86c-.08.65-.6 1.14-1.21 1.14-.49 0-.8-.29-.93-.47-.27-.32-.36-.75-.26-1.17zM5 19v-6.03c.08.01.15.03.23.03.87 0 1.66-.36 2.24-.95.6.6 1.4.95 2.31.95.87 0 1.65-.36 2.23-.93.59.57 1.39.93 2.29.93.84 0 1.64-.35 2.24-.95.58.59 1.37.95 2.24.95.08 0 .15-.02.23-.03V19H5z"
+                />
+              </svg>
+              <span
+                className="appbarActionLink_Label"
+              >
+                Marketplace
+              </span>
+            </span>
+          </button>
+        </a>
+        <a
+          className="appbarActionLink"
+          href="/guides"
+          onClick={[Function]}
+          onMouseEnter={[Function]}
+        >
+          <button
+            aria-label="guides"
+            className="MuiButtonBase-root MuiIconButton-root appbarActionLink_Button"
+            disabled={false}
+            onBlur={[Function]}
+            onDragLeave={[Function]}
+            onFocus={[Function]}
+            onKeyDown={[Function]}
+            onKeyUp={[Function]}
+            onMouseDown={[Function]}
+            onMouseLeave={[Function]}
+            onMouseUp={[Function]}
+            onTouchEnd={[Function]}
+            onTouchMove={[Function]}
+            onTouchStart={[Function]}
+            tabIndex={0}
+            type="button"
+          >
+            <span
+              className="MuiIconButton-label"
+            >
+              <svg
+                aria-hidden={true}
+                className="MuiSvgIcon-root appbarActionLink_Icon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M21 5c-1.11-.35-2.33-.5-3.5-.5-1.95 0-4.05.4-5.5 1.5-1.45-1.1-3.55-1.5-5.5-1.5S2.45 4.9 1 6v14.65c0 .25.25.5.5.5.1 0 .15-.05.25-.05C3.1 20.45 5.05 20 6.5 20c1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.3 4.75 1.05.1.05.15.05.25.05.25 0 .5-.25.5-.5V6c-.6-.45-1.25-.75-2-1zm0 13.5c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5V8c1.35-.85 3.8-1.5 5.5-1.5 1.2 0 2.4.15 3.5.5v11.5z"
+                />
+                <path
+                  d="M17.5 10.5c.88 0 1.73.09 2.5.26V9.24c-.79-.15-1.64-.24-2.5-.24-1.7 0-3.24.29-4.5.83v1.66c1.13-.64 2.7-.99 4.5-.99zM13 12.49v1.66c1.13-.64 2.7-.99 4.5-.99.88 0 1.73.09 2.5.26V11.9c-.79-.15-1.64-.24-2.5-.24-1.7 0-3.24.3-4.5.83zM17.5 14.33c-1.7 0-3.24.29-4.5.83v1.66c1.13-.64 2.7-.99 4.5-.99.88 0 1.73.09 2.5.26v-1.52c-.79-.16-1.64-.24-2.5-.24z"
+                />
+              </svg>
+              <span
+                className="appbarActionLink_Label"
+              >
+                Guides
+              </span>
+            </span>
+          </button>
+        </a>
+        <div
+          className="profileSection"
+        >
+          <button
+            className="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedSecondary"
+            disabled={false}
+            onBlur={[Function]}
+            onDragLeave={[Function]}
+            onFocus={[Function]}
+            onKeyDown={[Function]}
+            onKeyUp={[Function]}
+            onMouseDown={[Function]}
+            onMouseLeave={[Function]}
+            onMouseUp={[Function]}
+            onTouchEnd={[Function]}
+            onTouchMove={[Function]}
+            onTouchStart={[Function]}
+            tabIndex={0}
+            type="button"
+          >
+            <span
+              className="MuiButton-label"
+            >
+              Start
+            </span>
+          </button>
+        </div>
+      </div>
+    </header>
+    <div
+      className="MuiToolbar-root MuiToolbar-regular MuiToolbar-gutters"
+      id="back-to-top-anchor"
+    />
+    <div
+      className="makeStyles-root-1"
+      onClick={[Function]}
+      role="presentation"
+      style={
+        Object {
+          "transform": "scale(0)",
+          "visibility": "hidden",
+        }
+      }
+    >
+      <button
+        aria-label="Scroll back to top"
+        className="MuiButtonBase-root MuiFab-root MuiFab-secondary"
+        disabled={false}
+        onBlur={[Function]}
+        onDragLeave={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        onKeyUp={[Function]}
+        onMouseDown={[Function]}
+        onMouseLeave={[Function]}
+        onMouseUp={[Function]}
+        onTouchEnd={[Function]}
+        onTouchMove={[Function]}
+        onTouchStart={[Function]}
+        tabIndex={0}
+        type="button"
+      >
+        <span
+          className="MuiFab-label"
+        >
+          <svg
+            aria-hidden={true}
+            className="MuiSvgIcon-root"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"
+            />
+          </svg>
+        </span>
+      </button>
+    </div>
+    <div
+      className="react-parallax "
+      style={
+        Object {
+          "overflow": "hidden",
+          "position": "relative",
+        }
+      }
+    >
+      <img
+        alt="background landing"
+        className="react-parallax-bgimage"
+        src="/assets/home/background_dragon-land.jpg"
+        style={
+          Object {
+            "MozBackfaceVisibility": "hidden",
+            "MsBackfaceVisibility": "hidden",
+            "WebkitBackfaceVisibility": "hidden",
+            "WebkitTransform": "translate3d(-50%, 0, 0)",
+            "WebkitTransformStyle": "preserve-3d",
+            "left": "50%",
+            "position": "absolute",
+            "transform": "translate3d(-50%, 0, 0)",
+          }
+        }
+      />
+      <div
+        className="react-parallax-content"
+        style={
+          Object {
+            "position": "relative",
+          }
+        }
       >
         <div
-          className="jsx-683114997 header"
+          className="main"
         >
-          <h2
-            className="jsx-683114997"
+          <div
+            className="title"
           >
-            Welcome to CryptoDragons
-          </h2>
+            <h2
+              className="MuiTypography-root MuiTypography-h2"
+            >
+              CryptoDragons
+            </h2>
+          </div>
+          <div
+            className="images"
+          >
+            <img
+              alt=""
+              height="400px"
+              src="/assets/home/dragon-1.png"
+              width="400px"
+            />
+          </div>
         </div>
-        <a
-          aria-disabled={false}
-          className="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary"
-          href="demo"
+      </div>
+    </div>
+    <div
+      className="main"
+    >
+      <div
+        className="MuiPaper-root MuiCard-root card MuiPaper-elevation8 MuiPaper-rounded"
+      >
+        <div
+          className="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3"
+        >
+          <div
+            className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-4"
+          >
+            <div
+              className="MuiGrid-root MuiGrid-container MuiGrid-justify-xs-center"
+            >
+              <img
+                alt="complex"
+                className="img"
+                src="/assets/home/dragon-2.png"
+              />
+            </div>
+          </div>
+          <div
+            className="MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-align-items-xs-center MuiGrid-grid-xs-8"
+          >
+            <div
+              className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-10"
+            >
+              <h3
+                className="MuiTypography-root MuiTypography-h3 MuiTypography-gutterBottom"
+              >
+                What is CryptoDragons?
+              </h3>
+              <h6
+                className="MuiTypography-root MuiTypography-subtitle1 MuiTypography-colorTextSecondary MuiTypography-gutterBottom"
+              >
+                CryptoDragons is a game centered around breedable, collectible, and oh-so-adorable creatures we call CryptoDragons! Each dragon is one-of-a-kind and 100% owned by you; it cannot be replicated, taken away, or destroyed.
+              </h6>
+            </div>
+            <div
+              className="MuiGrid-root MuiGrid-container"
+            >
+              <div
+                className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6"
+              />
+              <div
+                className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-4"
+              >
+                <button
+                  className="MuiButtonBase-root MuiButton-root MuiButton-contained cardButton MuiButton-containedSecondary MuiButton-containedSizeLarge MuiButton-sizeLarge MuiButton-fullWidth"
+                  disabled={false}
+                  onBlur={[Function]}
+                  onDragLeave={[Function]}
+                  onFocus={[Function]}
+                  onKeyDown={[Function]}
+                  onKeyUp={[Function]}
+                  onMouseDown={[Function]}
+                  onMouseLeave={[Function]}
+                  onMouseUp={[Function]}
+                  onTouchEnd={[Function]}
+                  onTouchMove={[Function]}
+                  onTouchStart={[Function]}
+                  tabIndex={0}
+                  type="button"
+                >
+                  <span
+                    className="MuiButton-label"
+                  >
+                    <span
+                      className="MuiTypography-root MuiTypography-h6"
+                    >
+                      Buy a Dragon
+                    </span>
+                    <span
+                      className="MuiButton-endIcon MuiButton-iconSizeLarge"
+                    >
+                      <img
+                        alt=""
+                        height="50px"
+                        src="/assets/home/dragon-3.png"
+                      />
+                    </span>
+                  </span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="main"
+    >
+      <div
+        className="container"
+      >
+        <div
+          className="title"
+        >
+          <h3
+            className="MuiTypography-root MuiTypography-h3"
+          >
+            Start your own collection
+          </h3>
+        </div>
+        <div
+          className="subtitle"
+        >
+          <h6
+            className="MuiTypography-root MuiTypography-subtitle1 MuiTypography-colorTextSecondary"
+          >
+            In CryptoDragons you can collect Dragons of all colours and shapes. Create Collections of your favourite dragons and share them with our cryptodragons community.
+          </h6>
+        </div>
+        <div
+          className="marketplaceCollections"
+        >
+          <div
+            className="MuiGrid-root MuiGrid-container MuiGrid-justify-xs-space-between"
+          >
+            <div
+              className="MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-justify-xs-center MuiGrid-grid-xs-12 MuiGrid-grid-sm-6 MuiGrid-grid-md-3"
+            >
+              <div
+                className="MuiPaper-root MuiCard-root card MuiPaper-elevation8 MuiPaper-rounded"
+              >
+                <button
+                  className="MuiButtonBase-root MuiCardActionArea-root"
+                  disabled={false}
+                  onBlur={[Function]}
+                  onDragLeave={[Function]}
+                  onFocus={[Function]}
+                  onKeyDown={[Function]}
+                  onKeyUp={[Function]}
+                  onMouseDown={[Function]}
+                  onMouseLeave={[Function]}
+                  onMouseUp={[Function]}
+                  onTouchEnd={[Function]}
+                  onTouchMove={[Function]}
+                  onTouchStart={[Function]}
+                  tabIndex={0}
+                  type="button"
+                >
+                  <div
+                    className="MuiCardContent-root"
+                  >
+                    <h2
+                      className="MuiTypography-root MuiTypography-h5"
+                    >
+                      Flarion
+                    </h2>
+                  </div>
+                  <div
+                    className="MuiCardMedia-root media"
+                    style={
+                      Object {
+                        "backgroundImage": "url(\\"/assets/dragonsito2.jpeg\\")",
+                      }
+                    }
+                    title="Flarion"
+                  />
+                  <div
+                    className="MuiCardContent-root"
+                  >
+                    <div
+                      className="cardBottomContent"
+                    >
+                      <div
+                        className="cardBottomContentAvatar"
+                      >
+                        <div
+                          className="MuiAvatar-root MuiAvatar-circle"
+                        >
+                          <img
+                            alt="Mocca"
+                            className="MuiAvatar-img"
+                            src="/assets/mocca.jpg"
+                          />
+                        </div>
+                      </div>
+                      <div
+                        className="cardBottomContentText"
+                      >
+                        <p
+                          className="MuiTypography-root MuiTypography-body2 MuiTypography-colorTextSecondary"
+                        >
+                          Owned by
+                        </p>
+                        <p
+                          className="MuiTypography-root MuiTypography-body2 MuiTypography-colorTextPrimary"
+                        >
+                          Mocca
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <span
+                    className="MuiCardActionArea-focusHighlight"
+                  />
+                </button>
+              </div>
+            </div>
+            <div
+              className="MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-justify-xs-center MuiGrid-grid-xs-12 MuiGrid-grid-sm-6 MuiGrid-grid-md-3"
+            >
+              <div
+                className="MuiPaper-root MuiCard-root card MuiPaper-elevation8 MuiPaper-rounded"
+              >
+                <button
+                  className="MuiButtonBase-root MuiCardActionArea-root"
+                  disabled={false}
+                  onBlur={[Function]}
+                  onDragLeave={[Function]}
+                  onFocus={[Function]}
+                  onKeyDown={[Function]}
+                  onKeyUp={[Function]}
+                  onMouseDown={[Function]}
+                  onMouseLeave={[Function]}
+                  onMouseUp={[Function]}
+                  onTouchEnd={[Function]}
+                  onTouchMove={[Function]}
+                  onTouchStart={[Function]}
+                  tabIndex={0}
+                  type="button"
+                >
+                  <div
+                    className="MuiCardContent-root"
+                  >
+                    <h2
+                      className="MuiTypography-root MuiTypography-h5"
+                    >
+                      Flarion
+                    </h2>
+                  </div>
+                  <div
+                    className="MuiCardMedia-root media"
+                    style={
+                      Object {
+                        "backgroundImage": "url(\\"/assets/dragonsito3.png\\")",
+                      }
+                    }
+                    title="Flarion"
+                  />
+                  <div
+                    className="MuiCardContent-root"
+                  >
+                    <div
+                      className="cardBottomContent"
+                    >
+                      <div
+                        className="cardBottomContentAvatar"
+                      >
+                        <div
+                          className="MuiAvatar-root MuiAvatar-circle"
+                        >
+                          <img
+                            alt="Mocca"
+                            className="MuiAvatar-img"
+                            src="/assets/mocca.jpg"
+                          />
+                        </div>
+                      </div>
+                      <div
+                        className="cardBottomContentText"
+                      >
+                        <p
+                          className="MuiTypography-root MuiTypography-body2 MuiTypography-colorTextSecondary"
+                        >
+                          Owned by
+                        </p>
+                        <p
+                          className="MuiTypography-root MuiTypography-body2 MuiTypography-colorTextPrimary"
+                        >
+                          Mocca
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <span
+                    className="MuiCardActionArea-focusHighlight"
+                  />
+                </button>
+              </div>
+            </div>
+            <div
+              className="MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-justify-xs-center MuiGrid-grid-xs-12 MuiGrid-grid-sm-6 MuiGrid-grid-md-3"
+            >
+              <div
+                className="MuiPaper-root MuiCard-root card MuiPaper-elevation8 MuiPaper-rounded"
+              >
+                <button
+                  className="MuiButtonBase-root MuiCardActionArea-root"
+                  disabled={false}
+                  onBlur={[Function]}
+                  onDragLeave={[Function]}
+                  onFocus={[Function]}
+                  onKeyDown={[Function]}
+                  onKeyUp={[Function]}
+                  onMouseDown={[Function]}
+                  onMouseLeave={[Function]}
+                  onMouseUp={[Function]}
+                  onTouchEnd={[Function]}
+                  onTouchMove={[Function]}
+                  onTouchStart={[Function]}
+                  tabIndex={0}
+                  type="button"
+                >
+                  <div
+                    className="MuiCardContent-root"
+                  >
+                    <h2
+                      className="MuiTypography-root MuiTypography-h5"
+                    >
+                      Flarion
+                    </h2>
+                  </div>
+                  <div
+                    className="MuiCardMedia-root media"
+                    style={
+                      Object {
+                        "backgroundImage": "url(\\"/assets/dragonsito4.jpeg\\")",
+                      }
+                    }
+                    title="Flarion"
+                  />
+                  <div
+                    className="MuiCardContent-root"
+                  >
+                    <div
+                      className="cardBottomContent"
+                    >
+                      <div
+                        className="cardBottomContentAvatar"
+                      >
+                        <div
+                          className="MuiAvatar-root MuiAvatar-circle"
+                        >
+                          <img
+                            alt="Mocca"
+                            className="MuiAvatar-img"
+                            src="/assets/mocca.jpg"
+                          />
+                        </div>
+                      </div>
+                      <div
+                        className="cardBottomContentText"
+                      >
+                        <p
+                          className="MuiTypography-root MuiTypography-body2 MuiTypography-colorTextSecondary"
+                        >
+                          Owned by
+                        </p>
+                        <p
+                          className="MuiTypography-root MuiTypography-body2 MuiTypography-colorTextPrimary"
+                        >
+                          Mocca
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <span
+                    className="MuiCardActionArea-focusHighlight"
+                  />
+                </button>
+              </div>
+            </div>
+            <div
+              className="MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-justify-xs-center MuiGrid-grid-xs-12 MuiGrid-grid-sm-6 MuiGrid-grid-md-3"
+            >
+              <div
+                className="MuiPaper-root MuiCard-root card MuiPaper-elevation8 MuiPaper-rounded"
+              >
+                <button
+                  className="MuiButtonBase-root MuiCardActionArea-root"
+                  disabled={false}
+                  onBlur={[Function]}
+                  onDragLeave={[Function]}
+                  onFocus={[Function]}
+                  onKeyDown={[Function]}
+                  onKeyUp={[Function]}
+                  onMouseDown={[Function]}
+                  onMouseLeave={[Function]}
+                  onMouseUp={[Function]}
+                  onTouchEnd={[Function]}
+                  onTouchMove={[Function]}
+                  onTouchStart={[Function]}
+                  tabIndex={0}
+                  type="button"
+                >
+                  <div
+                    className="MuiCardContent-root"
+                  >
+                    <h2
+                      className="MuiTypography-root MuiTypography-h5"
+                    >
+                      Flarion
+                    </h2>
+                  </div>
+                  <div
+                    className="MuiCardMedia-root media"
+                    style={
+                      Object {
+                        "backgroundImage": "url(\\"/assets/dragonsito5.jpeg\\")",
+                      }
+                    }
+                    title="Flarion"
+                  />
+                  <div
+                    className="MuiCardContent-root"
+                  >
+                    <div
+                      className="cardBottomContent"
+                    >
+                      <div
+                        className="cardBottomContentAvatar"
+                      >
+                        <div
+                          className="MuiAvatar-root MuiAvatar-circle"
+                        >
+                          <img
+                            alt="Mocca"
+                            className="MuiAvatar-img"
+                            src="/assets/mocca.jpg"
+                          />
+                        </div>
+                      </div>
+                      <div
+                        className="cardBottomContentText"
+                      >
+                        <p
+                          className="MuiTypography-root MuiTypography-body2 MuiTypography-colorTextSecondary"
+                        >
+                          Owned by
+                        </p>
+                        <p
+                          className="MuiTypography-root MuiTypography-body2 MuiTypography-colorTextPrimary"
+                        >
+                          Mocca
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <span
+                    className="MuiCardActionArea-focusHighlight"
+                  />
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button
+          className="MuiButtonBase-root MuiButton-root MuiButton-contained goMktpButton MuiButton-containedSecondary MuiButton-containedSizeLarge MuiButton-sizeLarge"
+          disabled={false}
           onBlur={[Function]}
+          onClick={[Function]}
           onDragLeave={[Function]}
           onFocus={[Function]}
           onKeyDown={[Function]}
           onKeyUp={[Function]}
           onMouseDown={[Function]}
+          onMouseEnter={[Function]}
           onMouseLeave={[Function]}
           onMouseUp={[Function]}
           onTouchEnd={[Function]}
           onTouchMove={[Function]}
           onTouchStart={[Function]}
           tabIndex={0}
+          type="button"
         >
           <span
             className="MuiButton-label"
           >
-            Demo
+            <span
+              className="MuiTypography-root MuiTypography-body1"
+            >
+              Search more in marketplace!
+            </span>
           </span>
-        </a>
+        </button>
       </div>
-    </section>
+    </div>
+    <div
+      className="main"
+    >
+      <div
+        className="MuiPaper-root MuiCard-root card MuiPaper-elevation8 MuiPaper-rounded"
+      >
+        <div
+          className="MuiGrid-root MuiGrid-container"
+        >
+          <div
+            className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-4"
+          >
+            <img
+              alt="complex"
+              className="img"
+              src="/assets/home/wise-dragon.jpg"
+              width="200px"
+            />
+          </div>
+          <div
+            className="MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-align-items-xs-center MuiGrid-grid-xs-8"
+          >
+            <div
+              className="title"
+            >
+              <h3
+                className="MuiTypography-root MuiTypography-h3"
+              >
+                Learn how to play CryptoDragons!
+              </h3>
+            </div>
+            <div
+              className="subtitle"
+            >
+              <h6
+                className="MuiTypography-root MuiTypography-subtitle1 MuiTypography-colorTextSecondary"
+              >
+                Check the guides and become an expert of Cryptodragons - It is free. 
+                <br />
+                 Review the main features features such as purchasing a dragon, train them 
+                <br />
+                 and everything you must know to start your journey in this magic world.
+              </h6>
+            </div>
+            <div
+              className="MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-justify-xs-space-between MuiGrid-grid-xs-11"
+            >
+              <button
+                className="MuiButtonBase-root MuiButton-root MuiButton-contained guideButton MuiButton-containedSecondary MuiButton-containedSizeLarge MuiButton-sizeLarge"
+                disabled={false}
+                onBlur={[Function]}
+                onClick={[Function]}
+                onDragLeave={[Function]}
+                onFocus={[Function]}
+                onKeyDown={[Function]}
+                onKeyUp={[Function]}
+                onMouseDown={[Function]}
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+                onMouseUp={[Function]}
+                onTouchEnd={[Function]}
+                onTouchMove={[Function]}
+                onTouchStart={[Function]}
+                tabIndex={0}
+                type="button"
+              >
+                <span
+                  className="MuiButton-label"
+                >
+                  <span
+                    className="MuiTypography-root MuiTypography-body1"
+                  >
+                    Getting Started
+                  </span>
+                </span>
+              </button>
+              <button
+                className="MuiButtonBase-root MuiButton-root MuiButton-contained guideButton MuiButton-containedSecondary MuiButton-containedSizeLarge MuiButton-sizeLarge"
+                disabled={false}
+                onBlur={[Function]}
+                onClick={[Function]}
+                onDragLeave={[Function]}
+                onFocus={[Function]}
+                onKeyDown={[Function]}
+                onKeyUp={[Function]}
+                onMouseDown={[Function]}
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+                onMouseUp={[Function]}
+                onTouchEnd={[Function]}
+                onTouchMove={[Function]}
+                onTouchStart={[Function]}
+                tabIndex={0}
+                type="button"
+              >
+                <span
+                  className="MuiButton-label"
+                >
+                  <span
+                    className="MuiTypography-root MuiTypography-body1"
+                  >
+                    Gas and Fees
+                  </span>
+                </span>
+              </button>
+              <button
+                className="MuiButtonBase-root MuiButton-root MuiButton-contained guideButton MuiButton-containedSecondary MuiButton-containedSizeLarge MuiButton-sizeLarge"
+                disabled={false}
+                onBlur={[Function]}
+                onClick={[Function]}
+                onDragLeave={[Function]}
+                onFocus={[Function]}
+                onKeyDown={[Function]}
+                onKeyUp={[Function]}
+                onMouseDown={[Function]}
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+                onMouseUp={[Function]}
+                onTouchEnd={[Function]}
+                onTouchMove={[Function]}
+                onTouchStart={[Function]}
+                tabIndex={0}
+                type="button"
+              >
+                <span
+                  className="MuiButton-label"
+                >
+                  <span
+                    className="MuiTypography-root MuiTypography-body1"
+                  >
+                    Marketplace
+                  </span>
+                </span>
+              </button>
+              <button
+                className="MuiButtonBase-root MuiButton-root MuiButton-contained guideButton MuiButton-containedSecondary MuiButton-containedSizeLarge MuiButton-sizeLarge"
+                disabled={false}
+                onBlur={[Function]}
+                onClick={[Function]}
+                onDragLeave={[Function]}
+                onFocus={[Function]}
+                onKeyDown={[Function]}
+                onKeyUp={[Function]}
+                onMouseDown={[Function]}
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+                onMouseUp={[Function]}
+                onTouchEnd={[Function]}
+                onTouchMove={[Function]}
+                onTouchStart={[Function]}
+                tabIndex={0}
+                type="button"
+              >
+                <span
+                  className="MuiButton-label"
+                >
+                  <span
+                    className="MuiTypography-root MuiTypography-body1"
+                  >
+                    FAQs
+                  </span>
+                </span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="main"
+    >
+      <div
+        className="MuiGrid-root container MuiGrid-container"
+      >
+        <div
+          className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3"
+        >
+          <a
+            className="anchorTag"
+            href="/..."
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+          >
+            <p
+              className="MuiTypography-root MuiTypography-caption MuiTypography-colorPrimary"
+            >
+              My profile
+            </p>
+          </a>
+          <a
+            className="anchorTag"
+            href="/..."
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+          >
+            <p
+              className="MuiTypography-root MuiTypography-caption MuiTypography-colorPrimary"
+            >
+              Search
+            </p>
+          </a>
+          <a
+            className="anchorTag"
+            href="/..."
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+          >
+            <p
+              className="MuiTypography-root MuiTypography-caption MuiTypography-colorPrimary"
+            >
+              FAQs
+            </p>
+          </a>
+          <a
+            className="anchorTag"
+            href="/..."
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+          >
+            <p
+              className="MuiTypography-root MuiTypography-caption MuiTypography-colorPrimary"
+            >
+              Latest updates
+            </p>
+          </a>
+          <a
+            className="anchorTag"
+            href="/..."
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+          >
+            <p
+              className="MuiTypography-root MuiTypography-caption MuiTypography-colorPrimary"
+            >
+              Privacy
+            </p>
+          </a>
+          <a
+            className="anchorTag"
+            href="/..."
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+          >
+            <p
+              className="MuiTypography-root MuiTypography-caption MuiTypography-colorPrimary"
+            >
+              Terms and Conditions
+            </p>
+          </a>
+        </div>
+        <div
+          className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3"
+        >
+          <a
+            className="anchorTag"
+            href="/..."
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+          >
+            <p
+              className="MuiTypography-root MuiTypography-caption MuiTypography-colorPrimary"
+            >
+              About us
+            </p>
+          </a>
+          <a
+            className="anchorTag"
+            href="/..."
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+          >
+            <p
+              className="MuiTypography-root MuiTypography-caption MuiTypography-colorPrimary"
+            >
+              Join us!
+            </p>
+          </a>
+          <a
+            className="anchorTag"
+            href="/..."
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+          >
+            <p
+              className="MuiTypography-root MuiTypography-caption MuiTypography-colorPrimary"
+            >
+              Contact us
+            </p>
+          </a>
+        </div>
+        <div
+          className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-2"
+        />
+        <div
+          className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-2"
+        >
+          <p
+            className="MuiTypography-root socialMediaText MuiTypography-caption MuiTypography-colorPrimary"
+          >
+            Follow us
+          </p>
+          <a
+            href="https://www.facebook.com/"
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+          >
+            <svg
+              aria-hidden={true}
+              className="MuiSvgIcon-root icon iconFacebook mr-6"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2m13 2h-2.5A3.5 3.5 0 0 0 12 8.5V11h-2v3h2v7h3v-7h3v-3h-3V9a1 1 0 0 1 1-1h2V5z"
+              />
+            </svg>
+          </a>
+          <a
+            href="https://www.twitter.com/"
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+          >
+            <svg
+              aria-hidden={true}
+              className="MuiSvgIcon-root icon iconTwitter mr-6"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.56-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.98 8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21 16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56.84-.6 1.56-1.36 2.14-2.23z"
+              />
+            </svg>
+          </a>
+          <a
+            href="https://www.youtube.com/"
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+          >
+            <svg
+              aria-hidden={true}
+              className="MuiSvgIcon-root icon iconYoutube mr-6"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M10 15l5.19-3L10 9v6m11.56-7.83c.13.47.22 1.1.28 1.9.07.8.1 1.49.1 2.09L22 12c0 2.19-.16 3.8-.44 4.83-.25.9-.83 1.48-1.73 1.73-.47.13-1.33.22-2.65.28-1.3.07-2.49.1-3.59.1L12 19c-4.19 0-6.8-.16-7.83-.44-.9-.25-1.48-.83-1.73-1.73-.13-.47-.22-1.1-.28-1.9-.07-.8-.1-1.49-.1-2.09L2 12c0-2.19.16-3.8.44-4.83.25-.9.83-1.48 1.73-1.73.47-.13 1.33-.22 2.65-.28 1.3-.07 2.49-.1 3.59-.1L12 5c4.19 0 6.8.16 7.83.44.9.25 1.48.83 1.73 1.73z"
+              />
+            </svg>
+          </a>
+        </div>
+        <div
+          className="MuiGrid-root downloadAppSection MuiGrid-item MuiGrid-grid-xs-2"
+        >
+          <p
+            className="MuiTypography-root downloadAppText MuiTypography-caption MuiTypography-colorPrimary"
+          >
+            Download App
+          </p>
+          <a
+            href="https://www.android.com/"
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+          >
+            <svg
+              aria-hidden={true}
+              className="MuiSvgIcon-root icon iconAndroid ml-6"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M6 18c0 .55.45 1 1 1h1v3.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V19h2v3.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V19h1c.55 0 1-.45 1-1V8H6v10zM3.5 8C2.67 8 2 8.67 2 9.5v7c0 .83.67 1.5 1.5 1.5S5 17.33 5 16.5v-7C5 8.67 4.33 8 3.5 8zm17 0c-.83 0-1.5.67-1.5 1.5v7c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5v-7c0-.83-.67-1.5-1.5-1.5zm-4.97-5.84l1.3-1.3c.2-.2.2-.51 0-.71s-.51-.2-.71 0l-1.48 1.48C13.85 1.23 12.95 1 12 1c-.96 0-1.86.23-2.66.63L7.85.15c-.2-.2-.51-.2-.71 0-.2.2-.2.51 0 .71l1.31 1.31C6.97 3.26 6 5.01 6 7h12c0-1.99-.97-3.75-2.47-4.84zM10 5H9V4h1v1zm5 0h-1V4h1v1z"
+              />
+            </svg>
+          </a>
+          <a
+            href="https://www.apple.com/"
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+          >
+            <svg
+              aria-hidden={true}
+              className="MuiSvgIcon-root icon iconApple ml-6"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"
+              />
+            </svg>
+          </a>
+        </div>
+      </div>
+      <hr
+        className="MuiDivider-root divider"
+      />
+      <div
+        className="MuiGrid-root container MuiGrid-container"
+      >
+        <div
+          className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-2"
+        >
+          <p
+            className="MuiTypography-root copyRightText MuiTypography-overline MuiTypography-colorPrimary"
+          >
+            CryptoDragons © 2021
+          </p>
+        </div>
+      </div>
+    </div>
   </main>
 </div>
 `;

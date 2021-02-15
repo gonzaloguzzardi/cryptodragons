@@ -1,0 +1,15 @@
+@import '../../../styles/variables.scss';
+
+.main {
+  padding: $section-desktop-margins 0;
+}
+
+.title {
+  display: flex;
+  justify-content: center;
+}
+
+.images {
+  display: flex;
+  justify-content: center;
+}

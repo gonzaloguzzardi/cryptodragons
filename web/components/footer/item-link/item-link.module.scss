@@ -1,0 +1,9 @@
+@import '../../../styles/variables.scss';
+
+.anchorTag {
+  color: $pallete-primary;
+
+  &:not(:hover) {
+    text-decoration: none;
+  }
+}

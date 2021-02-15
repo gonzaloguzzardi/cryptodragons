@@ -1,0 +1,24 @@
+@import '../../../styles/variables.scss';
+
+.card {
+  width: 220px;
+  margin: 20px;
+}
+
+.media {
+  height: 200px;
+  background-origin: content-box;
+  background-size: contain !important;
+}
+
+.cardBottomContent {
+  display: flex;
+}
+
+.cardBottomContentAvatar {
+  padding-right: 14px;
+}
+
+.cardBottomContentText {
+  text-align: left;
+}

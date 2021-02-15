@@ -1,39 +1,11 @@
-import Layout from '../../components/layout'
-
-import Button from '@material-ui/core/Button'
-
+import React from 'react'
 import { ReactElement } from 'react'
 
-export default function Home(): ReactElement {
-  return (
-    <Layout>
-      <section>
-        <div className="container">
-          <div className="header">
-            <h2>Welcome to CryptoDragons</h2>
-          </div>
-          <Button variant="contained" color="primary" href="demo">
-            Demo
-          </Button>
-        </div>
-      </section>
+import HomeDesktop from './home.desktop'
+import HomeMobile from './home.mobile'
 
-      <style global jsx>
-        {`
-          .container {
-            text-align: center;
-          }
+import { ISSRPropsDeviceOnly } from '../../types/server-side-props-device-only'
 
-          .header {
-            background-color: #222;
-            height: 150px;
-            padding: 20px;
-            color: white;
-            margin-bottom: 25px;
-            text-align: center;
-          }
-        `}
-      </style>
-    </Layout>
-  )
+export default function Home({ deviceType }: ISSRPropsDeviceOnly): ReactElement {
+  return deviceType === 'desktop' ? <HomeDesktop /> : <HomeMobile />
 }

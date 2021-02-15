@@ -19,7 +19,7 @@ async function getMainNetGatewayContract() {
 }
 
 export default async function clientFactory() {
-  if (!window || !window.ethereum) return null
+  if (typeof window === 'undefined' || !window.ethereum) return null
 
   return Promise.all([
     web3js.eth.getAccounts(),

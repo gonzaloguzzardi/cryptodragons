@@ -12,6 +12,7 @@ import FooterMobile from '../../components/footer/mobile'
 
 function HomeMobile({ accountsState }): ReactElement {
   console.log('Account state', accountsState)
+
   return (
     <>
       <AppToolbar deviceType="mobile" section="home" />

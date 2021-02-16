@@ -8,12 +8,16 @@ import {
   LoomProvider,
 } from 'loom-js'
 
-const DappchainDragonTokenJson = require('../../../contracts/DappchainTransferableDragon.json')
-const GatewayJson = require('../../../contracts/DappchainGateway')
+const axios = require('axios');
+const contractGetterApiUrl = !process.env.DOCKERENV ? 'http://localhost:8082' : 'http://contractGetter:8082';
+//const DappchainDragonTokenJson = require('../../../contracts/DappchainTransferableDragon.json')
+//const GatewayJson = require('../../../contracts/DappchainGateway')
 
 const loomChainId = '13654820909954' // TODO ver si cambia o si es siempre el mismo
 
 async function getLoomTokenContract(web3js) {
+  let DappchainDragonTokenJson = await axios.get(contractGetterApiUrl + '/api/contract?contract=DappchainTransferableDragon.json');
+  DappchainDragonTokenJson = DappchainDragonTokenJson.data;
   return new web3js.eth.Contract(
     DappchainDragonTokenJson.abi,
     DappchainDragonTokenJson.networks[loomChainId].address
@@ -21,6 +25,8 @@ async function getLoomTokenContract(web3js) {
 }
 
 async function getLoomGatewayContract(web3js) {
+  let GatewayJson = await axios.get(contractGetterApiUrl + '/api/contract?contract=DappchainGateway.json');
+  GatewayJson = GatewayJson.data;
   return new web3js.eth.Contract(GatewayJson.abi, GatewayJson.networks[loomChainId].address)
 }
 

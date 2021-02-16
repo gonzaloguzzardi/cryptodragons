@@ -7,15 +7,18 @@ const web3js = new Web3(new Web3.providers.HttpProvider(bfaAddress));
 
 async function getMainNetTokenContract() {
   const networkId = await web3js.eth.net.getId();
-  const MainchainDragonTokenJson = await axios.get(contractGetterApiUrl + '/api/contract?contract=MainnetTransferableDragon.json');
+  let MainchainDragonTokenJson = await axios.get(contractGetterApiUrl + '/api/contract?contract=MainnetTransferableDragon.json');
   //const MainchainDragonTokenJson = require('../../../contracts/MainnetTransferableDragon.json');
-	return new web3js.eth.Contract(MainchainDragonTokenJson.abi, MainchainDragonTokenJson.networks[networkId].address);
+  MainchainDragonTokenJson = MainchainDragonTokenJson.data;
+  return new web3js.eth.Contract(MainchainDragonTokenJson.abi, MainchainDragonTokenJson.networks[networkId].address);
 }
 
 async function getMainNetGatewayContract() {
   const networkId = await web3js.eth.net.getId();
-  const GatewayJson = await axios.get(contractGetterApiUrl + '/api/contract?contract=MainnetGateway.json');
+  var GatewayJson = await axios.get(contractGetterApiUrl + '/api/contract?contract=MainnetGateway.json');
+  GatewayJson = GatewayJson.data;
   //const GatewayJson = require('../../../contracts/MainnetGateway.json');
+  console.log(GatewayJson);
 	return new web3js.eth.Contract(GatewayJson.abi, GatewayJson.networks[networkId].address);
 }
 

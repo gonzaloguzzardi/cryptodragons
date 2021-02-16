@@ -9,6 +9,8 @@ import MarketplaceSection from '../../components/home/marketplace/desktop'
 import GuidesSection from '../../components/home/guides/desktop'
 import FooterDesktop from '../../components/footer/desktop'
 
+import Modal from '../../components/modals/generic-modal'
+
 function HomeDesktop({ accountsState }): ReactElement {
   console.log('Account state', JSON.stringify(accountsState, null, 2))
 
@@ -35,6 +37,7 @@ function HomeDesktop({ accountsState }): ReactElement {
         section="home"
         onClickStart={() => onClickStart(accountsState)}
       />
+      <Modal open={true}>CONTENIDOOOOOOO</Modal>
       <LandingSection />
       <BuyADragonSection />
       <MarketplaceSection />

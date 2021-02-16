@@ -34,25 +34,30 @@ const AccountsProvider = ({ children }: { children: ReactNode }): ReactElement =
     mainchain_account: null,
   })
 
-  useEffect(() => {
-    if (!MainchainAPI.providerInstalled()) {
-      setData({
-        provider_installed: false,
-        mainchain_account: null,
-      })
-    } else {
-      MainchainAPI.getClientHelper().then((mainchainData) => {
+  const connectToProvider = (): void => {
+    MainchainAPI.connectToProvider()
+      .then((res) => {
+        console.log('Connect provider response:', res)
         setData({
           provider_installed: true,
-          mainchain_account: mainchainData && mainchainData.account,
+          mainchain_account: res && res.account,
         })
       })
-    }
+      .catch((err) => console.error('Connect provider error:', err))
+  }
+
+  useEffect(() => {
+    MainchainAPI.getClientHelper().then((mainchainData) => {
+      setData({
+        provider_installed: !!mainchainData,
+        mainchain_account: mainchainData && mainchainData.account,
+      })
+    })
   }, [])
 
   const store = {
-    state: data,
-    setState: setData,
+    ...data,
+    connectToProvider,
   }
 
   return <AccountsContext.Provider value={store}>{children}</AccountsContext.Provider>

@@ -7,7 +7,7 @@ import styles from './index.module.scss'
 
 type tProps = {
   children: ReactNode
-  handleClose: () => null
+  handleClose: () => void
   open: boolean
 }
 

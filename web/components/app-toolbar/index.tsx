@@ -54,12 +54,18 @@ function ScrollTop({ children }: { children: ReactElement }): ReactElement {
 }
 
 interface IProps {
+  account: string
   deviceType: deviceType
   section: 'home' | 'my-dragons' | 'marketplace' | 'guides'
-  onClickStart: (any) => null
+  onClickStart: (any) => void
 }
 
-export default function AppToolbar({ deviceType, section, onClickStart }: IProps): ReactElement {
+export default function AppToolbar({
+  account,
+  deviceType,
+  section,
+  onClickStart,
+}: IProps): ReactElement {
   return (
     <>
       <AppBar variant="outlined">
@@ -124,9 +130,13 @@ export default function AppToolbar({ deviceType, section, onClickStart }: IProps
 
           {/* Profile | Sign in/up */}
           <div className={appbarStyles.profileSection}>
-            <Button variant="contained" color="secondary" onClick={onClickStart}>
-              Start
-            </Button>
+            {!account ? (
+              <Button variant="contained" color="secondary" onClick={onClickStart}>
+                Start
+              </Button>
+            ) : (
+              <Avatar alt={'Mocca'} src={'/assets/mocca.jpg'} />
+            )}
           </div>
         </Toolbar>
       </AppBar>

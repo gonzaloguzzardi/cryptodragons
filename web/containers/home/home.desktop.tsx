@@ -14,24 +14,18 @@ import Modal from '../../components/modals'
 function HomeDesktop({ accountsState }): ReactElement {
   console.log('Account state', JSON.stringify(accountsState, null, 2))
 
-  const [modalType, setModalType] = useState(null)
-  const [modalOpen, setModalOpen] = useState(false)
+  const [modalState, setModalState] = useState({ open: false, type: null })
 
   function onClickStart(accountState): void {
     if (!accountState.provider_installed) {
-      // User needs provider to connect to mainchain, offer Metamask
-      setModalType('PROVIDER_MISSING')
-      setModalOpen(true)
+      setModalState({ open: true, type: 'PROVIDER_MISSING' })
     }
 
     if (accountState.provider_installed && !accountState.mainchain_account) {
-      // Should open metamask to connect with account
-      console.log('Metamask DETECTED, but no mainchain account found.')
       accountState.connectToProvider()
     }
 
     if (accountState.provider_installed && accountState.mainchain_account) {
-      // Should show users data or create account in app with user data
       console.log(`Metamask DETECTED, and account: ${accountState.mainchain_account} found.`)
     }
   }
@@ -44,7 +38,11 @@ function HomeDesktop({ accountsState }): ReactElement {
         onClickStart={() => onClickStart(accountsState)}
         account={accountsState.mainchain_account}
       />
-      <Modal open={modalOpen} type={modalType} handleClose={() => setModalOpen(false)} />
+      <Modal
+        open={modalState.open}
+        type={modalState.type}
+        handleClose={() => setModalState({ open: false, type: null })}
+      />
       <LandingSection />
       <BuyADragonSection />
       <MarketplaceSection />

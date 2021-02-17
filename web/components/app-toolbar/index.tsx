@@ -1,7 +1,6 @@
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Fab from '@material-ui/core/Fab'
-import Button from '@material-ui/core/Button'
 import IconButton from '@material-ui/core/IconButton'
 import PetsIcon from '@material-ui/icons/Pets'
 import MenuBookIcon from '@material-ui/icons/MenuBook'
@@ -11,6 +10,8 @@ import { makeStyles, Theme, createStyles } from '@material-ui/core/styles'
 import useScrollTrigger from '@material-ui/core/useScrollTrigger'
 import Zoom from '@material-ui/core/Zoom'
 import Avatar from '@material-ui/core/Avatar'
+
+import SessionComponent from './session-component'
 
 import classnames from 'classnames'
 
@@ -57,7 +58,7 @@ interface IProps {
   account: string
   deviceType: deviceType
   section: 'home' | 'my-dragons' | 'marketplace' | 'guides'
-  onClickStart: (any) => void
+  onClickStart: () => void
 }
 
 export default function AppToolbar({
@@ -130,13 +131,7 @@ export default function AppToolbar({
 
           {/* Profile | Sign in/up */}
           <div className={appbarStyles.profileSection}>
-            {!account ? (
-              <Button variant="contained" color="secondary" onClick={onClickStart}>
-                Start
-              </Button>
-            ) : (
-              <Avatar alt={'Mocca'} src={'/assets/mocca.jpg'} />
-            )}
+            <SessionComponent account={account} onClickStart={onClickStart} />
           </div>
         </Toolbar>
       </AppBar>

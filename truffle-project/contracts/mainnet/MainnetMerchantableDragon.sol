@@ -3,7 +3,7 @@ pragma solidity ^0.5.0;
 import "./MainnetTransferableDragon.sol";
 
 contract IMarketplace {
-    function createOrder (
+    function createSellOrder (
         uint256 dragonId,
         string memory title,
 		string memory description,
@@ -28,10 +28,13 @@ contract MainnetMerchantableDragon is MainnetTransferableDragon {
         uint256 _price) external onlyDragonOwner(_tokenId) {
 
         require(marketplaceAddress != address(0), 'The marketplace address needs to be initialized');
+        require(bytes(_title).length > 0, 'The title cannot be empty');
+		require(bytes(_description).length > 0, 'The description cannot be empty');
+		require(_price > 0, 'The price cannot be empty');
 
         // Allow marketplace to transfer ownership
         approve(marketplaceAddress, _tokenId);
 
-        IMarketplace(marketplaceAddress).createOrder(_tokenId, _title, _description, _price)
+        IMarketplace(marketplaceAddress).createSellOrder(_tokenId, _title, _description, _price);
     }
 }

@@ -30,7 +30,6 @@ contract MainnetMarketplace {
 		uint256 date;
 		address payable owner;
 		uint256 price;
-		string image;
 	}
 	struct Order {
 		uint256 id;
@@ -59,6 +58,18 @@ contract MainnetMarketplace {
 	modifier onlyFromDragonToken() {
 		require(ownerOf(_dragonTokenAddress) == msg.sender, 'Only dragon token can call this function');
 		_;
+	}
+
+	function createOrder(
+		uint256 _dragonId,
+		string memory _title,
+		string memory _description,
+		uint256 _price
+	) public onlyFromDragonToken() {
+		// Parameter validity are checked in dragon token contract
+		Product memory p = Product(lastId, _title, _description, now, msg.sender, _price);
+		products.push(p);
+		productById[lastId] = p;
 	}
 
 	// TODO en lugar de mint tiene que pasarle el id, chequear que quien trasnfiere sea dueño del dragon, y hacer la transferencia de dominio al marketplace referenciando al dueño

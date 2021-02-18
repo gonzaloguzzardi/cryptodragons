@@ -1,3 +1,5 @@
+import { ReactElement } from 'react'
+
 import GenericModal from './generic-modal'
 
 import MetamaskContent from './contents/metamask-download'
@@ -11,13 +13,13 @@ type tProps = {
   type: 'PROVIDER_MISSING' | 'USER_NOT_REGISTERED'
 }
 
-export default function Modal({ handleClose, open, type }: tProps) {
+export default function Modal({ handleClose, open, type }: tProps): ReactElement {
   if (type === 'PROVIDER_MISSING')
     return (
       <GenericModal
         open={open}
         handleClose={handleClose}
-        title={'Wanna play?'}
+        title={'Wanna play?!'}
         upperRightButtonContent={'Done'}
         upperRightButtonHandler={() => window.location.reload()}
       >

@@ -1,17 +1,30 @@
-import React, { ReactNode } from 'react'
+import React, { ReactElement, ReactNode } from 'react'
 import Modal from '@material-ui/core/Modal'
 import Backdrop from '@material-ui/core/Backdrop'
 import Fade from '@material-ui/core/Fade'
+import Typography from '@material-ui/core/Typography'
+import Divider from '@material-ui/core/Divider'
 
 import styles from './index.module.scss'
+import { Button } from '@material-ui/core'
 
 type tProps = {
   children: ReactNode
+  upperRightButtonContent: string | ReactNode
+  upperRightButtonHandler: () => void
   handleClose: () => void
   open: boolean
+  title: string
 }
 
-export default function GenericModal({ children, handleClose, open }: tProps) {
+export default function GenericModal({
+  children,
+  upperRightButtonContent,
+  upperRightButtonHandler,
+  handleClose,
+  open,
+  title,
+}: tProps): ReactElement {
   return (
     <Modal
       aria-labelledby="transition-modal-title"
@@ -26,7 +39,22 @@ export default function GenericModal({ children, handleClose, open }: tProps) {
       }}
     >
       <Fade in={open}>
-        <div className={styles.paper}>{children}</div>
+        <div className={styles.paper}>
+          {title && (
+            <div className={styles.title}>
+              <Typography variant="h5">{title}</Typography>
+            </div>
+          )}
+          {title && <Divider className={styles.divider} />}
+          {upperRightButtonContent && (
+            <div className={styles.closeButton}>
+              <Button variant="outlined" color="secondary" onClick={upperRightButtonHandler}>
+                {upperRightButtonContent}
+              </Button>
+            </div>
+          )}
+          {children}
+        </div>
       </Fade>
     </Modal>
   )

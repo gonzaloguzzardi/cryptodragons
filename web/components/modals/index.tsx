@@ -1,5 +1,7 @@
 import GenericModal from './generic-modal'
 
+import MetamaskContent from './contents/metamask-download'
+
 export const PROVIDER_MISSING = 'provider_missing'
 export const USER_NOT_REGISTERED = 'user_not_registered'
 
@@ -12,8 +14,14 @@ type tProps = {
 export default function Modal({ handleClose, open, type }: tProps) {
   if (type === 'PROVIDER_MISSING')
     return (
-      <GenericModal open={open} handleClose={handleClose}>
-        INSTALL METAMASK MODAL
+      <GenericModal
+        open={open}
+        handleClose={handleClose}
+        title={'Wanna play?'}
+        upperRightButtonContent={'Done'}
+        upperRightButtonHandler={() => window.location.reload()}
+      >
+        <MetamaskContent />
       </GenericModal>
     )
 

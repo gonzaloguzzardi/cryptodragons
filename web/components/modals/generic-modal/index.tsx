@@ -49,7 +49,7 @@ export default function GenericModal({
           {upperRightButtonContent && (
             <div className={styles.closeButton}>
               <Button variant="outlined" color="secondary" onClick={upperRightButtonHandler}>
-                {upperRightButtonContent}
+                <span className={styles.closeButtonContent}>{upperRightButtonContent}</span>
               </Button>
             </div>
           )}

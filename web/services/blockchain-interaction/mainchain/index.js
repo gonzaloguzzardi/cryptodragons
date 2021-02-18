@@ -26,6 +26,7 @@ class MainchainAPI {
 
       ethereum.on('accountsChanged', (accounts) => {
         console.log(`Account changed to: ${accounts[0]}`)
+        if (!accounts[0]) window.location.reload()
         client.account = accounts[0]
       })
     }

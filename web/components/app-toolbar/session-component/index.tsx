@@ -4,23 +4,33 @@ import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown'
 import Popover from '@material-ui/core/Popover'
-
 import styles from './index.module.scss'
+
+import deviceType from 'types/device-types'
 
 type tProps = {
   account: string
+  device: deviceType
   onClickStart: () => void
 }
 
-export default function SessionComponent({ account, onClickStart }: tProps): ReactElement {
+export default function SessionComponent({ account, device, onClickStart }: tProps): ReactElement {
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null)
 
-  const handlePopoverOpen = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
+  const handlePopoverOpen = (
+    event: React.MouseEvent<HTMLElement, MouseEvent> | React.KeyboardEvent<HTMLElement>
+  ): void => {
     setAnchorEl(event.currentTarget)
   }
 
-  const handlePopoverClose = () => {
+  const handlePopoverClose = (): void => {
     setAnchorEl(null)
+  }
+
+  const handleTogglePopover = (
+    event: React.MouseEvent<HTMLElement, MouseEvent> | React.KeyboardEvent<HTMLElement>
+  ): void => {
+    anchorEl === null ? handlePopoverOpen(event) : handlePopoverClose()
   }
 
   const open = Boolean(anchorEl)
@@ -36,8 +46,12 @@ export default function SessionComponent({ account, onClickStart }: tProps): Rea
     <>
       <div
         className={styles.accountCard}
-        onMouseEnter={handlePopoverOpen}
+        onMouseEnter={(e) => (device === 'mobile' ? false : handlePopoverOpen(e))}
         onMouseLeave={handlePopoverClose}
+        onClick={(e) => (device === 'desktop' ? false : handleTogglePopover(e))}
+        onKeyDown={(e) => device === 'mobile' && e.key === 'Enter' && handleTogglePopover(e)}
+        role="button"
+        tabIndex={0}
       >
         <Avatar alt={'Mocca'} src={'/assets/mocca.jpg'} />
         <Typography variant="body1" className={styles.accountName}>

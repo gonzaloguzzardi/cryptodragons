@@ -131,7 +131,7 @@ export default function AppToolbar({
 
           {/* Profile | Sign in/up */}
           <div className={appbarStyles.profileSection}>
-            <SessionComponent account={account} onClickStart={onClickStart} />
+            <SessionComponent account={account} device={deviceType} onClickStart={onClickStart} />
           </div>
         </Toolbar>
       </AppBar>

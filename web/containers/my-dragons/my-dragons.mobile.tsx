@@ -1,5 +1,4 @@
-import React from 'react'
-import { ReactElement } from 'react'
+import React, { ReactElement } from 'react'
 
 import { withAccountsHOC } from '../../hooks/accounts-context'
 

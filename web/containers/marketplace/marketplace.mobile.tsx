@@ -1,15 +1,16 @@
-import React from 'react'
-import { ReactElement } from 'react'
+import React, { ReactElement } from 'react'
+
+import { withAccountsHOC } from '../../hooks/accounts-context'
 
 import AppToolbar from '../../components/app-toolbar'
 
-import Marketplace from './marketplace'
-
-export default function MarketplaceMobile(): ReactElement {
+function MarketplaceMobile({ accountsState }): ReactElement {
   return (
-    <Marketplace>
-      <AppToolbar deviceType="mobile" section="marketplace" />
+    <>
+      <AppToolbar deviceType="mobile" section="marketplace" accountsState={accountsState} />
       <p>Marketplace</p>
-    </Marketplace>
+    </>
   )
 }
+
+export default withAccountsHOC(MarketplaceMobile)

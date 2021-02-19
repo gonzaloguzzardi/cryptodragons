@@ -9,6 +9,8 @@ import MarketplaceSection from '../../components/home/marketplace/desktop'
 import GuidesSection from '../../components/home/guides/desktop'
 import FooterDesktop from '../../components/footer/desktop'
 
+import isChromeBrowser from '../../utils/is-chrome-browser'
+
 import Modal from '../../components/modals'
 
 function HomeDesktop({ accountsState }): ReactElement {
@@ -17,16 +19,20 @@ function HomeDesktop({ accountsState }): ReactElement {
   const [modalState, setModalState] = useState({ open: false, type: null })
 
   function onClickStart(accountState): void {
+    if (!isChromeBrowser()) {
+      return setModalState({ open: true, type: 'NOT_CHROME_BROWSER' })
+    }
+
     if (!accountState.provider_installed) {
-      setModalState({ open: true, type: 'PROVIDER_MISSING' })
+      return setModalState({ open: true, type: 'PROVIDER_MISSING' })
     }
 
     if (accountState.provider_installed && !accountState.mainchain_account) {
-      accountState.connectToProvider()
+      return accountState.connectToProvider()
     }
 
     if (accountState.provider_installed && accountState.mainchain_account) {
-      console.log(`Metamask DETECTED, and account: ${accountState.mainchain_account} found.`)
+      return console.log(`Metamask DETECTED, and account: ${accountState.mainchain_account} found.`)
     }
   }
 

@@ -5,7 +5,7 @@ import Fade from '@material-ui/core/Fade'
 import Typography from '@material-ui/core/Typography'
 import Divider from '@material-ui/core/Divider'
 
-import styles from './index.module.scss'
+import styles from './desktop.module.scss'
 import { Button } from '@material-ui/core'
 
 type tProps = {

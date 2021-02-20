@@ -170,10 +170,10 @@ export default function AppToolbar({ accountsState, deviceType, section }: IProp
       </ScrollTop>
 
       <Modal
+        device={deviceType}
         open={modalState.open}
         type={modalState.type}
         handleClose={() => setModalState({ open: false, type: null })}
-        device={deviceType}
       />
     </>
   )

@@ -1,6 +1,7 @@
 import { ReactElement } from 'react'
 
 import GenericModalDesktop from './generic-modal/desktop'
+import GenericModalMobile from './generic-modal/desktop'
 
 import MetamaskContent from './contents/metamask-download'
 import DownloadChromeContent from './contents/download-chrome'
@@ -18,8 +19,8 @@ type tProps = {
 }
 
 export default function Modal({ device, handleClose, open, type }: tProps): ReactElement {
-  if (type === 'PROVIDER_MISSING')
-    return (
+  if (type === 'PROVIDER_MISSING') {
+    return device === 'desktop' ? (
       <GenericModalDesktop
         open={open}
         handleClose={handleClose}
@@ -29,9 +30,20 @@ export default function Modal({ device, handleClose, open, type }: tProps): Reac
       >
         <MetamaskContent />
       </GenericModalDesktop>
+    ) : (
+      <GenericModalMobile
+        open={open}
+        handleClose={handleClose}
+        title={'Wanna play?!'}
+        upperRightButtonContent={'Done'}
+        upperRightButtonHandler={() => window.location.reload()}
+      >
+        <MetamaskContent />
+      </GenericModalMobile>
     )
+  }
 
-  if (type === 'NOT_CHROME_BROWSER')
+  if (type === 'NOT_CHROME_BROWSER') {
     return (
       <GenericModalDesktop
         open={open}
@@ -43,6 +55,7 @@ export default function Modal({ device, handleClose, open, type }: tProps): Reac
         <DownloadChromeContent />
       </GenericModalDesktop>
     )
+  }
 
   return null
 }

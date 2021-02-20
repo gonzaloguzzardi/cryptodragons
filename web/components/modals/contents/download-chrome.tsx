@@ -25,7 +25,7 @@ export default function DownloadChromeContent(): ReactElement {
       </Grid>
 
       <Grid container item justify="center">
-        <img src={'/assets/chrome.svg'} alt="" width="200" height="200" />
+        <img src={'/assets/chrome.svg'} alt="" width="160" height="160" />
       </Grid>
 
       <Grid container item justify="center">

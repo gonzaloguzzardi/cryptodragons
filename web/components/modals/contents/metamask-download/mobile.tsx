@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 )
 
-export default function MetamaskContent(): ReactElement {
+export default function MetamaskContentMobile(): ReactElement {
   const classes = useStyles()
   return (
     <Grid container spacing={2} className={classes.root}>
@@ -25,7 +25,7 @@ export default function MetamaskContent(): ReactElement {
       </Grid>
 
       <Grid container item justify="center">
-        <img src={'/assets/metamask-fox.svg'} alt="" width="200" height="200" />
+        <img src={'/assets/metamask-fox.svg'} alt="" width="150" height="150" />
       </Grid>
 
       <Grid container item>
@@ -40,13 +40,9 @@ export default function MetamaskContent(): ReactElement {
           variant="contained"
           color="secondary"
           size="large"
-          onClick={() =>
-            window.open(
-              'https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn'
-            )
-          }
+          onClick={() => window.open('https://play.google.com/store/apps/details?id=io.metamask')}
         >
-          Get from Chrome Web Store
+          Get from Google Play
         </Button>
       </Grid>
     </Grid>

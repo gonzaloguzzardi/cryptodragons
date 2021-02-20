@@ -1,9 +1,10 @@
 import { ReactElement } from 'react'
 
 import GenericModalDesktop from './generic-modal/desktop'
-import GenericModalMobile from './generic-modal/desktop'
+import GenericModalMobile from './generic-modal/mobile'
 
-import MetamaskContent from './contents/metamask-download'
+import MetamaskContentDesktop from './contents/metamask-download/desktop'
+import MetamaskContentMobile from './contents/metamask-download/mobile'
 import DownloadChromeContent from './contents/download-chrome'
 
 import deviceType from 'types/device-types'
@@ -28,7 +29,7 @@ export default function Modal({ device, handleClose, open, type }: tProps): Reac
         upperRightButtonContent={'Done'}
         upperRightButtonHandler={() => window.location.reload()}
       >
-        <MetamaskContent />
+        <MetamaskContentDesktop />
       </GenericModalDesktop>
     ) : (
       <GenericModalMobile
@@ -38,13 +39,13 @@ export default function Modal({ device, handleClose, open, type }: tProps): Reac
         upperRightButtonContent={'Done'}
         upperRightButtonHandler={() => window.location.reload()}
       >
-        <MetamaskContent />
+        <MetamaskContentMobile />
       </GenericModalMobile>
     )
   }
 
   if (type === 'NOT_CHROME_BROWSER') {
-    return (
+    return device === 'desktop' ? (
       <GenericModalDesktop
         open={open}
         handleClose={handleClose}
@@ -54,6 +55,16 @@ export default function Modal({ device, handleClose, open, type }: tProps): Reac
       >
         <DownloadChromeContent />
       </GenericModalDesktop>
+    ) : (
+      <GenericModalMobile
+        open={open}
+        handleClose={handleClose}
+        title={'You need Chrome'}
+        upperRightButtonContent={'Done'}
+        upperRightButtonHandler={handleClose}
+      >
+        <DownloadChromeContent />
+      </GenericModalMobile>
     )
   }
 

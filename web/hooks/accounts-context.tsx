@@ -15,7 +15,7 @@ const ComponentWithAccountData = withAccountsHOC(Component1);
 
 ---
 Now ComponentWithAccountData has a prop `accountsState` with the fields
- 'state' & 'setState'
+ 'provider_installed' & 'mainchain_account' & 'connectToProvider()'
 
 */
 

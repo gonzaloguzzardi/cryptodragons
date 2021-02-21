@@ -1,5 +1,6 @@
-import React from 'react'
-import { ReactElement } from 'react'
+import React, { ReactElement } from 'react'
+
+import { withAccountsHOC } from '../../hooks/accounts-context'
 
 import AppToolbar from '../../components/app-toolbar'
 import LandingSection from '../../components/home/landing-section/mobile'
@@ -8,17 +9,19 @@ import MarketplaceSection from '../../components/home/marketplace/mobile'
 import GuidesSection from '../../components/home/guides/mobile'
 import FooterMobile from '../../components/footer/mobile'
 
-import Home from './home'
+function HomeMobile({ accountsState }): ReactElement {
+  console.log('Account state', JSON.stringify(accountsState, null, 2))
 
-export default function HomeMobile(): ReactElement {
   return (
-    <Home>
-      <AppToolbar deviceType="mobile" section="home" />
+    <>
+      <AppToolbar deviceType="mobile" section="home" accountsState={accountsState} />
       <LandingSection />
       <BuyADragonSection />
       <MarketplaceSection />
       <GuidesSection />
       <FooterMobile />
-    </Home>
+    </>
   )
 }
+
+export default withAccountsHOC(HomeMobile)

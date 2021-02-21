@@ -5,6 +5,7 @@ import TwitterIcon from '@material-ui/icons/Twitter'
 import YoutubeIcon from '@material-ui/icons/Youtube'
 import AndroidOutlinedIcon from '@material-ui/icons/AndroidOutlined'
 import AppleIcon from '@material-ui/icons/Apple'
+import InstagramIcon from '@material-ui/icons/Instagram'
 
 import styles from './index.module.scss'
 
@@ -36,6 +37,9 @@ export default function Icon({ className, href, id }: IProps): ReactElement {
       break
     case 'apple':
       element = <AppleIcon className={`${styles.icon} ${styles.iconApple} ${className}`} />
+      break
+    case 'instagram':
+      element = <InstagramIcon className={`${styles.icon} ${styles.iconInstagram} ${className}`} />
       break
   }
 

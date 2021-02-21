@@ -1,7 +1,6 @@
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Fab from '@material-ui/core/Fab'
-import Button from '@material-ui/core/Button'
 import IconButton from '@material-ui/core/IconButton'
 import PetsIcon from '@material-ui/icons/Pets'
 import MenuBookIcon from '@material-ui/icons/MenuBook'
@@ -12,9 +11,14 @@ import useScrollTrigger from '@material-ui/core/useScrollTrigger'
 import Zoom from '@material-ui/core/Zoom'
 import Avatar from '@material-ui/core/Avatar'
 
+import SessionComponent from './session-component'
+import Modal from '../../components/modals'
+
+import isChromeBrowser from '../../utils/is-chrome-browser'
+
 import classnames from 'classnames'
 
-import { ReactElement } from 'react'
+import { ReactElement, useState } from 'react'
 import Link from 'next/link'
 
 import appbarStyles from './app-toolbar.module.scss'
@@ -54,11 +58,37 @@ function ScrollTop({ children }: { children: ReactElement }): ReactElement {
 }
 
 interface IProps {
+  accountsState: {
+    mainchain_account: string
+    provider_installed: boolean
+  }
   deviceType: deviceType
   section: 'home' | 'my-dragons' | 'marketplace' | 'guides'
 }
 
-export default function AppToolbar({ deviceType, section }: IProps): ReactElement {
+export default function AppToolbar({ accountsState, deviceType, section }: IProps): ReactElement {
+  const [modalState, setModalState] = useState({ open: false, type: null })
+
+  function onClickStart(accountsState): void {
+    if (!isChromeBrowser()) {
+      return setModalState({ open: true, type: 'NOT_CHROME_BROWSER' })
+    }
+
+    if (!accountsState.provider_installed) {
+      return setModalState({ open: true, type: 'PROVIDER_MISSING' })
+    }
+
+    if (accountsState.provider_installed && !accountsState.mainchain_account) {
+      return accountsState.connectToProvider()
+    }
+
+    if (accountsState.provider_installed && accountsState.mainchain_account) {
+      return console.log(
+        `Metamask DETECTED, and account: ${accountsState.mainchain_account} found.`
+      )
+    }
+  }
+
   return (
     <>
       <AppBar variant="outlined">
@@ -123,9 +153,11 @@ export default function AppToolbar({ deviceType, section }: IProps): ReactElemen
 
           {/* Profile | Sign in/up */}
           <div className={appbarStyles.profileSection}>
-            <Button variant="contained" color="secondary">
-              Start
-            </Button>
+            <SessionComponent
+              account={accountsState && accountsState.mainchain_account}
+              device={deviceType}
+              onClickStart={() => onClickStart(accountsState)}
+            />
           </div>
         </Toolbar>
       </AppBar>
@@ -136,6 +168,13 @@ export default function AppToolbar({ deviceType, section }: IProps): ReactElemen
           <KeyboardArrowUpIcon />
         </Fab>
       </ScrollTop>
+
+      <Modal
+        device={deviceType}
+        open={modalState.open}
+        type={modalState.type}
+        handleClose={() => setModalState({ open: false, type: null })}
+      />
     </>
   )
 }

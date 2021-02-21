@@ -1,15 +1,17 @@
 import React from 'react'
 import { ReactElement } from 'react'
 
+import { withAccountsHOC } from '../../hooks/accounts-context'
+
 import AppToolbar from '../../components/app-toolbar'
 
-import Guides from './guides'
-
-export default function GuidesMobile(): ReactElement {
+function GuidesMobile({ accountsState }): ReactElement {
   return (
-    <Guides>
-      <AppToolbar deviceType="mobile" section="guides" />
+    <>
+      <AppToolbar deviceType="mobile" section="guides" accountsState={accountsState} />
       <p>Guides</p>
-    </Guides>
+    </>
   )
 }
+
+export default withAccountsHOC(GuidesMobile)

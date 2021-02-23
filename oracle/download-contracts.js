@@ -1,4 +1,3 @@
-
 const axios = require('axios');
 var fs = require('fs');
 var dir = './contracts';

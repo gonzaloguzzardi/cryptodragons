@@ -14,11 +14,13 @@ RUN if test -d node_modules; then rm -r node_modules; fi
 
 # Run the command inside your image filesystem
 RUN apt-get update
+RUN apt-get install libudev-dev -y
+RUN apt-get install libusb-1.0-0-dev -y
 RUN npm install --silent
 
 # Inform Docker that the container is listening on the specified port at runtime.
 EXPOSE 8082
 
 # Run the specified command within the container.
-#CMD npm run deploy:reset:bfa:docker && npm run deploy:reset:loom:docker && npm run start-dev-contract-getter
-CMD node contractGetter.js
+CMD npm run deploy:reset:bfa:docker && npm run deploy:reset:loom:docker && npm run start-dev-contract-getter
+#CMD node contractGetter.js

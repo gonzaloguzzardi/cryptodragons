@@ -21,21 +21,21 @@ services:
       - ./truffle-project:/usr/src/app/contractGetter
       - /usr/src/app/contractGetter/node_modules
 
-  sidechain-deploy:
-    environment:
-      DOCKERENV: 1
-    build:
-      context: ./truffle-project
-      dockerfile: DockerfileSidechainSetup
-    ports:
-      - "8001:8001"
-      - 46656
-      - 46658
-    depends_on:
-      - loom
-    volumes:
-      - ./truffle-project:/usr/src/app/side-sv
-      - /usr/src/app/side-sv/node_modules
+  #dechain-deploy:
+  #environment:
+  #  DOCKERENV: 1
+  #build:
+  #  context: ./truffle-project
+  #  dockerfile: DockerfileSidechainSetup
+  #ports:
+  #  - "8001:8001"
+  #  - 46656
+  #  - 46658
+  #depends_on:
+  #  - loom
+  #volumes:
+  #  - ./truffle-project:/usr/src/app/side-sv
+  #  - /usr/src/app/side-sv/node_modules
 
   bfa:
     image: nicomoccagatta/cryptodragons:bfa_node_v010
@@ -45,23 +45,23 @@ services:
       - "8547:8547"
       - "30303:30303"
 
-  mainchain-deploy:
-    environment:
-      DOCKERENV: 1
-    build:
-      context: ./truffle-project
-      dockerfile: DockerfileMainchainSetup
-    ports:
-      - "8002:8002"
-      - 8545
-      - 8546
-      - 8547
-      - 30303
-    depends_on:
-      - bfa
-    volumes:
-      - ./truffle-project:/usr/src/app/main-sv
-      - /usr/src/app/main-sv/node_modules
+#mainchain-deploy:
+#  environment:
+#    DOCKERENV: 1
+#  build:
+#    context: ./truffle-project
+#    dockerfile: DockerfileMainchainSetup
+#  ports:
+#    - "8002:8002"
+#    - 8545
+#    - 8546
+#    - 8547
+#    - 30303
+#  depends_on:
+#    - bfa
+#  volumes:
+#    - ./truffle-project:/usr/src/app/main-sv
+#    - /usr/src/app/main-sv/node_modules
 
   mongo:
     build:
@@ -80,8 +80,8 @@ services:
       - 8002
       - "8081:8081"
     depends_on:
-      - sidechain-deploy
-      - mainchain-deploy
+      #- sidechain-deploy
+      #- mainchain-deploy
       - mongo
       - contract-getter
     volumes:

@@ -30,6 +30,7 @@ export default createMuiTheme({
     fontFamily: 'Raleway, Arial',
     button: {
       fontWeight: 'bold',
+      textTransform: 'none',
     },
     subtitle1: {
       fontWeight: 500,
@@ -37,7 +38,7 @@ export default createMuiTheme({
     },
     subtitle2: {
       fontWeight: 500,
-      fontSize: 16,
+      fontSize: 18,
     },
     body1: {},
     body2: {},

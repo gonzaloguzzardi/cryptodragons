@@ -8,10 +8,10 @@ import { Parallax } from 'react-parallax'
 export default function LandingSection(): ReactElement {
   return (
     <Parallax
-      blur={0}
+      blur={1}
       bgImage="/assets/home/background_dragon-land.jpg"
       bgImageAlt="background landing"
-      strength={100}
+      strength={120}
     >
       <div className={styles.main}>
         <div className={styles.title}>

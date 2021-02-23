@@ -1,15 +1,17 @@
 import React from 'react'
 import { ReactElement } from 'react'
 
+import { withAccountsHOC } from '../../hooks/accounts-context'
+
 import AppToolbar from '../../components/app-toolbar'
 
-import MyDragons from './my-dragons'
-
-export default function MyDragonsDesktop(): ReactElement {
+function MyDragonsDesktop({ accountsState }): ReactElement {
   return (
-    <MyDragons>
-      <AppToolbar deviceType="desktop" section="my-dragons" />
+    <>
+      <AppToolbar deviceType="desktop" section="my-dragons" accountsState={accountsState} />
       <p>My Dragons</p>
-    </MyDragons>
+    </>
   )
 }
+
+export default withAccountsHOC(MyDragonsDesktop)

@@ -1,8 +1,9 @@
+/* eslint-disable no-undef */
 import clientFactory from './client-factory'
 import CommonAPI from '../common'
 import sleep from '../../../utils/sleep'
 
-// client: { web3js, account, netId, tokenContract, gatewayContract }
+// client: { account, chainId } ... { tokenContract, gatewayContract }
 let client
 let clientFetching
 
@@ -15,12 +16,56 @@ class MainchainAPI {
       client = await clientFactory()
       clientFetching = false
       console.log('MAINCHAIN CLIENT CREATED', client)
-      // client.web3js.eth.accounts.wallet.add(client.account);
+    }
+
+    if (client) {
+      ethereum.on('chainChanged', (chainId) => {
+        console.log(`Blockchain changed to chainId: ${chainId}`)
+        window.location.reload()
+      })
+
+      ethereum.on('accountsChanged', (accounts) => {
+        console.log(`Account changed to: ${accounts[0]}`)
+        if (!accounts[0]) window.location.reload()
+        client.account = accounts[0]
+      })
     }
 
     return client
   }
 
+  static async connectToProvider() {
+    if (!client) return Promise.resolve('Provider(ej: Metamask) not connected')
+
+    return new Promise((res, rej) => {
+      ethereum
+        .request({ method: 'eth_requestAccounts' })
+        .then((accounts) => {
+          console.log(`Account changed to: ${accounts[0]}`)
+          client.account = accounts[0]
+          return res(client)
+        })
+        .catch((err) => {
+          if (err.code === 4001) return rej('EIP-1193 userRejectedRequest error.')
+          if (err.code === -32002) return rej('Request already sent, check Provider')
+          return rej(err)
+        })
+    })
+  }
+
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
   static async createDragon(gas) {
     try {
       const {

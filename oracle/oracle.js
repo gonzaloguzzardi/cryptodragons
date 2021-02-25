@@ -26,8 +26,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // LISTENING BLOCKCHAINS
-listenMainChainEvents();
-listenSideChainEvents();
+// listenMainChainEvents();
+// listenSideChainEvents();
 
 // API ROUTES
 app.get('/api/dragons', getDragonsInGateways);
@@ -51,7 +51,7 @@ const server = app.listen(oracleApiPort, () => {
 });
 
 // CRON
-cron.schedule('*/15 * * * * *', () => {
-  collectFromSidechainGatewayAndSendToMainchain();
-  collectFromMainchainGatewayAndSendToSidechain();
-});
+// cron.schedule('*/15 * * * * *', () => {
+//   collectFromSidechainGatewayAndSendToMainchain();
+//   collectFromMainchainGatewayAndSendToSidechain();
+// });

@@ -7,4 +7,4 @@ if [[ "$(docker images -q nicomoccagatta/cryptodragons:bfa_node_v010 2> /dev/nul
     docker pull nicomoccagatta/cryptodragons:bfa_node_v010
 fi
 
-docker run -d -p 8545:8545 -p 8546:8546 -p 8547:8547 -p 30303:30303 -i -t nicomoccagatta/cryptodragons:bfa_node_v010
+docker run -p 8545:8545 -p 8546:8546 -p 8547:8547 -p 30303:30303 -i -t nicomoccagatta/cryptodragons:bfa_node_v010

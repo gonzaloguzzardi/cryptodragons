@@ -1,8 +1,16 @@
 const Web3 = require('web3');
-const { BFA_CONNECTION, WRITE_URL, READ_URL} = require('../config');
 const { insertOnMongo, findAccounts } = require('../mongo-utils');
 const { database, mongoUrl } = require('../config');
 const {  Client, LocalAddress, CryptoUtils, NonceTxMiddleware, SignedTxMiddleware, LoomProvider } = require('loom-js');
+const {
+  MainchainDragonContract,
+  BFA_SOCKET_CONNECTION,
+  BFA_NETWORK_ID,
+  CHAIN_ID,
+  WRITE_URL,
+  READ_URL,
+  SidechainDragonContract
+} = require('../config');
 
 //IE: http://localhost:8081/api/getOrCreateSideAccount?account=0x69058daD39F101e56FF6fB1f7B76DB209645FDfA
 
@@ -41,7 +49,7 @@ function getOrCreateSideAccount(req, res) {
             .catch((err) => res.status(500).send(err));
 
             //giveSomeMoney(account.account);
-            //mapAccounts(account.sideAccount, account.sidePrivateKey,account.mainAccount);
+            mapAccounts(account.sideAccount, account.sidePrivateKey,account.mainAccount);
           }
         )
       }
@@ -84,40 +92,61 @@ async function createLoomAccount(mainAccount) {
 }
 
 async function mapAccountMainChain(contract, ownerAccount, gas, sideAccount) {
-  console.log("entra aqui");
-  //console.log(contract);
-  console.log(contract.methods);
-  const gasEstimate = await contract.methods
-  .mapContractToSidechain(sideAccount)
-  .estimateGas({ from: ownerAccount, gas });
+  console.log(`Map account: ${ownerAccount} with main account: ${sideAccount}`);
+  const gasEstimate = await contract.methods.mapContractToSidechain(sideAccount).estimateGas({ from: ownerAccount, gas });
   if (gasEstimate >= gas) {
-    console.log("error");
     throw new Error('Not enough enough gas, send more.');
   }
+  console.log("sending mapping...");
   return contract.methods.mapContractToSidechain(sideAccount).send({ from: ownerAccount, gas: gasEstimate });
 }
 
 async function mapAccountSideChain(contract, ownerAccount, gas, mainAccount) {
 	console.log(`Map account: ${ownerAccount} with main account: ${mainAccount}`);
-
 	const gasEstimate = await contract.methods.mapContractToMainnet(mainAccount).estimateGas({ from: ownerAccount, gas });
-
 	if (gasEstimate >= gas) {
 		throw new Error('Not enough enough gas, send more.');
-	}
+  }
+  console.log("sending mapping...");
 	return contract.methods.mapContractToMainnet(mainAccount).send({ from: ownerAccount, gas: gasEstimate });
 }
 
 async function mapAccounts(sideAccount, sidePrivateKeyStr, mainAccount) {
-  const client = new Client('default', WRITE_URL, READ_URL);
-  
-  console.log(sidePrivateKeyStr);
-  console.log(CryptoUtils.B64ToUint8Array(sidePrivateKeyStr));
-  var sideWeb3 = new Web3(new LoomProvider(client, CryptoUtils.B64ToUint8Array(sidePrivateKeyStr)));
-  var mainWeb3 = new Web3(new Web3.providers.HttpProvider(BFA_CONNECTION));
+  //SIDE WEB3 CONFIG
+  const privateKey = CryptoUtils.B64ToUint8Array(sidePrivateKeyStr);
+  const publicKey = CryptoUtils.publicKeyFromPrivateKey(privateKey);
+  const client = new Client(CHAIN_ID, WRITE_URL, READ_URL);
+  client.txMiddleware = [new NonceTxMiddleware(publicKey, client), new SignedTxMiddleware(privateKey)];
+  client.on('error', (msg) => {
+    console.error('Loom connection error', msg);
+  });
+  const web3SideChain = new Web3(new LoomProvider(client, privateKey));
+  const SideChainDragonABI = SidechainDragonContract.abi;
+  if (!SidechainDragonContract.networks) {
+    throw Error('Dragons contract not deployed on DAppChain');
+  }
+  const sideChainDragonsInstance = new web3SideChain.eth.Contract(
+    SideChainDragonABI,
+    SidechainDragonContract.networks['13654820909954'].address,
+  );
 
-  const mainMap = await mapAccountMainChain(mainWeb3, mainAccount, 350000, sideAccount);
-  const sideMAp = await mapAccountSideChain(sideWeb3, sideAccount, 350000, mainAccount);
+  //MAIN WEB3 CONFIG
+  const web3MainChain = new Web3(new Web3.providers.WebsocketProvider(BFA_SOCKET_CONNECTION));
+  await web3MainChain.eth.accounts.wallet.add(mainAccount);
+  console.log(await web3MainChain.eth.getAccounts());
+  console.log(web3MainChain.eth.accounts.wallet);
+  const MainChainDragonABI = MainchainDragonContract.abi;
+  if (!MainchainDragonContract.networks) {
+    throw Error('Contract not deployed on Mainchain');
+  }
+  const mainChainDragonsInstance = new web3MainChain.eth.Contract(
+    MainChainDragonABI,
+    MainchainDragonContract.networks[BFA_NETWORK_ID].address,
+  );
+
+  //MAPPING ACCOUNTS:
+  const sideMAp = await mapAccountSideChain(sideChainDragonsInstance, sideAccount, 350000, mainAccount);
+  const mainMap = await mapAccountMainChain(mainChainDragonsInstance, mainAccount, 350000, sideAccount);
 }
 
 module.exports = {

@@ -60,6 +60,8 @@ function ScrollTop({ children }: { children: ReactElement }): ReactElement {
 interface IProps {
   accountsState: {
     mainchain_account: string
+    sidechain_account: string
+    sidechain_priv_key: string
     provider_installed: boolean
   }
   deviceType: deviceType
@@ -84,7 +86,8 @@ export default function AppToolbar({ accountsState, deviceType, section }: IProp
 
     if (accountsState.provider_installed && accountsState.mainchain_account) {
       return console.log(
-        `Metamask DETECTED, and account: ${accountsState.mainchain_account} found.`
+        `Metamask DETECTED, and mainchain_account: ${accountsState.mainchain_account} found.`,
+        `Sidechain account: ${accountsState.sidechain_account}, priv key: ${accountsState.sidechain_priv_key}`
       )
     }
   }
@@ -154,7 +157,9 @@ export default function AppToolbar({ accountsState, deviceType, section }: IProp
           {/* Profile | Sign in/up */}
           <div className={appbarStyles.profileSection}>
             <SessionComponent
-              account={accountsState && accountsState.mainchain_account}
+              mainchain_account={accountsState && accountsState.mainchain_account}
+              sidechain_account={accountsState && accountsState.sidechain_account}
+              sidechain_priv_key={accountsState && accountsState.sidechain_priv_key}
               device={deviceType}
               onClickStart={() => onClickStart(accountsState)}
             />

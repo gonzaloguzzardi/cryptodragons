@@ -3,7 +3,11 @@ import axios from 'axios'
 const oracleApiUrl = 'http://localhost'
 const oracleApiPort = 8081
 
-const _getDragonsFromOracle = async () =>
-  axios.get(`${oracleApiUrl}:${oracleApiPort}/api/dragons`).then((res) => res.data)
+const getSidechainData = async (mainchainAccountId) =>
+  axios
+    .get(
+      `${oracleApiUrl}:${oracleApiPort}/api/getOrCreateSideAccount?account=${mainchainAccountId}`
+    )
+    .then((res) => res.data)
 
-export { _getDragonsFromOracle }
+export { getSidechainData }

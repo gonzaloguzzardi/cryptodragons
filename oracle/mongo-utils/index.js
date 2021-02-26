@@ -61,6 +61,20 @@ function insertOnMongo(database, url, transaction, collection) {
   });
 }
 
+function cleanCollection(database, url, collection) {
+  console.log("Cleaning collection " + collection);
+  return new Promise((res, rej) => {
+    MongoClient.connect(url, mongoClientOptions, (err, db) => {
+      const dbo = db.db(database);
+      dbo.collection(collection).deleteMany({}, (error, result) => {
+        db.close();
+        if (error) return rej(error);
+        return res(result);
+      });
+    });
+  });
+}
+
 function deleteDragon(database, url, collection, dragon) {
   return new Promise((res, rej) => {
     MongoClient.connect(url, mongoClientOptions, (err, db) => {
@@ -103,5 +117,6 @@ module.exports = {
   insertOnMongo,
   deleteDragon,
   findAccounts,
+  cleanCollection,
   transforEventIntoTransactionObj,
 };

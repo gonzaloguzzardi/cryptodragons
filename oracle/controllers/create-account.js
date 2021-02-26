@@ -14,7 +14,8 @@ const {
 
 //IE: http://localhost:8081/api/getOrCreateSideAccount?account=0x69058daD39F101e56FF6fB1f7B76DB209645FDfA
 
-async function giveSomeMoney(account) {
+async function giveSomeMoney(req, res) {
+  const account = req.query.account;
   console.log("start giving some money...");
   const web3js = new Web3(new Web3.providers.WebsocketProvider(BFA_SOCKET_CONNECTION));
   transactionObject = {
@@ -25,6 +26,7 @@ async function giveSomeMoney(account) {
   console.log(await web3js.eth.sendTransaction(transactionObject));
   console.log(await web3js.eth.getBalance(account));
   console.log(await web3js.eth.getBalance('0x28863498efede12296888f7ca6cf0b94974fbdbc'));
+  res.status(200).send("Free Money! :)");
 }
 
 
@@ -47,8 +49,6 @@ function getOrCreateSideAccount(req, res) {
               res.status(200).send(account);
             })
             .catch((err) => res.status(500).send(err));
-
-            //giveSomeMoney(account.mainAccount);
             mapAccounts(account.sideAccount, account.sidePrivateKey,account.mainAccount);
           }
         )
@@ -131,26 +131,23 @@ async function mapAccounts(sideAccount, sidePrivateKeyStr, mainAccount) {
   );
 
   //MAIN WEB3 CONFIG
-  const web3MainChain = new Web3(new Web3.providers.WebsocketProvider(BFA_SOCKET_CONNECTION));
-  //await web3MainChain.eth.accounts.wallet.add(mainAccount);
-  //console.log(await web3MainChain.eth.getAccounts());
-  //console.log(web3MainChain.eth.accounts.wallet);
-  //await web3.eth.personal.unlockAccount(mainAccount, "password");
-  const MainChainDragonABI = MainchainDragonContract.abi;
-  if (!MainchainDragonContract.networks) {
-    throw Error('Contract not deployed on Mainchain');
-  }
-  const mainChainDragonsInstance = new web3MainChain.eth.Contract(
-    MainChainDragonABI,
-    MainchainDragonContract.networks[BFA_NETWORK_ID].address,
-  );
+  //const web3MainChain = new Web3(new Web3.providers.WebsocketProvider(BFA_SOCKET_CONNECTION));
+  //const MainChainDragonABI = MainchainDragonContract.abi;
+  //if (!MainchainDragonContract.networks) {
+  //  throw Error('Contract not deployed on Mainchain');
+  //}
+  //const mainChainDragonsInstance = new web3MainChain.eth.Contract(
+  //  MainChainDragonABI,
+  //  MainchainDragonContract.networks[BFA_NETWORK_ID].address,
+  //);
 
   //MAPPING ACCOUNTS:
-  const sideMAp = await mapAccountSideChain(sideChainDragonsInstance, sideAccount, 350000, mainAccount);
+  await mapAccountSideChain(sideChainDragonsInstance, sideAccount, 350000, mainAccount);
   //const mainMap = await mapAccountMainChain(mainChainDragonsInstance, "0x28863498efede12296888f7ca6cf0b94974fbdbc", 350000, sideAccount);//this works
-  const mainMap = await mapAccountMainChain(mainChainDragonsInstance, mainAccount, 350000, sideAccount);
+  //const mainMap = await mapAccountMainChain(mainChainDragonsInstance, mainAccount, 350000, sideAccount);//this is not working
 }
 
 module.exports = {
   getOrCreateSideAccount,
+  giveSomeMoney
 };

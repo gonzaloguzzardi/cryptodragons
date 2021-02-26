@@ -13,6 +13,7 @@ const {
 } = require('../config');
 
 //IE: http://localhost:8081/api/getOrCreateSideAccount?account=0x69058daD39F101e56FF6fB1f7B76DB209645FDfA
+//IE: http://localhost:8081/api/giveSomeMoney?account=0x69058daD39F101e56FF6fB1f7B76DB209645FDfA
 
 async function giveSomeMoney(req, res) {
   const account = req.query.account;

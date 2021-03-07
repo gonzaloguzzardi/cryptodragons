@@ -9,5 +9,6 @@ const getSidechainData = async (mainchainAccountId) =>
       `${oracleApiUrl}:${oracleApiPort}/api/getOrCreateSideAccount?account=${mainchainAccountId}`
     )
     .then((res) => res.data)
+    .catch((err) => console.log(`Error fetching sidechain data: ${err}`))
 
 export { getSidechainData }

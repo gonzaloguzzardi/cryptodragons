@@ -29,6 +29,32 @@ const getDisplayName = (Component): string => Component.displayName || Component
 const AccountsContext = createContext({})
 AccountsContext.displayName = 'AccountsContext'
 
+const fetchAndSetAllAccountsData = (mainchainData, setData): void => {
+  if (!mainchainData) return
+  setData({
+    provider_installed: true,
+    mainchain_account: mainchainData.account,
+  })
+
+  if (!mainchainData.account) return
+  SidechainAPI.fetchSidechainData(mainchainData.account).then((sidechainData) => {
+    if (!sidechainData) return
+    setData((prevData) => ({
+      ...prevData,
+      sidechain_account: sidechainData.sideAccount,
+      sidechain_priv_key: sidechainData.sidePrivateKey,
+      sidechain_new_account: sidechainData.isFirst,
+    }))
+
+    MainchainAPI.areAccountsMapped(sidechainData.sideAccount, 45000).then((res) => {
+      setData((prevData) => ({
+        ...prevData,
+        mapped_accounts: res,
+      }))
+    })
+  })
+}
+
 const AccountsProvider = ({ children }: { children: ReactNode }): ReactElement => {
   const [data, setData] = useState({
     provider_installed: false,
@@ -37,45 +63,14 @@ const AccountsProvider = ({ children }: { children: ReactNode }): ReactElement =
 
   const connectToProvider = (): void => {
     MainchainAPI.connectToProvider()
-      .then((mainchainData) => {
-        console.log('Connect provider response:', mainchainData)
-        if (mainchainData) {
-          setData({
-            provider_installed: true,
-            mainchain_account: mainchainData.account,
-          })
-          SidechainAPI.fetchSidechainData(mainchainData.account).then((sidechainData) => {
-            if (sidechainData)
-              setData((prevData) => ({
-                ...prevData,
-                sidechain_account: sidechainData.sideAccount,
-                sidechain_priv_key: sidechainData.sidePrivateKey,
-                sidechain_new_account: sidechainData.isFirst,
-              }))
-          })
-        }
-      })
+      .then((mainchainData) => fetchAndSetAllAccountsData(mainchainData, setData))
       .catch((err) => console.error('Connect provider error:', err))
   }
 
   useEffect(() => {
-    MainchainAPI.getClientHelper().then((mainchainData) => {
-      if (mainchainData) {
-        setData({
-          provider_installed: true,
-          mainchain_account: mainchainData.account,
-        })
-        SidechainAPI.fetchSidechainData(mainchainData.account).then((sidechainData) => {
-          if (sidechainData)
-            setData((prevData) => ({
-              ...prevData,
-              sidechain_account: sidechainData.sideAccount,
-              sidechain_priv_key: sidechainData.sidePrivateKey,
-              sidechain_new_account: sidechainData.isFirst,
-            }))
-        })
-      }
-    })
+    MainchainAPI.getClientHelper().then((mainchainData) =>
+      fetchAndSetAllAccountsData(mainchainData, setData)
+    )
   }, [])
 
   const store = {

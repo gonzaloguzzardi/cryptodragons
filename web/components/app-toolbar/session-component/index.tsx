@@ -12,6 +12,7 @@ type tProps = {
   mainchain_account: string
   sidechain_account: string
   sidechain_priv_key: string
+  mapped_accounts: boolean
   device: deviceType
   onClickStart: () => void
 }
@@ -20,6 +21,7 @@ export default function SessionComponent({
   mainchain_account,
   sidechain_account,
   sidechain_priv_key,
+  mapped_accounts,
   device,
   onClickStart,
 }: tProps): ReactElement {
@@ -87,13 +89,16 @@ export default function SessionComponent({
           disableRestoreFocus
         >
           <Typography>
-            <b>mainchain account:</b> {mainchain_account}
+            <b>Mainchain account:</b> {mainchain_account}
           </Typography>
           <Typography>
-            <b>sidechain account:</b> {sidechain_account}
-            <Typography>
-              <b>sidechain priv key:</b> {sidechain_priv_key}
-            </Typography>
+            <b>Sidechain account:</b> {sidechain_account}
+          </Typography>
+          <Typography>
+            <b>Sidechain priv key:</b> {sidechain_priv_key}
+          </Typography>
+          <Typography>
+            <b>Mapped accounts:</b> {'' + mapped_accounts}
           </Typography>
         </Popover>
       </div>

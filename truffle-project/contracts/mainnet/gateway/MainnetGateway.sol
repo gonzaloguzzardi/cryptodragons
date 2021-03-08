@@ -35,7 +35,6 @@ contract MainnetGateway is IERC20Receiver, IERC721Receiver, MainnetValidatorMana
 
   event SendDragonToSidechainAttempt(address from, uint256 uid, address toSidechainAddress, bytes data);
   event DragonSuccessfullyRetrievedInMainchain(address mainchainAddress, uint256 uid, bytes data);
-  event DragonWithdrawal(address sidechainAddress, uint256 uid);
 
   enum TokenKind {
     ETH,
@@ -98,21 +97,6 @@ contract MainnetGateway is IERC20Receiver, IERC721Receiver, MainnetValidatorMana
     delete lockedDragons[uid];
     delete balances[mainchainAddress].erc721[mainchainAddress][uid];
     emit DragonSuccessfullyRetrievedInMainchain(mainchainAddress, uid, data);
-  }
-
-  //@TODO hacer onlyOracle
-  /**
-  * @dev Se llama cuando el usuario hace un withdraw del dragon. Primero se debe bloquear el dragon en la otra blockchain
-  */
-  function withdrawDragon(address mainchainAddress, uint256 uid) public {
-    require(balances[mainchainAddress].erc721[mainchainAddress][uid].length > 0, "Does not own token");
-    bytes storage dragonData = balances[mainchainAddress].erc721[mainchainAddress][uid];
-
-    IDragonContract(_erc721ContractAddress).retrieveToken(mainchainAddress, uid, dragonData);
-
-    delete lockedDragons[uid];
-    delete balances[mainchainAddress].erc721[mainchainAddress][uid];
-    emit DragonWithdrawal(mainchainAddress, uid);
   }
 
   /*********************************************************************************** */

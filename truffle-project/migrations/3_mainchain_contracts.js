@@ -1,6 +1,8 @@
-const { writeFileSync } = require('fs');
+const {
+	writeFileSync
+} = require('fs');
 
-const DragonToken = artifacts.require('./mainnet/MainnetMerchantableDragon.sol');
+const DragonToken = artifacts.require('./mainnet/MainnetTransferableDragon.sol');
 const Gateway = artifacts.require('./mainnet/gateway/MainnetGateway.sol');
 const GenesLaboratory = artifacts.require('./genes/GenesLaboratory.sol');
 const Marketplace = artifacts.require('./mainnet/marketplace/MainnetMarketplace.sol');
@@ -35,18 +37,12 @@ module.exports = function (deployer, network, accounts) {
 		console.log(`GenesLaboratory deployed at address: ${genesContractInstance.address}`);
 		console.log(`GenesLaboratory transaction at hash: ${genesContract.transactionHash}`);
 
-		const dragonCoinContract = await deployer.deploy(DragonCoin, gatewayInstance.address);
-		const dragonCoinInstance = await DragonCoin.deployed();
-
-		console.log(`GenesLaboratory deployed at address: ${genesContractInstance.address}`);
-		console.log(`GenesLaboratory transaction at hash: ${genesContract.transactionHash}`);
-
 		const marketplaceContract = await deployer.deploy(Marketplace, dragonTokenInstance.address);
 		const marketplaceContractInstance = await Marketplace.deployed();
 
 		console.log(`Marketplace deployed at address: ${marketplaceContractInstance.address}`);
 		console.log(`Marketplace transaction at hash: ${marketplaceContract.transactionHash}`);
-		
+
 		// await gatewayInstance.toggleToken(dragonTokenInstance.address, { from: validator })
 		// await dragonTokenInstance.register(user)
 

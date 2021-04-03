@@ -9,25 +9,24 @@ let clientFetching
 
 class MainchainAPI {
   static async getClientHelper() {
-    while (!client && clientFetching) await sleep(1000)
+    while (!client && clientFetching) await sleep(1000);
 
     if (!client) {
-      clientFetching = true
-      client = await clientFactory()
-      clientFetching = false
-      console.log('MAINCHAIN CLIENT CREATED', client)
+      clientFetching = true;
+      client = await clientFactory();
+      clientFetching = false;
+      console.log('MAINCHAIN CLIENT CREATED', client);
     }
 
     if (client) {
       ethereum.on('chainChanged', (chainId) => {
-        console.log(`Blockchain changed to chainId: ${chainId}`)
-        window.location.reload()
+        console.log(`Blockchain changed to chainId: ${chainId}`);
+        window.location.reload();
       })
 
       ethereum.on('accountsChanged', (accounts) => {
-        console.log(`Account changed to: ${accounts[0]}`)
-        if (!accounts[0]) window.location.reload()
-        client.account = accounts[0]
+        console.log(`Account changed to: ${accounts[0]}`);
+        window.location.reload();
       })
     }
 
@@ -35,22 +34,22 @@ class MainchainAPI {
   }
 
   static async connectToProvider() {
-    if (!client) return Promise.resolve('Provider(ej: Metamask) not connected')
+    if (!client) return Promise.resolve('Provider(ej: Metamask) not connected');
 
     return new Promise((res, rej) => {
       ethereum
         .request({ method: 'eth_requestAccounts' })
         .then((accounts) => {
           console.log(`Account changed to: ${accounts[0]}`)
-          client.account = accounts[0]
-          return res(client)
+          client.account = accounts[0];
+          return res(client);
         })
         .catch((err) => {
-          if (err.code === 4001) return rej('EIP-1193 userRejectedRequest error.')
-          if (err.code === -32002) return rej('Request already sent, check Provider')
-          return rej(err)
-        })
-    })
+          if (err.code === 4001) return rej('EIP-1193 userRejectedRequest error.');
+          if (err.code === -32002) return rej('Request already sent, check Provider');
+          return rej(err);
+        });
+    });
   }
 
   static async areAccountsMapped(sideAccount, gas) {
@@ -58,11 +57,11 @@ class MainchainAPI {
       const {
         tokenContract: contract,
         account: ownerAccount,
-      } = await MainchainAPI.getClientHelper()
+      } = await MainchainAPI.getClientHelper();
 
-      return await CommonAPI.sAreAccountsMapped(contract, ownerAccount, sideAccount, gas)
+      return await CommonAPI.sAreAccountsMapped(contract, ownerAccount, sideAccount, gas);
     } catch (err) {
-      console.error(err)
+      console.error(err);
     }
   }
   //

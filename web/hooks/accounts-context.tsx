@@ -15,8 +15,13 @@ const ComponentWithAccountData = withAccountsHOC(Component1);
 
 ---
 Now ComponentWithAccountData has a prop `accountsState` with the fields
- 'provider_installed' & 'mainchain_account' & 'connectToProvider()'
-
+ provider_installed &
+ mainchain_account &
+ sidechain_account &
+ sidechain_priv_key &
+ sidechain_new_account &
+ mapped_accounts &
+ connectToProvider()
 */
 
 import React, { createContext, ReactElement, ReactNode, useEffect, useState } from 'react'
@@ -27,6 +32,7 @@ import SidechainAPI from '../services/blockchain-interaction/sidechain'
 const getDisplayName = (Component): string => Component.displayName || Component.name || 'Component'
 
 const AccountsContext = createContext({})
+
 AccountsContext.displayName = 'AccountsContext'
 
 const fetchAndSetAllAccountsData = (mainchainData, setData): void => {

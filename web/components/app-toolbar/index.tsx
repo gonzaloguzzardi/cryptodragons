@@ -62,6 +62,7 @@ interface IProps {
     mainchain_account: string
     sidechain_account: string
     sidechain_priv_key: string
+    sidechain_new_account: string
     mapped_accounts: boolean
     provider_installed: boolean
   }
@@ -161,6 +162,7 @@ export default function AppToolbar({ accountsState, deviceType, section }: IProp
               mainchain_account={accountsState && accountsState.mainchain_account}
               sidechain_account={accountsState && accountsState.sidechain_account}
               sidechain_priv_key={accountsState && accountsState.sidechain_priv_key}
+              sidechain_new_account={accountsState && accountsState.sidechain_new_account}
               mapped_accounts={accountsState && accountsState.mapped_accounts}
               device={deviceType}
               onClickStart={() => onClickStart(accountsState)}

@@ -2,7 +2,7 @@ import Link from 'next/link'
 
 import FacebookIcon from '@material-ui/icons/Facebook'
 import TwitterIcon from '@material-ui/icons/Twitter'
-import YoutubeIcon from '@material-ui/icons/Youtube'
+import YoutubeIcon from '@material-ui/icons/YouTube'
 import AndroidOutlinedIcon from '@material-ui/icons/AndroidOutlined'
 import AppleIcon from '@material-ui/icons/Apple'
 import InstagramIcon from '@material-ui/icons/Instagram'

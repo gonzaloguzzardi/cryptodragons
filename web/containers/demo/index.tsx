@@ -11,7 +11,7 @@ import FormLabel from '@material-ui/core/FormLabel'
 
 import MainchainAPI from '../../services/blockchain-interaction/mainchain'
 import SidechainAPI from '../../services/blockchain-interaction/sidechain'
-import { _getDragonsFromOracle } from '../../services/oracle'
+// import { _getDragonsFromOracle } from '../../services/oracle'
 import { ReactElement } from 'react'
 
 const GAS_DEFAULT_VALUE = 350000
@@ -75,12 +75,12 @@ class Demo extends Component<IProps> {
   }
 
   getDragonsFromOracle: () => unknown = () => {
-    _getDragonsFromOracle().then((result) => {
-      this.setState({
-        sidechainGatewayDragons: result[0]['sidechain-gateway-results'],
-        mainchainGatewayDragons: result[1]['mainchain-gateway-results'],
-      })
-    })
+    // _getDragonsFromOracle().then((result) => {
+    //   this.setState({
+    //     sidechainGatewayDragons: result[0]['sidechain-gateway-results'],
+    //     mainchainGatewayDragons: result[1]['mainchain-gateway-results'],
+    //   })
+    // })
   }
 
   buyDragonInSideChain: () => unknown = () => {

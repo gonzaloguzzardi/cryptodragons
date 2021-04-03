@@ -47,7 +47,11 @@ class CommonAPI {
       .isMap(otherChainAccount)
       .estimateGas({ from: ownerAccount, gas })
 
-    console.log(`[COMMON-API_ARE-ACCOUNTS-MAPPED]: Gas sent: ${gas}, Gas Estimate: ${gasEstimate}`)
+    console.log(
+      `[COMMON-API_ARE-ACCOUNTS-MAPPED]:`,
+      `Gas sent: ${gas}, Gas Estimate: ${gasEstimate}`,
+      `[COMMON-API_ARE-ACCOUNTS-MAPPED]: Main account ${ownerAccount}, Side account: ${otherChainAccount}`
+    )
     if (gasEstimate >= gas) throw new Error('Not enough enough gas, send more.')
 
     return await contract.methods

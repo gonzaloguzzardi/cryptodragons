@@ -22,19 +22,12 @@ class SidechainAPI {
     return client
   }
 
+  // This is an apicall to Oracle, but it's Sidechain data so it goes here for now
   static async fetchSidechainData(mainchainAccountId) {
     return getSidechainData(mainchainAccountId)
       .then((res) => res)
       .catch((err) => console.error(err))
   }
-
-  ////////////////////
-  ////////////////////
-  ////////////////////
-  ////////////////////
-  ////////////////////
-  ////////////////////
-  ////////////////////
 
   static async createDragon(gas) {
     try {

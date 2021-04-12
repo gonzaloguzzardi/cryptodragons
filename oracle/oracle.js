@@ -7,10 +7,10 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 
 // CONSTANTS
-const { oracleApiPort } = require('./config');
-
+const { oracleApiPort, database, mongoUrl } = require('./config');
+const { cleanCollection } = require('./mongo-utils');
 // CONTROLLERS
-const { getDragonsInGateways, getOrCreateSideAccount } = require('./controllers');
+const { getDragonsInGateways, getOrCreateSideAccount, giveSomeMoney } = require('./controllers');
 
 // SERVICES
 const {
@@ -32,6 +32,9 @@ listenSideChainEvents();
 // API ROUTES
 app.get('/api/dragons', getDragonsInGateways);
 app.get('/api/getOrCreateSideAccount', getOrCreateSideAccount);
+app.get('/api/giveSomeMoney', giveSomeMoney);
+
+cleanCollection(database, mongoUrl, 'accounts');
 
 // SERVER LISTEN
 const server = app.listen(oracleApiPort, () => {

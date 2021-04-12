@@ -20,6 +20,25 @@ function collectEvents(event, database, url, collection) {
   });
 }
 
+function findAccounts(event, database, url, collection) {
+  return new Promise((res, rej) => {
+    MongoClient.connect(url, mongoClientOptions, (err, db) => {
+      if (err) return rej(err);
+      const dbo = db.db(database);
+      dbo
+        .collection(collection)
+        .find( event )
+        .toArray((error, results) => {
+          db.close();
+          if (error) return rej(error);
+          return res(results);
+        });
+      return null;
+    });
+  });
+}
+
+
 function collectEventsFromSidechainGateway(database, url, collection) {
   return collectEvents('SendDragonToMainchainAttempt', database, url, collection);
 }
@@ -37,6 +56,20 @@ function insertOnMongo(database, url, transaction, collection) {
         db.close();
         if (error) return rej(error);
         return res('OK');
+      });
+    });
+  });
+}
+
+function cleanCollection(database, url, collection) {
+  console.log("Cleaning collection " + collection);
+  return new Promise((res, rej) => {
+    MongoClient.connect(url, mongoClientOptions, (err, db) => {
+      const dbo = db.db(database);
+      dbo.collection(collection).deleteMany({}, (error, result) => {
+        db.close();
+        if (error) return rej(error);
+        return res(result);
       });
     });
   });
@@ -83,5 +116,7 @@ module.exports = {
   collectEventsFromMainchainGateway,
   insertOnMongo,
   deleteDragon,
+  findAccounts,
+  cleanCollection,
   transforEventIntoTransactionObj,
 };

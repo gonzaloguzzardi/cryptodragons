@@ -1,5 +1,7 @@
 import clientFactory from './client-factory'
 import CommonAPI from '../common'
+import { getSidechainData } from '../../oracle'
+
 import sleep from '../../../utils/sleep'
 
 // client: { account, web3js, loomClient, netId, tokenContract, gatewayContract }
@@ -18,6 +20,13 @@ class SidechainAPI {
     }
 
     return client
+  }
+
+  // This is an apicall to Oracle, but it's Sidechain data so it goes here for now
+  static async fetchSidechainData(mainchainAccountId) {
+    return getSidechainData(mainchainAccountId)
+      .then((res) => res)
+      .catch((err) => console.error(err))
   }
 
   static async createDragon(gas) {

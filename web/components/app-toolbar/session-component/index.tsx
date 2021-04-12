@@ -9,12 +9,24 @@ import styles from './index.module.scss'
 import deviceType from 'types/device-types'
 
 type tProps = {
-  account: string
+  mainchain_account: string
+  sidechain_account: string
+  sidechain_priv_key: string
+  sidechain_new_account: string
+  mapped_accounts: boolean
   device: deviceType
   onClickStart: () => void
 }
 
-export default function SessionComponent({ account, device, onClickStart }: tProps): ReactElement {
+export default function SessionComponent({
+  mainchain_account,
+  sidechain_account,
+  sidechain_priv_key,
+  sidechain_new_account,
+  mapped_accounts,
+  device,
+  onClickStart,
+}: tProps): ReactElement {
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null)
 
   const handlePopoverOpen = (
@@ -35,7 +47,7 @@ export default function SessionComponent({ account, device, onClickStart }: tPro
 
   const open = Boolean(anchorEl)
 
-  if (!account)
+  if (!mainchain_account)
     return (
       <Button variant="contained" color="secondary" onClick={onClickStart}>
         Start
@@ -79,10 +91,19 @@ export default function SessionComponent({ account, device, onClickStart }: tPro
           disableRestoreFocus
         >
           <Typography>
-            <b>mainchain account:</b> {account}
+            <b>Mainchain account:</b> {'' + mainchain_account}
           </Typography>
           <Typography>
-            <b>sidechain account:</b>&nbsp;&nbsp; ...
+            <b>Sidechain account:</b> {'' + sidechain_account}
+          </Typography>
+          <Typography>
+            <b>Sidechain priv key:</b> {'' + sidechain_priv_key}
+          </Typography>
+          <Typography>
+            <b>Sidechain new account:</b> {'' + sidechain_new_account}
+          </Typography>
+          <Typography>
+            <b>Mapped accounts:</b> {'' + mapped_accounts}
           </Typography>
         </Popover>
       </div>

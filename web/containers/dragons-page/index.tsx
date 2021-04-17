@@ -648,7 +648,7 @@ class DragonsPage extends Component<DProps> {
           {this.createSliderForPart("Cuernos", this.updateColorCuernos, this.updateTypeCuernos, 4, true, true)}
           {this.createSliderForPart("Panza", this.updateColorPanza, this.updateTypePanza, 2, true, true)}
           {this.createSliderForPart("Cola", this.updateColorCola, this.updateTypeCola, 4, true, true)}
-          {this.createSliderForPart("Alas", this.updateColorAlas, this.updateTypeAlas, 1, true, true)}
+          {this.createSliderForPart("Alas", this.updateColorAlas, this.updateTypeAlas, 1, false, true)}
           {this.createSliderForPart("Ojos", this.updateColorOjos, this.updateTypeOjos, 4, true, true)}
           {this.createSliderForPart("Cuerpo", this.updateColorCuerpo, this.updateTypeCuerpo, 1, false, true)}
         </div>

@@ -169,7 +169,7 @@ class DragonsPage extends Component<DProps> {
         return (
           <svg className="panza" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 90.85 132.71">
             <defs>
-              <style>{`.panza {position: absolute;z-index: 6;top: 245px;left: 150px;width: 200px;height: 200px;stroke: #1d1d1b;stroke-miterlimit: 10;stroke-width: 3px;fill:hsl(` + color + `,100%,50%);}`}</style>
+              <style>{`.panza {position: absolute;z-index: 6;top: 238px;left: 153px;width: 200px;height: 200px;stroke: #1d1d1b;stroke-miterlimit: 10;stroke-width: 3px;fill:hsl(` + color + `,100%,50%);}`}</style>
             </defs>
             <path className="cls-9" d="M167.13,133.32a22.14,22.14,0,0,1-14.32,4.33,18.88,18.88,0,0,1-12.61-4.55c-17.78,8.48-30.68,33.55-30.68,63.18,0,36.59,19.67,66.25,43.93,66.25s43.93-29.66,43.93-66.25C197.38,166.89,184.69,142,167.13,133.32Z" transform="translate(-108.02 -131.33)" />
           </svg>
@@ -178,7 +178,7 @@ class DragonsPage extends Component<DProps> {
         return (
           <svg className="panza" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 90.8 134.27">
             <defs>
-              <style>{`.panza {position: absolute;z-index: 6;top: 245px;left: 150px;width: 200px;height: 200px;stroke: #1d1d1b;stroke-miterlimit: 10;stroke-width: 3px;fill:hsl(` + color + `,100%,50%);} .cls-1,.cls-2{fill:none;stroke:#000;stroke-miterlimit:10;}.cls-1{stroke - width:3px;}.cls-2{stroke - width:2px;}`}</style>
+              <style>{`.panza {position: absolute;z-index: 6;top: 236px;left: 153px;width: 200px;height: 200px;stroke: #1d1d1b;stroke-miterlimit: 10;stroke-width: 3px;fill:hsl(` + color + `,100%,50%);} .cls-1,.cls-2{fill:none;stroke:#000;stroke-miterlimit:10;}.cls-1{stroke - width:3px;}.cls-2{stroke - width:2px;}`}</style>
             </defs>
             <g id="Capa_2" data-name="Capa 2">
               <g id="Capa_1-2" data-name="Capa 1">
@@ -426,7 +426,7 @@ class DragonsPage extends Component<DProps> {
               <style></style>
             </defs>
             <defs>
-              <style>{`.cuerpo {position: absolute;z-index: 4;top: 40px;width: 500px;height: 500px;} .cls-1,.cls-2,.cls-3{fill:red;stroke:#000;}.cls-1{stroke - miterlimit:10;stroke-width:3px;}.cls-2{stroke - miterlimit:10;stroke-width:2px;}.cls-3{stroke - miterlimit:10;stroke-width:2px;}`}</style>
+              <style>{`.cuerpo {position: absolute;z-index: 4;top: 40px;width: 500px;height: 500px;} .cls-1,.cls-2,.cls-3{fill:hsl(` + color + `,100%,50%);stroke:#000;}.cls-1{stroke - miterlimit:10;stroke-width:3px;}.cls-2{stroke - miterlimit:10;stroke-width:2px;}.cls-3{stroke - miterlimit:10;stroke-width:2px;}`}</style>
             </defs>
             <g id="Capa_2" data-name="Capa 2">
               <g id="Capa_1-2" data-name="Capa 1">
@@ -522,6 +522,22 @@ class DragonsPage extends Component<DProps> {
 
   }
 
+  createCuerpoFondo(color) {
+    return (
+      <svg className="cuerpoBack" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 121.47 176.49">
+        <defs>
+          <style>{`.cuerpoBack {position: absolute;position: absolute;z-index: 0;top: 190px;left: 109px;width: 280px;height: 280px;} .cls-100{fill:hsl(` + color + `,100%,50%);stroke:#000;stroke-miterlimit:10;stroke-width:3px;}`}</style>
+        </defs>
+        <g id="Capa_2" data-name="Capa 2">
+          <g id="Capa_1-2" data-name="Capa 1">
+            <path className="cls-100" d="M106.83,25.52,120,129.76c-.21,6.72-1.77,17-8.84,25.35-4,4.7-8.54,7.38-14.29,10.77a91.9,91.9,0,0,1-18.38,8.27,115.49,115.49,0,0,1-31.12-.46A114.4,114.4,0,0,1,34.72,171a56.15,56.15,0,0,1-7.45-3.73,58.22,58.22,0,0,1-6.82-4.78l-9-9.25a38.18,38.18,0,0,1-7.75-12.9A39.89,39.89,0,0,1,2.6,117.89Q7.85,92.65,13.11,67.42c-4.9-21.32.78-43.17,15.16-55.35C48.62-5.17,84.88-1.75,106.83,25.52Z" />
+          </g>
+        </g>
+      </svg>
+    );
+
+  }
+
   updateColorAlas(color) {
     this.setState({
       colorAlas: color
@@ -584,16 +600,22 @@ class DragonsPage extends Component<DProps> {
     });
   }
 
-  createSliderForPart(parte, callbackColorFunction, callbacktypeFunction, typeTotal) {
+  createSliderForPart(parte, callbackColorFunction, callbacktypeFunction, typeTotal, haveTypes, haveColors) {
     return (
       <div>
         <label>{parte}</label>
         <div className="aParent">
           <div className="slider">
-            <Slider min={1} max={typeTotal} step={1} value={1} label={"Tipo"} parentMethod={callbacktypeFunction} />
+            {haveTypes ? (
+              <Slider min={1} max={typeTotal} step={1} value={1} label={"Tipo"} parentMethod={callbacktypeFunction} />
+            ) : (null)}
+
           </div>
           <div className="slider">
-            <Slider min={1} max={360} step={1} value={1} label={"Color"} parentMethod={callbackColorFunction} />
+            {haveColors ? (
+              <Slider min={1} max={360} step={1} value={1} label={"Color"} parentMethod={callbackColorFunction} />
+            ) : (null)}
+
           </div>
         </div>
         <style global jsx>{`
@@ -620,14 +642,15 @@ class DragonsPage extends Component<DProps> {
           {this.createCuernos(this.state.colorCuernos, this.state.typeCuernos)}
           {this.createOjos(this.state.colorOjos, this.state.typeOjos)}
           {this.createCuerpo(this.state.colorCuerpo, this.state.typeCuerpo)}
+          {this.createCuerpoFondo(this.state.colorCuerpo)}
         </div>
         <div className="navigation">
-          {this.createSliderForPart("Cuernos", this.updateColorCuernos, this.updateTypeCuernos, 4)}
-          {this.createSliderForPart("Panza", this.updateColorPanza, this.updateTypePanza, 2)}
-          {this.createSliderForPart("Cola", this.updateColorCola, this.updateTypeCola, 4)}
-          {this.createSliderForPart("Alas", this.updateColorAlas, this.updateTypeAlas, 1)}
-          {this.createSliderForPart("Ojos", this.updateColorOjos, this.updateTypeOjos, 4)}
-          {this.createSliderForPart("Cuerpo", this.updateColorCuerpo, this.updateTypeCuernos, 1)}
+          {this.createSliderForPart("Cuernos", this.updateColorCuernos, this.updateTypeCuernos, 4, true, true)}
+          {this.createSliderForPart("Panza", this.updateColorPanza, this.updateTypePanza, 2, true, true)}
+          {this.createSliderForPart("Cola", this.updateColorCola, this.updateTypeCola, 4, true, true)}
+          {this.createSliderForPart("Alas", this.updateColorAlas, this.updateTypeAlas, 1, true, true)}
+          {this.createSliderForPart("Ojos", this.updateColorOjos, this.updateTypeOjos, 4, true, true)}
+          {this.createSliderForPart("Cuerpo", this.updateColorCuerpo, this.updateTypeCuerpo, 1, false, true)}
         </div>
       </div>
       <style global jsx>{`

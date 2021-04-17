@@ -3,6 +3,8 @@ import { ReactElement } from 'react'
 import Head from 'next/head'
 
 import '../styles/globals.scss'
+import '../containers/slider/Slider.css'
+import 'react-input-range/lib/css/index.css';
 
 function MyApp({ Component, pageProps }: AppProps): ReactElement {
   return (

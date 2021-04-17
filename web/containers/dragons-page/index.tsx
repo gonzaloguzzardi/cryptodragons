@@ -2,6 +2,8 @@
 import React, { Component, ReactElement } from 'react'
 import Slider from '../slider/Slider';
 
+// http://localhost:3000/dragon-creation
+
 interface DProps {
   any
 }

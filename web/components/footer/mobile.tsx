@@ -12,7 +12,7 @@ import Icon from './icon'
 
 export default function FooterMobile(): ReactElement {
   return (
-    <div className={styles.main}>
+    <footer className={styles.main}>
       <Grid container className={styles.container}>
         <Grid item xs={6}>
           <ItemLink href="/..." text="My profile" />
@@ -82,6 +82,6 @@ export default function FooterMobile(): ReactElement {
           </Typography>
         </Grid>
       </Grid>
-    </div>
+    </footer>
   )
 }

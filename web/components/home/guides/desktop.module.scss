@@ -11,12 +11,15 @@
 
 .card {
   padding: 40px 0;
-  width: $max-width-by-screen;
+  width: $max-width-by-screen-desktop;
   border-radius: 50px !important;
 }
 
 .title, .subtitle {
   padding-bottom: 20px;
+  padding-right: 40px;
+  justify-content: center;
+  width: 100%;
 }
 
 .marketplaceCollections {

@@ -36,6 +36,8 @@
   }
 
   &_Button {
+    border-radius: 0 !important;
+
     &:hover,
     &__selected {
       background-color: transparent !important;

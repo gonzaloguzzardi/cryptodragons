@@ -7,12 +7,12 @@
 }
 
 .container {
-  max-width: $max-width-by-screen;
+  max-width: $max-width-by-screen-mobile;
   margin: 20px auto;
 }
 
 .divider {
-  width: $max-width-by-screen;
+  width: $max-width-by-screen-mobile;
   margin: 0 auto !important;
 }
 

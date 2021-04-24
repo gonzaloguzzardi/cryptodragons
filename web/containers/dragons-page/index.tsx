@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/ban-types */
 import React, { Component, ReactElement } from 'react'
 import Slider from '../slider/Slider';
+import Card from '@material-ui/core/Card'
+import CardContent from '@material-ui/core/CardContent'
 
 // http://localhost:3000/dragon-creation
 
@@ -74,7 +76,21 @@ class DragonsPage extends Component<DProps> {
         return (
           <svg className="cuernos" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 114.36 18.67">
             <defs>
-              <style>{`.cuernos {position: absolute;z-index: 3;top:19%;left:20%;width:65%;fill: hsl(` + color + `,100%,50%);stroke: #1d1d1b;stroke-miterlimit: 10;stroke-width: 3px;}`}</style>
+              <style>
+                {`.cuernos {
+                    position: absolute;
+                    z-index: 3;
+                    margin-left: auto; 
+                    margin-right: auto; 
+                    left: 0; 
+                    right: 0;
+                    top: 10%;
+                    width: 39%;
+                    fill: hsl(` + color + `,100%,50%);
+                    stroke: #1d1d1b;
+                    stroke-miterlimit: 10;
+                    stroke-width: 3px;}`
+                }</style>
             </defs>
             <path className="cls-10" d="M128.74,16.19s-10.18,6.9-14,3h0a7.51,7.51,0,0,0-9.89-.85c-10.45,7.78-11.38,9.06,1.3-10h0Z" transform="translate(-95.38 -6.49)" />
             <path className="cls-10" d="M176.34,16.31s10.22,6.85,14,2.91h0a7.5,7.5,0,0,1,9.88-.9c10.49,7.72,11.43,9-1.36-10h0Z" transform="translate(-95.38 -6.49)" />
@@ -84,7 +100,21 @@ class DragonsPage extends Component<DProps> {
         return (
           <svg className="cuernos" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 76.83 16.99">
             <defs>
-              <style>{`.cuernos {position: absolute;z-index: 3;top:18%;left:27%;width:50%;fill: hsl(` + color + `,100%,50%);stroke: #1d1d1b;stroke-miterlimit: 10;stroke-width: 3px;}`}</style>
+              <style>
+                {`.cuernos {
+                    position: absolute;
+                    z-index: 3;
+                    margin-left: auto; 
+                    margin-right: auto; 
+                    left: 0; 
+                    right: 0;
+                    top: 9%;
+                    width: 23%;
+                    fill: hsl(` + color + `,100%,50%);
+                    stroke: #1d1d1b;
+                    stroke-miterlimit: 10;
+                    stroke-width: 3px;}`
+                }</style>
             </defs>
             <g id="Capa_2" data-name="Capa 2">
               <g id="Capa_1-2" data-name="Capa 1">
@@ -104,7 +134,22 @@ class DragonsPage extends Component<DProps> {
         return (
           <svg className="cuernos" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 106.29 36.32">
             <defs>
-              <style>{`.cuernos {position: absolute;z-index: 3;top:10%;left:20%;width:65%;fill: hsl(` + color + `,100%,50%) ;stroke: #1d1d1b;stroke-miterlimit: 10;stroke-width: 3px;}`}</style>
+              <style>
+                {`.cuernos {
+                    position: absolute;
+                    z-index: 3;
+                    margin-left: auto; 
+                    margin-right: auto; 
+                    left: 0; 
+                    right: 0;
+                    top: 5%;
+                    width: 38%;
+                    fill: hsl(` + color + `,100%,50%) ;
+                    stroke: #1d1d1b;
+                    stroke-miterlimit: 10;
+                    stroke-width: 3px;}`
+                }
+              </style>
             </defs>
             <g id="Capa_2" data-name="Capa 2">
               <g id="Capa_1-2" data-name="Capa 1">
@@ -130,7 +175,21 @@ class DragonsPage extends Component<DProps> {
         return (
           <svg className="cuernos" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144.31 34.88">
             <defs>
-              <style>{`.cuernos {position: absolute;z-index: 3;top:19%;left:20%;width:65%;fill: hsl(` + color + `,100%,50%);stroke: #1d1d1b;stroke-miterlimit: 10;stroke-width: 3px;}`}</style>
+              <style>
+                {`.cuernos {
+                  position: absolute;
+                  z-index: 3;
+                  margin-left: auto; 
+                  margin-right: auto; 
+                  left: 0; 
+                  right: 0;
+                  top: 7%;
+                  width: 40%;
+                  fill: hsl(` + color + `,100%,50%);
+                  stroke: #1d1d1b;
+                  stroke-miterlimit: 10;
+                  stroke-width: 3px;}`
+                }</style>
             </defs>
             <g id="Capa_2" data-name="Capa 2">
               <g id="Capa_1-2" data-name="Capa 1">
@@ -171,7 +230,22 @@ class DragonsPage extends Component<DProps> {
         return (
           <svg className="panza" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 90.85 132.71">
             <defs>
-              <style>{`.panza {position: absolute;z-index: 6;top: 85%; left: 31%; width: 44%;stroke: #1d1d1b;stroke-miterlimit: 10;stroke-width: 3px;fill:hsl(` + color + `,100%,50%);}`}</style>
+              <style>
+                {`.panza {
+                  position: absolute;
+                  z-index: 2;
+                  margin-left: auto; 
+                  margin-right: auto; 
+                  left: 0; 
+                  right: 0;
+                  top: 41%;
+                  width: 27%;
+                  stroke: #1d1d1b;
+                  stroke-miterlimit: 10;
+                  stroke-width: 3px;
+                  fill:hsl(` + color + `,100%,50%);
+                  }`
+                }</style>
             </defs>
             <path className="cls-9" d="M167.13,133.32a22.14,22.14,0,0,1-14.32,4.33,18.88,18.88,0,0,1-12.61-4.55c-17.78,8.48-30.68,33.55-30.68,63.18,0,36.59,19.67,66.25,43.93,66.25s43.93-29.66,43.93-66.25C197.38,166.89,184.69,142,167.13,133.32Z" transform="translate(-108.02 -131.33)" />
           </svg>
@@ -180,7 +254,26 @@ class DragonsPage extends Component<DProps> {
         return (
           <svg className="panza" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 90.8 134.27">
             <defs>
-              <style>{`.panza {position: absolute;z-index: 6;top: 85%; left: 31%; width: 44%;stroke: #1d1d1b;stroke-miterlimit: 10;stroke-width: 3px;fill:hsl(` + color + `,100%,50%);} .cls-9,.cls-99{fill:none;stroke:#000;stroke-miterlimit:10;}.cls-1{stroke - width:3px;}.cls-99{stroke - width:2px;}`}</style>
+              <style>
+                {`.panza {
+                    position: absolute;
+                    z-index: 2;
+                    margin-left: auto; 
+                    margin-right: auto; 
+                    left: 0; 
+                    right: 0;
+                    top: 41%;
+                    width: 27%;
+                    stroke: #1d1d1b;
+                    stroke-miterlimit: 10;
+                    stroke-width: 3px;
+                    fill:hsl(` + color + `,100%,50%);
+                  } 
+                  .cls-9,.cls-99{stroke:#000;stroke-miterlimit:10;}
+                  .cls-9{stroke - width:3px;}
+                  .cls-99{stroke - width:2px;}`
+                }
+              </style>
             </defs>
             <g id="Capa_2" data-name="Capa 2">
               <g id="Capa_1-2" data-name="Capa 1">
@@ -204,13 +297,23 @@ class DragonsPage extends Component<DProps> {
   }
 
   createCola(color, number) {
-
     switch (number) {
       case 2:
         return (
           <svg className="cola" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 49.76 111.54">
             <defs>
-              <style>{`.cola {position: absolute;z-index: 0;top: 86%;left: 82% ;width: 30%;} .cls-8,.cls-88{fill:hsl(` + color + `,100%,50%);stroke:#000;stroke-miterlimit:10;}.cls-8{stroke - width:2px;}`}</style>
+              <style>
+                {`.cola {
+                  position: absolute;
+                  z-index: 0;
+                  top: 44%;
+                  left: 67%;
+                  width: 16%;
+                } 
+                .cls-8,.cls-88{fill:hsl(` + color + `,100%,50%);stroke:#000;stroke-miterlimit:10;}
+                .cls-8{stroke - width:2px;}`
+                }
+              </style>
             </defs>
             <g id="Capa_2" data-name="Capa 2">
               <g id="Capa_1-2" data-name="Capa 1">
@@ -236,7 +339,15 @@ class DragonsPage extends Component<DProps> {
         return (
           <svg className="cola" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 74.59 150.46">
             <defs>
-              <style>{`.cola {position: absolute;z-index: 2;top: 80%;left: 83% ;width: 35%;} .cls-8{fill:hsl(` + color + `,100%,50%);stroke:#000;stroke-miterlimit:10;stroke-width:2px;}`}</style>
+              <style>
+                {`.cola {
+                  position: absolute;
+                  z-index: 0;
+                  top: 32%;
+                  left: 67%;
+                  width: 25%;
+                } 
+                .cls-8{fill:hsl(` + color + `,100%,50%);stroke:#000;stroke-miterlimit:10;stroke-width:2px;}`}</style>
             </defs>
             <g id="Capa_2" data-name="Capa 2">
               <g id="Capa_1-2" data-name="Capa 1">
@@ -258,7 +369,15 @@ class DragonsPage extends Component<DProps> {
         return (
           <svg className="cola" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140.13 71.12">
             <defs>
-              <style>{`.cola {position: absolute;z-index: 2;top: 134%;left: 76% ;width: 54%;} .cls-8{fill:hsl(` + color + `,100%,50%);stroke:#000;stroke-miterlimit:10;stroke-width:2px;}`}</style>
+              <style>
+                {`.cola {
+                    position: absolute;
+                    z-index: 2;
+                    top: 64%;
+                    left: 62%;
+                    width: 37%;
+                  } 
+                  .cls-8{fill:hsl(` + color + `,100%,50%);stroke:#000;stroke-miterlimit:10;stroke-width:2px;}`}</style>
             </defs>
             <g id="Capa_2" data-name="Capa 2">
               <g id="Capa_1-2" data-name="Capa 1">
@@ -284,7 +403,17 @@ class DragonsPage extends Component<DProps> {
         return (
           <svg className="cola" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 116.37 142.47">
             <defs>
-              <style>{`.cola {position: absolute;z-index: 2;top: 90%;left: 73% ;width: 58%;} .cls-8,.cls-88{fill:hsl(` + color + `,100%,50%);stroke:#000;stroke-miterlimit:10;}.cls-8{stroke - width:2px;}`}</style>
+              <style>
+                {`.cola {
+                  position: absolute;
+                  z-index: 2;
+                  top: 44%;
+                  left: 62%;
+                  width: 33%;
+                } 
+                .cls-8,.cls-88{fill:hsl(` + color + `,100%,50%);stroke:#000;stroke-miterlimit:10;}
+                .cls-8{stroke - width:2px;}`}
+              </style>
             </defs>
             <g id="Capa_2" data-name="Capa 2">
               <g id="Capa_1-2" data-name="Capa 1">
@@ -312,7 +441,21 @@ class DragonsPage extends Component<DProps> {
           <div>
             <svg className="alas" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 293.74 80.96">
               <defs>
-                <style>{`.alas{position: absolute;z-index: 1;top: 50%; left: -46%; width: 200%;fill: hsl(` + color + `,100%,50%) ;stroke: #1d1d1b;stroke-miterlimit: 10;stroke-width: 3px;}`}</style>
+                <style>
+                  {`.alas{
+                      position: absolute;
+                      z-index: 1; 
+                      margin-left: auto; 
+                      margin-right: auto; 
+                      left: 0; 
+                      right: 0;
+                      top: 28%;                      
+                      width: 80%;
+                      fill: hsl(` + color + `,100%,50%) ;
+                      stroke: #1d1d1b;
+                      stroke-miterlimit: 10;
+                      stroke-width: 3px;}`
+                  }</style>
               </defs>
               <path className="cls-7" d="M92.67,119.68" transform="translate(-7.17 -73.81)" />
               <path className="cls-7" d="M115.09,108.17,88.64,78.94c-1.25-1.37-2-2.44-2.71-3a1.6,1.6,0,0,0-2.1-.32,18.45,18.45,0,0,0-3.65,3.29l-63.06,66,36.94-24a6.23,6.23,0,0,1,7.88.88L64.8,125l9.64-8.73a7.38,7.38,0,0,1,11.22,1.49h0A5.32,5.32,0,0,0,88.47,120a5.37,5.37,0,0,0,4.2-.31l1.58-2.18a22.17,22.17,0,0,1,17.38-9.23Z" transform="translate(-7.17 -73.81)" />
@@ -326,6 +469,39 @@ class DragonsPage extends Component<DProps> {
             </svg>
           </div>
         );
+      case 2:
+        return (
+          <svg className="alas" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 393.94 90.79">
+            <defs>
+              <style>
+                {`.alas{
+                      position: absolute;
+                      z-index: 1; 
+                      margin-left: auto; 
+                      margin-right: auto; 
+                      left: 0; 
+                      right: 0;
+                      top: 24%;                      
+                      width: 94%;
+                      fill: hsl(` + color + `,100%,50%) ;
+                  }
+                  .cls-7{stroke:#000;stroke-miterlimit:10;stroke-width:3px;}`
+                }</style>
+            </defs>
+            <g id="Capa_2" data-name="Capa 2">
+              <g id="Capa_2-2" data-name="Capa 2">
+                <path className="cls-7" d="M236.2,68l29.67-40.46a15.38,15.38,0,0,1,9.9-5.95L389,3.75,359.21,29.52A20.36,20.36,0,0,0,355.46,56l5.87,9L331.76,69a27,27,0,0,0-22,18l-.73,1.88-13.17-5A267.09,267.09,0,0,0,254,71.62Z" />
+                <path className="cls-7" d="M270.83,23.26l9.82,26.82a59.8,59.8,0,0,0,10.88,18.49l17.53,20.29" />
+                <path className="cls-7" d="M361.33,65,330.21,54.13a152.25,152.25,0,0,1-24.68-11.2l-34.7-19.67-1.87,20c-1,8.06-.64,13.5.68,18.06L272.15,76" />
+                <path className="cls-7" d="M356.42,32.47H331.18a106.75,106.75,0,0,1-19.13-1.72l-41.22-7.49" />
+                <path className="cls-7" d="M157.74,66.55,128.07,26.09a15.38,15.38,0,0,0-9.9-5.95L5,2.3,34.73,28.07a20.36,20.36,0,0,1,3.75,26.49l-5.87,9,29.57,3.94a27,27,0,0,1,22,18l.73,1.88,13.17-5A267.09,267.09,0,0,1,140,70.17Z" />
+                <path className="cls-7" d="M123.11,21.81l-9.82,26.82a59.8,59.8,0,0,1-10.88,18.49L84.88,87.41" />
+                <path className="cls-7" d="M32.61,63.59,63.73,52.68a152.25,152.25,0,0,0,24.68-11.2l34.7-19.67,1.87,20c1,8.06.64,13.5-.68,18.06l-2.51,14.71" />
+                <path className="cls-7" d="M37.52,31H62.76A106.75,106.75,0,0,0,81.89,29.3l41.22-7.49" />
+              </g>
+            </g>
+          </svg>
+        );
       default:
         return null;
     }
@@ -337,7 +513,21 @@ class DragonsPage extends Component<DProps> {
         return (
           <svg className="ojos" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 43.95 24.29">
             <defs>
-              <style>{`.ojos {position: absolute;z-index: 5;top: 40%;left: 42%;width: 20%}.cls-5{fill:hsl(` + color + `,100%,50%);stroke:#1d1d1b;stroke-miterlimit:10;stroke-width:3px;}.cls-6{fill:#1d1d1b;}`}</style>
+              <style>
+                {`.ojos {
+                    position: absolute;
+                    margin-left: auto; 
+                    margin-right: auto; 
+                    left: 0; 
+                    right: 0;
+                    top: 18%;
+                    z-index: 5;
+                    width: 15%
+                  }
+                  .cls-5{fill:hsl(` + color + `,100%,50%);stroke:#1d1d1b;stroke-miterlimit:10;stroke-width:3px;}
+                  .cls-6{fill:#1d1d1b;}`
+                }
+              </style>
             </defs>
             <rect className="cls-5" x="28.72" y="7.12" width="12.51" height="15.67" rx="6.26" />
             <rect className="cls-6" x="28.72" y="10.94" width="12.51" height="12.51" rx="6.26" />
@@ -351,7 +541,21 @@ class DragonsPage extends Component<DProps> {
         return (
           <svg className="ojos" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 53.31 17.55">
             <defs>
-              <style>{`.ojos {position: absolute;z-index: 5;top: 40%;left: 42%;width: 20%}.cls-5{fill:hsl(` + color + `,100%,50%);stroke:#1d1d1b;stroke-miterlimit:10;stroke-width:3px;}.cls-6{fill:#1d1d1b;}`}</style>
+              <style>
+                {`.ojos {
+                    position: absolute;
+                    margin-left: auto; 
+                    margin-right: auto; 
+                    left: 0; 
+                    right: 0;
+                    top: 18%;
+                    z-index: 5;
+                    width: 15%
+                  }
+                  .cls-5{fill:hsl(` + color + `,100%,50%);stroke:#1d1d1b;stroke-miterlimit:10;stroke-width:3px;}
+                  .cls-6{fill:#1d1d1b;}`
+                }
+              </style>
             </defs>
             <g id="Capa_2" data-name="Capa 2">
               <g id="Capa_1-2" data-name="Capa 1">
@@ -380,7 +584,21 @@ class DragonsPage extends Component<DProps> {
         return (
           <svg className="ojos" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 47 24.72">
             <defs>
-              <style>{`.ojos {position: absolute;z-index: 5;top: 40%;left: 42%;width: 20%}.cls-5{fill:hsl(` + color + `,100%,50%);stroke:#1d1d1b;stroke-miterlimit:10;stroke-width:3px;}.cls-6{fill:#1d1d1b;}`}</style>
+              <style>
+                {`.ojos {
+                    position: absolute;
+                    margin-left: auto; 
+                    margin-right: auto; 
+                    left: 0; 
+                    right: 0;
+                    top: 18%;
+                    z-index: 5;
+                    width: 15%
+                  }
+                  .cls-5{fill:hsl(` + color + `,100%,50%);stroke:#1d1d1b;stroke-miterlimit:10;stroke-width:3px;}
+                  .cls-6{fill:#1d1d1b;}`
+                }
+              </style>
             </defs>
             <g id="Capa_2" data-name="Capa 2">
               <g id="Capa_1-2" data-name="Capa 1">
@@ -396,10 +614,23 @@ class DragonsPage extends Component<DProps> {
         );
       case 4:
         return (
-
           <svg className="ojos" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 45.79 21.42">
             <defs>
-              <style>{`.ojos {position: absolute;z-index: 5;top: 40%;left: 42%;width: 20%}.cls-5{fill:hsl(` + color + `,100%,50%);stroke:#1d1d1b;stroke-miterlimit:10;stroke-width:3px;}.cls-6{fill:#1d1d1b;}`}</style>
+              <style>
+                {`.ojos {
+                    position: absolute;
+                    margin-left: auto; 
+                    margin-right: auto; 
+                    left: 0; 
+                    right: 0;
+                    top: 18%;
+                    z-index: 5;
+                    width: 15%
+                  }
+                  .cls-5{fill:hsl(` + color + `,100%,50%);stroke:#1d1d1b;stroke-miterlimit:10;stroke-width:3px;}
+                  .cls-6{fill:#1d1d1b;}`
+                }
+              </style>
             </defs>
             <g id="Capa_2" data-name="Capa 2">
               <g id="Capa_1-2" data-name="Capa 1">
@@ -421,12 +652,29 @@ class DragonsPage extends Component<DProps> {
   }
 
   createCuerpo(color, number) {
+
     switch (number) {
       case 1:
         return (
           <svg className="cuerpo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180.21 314.55">
             <defs>
-              <style>{`.cuerpo {position: absolute;z-index: 4;top: 20%; left:5%} .cls-1,.cls-2,.cls-3{fill:hsl(` + color + `,100%,50%);stroke:#000;}.cls-1{stroke - miterlimit:10;stroke-width:3px;}.cls-2{stroke - miterlimit:10;stroke-width:2px;}.cls-3{stroke - miterlimit:10;stroke-width:2px;}`}</style>
+              <style>
+                {`.cuerpo {
+                    position: absolute;
+                    z-index: 4; 
+                    height: 80%; 
+                    margin-left: auto; 
+                    margin-right: auto; 
+                    left: 0; right: 0;
+                    top: 0; bottom: 0; 
+                    margin-bottom: auto; margin-top: auto;
+                  } 
+                  .cls-1,.cls-2,.cls-3{fill:hsl(` + color + `,100%,50%);stroke:#000;}
+                  .cls-1{stroke - miterlimit:10;stroke-width:3px;}
+                  .cls-2{stroke - miterlimit:10;stroke-width:2px;}
+                  .cls-3{stroke - miterlimit:10;stroke-width:2px;}`
+                }
+              </style>
             </defs>
             <g id="Capa_2" data-name="Capa 2">
               <g id="Capa_1-2" data-name="Capa 1">
@@ -526,7 +774,18 @@ class DragonsPage extends Component<DProps> {
     return (
       <svg className="cuerpoBack" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 121.47 176.49">
         <defs>
-          <style>{`.cuerpoBack {position: absolute;position: absolute;z-index: 0;top: 68%;left: 20%;width: 65%;} .cls-100{fill:hsl(` + color + `,100%,50%);stroke:#000;stroke-miterlimit:10;stroke-width:3px;}`}</style>
+          <style>
+            {`.cuerpoBack {
+                position: absolute;
+                z-index: 0;
+                margin-left: auto;
+                margin-right: auto;
+                left: 0;
+                right: 0;
+                top: 33%;
+                width: 38%;
+              } 
+              .cls-100{fill:hsl(` + color + `,100%,50%);stroke:#000;stroke-miterlimit:10;stroke-width:3px;}`}</style>
         </defs>
         <g id="Capa_2" data-name="Capa 2">
           <g id="Capa_1-2" data-name="Capa 1">
@@ -635,33 +894,35 @@ class DragonsPage extends Component<DProps> {
   render: () => ReactElement<DProps> = () => (
     <div>
       <div className='main'>
-        <div className='mainRunner'>
-          {this.createAlas(this.state.colorAlas, this.state.typeAlas)}
-          {this.createCuernos(this.state.colorCuernos, this.state.typeCuernos)}
-          {this.createOjos(this.state.colorOjos, this.state.typeOjos)}
-          {this.createCuerpo(this.state.colorCuerpo, this.state.typeCuerpo)}
-          {this.createCuerpoFondo(this.state.colorCuerpo)}
-          {this.createPanza(this.state.colorPanza, this.state.typePanza)}
-          {this.createCola(this.state.colorCola, this.state.typeCola)}
-        </div>
+        <Card className='cardContainer'>
+          <CardContent>
+            {this.createCuerpo(this.state.colorCuerpo, this.state.typeCuerpo)}
+            {this.createAlas(this.state.colorAlas, this.state.typeAlas)}
+            {this.createCuernos(this.state.colorCuernos, this.state.typeCuernos)}
+            {this.createCola(this.state.colorCola, this.state.typeCola)}
+            {this.createCuerpoFondo(this.state.colorCuerpo)}
+            {this.createPanza(this.state.colorPanza, this.state.typePanza)}
+            {this.createOjos(this.state.colorOjos, this.state.typeOjos)}
+          </CardContent>
+        </Card>
         <div className="navigation">
           {this.createSliderForPart("Cuernos", this.updateColorCuernos, this.updateTypeCuernos, 4, true, true)}
           {this.createSliderForPart("Panza", this.updateColorPanza, this.updateTypePanza, 2, true, true)}
           {this.createSliderForPart("Cola", this.updateColorCola, this.updateTypeCola, 4, true, true)}
-          {this.createSliderForPart("Alas", this.updateColorAlas, this.updateTypeAlas, 1, false, true)}
+          {this.createSliderForPart("Alas", this.updateColorAlas, this.updateTypeAlas, 2, true, true)}
           {this.createSliderForPart("Ojos", this.updateColorOjos, this.updateTypeOjos, 4, true, true)}
           {this.createSliderForPart("Cuerpo", this.updateColorCuerpo, this.updateTypeCuerpo, 1, false, true)}
         </div>
       </div>
       <style global jsx>{`
-        .mainRunner {
-          position: relative;
-          width: 300px;
+        .main{width:100%;}
+        .cardContainer {
+          position: absolute;
+          width: 500px;
           top:0%;
-          height:300px;
+          height:600px;
           float:left;
         }
-        .main{width:100%;}
         .navigation{margin:0 auto;width:400px;}
       `}</style>
     </div>
@@ -669,13 +930,4 @@ class DragonsPage extends Component<DProps> {
   );
 }
 
-/*
-          {this.createAlas(this.state.colorAlas, this.state.typeAlas)}
-          {this.createCola(this.state.colorCola, this.state.typeCola)}
-          {this.createPanza(this.state.colorPanza, this.state.typePanza)}
-          {this.createCuernos(this.state.colorCuernos, this.state.typeCuernos)}
-          {this.createOjos(this.state.colorOjos, this.state.typeOjos)}
-          {this.createCuerpo(this.state.colorCuerpo, this.state.typeCuerpo)}
-          {this.createCuerpoFondo(this.state.colorCuerpo)}
-*/
 export default DragonsPage

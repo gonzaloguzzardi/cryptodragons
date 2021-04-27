@@ -133,7 +133,7 @@ class DragonsPage extends Component<DProps> {
             {this.createSliderForPart("Cola", this.updateColorCola, this.updateTypeCola, 4, true, true)}
           </Grid>
           <Grid item>
-            {this.createSliderForPart("Alas", this.updateColorAlas, this.updateTypeAlas, 2, true, true)}
+            {this.createSliderForPart("Alas", this.updateColorAlas, this.updateTypeAlas, 4, true, true)}
           </Grid>
           <Grid item>
             {this.createSliderForPart("Ojos", this.updateColorOjos, this.updateTypeOjos, 4, true, true)}

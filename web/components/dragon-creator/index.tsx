@@ -317,67 +317,49 @@ class DragonCreator extends Component<DProps> {
         switch (number) {
             case 2:
                 return (
-                    <svg className="cola" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 49.76 111.54">
+                    <svg className="cola" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 93.92 127.62">
                         <defs>
                             <style>
                                 {`.cola {
                       position: absolute;
                       z-index: 0;
-                      top: 44%;
-                      left: 67%;
-                      width: 16%;
+                      top: 42%;
+                      left: 63%;
+                      width: 30%;
                     } 
-                    .cls-8,.cls-88{fill:hsl(` + color + `,100%,50%);stroke:#000;stroke-miterlimit:10;}
-                    .cls-8{stroke - width:2px;}`
-                                }
-                            </style>
+                    .cls-8{fill:hsl(` + color + `,100%,50%);stroke:#000;stroke-miterlimit:10;stroke-width:2px;}`}</style>
                         </defs>
                         <g id="Capa_2" data-name="Capa 2">
-                            <g id="Capa_1-2" data-name="Capa 1">
-                                <g id="Capa_2-2" data-name="Capa 2">
-                                    <g id="Capa_1-2-2" data-name="Capa 1-2">
-                                        <path d="M36.31,35.26A3.7,3.7,0,0,1,40.39,32a3.7,3.7,0,0,1,3.71,3.68A3.72,3.72,0,0,1,40,39" />
-                                        <path d="M42.55,35.23A2.3,2.3,0,1,1,38,34.66" />
-                                        <path d="M40.49,37.29a2.31,2.31,0,0,1-2-2.57" />
-                                        <path d="M40.53,39a3.74,3.74,0,0,1-3.72-3.7" />
-                                        <path className="cls-8" d="M.41,108.5C87,126.58,26.72,18.9,46.54,1" />
-                                        <path className="cls-8" d="M21.39,52.56c3.7-29.79,15.34-52.83,26-51.51" />
-                                        <circle cx="34.22" cy="97.78" r="5.64" />
-                                        <circle cx="30.94" cy="82.38" r="3.41" />
-                                        <circle cx="26.39" cy="42.18" r="3.02" />
-                                    </g>
-                                </g>
-                                <path className="cls-88" d="M21.39,52.56c-34.83,15-13.88,49.09-21,55.94" />
+                            <g id="Capa_9" data-name="Capa 9">
+                                <path className="cls-8" d="M17.44,89.89,2.38,125.82,33.92,122A50.11,50.11,0,0,0,77.8,76.91L82,31.53l4.7,2a4.1,4.1,0,0,0,5.55-4.86L85.13,2.74a1.69,1.69,0,0,0-2.9-.66L63.8,23.39a2.85,2.85,0,0,0,2,4.71l6.39.4-13,27.07A64.22,64.22,0,0,1,17.44,89.89Z" />
+                                <circle className="cls-8" cx="31.61" cy="100.75" r="4.05" />
+                                <circle className="cls-8" cx="61.44" cy="87.58" r="5.19" />
+                                <circle className="cls-8" cx="65.61" cy="59.8" r="1.02" />
                             </g>
                         </g>
                     </svg>
                 );
             case 1:
                 return (
-                    <svg className="cola" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 74.59 150.46">
+                    <svg className="cola" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 103.98 121.93">
                         <defs>
                             <style>
                                 {`.cola {
                       position: absolute;
                       z-index: 0;
-                      top: 32%;
-                      left: 67%;
-                      width: 25%;
+                      top: 43%;
+                      left: 65%;
+                      width: 35%;
                     } 
                     .cls-8{fill:hsl(` + color + `,100%,50%);stroke:#000;stroke-miterlimit:10;stroke-width:2px;}`}</style>
                         </defs>
                         <g id="Capa_2" data-name="Capa 2">
-                            <g id="Capa_1-2" data-name="Capa 1">
-                                <g id="Capa_2-2" data-name="Capa 2">
-                                    <g id="Capa_1-2-2" data-name="Capa 1-2">
-                                        <path className="cls-8" d="M.6,146.84c85.1,24,47.51-125.1,68.52-141.64" />
-                                        <path className="cls-8" d="M25.79,102.29C63.38,135.71,54.94,2.43,69.12,5.2" />
-                                        <circle cx="35.07" cy="138.49" r="5.64" />
-                                        <circle cx="32.87" cy="122.89" r="3.41" />
-                                        <polygon points="67.59 6.11 60.6 1.89 65.94 0.94 71.29 0 72.94 5.17 74.59 10.34 67.59 6.11" />
-                                    </g>
-                                </g>
-                                <path className="cls-8" d="M26.26,102.7c-28.37-5.17-23,35.79-25.29,45" />
+                            <g id="Capa_6" data-name="Capa 6">
+                                <path className="cls-8" d="M1.93,111l29.46,2.51a39,39,0,0,0,17.9-2.65c15.05-6,24.45-21.16,24-37.37L73,59.39a121.13,121.13,0,0,1,12.12-56h0L80.73,5.61A96.39,96.39,0,0,0,38,49.17l-.41.84A98,98,0,0,1,9.14,84.85h0Z" />
+                                <circle className="cls-8" cx="42.35" cy="98.59" r="6.54" />
+                                <circle className="cls-8" cx="40.72" cy="79.38" r="2.79" />
+                                <circle className="cls-8" cx="68.69" cy="41.18" r="2.94" />
+                                <circle className="cls-8" cx="53.96" cy="43.31" r="5.07" />
                             </g>
                         </g>
                     </svg>
@@ -389,29 +371,22 @@ class DragonCreator extends Component<DProps> {
                             <style>
                                 {`.cola {
                         position: absolute;
-                        z-index: 2;
-                        top: 64%;
-                        left: 62%;
+                        z-index: 0;
+                        top: 63%;
+                        left: 65%;
                         width: 37%;
                       } 
                       .cls-8{fill:hsl(` + color + `,100%,50%);stroke:#000;stroke-miterlimit:10;stroke-width:2px;}`}</style>
                         </defs>
                         <g id="Capa_2" data-name="Capa 2">
-                            <g id="Capa_1-2" data-name="Capa 1">
-                                <g id="Capa_2-2" data-name="Capa 2">
-                                    <g id="Capa_1-2-2" data-name="Capa 1-2">
-                                        <path className="cls-8" d="M1.77,58.17C50.67,92.39,99.27,46.74,139.2,1" />
-                                        <path className="cls-8" d="M25.9.84c-1.7,39.34,45.75,43.33,113.69,0" />
-                                        <circle cx="29.21" cy="40.21" r="5.64" />
-                                        <circle cx="66.19" cy="48.59" r="5.64" />
-                                        <circle cx="76.27" cy="52.2" r="2.45" />
-                                        <path d="M96,24.53l-2.14.74a1.66,1.66,0,0,1-2.1-2.12l.41-1.06L93,19.74a1.66,1.66,0,0,1,2.45-.85l2.1,1.33,1,.61a1.65,1.65,0,0,1,.6,2.26,1.62,1.62,0,0,1-.94.74Z" />
-                                        <path d="M81.65,29.26l-2.18.55a1.66,1.66,0,0,1-2-1.21,1.7,1.7,0,0,1,.1-1.09l.47-1,1-2.26a1.67,1.67,0,0,1,2.21-.81,1.49,1.49,0,0,1,.3.18l2,1.52.9.69a1.66,1.66,0,0,1,.31,2.32,1.68,1.68,0,0,1-.92.59Z" />
-                                        <path d="M66.74,31.46l-2.22.36a1.65,1.65,0,0,1-1.89-1.36,1.67,1.67,0,0,1,.18-1.07l.55-1,1.22-2.17a1.67,1.67,0,0,1,2.25-.64,1.78,1.78,0,0,1,.31.23L69,27.48l.84.76A1.66,1.66,0,0,1,69,31.1Z" />
-                                        <path d="M48.1,31.48l-2.25-.25a1.66,1.66,0,0,1-1.47-1.83,1.7,1.7,0,0,1,.47-1l.8-.8,1.76-1.76a1.66,1.66,0,0,1,2.34,0,1.54,1.54,0,0,1,.23.29l1.32,2.11.61,1a1.65,1.65,0,0,1-1.59,2.52Z" />
-                                    </g>
-                                </g>
-                                <path className="cls-8" d="M25.9.84c0,29-30,41.87-24.13,57.33" />
+                            <g id="Capa_7" data-name="Capa 7">
+                                <path className="cls-8" d="M1.72,53.73l2.78.71a76.27,76.27,0,0,0,59.9-9.5L124,7.06,67.38,20.87A66.62,66.62,0,0,1,9.75,8h0Z" />
+                                <path className="cls-8" d="M34.92,20.63l5-5.79a3.64,3.64,0,0,1,6.09,1L49,22.7Z" />
+                                <path className="cls-8" d="M62.88,20.63,64.43,14a3.77,3.77,0,0,1,6.46-1.68l5.73,6.28Z" />
+                                <path className="cls-8" d="M91,15.11V8.39a3.5,3.5,0,0,1,5.72-2.71l7.58,6.19Z" />
+                                <path className="cls-8" d="M115,9.26l1.63-6a2.37,2.37,0,0,1,4.23-.73L124,7.06Z" />
+                                <circle className="cls-8" cx="26.26" cy="36.67" r="4.72" />
+                                <circle className="cls-8" cx="64.37" cy="33.44" r="1.49" />
                             </g>
                         </g>
                     </svg>
@@ -423,24 +398,24 @@ class DragonCreator extends Component<DProps> {
                             <style>
                                 {`.cola {
                       position: absolute;
-                      z-index: 2;
-                      top: 44%;
+                      z-index: 0;
+                      top: 40%;
                       left: 62%;
                       width: 33%;
                     } 
-                    .cls-8,.cls-88{fill:hsl(` + color + `,100%,50%);stroke:#000;stroke-miterlimit:10;}
+                    .cls-8{fill:hsl(` + color + `,100%,50%);stroke:#000;stroke-miterlimit:10;}
                     .cls-8{stroke - width:2px;}`}
                             </style>
                         </defs>
                         <g id="Capa_2" data-name="Capa 2">
-                            <g id="Capa_1-2" data-name="Capa 1">
-                                <path className="cls-8" d="M.72,141.78C38.42,102.33,118.91,93.6,109.9,12.14" />
-                                <path className="cls-8" d="M21.89,98C44.38,77.37,110.49,85.42,110,16.29c0-1.35,0-2.73-.1-4.15L108.48,1.43a.37.37,0,0,1,.71-.21l6,13a1.94,1.94,0,0,1-.28,2.07l-4.36,5.16" />
-                                <path className="cls-8" d="M110,17.67,99.7,14.11a.7.7,0,0,0-.78,1.1l10.44,13-1.11,6.67L95.58,31.28a.77.77,0,0,0-.78,1.25l10.62,11.84" />
-                                <path className="cls-8" d="M63.82,79.83l-2.39-6.28A1.62,1.62,0,0,1,64,71.79l6,5.56,5.57-2.54L74.07,70.4a1.36,1.36,0,0,1,2.06-1.56l4.6,3.25" />
-                                <circle cx="42.19" cy="105.02" r="2.4" />
-                                <circle cx="45.46" cy="98.11" r="4.51" />
-                                <path className="cls-88" d="M22.28,97.15C21.42,120.66,3.62,136.86.72,141.78" />
+                            <g id="Capa_8" data-name="Capa 8">
+                                <path className="cls-8" d="M16.5,128.79,4.2,150.9l29.85-19.06A107.51,107.51,0,0,0,83.39,49.05l-.5-35.29L77.8,38.46A177.43,177.43,0,0,1,62.44,82.52h0C51,96.67,32.66,97,16.7,105.74Z" />
+                                <path className="cls-8" d="M76.47,44.36,64.83,32a2.66,2.66,0,0,1,2.48-4.43l12.2,2.53Z" />
+                                <path className="cls-8" d="M81.52,20.39,65.87,14.56a1.9,1.9,0,0,1,.66-3.68h15Z" />
+                                <path className="cls-8" d="M64.45,77.08l-7.07-3a1.64,1.64,0,0,0-2.1,2.28l4.81,9Z" />
+                                <ellipse className="cls-8" cx="34.27" cy="118.35" rx="2.77" ry="1.52" />
+                                <circle className="cls-8" cx="45.69" cy="116.46" r="1.89" />
+                                <circle className="cls-8" cx="74.11" cy="68.6" r="1.03" />
                             </g>
                         </g>
                     </svg>

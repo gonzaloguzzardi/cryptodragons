@@ -18,10 +18,9 @@ export default function MyDragonsSearchContainerDesktop(): ReactElement {
   }
 
   const [state, setState] = useState({
-    checkedA: true,
-    checkedB: true,
-    checkedF: true,
-    checkedG: true,
+    checkedMainchain: true,
+    checkedSidechain: true,
+    checkedGateways: true,
   })
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
@@ -39,7 +38,6 @@ export default function MyDragonsSearchContainerDesktop(): ReactElement {
   const handleChangeSelectLowHigh = (event: React.ChangeEvent<{ value: unknown }>): void => {
     event.preventDefault()
     setLowOrHigh(lowOrHigh === LOW_TO_HIGH_VALUE ? HIGH_TO_LOW_VALUE : LOW_TO_HIGH_VALUE)
-    // setLowOrHigh(event.target.value as string)
   }
 
   return (
@@ -51,25 +49,41 @@ export default function MyDragonsSearchContainerDesktop(): ReactElement {
           <div className={styles.fieldsFilterForm_firstGroup}>
             <FormControlLabel
               control={
-                <Checkbox checked={state.checkedA} onChange={handleChange} name="checkedA" />
+                <Checkbox
+                  checked={state.checkedMainchain}
+                  onChange={handleChange}
+                  name="checkedMainchain"
+                />
               }
-              label="In Mainchain"
+              label={<Typography variant="caption">In Mainchain</Typography>}
             />
             <FormControlLabel
               control={
-                <Checkbox checked={state.checkedB} onChange={handleChange} name="checkedB" />
+                <Checkbox
+                  checked={state.checkedSidechain}
+                  onChange={handleChange}
+                  name="checkedSidechain"
+                />
               }
-              label="In Appchain"
+              label={<Typography variant="caption">In Appchain</Typography>}
             />
             <FormControlLabel
               control={
-                <Checkbox checked={state.checkedB} onChange={handleChange} name="checkedB" />
+                <Checkbox
+                  checked={state.checkedGateways}
+                  onChange={handleChange}
+                  name="checkedGateways"
+                />
               }
-              label="In Gateways"
+              label={<Typography variant="caption">In Gateways</Typography>}
             />
           </div>
+
           <div className={styles.fieldsFilterForm_secondGroup}>
-            <Typography className={styles.fieldsFilterForm_secondGroup_sortByLabel}>
+            <Typography
+              className={styles.fieldsFilterForm_secondGroup_sortByLabel}
+              variant={'body2'}
+            >
               Sort by
             </Typography>
             <FormControl className={styles.fieldsFilterForm_secondGroup_sortByValue}>

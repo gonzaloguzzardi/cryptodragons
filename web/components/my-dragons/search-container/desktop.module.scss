@@ -1,11 +1,10 @@
 @import '../../../styles/variables.scss';
 
 .main {
-  padding: 40px 0;
+  padding: 40px 0 10px;
   background-color: $pallete-primary;
   display: flex;
   justify-content: center;
-  min-height: calc(100vh - 316px);
 }
 
 .container {
@@ -23,10 +22,11 @@
     display: flex;
     align-items: center;
     margin-left: auto;
+    user-select: none;
 
     &_sortByLabel,
     &_sortByValue {
-      padding-right: 8px !important;
+      padding-right: 16px !important;
     }
   }
 }

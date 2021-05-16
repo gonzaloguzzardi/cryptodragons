@@ -1,4 +1,4 @@
-import { ReactElement, useState } from 'react'
+import { ReactElement } from 'react'
 import FormControl from '@material-ui/core/FormControl'
 import FormGroup from '@material-ui/core/FormGroup'
 import MenuItem from '@material-ui/core/MenuItem'
@@ -8,38 +8,22 @@ import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Checkbox from '@material-ui/core/Checkbox'
 import SearchBar from '../../search-bar'
 
+import { LOW_TO_HIGH_VALUE, HIGH_TO_LOW_VALUE } from './constants'
+import { tComponentProps } from './types'
 import styles from './desktop.module.scss'
 
-export default function MyDragonsSearchContainerDesktop(): ReactElement {
-  const [search, setSearch] = useState('')
-
-  const handleSearchChange = (event): void => {
-    setSearch(event.target.value)
-  }
-
-  const [state, setState] = useState({
-    checkedMainchain: true,
-    checkedSidechain: true,
-    checkedGateways: true,
-  })
-
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    setState({ ...state, [event.target.name]: event.target.checked })
-  }
-
-  const [age, setAge] = useState(10)
-  const handleChangeSelect = (event: React.ChangeEvent<{ value: unknown }>): void => {
-    setAge(event.target.value as number)
-  }
-
-  const LOW_TO_HIGH_VALUE = 'LOW_TO_HIGH_VALUE'
-  const HIGH_TO_LOW_VALUE = 'HIGH_TO_LOW_VALUE'
-  const [lowOrHigh, setLowOrHigh] = useState(LOW_TO_HIGH_VALUE)
-  const handleChangeSelectLowHigh = (event: React.ChangeEvent<{ value: unknown }>): void => {
-    event.preventDefault()
-    setLowOrHigh(lowOrHigh === LOW_TO_HIGH_VALUE ? HIGH_TO_LOW_VALUE : LOW_TO_HIGH_VALUE)
-  }
-
+export default function MyDragonsSearchContainerDesktop({
+  checkedGateways,
+  checkedMainchain,
+  checkedSidechain,
+  handleCheckedChange,
+  handleSearchChange,
+  search,
+  attribute,
+  handleChangeAttribute,
+  handleChangeSelectLowHigh,
+  lowOrHigh,
+}: tComponentProps): ReactElement {
   return (
     <div className={styles.main}>
       <div className={styles.container}>
@@ -50,8 +34,8 @@ export default function MyDragonsSearchContainerDesktop(): ReactElement {
             <FormControlLabel
               control={
                 <Checkbox
-                  checked={state.checkedMainchain}
-                  onChange={handleChange}
+                  checked={checkedMainchain}
+                  onChange={handleCheckedChange}
                   name="checkedMainchain"
                 />
               }
@@ -60,8 +44,8 @@ export default function MyDragonsSearchContainerDesktop(): ReactElement {
             <FormControlLabel
               control={
                 <Checkbox
-                  checked={state.checkedSidechain}
-                  onChange={handleChange}
+                  checked={checkedSidechain}
+                  onChange={handleCheckedChange}
                   name="checkedSidechain"
                 />
               }
@@ -70,8 +54,8 @@ export default function MyDragonsSearchContainerDesktop(): ReactElement {
             <FormControlLabel
               control={
                 <Checkbox
-                  checked={state.checkedGateways}
-                  onChange={handleChange}
+                  checked={checkedGateways}
+                  onChange={handleCheckedChange}
                   name="checkedGateways"
                 />
               }
@@ -87,16 +71,26 @@ export default function MyDragonsSearchContainerDesktop(): ReactElement {
               Sort by
             </Typography>
             <FormControl className={styles.fieldsFilterForm_secondGroup_sortByValue}>
-              <Select value={age} onChange={handleChangeSelect}>
-                <MenuItem value={10}>Age</MenuItem>
-                <MenuItem value={20}>Strength</MenuItem>
-                <MenuItem value={30}>Beauty</MenuItem>
+              <Select value={attribute} onChange={handleChangeAttribute}>
+                <MenuItem value={10}>
+                  <Typography variant="caption">Age</Typography>
+                </MenuItem>
+                <MenuItem value={20}>
+                  <Typography variant="caption">Strength</Typography>
+                </MenuItem>
+                <MenuItem value={30}>
+                  <Typography variant="caption">Beauty</Typography>
+                </MenuItem>
               </Select>
             </FormControl>
             <FormControl>
               <Select value={lowOrHigh} onOpen={handleChangeSelectLowHigh} open={false}>
-                <MenuItem value={LOW_TO_HIGH_VALUE}>low to high</MenuItem>
-                <MenuItem value={HIGH_TO_LOW_VALUE}>high to low</MenuItem>
+                <MenuItem value={LOW_TO_HIGH_VALUE}>
+                  <Typography variant="caption">low to high</Typography>
+                </MenuItem>
+                <MenuItem value={HIGH_TO_LOW_VALUE}>
+                  <Typography variant="caption">high to low</Typography>
+                </MenuItem>
               </Select>
             </FormControl>
           </div>

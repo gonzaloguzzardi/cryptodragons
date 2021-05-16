@@ -1,0 +1,40 @@
+@import '../../../styles/variables.scss';
+
+.main {
+  padding: 20px 0 10px;
+  background-color: $pallete-primary;
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  width: $max-width-by-screen-mobile;
+}
+
+.searchbar {
+  display: flex;
+}
+
+.fieldsFilterForm {
+  &_firstGroup {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  &_sortByLabel {
+    padding: 10px 0;
+    width: 100%;
+  }
+
+  &_secondGroup {
+    display: flex;
+    user-select: none;
+    justify-content: space-between;
+    width: 100%;
+
+    &_sortByValue {
+      width: 45%;
+    }
+  }
+}

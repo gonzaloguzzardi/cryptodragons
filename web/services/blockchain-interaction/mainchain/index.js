@@ -3,7 +3,7 @@ import clientFactory from './client-factory'
 import CommonAPI from '../common'
 import sleep from '../../../utils/sleep'
 
-// client: { account, chainId } ... { tokenContract, gatewayContract }
+// client: { account, chainId } ... { tokenContract, gatewayContract, dragonFactoryContract }
 let client
 let clientFetching
 
@@ -96,7 +96,7 @@ class MainchainAPI {
         tokenContract: contract,
         account: ownerAccount,
       } = await MainchainAPI.getClientHelper()
-
+      console.log(contract);
       return await CommonAPI.sGetMyDragons(contract, ownerAccount, gas)
     } catch (err) {
       console.error(err)
@@ -151,6 +151,20 @@ class MainchainAPI {
       console.error(err)
     }
   }
+
+  static async getDragonVisualDataById(dragonId, gas) {
+    try {
+      const {
+        dragonFactoryContract: contract,
+        account: ownerAccount,
+      } = await MainchainAPI.getClientHelper()
+
+      return await CommonAPI.getDragonVisualDataById(dragonId, contract, ownerAccount, gas)
+    } catch (err) {
+      console.error(err)
+    }
+  }
+
 }
 
 export default MainchainAPI

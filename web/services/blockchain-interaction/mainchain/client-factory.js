@@ -11,6 +11,12 @@ async function getMainNetTokenContract(web3js) {
   );
 }
 
+async function getDragonFactoryContract(web3js) {
+  const networkId = await web3js.eth.net.getId();
+  const DragonFactoryJson = require('../../../contracts/DragonFactory.json');
+  return new web3js.eth.Contract(DragonFactoryJson.abi, DragonFactoryJson.networks[networkId].address)
+}
+
 async function getMainNetGatewayContract(web3js) {
   const networkId = await web3js.eth.net.getId();
   const GatewayJson = require('../../../contracts/MainnetGateway.json');
@@ -35,13 +41,15 @@ export default async function clientFactory() {
     ethereum.request({ method: 'eth_accounts' }),
     ethereum.request({ method: 'eth_chainId' }),
     getMainNetTokenContract(web3js),
-    getMainNetGatewayContract(web3js),
+    getMainNetGatewayContract(web3js)
+    //getDragonFactoryContract(web3js)
   ])
     .then((values) => ({
       account: values[0][0],
       chainId: values[1],
       tokenContract: values[2],
-      gatewayContract: values[3],
+      gatewayContract: values[3]
+      //dragonFactoryContract: values[4]
     }))
     .catch((err) => console.error(err));
 }

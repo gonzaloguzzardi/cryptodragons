@@ -49,7 +49,8 @@ class Dragon extends Component<IProps, IState> {
       fortitude: '',
     }
 
-    this.getDragonData()
+    this.getDragonData();
+    this.getDragonVisualData();
   }
 
   getDragonData: () => unknown = () => {
@@ -61,6 +62,19 @@ class Dragon extends Component<IProps, IState> {
     if (this.state.location === 'main') {
       MainchainAPI.getDragonDataById(this.state.id, GAS_DEFAULT_VALUE).then((dragonData) =>
         this.setState(dragonData)
+      )
+    }
+  }
+
+  getDragonVisualData: () => unknown = () => {
+    if (this.state.location === 'side') {
+      SidechainAPI.getDragonVisualDataById(this.state.id, GAS_DEFAULT_VALUE).then((dragonData) =>
+        console.log(dragonData)
+      )
+    }
+    if (this.state.location === 'main') {
+      MainchainAPI.getDragonVisualDataById(this.state.id, GAS_DEFAULT_VALUE).then((dragonData) =>
+        console.log(dragonData)
       )
     }
   }

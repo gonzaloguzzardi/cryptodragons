@@ -10,6 +10,7 @@ import {
 
 const DappchainDragonTokenJson = require('../../../contracts/DappchainTransferableDragon.json')
 const GatewayJson = require('../../../contracts/DappchainGateway')
+const DragonFactoryJson = require('../../../contracts/DragonFactory.json')
 
 const loomChainId = '13654820909954' // TODO ver si cambia o si es siempre el mismo
 
@@ -22,6 +23,11 @@ async function getLoomTokenContract(web3js) {
 
 async function getLoomGatewayContract(web3js) {
   return new web3js.eth.Contract(GatewayJson.abi, GatewayJson.networks[loomChainId].address)
+}
+
+async function getDragonFactoryContract(web3js) {
+  console.log(DragonFactoryJson);
+  return new web3js.eth.Contract(DragonFactoryJson.abi, DragonFactoryJson.networks[loomChainId].address)
 }
 
 async function loadLoomAccount() {
@@ -51,7 +57,8 @@ async function loadLoomAccount() {
 export default async function clientFactory() {
   return loadLoomAccount()
     .then(({ account, web3js, client }) =>
-      Promise.all([getLoomTokenContract(web3js), getLoomGatewayContract(web3js)]).then(
+      Promise.all([getLoomTokenContract(web3js), getLoomGatewayContract(web3js)//, getDragonFactoryContract(web3js)
+      ]).then(
         (values) => ({
           account,
           web3js,
@@ -59,6 +66,7 @@ export default async function clientFactory() {
           netId: loomChainId,
           tokenContract: values[0],
           gatewayContract: values[1],
+          //dragonFactoryContract: values[2],
         })
       )
     )

@@ -472,6 +472,11 @@ contract GenesLaboratory {
         return uint16(uint256(genes));
     }
 
+    function getVisualAttributes(bytes32 genes) public pure returns (uint16 head, uint16 body, uint16 wings) {
+        head = uint16(uint256(genes) >> (10 * 8) );
+        body = uint16(uint256(genes) >> (8 * 8) );
+        wings = uint16(uint256(genes) >> (6 * 8) );
+    }
     /********************* Utils *************************************** */
 
     // This is vulnerable, but I don't think it is worth protecting for this use case.

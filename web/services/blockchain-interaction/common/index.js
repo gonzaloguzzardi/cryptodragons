@@ -17,10 +17,12 @@ class CommonAPI {
   }
 
   static async sGetMyDragons(contract, ownerAccount, gas) {
+    console.log(contract);
+    console.log(ownerAccount);
+    console.log(gas);
     const gasEstimate = await contract.methods
       .getDragonsIdsByOwner(ownerAccount)
       .estimateGas({ from: ownerAccount, gas })
-
     console.log(`[COMMON-API_GET-MY-DRAGONS]: Gas sent: ${gas}, Gas Estimate: ${gasEstimate}`)
     if (gasEstimate >= gas) throw new Error('Not enough enough gas, send more.')
 
@@ -71,6 +73,33 @@ class CommonAPI {
       .getDragonById(dragonId)
       .call({ from: ownerAccount, gas: gasEstimate })
   }
+
+  static async getDragonVisualDataById(dragonId, contract, ownerAccount, gas) {
+    const gasEstimate = await contract.methods
+      .getVisualAttributes(dragonId)
+      .estimateGas({ from: ownerAccount, gas })
+
+    console.log(`[COMMON-API_GET-DRAGON-VISUAL-DATA]: Gas sent: ${gas}, Gas Estimate: ${gasEstimate}`)
+    if (gasEstimate >= gas) throw new Error('Not enough enough gas, send more.')
+
+    return await contract.methods
+      .getVisualAttributes(dragonId)
+      .call({ from: ownerAccount, gas: gasEstimate })
+  }
+
+  static async getGenerationAttributeFromBytes(genes, contract, ownerAccount, gas) {
+    const gasEstimate = await contract.methods
+      .getGenerationAttributeFromBytes(genes)
+      .estimateGas({ from: ownerAccount, gas })
+
+    console.log(`[COMMON-API_GET-DRAGON-DATA]: Gas sent: ${gas}, Gas Estimate: ${gasEstimate}`)
+    if (gasEstimate >= gas) throw new Error('Not enough enough gas, send more.')
+
+    return await contract.methods
+      .getGenerationAttributeFromBytes(genes)
+      .call({ from: ownerAccount, gas: gasEstimate })
+  }
+
 }
 
 export default CommonAPI

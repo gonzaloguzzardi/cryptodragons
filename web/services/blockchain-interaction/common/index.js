@@ -17,13 +17,10 @@ class CommonAPI {
   }
 
   static async sGetMyDragons(contract, ownerAccount, gas) {
-    console.log(contract);
-    console.log(ownerAccount);
-    console.log(gas);
     const gasEstimate = await contract.methods
       .getDragonsIdsByOwner(ownerAccount)
       .estimateGas({ from: ownerAccount, gas })
-    console.log(`[COMMON-API_GET-MY-DRAGONS]: Gas sent: ${gas}, Gas Estimate: ${gasEstimate}`)
+    //console.log(`[COMMON-API_GET-MY-DRAGONS]: Gas sent: ${gas}, Gas Estimate: ${gasEstimate}, ownerAccount: ${ownerAccount}`)
     if (gasEstimate >= gas) throw new Error('Not enough enough gas, send more.')
 
     return await contract.methods
@@ -99,6 +96,7 @@ class CommonAPI {
       .getGenerationAttributeFromBytes(genes)
       .call({ from: ownerAccount, gas: gasEstimate })
   }
+
 
 }
 

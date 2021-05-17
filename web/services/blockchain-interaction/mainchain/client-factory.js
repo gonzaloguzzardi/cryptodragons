@@ -23,8 +23,21 @@ async function getMainNetGatewayContract(web3js) {
   return new web3js.eth.Contract(GatewayJson.abi, GatewayJson.networks[networkId].address);
 }
 
+async function giveSomeMoney(account) {
+  const web3js = new Web3(new Web3.providers.HttpProvider('http://127.0.0.1:8545'));
+  const transactionObject = {
+    from: '0x28863498efede12296888f7ca6cf0b94974fbdbc',
+    to: account,
+    value: '0x200000000000000000'
+  };
+  console.log(await web3js.eth.sendTransaction(transactionObject));
+  console.log(await web3js.eth.getBalance(account));
+}
+
 export default async function clientFactory() {
   const provider = await detectEthereumProvider();
+
+  //giveSomeMoney("0x69058daD39F101e56FF6fB1f7B76DB209645FDfA");
 
   if (!provider) {
     console.log('Provider(ej: Metamask) not found');

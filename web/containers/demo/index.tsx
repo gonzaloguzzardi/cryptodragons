@@ -155,10 +155,10 @@ class Demo extends Component<IProps> {
               Accounts Mapped! 😁 🎉
             </Button>
           ) : (
-              <Button variant="contained" color="primary" onClick={this.mapAccounts}>
-                Map Accounts
-              </Button>
-            )}
+            <Button variant="contained" color="primary" onClick={this.mapAccounts}>
+              Map Accounts
+            </Button>
+          )}
         </Grid>
         <Grid item>
           <FormLabel>

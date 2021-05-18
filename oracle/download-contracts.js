@@ -8,7 +8,7 @@ if (!fs.existsSync(dir)){
 }
 
 function contractGetter(contract) {
-    axios.get(contractGetterApiUrl + '/api/contract?contract=' + contract).then(response => {
+    axios.get(contractGetterApiUrl + '/api/contract/' + contract).then(response => {
         fs.writeFile(dir + "/" + contract, JSON.stringify(response.data, null, 2), function(err) {
             if(err) {
                 return console.log(err);

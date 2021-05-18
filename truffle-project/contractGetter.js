@@ -8,7 +8,7 @@ const path = require('path');
 const fs = require('fs');
 
 
-function getAbailableContracts(req, res) {
+function getAvailableContracts(req, res) {
     fs.readdir('./src/contracts', function (err, files) {
         if (err) {
             res.status(500).send('Unable to scan directory: ' + err);
@@ -18,7 +18,7 @@ function getAbailableContracts(req, res) {
 }
 
 function getContentOfContract(req, res) {
-    const filePath = path.join('./src/contracts', req.query.contract);
+    const filePath = path.join('./src/contracts', req.params.contract_name);
     fs.readFile(filePath, 'utf8', function (err,data) {
         if (err) {
             res.status(500).send('Unable to get data: ' + err);
@@ -30,8 +30,8 @@ function getContentOfContract(req, res) {
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.get('/api/contracts', getAbailableContracts);
-app.get('/api/contract', getContentOfContract);
+app.get('/api/contracts', getAvailableContracts);
+app.get('/api/contract/:contract_name', getContentOfContract);
 
 // SERVER LISTEN
 const server = app.listen(8082, () => {

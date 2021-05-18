@@ -10,8 +10,6 @@ import {
 
 const axios = require('axios');
 const contractGetterApiUrl = !process.env.DOCKERENV ? 'http://localhost:8082' : 'http://contractGetter:8082';
-//const DappchainDragonTokenJson = require('../../../contracts/DappchainTransferableDragon.json')
-//const GatewayJson = require('../../../contracts/DappchainGateway')
 
 const loomChainId = '13654820909954' // TODO ver si cambia o si es siempre el mismo
 

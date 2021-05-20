@@ -12,7 +12,7 @@ import Icon from './icon'
 
 export default function FooterDesktop(): ReactElement {
   return (
-    <div className={styles.main}>
+    <footer className={styles.main}>
       <Grid container className={styles.container}>
         <Grid item xs={3}>
           <ItemLink href="/..." text="My profile" />
@@ -76,6 +76,6 @@ export default function FooterDesktop(): ReactElement {
           </Typography>
         </Grid>
       </Grid>
-    </div>
+    </footer>
   )
 }

@@ -107,7 +107,7 @@ export default function AppToolbar({ accountsState, deviceType, section }: IProp
 
           {/* My dragons */}
           <Link href="/my-dragons">
-            <a className={appbarStyles.appbarActionLink}>
+            <a className={appbarStyles.appbarActionLink} tabIndex={-1}>
               <IconButton
                 aria-label="my-dragons"
                 className={classnames(appbarStyles.appbarActionLink_Button, {
@@ -124,7 +124,7 @@ export default function AppToolbar({ accountsState, deviceType, section }: IProp
 
           {/* Marketplace */}
           <Link href="/marketplace">
-            <a className={appbarStyles.appbarActionLink}>
+            <a className={appbarStyles.appbarActionLink} tabIndex={-1}>
               <IconButton
                 aria-label="marketplace"
                 className={classnames(appbarStyles.appbarActionLink_Button, {
@@ -141,7 +141,7 @@ export default function AppToolbar({ accountsState, deviceType, section }: IProp
 
           {/* Guias */}
           <Link href="/guides">
-            <a className={appbarStyles.appbarActionLink}>
+            <a className={appbarStyles.appbarActionLink} tabIndex={-1}>
               <IconButton
                 aria-label="guides"
                 className={classnames(appbarStyles.appbarActionLink_Button, {

@@ -24,14 +24,14 @@ export default function MarketplaceSection(): ReactElement {
 
           <Grid item xs={8} container alignItems="center">
             <div className={styles.title}>
-              <Typography variant="h3">Learn how to play CryptoDragons!</Typography>
+              <Typography variant="h4">Learn how to play CryptoDragons!</Typography>
             </div>
 
             <div className={styles.subtitle}>
               <Typography variant="subtitle1" color="textSecondary">
-                Check the guides and become an expert of Cryptodragons - It is free. <br /> Review
-                the main features features such as purchasing a dragon, train them <br /> and
-                everything you must know to start your journey in this magic world.
+                Check the guides and become an expert of Cryptodragons - It is free. Review the main
+                features features such as purchasing a dragon, train them and everything you must
+                know to start your journey in this magic world.
               </Typography>
             </div>
 

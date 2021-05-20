@@ -2,24 +2,28 @@
 import Web3 from 'web3';
 import detectEthereumProvider from '@metamask/detect-provider';
 
-async function getMainNetTokenContract(web3js) {
-  const networkId = await web3js.eth.net.getId();
-  const MainchainDragonTokenJson = require('../../../contracts/MainnetTransferableDragon.json');
+const axios = require('axios');
+const contractGetterApiUrl = !process.env.DOCKERENV ? 'http://localhost:8082' : 'http://contractGetter:8082';
+
+async function getMainNetTokenContract(web3js, networkId) {
+  let MainchainDragonTokenJson = await axios.get(contractGetterApiUrl + '/api/contract/MainnetTransferableDragon.json');
+  MainchainDragonTokenJson = DragonFactoryJson.data;
   return new web3js.eth.Contract(
-    MainchainDragonTokenJson.abi,
-    MainchainDragonTokenJson.networks[networkId].address
+    MainchainDragonTokenJson.abi, MainchainDragonTokenJson.networks[networkId].address
   );
 }
 
 async function getDragonFactoryContract(web3js) {
   const networkId = await web3js.eth.net.getId();
-  const DragonFactoryJson = require('../../../contracts/DragonFactory.json');
+  let DragonFactoryJson = await axios.get(contractGetterApiUrl + '/api/contract/DragonFactory.json');
+  DragonFactoryJson = DragonFactoryJson.data;
   return new web3js.eth.Contract(DragonFactoryJson.abi, DragonFactoryJson.networks[networkId].address)
 }
 
 async function getMainNetGatewayContract(web3js) {
   const networkId = await web3js.eth.net.getId();
-  const GatewayJson = require('../../../contracts/MainnetGateway.json');
+  let GatewayJson = await axios.get(contractGetterApiUrl + '/api/contract/MainnetGateway.json');
+  GatewayJson = DragonFactoryJson.data;
   return new web3js.eth.Contract(GatewayJson.abi, GatewayJson.networks[networkId].address);
 }
 
@@ -49,6 +53,12 @@ export default async function clientFactory() {
   }
 
   const web3js = new Web3(provider);
+
+  const networkId = await web3js.eth.net.getId();
+  if (networkId !== 12345) {
+    alert("Connect to BFA mainnet with metamask");
+    return Promise.resolve({});
+  }
 
   return Promise.all([
     ethereum.request({ method: 'eth_accounts' }),

@@ -18,6 +18,7 @@
 		"start-dev-sidechain-cli": "nodemon sidechain-cli.js",
 		"lint-fix": "eslint --fix .",
 		"contracts-uml": "sol2uml -f png -o uml/contracts-uml ./contracts",
+		"start-dev-contract-getter": "nodemon contractGetter.js",
 		"contracts-uml-custom": "sol2uml -b DappchainTransferableDragon,DappchainGateway,DragonBase,DragonFactory,MainnetTransferableDragon -f png -o uml/contracts-uml-custom ./contracts"
 	},
 	"dependencies": {

@@ -85,6 +85,7 @@ class MainchainAPI {
       } = await MainchainAPI.getClientHelper()
       console.log(contract);
       console.log(ownerAccount);
+      
       return await CommonAPI.sCreateDragonToken(contract, ownerAccount, gas)
     } catch (err) {
       console.error(err)
@@ -155,7 +156,7 @@ class MainchainAPI {
   static async getDragonVisualDataById(dragonId, gas) {
     try {
       const {
-        dragonFactoryContract: contract,
+        tokenContract: contract,
         account: ownerAccount,
       } = await MainchainAPI.getClientHelper()
 

@@ -879,9 +879,8 @@ class DragonCreator extends Component<DProps> {
             <style global jsx>{`
             .cardContainer {
               position: absolute;
-              width: 500px;
-              top:0%;
-              height:600px;
+              width: 100px;
+              height:120px;
               float:left;
             }
           `}</style>

@@ -35,7 +35,6 @@ class SidechainAPI {
         tokenContract: contract,
         account: ownerAccount,
       } = await SidechainAPI.getClientHelper()
-
       return await CommonAPI.sCreateDragonToken(contract, ownerAccount, gas)
     } catch (err) {
       console.error(err)
@@ -120,7 +119,7 @@ class SidechainAPI {
   static async getDragonVisualDataById(dragonId, gas) {
     try {
       const {
-        dragonFactoryContract: contract,
+        tokenContract: contract,
         account: ownerAccount,
       } = await SidechainAPI.getClientHelper()
 

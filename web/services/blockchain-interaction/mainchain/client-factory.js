@@ -5,9 +5,12 @@ import detectEthereumProvider from '@metamask/detect-provider';
 const axios = require('axios');
 const contractGetterApiUrl = !process.env.DOCKERENV ? 'http://localhost:8082' : 'http://contractGetter:8082';
 
-async function getMainNetTokenContract(web3js, networkId) {
+async function getMainNetTokenContract(web3js) {
+  const networkId = await web3js.eth.net.getId();
   let MainchainDragonTokenJson = await axios.get(contractGetterApiUrl + '/api/contract/MainnetTransferableDragon.json');
-  MainchainDragonTokenJson = DragonFactoryJson.data;
+  console.log(MainchainDragonTokenJson);
+  MainchainDragonTokenJson = MainchainDragonTokenJson.data;
+
   return new web3js.eth.Contract(
     MainchainDragonTokenJson.abi, MainchainDragonTokenJson.networks[networkId].address
   );
@@ -23,7 +26,7 @@ async function getDragonFactoryContract(web3js) {
 async function getMainNetGatewayContract(web3js) {
   const networkId = await web3js.eth.net.getId();
   let GatewayJson = await axios.get(contractGetterApiUrl + '/api/contract/MainnetGateway.json');
-  GatewayJson = DragonFactoryJson.data;
+  GatewayJson = GatewayJson.data;
   return new web3js.eth.Contract(GatewayJson.abi, GatewayJson.networks[networkId].address);
 }
 
@@ -55,6 +58,7 @@ export default async function clientFactory() {
   const web3js = new Web3(provider);
 
   const networkId = await web3js.eth.net.getId();
+  console.log("Network id: " + networkId);
   if (networkId !== 12345) {
     alert("Connect to BFA mainnet with metamask");
     return Promise.resolve({});
@@ -64,14 +68,13 @@ export default async function clientFactory() {
     ethereum.request({ method: 'eth_accounts' }),
     ethereum.request({ method: 'eth_chainId' }),
     getMainNetTokenContract(web3js),
-    getMainNetGatewayContract(web3js)
-    //getDragonFactoryContract(web3js)
+    getMainNetGatewayContract(web3js),
   ])
     .then((values) => ({
       account: values[0][0],
       chainId: values[1],
       tokenContract: values[2],
-      gatewayContract: values[3]
+      gatewayContract: values[3],
       //dragonFactoryContract: values[4]
     }))
     .catch((err) => console.error(err));

@@ -5,7 +5,6 @@ import './DragonBase.sol';
 contract IGenesLaboratory {
 	function createNewDragonGenes()
 		external
-		pure
 		returns (
 			bytes32 genes,
 			uint16 initialHealth,
@@ -18,7 +17,6 @@ contract IGenesLaboratory {
 
 	function createChildGenes(bytes32 fatherGenes, bytes32 motherGenes)
 		external
-		pure
 		returns (
 			bytes32 childGenes,
 			uint16 initialHealth,

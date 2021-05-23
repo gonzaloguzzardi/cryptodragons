@@ -8,6 +8,8 @@ import CircularProgress from '@material-ui/core/CircularProgress'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 
+import DragonCreator from '../../components/dragon-creator'
+
 import MainchainAPI from '../../services/blockchain-interaction/mainchain'
 import SidechainAPI from '../../services/blockchain-interaction/sidechain'
 
@@ -91,9 +93,23 @@ class Dragon extends Component<IProps, IState> {
           <Typography color="textSecondary" align="center" gutterBottom>
             #{this.state.id} {this.state.name}
           </Typography>
+
           <CardMedia>
-            <img src={'/assets/dragonsito.jpg'} alt="" width="100" height="100" />
+            <DragonCreator
+              typeAlas={1}
+              typeCuernos={1}
+              typeOjos={1}
+              typePanza={1}
+              typeCola={1}
+              typeCuerpo={1}
+              colorAlas={1}
+              colorCuernos={1}
+              colorOjos={1}
+              colorPanza={1}
+              colorCola={1}
+              colorCuerpo={1} />
           </CardMedia>
+
           <Grid container justify="center" spacing={2}>
             <Grid item>
               <img src={'/assets/corazon.svg'} alt="" width="20" height="20" />

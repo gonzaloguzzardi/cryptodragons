@@ -36,8 +36,8 @@ class Demo extends Component<IProps> {
     super(props)
 
     this.state = {
-      sideAccount: '0x0bd67f97d88e4c3859f9204d92b603d736c84df3',
-      mainAccount: '0x69058dad39f101e56ff6fb1f7b76db209645fdfa',
+      sideAccount: '',
+      mainAccount: '',
 
       sideDragons: [],
       mainDragons: [],
@@ -46,6 +46,16 @@ class Demo extends Component<IProps> {
 
       accountsAreMapped: false,
     }
+    this.initAccounts();
+  }
+
+  initAccounts: () => unknown = () => {
+    MainchainAPI.getClientHelper().then((account) =>
+      this.setState({ mainAccount: account.account })
+    );
+    SidechainAPI.getClientHelper().then((account) =>
+      this.setState({ sideAccount: account.account })
+    );
   }
 
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types

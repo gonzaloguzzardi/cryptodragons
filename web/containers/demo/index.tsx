@@ -271,6 +271,10 @@ class Demo extends Component<IProps> {
       </Grid>
 
       <style global jsx>{`
+        .cardContainer {
+          position: relative !important;
+        }
+
         .container {
           margin-top: 20px;
         }

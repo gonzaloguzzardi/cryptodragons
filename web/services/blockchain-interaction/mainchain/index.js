@@ -85,8 +85,9 @@ class MainchainAPI {
       } = await MainchainAPI.getClientHelper()
       console.log(contract);
       console.log(ownerAccount);
-      
-      return await CommonAPI.sCreateDragonToken(contract, ownerAccount, gas)
+      const response = await CommonAPI.sCreateDragonToken(contract, ownerAccount, gas)
+      console.log(response);
+      return response
     } catch (err) {
       console.error(err)
     }

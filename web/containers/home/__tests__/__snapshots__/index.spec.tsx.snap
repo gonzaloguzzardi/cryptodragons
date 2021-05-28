@@ -18,7 +18,7 @@ exports[`Renders Home desktop 1`] = `
           onMouseEnter={[Function]}
         >
           <div
-            className="MuiAvatar-root MuiAvatar-circle"
+            className="MuiAvatar-root MuiAvatar-square"
           >
             <img
               alt="CryptoDragons Icon"
@@ -1118,6 +1118,12 @@ exports[`Renders Home desktop 1`] = `
               aria-hidden={true}
               className="MuiSvgIcon-root icon iconInstagram mr-6"
               focusable="false"
+              style={
+                Object {
+                  "height": "30px",
+                  "width": "30px",
+                }
+              }
               viewBox="0 0 24 24"
             >
               <path
@@ -1134,6 +1140,12 @@ exports[`Renders Home desktop 1`] = `
               aria-hidden={true}
               className="MuiSvgIcon-root icon iconTwitter mr-6"
               focusable="false"
+              style={
+                Object {
+                  "height": "30px",
+                  "width": "30px",
+                }
+              }
               viewBox="0 0 24 24"
             >
               <path
@@ -1150,6 +1162,12 @@ exports[`Renders Home desktop 1`] = `
               aria-hidden={true}
               className="MuiSvgIcon-root icon iconFacebook mr-6"
               focusable="false"
+              style={
+                Object {
+                  "height": "30px",
+                  "width": "30px",
+                }
+              }
               viewBox="0 0 24 24"
             >
               <path
@@ -1166,6 +1184,12 @@ exports[`Renders Home desktop 1`] = `
               aria-hidden={true}
               className="MuiSvgIcon-root icon iconYoutube mr-6"
               focusable="false"
+              style={
+                Object {
+                  "height": "30px",
+                  "width": "30px",
+                }
+              }
               viewBox="0 0 24 24"
             >
               <path
@@ -1191,6 +1215,12 @@ exports[`Renders Home desktop 1`] = `
               aria-hidden={true}
               className="MuiSvgIcon-root icon iconAndroid ml-6"
               focusable="false"
+              style={
+                Object {
+                  "height": "30px",
+                  "width": "30px",
+                }
+              }
               viewBox="0 0 24 24"
             >
               <path
@@ -1207,6 +1237,12 @@ exports[`Renders Home desktop 1`] = `
               aria-hidden={true}
               className="MuiSvgIcon-root icon iconApple ml-6"
               focusable="false"
+              style={
+                Object {
+                  "height": "30px",
+                  "width": "30px",
+                }
+              }
               viewBox="0 0 24 24"
             >
               <path
@@ -1255,7 +1291,7 @@ exports[`Renders Home mobile 1`] = `
           onMouseEnter={[Function]}
         >
           <div
-            className="MuiAvatar-root MuiAvatar-circle"
+            className="MuiAvatar-root MuiAvatar-square"
           >
             <img
               alt="CryptoDragons Icon"
@@ -2349,6 +2385,12 @@ exports[`Renders Home mobile 1`] = `
               aria-hidden={true}
               className="MuiSvgIcon-root icon iconInstagram mr-6"
               focusable="false"
+              style={
+                Object {
+                  "height": "30px",
+                  "width": "30px",
+                }
+              }
               viewBox="0 0 24 24"
             >
               <path
@@ -2365,6 +2407,12 @@ exports[`Renders Home mobile 1`] = `
               aria-hidden={true}
               className="MuiSvgIcon-root icon iconTwitter mr-6"
               focusable="false"
+              style={
+                Object {
+                  "height": "30px",
+                  "width": "30px",
+                }
+              }
               viewBox="0 0 24 24"
             >
               <path
@@ -2381,6 +2429,12 @@ exports[`Renders Home mobile 1`] = `
               aria-hidden={true}
               className="MuiSvgIcon-root icon iconFacebook mr-6"
               focusable="false"
+              style={
+                Object {
+                  "height": "30px",
+                  "width": "30px",
+                }
+              }
               viewBox="0 0 24 24"
             >
               <path
@@ -2397,6 +2451,12 @@ exports[`Renders Home mobile 1`] = `
               aria-hidden={true}
               className="MuiSvgIcon-root icon iconYoutube mr-6"
               focusable="false"
+              style={
+                Object {
+                  "height": "30px",
+                  "width": "30px",
+                }
+              }
               viewBox="0 0 24 24"
             >
               <path
@@ -2429,6 +2489,12 @@ exports[`Renders Home mobile 1`] = `
               aria-hidden={true}
               className="MuiSvgIcon-root icon iconAndroid ml-6"
               focusable="false"
+              style={
+                Object {
+                  "height": "30px",
+                  "width": "30px",
+                }
+              }
               viewBox="0 0 24 24"
             >
               <path
@@ -2445,6 +2511,12 @@ exports[`Renders Home mobile 1`] = `
               aria-hidden={true}
               className="MuiSvgIcon-root icon iconApple ml-6"
               focusable="false"
+              style={
+                Object {
+                  "height": "30px",
+                  "width": "30px",
+                }
+              }
               viewBox="0 0 24 24"
             >
               <path

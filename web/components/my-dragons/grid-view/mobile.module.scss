@@ -1,11 +1,10 @@
 @import '../../../styles/variables.scss';
 
 .main {
-  padding: 40px 0;
+  padding: 20px 0 40px;
   background-color: $pallete-primary;
   display: flex;
   justify-content: center;
-  min-height: calc(100vh - 464px);
 }
 
 .container {

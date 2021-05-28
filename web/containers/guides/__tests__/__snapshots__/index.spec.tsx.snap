@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Renders MyDragons desktop 1`] = `
+exports[`Renders Guides desktop 1`] = `
 <div
   className="container"
 >
@@ -14,16 +14,16 @@ exports[`Renders MyDragons desktop 1`] = `
         }
       }
       deviceType="desktop"
-      section="my-dragons"
+      section="guides"
     />
     <p>
-      My Dragons
+      Guides
     </p>
   </main>
 </div>
 `;
 
-exports[`Renders MyDragons mobile 1`] = `
+exports[`Renders Guides mobile 1`] = `
 <div
   className="container"
 >
@@ -37,10 +37,10 @@ exports[`Renders MyDragons mobile 1`] = `
         }
       }
       deviceType="mobile"
-      section="my-dragons"
+      section="guides"
     />
     <p>
-      My Dragons
+      Guides
     </p>
   </main>
 </div>

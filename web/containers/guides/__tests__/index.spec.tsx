@@ -1,7 +1,7 @@
 import React from 'react'
 import renderer from 'react-test-renderer'
 
-import MyDragons from '..'
+import Guides from '..'
 jest.mock('../../../components/app-toolbar', () => ({
   __esModule: true,
   default: 'AppToolbar',
@@ -11,16 +11,16 @@ jest.mock('../../../components/footer/mobile', () => ({
   default: 'AppFooter',
 }))
 
-test('Renders MyDragons desktop', () => {
+test('Renders Guides desktop', () => {
   const deviceType = 'desktop'
-  const component = renderer.create(<MyDragons deviceType={deviceType} />)
+  const component = renderer.create(<Guides deviceType={deviceType} />)
 
   expect(component).toMatchSnapshot()
 })
 
-test('Renders MyDragons mobile', () => {
+test('Renders Guides mobile', () => {
   const deviceType = 'mobile'
-  const component = renderer.create(<MyDragons deviceType={deviceType} />)
+  const component = renderer.create(<Guides deviceType={deviceType} />)
 
   expect(component).toMatchSnapshot()
 })

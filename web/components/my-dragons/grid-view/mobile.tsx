@@ -1,5 +1,5 @@
 import { ReactElement } from 'react'
-import BuyDragonCard from '../../card/buy-dragon'
+import BuyDragonCard from '../../card/buy-dragon/mobile'
 
 import styles from './mobile.module.scss'
 
@@ -9,7 +9,7 @@ export default function MyDragonsGridViewMobile(): ReactElement {
   return (
     <div className={styles.main}>
       <div className={styles.container}>
-        {dragons.length === 0 && <BuyDragonCard width="150px" height="200px" />}
+        {dragons.length === 0 && <BuyDragonCard />}
 
         {dragons.length > 0 && (
           <>

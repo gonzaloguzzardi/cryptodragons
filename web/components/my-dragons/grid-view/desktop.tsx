@@ -1,5 +1,5 @@
 import { ReactElement } from 'react'
-import BuyDragonCard from '../../card/buy-dragon'
+import BuyDragonCard from '../../card/buy-dragon/desktop'
 
 import styles from './desktop.module.scss'
 

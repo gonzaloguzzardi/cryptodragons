@@ -66,9 +66,7 @@ export default function MyDragonsSearchContainerMobile({
             />
           </div>
 
-          <Typography className={styles.fieldsFilterForm_sortByLabel} variant="body2">
-            Sort by
-          </Typography>
+          <Typography variant="overline">Sort by</Typography>
 
           <div className={styles.fieldsFilterForm_secondGroup}>
             <FormControl className={styles.fieldsFilterForm_secondGroup_sortByValue}>

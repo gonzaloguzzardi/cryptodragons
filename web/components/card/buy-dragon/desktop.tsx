@@ -4,9 +4,9 @@ import Typography from '@material-ui/core/Typography'
 import Icon from '../../icon'
 import { ReactElement } from 'react'
 
-import styles from './index.module.scss'
+import styles from './desktop.module.scss'
 
-export default function BuyDragonCard(): ReactElement {
+export default function BuyDragonCardDesktop(): ReactElement {
   return (
     <Link href="/marketplace">
       <div className={styles.container}>

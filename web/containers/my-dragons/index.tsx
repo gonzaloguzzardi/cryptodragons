@@ -13,9 +13,11 @@ import { tLowOHigh } from '../../components/my-dragons/search-container/types'
 import { ISSRPropsDeviceOnly } from '../../types/server-side-props-device-only'
 
 export default function MyDragons({ deviceType }: ISSRPropsDeviceOnly): ReactElement {
+  const dragons = []
+
   const [search, setSearch] = useState('')
 
-  const handleSearchChange = (event): void => {
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setSearch(event.target.value)
   }
 
@@ -53,6 +55,7 @@ export default function MyDragons({ deviceType }: ISSRPropsDeviceOnly): ReactEle
         handleChangeAttribute={handleChangeAttribute}
         lowOrHigh={lowOrHigh as tLowOHigh}
         handleChangeSelectLowHigh={handleChangeSelectLowHigh}
+        dragons={dragons}
       />
     </MyDragonsCommons>
   ) : (
@@ -68,6 +71,7 @@ export default function MyDragons({ deviceType }: ISSRPropsDeviceOnly): ReactEle
         handleChangeAttribute={handleChangeAttribute}
         lowOrHigh={lowOrHigh as tLowOHigh}
         handleChangeSelectLowHigh={handleChangeSelectLowHigh}
+        dragons={dragons}
       />
     </MyDragonsCommons>
   )

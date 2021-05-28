@@ -8,6 +8,8 @@ import MyDragonsSearchContainerDesktop from '../../components/my-dragons/search-
 import MyDragonsGridViewDesktop from '../../components/my-dragons/grid-view/desktop'
 import FooterDesktop from '../../components/footer/desktop'
 
+import { tProps } from './types'
+
 function MyDragonsDesktop({
   accountsState,
   checkedGateways,
@@ -20,7 +22,8 @@ function MyDragonsDesktop({
   handleChangeAttribute,
   handleChangeSelectLowHigh,
   lowOrHigh,
-}): ReactElement {
+  dragons,
+}: tProps): ReactElement {
   return (
     <>
       <AppToolbar deviceType="desktop" section="my-dragons" accountsState={accountsState} />
@@ -36,7 +39,7 @@ function MyDragonsDesktop({
         lowOrHigh={lowOrHigh}
         handleChangeSelectLowHigh={handleChangeSelectLowHigh}
       />
-      <MyDragonsGridViewDesktop />
+      <MyDragonsGridViewDesktop dragons={dragons} />
       <FooterDesktop />
     </>
   )

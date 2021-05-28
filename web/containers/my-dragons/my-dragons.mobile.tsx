@@ -7,6 +7,8 @@ import MyDragonsSearchContainerMobile from '../../components/my-dragons/search-c
 import MyDragonsGridViewMobile from '../../components/my-dragons/grid-view/mobile'
 import FooterMobile from '../../components/footer/mobile'
 
+import { tProps } from './types'
+
 function MyDragonsMobile({
   accountsState,
   checkedGateways,
@@ -19,7 +21,8 @@ function MyDragonsMobile({
   handleChangeAttribute,
   handleChangeSelectLowHigh,
   lowOrHigh,
-}): ReactElement {
+  dragons,
+}: tProps): ReactElement {
   return (
     <>
       <AppToolbar deviceType="mobile" section="my-dragons" accountsState={accountsState} />
@@ -35,7 +38,7 @@ function MyDragonsMobile({
         lowOrHigh={lowOrHigh}
         handleChangeSelectLowHigh={handleChangeSelectLowHigh}
       />
-      <MyDragonsGridViewMobile />
+      <MyDragonsGridViewMobile dragons={dragons} />
       <FooterMobile />
     </>
   )

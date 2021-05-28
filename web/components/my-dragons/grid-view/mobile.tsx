@@ -1,11 +1,10 @@
 import { ReactElement } from 'react'
 import BuyDragonCard from '../../card/buy-dragon/mobile'
 
+import { tProps } from './types'
 import styles from './mobile.module.scss'
 
-export default function MyDragonsGridViewMobile(): ReactElement {
-  const dragons = []
-
+export default function MyDragonsGridViewMobile({ dragons }: tProps): ReactElement {
   return (
     <div className={styles.main}>
       <div className={styles.container}>

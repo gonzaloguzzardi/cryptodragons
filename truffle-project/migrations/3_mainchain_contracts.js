@@ -2,6 +2,7 @@ const {
 	writeFileSync
 } = require('fs');
 
+const DragonDecoder = artifacts.require('./common/decoder/DragonDecoder.sol');
 const DragonToken = artifacts.require('./mainnet/MainnetTransferableDragon.sol');
 const Gateway = artifacts.require('./mainnet/gateway/MainnetGateway.sol');
 const GenesLaboratory = artifacts.require('./genes/GenesLaboratory.sol');
@@ -25,7 +26,15 @@ module.exports = function (deployer, network, accounts) {
 
 		console.log(`Gateway deployed at address: ${gatewayInstance.address}`);
 
-		const dragonTokenContract = await deployer.deploy(DragonToken, gatewayInstance.address, 128);
+		const dragonDecoderInstance = await DragonDecoder.deployed();
+		console.log(`DragonDecoder deployed at address: ${dragonDecoderInstance.address}`);
+
+		const dragonTokenContract = await deployer.deploy(
+			DragonToken,
+			gatewayInstance.address,
+			dragonDecoderInstance.address,
+			128,
+		);
 		const dragonTokenInstance = await DragonToken.deployed();
 
 		console.log(`DragonToken deployed at address: ${dragonTokenInstance.address}`);

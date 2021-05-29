@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 services:
   loom:
     image: gonzaloguzzardi/cryptodragons:loom_node_v001

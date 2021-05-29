@@ -1,5 +1,6 @@
-pragma solidity ^0.5.0;
+pragma solidity ^0.8.0;
 
+import './libraries/DragonLibrary.sol';
 import './token/ERC721Enumerable.sol';
 import './ownership/Ownable.sol';
 
@@ -7,27 +8,8 @@ contract DragonBase is ERC721Enumerable, Ownable {
 	uint256 constant dnaDigits = 16;
 	uint256 constant dnaModulus = 10**dnaDigits;
 
-	struct Dragon {
-		bytes32 genes;
-		bytes32 name; // maybe we can avoid saving the name in teh blockchain
-		uint64 creationTime; // Initialzed at egg instantiation
-		// parents information
-		uint32 dadId;
-		uint32 motherId;
-		// level attributes
-		uint32 currentExperience; // level will ve determined by exp
-		uint16 actionCooldown; // time to be waited to perform an action
-		// fighting attributes
-		uint16 health;
-		uint16 strength;
-		uint16 agility;
-		uint16 fortitude;
-		uint16 hatchTime; // in minutes, capped to 45 days - Maybe it would be nice to reuse some variable like current exp
-		uint8 blockchainOriginId;
-	}
-
 	// Holds all dragons in game
-	Dragon[] internal dragons;
+	DragonLibrary.Dragon[] internal dragons;
 
 	// Maps dragon index corresponding to the dragon position in dragons array, to his owner address
 	mapping(uint256 => address) public dragonIndexToOwner;
@@ -44,10 +26,15 @@ contract DragonBase is ERC721Enumerable, Ownable {
         PUBLIC METHODS
     ********************************************************************************************/
 
-	function getDragonsIdsByOwner(address _owner) external view returns (uint256[] memory) {
-		return _ownedTokens[_owner];
+	function getDragonsIdsByOwner(address owner) external view returns (uint256[] memory tokenIds) {
+		uint256 balance = balanceOf(owner);
+
+		for (uint256 i = 0; i < balance; i++) {
+			tokenIds[i] = tokenOfOwnerByIndex(owner, i);
+		}
 	}
 
+	/************************ Commented out wrapper functions ***********************
 	function getDragonsCountByOwner(address _owner) external view returns (uint256) {
 		return balanceOf(_owner);
 	}
@@ -55,15 +42,16 @@ contract DragonBase is ERC721Enumerable, Ownable {
 	function getDragonOwner(uint256 _dragonId) external view returns (address) {
 		return ownerOf(_dragonId);
 	}
+	************************************************************************** */
 
 	function getParents(uint256 _dragonId) public view returns (uint256 motherId, uint256 dadId) {
-		Dragon storage dragon = dragons[_dragonId];
+		DragonLibrary.Dragon storage dragon = dragons[_dragonId];
 		return (dragon.motherId, dragon.dadId);
 	}
 
 	function isEgg(uint256 _dragonId) public view returns (bool) {
-		Dragon storage dragon = dragons[_dragonId];
-		uint256 lifeTimeSinceCreation = (now - dragon.creationTime) * 60;
+		DragonLibrary.Dragon storage dragon = dragons[_dragonId];
+		uint256 lifeTimeSinceCreation = (block.timestamp - dragon.creationTime) * 60;
 		return (lifeTimeSinceCreation < dragon.hatchTime);
 	}
 
@@ -85,7 +73,7 @@ contract DragonBase is ERC721Enumerable, Ownable {
 			uint16 fortitude
 		)
 	{
-		Dragon storage dragon = dragons[_dragonId];
+		DragonLibrary.Dragon storage dragon = dragons[_dragonId];
 		name = dragon.name;
 		dadId = dragon.dadId;
 		motherId = dragon.motherId;
@@ -101,7 +89,7 @@ contract DragonBase is ERC721Enumerable, Ownable {
     ********************************************************************************************/
 
 	function setName(uint256 _dragonId, string calldata _name) external onlyDragonOwner(_dragonId) {
-		Dragon storage dragon = dragons[_dragonId];
+		DragonLibrary.Dragon storage dragon = dragons[_dragonId];
 		bytes32 nameBytes = _stringToBytes32(_name);
 		require(nameBytes != 0x0, 'Empty names are not acceptable');
 		dragon.name = nameBytes;
@@ -115,7 +103,7 @@ contract DragonBase is ERC721Enumerable, Ownable {
 	 * @notice String to bytes 32
 	 * @dev Helper to convert a string to a bytes32
 	 * @param _string the string to convert
-	 * @return bytes32
+	 * @return result as bytes32
 	 */
 	function _stringToBytes32(string memory _string) internal pure returns (bytes32 result) {
 		bytes memory tempEmptyStringTest = bytes(_string);
@@ -131,7 +119,7 @@ contract DragonBase is ERC721Enumerable, Ownable {
 	/**
         Packed dragon data in an array of bytes
     */
-	function _encodeDragonToBytes(Dragon memory _dragon) internal pure returns (bytes memory) {
+	function _encodeDragonToBytes(DragonLibrary.Dragon memory _dragon) internal pure returns (bytes memory) {
 		// TODO update size in bytes whenever dragon struct is updated
 		uint256 size = 97; //32 + 32 + 8 + 4 + 4 + 4 + 2 + 2 + 2 + 2 + 2 + 2 + 1;
 		bytes memory encodedData = new bytes(size);
@@ -216,140 +204,5 @@ contract DragonBase is ERC721Enumerable, Ownable {
 			counter++;
 		}
 		return encodedData;
-	}
-
-	function _decodeFirstHalfOfDragonFromBytes(bytes memory _data)
-		internal
-		pure
-		returns (
-			bytes32 genes,
-			bytes32 name,
-			uint64 creationTime,
-			uint32 dadId,
-			uint32 motherId,
-			uint32 currentExperience
-		)
-	{
-		uint256 counter = 0;
-
-		// Decode genes
-		for (uint256 i = 0; i < 32; i++) {
-			genes |= bytes32(_data[counter + i] & 0xFF) >> (i * 8);
-			counter++;
-		}
-
-		// Decode name
-		name = _decodeName(_data, counter);
-		counter += 32;
-
-		// Decode creation time
-		for (uint256 i = 0; i < 8; i++) {
-			uint64 temp = uint64(uint8(_data[counter]));
-			temp <<= 8 * i;
-			creationTime ^= temp;
-			counter++;
-		}
-
-		// Decode dad id
-		for (uint256 i = 0; i < 4; i++) {
-			uint32 temp = uint32(uint8(_data[counter]));
-			temp <<= 8 * i;
-			dadId ^= temp;
-			counter++;
-		}
-
-		// Decode mother id
-		for (uint256 i = 0; i < 4; i++) {
-			uint32 temp = uint32(uint8(_data[counter]));
-			temp <<= 8 * i;
-			motherId ^= temp;
-			counter++;
-		}
-
-		// Decode current experience
-		for (uint256 i = 0; i < 4; i++) {
-			uint32 temp = uint32(uint8(_data[counter]));
-			temp <<= 8 * i;
-			currentExperience ^= temp;
-			counter++;
-		}
-	}
-
-	function _decodeSecondHalfOfDragonFromBytes(bytes memory _data)
-		internal
-		pure
-		returns (
-			uint16 actionCooldown,
-			uint16 health,
-			uint16 strength,
-			uint16 agility,
-			uint16 fortitude,
-			uint16 hatchTime,
-			uint8 blockchainOriginId
-		)
-	{
-		uint256 counter = 84;
-
-		// Decode action cooldown
-		for (uint256 i = 0; i < 2; i++) {
-			uint16 temp = uint16(uint8(_data[counter]));
-			temp <<= 8 * i;
-			actionCooldown ^= temp;
-			counter++;
-		}
-
-		// Decode health
-		for (uint256 i = 0; i < 2; i++) {
-			uint16 temp = uint16(uint8(_data[counter]));
-			temp <<= 8 * i;
-			health ^= temp;
-			counter++;
-		}
-
-		// Decode strength
-		for (uint256 i = 0; i < 2; i++) {
-			uint16 temp = uint16(uint8(_data[counter]));
-			temp <<= 8 * i;
-			strength ^= temp;
-			counter++;
-		}
-
-		// Decode agility
-		for (uint256 i = 0; i < 2; i++) {
-			uint16 temp = uint16(uint8(_data[counter]));
-			temp <<= 8 * i;
-			agility ^= temp;
-			counter++;
-		}
-
-		// Decode fortitude
-		for (uint256 i = 0; i < 2; i++) {
-			uint16 temp = uint16(uint8(_data[counter]));
-			temp <<= 8 * i;
-			fortitude ^= temp;
-			counter++;
-		}
-
-		// Decode hatch time
-		for (uint256 i = 0; i < 2; i++) {
-			uint16 temp = uint16(uint8(_data[counter]));
-			temp <<= 8 * i;
-			hatchTime ^= temp;
-			counter++;
-		}
-
-		// Decode blockchain origin id
-		blockchainOriginId ^= uint8(_data[counter]);
-		counter++;
-	}
-
-	function _decodeName(bytes memory _data, uint256 _dataIndex) private pure returns (bytes32 name) {
-		for (uint256 i = 0; i < 32; i++) {
-			name |= bytes32(_data[_dataIndex + i] & 0xFF) >> (i * 8);
-		}
-	}
-
-	function _decodeBlockchainIdFromData(bytes memory _data) internal pure returns (uint8 blockchainId) {
-		blockchainId = uint8(_data[96]);
 	}
 }

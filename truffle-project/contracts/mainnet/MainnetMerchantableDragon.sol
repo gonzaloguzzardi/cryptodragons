@@ -1,8 +1,8 @@
-pragma solidity ^0.5.0;
+pragma solidity ^0.8.0;
 
 import './MainnetTransferableDragon.sol';
 
-contract IMarketplace {
+interface IMarketplace {
 	function createSellOrder(
 		uint256 dragonId,
 		string calldata title,
@@ -14,7 +14,11 @@ contract IMarketplace {
 contract MainnetMerchantableDragon is MainnetTransferableDragon {
 	address private marketplaceAddress;
 
-	constructor(address gateway, uint8 blockchainId) public MainnetTransferableDragon(gateway, blockchainId) {}
+	constructor(
+		address gateway,
+		address dragonDecoder,
+		uint8 blockchainId
+	) public MainnetTransferableDragon(gateway, dragonDecoder, blockchainId) {}
 
 	function setMarketplace(address _marketplaceAddress) external onlyOwner {
 		require(_marketplaceAddress != address(0), 'The marketplace address cannot be empty');

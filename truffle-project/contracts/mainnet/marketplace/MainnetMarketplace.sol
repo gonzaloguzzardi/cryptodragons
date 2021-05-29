@@ -1,6 +1,6 @@
-pragma solidity ^0.5.0;
+pragma solidity ^0.8.0;
 
-contract IERC721 {
+interface IERC721 {
 	function safeTransferFrom(
 		address from,
 		address to,
@@ -63,7 +63,14 @@ contract MainnetMarketplace {
 		uint256 _price
 	) external onlyFromDragonToken() {
 		// Parameter validity are checked in dragon token contract
-		SellOrder memory sellOrder = SellOrder(_dragonId, _title, _description, now, msg.sender, _price);
+		SellOrder memory sellOrder = SellOrder(
+			_dragonId,
+			_title,
+			_description,
+			block.timestamp,
+			payable(msg.sender),
+			_price
+		);
 		sellOrders.push(sellOrder);
 		sellOrderById[_dragonId] = sellOrder;
 	}
@@ -87,12 +94,12 @@ contract MainnetMarketplace {
 			if (sellOrders[i].id == _dragonId) {
 				SellOrder memory lastElement = sellOrders[sellOrders.length - 1];
 				sellOrders[i] = lastElement;
-				sellOrders.length--;
+				sellOrders.pop();
 			}
 		}
 		// Return the excess ETH sent by the buyer
 		if (msg.value > sellOrder.price) {
-			msg.sender.transfer(msg.value - sellOrder.price);
+			payable(msg.sender).transfer(msg.value - sellOrder.price);
 		}
 
 		salesHistory.push(sale);

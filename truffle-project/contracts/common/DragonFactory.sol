@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: GPL-3.0 License
+
 pragma solidity ^0.8.0;
 
 import './DragonBase.sol';
@@ -54,7 +56,7 @@ contract DragonFactory is DragonBase {
 		address gateway,
 		address dragonDecoder,
 		uint8 blockchainId
-	) public DragonBase() {
+	) DragonBase() {
 		require(gateway != address(0), 'Invalid gateway address');
 		require(dragonDecoder != address(0), 'Invalid dragon decoder address');
 		_gateway = gateway;

@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: GPL-3.0 License
+
 pragma solidity ^0.8.0;
 
 import './MainnetTransferableDragon.sol';
@@ -18,7 +20,7 @@ contract MainnetMerchantableDragon is MainnetTransferableDragon {
 		address gateway,
 		address dragonDecoder,
 		uint8 blockchainId
-	) public MainnetTransferableDragon(gateway, dragonDecoder, blockchainId) {}
+	) MainnetTransferableDragon(gateway, dragonDecoder, blockchainId) {}
 
 	function setMarketplace(address _marketplaceAddress) external onlyOwner {
 		require(_marketplaceAddress != address(0), 'The marketplace address cannot be empty');

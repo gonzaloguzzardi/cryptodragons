@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: GPL-3.0 License
+
 pragma solidity ^0.8.0;
 
 import '../common/DragonFactory.sol';
@@ -20,7 +22,7 @@ contract DappchainTransferableDragon is DragonFactory {
 		address gateway,
 		address dragonDecoder,
 		uint8 blockchainId
-	) public DragonFactory(gateway, dragonDecoder, blockchainId) {}
+	) DragonFactory(gateway, dragonDecoder, blockchainId) {}
 
 	// Setter to update who the gateway is
 	function setGatewayAddress(address gateway) external onlyOwner {

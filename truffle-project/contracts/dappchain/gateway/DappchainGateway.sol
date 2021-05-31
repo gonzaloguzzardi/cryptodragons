@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: GPL-3.0 License
+
 pragma solidity ^0.8.0;
 
 import '../../common/token/ERC721.sol';
@@ -53,7 +55,7 @@ contract DappchainGateway is IERC20Receiver, IERC721Receiver, DappchainValidator
 		address[] memory _validators,
 		uint8 _threshold_num,
 		uint8 _threshold_denom
-	) public DappchainValidatorManagerContract(_validators, _threshold_num, _threshold_denom) {}
+	) DappchainValidatorManagerContract(_validators, _threshold_num, _threshold_denom) {}
 
 	function setERC721ContractAddress(address contractAddress) external onlyOwner {
 		require(contractAddress != address(0), 'Invalid address parameter');
@@ -185,7 +187,7 @@ contract DappchainGateway is IERC20Receiver, IERC721Receiver, DappchainValidator
 		return ERC721_RECEIVED;
 	}
 
-	fallback() external payable {
+	receive() external payable {
 		depositETH();
 		emit ETHReceived(msg.sender, msg.value);
 	}

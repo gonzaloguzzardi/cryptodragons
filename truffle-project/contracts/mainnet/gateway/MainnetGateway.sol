@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: GPL-3.0 License
+
 pragma solidity ^0.8.0;
 
 import '../../common/token/ERC721.sol';
@@ -53,7 +55,7 @@ contract MainnetGateway is IERC20Receiver, IERC721Receiver, MainnetValidatorMana
 		address[] memory _validators,
 		uint8 _threshold_num,
 		uint8 _threshold_denom
-	) public MainnetValidatorManagerContract(_validators, _threshold_num, _threshold_denom) {}
+	) MainnetValidatorManagerContract(_validators, _threshold_num, _threshold_denom) {}
 
 	function setERC721ContractAddress(address contractAddress) external onlyOwner {
 		require(contractAddress != address(0), 'Invalid address parameter');
@@ -186,7 +188,7 @@ contract MainnetGateway is IERC20Receiver, IERC721Receiver, MainnetValidatorMana
 		return ERC721_RECEIVED;
 	}
 
-	fallback() external payable {
+	receive() external payable {
 		depositETH();
 		emit ETHReceived(msg.sender, msg.value);
 	}

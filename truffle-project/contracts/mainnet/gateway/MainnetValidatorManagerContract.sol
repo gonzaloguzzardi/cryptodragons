@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: GPL-3.0 License
+
 pragma solidity ^0.8.0;
 
 import '../../common/ownership/Ownable.sol';
@@ -27,7 +29,7 @@ contract MainnetValidatorManagerContract is Ownable {
 		address[] memory _validators,
 		uint8 _threshold_num,
 		uint8 _threshold_denom
-	) public {
+	) {
 		uint256 length = _validators.length;
 		require(length > 0);
 

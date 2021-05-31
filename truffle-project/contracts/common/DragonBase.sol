@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: MIT
+// SPDX-License-Identifier: GPL-3.0 License
 
 pragma solidity ^0.8.0;
 
@@ -55,10 +55,6 @@ contract DragonBase is ERC721Enumerable, Ownable {
 		DragonLibrary.Dragon storage dragon = dragons[_dragonId];
 		uint256 lifeTimeSinceCreation = (block.timestamp - dragon.creationTime) * 60;
 		return (lifeTimeSinceCreation < dragon.hatchTime);
-	}
-
-	function getDragonName(uint256 _dragonId) external view returns (bytes32) {
-		return dragons[_dragonId].name;
 	}
 
 	function getDragonById(uint256 _dragonId)

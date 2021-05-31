@@ -18,7 +18,7 @@ abstract contract Minter is Ownable {
 	}
 
 	modifier onlyMinter() {
-		require(isMinter(msg.sender), 'Must have the minter roler to perform this action');
+		require(isMinter(msg.sender), 'Invalid permission');
 		_;
 	}
 

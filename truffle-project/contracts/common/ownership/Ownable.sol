@@ -32,7 +32,7 @@ abstract contract Ownable {
 	 * @dev Throws if called by any account other than the owner.
 	 */
 	modifier onlyOwner() {
-		require(isOwner(), 'Only the owner can perform this action');
+		require(isOwner(), 'Invalid permission');
 		_;
 	}
 
@@ -67,7 +67,7 @@ abstract contract Ownable {
 	 * @param newOwner The address to transfer ownership to.
 	 */
 	function _transferOwnership(address newOwner) internal {
-		require(newOwner != address(0), 'Invalid new owner address');
+		require(newOwner != address(0), 'Invalid address');
 		emit OwnershipTransferred(_owner, newOwner);
 		_owner = newOwner;
 	}

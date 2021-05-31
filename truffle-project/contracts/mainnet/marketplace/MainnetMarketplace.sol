@@ -41,7 +41,7 @@ contract MainnetMarketplace {
 	/// @notice To setup the address of the ERC-721 token to use for this contract
 	/// @param _dragonTokenAddress The token address
 	constructor(address _dragonTokenAddress) {
-		require(_dragonTokenAddress != address(0), 'Dragon address address cannot be empty');
+		require(_dragonTokenAddress != address(0), 'Empty address');
 		dragonTokenAddress = _dragonTokenAddress;
 	}
 
@@ -49,7 +49,7 @@ contract MainnetMarketplace {
 	 * @dev Throws if function isn't called from dragon contract
 	 */
 	modifier onlyFromDragonToken() {
-		require(dragonTokenAddress == msg.sender, 'Only dragon token can call this function');
+		require(dragonTokenAddress == msg.sender, 'Invalid permission');
 		_;
 	}
 
@@ -80,14 +80,14 @@ contract MainnetMarketplace {
 	/// @notice To buy a new dragon, note that the seller must authorize this contract to manage the token
 	/// @param _dragonId The id of the dragon to buy - dragon id references a sell order
 	function buyDragon(uint256 _dragonId) external payable {
-		require(dragonTokenAddress != address(0), 'Dragon address address cannot be empty');
+		require(dragonTokenAddress != address(0), 'Invalid address');
 
 		SellOrder memory sellOrder = sellOrderById[_dragonId];
-		require(sellOrder.owner != address(0), 'A sell order for the dragon must exist to be purchased');
+		require(sellOrder.owner != address(0), 'A sell order must exist');
 
 		Sale memory sale = Sale(_dragonId, sellOrder.owner, msg.sender, sellOrder.price, sellOrder.title);
 
-		require(msg.value >= sellOrder.price, 'The payment must be larger or equal than the sell order price');
+		require(msg.value >= sellOrder.price, 'Payment is not enough');
 
 		// We can charge a fee here
 

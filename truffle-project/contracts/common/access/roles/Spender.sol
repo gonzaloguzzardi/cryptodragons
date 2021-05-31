@@ -18,7 +18,7 @@ abstract contract Spender is Ownable {
 	}
 
 	modifier onlySpender() {
-		require(isSpender(msg.sender), 'Must have the spender roel to perform this action');
+		require(isSpender(msg.sender), 'Invalid permission');
 		_;
 	}
 

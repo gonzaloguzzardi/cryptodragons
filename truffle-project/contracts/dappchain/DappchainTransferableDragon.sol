@@ -27,7 +27,7 @@ contract DappchainTransferableDragon is DragonFactory {
 	// Setter to update who the gateway is
 	function setGatewayAddress(address gateway) external onlyOwner {
 		//TODO check address is a gateway
-		require(gateway != address(0), 'gateway should have a valid address');
+		require(gateway != address(0), 'Invalid gateway addr');
 		_gateway = gateway;
 	}
 
@@ -37,35 +37,35 @@ contract DappchainTransferableDragon is DragonFactory {
 		uint256 _tokenId,
 		bytes memory _data
 	) public {
-		require(msg.sender == _gateway, 'only the gateway is allowed to call this function');
-		require(receiver != address(0), 'Receiver should be a valid address');
+		require(msg.sender == _gateway, 'Invalid permission');
+		require(receiver != address(0), 'Invalid addr');
 		_mintReceivedDragon(receiver, _tokenId, _data);
 	}
 
 	function undoMapping(address owner, address mainnetAddress) external onlyOwner {
-		require(owner != address(0), 'Invalid owner address to be mapped');
-		require(mainnetAddress != address(0), 'Invalid mainnet address to be mapped');
+		require(owner != address(0), 'Invalid owner addr');
+		require(mainnetAddress != address(0), 'Invalid mainnet addr');
 		_sidechainAddressToMainchain[owner] = mainnetAddress;
 	}
 
 	function mapContractToMainnet(address mainnetAddress) external {
-		require(mainnetAddress != address(0), 'Invalid mainnet address to be mapped');
+		require(mainnetAddress != address(0), 'Invalid mainnet addr');
 		require(
 			_sidechainAddressToMainchain[msg.sender] == address(0),
-			'Address already mapped. Request owner to undo the mapping'
+			'Already mapped'
 		);
 		_sidechainAddressToMainchain[msg.sender] = mainnetAddress;
 	}
 
 	function isMap(address mainnetAddress) external view returns (bool) {
-		require(mainnetAddress != address(0), 'Invalid mainnet address');
+		require(mainnetAddress != address(0), 'Invalid mainnet addr');
 		return _sidechainAddressToMainchain[msg.sender] == mainnetAddress;
 	}
 
 	function transferToGateway(uint256 _tokenId) public onlyDragonOwner(_tokenId) {
 		require(
 			_sidechainAddressToMainchain[msg.sender] != address(0),
-			'Blockchains should be mapped to allow transferences'
+			'Not mapped'
 		);
 		require(_tokenId < dragons.length, 'Invalid token Id');
 

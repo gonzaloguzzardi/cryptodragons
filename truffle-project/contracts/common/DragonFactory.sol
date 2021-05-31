@@ -58,14 +58,14 @@ contract DragonFactory is DragonBase {
 		uint8 blockchainId
 	) DragonBase() {
 		require(gateway != address(0), 'Invalid gateway address');
-		require(dragonDecoder != address(0), 'Invalid dragon decoder address');
+		require(dragonDecoder != address(0), 'Invalid decoder address');
 		_gateway = gateway;
 		_dragonDecoderAddress = dragonDecoder;
 		_blockchainId = blockchainId;
 	}
 
 	function setGenesLaboratoryAddress(address genesLaboratoryAddress) external onlyOwner {
-		require(genesLaboratoryAddress != address(0), 'address should have a valid value');
+		require(genesLaboratoryAddress != address(0), 'Invalid address');
 		_genesLaboratory = genesLaboratoryAddress;
 	}
 

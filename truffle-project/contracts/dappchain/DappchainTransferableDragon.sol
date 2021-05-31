@@ -70,7 +70,7 @@ contract DappchainTransferableDragon is DragonFactory {
 		require(_tokenId < dragons.length, 'Invalid token Id');
 
 		DragonLibrary.Dragon memory dragon = dragons[_tokenId];
-		bytes memory encodedDragon = _encodeDragonToBytes(dragon);
+		bytes memory encodedDragon = IDragonSerializer(_dragonDecoderAddress).encodeDragonToBytes(dragon);
 
 		// Transfer ownership
 		transferFrom(msg.sender, _gateway, _tokenId);

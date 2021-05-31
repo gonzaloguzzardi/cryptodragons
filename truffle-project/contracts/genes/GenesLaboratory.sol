@@ -6,7 +6,7 @@ contract GenesLaboratory {
 	address private _dragonContractAddress;
 	uint256 private _randomNonce;
 
-	constructor(address dragonAddress) public {
+	constructor(address dragonAddress) {
 		require(dragonAddress != address(0), 'Invalid dragon address address');
 		_dragonContractAddress = dragonAddress;
 	}
@@ -132,14 +132,14 @@ contract GenesLaboratory {
 		return bytes32(result);
 	}
 
-	function createActionCooldown(bytes32 genes) private returns (bytes32, uint16) {
+	function createActionCooldown(bytes32 genes) private pure returns (bytes32, uint16) {
 		uint256 value = 180;
 		uint256 shiftedValue = value << (14 * 8);
 		uint256 result = shiftedValue | uint256(genes);
 		return (bytes32(result), uint16(value));
 	}
 
-	function createHatchTime(bytes32 genes) private returns (bytes32, uint16) {
+	function createHatchTime(bytes32 genes) private pure returns (bytes32, uint16) {
 		uint256 value = 360;
 		uint256 shiftedValue = value << (12 * 8);
 		uint256 result = shiftedValue | uint256(genes);
@@ -173,7 +173,7 @@ contract GenesLaboratory {
 		return bytes32(result);
 	}
 
-	function createGeneration(bytes32 genes) private returns (bytes32) {
+	function createGeneration(bytes32 genes) private pure returns (bytes32) {
 		uint256 generation = 1;
 		uint256 result = generation | uint256(genes);
 		return bytes32(result);
@@ -305,7 +305,7 @@ contract GenesLaboratory {
 		bytes32 childGenes,
 		bytes32 fatherGenes,
 		bytes32 motherGenes
-	) private returns (bytes32, uint16) {
+	) private pure returns (bytes32, uint16) {
 		uint16 fatherHatchTime = getHatchTimeFromBytes(fatherGenes);
 		uint16 motherHatchTime = getHatchTimeFromBytes(motherGenes);
 
@@ -329,7 +329,7 @@ contract GenesLaboratory {
 		bytes32 childGenes,
 		bytes32 fatherGenes,
 		bytes32 motherGenes
-	) private returns (bytes32, uint16) {
+	) private pure returns (bytes32, uint16) {
 		uint16 fatherHatchTime = getHatchTimeFromBytes(fatherGenes);
 		uint16 motherHatchTime = getHatchTimeFromBytes(motherGenes);
 
@@ -398,7 +398,7 @@ contract GenesLaboratory {
 		bytes32 childGenes,
 		bytes32 fatherGenes,
 		bytes32 motherGenes
-	) private returns (bytes32) {
+	) private pure returns (bytes32) {
 		uint16 fatherGeneration = getGenerationAttributeFromBytes(fatherGenes);
 		uint16 motherGeneration = getGenerationAttributeFromBytes(motherGenes);
 
@@ -470,7 +470,7 @@ contract GenesLaboratory {
 		}
 	}
 
-	function generateChildGeneration(uint16 fatherValue, uint16 motherValue) private returns (uint16) {
+	function generateChildGeneration(uint16 fatherValue, uint16 motherValue) private pure returns (uint16) {
 		uint256 maxValue = (fatherValue > motherValue) ? fatherValue : motherValue;
 		maxValue = maxValue + 1;
 		if (maxValue > 65535) {

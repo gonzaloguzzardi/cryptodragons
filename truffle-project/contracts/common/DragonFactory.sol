@@ -31,9 +31,9 @@ interface IGenesLaboratory {
 		);
 }
 
-interface IDragonDecoder {
+interface IDragonSerializer {
+	function encodeDragonToBytes(DragonLibrary.Dragon memory _dragon) external pure returns (bytes memory);
 	function decodeDragonFromBytes(bytes calldata _data) external pure returns (DragonLibrary.Dragon memory dragon);
-
 	function decodeBlockchainIdFromData(bytes calldata _data) external pure returns (uint8 blockchainId);
 }
 
@@ -125,7 +125,7 @@ contract DragonFactory is DragonBase {
 		uint256 _originalTokenId,
 		bytes memory _data
 	) internal {
-		uint8 blockchainId = IDragonDecoder(_dragonDecoderAddress).decodeBlockchainIdFromData(_data);
+		uint8 blockchainId = IDragonSerializer(_dragonDecoderAddress).decodeBlockchainIdFromData(_data);
 		bool originatedInThisBlockchain = blockchainId == _blockchainId;
 
 		if (originatedInThisBlockchain) {
@@ -151,7 +151,7 @@ contract DragonFactory is DragonBase {
 	}
 
 	function _createDragonFromData(bytes memory _data) private returns (uint256) {
-		DragonLibrary.Dragon memory dragon = IDragonDecoder(_dragonDecoderAddress).decodeDragonFromBytes(_data);
+		DragonLibrary.Dragon memory dragon = IDragonSerializer(_dragonDecoderAddress).decodeDragonFromBytes(_data);
 
 		uint256 id = _createDragonWithStats(
 			dragon.genes,
@@ -221,7 +221,7 @@ contract DragonFactory is DragonBase {
 	}
 
 	function _updateDragonFromData(uint256 _tokenId, bytes memory _data) private {
-		DragonLibrary.Dragon memory dragon = IDragonDecoder(_dragonDecoderAddress).decodeDragonFromBytes(_data);
+		DragonLibrary.Dragon memory dragon = IDragonSerializer(_dragonDecoderAddress).decodeDragonFromBytes(_data);
 
 		_updateDragonWithStats(
 			_tokenId,

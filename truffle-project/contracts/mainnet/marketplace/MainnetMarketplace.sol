@@ -40,7 +40,7 @@ contract MainnetMarketplace {
 
 	/// @notice To setup the address of the ERC-721 token to use for this contract
 	/// @param _dragonTokenAddress The token address
-	constructor(address _dragonTokenAddress) public {
+	constructor(address _dragonTokenAddress) {
 		require(_dragonTokenAddress != address(0), 'Dragon address address cannot be empty');
 		dragonTokenAddress = _dragonTokenAddress;
 	}

@@ -20,7 +20,7 @@ contract DragonBase is ERC721Enumerable, Ownable {
 	 * @dev Throws if sender isn't the owner of the dragon in the parameter
 	 */
 	modifier onlyDragonOwner(uint256 _dragonId) {
-		require(ownerOf(_dragonId) == msg.sender, "You don't own this dragon");
+		require(ownerOf(_dragonId) == msg.sender, 'Not owner');
 		_;
 	}
 
@@ -44,12 +44,12 @@ contract DragonBase is ERC721Enumerable, Ownable {
 	function getDragonOwner(uint256 _dragonId) external view returns (address) {
 		return ownerOf(_dragonId);
 	}
-	************************************************************************** */
 
 	function getParents(uint256 _dragonId) public view returns (uint256 motherId, uint256 dadId) {
 		DragonLibrary.Dragon storage dragon = dragons[_dragonId];
 		return (dragon.motherId, dragon.dadId);
 	}
+	************************************************************************** */
 
 	function isEgg(uint256 _dragonId) public view returns (bool) {
 		DragonLibrary.Dragon storage dragon = dragons[_dragonId];
@@ -89,7 +89,7 @@ contract DragonBase is ERC721Enumerable, Ownable {
 	function setName(uint256 _dragonId, string calldata _name) external onlyDragonOwner(_dragonId) {
 		DragonLibrary.Dragon storage dragon = dragons[_dragonId];
 		bytes32 nameBytes = _stringToBytes32(_name);
-		require(nameBytes != 0x0, 'Empty names are not acceptable');
+		require(nameBytes != 0x0, 'Empty name');
 		dragon.name = nameBytes;
 	}
 

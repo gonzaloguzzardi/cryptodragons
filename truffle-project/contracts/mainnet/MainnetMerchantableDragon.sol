@@ -23,7 +23,7 @@ contract MainnetMerchantableDragon is MainnetTransferableDragon {
 	) MainnetTransferableDragon(gateway, dragonDecoder, blockchainId) {}
 
 	function setMarketplace(address _marketplaceAddress) external onlyOwner {
-		require(_marketplaceAddress != address(0), 'The marketplace address cannot be empty');
+		require(_marketplaceAddress != address(0), 'Invalid address');
 		marketplaceAddress = _marketplaceAddress;
 	}
 
@@ -33,10 +33,10 @@ contract MainnetMerchantableDragon is MainnetTransferableDragon {
 		string calldata _description,
 		uint256 _price
 	) external onlyDragonOwner(_tokenId) {
-		require(marketplaceAddress != address(0), 'The marketplace address needs to be initialized');
-		require(bytes(_title).length > 0, 'The title cannot be empty');
-		require(bytes(_description).length > 0, 'The description cannot be empty');
-		require(_price > 0, 'The price cannot be empty');
+		require(marketplaceAddress != address(0), 'Invalid  address');
+		require(bytes(_title).length > 0, 'Empty title');
+		require(bytes(_description).length > 0, 'Empty desc');
+		require(_price > 0, 'Empty price');
 
 		// Allow marketplace to transfer ownership
 		approve(marketplaceAddress, _tokenId);

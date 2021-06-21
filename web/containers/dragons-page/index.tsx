@@ -77,6 +77,7 @@ class DragonsPage extends Component<DProps> {
   updateColorCuerpo(color) {
     this.setState({ colorCuerpo: color })
   }
+
   updateTypeAlas(n) {
     this.setState({ typeAlas: n })
   }

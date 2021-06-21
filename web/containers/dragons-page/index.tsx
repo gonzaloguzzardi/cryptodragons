@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-types */
 import React, { Component, ReactElement } from 'react'
-import Slider from '../slider/Slider';
-import DragonCreator from '../../components/dragon-creator';
+import Slider from '../../components/slider/Slider'
+import DragonCreator from '../../components/dragon-creator'
 import Grid from '@material-ui/core/Grid'
 
 // http://localhost:3000/dragon-creation
@@ -27,7 +27,7 @@ class DragonsPage extends Component<DProps> {
   state: DState
 
   constructor(props: DProps) {
-    super(props);
+    super(props)
     this.updateColorAlas = this.updateColorAlas.bind(this)
     this.updateColorCola = this.updateColorCola.bind(this)
     this.updateColorOjos = this.updateColorOjos.bind(this)
@@ -55,58 +55,102 @@ class DragonsPage extends Component<DProps> {
       typePanza: 1,
       typeCuernos: 1,
       typeOjos: 1,
-      typeCuerpo: 1
+      typeCuerpo: 1,
     }
   }
 
-  updateColorAlas(color) { this.setState({ colorAlas: color }); }
-  updateColorCola(color) { this.setState({ colorCola: color }); }
-  updateColorPanza(color) { this.setState({ colorPanza: color }); }
-  updateColorCuernos(color) { this.setState({ colorCuernos: color }); }
-  updateColorOjos(color) { this.setState({ colorOjos: color }); }
-  updateColorCuerpo(color) { this.setState({ colorCuerpo: color }); }
-  updateTypeAlas(n) { this.setState({ typeAlas: n }); }
-  updateTypeCola(n) { this.setState({ typeCola: n }); }
-  updateTypePanza(n) { this.setState({ typePanza: n }); }
-  updateTypeCuernos(n) { this.setState({ typeCuernos: n }); }
-  updateTypeOjos(n) { this.setState({ typeOjos: n }); }
-  updateTypeCuerpo(n) { this.setState({ typeCuerpo: n }); }
+  updateColorAlas = (color) => this.setState({ colorCola: color })
 
-  createSliderForPart(parte, callbackColorFunction, callbacktypeFunction, typeTotal, haveTypes, haveColors) {
+  //updateColorAlas(color) { this.setState({ colorAlas: color }); }
+  updateColorCola(color) {
+    this.setState({ colorCola: color })
+  }
+  updateColorPanza(color) {
+    this.setState({ colorPanza: color })
+  }
+  updateColorCuernos(color) {
+    this.setState({ colorCuernos: color })
+  }
+  updateColorOjos(color) {
+    this.setState({ colorOjos: color })
+  }
+  updateColorCuerpo(color) {
+    this.setState({ colorCuerpo: color })
+  }
+  updateTypeAlas(n) {
+    this.setState({ typeAlas: n })
+  }
+  updateTypeCola(n) {
+    this.setState({ typeCola: n })
+  }
+  updateTypePanza(n) {
+    this.setState({ typePanza: n })
+  }
+  updateTypeCuernos(n) {
+    this.setState({ typeCuernos: n })
+  }
+  updateTypeOjos(n) {
+    this.setState({ typeOjos: n })
+  }
+  updateTypeCuerpo(n) {
+    this.setState({ typeCuerpo: n })
+  }
+
+  createSliderForPart(
+    parte,
+    callbackColorFunction,
+    callbacktypeFunction,
+    typeTotal,
+    haveTypes,
+    haveColors
+  ) {
     return (
       <div>
         <label>{parte}</label>
         <div className="aParent">
           <div className="slider">
             {haveTypes ? (
-              <Slider min={1} max={typeTotal} step={1} value={1} label={"Tipo"} parentMethod={callbacktypeFunction} />
-            ) : (null)}
-
+              <Slider
+                min={1}
+                max={typeTotal}
+                step={1}
+                value={1}
+                label={'Tipo'}
+                parentMethod={callbacktypeFunction}
+              />
+            ) : null}
           </div>
           <div className="slider">
             {haveColors ? (
-              <Slider min={1} max={360} step={1} value={1} label={"Color"} parentMethod={callbackColorFunction} />
-            ) : (null)}
-
+              <Slider
+                min={1}
+                max={360}
+                step={1}
+                value={1}
+                label={'Color'}
+                parentMethod={callbackColorFunction}
+              />
+            ) : null}
           </div>
         </div>
-        <style global jsx>{`
-          .aParent {
-            display: flex
-          }
-          .slider {
-            width: 500px;
-            padding-left: 40px;
-          }
+        <style global jsx>
+          {`
+            .aParent {
+              display: flex;
+            }
+            .slider {
+              width: 500px;
+              padding-left: 40px;
+            }
           `}
         </style>
       </div>
-    );
+    )
   }
 
   render: () => ReactElement<DProps> = () => (
     <div>
-      <div className='main'>
+      <div className="main">
         <DragonCreator
           typeAlas={this.state.typeAlas}
           typeCuernos={this.state.typeCuernos}
@@ -114,7 +158,6 @@ class DragonsPage extends Component<DProps> {
           typePanza={this.state.typePanza}
           typeCola={this.state.typeCola}
           typeCuerpo={this.state.typeCuerpo}
-
           colorAlas={this.state.colorAlas}
           colorCuernos={this.state.colorCuernos}
           colorOjos={this.state.colorOjos}
@@ -124,39 +167,85 @@ class DragonsPage extends Component<DProps> {
         />
         <Grid className="navigation">
           <Grid item>
-            {this.createSliderForPart("Cuernos", this.updateColorCuernos, this.updateTypeCuernos, 4, true, true)}
+            {this.createSliderForPart(
+              'Cuernos',
+              this.updateColorCuernos,
+              this.updateTypeCuernos,
+              4,
+              true,
+              true
+            )}
           </Grid>
           <Grid item>
-            {this.createSliderForPart("Panza", this.updateColorPanza, this.updateTypePanza, 2, true, true)}
+            {this.createSliderForPart(
+              'Panza',
+              this.updateColorPanza,
+              this.updateTypePanza,
+              2,
+              true,
+              true
+            )}
           </Grid>
           <Grid item>
-            {this.createSliderForPart("Cola", this.updateColorCola, this.updateTypeCola, 4, true, true)}
+            {this.createSliderForPart(
+              'Cola',
+              this.updateColorCola,
+              this.updateTypeCola,
+              4,
+              true,
+              true
+            )}
           </Grid>
           <Grid item>
-            {this.createSliderForPart("Alas", this.updateColorAlas, this.updateTypeAlas, 4, true, true)}
+            {this.createSliderForPart(
+              'Alas',
+              this.updateColorAlas,
+              this.updateTypeAlas,
+              4,
+              true,
+              true
+            )}
           </Grid>
           <Grid item>
-            {this.createSliderForPart("Ojos", this.updateColorOjos, this.updateTypeOjos, 4, true, true)}
+            {this.createSliderForPart(
+              'Ojos',
+              this.updateColorOjos,
+              this.updateTypeOjos,
+              4,
+              true,
+              true
+            )}
           </Grid>
           <Grid item>
-            {this.createSliderForPart("Cuerpo", this.updateColorCuerpo, this.updateTypeCuerpo, 1, false, true)}
+            {this.createSliderForPart(
+              'Cuerpo',
+              this.updateColorCuerpo,
+              this.updateTypeCuerpo,
+              1,
+              false,
+              true
+            )}
           </Grid>
         </Grid>
       </div>
       <style global jsx>{`
-        .main{width:100%;}
+        .main {
+          width: 100%;
+        }
         .cardContainer {
           position: absolute;
           width: 500px;
-          top:0%;
-          height:600px;
-          float:left;
+          top: 0%;
+          height: 600px;
+          float: left;
         }
-        .navigation{margin:0 auto;width:400px;}
+        .navigation {
+          margin: 0 auto;
+          width: 400px;
+        }
       `}</style>
     </div>
-
-  );
+  )
 }
 
 export default DragonsPage

@@ -7,10 +7,7 @@ const contractGetterApiUrl = !process.env.DOCKERENV ? 'http://localhost:8082' : 
 
 async function getMainNetTokenContract(web3js) {
   const networkId = await web3js.eth.net.getId();
-  let MainchainDragonTokenJson = await axios.get(contractGetterApiUrl + '/api/contract/MainnetTransferableDragon.json');
-  console.log(MainchainDragonTokenJson);
-  MainchainDragonTokenJson = MainchainDragonTokenJson.data;
-
+  const { data: MainchainDragonTokenJson } = await axios.get(contractGetterApiUrl + '/api/contract/MainnetTransferableDragon.json');
   return new web3js.eth.Contract(
     MainchainDragonTokenJson.abi, MainchainDragonTokenJson.networks[networkId].address
   );
@@ -18,8 +15,7 @@ async function getMainNetTokenContract(web3js) {
 
 async function getMainNetGatewayContract(web3js) {
   const networkId = await web3js.eth.net.getId();
-  let GatewayJson = await axios.get(contractGetterApiUrl + '/api/contract/MainnetGateway.json');
-  GatewayJson = GatewayJson.data;
+  const { data: GatewayJson } = await axios.get(contractGetterApiUrl + '/api/contract/MainnetGateway.json');
   return new web3js.eth.Contract(GatewayJson.abi, GatewayJson.networks[networkId].address);
 }
 

@@ -2,7 +2,8 @@
 
 import React, { Component, ReactElement } from 'react'
 import InputRange from "react-input-range";
-
+import './Slider.module.scss'
+import 'react-input-range/lib/css/index.css';
 //
 
 interface SProps {

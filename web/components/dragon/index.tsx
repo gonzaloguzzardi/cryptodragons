@@ -51,8 +51,8 @@ class Dragon extends Component<IProps, IState> {
       fortitude: '',
     }
 
-    this.getDragonData();
-    this.getDragonVisualData();
+    this.getDragonData()
+    this.getDragonVisualData()
   }
 
   getDragonData: () => unknown = () => {
@@ -68,6 +68,7 @@ class Dragon extends Component<IProps, IState> {
     }
   }
 
+  //TODO: map when backend is ready.
   getDragonVisualData: () => unknown = () => {
     if (this.state.location === 'side') {
       SidechainAPI.getDragonVisualDataById(this.state.id, GAS_DEFAULT_VALUE).then((dragonData) =>
@@ -107,7 +108,8 @@ class Dragon extends Component<IProps, IState> {
               colorOjos={1}
               colorPanza={1}
               colorCola={1}
-              colorCuerpo={1} />
+              colorCuerpo={1}
+            />
           </CardMedia>
 
           <Grid container justify="center" spacing={2}>

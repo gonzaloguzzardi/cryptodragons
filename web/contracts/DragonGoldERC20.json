@@ -1607,7 +1607,7 @@
   },
   "networks": {},
   "schemaVersion": "3.0.1",
-  "updatedAt": "2021-07-04T20:38:31.775Z",
+  "updatedAt": "2021-07-04T20:42:09.270Z",
   "devdoc": {
     "details": "ERC20 with minting and burning logic so that it can be used as ingame virtual currency",
     "methods": {

@@ -328,47 +328,32 @@ exports[`Renders MyDragons desktop 1`] = `
       </div>
     </div>
     <div
-      className="main"
+      className="spinnerContainer"
     >
       <div
-        className="container"
+        className="MuiCircularProgress-root MuiCircularProgress-colorSecondary MuiCircularProgress-indeterminate"
+        role="progressbar"
+        style={
+          Object {
+            "height": 40,
+            "width": 40,
+          }
+        }
       >
-        <div
-          className="container"
-          onClick={[Function]}
-          onMouseEnter={[Function]}
+        <svg
+          className="MuiCircularProgress-svg"
+          viewBox="22 22 44 44"
         >
-          <div
-            className="content"
-          >
-            <svg
-              aria-hidden={true}
-              className="MuiSvgIcon-root icon addIcon"
-              focusable="false"
-              style={
-                Object {
-                  "height": "50px",
-                  "width": "50px",
-                }
-              }
-              viewBox="0 0 24 24"
-            >
-              <path
-                d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"
-              />
-            </svg>
-            <h6
-              className="MuiTypography-root heading MuiTypography-h6"
-            >
-              Get your first Dragon!
-            </h6>
-            <p
-              className="MuiTypography-root MuiTypography-body2 MuiTypography-colorTextSecondary"
-            >
-              This is your first step to start collecting your CryptoDragons!
-            </p>
-          </div>
-        </div>
+          <circle
+            className="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate"
+            cx={44}
+            cy={44}
+            fill="none"
+            r={20.2}
+            strokeWidth={3.6}
+            style={Object {}}
+          />
+        </svg>
       </div>
     </div>
     <footer
@@ -1005,48 +990,29 @@ exports[`Renders MyDragons mobile 1`] = `
       </div>
     </div>
     <div
-      className="main"
+      className="MuiCircularProgress-root MuiCircularProgress-colorPrimary MuiCircularProgress-indeterminate"
+      role="progressbar"
+      style={
+        Object {
+          "height": 40,
+          "width": 40,
+        }
+      }
     >
-      <div
-        className="container"
+      <svg
+        className="MuiCircularProgress-svg"
+        viewBox="22 22 44 44"
       >
-        <div
-          className="container"
-          onClick={[Function]}
-          onMouseEnter={[Function]}
-        >
-          <div
-            className="content"
-          >
-            <svg
-              aria-hidden={true}
-              className="MuiSvgIcon-root icon addIcon"
-              focusable="false"
-              style={
-                Object {
-                  "height": "50px",
-                  "width": "50px",
-                }
-              }
-              viewBox="0 0 24 24"
-            >
-              <path
-                d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"
-              />
-            </svg>
-            <h6
-              className="MuiTypography-root heading MuiTypography-h6"
-            >
-              Get your first Dragon!
-            </h6>
-            <p
-              className="MuiTypography-root MuiTypography-body2 MuiTypography-colorTextSecondary"
-            >
-              This is your first step to start collecting your CryptoDragons!
-            </p>
-          </div>
-        </div>
-      </div>
+        <circle
+          className="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate"
+          cx={44}
+          cy={44}
+          fill="none"
+          r={20.2}
+          strokeWidth={3.6}
+          style={Object {}}
+        />
+      </svg>
     </div>
     <AppFooter />
   </main>

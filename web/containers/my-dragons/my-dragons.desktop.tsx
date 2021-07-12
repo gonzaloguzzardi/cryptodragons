@@ -18,6 +18,7 @@ function MyDragonsDesktop({
   handleCheckedChange,
   handleSearchChange,
   search,
+  loading,
   attribute,
   handleChangeAttribute,
   handleChangeSelectLowHigh,
@@ -39,7 +40,7 @@ function MyDragonsDesktop({
         lowOrHigh={lowOrHigh}
         handleChangeSelectLowHigh={handleChangeSelectLowHigh}
       />
-      <MyDragonsGridViewDesktop dragons={dragons} />
+      <MyDragonsGridViewDesktop dragons={dragons} loading={loading} />
       <FooterDesktop />
     </>
   )

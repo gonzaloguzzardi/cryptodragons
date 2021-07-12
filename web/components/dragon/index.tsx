@@ -11,18 +11,17 @@ import Typography from '@material-ui/core/Typography'
 import MainchainAPI from '../../services/blockchain-interaction/mainchain'
 import SidechainAPI from '../../services/blockchain-interaction/sidechain'
 
+import { tDragonSrc } from '../../types/data'
+
 import dragonStyles from './dragon.module.scss'
 
-const GAS_DEFAULT_VALUE = 350000
-
 interface IProps {
-  location: string
+  location: tDragonSrc
   id: string
-  transferMethod: (id: string) => Promise<unknown>
 }
 
 interface IState {
-  location: string
+  location: tDragonSrc
   name: string
   id: string
   pic: string
@@ -53,21 +52,27 @@ class Dragon extends Component<IProps, IState> {
   }
 
   getDragonData: () => unknown = () => {
-    if (this.state.location === 'side') {
-      SidechainAPI.getDragonDataById(this.state.id, GAS_DEFAULT_VALUE).then((dragonData) =>
-        this.setState(dragonData)
-      )
+    if (this.state.location === 'SIDECHAIN') {
+      SidechainAPI.getDragonDataById(this.state.id).then((dragonData) => this.setState(dragonData))
     }
-    if (this.state.location === 'main') {
-      MainchainAPI.getDragonDataById(this.state.id, GAS_DEFAULT_VALUE).then((dragonData) =>
-        this.setState(dragonData)
-      )
+    if (this.state.location === 'MAINCHAIN') {
+      MainchainAPI.getDragonDataById(this.state.id).then((dragonData) => this.setState(dragonData))
     }
   }
 
   transfer: () => unknown = () => {
     this.setState({ fetching: true })
-    this.props.transferMethod(this.state.id).catch(() => this.setState({ fetching: false }))
+
+    if (this.state.location === 'SIDECHAIN') {
+      SidechainAPI.transferDragon(this.state.id)
+        .then((res) => console.log('[SIDECHAIN]: Transfer to Mainchain response', res))
+        .catch(() => this.setState({ fetching: false }))
+    }
+    if (this.state.location === 'MAINCHAIN') {
+      MainchainAPI.transferDragon(this.state.id)
+        .then((res) => console.log('[MAINCHAIN]: Transfer to Sidechain response', res))
+        .catch(() => this.setState({ fetching: false }))
+    }
   }
 
   render: () => ReactNode = () => {
@@ -100,12 +105,12 @@ class Dragon extends Component<IProps, IState> {
           </Grid>
         </CardContent>
         <CardActions style={{ justifyContent: 'center' }}>
-          {this.props.transferMethod && !this.state.fetching && (
+          {!this.props.location.includes('GATEWAY') && !this.state.fetching && (
             <Button variant="contained" color="primary" onClick={this.transfer}>
               Transfer
             </Button>
           )}
-          {this.props.transferMethod && this.state.fetching && <CircularProgress />}
+          {this.state.fetching && <CircularProgress color="secondary" />}
         </CardActions>
       </Card>
     )

@@ -17,6 +17,7 @@ function MyDragonsMobile({
   handleCheckedChange,
   handleSearchChange,
   search,
+  loading,
   attribute,
   handleChangeAttribute,
   handleChangeSelectLowHigh,
@@ -38,7 +39,7 @@ function MyDragonsMobile({
         lowOrHigh={lowOrHigh}
         handleChangeSelectLowHigh={handleChangeSelectLowHigh}
       />
-      <MyDragonsGridViewMobile dragons={dragons} />
+      <MyDragonsGridViewMobile dragons={dragons} loading={loading} />
       <FooterMobile />
     </>
   )

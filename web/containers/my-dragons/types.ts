@@ -12,6 +12,7 @@ export type tProps = {
   handleCheckedChange: (event: React.ChangeEvent<HTMLInputElement>) => void
   handleSearchChange: (event: React.ChangeEvent<HTMLInputElement>) => void
   search: string
+  loading: boolean
   attribute: number
   handleChangeAttribute: (event: React.ChangeEvent<{ value: unknown }>) => void
   handleChangeSelectLowHigh: (event: React.ChangeEvent<{ value: unknown }>) => void

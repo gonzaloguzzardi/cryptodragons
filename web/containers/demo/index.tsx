@@ -36,8 +36,8 @@ class Demo extends Component<IProps> {
     super(props)
 
     this.state = {
-      sideAccount: '0xfee39fad945754831b59b92a1a8339f65358792d',
-      mainAccount: '0x28863498efede12296888f7ca6cf0b94974fbdbc',
+      sideAccount: '',
+      mainAccount: '',
 
       sideDragons: [],
       mainDragons: [],
@@ -46,6 +46,16 @@ class Demo extends Component<IProps> {
 
       accountsAreMapped: false,
     }
+    this.initAccounts();
+  }
+
+  initAccounts: () => unknown = () => {
+    MainchainAPI.getClientHelper().then((account) =>
+      this.setState({ mainAccount: account.account })
+    );
+    SidechainAPI.getClientHelper().then((account) =>
+      this.setState({ sideAccount: account.account })
+    );
   }
 
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
@@ -197,14 +207,14 @@ class Demo extends Component<IProps> {
               <Grid container spacing={2}>
                 {this.state.sideDragons
                   ? this.state.sideDragons.map((value) => (
-                      <Grid key={value} item>
-                        <Dragon
-                          location="side"
-                          id={value}
-                          transferMethod={this.transferFromSideToMain}
-                        />
-                      </Grid>
-                    ))
+                    <Grid key={value} item>
+                      <Dragon
+                        location="side"
+                        id={value}
+                        transferMethod={this.transferFromSideToMain}
+                      />
+                    </Grid>
+                  ))
                   : null}
               </Grid>
             </Grid>
@@ -217,14 +227,14 @@ class Demo extends Component<IProps> {
               <Grid container spacing={2}>
                 {this.state.mainDragons
                   ? this.state.mainDragons.map((value) => (
-                      <Grid key={value} item>
-                        <Dragon
-                          location="main"
-                          id={value}
-                          transferMethod={this.transferFromMainToSide}
-                        />
-                      </Grid>
-                    ))
+                    <Grid key={value} item>
+                      <Dragon
+                        location="main"
+                        id={value}
+                        transferMethod={this.transferFromMainToSide}
+                      />
+                    </Grid>
+                  ))
                   : null}
               </Grid>
             </Grid>
@@ -239,10 +249,10 @@ class Demo extends Component<IProps> {
           <Grid container justify="center" spacing={2}>
             {this.state.sidechainGatewayDragons
               ? this.state.sidechainGatewayDragons.map((value) => (
-                  <Grid key={value['uid']} item>
-                    <Dragon location="side" id={value['uid']} transferMethod={null} />
-                  </Grid>
-                ))
+                <Grid key={value['uid']} item>
+                  <Dragon location="side" id={value['uid']} transferMethod={null} />
+                </Grid>
+              ))
               : null}
           </Grid>
         </Grid>
@@ -251,16 +261,20 @@ class Demo extends Component<IProps> {
           <Grid container justify="center" spacing={2}>
             {this.state.mainchainGatewayDragons
               ? this.state.mainchainGatewayDragons.map((value) => (
-                  <Grid key={value['uid']} item>
-                    <Dragon location="oracle" id={value['uid']} transferMethod={null} />
-                  </Grid>
-                ))
+                <Grid key={value['uid']} item>
+                  <Dragon location="oracle" id={value['uid']} transferMethod={null} />
+                </Grid>
+              ))
               : null}
           </Grid>
         </Grid>
       </Grid>
 
       <style global jsx>{`
+        .cardContainer {
+          position: relative !important;
+        }
+
         .container {
           margin-top: 20px;
         }

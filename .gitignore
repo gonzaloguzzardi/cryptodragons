@@ -1,7 +1,7 @@
 protobuf-*
 *.meta
 UnityClient/Assets/Contracts/
-
+web/contracts/
 loom_dragon_coin_address
 loom_dragon_coin_tx_hash
 loom_dragon_token_address

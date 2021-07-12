@@ -4,7 +4,7 @@ import { getSidechainData } from '../../oracle'
 
 import sleep from '../../../utils/sleep'
 
-// client: { account, web3js, loomClient, netId, tokenContract, gatewayContract }
+// client: { account, web3js, loomClient, netId, tokenContract, gatewayContract, dragonFactoryContract }
 let client
 let clientFetching
 
@@ -35,7 +35,6 @@ class SidechainAPI {
         tokenContract: contract,
         account: ownerAccount,
       } = await SidechainAPI.getClientHelper()
-
       return await CommonAPI.sCreateDragonToken(contract, ownerAccount, gas)
     } catch (err) {
       console.error(err)
@@ -112,6 +111,32 @@ class SidechainAPI {
       } = await SidechainAPI.getClientHelper()
 
       return await CommonAPI.getDragonDataById(dragonId, contract, ownerAccount, gas)
+    } catch (err) {
+      console.error(err)
+    }
+  }
+
+  static async getDragonVisualDataById(dragonId, gas) {
+    try {
+      const {
+        tokenContract: contract,
+        account: ownerAccount,
+      } = await SidechainAPI.getClientHelper()
+
+      return await CommonAPI.getDragonVisualDataById(dragonId, contract, ownerAccount, gas)
+    } catch (err) {
+      console.error(err)
+    }
+  }
+  
+  static async getGenerationAttributeFromBytes(genes, gas) {
+    try {
+      const {
+        genesContract: contract,
+        account: ownerAccount,
+      } = await SidechainAPI.getClientHelper()
+
+      return await CommonAPI.getGenerationAttributeFromBytes(genes, contract, ownerAccount, gas)
     } catch (err) {
       console.error(err)
     }

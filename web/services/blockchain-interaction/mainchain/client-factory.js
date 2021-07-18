@@ -20,7 +20,7 @@ async function getMainNetGatewayContract(web3js) {
 }
 
 export default async function clientFactory() {
-  if (!window) return Promise.resolve(null);
+  if (typeof window === "undefined") return Promise.resolve(null);
 
   const provider = await detectEthereumProvider();
 

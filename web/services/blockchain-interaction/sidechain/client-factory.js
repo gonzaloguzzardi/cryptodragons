@@ -52,6 +52,8 @@ async function loadLoomAccount(mainchainAccountId) {
 }
 
 export default async function clientFactory() {
+  if (!window) return Promise.resolve(null);
+
   const {
     account: mainchainAccountId,
   } = await MainchainAPI.getClientHelper()

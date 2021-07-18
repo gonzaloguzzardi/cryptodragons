@@ -34,7 +34,7 @@ class Demo extends Component<IProps> {
     super(props)
 
     this.state = {
-      sideAccount: '0xfee39fad945754831b59b92a1a8339f65358792d',
+      sideAccount: '0x1a79d28bde90f8fff0c0e0716286e808635fe30d',
       mainAccount: '0xA64D35d224c85f239820a229CA3aCf5575d28Fdd',
 
       sideDragons: [],
@@ -48,11 +48,11 @@ class Demo extends Component<IProps> {
   }
 
   initAccounts: () => unknown = () => {
-    MainchainAPI.getClientHelper().then((account) =>
-      this.setState({ mainAccount: account.account })
+    MainchainAPI.getClientHelper().then(
+      (account) => account && this.setState({ mainAccount: account.account })
     )
-    SidechainAPI.getClientHelper().then((account) =>
-      this.setState({ sideAccount: account.account })
+    SidechainAPI.getClientHelper().then(
+      (account) => account && this.setState({ sideAccount: account.account })
     )
   }
 
@@ -101,11 +101,11 @@ class Demo extends Component<IProps> {
 
   mapAccounts: () => unknown = () => {
     Promise.all([
-      SidechainAPI.mapAccountToMainchainAccount(this.state.mainAccount),
       MainchainAPI.mapAccountToSidechainAccount(this.state.sideAccount),
+      SidechainAPI.mapAccountToMainchainAccount(this.state.mainAccount),
     ]).then((values) => {
-      console.log('[SIDECHAIN]: MAPEO EN SIDECHAIN', values[0])
       console.log('[MAINCHAIN]: MAPEO EN MAINCHAIN', values[1])
+      console.log('[SIDECHAIN]: MAPEO EN SIDECHAIN', values[0])
       this.accountsAreMapped()
     })
   }

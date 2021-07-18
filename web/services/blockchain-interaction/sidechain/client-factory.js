@@ -31,7 +31,7 @@ async function getLoomGatewayContract(web3js) {
 }
 
 async function loadLoomAccount(mainchainAccountId) {
-  const {sidePrivateKey} = await getSidechainData(mainchainAccountId);
+  const { sidePrivateKey } = await getSidechainData(mainchainAccountId);
   const privateKey = CryptoUtils.B64ToUint8Array(sidePrivateKey)
   const publicKey = CryptoUtils.publicKeyFromPrivateKey(privateKey)
   const loomAddress = !process.env.DOCKERENV ? 'ws://127.0.0.1:46658' : 'ws://loom:46658'

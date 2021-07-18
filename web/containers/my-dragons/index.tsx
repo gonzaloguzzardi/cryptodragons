@@ -45,7 +45,7 @@ export default function MyDragons({ deviceType }: ISSRPropsDeviceOnly): ReactEle
   }
 
   const mapDragonsResults = (results: any[], source: string): any[] =>
-    results.map((dragon: any) => ({ id: dragon, source }))
+    results ? results.map((dragon: any) => ({ id: dragon, source })) : []
 
   useEffect(() => {
     Promise.all([MainchainAPI.getMyDragons(), SidechainAPI.getMyDragons()]).then((results) => {

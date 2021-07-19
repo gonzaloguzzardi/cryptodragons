@@ -1,0 +1,51 @@
+@import '../../styles/variables.scss';
+
+.homeIconLabelAnchor {
+  display: flex;
+  margin-right: auto;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.homeLabel {
+  display: flex;
+  color: $font-color-black;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 18px;
+  text-decoration: none;
+  align-items: center;
+  margin: 0 0 0 12px;
+  letter-spacing: -0.3px;
+}
+
+.appbarActionLink {
+  text-decoration: none;
+
+  &_Icon {
+    font-size: 18px;
+    padding-bottom: 4px;
+  }
+
+  &_Label {
+    font-size: 16px;
+    padding-left: 4px;
+  }
+
+  &_Button {
+    border-radius: 0 !important;
+
+    &:hover,
+    &__selected {
+      background-color: transparent !important;
+      color: $pallete-secondary !important;
+    }
+  }
+}
+
+.profileSection {
+  padding-left: 12px;
+}

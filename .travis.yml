@@ -33,3 +33,5 @@ jobs:
       script: bash scripts/travis/run_truffle_tests.sh
     - stage: docker
       script: bash scripts/travis/run_docker.sh
+    - stage: web
+      script: bash scripts/travis/run_web_tests.sh

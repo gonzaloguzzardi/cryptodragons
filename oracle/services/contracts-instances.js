@@ -7,7 +7,7 @@ const { NonceTxMiddleware, SignedTxMiddleware, Client, CryptoUtils, LoomProvider
 // CONSTANTS
 const {
   MainchainDragonContract,
-  MainChainGateway,
+  MainChainGatewayContract,
   BFA_SOCKET_CONNECTION,
   BFA_NETWORK_ID,
   CHAIN_ID,
@@ -22,10 +22,10 @@ const web3MainChain = new Web3(new Web3.providers.WebsocketProvider(BFA_SOCKET_C
 const ownerAccount = fs.readFileSync(path.join(__dirname, '../misc/', 'mainchain_account'), 'utf-8');
 web3MainChain.eth.accounts.wallet.add(ownerAccount);
 
-const MainChainGatewayABI = MainChainGateway.abi;
+const MainChainGatewayABI = MainChainGatewayContract.abi;
 const MainchainDragonABI = MainchainDragonContract.abi;
 
-if (!MainChainGateway.networks) {
+if (!MainChainGatewayContract.networks) {
   throw Error('Contract not deployed on Mainchain');
 }
 
@@ -36,7 +36,7 @@ const mainChainDragonsInstance = new web3MainChain.eth.Contract(
 
 const mainChainGatewayInstance = new web3MainChain.eth.Contract(
   MainChainGatewayABI,
-  MainChainGateway.networks[BFA_NETWORK_ID].address,
+  MainChainGatewayContract.networks[BFA_NETWORK_ID].address,
 );
 
 // SIDECHAIN CONTRACTS

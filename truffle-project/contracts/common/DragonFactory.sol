@@ -29,6 +29,15 @@ interface IGenesLaboratory {
 			uint16 actionCooldown,
 			uint16 hatchTime
 		);
+
+	function getVisualAttributes(bytes32 genes)
+		external
+		pure
+		returns (
+			uint16 head,
+			uint16 body,
+			uint16 wings
+		);
 }
 
 interface IDragonSerializer {
@@ -94,24 +103,38 @@ contract DragonFactory is DragonBase {
 
 		bytes32 nameInBytes = _stringToBytes32(_name);
 
-		uint256 id = _createDragonWithStats(
-			genes,
-			nameInBytes,
-			_creationTime,
-			_dadId,
-			_motherId,
-			0,
-			actionCooldown,
-			initialHealth,
-			initialStrength,
-			initialAgility,
-			initialFortitude,
-			hatchTime,
-			_blockchainId
-		);
+		uint256 id =
+			_createDragonWithStats(
+				genes,
+				nameInBytes,
+				_creationTime,
+				_dadId,
+				_motherId,
+				0,
+				actionCooldown,
+				initialHealth,
+				initialStrength,
+				initialAgility,
+				initialFortitude,
+				hatchTime,
+				_blockchainId
+			);
 
 		_mint(msg.sender, id);
 		emit NewDragon(id, uint256(genes));
+	}
+
+	function getVisualAttributes(uint256 id)
+		public
+		view
+		returns (
+			uint16 head,
+			uint16 body,
+			uint16 wings
+		)
+	{
+		DragonLibrary.Dragon storage dragon = dragons[id];
+		(head, body, wings) = IGenesLaboratory(_genesLaboratory).getVisualAttributes(dragon.genes);
 	}
 
 	//TODO implement burn function which should update mainchainToSidechainIds mapping

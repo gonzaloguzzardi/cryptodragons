@@ -1,0 +1,28 @@
+@import '../../../styles/variables.scss';
+
+.main {
+  padding: $section-mobile-margins 0;
+  justify-content: center;
+  text-align: center;
+  display: flex;
+}
+
+.container {
+  max-width: $max-width-by-screen-mobile;
+}
+
+.title, .subtitle {
+  padding-bottom: 10px;
+}
+
+.marketplaceCollections {
+  padding: 10px 0;
+  display: flex;
+  justify-content: center;
+}
+
+.goMktpButton {
+  margin-top: 20px !important;
+  border-radius: 10px !important;
+  text-transform: none !important;
+}

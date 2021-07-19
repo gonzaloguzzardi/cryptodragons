@@ -1,39 +1,39 @@
 {
-	"name": "oracle",
-	"version": "1.0.0",
-	"description": "CryptoDragons Oracle",
-	"main": "",
-	"license": "MIT",
-	"repository": {
-		"type": "git",
-		"url": "https://bitbucket.org/nitzardi/cryptodragons.git"
-	},
-	"scripts": {
-		"init": "node oracle.js",
-		"start-dev": "nodemon oracle.js",
-		"lint": "eslint .",
-		"lint-fix": "eslint --fix ."
-	},
-	"dependencies": {
-		"axios": "0.19.2",
-		"cors": "2.8.5",
-		"express": "latest",
-		"fs": "latest",
-		"loom-js": "1.55.0",
-		"mongodb": "latest",
-		"body-parser": "latest",
-		"node-cron": "latest",
-		"web3": "1.0.0-beta.37"
-	},
-	"devDependencies": {
-		"eslint": "5.16.0",
-		"eslint-config-airbnb": "18.1.0",
-		"eslint-config-prettier": "6.7.0",
-		"eslint-plugin-prettier": "3.1.1",
-		"eslint-plugin-import": "2.20.2",
-		"eslint-plugin-jsx-a11y": "6.2.3",
-		"eslint-plugin-react": "7.19.0",
-		"nodemon": "2.0.2",
-		"prettier": "2.0.4"
-	}
+  "name": "oracle",
+  "version": "1.0.0",
+  "description": "CryptoDragons Oracle",
+  "main": "",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://bitbucket.org/nitzardi/cryptodragons.git"
+  },
+  "scripts": {
+    "init": "node oracle.js",
+    "start-dev": "nodemon oracle.js",
+    "lint": "eslint .",
+    "lint-fix": "eslint --fix ."
+  },
+  "dependencies": {
+    "axios": "0.19.2",
+    "cors": "2.8.5",
+    "express": "latest",
+    "fs": "latest",
+    "loom-js": "1.79.0",
+    "mongodb": "latest",
+    "body-parser": "latest",
+    "node-cron": "latest",
+    "web3": "1.0.0-beta.37"
+  },
+  "devDependencies": {
+    "eslint": "5.16.0",
+    "eslint-config-airbnb": "18.1.0",
+    "eslint-config-prettier": "6.7.0",
+    "eslint-plugin-prettier": "3.1.1",
+    "eslint-plugin-import": "2.20.2",
+    "eslint-plugin-jsx-a11y": "6.2.3",
+    "eslint-plugin-react": "7.19.0",
+    "nodemon": "2.0.2",
+    "prettier": "2.0.4"
+  }
 }

@@ -133,7 +133,7 @@ contract DragonFactory is DragonBase {
 			uint16 wings
 		)
 	{
-		Dragon storage dragon = dragons[id];
+		DragonLibrary.Dragon storage dragon = dragons[id];
 		(head, body, wings) = IGenesLaboratory(_genesLaboratory).getVisualAttributes(dragon.genes);
 	}
 

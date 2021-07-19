@@ -1,0 +1,47 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Renders Guides desktop 1`] = `
+<div
+  className="container"
+>
+  <main>
+    <AppToolbar
+      accountsState={
+        Object {
+          "connectToProvider": [Function],
+          "mainchain_account": null,
+          "provider_installed": false,
+        }
+      }
+      deviceType="desktop"
+      section="guides"
+    />
+    <p>
+      Guides
+    </p>
+  </main>
+</div>
+`;
+
+exports[`Renders Guides mobile 1`] = `
+<div
+  className="container"
+>
+  <main>
+    <AppToolbar
+      accountsState={
+        Object {
+          "connectToProvider": [Function],
+          "mainchain_account": null,
+          "provider_installed": false,
+        }
+      }
+      deviceType="mobile"
+      section="guides"
+    />
+    <p>
+      Guides
+    </p>
+  </main>
+</div>
+`;

@@ -1,4 +1,7 @@
 import Web3 from 'web3'
+import MainchainAPI from '../mainchain'
+import { getSidechainData } from '../../oracle'
+
 import {
   Client,
   NonceTxMiddleware,
@@ -8,12 +11,14 @@ import {
   LoomProvider,
 } from 'loom-js'
 
-const DappchainDragonTokenJson = require('../../../contracts/DappchainTransferableDragon.json')
-const GatewayJson = require('../../../contracts/DappchainGateway')
+const axios = require('axios');
+const contractGetterApiUrl = !process.env.DOCKERENV ? 'http://localhost:8082' : 'http://contractGetter:8082';
+
 
 const loomChainId = '13654820909954' // TODO ver si cambia o si es siempre el mismo
 
 async function getLoomTokenContract(web3js) {
+  const { data: DappchainDragonTokenJson } = await axios.get(contractGetterApiUrl + '/api/contract/DappchainTransferableDragon.json');
   return new web3js.eth.Contract(
     DappchainDragonTokenJson.abi,
     DappchainDragonTokenJson.networks[loomChainId].address
@@ -21,15 +26,13 @@ async function getLoomTokenContract(web3js) {
 }
 
 async function getLoomGatewayContract(web3js) {
+  const { data: GatewayJson } = await axios.get(contractGetterApiUrl + '/api/contract/DappchainGateway.json');
   return new web3js.eth.Contract(GatewayJson.abi, GatewayJson.networks[loomChainId].address)
 }
 
-async function loadLoomAccount() {
-  // const accountPath = './misc/loom_private_key';
-  // const privateKeyStr = fs.readFileSync(path.join(__dirname, accountPath), 'utf-8');
-  const privateKeyStr =
-    'OwM4hj6RcjBecJSrObLjyB4R/5dbQFk0ZpAyrIn7kYAFsuBAV7RoOIbw9V3tGB9I2WodYtN373D46UHn3EtgqQ=='
-  const privateKey = CryptoUtils.B64ToUint8Array(privateKeyStr)
+async function loadLoomAccount(mainchainAccountId) {
+  const {sidePrivateKey} = await getSidechainData(mainchainAccountId);
+  const privateKey = CryptoUtils.B64ToUint8Array(sidePrivateKey)
   const publicKey = CryptoUtils.publicKeyFromPrivateKey(privateKey)
   const loomAddress = !process.env.DOCKERENV ? 'ws://127.0.0.1:46658' : 'ws://loom:46658'
   const client = new Client('default', `${loomAddress}/websocket`, `${loomAddress}/queryws`)
@@ -49,9 +52,15 @@ async function loadLoomAccount() {
 }
 
 export default async function clientFactory() {
-  return loadLoomAccount()
+  const {
+    account: mainchainAccountId,
+  } = await MainchainAPI.getClientHelper()
+  return loadLoomAccount(mainchainAccountId)
     .then(({ account, web3js, client }) =>
-      Promise.all([getLoomTokenContract(web3js), getLoomGatewayContract(web3js)]).then(
+      Promise.all([
+        getLoomTokenContract(web3js),
+        getLoomGatewayContract(web3js),
+      ]).then(
         (values) => ({
           account,
           web3js,

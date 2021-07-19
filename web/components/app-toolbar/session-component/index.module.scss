@@ -1,0 +1,26 @@
+@import '../../../styles/variables.scss';
+
+.accountCard {
+  display: flex;
+  align-items: center;
+  user-select: none;
+  cursor: pointer;
+
+  &:hover {
+    color: $pallete-secondary;
+  }
+}
+
+.accountName {
+  margin-left: 10px !important;
+  font-size: 18px !important;
+  max-width: 80px;
+}
+
+.popover {
+  pointer-events: none !important;
+}
+
+.paper {
+  padding: 8px;
+}

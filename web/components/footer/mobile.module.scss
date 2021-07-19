@@ -1,0 +1,30 @@
+@import '../../styles/variables.scss';
+
+.main {
+  padding: 10px 0;
+  background-color: $pallete-secondary;
+  display: block;
+}
+
+.container {
+  max-width: $max-width-by-screen-mobile;
+  margin: 20px auto;
+}
+
+.divider {
+  width: $max-width-by-screen-mobile;
+  margin: 0 auto !important;
+}
+
+.socialMediaText,
+.downloadAppText {
+  width: 100%;
+  height: 20px;
+  margin-bottom: 10px !important;
+}
+
+.copyRightText,
+.downloadAppText,
+.socialMediaText {
+  user-select: none;
+}

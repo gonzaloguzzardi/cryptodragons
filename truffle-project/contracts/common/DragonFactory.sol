@@ -174,27 +174,7 @@ contract DragonFactory is DragonBase {
 	}
 
 	function _createDragonFromData(bytes memory _data) private returns (uint256) {
-<<<<<<< HEAD
 		DragonLibrary.Dragon memory dragon = IDragonSerializer(_dragonDecoderAddress).decodeDragonFromBytes(_data);
-=======
-		(
-			bytes32 _genes,
-			bytes32 _name,
-			uint64 _creationTime,
-			uint32 _dadId,
-			uint32 _motherId,
-			uint32 _currentExperience
-		) = _decodeFirstHalfOfDragonFromBytes(_data);
-		(
-			uint16 _actionCooldown,
-			uint16 _health,
-			uint16 _strength,
-			uint16 _agility,
-			uint16 _fortitude,
-			uint16 _hatchTime,
-			uint8 _blockchainOriginId
-		) = _decodeSecondHalfOfDragonFromBytes(_data);
->>>>>>> feature/solidity_marketplace
 
 		uint256 id = _createDragonWithStats(
 			dragon.genes,
@@ -230,7 +210,6 @@ contract DragonFactory is DragonBase {
 		uint16 _hatchTime,
 		uint8 _blockchainOriginId
 	) private returns (uint256 id) {
-<<<<<<< HEAD
 		dragons.push(
 			DragonLibrary.Dragon({
 				genes: 0,
@@ -249,27 +228,6 @@ contract DragonFactory is DragonBase {
 			})
 		);
 		id = dragons.length;
-=======
-		id =
-			dragons.push(
-				Dragon({
-					genes: 0,
-					name: 0,
-					creationTime: _creationTime, // level attributes
-					currentExperience: _currentExperience, // parents information
-					dadId: _dadId,
-					motherId: _motherId,
-					actionCooldown: _actionCooldown,
-					health: _health,
-					strength: _strength,
-					agility: _agility,
-					fortitude: _fortitude,
-					hatchTime: _hatchTime,
-					blockchainOriginId: _blockchainOriginId
-				})
-			) -
-			1;
->>>>>>> feature/solidity_marketplace
 
 		// Assign genes in different function as a workaround to the stack too deep exception
 		_assignGenesAndName(id, _genes, _name);
@@ -286,27 +244,7 @@ contract DragonFactory is DragonBase {
 	}
 
 	function _updateDragonFromData(uint256 _tokenId, bytes memory _data) private {
-<<<<<<< HEAD
 		DragonLibrary.Dragon memory dragon = IDragonSerializer(_dragonDecoderAddress).decodeDragonFromBytes(_data);
-=======
-		(
-			bytes32 _genes,
-			bytes32 _name,
-			uint64 _creationTime,
-			uint32 _dadId,
-			uint32 _motherId,
-			uint32 _currentExperience
-		) = _decodeFirstHalfOfDragonFromBytes(_data);
-		(
-			uint16 _actionCooldown,
-			uint16 _health,
-			uint16 _strength,
-			uint16 _agility,
-			uint16 _fortitude,
-			uint16 _hatchTime,
-			uint8 _blockchainOriginId
-		) = _decodeSecondHalfOfDragonFromBytes(_data);
->>>>>>> feature/solidity_marketplace
 
 		_updateDragonWithStats(
 			_tokenId,

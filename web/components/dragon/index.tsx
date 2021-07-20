@@ -100,7 +100,7 @@ class Dragon extends Component<IProps, IState> {
             #{this.state.id} {this.state.name}
           </Typography>
 
-          <CardMedia>
+          <CardMedia className={dragonStyles.card}>
             <DragonCreator
               typeAlas={1}
               typeCuernos={1}

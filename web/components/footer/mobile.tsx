@@ -8,9 +8,11 @@ import styles from './mobile.module.scss'
 
 import { ReactElement } from 'react'
 
-import Icon from './icon'
+import Icon from '../icon'
 
 export default function FooterMobile(): ReactElement {
+  const commonIconProps = { height: '30px', width: '30px' }
+
   return (
     <footer className={styles.main}>
       <Grid container className={styles.container}>
@@ -43,10 +45,20 @@ export default function FooterMobile(): ReactElement {
             Follow us
           </Typography>
 
-          <Icon href="https://www.instagram.com" id="instagram" className="mr-6" />
-          <Icon href="https://www.twitter.com" id="twitter" className="mr-6" />
-          <Icon href="https://www.facebook.com" id="facebook" className="mr-6" />
-          <Icon href="https://www.youtube.com" id="youtube" className="mr-6" />
+          <Icon
+            href="https://www.instagram.com"
+            id="instagram"
+            className="mr-6"
+            {...commonIconProps}
+          />
+          <Icon href="https://www.twitter.com" id="twitter" className="mr-6" {...commonIconProps} />
+          <Icon
+            href="https://www.facebook.com"
+            id="facebook"
+            className="mr-6"
+            {...commonIconProps}
+          />
+          <Icon href="https://www.youtube.com" id="youtube" className="mr-6" {...commonIconProps} />
         </Grid>
       </Grid>
 
@@ -63,8 +75,8 @@ export default function FooterMobile(): ReactElement {
             Download App
           </Typography>
 
-          <Icon href="https://www.android.com" id="android" className="ml-6" />
-          <Icon href="https://www.apple.com" id="apple" className="ml-6" />
+          <Icon href="https://www.android.com" id="android" className="ml-6" {...commonIconProps} />
+          <Icon href="https://www.apple.com" id="apple" className="ml-6" {...commonIconProps} />
         </Grid>
       </Grid>
 

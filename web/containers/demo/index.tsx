@@ -14,8 +14,6 @@ import SidechainAPI from '../../services/blockchain-interaction/sidechain'
 // import { _getDragonsFromOracle } from '../../services/oracle'
 import { ReactElement } from 'react'
 
-const GAS_DEFAULT_VALUE = 350000
-
 interface IProps {
   any
 }
@@ -36,8 +34,8 @@ class Demo extends Component<IProps> {
     super(props)
 
     this.state = {
-      sideAccount: '',
-      mainAccount: '',
+      sideAccount: '0x1a79d28bde90f8fff0c0e0716286e808635fe30d',
+      mainAccount: '0xA64D35d224c85f239820a229CA3aCf5575d28Fdd',
 
       sideDragons: [],
       mainDragons: [],
@@ -46,16 +44,16 @@ class Demo extends Component<IProps> {
 
       accountsAreMapped: false,
     }
-    this.initAccounts();
+    this.initAccounts()
   }
 
   initAccounts: () => unknown = () => {
-    MainchainAPI.getClientHelper().then((account) =>
-      this.setState({ mainAccount: account.account })
-    );
-    SidechainAPI.getClientHelper().then((account) =>
-      this.setState({ sideAccount: account.account })
-    );
+    MainchainAPI.getClientHelper().then(
+      (account) => account && this.setState({ mainAccount: account.account })
+    )
+    SidechainAPI.getClientHelper().then(
+      (account) => account && this.setState({ sideAccount: account.account })
+    )
   }
 
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
@@ -73,15 +71,11 @@ class Demo extends Component<IProps> {
   }
 
   getDragonsFromMain: () => unknown = () => {
-    MainchainAPI.getMyDragons(GAS_DEFAULT_VALUE).then((mainDragons) =>
-      this.setState({ mainDragons })
-    )
+    MainchainAPI.getMyDragons().then((mainDragons) => this.setState({ mainDragons }))
   }
 
   getDragonsFromSide: () => unknown = () => {
-    SidechainAPI.getMyDragons(GAS_DEFAULT_VALUE).then((sideDragons) =>
-      this.setState({ sideDragons })
-    )
+    SidechainAPI.getMyDragons().then((sideDragons) => this.setState({ sideDragons }))
   }
 
   getDragonsFromOracle: () => unknown = () => {
@@ -94,34 +88,24 @@ class Demo extends Component<IProps> {
   }
 
   buyDragonInSideChain: () => unknown = () => {
-    SidechainAPI.createDragon(GAS_DEFAULT_VALUE).then((res) => {
+    SidechainAPI.createDragon().then((res) => {
       console.log('[SIDECHAIN]: Dragon create response', res)
     })
   }
 
   buyDragonInMainChain: () => unknown = () => {
-    MainchainAPI.createDragon(GAS_DEFAULT_VALUE).then((res) =>
+    MainchainAPI.createDragon().then((res) =>
       console.log('[MAINCHAIN]: Dragon create response', res)
     )
   }
 
-  transferFromSideToMain: (id: string) => Promise<unknown> = (dragonId) =>
-    SidechainAPI.transferDragon(dragonId, GAS_DEFAULT_VALUE).then((res) =>
-      console.log('[SIDECHAIN]: Transfer to Mainchain response', res)
-    )
-
-  transferFromMainToSide: (id: string) => Promise<unknown> = (dragonId) =>
-    MainchainAPI.transferDragon(dragonId, GAS_DEFAULT_VALUE).then((res) =>
-      console.log('[MAINCHAIN]: Transfer to Sidechain response', res)
-    )
-
   mapAccounts: () => unknown = () => {
     Promise.all([
-      SidechainAPI.mapAccountToMainchainAccount(this.state.mainAccount, GAS_DEFAULT_VALUE),
-      MainchainAPI.mapAccountToSidechainAccount(this.state.sideAccount, GAS_DEFAULT_VALUE),
+      MainchainAPI.mapAccountToSidechainAccount(this.state.sideAccount),
+      SidechainAPI.mapAccountToMainchainAccount(this.state.mainAccount),
     ]).then((values) => {
-      console.log('[SIDECHAIN]: MAPEO EN SIDECHAIN', values[0])
       console.log('[MAINCHAIN]: MAPEO EN MAINCHAIN', values[1])
+      console.log('[SIDECHAIN]: MAPEO EN SIDECHAIN', values[0])
       this.accountsAreMapped()
     })
   }
@@ -129,8 +113,8 @@ class Demo extends Component<IProps> {
   accountsAreMapped: () => unknown = () => {
     console.log('Are accounts mapped?')
     Promise.all([
-      MainchainAPI.areAccountsMapped(this.state.sideAccount, GAS_DEFAULT_VALUE),
-      SidechainAPI.areAccountsMapped(this.state.mainAccount, GAS_DEFAULT_VALUE),
+      MainchainAPI.areAccountsMapped(this.state.sideAccount),
+      SidechainAPI.areAccountsMapped(this.state.mainAccount),
     ]).then((values) => {
       console.log('MAPEO CUENTAS [SideInMain, MainInSide]', values)
       this.setState({ accountsAreMapped: values[0] && values[1] })
@@ -207,14 +191,10 @@ class Demo extends Component<IProps> {
               <Grid container spacing={2}>
                 {this.state.sideDragons
                   ? this.state.sideDragons.map((value) => (
-                    <Grid key={value} item>
-                      <Dragon
-                        location="side"
-                        id={value}
-                        transferMethod={this.transferFromSideToMain}
-                      />
-                    </Grid>
-                  ))
+                      <Grid key={value} item>
+                        <Dragon location="SIDECHAIN" id={value} />
+                      </Grid>
+                    ))
                   : null}
               </Grid>
             </Grid>
@@ -227,14 +207,10 @@ class Demo extends Component<IProps> {
               <Grid container spacing={2}>
                 {this.state.mainDragons
                   ? this.state.mainDragons.map((value) => (
-                    <Grid key={value} item>
-                      <Dragon
-                        location="main"
-                        id={value}
-                        transferMethod={this.transferFromMainToSide}
-                      />
-                    </Grid>
-                  ))
+                      <Grid key={value} item>
+                        <Dragon location="MAINCHAIN" id={value} />
+                      </Grid>
+                    ))
                   : null}
               </Grid>
             </Grid>
@@ -249,10 +225,10 @@ class Demo extends Component<IProps> {
           <Grid container justify="center" spacing={2}>
             {this.state.sidechainGatewayDragons
               ? this.state.sidechainGatewayDragons.map((value) => (
-                <Grid key={value['uid']} item>
-                  <Dragon location="side" id={value['uid']} transferMethod={null} />
-                </Grid>
-              ))
+                  <Grid key={value['uid']} item>
+                    <Dragon location="SIDECHAIN_GATEWAY" id={value['uid']} />
+                  </Grid>
+                ))
               : null}
           </Grid>
         </Grid>
@@ -261,10 +237,10 @@ class Demo extends Component<IProps> {
           <Grid container justify="center" spacing={2}>
             {this.state.mainchainGatewayDragons
               ? this.state.mainchainGatewayDragons.map((value) => (
-                <Grid key={value['uid']} item>
-                  <Dragon location="oracle" id={value['uid']} transferMethod={null} />
-                </Grid>
-              ))
+                  <Grid key={value['uid']} item>
+                    <Dragon location="MAINCHAIN_GATEWAY" id={value['uid']} />
+                  </Grid>
+                ))
               : null}
           </Grid>
         </Grid>

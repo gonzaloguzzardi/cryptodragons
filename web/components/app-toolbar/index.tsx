@@ -100,7 +100,7 @@ export default function AppToolbar({ accountsState, deviceType, section }: IProp
         <Toolbar>
           <Link href="/">
             <a className={appbarStyles.homeIconLabelAnchor}>
-              <Avatar alt="CryptoDragons Icon" src="/assets/dragonsito.jpg" />
+              <Avatar variant="square" alt="CryptoDragons Icon" src="/assets/dragonsito.jpg" />
               {deviceType !== 'mobile' && <h6 className={appbarStyles.homeLabel}>CryptoDragons</h6>}
             </a>
           </Link>

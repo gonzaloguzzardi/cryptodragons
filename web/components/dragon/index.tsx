@@ -124,19 +124,27 @@ class Dragon extends Component<IProps, IState> {
           <Grid container justify="center" spacing={2}>
             <Grid item>
               <img src={'/assets/corazon.svg'} alt="" width="20" height="20" />
-              <p>{this.state.health}</p>
+              <Typography variant="body2" align="center">
+                {this.state.health}
+              </Typography>
             </Grid>
             <Grid item>
               <img src={'/assets/reloj.svg'} alt="" width="20" height="20" />
-              <p>{this.state.agility}</p>
+              <Typography variant="body2" align="center">
+                {this.state.agility}
+              </Typography>
             </Grid>
             <Grid item>
               <img src={'/assets/espada.svg'} alt="" width="20" height="20" />
-              <p>{this.state.strength}</p>
+              <Typography variant="body2" align="center">
+                {this.state.strength}
+              </Typography>
             </Grid>
             <Grid item>
               <img src={'/assets/escudo.svg'} alt="" width="20" height="20" />
-              <p>{this.state.fortitude}</p>
+              <Typography variant="body2" align="center">
+                {this.state.fortitude}
+              </Typography>
             </Grid>
           </Grid>
 

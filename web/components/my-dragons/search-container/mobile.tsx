@@ -51,7 +51,7 @@ export default function MyDragonsSearchContainerMobile({
                   size="small"
                 />
               }
-              label={<Typography variant="caption">Appchain</Typography>}
+              label={<Typography variant="caption">Sidechain</Typography>}
             />
             <FormControlLabel
               control={

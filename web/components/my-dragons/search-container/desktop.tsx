@@ -49,7 +49,7 @@ export default function MyDragonsSearchContainerDesktop({
                   name="checkedSidechain"
                 />
               }
-              label={<Typography variant="caption">in Appchain</Typography>}
+              label={<Typography variant="caption">in Sidechain</Typography>}
             />
             <FormControlLabel
               control={

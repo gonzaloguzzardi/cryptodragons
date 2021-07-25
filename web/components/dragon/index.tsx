@@ -4,6 +4,7 @@ import Card from '@material-ui/core/Card'
 import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent'
 import CardMedia from '@material-ui/core/CardMedia'
+import Chip from '@material-ui/core/Chip'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
@@ -94,10 +95,13 @@ class Dragon extends Component<IProps, IState> {
 
   render: () => ReactNode = () => {
     return (
-      <Card className={dragonStyles.container}>
+      <Card className={dragonStyles.container} raised>
         <CardContent>
           <Typography color="textSecondary" align="center" gutterBottom>
-            #{this.state.id} {this.state.name}
+            #{this.state.id}
+          </Typography>
+          <Typography color="textSecondary" align="center" noWrap gutterBottom>
+            {this.state.name}
           </Typography>
 
           <CardMedia className={dragonStyles.card}>
@@ -135,15 +139,23 @@ class Dragon extends Component<IProps, IState> {
               <p>{this.state.fortitude}</p>
             </Grid>
           </Grid>
+
+          <CardContent>
+            <Grid container justify="center" spacing={2}>
+              <Typography variant="caption">Location:&nbsp;</Typography>
+              <Chip color="secondary" size="small" label={<b>{this.state.location}</b>} />
+            </Grid>
+          </CardContent>
+
+          <CardActions style={{ justifyContent: 'center' }}>
+            {!this.props.location.includes('GATEWAY') && !this.state.fetching && (
+              <Button variant="contained" color="secondary" onClick={this.transfer}>
+                {`Transfer to ${this.props.location === 'SIDECHAIN' ? 'MAINCHAIN' : 'SIDECHAIN'}`}
+              </Button>
+            )}
+            {this.state.fetching && <CircularProgress color="secondary" />}
+          </CardActions>
         </CardContent>
-        <CardActions style={{ justifyContent: 'center' }}>
-          {!this.props.location.includes('GATEWAY') && !this.state.fetching && (
-            <Button variant="contained" color="primary" onClick={this.transfer}>
-              Transfer
-            </Button>
-          )}
-          {this.state.fetching && <CircularProgress color="secondary" />}
-        </CardActions>
       </Card>
     )
   }

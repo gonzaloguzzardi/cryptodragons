@@ -3,7 +3,7 @@ const {
 } = require('fs');
 
 const DragonSerializer = artifacts.require('./common/serialization/DragonSerializer.sol');
-const DragonToken = artifacts.require('./mainnet/MainnetTransferableDragon.sol');
+const DragonToken = artifacts.require('./mainnet/MainnetMerchantableDragon.sol');
 const Gateway = artifacts.require('./mainnet/gateway/MainnetGateway.sol');
 const GenesLaboratory = artifacts.require('./genes/GenesLaboratory.sol');
 const Marketplace = artifacts.require('./mainnet/marketplace/MainnetMarketplace.sol');

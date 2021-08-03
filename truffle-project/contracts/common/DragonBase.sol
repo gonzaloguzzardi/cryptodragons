@@ -7,9 +7,6 @@ import './token/ERC721Enumerable.sol';
 import './ownership/Ownable.sol';
 
 contract DragonBase is ERC721Enumerable, Ownable {
-	uint256 constant dnaDigits = 16;
-	uint256 constant dnaModulus = 10**dnaDigits;
-
 	// Holds all dragons in game
 	DragonLibrary.Dragon[] internal dragons;
 
@@ -27,59 +24,8 @@ contract DragonBase is ERC721Enumerable, Ownable {
 	/*******************************************************************************************
         PUBLIC METHODS
     ********************************************************************************************/
-
-	function getDragonsIdsByOwner(address owner) external view returns (uint256[] memory tokenIds) {
-		uint256 balance = balanceOf(owner);
-
-		for (uint256 i = 0; i < balance; i++) {
-			tokenIds[i] = tokenOfOwnerByIndex(owner, i);
-		}
-	}
-
-	/************************ Commented out wrapper functions ***********************
-	function getDragonsCountByOwner(address _owner) external view returns (uint256) {
-		return balanceOf(_owner);
-	}
-
-	function getDragonOwner(uint256 _dragonId) external view returns (address) {
-		return ownerOf(_dragonId);
-	}
-
-	function getParents(uint256 _dragonId) public view returns (uint256 motherId, uint256 dadId) {
-		DragonLibrary.Dragon storage dragon = dragons[_dragonId];
-		return (dragon.motherId, dragon.dadId);
-	}
-	************************************************************************** */
-
-	function isEgg(uint256 _dragonId) public view returns (bool) {
-		DragonLibrary.Dragon storage dragon = dragons[_dragonId];
-		uint256 lifeTimeSinceCreation = (block.timestamp - dragon.creationTime) * 60;
-		return (lifeTimeSinceCreation < dragon.hatchTime);
-	}
-
-	function getDragonById(uint256 _dragonId)
-		external
-		view
-		returns (
-			bytes32 name,
-			uint32 dadId,
-			uint32 motherId,
-			uint32 currentExperience,
-			uint16 health,
-			uint16 strength,
-			uint16 agility,
-			uint16 fortitude
-		)
-	{
-		DragonLibrary.Dragon storage dragon = dragons[_dragonId];
-		name = dragon.name;
-		dadId = dragon.dadId;
-		motherId = dragon.motherId;
-		currentExperience = dragon.currentExperience;
-		health = dragon.health;
-		strength = dragon.strength;
-		agility = dragon.agility;
-		fortitude = dragon.fortitude;
+	function getDragonById(uint256 _dragonId) external view returns (DragonLibrary.Dragon memory) {
+		return dragons[_dragonId];
 	}
 
 	/*******************************************************************************************

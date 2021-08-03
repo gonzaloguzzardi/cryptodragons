@@ -3,10 +3,11 @@ const {
 } = require('fs');
 
 const DragonSerializer = artifacts.require('./common/serialization/DragonSerializer.sol');
-const DragonToken = artifacts.require('./mainnet/MainnetMerchantableDragon.sol');
+const DragonToken = artifacts.require('./mainnet/MainnetTransferableDragon.sol');
 const Gateway = artifacts.require('./mainnet/gateway/MainnetGateway.sol');
 const GenesLaboratory = artifacts.require('./genes/GenesLaboratory.sol');
 const Marketplace = artifacts.require('./mainnet/marketplace/MainnetMarketplace.sol');
+const DragonApi = artifacts.require('./public/MainnetDragonApi.sol');
 
 module.exports = function (deployer, network, accounts) {
 	if (network !== 'rinkeby' && network !== 'ganache' && network !== 'bfa') {
@@ -54,6 +55,12 @@ module.exports = function (deployer, network, accounts) {
 		console.log(`Marketplace deployed at address: ${marketplaceContractInstance.address}`);
 		console.log(`Marketplace transaction at hash: ${marketplaceContract.transactionHash}`);
 
+		const dragonApiContract = await deployer.deploy(DragonApi, dragonTokenInstance.address, genesContractInstance.address, marketplaceContractInstance.address);
+		const dragonApiInstance = await DragonApi.deployed();
+
+		console.log(`DragonApi deployed at address: ${dragonApiInstance.address}`);
+		console.log(`DragonApi transaction at hash: ${dragonApiContract.transactionHash}`);
+
 		// await gatewayInstance.toggleToken(dragonTokenInstance.address, { from: validator })
 		// await dragonTokenInstance.register(user)
 
@@ -62,7 +69,6 @@ module.exports = function (deployer, network, accounts) {
 
 		// setup dragon contract
 		await dragonTokenInstance.setGenesLaboratoryAddress(genesContractInstance.address);
-		await dragonTokenInstance.setMarketplace(marketplaceContractInstance.address);
 
 		writeFileSync('../mainnet_gateway_address', gatewayInstance.address);
 		writeFileSync('../mainnet_dragon_token_address', dragonTokenInstance.address);

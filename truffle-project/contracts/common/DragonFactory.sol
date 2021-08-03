@@ -124,19 +124,6 @@ contract DragonFactory is DragonBase {
 		emit NewDragon(id, uint256(genes));
 	}
 
-	function getVisualAttributes(uint256 id)
-		public
-		view
-		returns (
-			uint16 head,
-			uint16 body,
-			uint16 wings
-		)
-	{
-		DragonLibrary.Dragon storage dragon = dragons[id];
-		(head, body, wings) = IGenesLaboratory(_genesLaboratory).getVisualAttributes(dragon.genes);
-	}
-
 	//TODO implement burn function which should update mainchainToSidechainIds mapping
 
 	//
@@ -294,11 +281,6 @@ contract DragonFactory is DragonBase {
 		dragon.fortitude = _fortitude;
 		dragon.hatchTime = _hatchTime;
 		dragon.blockchainOriginId = _blockchainOriginId;
-	}
-
-	function _generateRandomDna(string memory _str) private pure returns (uint256) {
-		uint256 rand = uint256(keccak256(abi.encodePacked(_str)));
-		return rand % dnaModulus;
 	}
 
 	function _getForeignTokenId(uint256 _localTokenId) internal view returns (uint256) {

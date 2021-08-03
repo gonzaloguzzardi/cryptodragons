@@ -1730,7 +1730,7 @@
     module "^1.2.5"
     original-require "^1.0.1"
 
-"@truffle/db@^0.5.19":
+"@truffle/db@^0.5.21":
   version "0.5.22"
   resolved "https://registry.yarnpkg.com/@truffle/db/-/db-0.5.22.tgz#ee2c5725f62dbd472f404d71b2e11c7c1b612408"
   integrity sha512-exISBxh2if4CxzxkvVH+Fub3m2IpXUd/YtgQmU07ioJ4okRkvudFILUgUVEpHcYyf8iO+dBRCZCjgw1MWBuz8w==
@@ -1755,7 +1755,7 @@
     pouchdb-find "^7.0.0"
     web3-utils "1.4.0"
 
-"@truffle/debugger@^9.1.4":
+"@truffle/debugger@^9.1.6":
   version "9.1.7"
   resolved "https://registry.yarnpkg.com/@truffle/debugger/-/debugger-9.1.7.tgz#215fb83be1ece96c84b83686fd6980f512fdb671"
   integrity sha512-jeVtwwQXsNyBsSLqD+KEijVh9FmqzcgqcPDNYuvF2Dbi685zQZgcHCd8M4gXN1nuA/MP+QDHMMS1thkqs7woOw==
@@ -12498,17 +12498,17 @@ truffle-privatekey-provider@1.5.0:
     ethereumjs-wallet "^1.0.0"
     web3-provider-engine "^15.0.12"
 
-truffle@5.3.14:
-  version "5.3.14"
-  resolved "https://registry.yarnpkg.com/truffle/-/truffle-5.3.14.tgz#e542a2316f2d9473d74b1aab86e2de39fc6e8472"
-  integrity sha512-ZLeuX6S8/cTdL+Lkoq+pJU2t+3Chnd/kOJSWIn2RZ+1W6iuAfppdMbN6C1SF3fCM2ERNi7CL2wsWs/2pYG2PRw==
+truffle@5.4.1:
+  version "5.4.1"
+  resolved "https://registry.yarnpkg.com/truffle/-/truffle-5.4.1.tgz#d5d471a8aeb46cef7707c069be00ac92dce64319"
+  integrity sha512-ji5Nkw9qTP6PUktf7DwkZqlJKOKFZRjNeWV73urvnO80gS9ZdM+zSYSxxqgtc53E3PLcVaaetNs8T4LzUYlkjw==
   dependencies:
-    "@truffle/debugger" "^9.1.4"
+    "@truffle/debugger" "^9.1.6"
     app-module-path "^2.2.0"
     mocha "8.1.2"
     original-require "^1.0.1"
   optionalDependencies:
-    "@truffle/db" "^0.5.19"
+    "@truffle/db" "^0.5.21"
     "@truffle/preserve-fs" "^0.2.3"
     "@truffle/preserve-to-buckets" "^0.2.3"
     "@truffle/preserve-to-filecoin" "^0.2.3"

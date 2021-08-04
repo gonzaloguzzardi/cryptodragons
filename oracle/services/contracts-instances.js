@@ -20,7 +20,7 @@ const {
 // MAINCHAIN CONTRACTS
 const web3MainChain = new Web3(new Web3.providers.WebsocketProvider(BFA_SOCKET_CONNECTION));
 const ownerAccount = fs.readFileSync(path.join(__dirname, '../misc/', 'mainchain_account'), 'utf-8');
-//web3MainChain.eth.accounts.wallet.add(ownerAccount);
+// web3MainChain.eth.accounts.wallet.add(ownerAccount);
 
 const MainChainGatewayABI = MainChainGatewayContract.abi;
 const MainchainDragonABI = MainchainDragonContract.abi;

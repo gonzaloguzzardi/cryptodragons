@@ -13,7 +13,7 @@ COPY . .
 RUN if test -d node_modules; then rm -r node_modules; fi
 
 # Run the command inside your image filesystem
-RUN yarn install
+RUN npm install --silent
 
 # Inform Docker that the container is listening on the specified port at runtime.
 EXPOSE 8001

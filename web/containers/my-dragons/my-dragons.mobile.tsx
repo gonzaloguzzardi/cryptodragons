@@ -11,7 +11,6 @@ import { tProps } from './types'
 
 function MyDragonsMobile({
   accountsState,
-  checkedGateways,
   checkedMainchain,
   checkedSidechain,
   handleCheckedChange,
@@ -28,7 +27,6 @@ function MyDragonsMobile({
     <>
       <AppToolbar deviceType="mobile" section="my-dragons" accountsState={accountsState} />
       <MyDragonsSearchContainerMobile
-        checkedGateways={checkedGateways}
         checkedMainchain={checkedMainchain}
         checkedSidechain={checkedSidechain}
         handleCheckedChange={handleCheckedChange}

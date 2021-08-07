@@ -5,7 +5,11 @@ import CircularProgress from '@material-ui/core/CircularProgress'
 import { tProps } from './types'
 import styles from './mobile.module.scss'
 
-export default function MyDragonsGridViewMobile({ dragons, loading }: tProps): ReactElement {
+export default function MyDragonsGridViewMobile({
+  dragons,
+  loading,
+  transferMethod,
+}: tProps): ReactElement {
   if (loading) {
     return <CircularProgress />
   }

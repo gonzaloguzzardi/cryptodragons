@@ -11,25 +11,24 @@ import FooterDesktop from '../../components/footer/desktop'
 import { tProps } from './types'
 
 function MyDragonsDesktop({
+  attribute,
   accountsState,
-  checkedGateways,
   checkedMainchain,
   checkedSidechain,
-  handleCheckedChange,
-  handleSearchChange,
-  search,
-  loading,
-  attribute,
+  dragons,
   handleChangeAttribute,
   handleChangeSelectLowHigh,
+  handleCheckedChange,
+  handleSearchChange,
+  loading,
   lowOrHigh,
-  dragons,
+  transferMethod,
+  search,
 }: tProps): ReactElement {
   return (
     <>
       <AppToolbar deviceType="desktop" section="my-dragons" accountsState={accountsState} />
       <MyDragonsSearchContainerDesktop
-        checkedGateways={checkedGateways}
         checkedMainchain={checkedMainchain}
         checkedSidechain={checkedSidechain}
         handleCheckedChange={handleCheckedChange}
@@ -40,7 +39,11 @@ function MyDragonsDesktop({
         lowOrHigh={lowOrHigh}
         handleChangeSelectLowHigh={handleChangeSelectLowHigh}
       />
-      <MyDragonsGridViewDesktop dragons={dragons} loading={loading} />
+      <MyDragonsGridViewDesktop
+        dragons={dragons}
+        loading={loading}
+        transferMethod={transferMethod}
+      />
       <FooterDesktop />
     </>
   )

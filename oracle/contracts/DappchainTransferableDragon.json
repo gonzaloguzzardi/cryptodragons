@@ -8367,12 +8367,12 @@
         }
       },
       "links": {},
-      "address": "0xb0A6d565323700453F08d30cb3e5575d1E4381c7",
-      "transactionHash": "0xc8d1c0c5e21bfdda871f876eeeedbded23561b5f5f13869c575831b5e9ce0110"
+      "address": "0xB19659ed5f386AE563f02F0E34FffAa20455810e",
+      "transactionHash": "0xb5233f888823a47e9832e75dd86f23778c8818d6734e04ab41e95253766fe6ac"
     }
   },
   "schemaVersion": "3.0.1",
-  "updatedAt": "2021-07-25T17:48:22.846Z",
+  "updatedAt": "2021-08-01T20:16:20.197Z",
   "devdoc": {
     "methods": {
       "approve(address,uint256)": {

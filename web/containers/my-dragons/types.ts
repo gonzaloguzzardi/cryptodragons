@@ -6,16 +6,16 @@ import { tDragon } from '../../types/data'
 
 export type tProps = {
   accountsState: any // @todo: complete
-  checkedGateways: boolean
+  attribute: number
   checkedMainchain: boolean
   checkedSidechain: boolean
+  dragons: tDragon[]
   handleCheckedChange: (event: React.ChangeEvent<HTMLInputElement>) => void
   handleSearchChange: (event: React.ChangeEvent<HTMLInputElement>) => void
-  search: string
-  loading: boolean
-  attribute: number
   handleChangeAttribute: (event: React.ChangeEvent<{ value: unknown }>) => void
   handleChangeSelectLowHigh: (event: React.ChangeEvent<{ value: unknown }>) => void
+  loading: boolean
   lowOrHigh: typeof LOW_TO_HIGH_VALUE | typeof HIGH_TO_LOW_VALUE
-  dragons: tDragon[]
+  transferMethod?: (id: string, location: string) => unknown
+  search: string
 }

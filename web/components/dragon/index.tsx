@@ -21,6 +21,7 @@ import dragonStyles from './dragon.module.scss'
 interface IProps {
   location: tDragonSrc
   id: string
+  transferMethod?: (id: string, location: string) => unknown
 }
 
 interface IState {
@@ -56,11 +57,15 @@ class Dragon extends Component<IProps, IState> {
   }
 
   getDragonData: () => unknown = () => {
-    if (this.state.location === 'SIDECHAIN') {
-      SidechainAPI.getDragonDataById(this.state.id).then((dragonData) => this.setState(dragonData))
+    if (this.state.location === 'SIDECHAIN' || this.state.location === 'SIDECHAIN_GATEWAY') {
+      SidechainAPI.getDragonDataById(this.state.id)
+        .then((dragonData) => this.setState(dragonData))
+        .catch((err) => console.error(err))
     }
-    if (this.state.location === 'MAINCHAIN') {
-      MainchainAPI.getDragonDataById(this.state.id).then((dragonData) => this.setState(dragonData))
+    if (this.state.location === 'MAINCHAIN' || this.state.location === 'MAINCHAIN_GATEWAY') {
+      MainchainAPI.getDragonDataById(this.state.id)
+        .then((dragonData) => this.setState(dragonData))
+        .catch((err) => console.error(err))
     }
   }
 
@@ -81,15 +86,19 @@ class Dragon extends Component<IProps, IState> {
   transfer: () => unknown = () => {
     this.setState({ fetching: true })
 
-    if (this.state.location === 'SIDECHAIN') {
-      SidechainAPI.transferDragon(this.state.id)
-        .then((res) => console.log('[SIDECHAIN]: Transfer to Mainchain response', res))
-        .catch(() => this.setState({ fetching: false }))
-    }
-    if (this.state.location === 'MAINCHAIN') {
-      MainchainAPI.transferDragon(this.state.id)
-        .then((res) => console.log('[MAINCHAIN]: Transfer to Sidechain response', res))
-        .catch(() => this.setState({ fetching: false }))
+    if (this.props.transferMethod) {
+      this.props.transferMethod(this.state.id, this.state.location)
+    } else {
+      if (this.state.location === 'SIDECHAIN') {
+        SidechainAPI.transferDragon(this.state.id)
+          .then((res) => console.log('[SIDECHAIN]: Transfer to Mainchain response', res))
+          .catch(() => this.setState({ fetching: false }))
+      }
+      if (this.state.location === 'MAINCHAIN') {
+        MainchainAPI.transferDragon(this.state.id)
+          .then((res) => console.log('[MAINCHAIN]: Transfer to Sidechain response', res))
+          .catch(() => this.setState({ fetching: false }))
+      }
     }
   }
 
@@ -161,7 +170,9 @@ class Dragon extends Component<IProps, IState> {
                 {`Transfer to ${this.props.location === 'SIDECHAIN' ? 'MAINCHAIN' : 'SIDECHAIN'}`}
               </Button>
             )}
-            {this.state.fetching && <CircularProgress color="secondary" />}
+            {(this.state.fetching || this.props.location.includes('GATEWAY')) && (
+              <CircularProgress color="secondary" />
+            )}
           </CardActions>
         </CardContent>
       </Card>

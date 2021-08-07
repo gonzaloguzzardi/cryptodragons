@@ -6,7 +6,8 @@ import MyDragonsMobile from './my-dragons.mobile'
 
 import MainchainAPI from '../../services/blockchain-interaction/mainchain'
 import SidechainAPI from '../../services/blockchain-interaction/sidechain'
-import { mapDragonsResults } from './utils'
+import { getDragonsFromOracleAPI } from '../../services/oracle'
+import { mapDragonsResults, updateDragonLocationError, updateDragonLocationOk } from './utils'
 import {
   LOW_TO_HIGH_VALUE,
   HIGH_TO_LOW_VALUE,
@@ -30,7 +31,6 @@ export default function MyDragons({ deviceType }: ISSRPropsDeviceOnly): ReactEle
   const [state, setState] = useState({
     checkedMainchain: true,
     checkedSidechain: true,
-    checkedGateways: true,
   })
   const handleCheckedChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setState({ ...state, [event.target.name]: event.target.checked })
@@ -40,13 +40,17 @@ export default function MyDragons({ deviceType }: ISSRPropsDeviceOnly): ReactEle
       (event.target.name === 'checkedMainchain' && !event.target.checked) ||
       (event.target.name !== 'checkedMainchain' && !state.checkedMainchain)
     ) {
-      finalDragons = finalDragons.filter((dragon) => dragon.source !== 'MAINCHAIN')
+      finalDragons = finalDragons.filter(
+        (dragon) => dragon.source !== 'MAINCHAIN' && dragon.source !== 'MAINCHAIN_GATEWAY'
+      )
     }
     if (
       (event.target.name === 'checkedSidechain' && !event.target.checked) ||
       (event.target.name !== 'checkedSidechain' && !state.checkedSidechain)
     ) {
-      finalDragons = finalDragons.filter((dragon) => dragon.source !== 'SIDECHAIN')
+      finalDragons = finalDragons.filter(
+        (dragon) => dragon.source !== 'SIDECHAIN' && dragon.source !== 'SIDECHAIN_GATEWAY'
+      )
     }
     setFilteredDragons(finalDragons)
   }
@@ -64,36 +68,82 @@ export default function MyDragons({ deviceType }: ISSRPropsDeviceOnly): ReactEle
     setLowOrHigh(lowOrHigh === LOW_TO_HIGH_VALUE ? HIGH_TO_LOW_VALUE : LOW_TO_HIGH_VALUE)
   }
 
-  useEffect(() => {
-    Promise.all([MainchainAPI.getMyDragons(), SidechainAPI.getMyDragons()]).then((results) => {
+  const updateDragons = (): void => {
+    console.log('Updating dragons')
+    Promise.all([
+      MainchainAPI.getMyDragons(),
+      SidechainAPI.getMyDragons(),
+      getDragonsFromOracleAPI(),
+    ]).then((results) => {
+      console.log(`Results: ${results}`)
       setDragons([
         ...mapDragonsResults(results[0], 'MAINCHAIN'),
         ...mapDragonsResults(results[1], 'SIDECHAIN'),
+        ...mapDragonsResults(results[2][0]['sidechain-gateway-results'], 'SIDECHAIN_GATEWAY'),
+        ...mapDragonsResults(results[2][1]['mainchain-gateway-results'], 'MAINCHAIN_GATEWAY'),
       ])
       setFilteredDragons([
         ...mapDragonsResults(results[0], 'MAINCHAIN'),
         ...mapDragonsResults(results[1], 'SIDECHAIN'),
+        ...mapDragonsResults(results[2][0]['sidechain-gateway-results'], 'SIDECHAIN_GATEWAY'),
+        ...mapDragonsResults(results[2][1]['mainchain-gateway-results'], 'MAINCHAIN_GATEWAY'),
       ])
       setLoading(false)
     })
+  }
+
+  useEffect(() => {
+    updateDragons()
+    setInterval(updateDragons, 7000)
   }, [])
+
+  const transferDragon = (id: string, location: string): void => {
+    setDragons((drgs) => updateDragonLocationOk(drgs, id, location))
+    setFilteredDragons((drgs) => updateDragonLocationOk(drgs, id, location))
+
+    console.log(`Starting ${id} - ${location}`)
+    if (location === 'SIDECHAIN') {
+      SidechainAPI.transferDragon(id)
+        .then(() => {
+          // setTimeout(updateDragons, 2000) We are using interval cause this callback was not being executed always..(weird)
+          console.log(`Dragon ${id} transferred to Mainchain successfully`)
+        })
+        .catch((err) => {
+          setDragons((drgs) => updateDragonLocationError(drgs, id, 'SIDECHAIN_GATEWAY'))
+          setFilteredDragons((drgs) => updateDragonLocationError(drgs, id, 'SIDECHAIN_GATEWAY'))
+          console.log(`Dragon ${id} error transferring to Mainchain: ${err}`)
+        })
+    }
+    if (location === 'MAINCHAIN') {
+      MainchainAPI.transferDragon(id)
+        .then(() => {
+          // setTimeout(updateDragons, 2000) We are using interval cause this callback was not being executed always..(weird)
+          console.log(`Dragon ${id} transferred to Sidechain successfully`)
+        })
+        .catch((err) => {
+          setDragons((drgs) => updateDragonLocationError(drgs, id, 'MAINCHAIN_GATEWAY'))
+          setFilteredDragons((drgs) => updateDragonLocationError(drgs, id, 'MAINCHAIN_GATEWAY'))
+          console.log(`Dragon ${id} error transferring to Sidechain: ${err}`)
+        })
+    }
+  }
 
   if (deviceType === 'desktop') {
     return (
       <MyDragonsCommons>
         <MyDragonsDesktop
-          checkedGateways={state.checkedGateways}
+          attribute={attribute}
           checkedMainchain={state.checkedMainchain}
           checkedSidechain={state.checkedSidechain}
+          dragons={filteredDragons}
+          handleChangeAttribute={handleChangeAttribute}
+          handleChangeSelectLowHigh={handleChangeSelectLowHigh}
           handleCheckedChange={handleCheckedChange}
           handleSearchChange={handleSearchChange}
-          search={search}
           loading={loading}
-          attribute={attribute}
-          handleChangeAttribute={handleChangeAttribute}
           lowOrHigh={lowOrHigh as tLowOHigh}
-          handleChangeSelectLowHigh={handleChangeSelectLowHigh}
-          dragons={filteredDragons}
+          transferMethod={transferDragon}
+          search={search}
         />
       </MyDragonsCommons>
     )
@@ -102,18 +152,18 @@ export default function MyDragons({ deviceType }: ISSRPropsDeviceOnly): ReactEle
   return (
     <MyDragonsCommons>
       <MyDragonsMobile
-        checkedGateways={state.checkedGateways}
+        attribute={attribute}
         checkedMainchain={state.checkedMainchain}
         checkedSidechain={state.checkedSidechain}
+        dragons={filteredDragons}
+        handleChangeAttribute={handleChangeAttribute}
+        handleChangeSelectLowHigh={handleChangeSelectLowHigh}
         handleCheckedChange={handleCheckedChange}
         handleSearchChange={handleSearchChange}
-        search={search}
         loading={loading}
-        attribute={attribute}
-        handleChangeAttribute={handleChangeAttribute}
         lowOrHigh={lowOrHigh as tLowOHigh}
-        handleChangeSelectLowHigh={handleChangeSelectLowHigh}
-        dragons={dragons}
+        transferMethod={transferDragon}
+        search={search}
       />
     </MyDragonsCommons>
   )

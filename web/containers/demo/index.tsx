@@ -34,7 +34,7 @@ class Demo extends Component<IProps> {
     super(props)
 
     this.state = {
-      sideAccount: '0x5484dbf29f1a1cbcbfe5810bd603a753c1aca7a3',
+      sideAccount: '0x8af72d72dbaef29a3c1963c3da7a1b54da97ce7c',
       mainAccount: '0xA64D35d224c85f239820a229CA3aCf5575d28Fdd',
 
       sideDragons: [],
@@ -178,7 +178,7 @@ class Demo extends Component<IProps> {
         </Grid>
         <Grid item>
           <Button variant="contained" color="primary" onClick={this.buyDragonInMainChain}>
-            Buy New Dragon in MainChain
+            Buy New Dragon in Mainchain
           </Button>
         </Grid>
       </Grid>
@@ -186,7 +186,7 @@ class Demo extends Component<IProps> {
       {/* Sidechain dragons - Mainchain dragons */}
       <Grid container justify="center" spacing={2}>
         <Grid item xs={6} className="containerGridDragonsItems">
-          <h3 className="chainsHeadings">Side Chain Dragons</h3>
+          <h3 className="chainsHeadings">Sidechain Dragons</h3>
           <Grid container spacing={2}>
             <Grid item>
               <Grid container spacing={2}>
@@ -202,7 +202,7 @@ class Demo extends Component<IProps> {
           </Grid>
         </Grid>
         <Grid item xs={6} className="containerGridDragonsItems">
-          <h3 className="chainsHeadings">Main Chain Dragons</h3>
+          <h3 className="chainsHeadings">Mainchain Dragons</h3>
           <Grid container spacing={2}>
             <Grid item>
               <Grid container spacing={2}>

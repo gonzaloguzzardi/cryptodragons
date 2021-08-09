@@ -22,6 +22,7 @@ interface IProps {
   location: tDragonSrc
   id: string
   transferMethod?: (id: string, location: string) => unknown
+  mappedAccounts: boolean
 }
 
 interface IState {
@@ -158,18 +159,20 @@ class Dragon extends Component<IProps, IState> {
           </Grid>
 
           <CardContent>
-            <Grid container justify="center" spacing={2}>
+            <Grid container justify="center">
               <Typography variant="caption">Location:&nbsp;</Typography>
               <Chip color="secondary" size="small" label={<b>{this.state.location}</b>} />
             </Grid>
           </CardContent>
 
           <CardActions style={{ justifyContent: 'center' }}>
-            {!this.props.location.includes('GATEWAY') && !this.state.fetching && (
-              <Button variant="contained" color="secondary" onClick={this.transfer}>
-                {`Transfer to ${this.props.location === 'SIDECHAIN' ? 'MAINCHAIN' : 'SIDECHAIN'}`}
-              </Button>
-            )}
+            {!this.props.location.includes('GATEWAY') &&
+              !this.state.fetching &&
+              this.props.mappedAccounts && (
+                <Button variant="contained" color="secondary" onClick={this.transfer}>
+                  {`Transfer to ${this.props.location === 'SIDECHAIN' ? 'MAINCHAIN' : 'SIDECHAIN'}`}
+                </Button>
+              )}
             {(this.state.fetching || this.props.location.includes('GATEWAY')) && (
               <CircularProgress color="secondary" />
             )}

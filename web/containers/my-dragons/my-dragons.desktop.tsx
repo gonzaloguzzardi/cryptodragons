@@ -43,6 +43,7 @@ function MyDragonsDesktop({
         dragons={dragons}
         loading={loading}
         transferMethod={transferMethod}
+        mappedAccounts={accountsState && accountsState.mapped_accounts}
       />
       <FooterDesktop />
     </>

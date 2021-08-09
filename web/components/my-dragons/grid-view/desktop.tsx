@@ -10,6 +10,7 @@ export default function MyDragonsGridViewDesktop({
   dragons,
   loading,
   transferMethod,
+  mappedAccounts,
 }: tProps): ReactElement {
   if (loading) {
     return (
@@ -31,6 +32,7 @@ export default function MyDragonsGridViewDesktop({
               id={dragon.id}
               location={dragon.source}
               transferMethod={transferMethod}
+              mappedAccounts={mappedAccounts}
             />
           ))}
       </div>

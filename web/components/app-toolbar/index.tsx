@@ -191,7 +191,7 @@ export default function AppToolbar({ accountsState, deviceType, section }: IProp
       </AppBar>
       <Toolbar id="back-to-top-anchor" />
 
-      {accountsState && !accountsState.mapped_accounts && (
+      {section === 'my-dragons' && accountsState && !accountsState.mapped_accounts && (
         <Alert severity="warning">
           {
             'You need to map your Mainchain & Sidechain accounts before being able to transfer your CryptoDragons between them!  '

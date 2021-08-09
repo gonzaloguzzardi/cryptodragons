@@ -75,6 +75,8 @@ export default function MyDragons({ deviceType }: ISSRPropsDeviceOnly): ReactEle
       SidechainAPI.getMyDragons(),
       getDragonsFromOracleAPI(),
     ]).then((results) => {
+      if (!results) return setLoading(false)
+
       console.log(`Results: ${results}`)
       setDragons([
         ...mapDragonsResults(results[0], 'MAINCHAIN'),

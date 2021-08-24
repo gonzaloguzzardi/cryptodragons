@@ -93,7 +93,7 @@ class MainchainAPI {
   static async getMyDragons(gas = GAS_DEFAULT_VALUE) {
     try {
       const {
-        tokenContract: contract,
+        dragonApiContract: contract,
         account: ownerAccount,
       } = await MainchainAPI.getClientHelper()
       return await CommonAPI.sGetMyDragons(contract, ownerAccount, gas)

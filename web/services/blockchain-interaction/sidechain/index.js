@@ -44,7 +44,7 @@ class SidechainAPI {
   static async getMyDragons(gas = GAS_DEFAULT_VALUE) {
     try {
       const {
-        tokenContract: contract,
+        dragonApiContract: contract,
         account: ownerAccount,
       } = await SidechainAPI.getClientHelper()
 

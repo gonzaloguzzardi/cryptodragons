@@ -44,7 +44,7 @@
 		"truffle": "5.4.1", 
 		"truffle-contract-size": "2.0.1",
 		"truffle-privatekey-provider": "1.5.0",
-		"web3": "1.4.0"
+		"web3": "1.5.0"
 	},
 	"devDependencies": {
 		"eslint": "5.16.0",

@@ -96,7 +96,7 @@ export default function MyDragons({ deviceType }: ISSRPropsDeviceOnly): ReactEle
 
   useEffect(() => {
     updateDragons()
-    setInterval(updateDragons, 7000)
+    setInterval(updateDragons, 18000)
   }, [])
 
   const transferDragon = (id: string, location: string): void => {
@@ -130,43 +130,32 @@ export default function MyDragons({ deviceType }: ISSRPropsDeviceOnly): ReactEle
     }
   }
 
+  const commonProps = {
+    attribute,
+    checkedMainchain: state.checkedMainchain,
+    checkedSidechain: state.checkedSidechain,
+    dragons: filteredDragons,
+    handleChangeAttribute: handleChangeAttribute,
+    handleChangeSelectLowHigh: handleChangeSelectLowHigh,
+    handleCheckedChange: handleCheckedChange,
+    handleSearchChange: handleSearchChange,
+    loading: loading,
+    lowOrHigh: lowOrHigh as tLowOHigh,
+    transferMethod: transferDragon,
+    search,
+  }
+
   if (deviceType === 'desktop') {
     return (
       <MyDragonsCommons>
-        <MyDragonsDesktop
-          attribute={attribute}
-          checkedMainchain={state.checkedMainchain}
-          checkedSidechain={state.checkedSidechain}
-          dragons={filteredDragons}
-          handleChangeAttribute={handleChangeAttribute}
-          handleChangeSelectLowHigh={handleChangeSelectLowHigh}
-          handleCheckedChange={handleCheckedChange}
-          handleSearchChange={handleSearchChange}
-          loading={loading}
-          lowOrHigh={lowOrHigh as tLowOHigh}
-          transferMethod={transferDragon}
-          search={search}
-        />
+        <MyDragonsDesktop {...commonProps} />
       </MyDragonsCommons>
     )
   }
 
   return (
     <MyDragonsCommons>
-      <MyDragonsMobile
-        attribute={attribute}
-        checkedMainchain={state.checkedMainchain}
-        checkedSidechain={state.checkedSidechain}
-        dragons={filteredDragons}
-        handleChangeAttribute={handleChangeAttribute}
-        handleChangeSelectLowHigh={handleChangeSelectLowHigh}
-        handleCheckedChange={handleCheckedChange}
-        handleSearchChange={handleSearchChange}
-        loading={loading}
-        lowOrHigh={lowOrHigh as tLowOHigh}
-        transferMethod={transferDragon}
-        search={search}
-      />
+      <MyDragonsMobile {...commonProps} />
     </MyDragonsCommons>
   )
 }

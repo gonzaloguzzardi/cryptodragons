@@ -11,17 +11,18 @@ import { tProps } from './types'
 
 function MyDragonsMobile({
   accountsState,
+  attribute,
   checkedMainchain,
   checkedSidechain,
+  dragons,
   handleCheckedChange,
   handleSearchChange,
-  search,
-  loading,
-  attribute,
   handleChangeAttribute,
   handleChangeSelectLowHigh,
+  loading,
   lowOrHigh,
-  dragons,
+  search,
+  transferMethod,
 }: tProps): ReactElement {
   return (
     <>
@@ -37,7 +38,12 @@ function MyDragonsMobile({
         lowOrHigh={lowOrHigh}
         handleChangeSelectLowHigh={handleChangeSelectLowHigh}
       />
-      <MyDragonsGridViewMobile dragons={dragons} loading={loading} />
+      <MyDragonsGridViewMobile
+        dragons={dragons}
+        loading={loading}
+        transferMethod={transferMethod}
+        mappedAccounts={accountsState && accountsState.mapped_accounts}
+      />
       <FooterMobile />
     </>
   )

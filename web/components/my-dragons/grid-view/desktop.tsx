@@ -9,8 +9,8 @@ import styles from './desktop.module.scss'
 export default function MyDragonsGridViewDesktop({
   dragons,
   loading,
-  transferMethod,
   mappedAccounts,
+  transferMethod,
 }: tProps): ReactElement {
   if (loading) {
     return (
@@ -31,8 +31,8 @@ export default function MyDragonsGridViewDesktop({
               key={`${dragon.source}_${dragon.id}`}
               id={dragon.id}
               location={dragon.source}
-              transferMethod={transferMethod}
               mappedAccounts={mappedAccounts}
+              transferMethod={transferMethod}
             />
           ))}
       </div>

@@ -11,8 +11,8 @@ import FooterDesktop from '../../components/footer/desktop'
 import { tProps } from './types'
 
 function MyDragonsDesktop({
-  attribute,
   accountsState,
+  attribute,
   checkedMainchain,
   checkedSidechain,
   dragons,
@@ -22,8 +22,8 @@ function MyDragonsDesktop({
   handleSearchChange,
   loading,
   lowOrHigh,
-  transferMethod,
   search,
+  transferMethod,
 }: tProps): ReactElement {
   return (
     <>

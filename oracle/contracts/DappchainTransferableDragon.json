@@ -8368,11 +8368,11 @@
       },
       "links": {},
       "address": "0xb0A6d565323700453F08d30cb3e5575d1E4381c7",
-      "transactionHash": "0xce53e133ae7b599a02a51a11d2f13936e155caf0b0f8806ed925013fdd43e79e"
+      "transactionHash": "0x92cd43db54f3e84b9899d6ea20b64913a391e874c54162cb53e8061ebf507ba6"
     }
   },
   "schemaVersion": "3.0.1",
-  "updatedAt": "2021-08-08T22:52:23.121Z",
+  "updatedAt": "2021-08-25T15:00:36.347Z",
   "devdoc": {
     "methods": {
       "approve(address,uint256)": {

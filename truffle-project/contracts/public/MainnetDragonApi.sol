@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0 License
 
-pragma solidity 0.8.4;
+pragma solidity ^0.8.0;
 
 import './DragonApi.sol';
 import '../common/ownership/Ownable.sol';

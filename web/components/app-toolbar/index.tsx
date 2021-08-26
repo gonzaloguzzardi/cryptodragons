@@ -2,6 +2,7 @@ import Alert from '@material-ui/lab/Alert'
 import AppBar from '@material-ui/core/AppBar'
 import Fab from '@material-ui/core/Fab'
 import IconButton from '@material-ui/core/IconButton'
+import LinearProgress from '@material-ui/core/LinearProgress'
 import { Link as LinkComponent } from '@material-ui/core'
 import MenuBookIcon from '@material-ui/icons/MenuBook'
 import PetsIcon from '@material-ui/icons/Pets'
@@ -77,6 +78,7 @@ interface IProps {
 
 export default function AppToolbar({ accountsState, deviceType, section }: IProps): ReactElement {
   const [modalState, setModalState] = useState({ open: false, type: null })
+  const [loadingState, setLoadingState] = useState(false)
 
   function onConnectMetamask(accountsState): void {
     if (!isChromeBrowser()) {
@@ -102,15 +104,20 @@ export default function AppToolbar({ accountsState, deviceType, section }: IProp
   const mapAccounts: (event, accountsState) => unknown = () => {
     event.preventDefault()
     onConnectMetamask(accountsState)
+    setLoadingState(true)
 
     Promise.all([
       MainchainAPI.mapAccountToSidechainAccount(accountsState.sidechain_account),
       SidechainAPI.mapAccountToMainchainAccount(accountsState.mainchain_account),
-    ]).then((values) => {
-      console.log('[MAINCHAIN]: MAPEO EN MAINCHAIN', values[0])
-      console.log('[SIDECHAIN]: MAPEO EN SIDECHAIN', values[1])
-      accountsState.updateAccountsData()
-    })
+    ])
+      .then((values) => {
+        console.log('[MAINCHAIN]: MAPEO EN MAINCHAIN', values[0])
+        console.log('[SIDECHAIN]: MAPEO EN SIDECHAIN', values[1])
+        accountsState.updateAccountsData()
+      })
+      .finally(() => {
+        setInterval(() => setLoadingState(false), 1500)
+      })
   }
 
   return (
@@ -191,16 +198,25 @@ export default function AppToolbar({ accountsState, deviceType, section }: IProp
       </AppBar>
       <Toolbar id="back-to-top-anchor" />
 
-      {section === 'my-dragons' && accountsState && !accountsState.mapped_accounts && (
-        <Alert severity="warning">
-          {
-            'You need to map your Mainchain & Sidechain accounts before being able to transfer your CryptoDragons between them!  '
-          }
-          <LinkComponent href="#" color="secondary" onClick={(e) => mapAccounts(e, accountsState)}>
-            {'Map Accounts'}
-          </LinkComponent>
-        </Alert>
-      )}
+      {section === 'my-dragons' &&
+        accountsState &&
+        !accountsState.mapped_accounts &&
+        !loadingState && (
+          <Alert severity="warning">
+            {
+              'You need to map your Mainchain & Sidechain accounts before being able to transfer your CryptoDragons between them!  '
+            }
+            <LinkComponent
+              href="#"
+              color="secondary"
+              onClick={(e) => mapAccounts(e, accountsState)}
+            >
+              {'Map Accounts'}
+            </LinkComponent>
+          </Alert>
+        )}
+
+      {loadingState && <LinearProgress color="secondary" />}
 
       <ScrollTop>
         <Fab color="secondary" size="large" aria-label="Scroll back to top">

@@ -76,7 +76,7 @@ export default function MyDragons({ deviceType }: ISSRPropsDeviceOnly): ReactEle
       getDragonsFromOracleAPI(),
     ]).then((results) => {
       console.log(`Results: ${results}`)
-      if (!results || results.length < 3) return setLoading(false)
+      if (!results || !results[0] || !results[1] || !results[2]) return setLoading(false)
 
       setDragons([
         ...mapDragonsResults(results[0], 'MAINCHAIN'),

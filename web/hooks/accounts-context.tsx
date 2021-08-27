@@ -73,15 +73,20 @@ const AccountsProvider = ({ children }: { children: ReactNode }): ReactElement =
       .catch((err) => console.error('Connect provider error:', err))
   }
 
-  useEffect(() => {
+  const updateAccountsData = () => {
     MainchainAPI.getClientHelper().then((mainchainData) =>
       fetchAndSetAllAccountsData(mainchainData, setData)
     )
+  }
+
+  useEffect(() => {
+    updateAccountsData()
   }, [])
 
   const store = {
     ...data,
     connectToProvider,
+    updateAccountsData,
   }
 
   return <AccountsContext.Provider value={store}>{children}</AccountsContext.Provider>

@@ -1,5 +1,12 @@
 .container {
-  max-width: 200px;
+  max-width: 250px;
+  user-select: 'none';
+}
+
+.card {
+  height: 140px;
+  display: flex;
+  padding-left: 25%;
 }
 
 .card {

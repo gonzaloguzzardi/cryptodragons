@@ -13,7 +13,6 @@ import { tComponentProps } from './types'
 import styles from './mobile.module.scss'
 
 export default function MyDragonsSearchContainerMobile({
-  checkedGateways,
   checkedMainchain,
   checkedSidechain,
   handleCheckedChange,
@@ -51,18 +50,7 @@ export default function MyDragonsSearchContainerMobile({
                   size="small"
                 />
               }
-              label={<Typography variant="caption">Appchain</Typography>}
-            />
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={checkedGateways}
-                  onChange={handleCheckedChange}
-                  name="checkedGateways"
-                  size="small"
-                />
-              }
-              label={<Typography variant="caption">Gateways</Typography>}
+              label={<Typography variant="caption">Sidechain</Typography>}
             />
           </div>
 

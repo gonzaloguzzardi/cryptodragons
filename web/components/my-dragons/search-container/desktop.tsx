@@ -13,7 +13,6 @@ import { tComponentProps } from './types'
 import styles from './desktop.module.scss'
 
 export default function MyDragonsSearchContainerDesktop({
-  checkedGateways,
   checkedMainchain,
   checkedSidechain,
   handleCheckedChange,
@@ -49,17 +48,7 @@ export default function MyDragonsSearchContainerDesktop({
                   name="checkedSidechain"
                 />
               }
-              label={<Typography variant="caption">in Appchain</Typography>}
-            />
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={checkedGateways}
-                  onChange={handleCheckedChange}
-                  name="checkedGateways"
-                />
-              }
-              label={<Typography variant="caption">in Gateways</Typography>}
+              label={<Typography variant="caption">in Sidechain</Typography>}
             />
           </div>
 

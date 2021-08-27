@@ -27,7 +27,7 @@ function findAccounts(event, database, url, collection) {
       const dbo = db.db(database);
       dbo
         .collection(collection)
-        .find( event )
+        .find(event)
         .toArray((error, results) => {
           db.close();
           if (error) return rej(error);
@@ -37,7 +37,6 @@ function findAccounts(event, database, url, collection) {
     });
   });
 }
-
 
 function collectEventsFromSidechainGateway(database, url, collection) {
   return collectEvents('SendDragonToMainchainAttempt', database, url, collection);
@@ -62,7 +61,7 @@ function insertOnMongo(database, url, transaction, collection) {
 }
 
 function cleanCollection(database, url, collection) {
-  console.log("Cleaning collection " + collection);
+  console.log(`Cleaning collection ${collection}`);
   return new Promise((res, rej) => {
     MongoClient.connect(url, mongoClientOptions, (err, db) => {
       const dbo = db.db(database);

@@ -4,6 +4,7 @@ import Card from '@material-ui/core/Card'
 import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent'
 import CardMedia from '@material-ui/core/CardMedia'
+import Chip from '@material-ui/core/Chip'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
@@ -20,6 +21,9 @@ import dragonStyles from './dragon.module.scss'
 interface IProps {
   location: tDragonSrc
   id: string
+  key: string
+  transferMethod?: (id: string, location: string) => unknown
+  mappedAccounts: boolean
 }
 
 interface IState {
@@ -55,11 +59,15 @@ class Dragon extends Component<IProps, IState> {
   }
 
   getDragonData: () => unknown = () => {
-    if (this.state.location === 'SIDECHAIN') {
-      SidechainAPI.getDragonDataById(this.state.id).then((dragonData) => this.setState(dragonData))
+    if (this.state.location === 'SIDECHAIN' || this.state.location === 'SIDECHAIN_GATEWAY') {
+      SidechainAPI.getDragonDataById(this.state.id)
+        .then((dragonData) => this.setState(dragonData))
+        .catch((err) => console.error(err))
     }
-    if (this.state.location === 'MAINCHAIN') {
-      MainchainAPI.getDragonDataById(this.state.id).then((dragonData) => this.setState(dragonData))
+    if (this.state.location === 'MAINCHAIN' || this.state.location === 'MAINCHAIN_GATEWAY') {
+      MainchainAPI.getDragonDataById(this.state.id)
+        .then((dragonData) => this.setState(dragonData))
+        .catch((err) => console.error(err))
     }
   }
 
@@ -80,24 +88,31 @@ class Dragon extends Component<IProps, IState> {
   transfer: () => unknown = () => {
     this.setState({ fetching: true })
 
-    if (this.state.location === 'SIDECHAIN') {
-      SidechainAPI.transferDragon(this.state.id)
-        .then((res) => console.log('[SIDECHAIN]: Transfer to Mainchain response', res))
-        .catch(() => this.setState({ fetching: false }))
-    }
-    if (this.state.location === 'MAINCHAIN') {
-      MainchainAPI.transferDragon(this.state.id)
-        .then((res) => console.log('[MAINCHAIN]: Transfer to Sidechain response', res))
-        .catch(() => this.setState({ fetching: false }))
+    if (this.props.transferMethod) {
+      this.props.transferMethod(this.state.id, this.state.location)
+    } else {
+      if (this.state.location === 'SIDECHAIN') {
+        SidechainAPI.transferDragon(this.state.id)
+          .then((res) => console.log('[SIDECHAIN]: Transfer to Mainchain response', res))
+          .catch(() => this.setState({ fetching: false }))
+      }
+      if (this.state.location === 'MAINCHAIN') {
+        MainchainAPI.transferDragon(this.state.id)
+          .then((res) => console.log('[MAINCHAIN]: Transfer to Sidechain response', res))
+          .catch(() => this.setState({ fetching: false }))
+      }
     }
   }
 
   render: () => ReactNode = () => {
     return (
-      <Card className={dragonStyles.container}>
+      <Card className={dragonStyles.container} raised>
         <CardContent>
           <Typography color="textSecondary" align="center" gutterBottom>
-            #{this.state.id} {this.state.name}
+            #{this.state.id}
+          </Typography>
+          <Typography color="textSecondary" align="center" noWrap gutterBottom>
+            {this.state.name}
           </Typography>
 
           <CardMedia className={dragonStyles.card}>
@@ -120,30 +135,50 @@ class Dragon extends Component<IProps, IState> {
           <Grid container justify="center" spacing={2}>
             <Grid item>
               <img src={'/assets/corazon.svg'} alt="" width="20" height="20" />
-              <p>{this.state.health}</p>
+              <Typography variant="body2" align="center">
+                {this.state.health}
+              </Typography>
             </Grid>
             <Grid item>
               <img src={'/assets/reloj.svg'} alt="" width="20" height="20" />
-              <p>{this.state.agility}</p>
+              <Typography variant="body2" align="center">
+                {this.state.agility}
+              </Typography>
             </Grid>
             <Grid item>
               <img src={'/assets/espada.svg'} alt="" width="20" height="20" />
-              <p>{this.state.strength}</p>
+              <Typography variant="body2" align="center">
+                {this.state.strength}
+              </Typography>
             </Grid>
             <Grid item>
               <img src={'/assets/escudo.svg'} alt="" width="20" height="20" />
-              <p>{this.state.fortitude}</p>
+              <Typography variant="body2" align="center">
+                {this.state.fortitude}
+              </Typography>
             </Grid>
           </Grid>
+
+          <CardContent>
+            <Grid container justify="center">
+              <Typography variant="caption">Location:&nbsp;</Typography>
+              <Chip color="secondary" size="small" label={<b>{this.state.location}</b>} />
+            </Grid>
+          </CardContent>
+
+          <CardActions style={{ justifyContent: 'center' }}>
+            {!this.props.location.includes('GATEWAY') &&
+              !this.state.fetching &&
+              this.props.mappedAccounts && (
+                <Button variant="contained" color="secondary" onClick={this.transfer}>
+                  {`Transfer to ${this.props.location === 'SIDECHAIN' ? 'MAINCHAIN' : 'SIDECHAIN'}`}
+                </Button>
+              )}
+            {(this.state.fetching || this.props.location.includes('GATEWAY')) && (
+              <CircularProgress color="secondary" />
+            )}
+          </CardActions>
         </CardContent>
-        <CardActions style={{ justifyContent: 'center' }}>
-          {!this.props.location.includes('GATEWAY') && !this.state.fetching && (
-            <Button variant="contained" color="primary" onClick={this.transfer}>
-              Transfer
-            </Button>
-          )}
-          {this.state.fetching && <CircularProgress color="secondary" />}
-        </CardActions>
       </Card>
     )
   }

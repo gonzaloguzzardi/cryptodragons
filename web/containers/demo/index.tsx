@@ -11,7 +11,7 @@ import FormLabel from '@material-ui/core/FormLabel'
 
 import MainchainAPI from '../../services/blockchain-interaction/mainchain'
 import SidechainAPI from '../../services/blockchain-interaction/sidechain'
-// import { _getDragonsFromOracle } from '../../services/oracle'
+import { getDragonsFromOracleAPI } from '../../services/oracle'
 import { ReactElement } from 'react'
 
 interface IProps {
@@ -34,7 +34,7 @@ class Demo extends Component<IProps> {
     super(props)
 
     this.state = {
-      sideAccount: '0x1a79d28bde90f8fff0c0e0716286e808635fe30d',
+      sideAccount: '0xa6870913263de49b430f5a9f26f54d2e22151432',
       mainAccount: '0xA64D35d224c85f239820a229CA3aCf5575d28Fdd',
 
       sideDragons: [],
@@ -79,12 +79,13 @@ class Demo extends Component<IProps> {
   }
 
   getDragonsFromOracle: () => unknown = () => {
-    // _getDragonsFromOracle().then((result) => {
-    //   this.setState({
-    //     sidechainGatewayDragons: result[0]['sidechain-gateway-results'],
-    //     mainchainGatewayDragons: result[1]['mainchain-gateway-results'],
-    //   })
-    // })
+    getDragonsFromOracleAPI().then((result) => {
+      result &&
+        this.setState({
+          sidechainGatewayDragons: result[0]['sidechain-gateway-results'],
+          mainchainGatewayDragons: result[1]['mainchain-gateway-results'],
+        })
+    })
   }
 
   buyDragonInSideChain: () => unknown = () => {
@@ -104,8 +105,8 @@ class Demo extends Component<IProps> {
       MainchainAPI.mapAccountToSidechainAccount(this.state.sideAccount),
       SidechainAPI.mapAccountToMainchainAccount(this.state.mainAccount),
     ]).then((values) => {
-      console.log('[MAINCHAIN]: MAPEO EN MAINCHAIN', values[1])
-      console.log('[SIDECHAIN]: MAPEO EN SIDECHAIN', values[0])
+      console.log('[MAINCHAIN]: MAPEO EN MAINCHAIN', values[0])
+      console.log('[SIDECHAIN]: MAPEO EN SIDECHAIN', values[1])
       this.accountsAreMapped()
     })
   }
@@ -177,7 +178,7 @@ class Demo extends Component<IProps> {
         </Grid>
         <Grid item>
           <Button variant="contained" color="primary" onClick={this.buyDragonInMainChain}>
-            Buy New Dragon in MainChain
+            Buy New Dragon in Mainchain
           </Button>
         </Grid>
       </Grid>
@@ -185,7 +186,7 @@ class Demo extends Component<IProps> {
       {/* Sidechain dragons - Mainchain dragons */}
       <Grid container justify="center" spacing={2}>
         <Grid item xs={6} className="containerGridDragonsItems">
-          <h3 className="chainsHeadings">Side Chain Dragons</h3>
+          <h3 className="chainsHeadings">Sidechain Dragons</h3>
           <Grid container spacing={2}>
             <Grid item>
               <Grid container spacing={2}>
@@ -201,7 +202,7 @@ class Demo extends Component<IProps> {
           </Grid>
         </Grid>
         <Grid item xs={6} className="containerGridDragonsItems">
-          <h3 className="chainsHeadings">Main Chain Dragons</h3>
+          <h3 className="chainsHeadings">Mainchain Dragons</h3>
           <Grid container spacing={2}>
             <Grid item>
               <Grid container spacing={2}>
@@ -225,8 +226,8 @@ class Demo extends Component<IProps> {
           <Grid container justify="center" spacing={2}>
             {this.state.sidechainGatewayDragons
               ? this.state.sidechainGatewayDragons.map((value) => (
-                  <Grid key={value['uid']} item>
-                    <Dragon location="SIDECHAIN_GATEWAY" id={value['uid']} />
+                  <Grid key={value} item>
+                    <Dragon location="SIDECHAIN_GATEWAY" id={value} />
                   </Grid>
                 ))
               : null}
@@ -237,8 +238,8 @@ class Demo extends Component<IProps> {
           <Grid container justify="center" spacing={2}>
             {this.state.mainchainGatewayDragons
               ? this.state.mainchainGatewayDragons.map((value) => (
-                  <Grid key={value['uid']} item>
-                    <Dragon location="MAINCHAIN_GATEWAY" id={value['uid']} />
+                  <Grid key={value} item>
+                    <Dragon location="MAINCHAIN_GATEWAY" id={value} />
                   </Grid>
                 ))
               : null}

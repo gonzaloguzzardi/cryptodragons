@@ -20,3 +20,30 @@ export const updateDragonLocationError = (dragons: any[], id, src): any[] =>
   dragons.map((d) =>
     d.id === id && d.source === src ? { ...d, source: DRAGONS_DST_ERROR[src] } : d
   )
+
+export function updateDragonsBasedOnSearchFilters(
+  dragons: any[],
+  name: string,
+  checked: boolean,
+  checkedMainchain: boolean,
+  checkedSidechain: boolean
+): any[] {
+  let finalDragons = dragons
+  if (
+    (name === 'checkedMainchain' && !checked) ||
+    (name !== 'checkedMainchain' && !checkedMainchain)
+  ) {
+    finalDragons = finalDragons.filter(
+      (dragon) => dragon.source !== 'MAINCHAIN' && dragon.source !== 'MAINCHAIN_GATEWAY'
+    )
+  }
+  if (
+    (name === 'checkedSidechain' && !checked) ||
+    (name !== 'checkedSidechain' && !checkedSidechain)
+  ) {
+    finalDragons = finalDragons.filter(
+      (dragon) => dragon.source !== 'SIDECHAIN' && dragon.source !== 'SIDECHAIN_GATEWAY'
+    )
+  }
+  return finalDragons
+}

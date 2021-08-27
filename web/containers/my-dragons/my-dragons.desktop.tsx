@@ -16,6 +16,7 @@ function MyDragonsDesktop({
   checkedMainchain,
   checkedSidechain,
   dragons,
+  filteredDragons,
   handleChangeAttribute,
   handleChangeSelectLowHigh,
   handleCheckedChange,
@@ -41,6 +42,7 @@ function MyDragonsDesktop({
       />
       <MyDragonsGridViewDesktop
         dragons={dragons}
+        filteredDragons={filteredDragons}
         loading={loading}
         transferMethod={transferMethod}
         mappedAccounts={accountsState && accountsState.mapped_accounts}

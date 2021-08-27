@@ -15,6 +15,7 @@ function MyDragonsMobile({
   checkedMainchain,
   checkedSidechain,
   dragons,
+  filteredDragons,
   handleCheckedChange,
   handleSearchChange,
   handleChangeAttribute,
@@ -40,6 +41,7 @@ function MyDragonsMobile({
       />
       <MyDragonsGridViewMobile
         dragons={dragons}
+        filteredDragons={filteredDragons}
         loading={loading}
         transferMethod={transferMethod}
         mappedAccounts={accountsState && accountsState.mapped_accounts}

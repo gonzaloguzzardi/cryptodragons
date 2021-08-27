@@ -10,6 +10,7 @@ export type tProps = {
   checkedMainchain: boolean
   checkedSidechain: boolean
   dragons: tDragon[]
+  filteredDragons: tDragon[]
   handleCheckedChange: (event: React.ChangeEvent<HTMLInputElement>) => void
   handleSearchChange: (event: React.ChangeEvent<HTMLInputElement>) => void
   handleChangeAttribute: (event: React.ChangeEvent<{ value: unknown }>) => void

@@ -8,6 +8,7 @@ import styles from './desktop.module.scss'
 
 export default function MyDragonsGridViewDesktop({
   dragons,
+  filteredDragons,
   loading,
   mappedAccounts,
   transferMethod,
@@ -23,10 +24,11 @@ export default function MyDragonsGridViewDesktop({
   return (
     <div className={styles.main}>
       <div className={styles.container}>
-        {dragons.length === 0 && <BuyDragonCard />}
+        {filteredDragons.length === 0 && dragons.length === 0 && <BuyDragonCard />}
+        {filteredDragons.length === 0 && dragons.length > 0 && <p>Try another search</p>}
 
-        {dragons.length > 0 &&
-          dragons.map((dragon) => (
+        {filteredDragons.length > 0 &&
+          filteredDragons.map((dragon) => (
             <Dragon
               key={`${dragon.source}_${dragon.id}`}
               id={dragon.id}

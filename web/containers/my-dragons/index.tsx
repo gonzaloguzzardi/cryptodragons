@@ -1,4 +1,4 @@
-import React, { ReactElement, useEffect, useState } from 'react'
+import React, { ReactElement, useEffect, useRef, useState } from 'react'
 
 import MyDragonsCommons from './my-dragons'
 import MyDragonsDesktop from './my-dragons.desktop'
@@ -7,7 +7,12 @@ import MyDragonsMobile from './my-dragons.mobile'
 import MainchainAPI from '../../services/blockchain-interaction/mainchain'
 import SidechainAPI from '../../services/blockchain-interaction/sidechain'
 import { getDragonsFromOracleAPI } from '../../services/oracle'
-import { mapDragonsResults, updateDragonLocationError, updateDragonLocationOk } from './utils'
+import {
+  mapDragonsResults,
+  updateDragonLocationError,
+  updateDragonLocationOk,
+  updateDragonsBasedOnSearchFilters,
+} from './utils'
 import {
   LOW_TO_HIGH_VALUE,
   HIGH_TO_LOW_VALUE,
@@ -28,31 +33,18 @@ export default function MyDragons({ deviceType }: ISSRPropsDeviceOnly): ReactEle
   }
 
   // Checkbox - change
-  const [state, setState] = useState({
-    checkedMainchain: true,
-    checkedSidechain: true,
-  })
+  const checkedMainchain = useRef(true)
+  const checkedSidechain = useRef(true)
   const handleCheckedChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    setState({ ...state, [event.target.name]: event.target.checked })
-
-    let finalDragons = [...dragons]
-    if (
-      (event.target.name === 'checkedMainchain' && !event.target.checked) ||
-      (event.target.name !== 'checkedMainchain' && !state.checkedMainchain)
-    ) {
-      finalDragons = finalDragons.filter(
-        (dragon) => dragon.source !== 'MAINCHAIN' && dragon.source !== 'MAINCHAIN_GATEWAY'
-      )
+    if (event.target.name === 'checkedMainchain') {
+      checkedMainchain.current = event.target.checked
     }
-    if (
-      (event.target.name === 'checkedSidechain' && !event.target.checked) ||
-      (event.target.name !== 'checkedSidechain' && !state.checkedSidechain)
-    ) {
-      finalDragons = finalDragons.filter(
-        (dragon) => dragon.source !== 'SIDECHAIN' && dragon.source !== 'SIDECHAIN_GATEWAY'
-      )
+    if (event.target.name === 'checkedSidechain') {
+      checkedSidechain.current = event.target.checked
     }
-    setFilteredDragons(finalDragons)
+    setFilteredDragons(
+      updateDragonsBasedOnSearchFilters(dragons, event.target.name, event.target.checked, checkedMainchain.current, checkedSidechain.current)
+    )
   }
 
   // Sort by - change
@@ -78,25 +70,23 @@ export default function MyDragons({ deviceType }: ISSRPropsDeviceOnly): ReactEle
       console.log(`Results: ${results}`)
       if (!results || !results[0] || !results[1] || !results[2]) return setLoading(false)
 
-      setDragons([
+      const dragons = [
         ...mapDragonsResults(results[0], 'MAINCHAIN'),
         ...mapDragonsResults(results[1], 'SIDECHAIN'),
         ...mapDragonsResults(results[2][0]['sidechain-gateway-results'], 'SIDECHAIN_GATEWAY'),
         ...mapDragonsResults(results[2][1]['mainchain-gateway-results'], 'MAINCHAIN_GATEWAY'),
-      ])
-      setFilteredDragons([
-        ...mapDragonsResults(results[0], 'MAINCHAIN'),
-        ...mapDragonsResults(results[1], 'SIDECHAIN'),
-        ...mapDragonsResults(results[2][0]['sidechain-gateway-results'], 'SIDECHAIN_GATEWAY'),
-        ...mapDragonsResults(results[2][1]['mainchain-gateway-results'], 'MAINCHAIN_GATEWAY'),
-      ])
+      ]
+      setDragons(dragons)
+      setFilteredDragons(
+        updateDragonsBasedOnSearchFilters(dragons, null, null, checkedMainchain.current, checkedSidechain.current)
+      )
       setLoading(false)
     })
   }
 
   useEffect(() => {
     updateDragons()
-    setInterval(updateDragons, 18000)
+    setInterval(updateDragons, 30000)
   }, [])
 
   const transferDragon = (id: string, location: string): void => {
@@ -132,9 +122,10 @@ export default function MyDragons({ deviceType }: ISSRPropsDeviceOnly): ReactEle
 
   const commonProps = {
     attribute,
-    checkedMainchain: state.checkedMainchain,
-    checkedSidechain: state.checkedSidechain,
-    dragons: filteredDragons,
+    checkedMainchain: checkedMainchain.current,
+    checkedSidechain: checkedSidechain.current,
+    dragons,
+    filteredDragons,
     handleChangeAttribute: handleChangeAttribute,
     handleChangeSelectLowHigh: handleChangeSelectLowHigh,
     handleCheckedChange: handleCheckedChange,
@@ -146,16 +137,8 @@ export default function MyDragons({ deviceType }: ISSRPropsDeviceOnly): ReactEle
   }
 
   if (deviceType === 'desktop') {
-    return (
-      <MyDragonsCommons>
-        <MyDragonsDesktop {...commonProps} />
-      </MyDragonsCommons>
-    )
+    return <MyDragonsCommons children={<MyDragonsDesktop {...commonProps} />} />
   }
 
-  return (
-    <MyDragonsCommons>
-      <MyDragonsMobile {...commonProps} />
-    </MyDragonsCommons>
-  )
+  return <MyDragonsCommons children={<MyDragonsMobile {...commonProps} />} />
 }

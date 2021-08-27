@@ -21,6 +21,7 @@ import dragonStyles from './dragon.module.scss'
 interface IProps {
   location: tDragonSrc
   id: string
+  key: string
   transferMethod?: (id: string, location: string) => unknown
   mappedAccounts: boolean
 }

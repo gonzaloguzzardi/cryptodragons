@@ -1,8 +1,0 @@
-{
-    "name": "LoomSDK.Editor",
-    "references": [],
-    "includePlatforms": [
-        "Editor"
-    ],
-    "excludePlatforms": []
-}

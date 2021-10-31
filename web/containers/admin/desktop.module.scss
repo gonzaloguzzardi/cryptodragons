@@ -1,8 +1,11 @@
+@import '../../styles/variables.scss';
+
 .root {
   display: flex;
   align-items: center;
   justify-content: center;
   height: 100vh;
+  background-color: $pallete-secondary;
 }
 
 .container {

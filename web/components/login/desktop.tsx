@@ -76,6 +76,9 @@ function AdminLoginDesktop(): ReactElement {
             disabled={!values.username || !values.password}
             classes={{ root: styles.submitButton }}
             size="large"
+            onClick={() => {
+              alert('clicked')
+            }}
           >
             Submit
           </Button>

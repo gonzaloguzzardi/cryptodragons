@@ -1,8 +1,8 @@
 import React from 'react'
 import { ReactElement } from 'react'
 
-import AdminLoginDesktop from './desktop'
+import LoginDesktop from '../../components/login/desktop'
 
 export default function AdminLogin(): ReactElement {
-  return <AdminLoginDesktop />
+  return <LoginDesktop />
 }

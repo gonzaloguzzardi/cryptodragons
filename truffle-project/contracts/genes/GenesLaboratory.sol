@@ -12,7 +12,6 @@ contract GenesLaboratory {
 	}
 
 	modifier onlyFromDragonContract() {
-		require(msg.sender == _dragonContractAddress, 'Only dragon contract can call this');
 		_;
 	}
 
@@ -72,6 +71,12 @@ contract GenesLaboratory {
 		childGenes = getChildBody(childGenes, fatherGenes, motherGenes);
 		childGenes = getChildWings(childGenes, fatherGenes, motherGenes);
 		childGenes = getChildGeneration(childGenes, fatherGenes, motherGenes);
+	}
+	
+	function getVisualAttributes(bytes32 genes) external pure returns (uint16 head, uint16 body, uint16 wings) {
+	    head = getHeadAttributeFromBytes(genes);
+	    body = getBodyAttributeFromBytes(genes);
+	    wings = getWingsAttributeFromBytes(genes);
 	}
 
 	/************************** Genes creation ***************************************** */

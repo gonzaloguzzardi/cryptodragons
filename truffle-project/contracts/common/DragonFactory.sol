@@ -214,7 +214,7 @@ contract DragonFactory is DragonBase {
 				blockchainOriginId: _blockchainOriginId
 			})
 		);
-		id = dragons.length;
+		id = dragons.length - 1;
 
 		// Assign genes in different function as a workaround to the stack too deep exception
 		_assignGenesAndName(id, _genes, _name);

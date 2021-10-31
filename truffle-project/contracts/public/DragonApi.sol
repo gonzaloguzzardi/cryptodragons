@@ -44,12 +44,14 @@ contract DragonApi {
 	/**
 	 * @dev Get all dragons ids owned by owner address
 	 */
-	function getDragonsIdsByOwner(address owner) external view returns (uint256[] memory tokenIds) {
+	function getDragonsIdsByOwner(address owner) external view returns (uint256[] memory) {
 		IERC721Enumerable dragonContract = IERC721Enumerable(_dragonAddress);
 		uint256 balance = dragonContract.balanceOf(owner);
+		uint[] memory tokensOfOwner = new uint[](balance);
 		for (uint256 i = 0; i < balance; i++) {
-			tokenIds[i] = dragonContract.tokenOfOwnerByIndex(owner, i);
+			tokensOfOwner[i] = dragonContract.tokenOfOwnerByIndex(owner, i);
 		}
+		return tokensOfOwner;
 	}
 
 	/**

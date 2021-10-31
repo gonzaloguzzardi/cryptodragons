@@ -3,6 +3,7 @@
 	"description": "Launch Blockchains & Deploy of Smarts Contracts",
 	"scripts": {
 		"truffle": "truffle",
+		"connect-remix": "remixd -s /mnt/d/Projects/cryptodragons/truffle-project/contracts/ --remix-ide https://remix.ethereum.org",
 		"contract-sizes": "truffle run contract-size",
 		"run:bfa": "./scripts/run_bfa.sh",
 		"deploy:bfa": "MAINCHAIN_URL=localhost truffle deploy --network bfa",

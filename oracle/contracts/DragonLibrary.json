@@ -10,7 +10,7 @@
   "sourceMap": "70:649:9:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;",
   "deployedSourceMap": "70:649:9:-:0;;;;;;;;",
   "source": "// SPDX-License-Identifier: GPL-3.0 License\n\npragma solidity ^0.8.0;\n\nlibrary DragonLibrary {\n\tstruct Dragon {\n\t\tbytes32 genes;\n\t\tbytes32 name; // maybe we can avoid saving the name in teh blockchain\n\t\tuint64 creationTime; // Initialzed at egg instantiation\n\t\t// parents information\n\t\tuint32 dadId;\n\t\tuint32 motherId;\n\t\t// level attributes\n\t\tuint32 currentExperience; // level will ve determined by exp\n\t\tuint16 actionCooldown; // time to be waited to perform an action\n\t\t// fighting attributes\n\t\tuint16 health;\n\t\tuint16 strength;\n\t\tuint16 agility;\n\t\tuint16 fortitude;\n\t\tuint16 hatchTime; // in minutes, capped to 45 days - Maybe it would be nice to reuse some variable like current exp\n\t\tuint8 blockchainOriginId;\n\t}\n}\n",
-  "sourcePath": "/mnt/d/Projects/cryptodragons/truffle-project/contracts/common/libraries/DragonLibrary.sol",
+  "sourcePath": "/usr/src/app/contractGetter/contracts/common/libraries/DragonLibrary.sol",
   "ast": {
     "absolutePath": "project:/contracts/common/libraries/DragonLibrary.sol",
     "exportedSymbols": {
@@ -830,8 +830,8 @@
     "version": "0.8.4+commit.c7e474f2.Emscripten.clang"
   },
   "networks": {},
-  "schemaVersion": "3.4.3",
-  "updatedAt": "2021-10-31T17:35:56.037Z",
+  "schemaVersion": "3.4.1",
+  "updatedAt": "2021-10-31T18:11:14.743Z",
   "devdoc": {
     "kind": "dev",
     "methods": {},

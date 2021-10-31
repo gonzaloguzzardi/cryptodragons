@@ -21,7 +21,7 @@ async function getMainNetGatewayContract(web3js) {
 
 async function getDragonApiContract(web3js) {
   const networkId = await web3js.eth.net.getId();
-  const { data: DragonApiJson } = await axios.get(contractGetterApiUrl + '/api/contract/DragonApi.json');
+  const { data: DragonApiJson } = await axios.get(contractGetterApiUrl + '/api/contract/MainnetDragonApi.json');
   return new web3js.eth.Contract(DragonApiJson.abi, DragonApiJson.networks[networkId].address);
 }
 

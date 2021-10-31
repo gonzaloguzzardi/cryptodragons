@@ -17,7 +17,7 @@ interface State {
   username: string
 }
 
-function AdminDesktop(): ReactElement {
+function AdminLoginDesktop(): ReactElement {
   const [values, setValues] = React.useState<State>({
     password: '',
     showPassword: false,
@@ -85,4 +85,4 @@ function AdminDesktop(): ReactElement {
   )
 }
 
-export default AdminDesktop
+export default AdminLoginDesktop

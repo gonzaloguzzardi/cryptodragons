@@ -9,8 +9,14 @@ const bodyParser = require('body-parser');
 // CONSTANTS
 const { oracleApiPort, database, mongoUrl } = require('./config');
 const { cleanCollection } = require('./mongo-utils');
+
 // CONTROLLERS
-const { getDragonsInGateways, getOrCreateSideAccount, giveSomeMoney } = require('./controllers');
+const {
+  getDragonsInGateways,
+  getOrCreateSideAccount,
+  giveSomeMoney,
+  postLoginAdmin,
+} = require('./controllers');
 
 // SERVICES
 const {
@@ -35,6 +41,9 @@ app.get('/api/getOrCreateSideAccount', getOrCreateSideAccount);
 app.get('/api/giveSomeMoney', giveSomeMoney);
 
 cleanCollection(database, mongoUrl, 'accounts');
+
+// ADMIN API ROUTES
+app.post('/api/admin/login', postLoginAdmin);
 
 // SERVER LISTEN
 const server = app.listen(oracleApiPort, () => {

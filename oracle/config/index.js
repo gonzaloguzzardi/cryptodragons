@@ -1,3 +1,6 @@
+const ADMIN_USERNAME = 'admin';
+const ADMIN_PASSWORD = 'admin';
+
 const collection = 'transactions';
 var fs = require('fs');
 const database = 'crypto-dragons';
@@ -22,6 +25,9 @@ var MainChainGatewayContract = require('../contracts/MainnetGateway');
 var MainchainDragonContract = require('../contracts/MainnetTransferableDragon');
 
 module.exports = {
+  ADMIN_USERNAME,
+  ADMIN_PASSWORD,
+
   collection,
   database,
   mongoUrl,

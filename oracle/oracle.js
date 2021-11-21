@@ -4,7 +4,6 @@ const express = require('express');
 
 const app = express();
 const cors = require('cors');
-const bodyParser = require('body-parser');
 
 // CONSTANTS
 const { oracleApiPort, database, mongoUrl } = require('./config');
@@ -26,10 +25,13 @@ const {
   listenSideChainEvents,
 } = require('./services');
 
+// CUSTOM MIDDLEWARES
+const { adminAuth } = require('./middlewares');
+
 // MIDDLEWARES
 app.use(cors());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 // LISTENING BLOCKCHAINS
 listenMainChainEvents();
@@ -39,6 +41,11 @@ listenSideChainEvents();
 app.get('/api/dragons', getDragonsInGateways);
 app.get('/api/getOrCreateSideAccount', getOrCreateSideAccount);
 app.get('/api/giveSomeMoney', giveSomeMoney);
+
+// ADMIN ROUTES
+app.get('/test_jwt', adminAuth, (req, res) =>
+  res.json({ success: 'You are authenticated with JWT!', user: req.user }),
+);
 
 cleanCollection(database, mongoUrl, 'accounts');
 

@@ -5,6 +5,8 @@ import LoginDesktop from '../../components/login/desktop'
 
 import { postLoginData } from '../../services/admin'
 
+import { JWT_LS_ID } from '../../constants'
+
 export default function AdminLogin(): ReactElement {
   const [error, setError] = React.useState('')
   const [loading, setLoading] = React.useState(false)
@@ -16,7 +18,8 @@ export default function AdminLogin(): ReactElement {
 
     postLoginData(username, password)
       .then((res) => {
-        console.log('TOKEN VALUEEEEE', res.token)
+        localStorage.setItem(JWT_LS_ID, res.token)
+        location.href = '/admin'
       })
       .catch(({ message }) => setError(message))
       .finally(() => setLoading(false))

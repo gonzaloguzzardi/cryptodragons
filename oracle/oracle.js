@@ -14,6 +14,7 @@ const {
   getDragonsInGateways,
   getOrCreateSideAccount,
   giveSomeMoney,
+  getSessionAdmin,
   postLoginAdmin,
 } = require('./controllers');
 
@@ -42,14 +43,10 @@ app.get('/api/dragons', getDragonsInGateways);
 app.get('/api/getOrCreateSideAccount', getOrCreateSideAccount);
 app.get('/api/giveSomeMoney', giveSomeMoney);
 
-// ADMIN ROUTES
-app.get('/test_jwt', adminAuth, (req, res) =>
-  res.json({ success: 'You are authenticated with JWT!', user: req.user }),
-);
-
 cleanCollection(database, mongoUrl, 'accounts');
 
 // ADMIN API ROUTES
+app.get('/api/admin/session/test', adminAuth, getSessionAdmin);
 app.post('/api/admin/login', postLoginAdmin);
 
 // SERVER LISTEN

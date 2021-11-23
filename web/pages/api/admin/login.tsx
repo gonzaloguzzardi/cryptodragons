@@ -8,17 +8,15 @@ type Data = {
   token?: string
   error?: string
 }
-
-export default (req: NextApiRequest, res: NextApiResponse<Data>): void => {
+export default (req: NextApiRequest, res: NextApiResponse<Data>): Promise<void> => {
   const { username, password } = req.body
 
-  axios
+  return axios
     .post(`${oracleApiUrl}:${oracleApiPort}/api/admin/login`, { username, password })
     .then(({ data }) => {
-      res.status(200).json({ token: data.token })
+      res.status(200).json(data)
     })
-    .catch((err) => {
-      console.error(`Error login in: ${err}`)
-      res.status(401).send(err)
+    .catch(({ response }) => {
+      res.status(401).send(response.data)
     })
 }

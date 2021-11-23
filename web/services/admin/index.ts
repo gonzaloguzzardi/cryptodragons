@@ -18,5 +18,5 @@ export const postLoginData = (username: string, password: string): Promise<PostL
     .post('/api/admin/login', { username, password })
     .then(({ data }) => data)
     .catch(({ response }) => {
-      throw new Error(response.data.error)
+      throw new Error(response.data.message)
     })

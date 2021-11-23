@@ -14,7 +14,7 @@ async function postLoginAdmin(req, res) {
     res.status(200).send({ token });
   }
 
-  res.status(401).send();
+  res.status(401).send({ message: 'Invalid credentials' });
 }
 
 module.exports = {

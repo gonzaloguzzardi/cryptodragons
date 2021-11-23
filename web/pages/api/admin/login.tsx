@@ -19,6 +19,6 @@ export default (req: NextApiRequest, res: NextApiResponse<Data>): void => {
     })
     .catch((err) => {
       console.error(`Error login in: ${err}`)
-      res.status(401).send({ error: 'Invalid credentials' })
+      res.status(401).send(err)
     })
 }

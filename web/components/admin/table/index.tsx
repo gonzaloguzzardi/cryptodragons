@@ -11,26 +11,14 @@ import TableRow from '@material-ui/core/TableRow'
 
 import Row from './row'
 import TablePaginationActions from './table-pagination-actions'
-
-function createData(name: string, calories: number, fat: number, carbs: number): any {
-  return {
-    name,
-    calories,
-    fat,
-    carbs,
-    attributes: [
-      { date: '2020-01-05', customerId: '11091700', amount: 3 },
-      { date: '2020-01-02', customerId: 'Anonymous', amount: 1 },
-    ],
-  }
-}
+import { createData } from './utils'
 
 const rows = [
-  createData('Frozen yoghurt', 159, 6.0, 24),
-  createData('Ice cream sandwich', 237, 9.0, 37),
-  createData('Eclair', 262, 16.0, 24),
-  createData('Cupcake', 305, 3.7, 67),
-  createData('Gingerbread', 356, 16.0, 49),
+  createData('0x123141231231123', 'Mocca', 'MAINCHAIN', false),
+  createData('0x123532421312313', 'Mocca', 'SIDECHAIN', true),
+  createData('0x523464342312123', 'Mocca', 'SIDECHAIN', false),
+  createData('0x512312414123123', 'Mocca', 'MAINCHAIN', false),
+  createData('0x422131231412312', 'Mocca', 'MAINCHAIN', true),
 ]
 
 interface Props {
@@ -70,10 +58,7 @@ export default function AdminTable({ token }: Props): ReactElement {
           </TableHead>
 
           <TableBody>
-            {(rowsPerPage > 0
-              ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              : rows
-            ).map((row) => (
+            {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => (
               <Row key={row.name} row={row} />
             ))}
             {emptyRows > 0 && (

@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react'
+import { ReactElement } from 'react'
 import Typography from '@material-ui/core/Typography'
 
 interface Props {

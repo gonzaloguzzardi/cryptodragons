@@ -9,7 +9,7 @@ async function postLoginAdmin(req, res) {
       username,
       role: 'admin',
     };
-    const token = jwt.sign(user, ADMIN_SECRET, { expiresIn: 600 });
+    const token = jwt.sign(user, ADMIN_SECRET, { expiresIn: 1200 });
 
     res.status(200).send({ token });
   }

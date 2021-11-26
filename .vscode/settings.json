@@ -4,6 +4,8 @@
     "source.fixAll.eslint": true
   },
   "cSpell.words": [
-    "BLOCKCHAINS"
+    "BLOCKCHAINS",
+    "MAINCHAIN",
+    "SIDECHAIN"
   ]
 }

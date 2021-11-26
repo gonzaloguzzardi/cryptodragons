@@ -1,3 +1,4 @@
+import { ReactElement, useState } from 'react'
 import Alert from '@material-ui/lab/Alert'
 import AppBar from '@material-ui/core/AppBar'
 import Fab from '@material-ui/core/Fab'
@@ -23,7 +24,6 @@ import isChromeBrowser from '../../utils/is-chrome-browser'
 
 import classnames from 'classnames'
 
-import { ReactElement, useState } from 'react'
 import Link from 'next/link'
 
 import appbarStyles from './app-toolbar.module.scss'

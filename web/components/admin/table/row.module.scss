@@ -1,0 +1,6 @@
+.root {
+  & > * {
+    border-bottom: unset!important;
+  }
+  cursor: pointer;
+}

@@ -1,19 +1,26 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { ReactElement } from 'react'
+import AppBar from '@material-ui/core/AppBar'
+import Avatar from '@material-ui/core/Avatar'
+import Toolbar from '@material-ui/core/Toolbar'
+
+import Layout from '../../components/layout'
+import AdminTable from '../../components/admin/table'
 
 import { getSessionAdmin } from '../../services/admin'
 
 import { JWT_LS_ID } from '../../constants'
 
+import adminToolbarStyles from './admin-toolbar.module.scss'
+
 export default function Admin(): ReactElement {
   const [token, setToken] = useState(null)
 
   useEffect(() => {
-    const token = localStorage.getItem(JWT_LS_ID)
-    getSessionAdmin(token)
+    getSessionAdmin(localStorage.getItem(JWT_LS_ID))
       .then((data) => {
         console.log(data)
-        setToken(token)
+        setToken(localStorage.getItem(JWT_LS_ID))
       })
       .catch((err) => {
         console.error('Redirecting', err)
@@ -21,5 +28,19 @@ export default function Admin(): ReactElement {
       })
   }, [])
 
-  return <p>{`Hola, el token es ${token}`}</p>
+  return (
+    <Layout>
+      <AppBar variant="outlined">
+        <Toolbar>
+          <div className={adminToolbarStyles.toolbarIconLabelAnchor}>
+            <Avatar variant="square" alt="CryptoDragons Icon" src="/assets/dragonsito.jpg" />
+            <h6 className={adminToolbarStyles.toolbarLabel}>Admin</h6>
+          </div>
+        </Toolbar>
+      </AppBar>
+      <div className={adminToolbarStyles.bottomSpacer} />
+
+      <AdminTable token={token} />
+    </Layout>
+  )
 }

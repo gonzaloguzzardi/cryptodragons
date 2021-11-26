@@ -3,6 +3,7 @@ import Container from '@material-ui/core/Container'
 import Table from '@material-ui/core/Table'
 import TableBody from '@material-ui/core/TableBody'
 import TableCell from '@material-ui/core/TableCell'
+import Typography from '@material-ui/core/Typography'
 import Paper from '@material-ui/core/Paper'
 import TableFooter from '@material-ui/core/TableFooter'
 import TableHead from '@material-ui/core/TableHead'
@@ -40,7 +41,7 @@ export default function AdminTable({ token }: Props): ReactElement {
   }
 
   if (!token) {
-    return <p>No admin privileges</p>
+    return <p>No admin privileges...</p>
   }
 
   return (
@@ -48,12 +49,28 @@ export default function AdminTable({ token }: Props): ReactElement {
       <Paper elevation={3}>
         <Table aria-label="collapsible table">
           <TableHead>
-            <TableRow>
+            <TableRow style={{ backgroundColor: '#88f' }}>
               <TableCell />
-              <TableCell>ERC 721</TableCell>
-              <TableCell align="center">Owner</TableCell>
-              <TableCell align="center">Location</TableCell>
-              <TableCell align="center">On sale</TableCell>
+              <TableCell>
+                <Typography variant="caption" component="div">
+                  ERC 721
+                </Typography>
+              </TableCell>
+              <TableCell align="center">
+                <Typography variant="caption" component="div">
+                  Owner
+                </Typography>
+              </TableCell>
+              <TableCell align="center">
+                <Typography variant="caption" component="div">
+                  Location
+                </Typography>
+              </TableCell>
+              <TableCell align="center">
+                <Typography variant="caption" component="div">
+                  On sale
+                </Typography>
+              </TableCell>
             </TableRow>
           </TableHead>
 
@@ -72,7 +89,7 @@ export default function AdminTable({ token }: Props): ReactElement {
             <TableRow>
               <TablePagination
                 rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
-                colSpan={3}
+                colSpan={6}
                 count={rows.length}
                 rowsPerPage={rowsPerPage}
                 page={page}

@@ -29,10 +29,11 @@ export default function Row({ row }: { row: TokenRowType }): ReactElement {
         <TableCell>{genes}</TableCell>
         <TableCell align="center">{owner}</TableCell>
         <TableCell align="center">{location}</TableCell>
-        <TableCell align="center">{onSale}</TableCell>
+        <TableCell align="center">{onSale + ''}</TableCell>
       </TableRow>
+
       <TableRow>
-        <TableCell style={{ paddingBottom: 0, paddingTop: 0, backgroundColor: '#88f' }} colSpan={6}>
+        <TableCell style={{ paddingBottom: 0, paddingTop: 0, backgroundColor: '#ddd' }} colSpan={6}>
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box margin={1}>
               <Typography variant="h5" gutterBottom component="div">

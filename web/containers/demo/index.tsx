@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/ban-types */
-import React, { Component } from 'react'
+import { Component } from 'react'
 
 import Layout from '../../components/layout'
 import Dragon from '../../components/dragon'

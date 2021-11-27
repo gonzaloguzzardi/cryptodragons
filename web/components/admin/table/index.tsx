@@ -22,11 +22,7 @@ const rows = [
   createData('0x422131231412312', 'Mocca', 'MAINCHAIN', true),
 ]
 
-interface Props {
-  token: string
-}
-
-export default function AdminTable({ token }: Props): ReactElement {
+export default function AdminTable(): ReactElement {
   const [page, setPage] = useState(0)
   const [rowsPerPage, setRowsPerPage] = useState(5)
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage)
@@ -40,10 +36,6 @@ export default function AdminTable({ token }: Props): ReactElement {
     setPage(0)
   }
 
-  if (!token) {
-    return <p>No admin privileges...</p>
-  }
-
   return (
     <Container>
       <Paper elevation={3}>
@@ -52,22 +44,22 @@ export default function AdminTable({ token }: Props): ReactElement {
             <TableRow style={{ backgroundColor: '#88f' }}>
               <TableCell />
               <TableCell>
-                <Typography variant="caption" component="div">
+                <Typography variant="caption" component="div" color="primary">
                   ERC 721
                 </Typography>
               </TableCell>
               <TableCell align="center">
-                <Typography variant="caption" component="div">
+                <Typography variant="caption" component="div" color="primary">
                   Owner
                 </Typography>
               </TableCell>
               <TableCell align="center">
-                <Typography variant="caption" component="div">
+                <Typography variant="caption" component="div" color="primary">
                   Location
                 </Typography>
               </TableCell>
               <TableCell align="center">
-                <Typography variant="caption" component="div">
+                <Typography variant="caption" component="div" color="primary">
                   On sale
                 </Typography>
               </TableCell>

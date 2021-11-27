@@ -5,6 +5,7 @@ import Avatar from '@material-ui/core/Avatar'
 import Toolbar from '@material-ui/core/Toolbar'
 
 import Layout from '../../components/layout'
+import AdminButtonsTokenCreate from '../../components/admin/buttons/tokens-create'
 import AdminTable from '../../components/admin/table'
 
 import { getSessionAdmin } from '../../services/admin'
@@ -28,6 +29,10 @@ export default function Admin(): ReactElement {
       })
   }, [])
 
+  if (!token) {
+    return <p>No admin privileges...</p>
+  }
+
   return (
     <Layout>
       <AppBar variant="outlined">
@@ -40,7 +45,8 @@ export default function Admin(): ReactElement {
       </AppBar>
       <div className={adminToolbarStyles.bottomSpacer} />
 
-      <AdminTable token={token} />
+      <AdminButtonsTokenCreate />
+      <AdminTable />
     </Layout>
   )
 }

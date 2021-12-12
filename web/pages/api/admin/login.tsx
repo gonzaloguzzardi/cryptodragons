@@ -16,7 +16,8 @@ export default (req: NextApiRequest, res: NextApiResponse<Data>): Promise<void> 
     .then(({ data }) => {
       res.status(200).json(data)
     })
-    .catch(({ response }) => {
-      res.status(401).send(response.data)
+    .catch((error) => {
+      const errorMessage = (error && error.response && error.response.data) || 'Error'
+      res.status(401).send(errorMessage)
     })
 }

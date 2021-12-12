@@ -12,6 +12,7 @@ async function postLoginAdmin(req, res) {
     const token = jwt.sign(user, ADMIN_SECRET, { expiresIn: 1200 });
 
     res.status(200).send({ token });
+    return;
   }
 
   res.status(401).send({ message: 'Invalid credentials' });

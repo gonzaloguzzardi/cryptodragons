@@ -1,0 +1,1 @@
+export const GAS_DEFAULT_VALUE = 1000000

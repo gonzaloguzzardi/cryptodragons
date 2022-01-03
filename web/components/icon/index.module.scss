@@ -1,0 +1,26 @@
+@import '../../styles/variables.scss';
+
+.icon {
+  background-color: $pallete-primary;
+  border-radius: 20px;
+  padding: 5px !important;
+
+  &Facebook {
+    color: #4267b2;
+  }
+  &Twitter {
+    color: #1da1f2;
+  }
+  &Youtube {
+    color: #c4302b;
+  }
+  &Android {
+    color: #a4c639;
+  }
+  &Apple {
+    color: #000;
+  }
+  &Instagram {
+    color: #fd1d1d;
+  }
+}

@@ -1,7 +1,7 @@
-version: '3'
+version: "3"
 services:
   loom:
-    image: gonzaloguzzardi/cryptodragons:loom_node_v001
+    image: loomnetwork/loom:1430
     ports:
       - "46656:46656"
       - "46658:46658"

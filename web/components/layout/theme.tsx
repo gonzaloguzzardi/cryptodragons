@@ -43,7 +43,9 @@ export default createMuiTheme({
     body1: {},
     body2: {},
     caption: {
+      fontSize: 14,
       fontWeight: 600,
+      userSelect: 'none',
     },
     overline: {
       fontSize: 14,

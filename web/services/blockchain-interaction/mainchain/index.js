@@ -2,6 +2,7 @@
 import clientFactory from './client-factory'
 import CommonAPI from '../common'
 import sleep from '../../../utils/sleep'
+import { GAS_DEFAULT_VALUE } from '../constants'
 
 // client: { account, chainId } ... { tokenContract, gatewayContract, dragonFactoryContract }
 let client
@@ -52,7 +53,7 @@ class MainchainAPI {
     });
   }
 
-  static async areAccountsMapped(sideAccount, gas) {
+  static async areAccountsMapped(sideAccount, gas = GAS_DEFAULT_VALUE) {
     try {
       const {
         tokenContract: contract,
@@ -77,7 +78,7 @@ class MainchainAPI {
   //
   //
   //
-  static async createDragon(gas) {
+  static async createDragon(gas = GAS_DEFAULT_VALUE) {
     try {
       const {
         tokenContract: contract,
@@ -89,10 +90,10 @@ class MainchainAPI {
     }
   }
 
-  static async getMyDragons(gas) {
+  static async getMyDragons(gas = GAS_DEFAULT_VALUE) {
     try {
       const {
-        tokenContract: contract,
+        dragonApiContract: contract,
         account: ownerAccount,
       } = await MainchainAPI.getClientHelper()
       return await CommonAPI.sGetMyDragons(contract, ownerAccount, gas)
@@ -101,7 +102,7 @@ class MainchainAPI {
     }
   }
 
-  static async transferDragon(dragonId, gas) {
+  static async transferDragon(dragonId, gas = GAS_DEFAULT_VALUE) {
     try {
       const {
         tokenContract: contract,
@@ -114,7 +115,7 @@ class MainchainAPI {
     }
   }
 
-  static async mapAccountToSidechainAccount(sideAccount, gas) {
+  static async mapAccountToSidechainAccount(sideAccount, gas = GAS_DEFAULT_VALUE) {
     try {
       const {
         tokenContract: contract,
@@ -137,7 +138,7 @@ class MainchainAPI {
     }
   }
 
-  static async getDragonDataById(dragonId, gas) {
+  static async getDragonDataById(dragonId, gas = GAS_DEFAULT_VALUE) {
     try {
       const {
         tokenContract: contract,
@@ -150,10 +151,10 @@ class MainchainAPI {
     }
   }
 
-  static async getDragonVisualDataById(dragonId, gas) {
+  static async getDragonVisualDataById(dragonId, gas = GAS_DEFAULT_VALUE) {
     try {
       const {
-        tokenContract: contract,
+        dragonApiContract: contract,
         account: ownerAccount,
       } = await MainchainAPI.getClientHelper()
 

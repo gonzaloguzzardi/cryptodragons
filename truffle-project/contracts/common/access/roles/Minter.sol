@@ -1,44 +1,46 @@
-pragma solidity ^0.5.0;
+// SPDX-License-Identifier: GPL-3.0 License
 
-import "../Roles.sol";
-import "../../ownership/Ownable.sol";
+pragma solidity ^0.8.0;
 
-contract Minter is Ownable{
-    using Roles for Roles.Role;
+import '../Roles.sol';
+import '../../ownership/Ownable.sol';
 
-    Roles.Role private minters;
+abstract contract Minter is Ownable {
+	using Roles for Roles.Role;
 
-    event MinterAdded(address indexed account);
-    event MinterRemoved(address indexed account);
+	Roles.Role private minters;
 
-    constructor() internal {
-        _addMinter(msg.sender);
-    }
+	event MinterAdded(address indexed account);
+	event MinterRemoved(address indexed account);
 
-    modifier onlyMinter() {
-        require(isMinter(msg.sender), "Must have the minter roler to perform this action");
-        _;
-    }
+	constructor() {
+		_addMinter(msg.sender);
+	}
 
-    function isMinter(address account) public view returns (bool) {
-        return minters.has(account);
-    }
+	modifier onlyMinter() {
+		require(isMinter(msg.sender), 'Invalid permission');
+		_;
+	}
 
-    function addMinter(address account) public onlyOwner {
-        _addMinter(account);
-    }
+	function isMinter(address account) public view returns (bool) {
+		return minters.has(account);
+	}
 
-    function renounceMinter() public {
-        _removeMinter(msg.sender);
-    }
+	function addMinter(address account) public onlyOwner {
+		_addMinter(account);
+	}
 
-    function _addMinter(address account) internal {
-        minters.add(account);
-        emit MinterAdded(account);
-    }
+	function renounceMinter() public {
+		_removeMinter(msg.sender);
+	}
 
-    function _removeMinter(address account) internal {
-        minters.remove(account);
-        emit MinterRemoved(account);
-    }
+	function _addMinter(address account) internal {
+		minters.add(account);
+		emit MinterAdded(account);
+	}
+
+	function _removeMinter(address account) internal {
+		minters.remove(account);
+		emit MinterRemoved(account);
+	}
 }

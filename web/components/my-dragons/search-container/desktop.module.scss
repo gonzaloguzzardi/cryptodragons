@@ -1,0 +1,32 @@
+@import '../../../styles/variables.scss';
+
+.main {
+  padding: 40px 0 10px;
+  background-color: $pallete-primary;
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  width: $max-width-by-screen-desktop;
+}
+
+.searchbar {
+  display: flex;
+}
+
+.fieldsFilterForm {
+  align-content: space-between;
+
+  &_secondGroup {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    user-select: none;
+
+    &_sortByLabel,
+    &_sortByValue {
+      padding-right: 16px !important;
+    }
+  }
+}

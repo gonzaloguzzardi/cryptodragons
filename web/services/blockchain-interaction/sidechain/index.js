@@ -1,8 +1,8 @@
 import clientFactory from './client-factory'
 import CommonAPI from '../common'
 import { getSidechainData } from '../../oracle'
-
 import sleep from '../../../utils/sleep'
+import { GAS_DEFAULT_VALUE } from '../constants'
 
 // client: { account, web3js, loomClient, netId, tokenContract, gatewayContract, dragonFactoryContract }
 let client
@@ -29,7 +29,7 @@ class SidechainAPI {
       .catch((err) => console.error(err))
   }
 
-  static async createDragon(gas) {
+  static async createDragon(gas = GAS_DEFAULT_VALUE) {
     try {
       const {
         tokenContract: contract,
@@ -41,10 +41,10 @@ class SidechainAPI {
     }
   }
 
-  static async getMyDragons(gas) {
+  static async getMyDragons(gas = GAS_DEFAULT_VALUE) {
     try {
       const {
-        tokenContract: contract,
+        dragonApiContract: contract,
         account: ownerAccount,
       } = await SidechainAPI.getClientHelper()
 
@@ -54,7 +54,7 @@ class SidechainAPI {
     }
   }
 
-  static async transferDragon(dragonId, gas) {
+  static async transferDragon(dragonId, gas = GAS_DEFAULT_VALUE) {
     try {
       const {
         tokenContract: contract,
@@ -67,7 +67,7 @@ class SidechainAPI {
     }
   }
 
-  static async mapAccountToMainchainAccount(mainAccount, gas) {
+  static async mapAccountToMainchainAccount(mainAccount, gas = GAS_DEFAULT_VALUE) {
     try {
       const {
         tokenContract: contract,
@@ -90,7 +90,7 @@ class SidechainAPI {
     }
   }
 
-  static async areAccountsMapped(mainAccount, gas) {
+  static async areAccountsMapped(mainAccount, gas = GAS_DEFAULT_VALUE) {
     try {
       const {
         tokenContract: contract,
@@ -103,7 +103,7 @@ class SidechainAPI {
     }
   }
 
-  static async getDragonDataById(dragonId, gas) {
+  static async getDragonDataById(dragonId, gas = GAS_DEFAULT_VALUE) {
     try {
       const {
         tokenContract: contract,
@@ -116,10 +116,10 @@ class SidechainAPI {
     }
   }
 
-  static async getDragonVisualDataById(dragonId, gas) {
+  static async getDragonVisualDataById(dragonId, gas = GAS_DEFAULT_VALUE) {
     try {
       const {
-        tokenContract: contract,
+        dragonApiContract: contract,
         account: ownerAccount,
       } = await SidechainAPI.getClientHelper()
 
@@ -129,7 +129,7 @@ class SidechainAPI {
     }
   }
   
-  static async getGenerationAttributeFromBytes(genes, gas) {
+  static async getGenerationAttributeFromBytes(genes, gas = GAS_DEFAULT_VALUE) {
     try {
       const {
         genesContract: contract,

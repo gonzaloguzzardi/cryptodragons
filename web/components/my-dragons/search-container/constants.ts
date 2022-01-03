@@ -1,0 +1,2 @@
+export const LOW_TO_HIGH_VALUE = 'LOW_TO_HIGH_VALUE'
+export const HIGH_TO_LOW_VALUE = 'HIGH_TO_LOW_VALUE'

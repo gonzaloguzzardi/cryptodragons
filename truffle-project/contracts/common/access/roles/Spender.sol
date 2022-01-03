@@ -1,40 +1,46 @@
-pragma solidity ^0.5.0;
+// SPDX-License-Identifier: GPL-3.0 License
 
-import "../Roles.sol";
-import "../../ownership/Ownable.sol";
+pragma solidity ^0.8.0;
 
-contract Spender is Ownable {
-    using Roles for Roles.Role;
+import '../Roles.sol';
+import '../../ownership/Ownable.sol';
 
-    Roles.Role private spenders;
+abstract contract Spender is Ownable {
+	using Roles for Roles.Role;
 
-    event SpenderAdded(address indexed account);
-    event SpenderRemoved(address indexed account);
+	Roles.Role private spenders;
 
-    modifier onlySpender() {
-        require(isSpender(msg.sender), "Must have the spender roel to perform this action");
-        _;
-    }
+	event SpenderAdded(address indexed account);
+	event SpenderRemoved(address indexed account);
 
-    function isSpender(address account) public view returns (bool) {
-        return spenders.has(account);
-    }
+	constructor() {
+		_addSpender(msg.sender);
+	}
 
-    function addSpender(address account) public onlyOwner {
-        _addSpender(account);
-    }
+	modifier onlySpender() {
+		require(isSpender(msg.sender), 'Invalid permission');
+		_;
+	}
 
-    function renounceMinter() public {
-        _removeSpender(msg.sender);
-    }
+	function isSpender(address account) public view returns (bool) {
+		return spenders.has(account);
+	}
 
-    function _addSpender(address account) internal {
-        spenders.add(account);
-        emit SpenderAdded(account);
-    }
+	function addSpender(address account) public onlyOwner {
+		_addSpender(account);
+	}
 
-    function _removeSpender(address account) internal {
-        spenders.remove(account);
-        emit SpenderRemoved(account);
-    }
+	function renounceSpender() public {
+		_removeSpender(msg.sender);
+	}
+
+	function _addSpender(address account) internal {
+		spenders.add(account);
+		emit SpenderAdded(account);
+	}
+
+	function _removeSpender(address account) internal {
+		spenders.remove(account);
+		emit SpenderRemoved(account);
+	}
 }

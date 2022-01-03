@@ -30,8 +30,14 @@ async function getLoomGatewayContract(web3js) {
   return new web3js.eth.Contract(GatewayJson.abi, GatewayJson.networks[loomChainId].address)
 }
 
+async function getDragonApiContract(web3js) {
+  const { data: DragonApiJson } = await axios.get(contractGetterApiUrl + '/api/contract/DragonApi.json');
+  return new web3js.eth.Contract(DragonApiJson.abi, DragonApiJson.networks[loomChainId].address);
+}
+
+
 async function loadLoomAccount(mainchainAccountId) {
-  const {sidePrivateKey} = await getSidechainData(mainchainAccountId);
+  const { sidePrivateKey } = await getSidechainData(mainchainAccountId);
   const privateKey = CryptoUtils.B64ToUint8Array(sidePrivateKey)
   const publicKey = CryptoUtils.publicKeyFromPrivateKey(privateKey)
   const loomAddress = !process.env.DOCKERENV ? 'ws://127.0.0.1:46658' : 'ws://loom:46658'
@@ -52,6 +58,8 @@ async function loadLoomAccount(mainchainAccountId) {
 }
 
 export default async function clientFactory() {
+  if (typeof window === "undefined") return Promise.resolve(null);
+
   const {
     account: mainchainAccountId,
   } = await MainchainAPI.getClientHelper()
@@ -60,6 +68,7 @@ export default async function clientFactory() {
       Promise.all([
         getLoomTokenContract(web3js),
         getLoomGatewayContract(web3js),
+        getDragonApiContract(web3js)
       ]).then(
         (values) => ({
           account,
@@ -68,6 +77,7 @@ export default async function clientFactory() {
           netId: loomChainId,
           tokenContract: values[0],
           gatewayContract: values[1],
+          dragonApiContract: values[2],
         })
       )
     )

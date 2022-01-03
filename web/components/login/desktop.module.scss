@@ -1,0 +1,26 @@
+@import '../../styles/variables.scss';
+
+.root {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: $pallete-secondary;
+}
+
+.container {
+  padding: 32px;
+  width: 300px;
+}
+
+.usernameField,
+.passwordField,
+.submitButton {
+  width: 100%;
+  margin-top: 8px !important;
+}
+
+.spinnerContainer {
+  text-align: center;
+  padding: 10px 0;
+}

@@ -1,6 +1,8 @@
-pragma solidity ^0.5.0;
+// SPDX-License-Identifier: GPL-3.0 License
 
-contract IERC721 {
+pragma solidity ^0.8.0;
+
+interface IERC721 {
 	function safeTransferFrom(
 		address from,
 		address to,
@@ -38,8 +40,8 @@ contract MainnetMarketplace {
 
 	/// @notice To setup the address of the ERC-721 token to use for this contract
 	/// @param _dragonTokenAddress The token address
-	constructor(address _dragonTokenAddress) public {
-		require(_dragonTokenAddress != address(0), 'Dragon address address cannot be empty');
+	constructor(address _dragonTokenAddress) {
+		require(_dragonTokenAddress != address(0), 'Empty address');
 		dragonTokenAddress = _dragonTokenAddress;
 	}
 
@@ -47,7 +49,7 @@ contract MainnetMarketplace {
 	 * @dev Throws if function isn't called from dragon contract
 	 */
 	modifier onlyFromDragonToken() {
-		require(dragonTokenAddress == msg.sender, 'Only dragon token can call this function');
+		require(dragonTokenAddress == msg.sender, 'Invalid permission');
 		_;
 	}
 
@@ -63,7 +65,14 @@ contract MainnetMarketplace {
 		uint256 _price
 	) external onlyFromDragonToken() {
 		// Parameter validity are checked in dragon token contract
-		SellOrder memory sellOrder = SellOrder(_dragonId, _title, _description, now, msg.sender, _price);
+		SellOrder memory sellOrder = SellOrder(
+			_dragonId,
+			_title,
+			_description,
+			block.timestamp,
+			payable(msg.sender),
+			_price
+		);
 		sellOrders.push(sellOrder);
 		sellOrderById[_dragonId] = sellOrder;
 	}
@@ -71,14 +80,14 @@ contract MainnetMarketplace {
 	/// @notice To buy a new dragon, note that the seller must authorize this contract to manage the token
 	/// @param _dragonId The id of the dragon to buy - dragon id references a sell order
 	function buyDragon(uint256 _dragonId) external payable {
-		require(dragonTokenAddress != address(0), 'Dragon address address cannot be empty');
+		require(dragonTokenAddress != address(0), 'Invalid address');
 
 		SellOrder memory sellOrder = sellOrderById[_dragonId];
-		require(sellOrder.owner != address(0), 'A sell order for the dragon must exist to be purchased');
+		require(sellOrder.owner != address(0), 'A sell order must exist');
 
 		Sale memory sale = Sale(_dragonId, sellOrder.owner, msg.sender, sellOrder.price, sellOrder.title);
 
-		require(msg.value >= sellOrder.price, 'The payment must be larger or equal than the sell order price');
+		require(msg.value >= sellOrder.price, 'Payment is not enough');
 
 		// We can charge a fee here
 
@@ -87,12 +96,12 @@ contract MainnetMarketplace {
 			if (sellOrders[i].id == _dragonId) {
 				SellOrder memory lastElement = sellOrders[sellOrders.length - 1];
 				sellOrders[i] = lastElement;
-				sellOrders.length--;
+				sellOrders.pop();
 			}
 		}
 		// Return the excess ETH sent by the buyer
 		if (msg.value > sellOrder.price) {
-			msg.sender.transfer(msg.value - sellOrder.price);
+			payable(msg.sender).transfer(msg.value - sellOrder.price);
 		}
 
 		salesHistory.push(sale);

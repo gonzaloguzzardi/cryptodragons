@@ -7,7 +7,7 @@ const { mainChainDragonsInstance, mainChainGatewayInstance } = require('./contra
 // MAIN
 function listenMainChainEvents() {
   mainChainDragonsInstance.events.allEvents((err, event) => {
-    if (err) console.err(err);
+    if (err) console.error(err);
     if (event) {
       console.log('mainchainDragonsInstance', 'Evento ->', event.event);
       switch (event.event) {

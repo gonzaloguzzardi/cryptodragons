@@ -27,7 +27,7 @@ module.exports = {
 	contracts_build_directory: join(__dirname, './src/contracts'),
 	compilers: {
 		solc: {
-			version: '0.5.17',
+			version: '0.8.4',
 			optimizer: {
 				enabled: true,
 				runs: 200,
@@ -91,4 +91,5 @@ module.exports = {
 			from: '0x28863498efede12296888f7ca6cf0b94974fbdbc',
 		},
 	},
+	plugins: ['truffle-contract-size'],
 };

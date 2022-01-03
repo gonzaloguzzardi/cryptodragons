@@ -1,9 +1,13 @@
-const { writeFileSync } = require('fs');
+const {
+	writeFileSync
+} = require('fs');
 
+const DragonSerializer = artifacts.require('./common/serialization/DragonSerializer.sol');
 const DragonToken = artifacts.require('./dappchain/DappchainTransferableDragon.sol');
 const DragonCoin = artifacts.require('./dappchain/DappchainDragonCoin.sol');
 const Gateway = artifacts.require('./dappchain/gateway/DappchainGateway.sol');
 const GenesLaboratory = artifacts.require('./genes/GenesLaboratory.sol');
+const DragonApi = artifacts.require('./public/DragonApi.sol');
 
 module.exports = function (deployer, network, accounts) {
 	if (network === 'rinkeby' || network === 'ganache' || network === 'bfa') {
@@ -19,7 +23,17 @@ module.exports = function (deployer, network, accounts) {
 
 		console.log(`Gateway deployed at address: ${gatewayInstance.address}`);
 
-		const dragonTokenContract = await deployer.deploy(DragonToken, gatewayInstance.address, 255);
+		const dragonSerializerContract = await deployer.deploy(DragonSerializer);
+		const dragonSerializerInstance = await DragonSerializer.deployed();
+		console.log(`DragonSerializer deployed at address: ${dragonSerializerInstance.address}`);
+		console.log(`DragonSerializer transaction at hash: ${dragonSerializerContract.transactionHash}`);
+
+		const dragonTokenContract = await deployer.deploy(
+			DragonToken,
+			gatewayInstance.address,
+			dragonSerializerInstance.address,
+			255,
+		);
 		const dragonTokenInstance = await DragonToken.deployed();
 
 		console.log(`DragonToken deployed at address: ${dragonTokenInstance.address}`);
@@ -36,6 +50,12 @@ module.exports = function (deployer, network, accounts) {
 
 		console.log(`DragonCoin deployed at address: ${dragonCoinInstance.address}`);
 		console.log(`DragonCoin transaction at hash: ${dragonCoinContract.transactionHash}`);
+
+		const dragonApiContract = await deployer.deploy(DragonApi, dragonTokenInstance.address, genesContractInstance.address);
+		const dragonApiInstance = await DragonApi.deployed();
+
+		console.log(`DragonApi deployed at address: ${dragonApiInstance.address}`);
+		console.log(`DragonApi transaction at hash: ${dragonApiContract.transactionHash}`);
 
 		// map gateway and contract addresses
 		await gatewayInstance.setERC721ContractAddress(dragonTokenInstance.address);

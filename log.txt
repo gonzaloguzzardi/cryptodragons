@@ -1,0 +1,532 @@
+1430: Pulling from loomnetwork/loom
+Digest: sha256:b4de6fc757b318d9d3aaad38c19842693a59c653e9df8df632aa4784abf0bbd5
+Status: Downloaded newer image for loomnetwork/loom:1430
+bfa_node_v010: Pulling from nicomoccagatta/cryptodragons
+Digest: sha256:a07377b60fbf49d25cc577556390c92c130d592a0e9ce2c79c3d73173375a634
+Status: Downloaded newer image for nicomoccagatta/cryptodragons:bfa_node_v010
+Attaching to cryptodragons_loom_1, cryptodragons_bfa_1, cryptodragons_mongo_1, cryptodragons_contract-getter_1, cryptodragons_oracle_1, cryptodragons_web_1
+[36mbfa_1              |[0m INFO [08-03|15:32:58.657] Maximum peer count                       ETH=50 LES=0 total=50
+[36mbfa_1              |[0m INFO [08-03|15:32:58.657] Smartcard socket not found, disabling    err="stat /run/pcscd/pcscd.comm: no such file or directory"
+[36mbfa_1              |[0m ERROR[08-03|15:32:58.658] Failed to enumerate USB devices          hub=ledger vendor=11415 failcount=1 err="failed to initialize libusb: libusb: unknown error [code -99]"
+[36mbfa_1              |[0m ERROR[08-03|15:32:58.658] Failed to enumerate USB devices          hub=trezor vendor=21324 failcount=1 err="failed to initialize libusb: libusb: unknown error [code -99]"
+[33mcontract-getter_1  |[0m 
+[33mcontract-getter_1  |[0m > truffle-project@ deploy:reset:bfa:docker /usr/src/app/contractGetter
+[33mcontract-getter_1  |[0m > MAINCHAIN_URL=bfa truffle deploy --reset --network bfa
+[33mcontract-getter_1  |[0m 
+[36mbfa_1              |[0m ERROR[08-03|15:32:58.658] Failed to enumerate USB devices          hub=trezor vendor=4617  failcount=1 err="failed to initialize libusb: libusb: unknown error [code -99]"
+[33mcontract-getter_1  |[0m Failed to initialize libusb.
+[36mbfa_1              |[0m ERROR[08-03|15:32:58.658] Failed to enumerate USB devices          hub=ledger vendor=11415 failcount=2 err="failed to initialize libusb: libusb: unknown error [code -99]"
+[36mbfa_1              |[0m ERROR[08-03|15:32:58.658] Failed to enumerate USB devices          hub=trezor vendor=21324 failcount=2 err="failed to initialize libusb: libusb: unknown error [code -99]"
+[32mloom_1             |[0m I[2021-08-03|15:32:58.617] go-ethereum cfg                              module=loom EnableStateObjectDirtyStorageKeysSorting=false EnableTrieDatabasePreimageKeysSorting=false
+[33mcontract-getter_1  |[0m 
+[33mcontract-getter_1  |[0m Compiling your contracts...
+[33mcontract-getter_1  |[0m ===========================
+[34moracle_1           |[0m 
+[34moracle_1           |[0m > oracle@1.0.0 start-dev /usr/src/app/oracle
+[34moracle_1           |[0m > node download-contracts.js & nodemon oracle.js
+[34moracle_1           |[0m 
+[32mloom_1             |[0m I[2021-08-03|15:32:58.636] Loading Multi-Writer App Store               module=loom 
+[35mmongo_1            |[0m 2021-08-03T15:32:59.381+0000 I CONTROL  [initandlisten] MongoDB starting : pid=1 port=27017 dbpath=/data/db 64-bit host=883706da7556
+[35mmongo_1            |[0m 2021-08-03T15:32:59.381+0000 I CONTROL  [initandlisten] db version v3.2.11
+[35mmongo_1            |[0m 2021-08-03T15:32:59.381+0000 I CONTROL  [initandlisten] git version: 009580ad490190ba33d1c6253ebd8d91808923e4
+[35mmongo_1            |[0m 2021-08-03T15:32:59.381+0000 I CONTROL  [initandlisten] OpenSSL version: OpenSSL 1.0.2u  20 Dec 2019
+[35mmongo_1            |[0m 2021-08-03T15:32:59.381+0000 I CONTROL  [initandlisten] allocator: tcmalloc
+[34moracle_1           |[0m dir: /usr/src/app/oracle
+[36mbfa_1              |[0m ERROR[08-03|15:32:58.659] Failed to enumerate USB devices          hub=trezor vendor=4617  failcount=2 err="failed to initialize libusb: libusb: unknown error [code -99]"
+[33mcontract-getter_1  |[0m - Fetching solc version list from solc-bin. Attempt #1
+[35mmongo_1            |[0m 2021-08-03T15:32:59.381+0000 I CONTROL  [initandlisten] modules: none
+[35mmongo_1            |[0m 2021-08-03T15:32:59.381+0000 I CONTROL  [initandlisten] build environment:
+[35mmongo_1            |[0m 2021-08-03T15:32:59.381+0000 I CONTROL  [initandlisten]     distarch: x86_64
+[35mmongo_1            |[0m 2021-08-03T15:32:59.381+0000 I CONTROL  [initandlisten]     target_arch: x86_64
+[32mloom_1             |[0m I[2021-08-03|15:32:59.034] Using simple log event dispatcher            
+[34moracle_1           |[0m [33m[nodemon] 2.0.2[39m
+[35mmongo_1            |[0m 2021-08-03T15:32:59.381+0000 I CONTROL  [initandlisten] options: { storage: { mmapv1: { smallFiles: true } } }
+[36mbfa_1              |[0m INFO [08-03|15:32:58.662] Starting peer-to-peer node               instance=Geth/v1.9.13-stable-cbc4ac26/linux-amd64/go1.14.2
+[36mbfa_1              |[0m INFO [08-03|15:32:58.662] Allocated trie memory caches             clean=256.00MiB dirty=256.00MiB
+[36mbfa_1              |[0m INFO [08-03|15:32:58.662] Allocated cache and file handles         database=/usr/bfa/devnet/network/node/geth/chaindata cache=512.00MiB handles=524288
+[32mloom_1             |[0m I[2021-08-03|15:32:59.100] Deployed contract                            vm=plugin location=coin:1.0.0 name=coin address=default:0xe288d6eec7150D6a22FDE33F0AA2d81E06591C4d
+[34moracle_1           |[0m [33m[nodemon] to restart at any time, enter `rs`[39m
+[33mcontract-getter_1  |[0m ✔ Downloading compiler. Attempt #1.
+[34moracle_1           |[0m [33m[nodemon] watching dir(s): *.*[39m
+[34moracle_1           |[0m [33m[nodemon] watching extensions: js,mjs,json[39m
+[36mbfa_1              |[0m INFO [08-03|15:32:58.721] Opened ancient database                  database=/usr/bfa/devnet/network/node/geth/chaindata/ancient
+[34moracle_1           |[0m [32m[nodemon] starting `node oracle.js`[39m
+[36mbfa_1              |[0m INFO [08-03|15:32:58.721] Initialised chain configuration          config="{ChainID: 12345 Homestead: 0 DAO: <nil> DAOSupport: false EIP150: 0 EIP155: 0 EIP158: 0 Byzantium: 0 Constantinople: 0 Petersburg: 0 Istanbul: 0, Muir Glacier: <nil>, Engine: clique}"
+[35mmongo_1            |[0m 2021-08-03T15:32:59.385+0000 I STORAGE  [initandlisten] wiredtiger_open config: create,cache_size=14G,session_max=20000,eviction=(threads_max=4),config_base=false,statistics=(fast),log=(enabled=true,archive=true,path=journal,compressor=snappy),file_manager=(close_idle_time=100000),checkpoint=(wait=60,log_size=2GB),statistics_log=(wait=0),
+[34moracle_1           |[0m Dir name: /usr/src/app/oracle/config
+[33mcontract-getter_1  |[0m > Everything is up to date, there is nothing to compile.
+[36mbfa_1              |[0m INFO [08-03|15:32:58.721] Initialising Ethereum protocol           versions="[65 64 63]" network=12345 dbversion=<nil>
+[34moracle_1           |[0m internal/modules/cjs/loader.js:638
+[34moracle_1           |[0m     throw err;
+[34moracle_1           |[0m     ^
+[34moracle_1           |[0m 
+[34moracle_1           |[0m Error: Cannot find module 'node-hid'
+[34moracle_1           |[0m     at Function.Module._resolveFilename (internal/modules/cjs/loader.js:636:15)
+[34moracle_1           |[0m     at Function.Module._load (internal/modules/cjs/loader.js:562:25)
+[34moracle_1           |[0m     at Module.require (internal/modules/cjs/loader.js:692:17)
+[34moracle_1           |[0m     at require (internal/modules/cjs/helpers.js:25:18)
+[34moracle_1           |[0m     at Object.<anonymous> (/usr/src/app/oracle/node_modules/@ledgerhq/hw-transport-node-hid/lib/TransportNodeHid.js:9:16)
+[34moracle_1           |[0m     at Module._compile (internal/modules/cjs/loader.js:778:30)
+[34moracle_1           |[0m     at Object.Module._extensions..js (internal/modules/cjs/loader.js:789:10)
+[34moracle_1           |[0m     at Module.load (internal/modules/cjs/loader.js:653:32)
+[34moracle_1           |[0m     at tryModuleLoad (internal/modules/cjs/loader.js:593:12)
+[34moracle_1           |[0m     at Function.Module._load (internal/modules/cjs/loader.js:585:3)
+[34moracle_1           |[0m     at Module.require (internal/modules/cjs/loader.js:692:17)
+[34moracle_1           |[0m     at require (internal/modules/cjs/helpers.js:25:18)
+[34moracle_1           |[0m     at Object.<anonymous> (/usr/src/app/oracle/node_modules/@binance-chain/javascript-sdk/lib/ledger/index.js:28:72)
+[34moracle_1           |[0m     at Module._compile (internal/modules/cjs/loader.js:778:30)
+[34moracle_1           |[0m     at Object.Module._extensions..js (internal/modules/cjs/loader.js:789:10)
+[34moracle_1           |[0m     at Module.load (internal/modules/cjs/loader.js:653:32)
+[33mcontract-getter_1  |[0m 
+[32mloom_1             |[0m ts=2021-08-03T15:32:59.101042Z module=loom level=info _msg="DPOSv3 Init" Params="params:<validator_count:21 oracle_address:<chain_id:\"default\" local:\"\\214\\341\\343\\236S\\251\\304\\243R\\266\\252\\256aVX\\n=U\\261T\" > > validators:<pub_key:\"^\\221\\035xd7\\026\\230\\014\\017\\007\\205\\032Z\\227\\257\\236\\3111\\r\\354[x)\\3123+\\252=5rj\" power:10 > init_candidates:true "
+[34moracle_1           |[0m [31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[36mbfa_1              |[0m WARN [08-03|15:32:58.721] Upgrade blockchain database version      from=<nil> to=7
+[35mmongo_1            |[0m 2021-08-03T15:32:59.449+0000 W STORAGE  [initandlisten] Detected configuration for non-active storage engine mmapv1 when current storage engine is wiredTiger
+[35mmongo_1            |[0m 2021-08-03T15:32:59.449+0000 I CONTROL  [initandlisten] ** WARNING: You are running this process as the root user, which is not recommended.
+[35mmongo_1            |[0m 2021-08-03T15:32:59.449+0000 I CONTROL  [initandlisten] 
+[32mloom_1             |[0m I[2021-08-03|15:32:59.101] Deployed contract                            vm=plugin location=dposV3:3.0.0 name=dposV3 address=default:0x01D10029c253fA02D76188b84b5846ab3D19510D
+[32mloom_1             |[0m I[2021-08-03|15:32:59.101] Deployed contract                            vm=plugin location=addressmapper:0.1.0 name=addressmapper address=default:0xde28fb974f31dFbe759cFcB3d1D44C2eeFDFaDd1
+[33mcontract-getter_1  |[0m 
+[35mmongo_1            |[0m 2021-08-03T15:32:59.449+0000 I CONTROL  [initandlisten] 
+[35mmongo_1            |[0m 2021-08-03T15:32:59.449+0000 I CONTROL  [initandlisten] ** WARNING: /sys/kernel/mm/transparent_hugepage/enabled is 'always'.
+[35mmongo_1            |[0m 2021-08-03T15:32:59.449+0000 I CONTROL  [initandlisten] **        We suggest setting it to 'never'
+[36mbfa_1              |[0m INFO [08-03|15:32:58.723] Loaded most recent local header          number=0 hash=ba0e16…13cfa9 td=1 age=1y7mo3d
+[36mbfa_1              |[0m INFO [08-03|15:32:58.723] Loaded most recent local full block      number=0 hash=ba0e16…13cfa9 td=1 age=1y7mo3d
+[36mbfa_1              |[0m INFO [08-03|15:32:58.723] Loaded most recent local fast block      number=0 hash=ba0e16…13cfa9 td=1 age=1y7mo3d
+[33mcontract-getter_1  |[0m 
+[33mcontract-getter_1  |[0m Starting migrations...
+[33mcontract-getter_1  |[0m ======================
+[33mcontract-getter_1  |[0m > Network name:    'bfa'
+[33mcontract-getter_1  |[0m > Network id:      12345
+[33mcontract-getter_1  |[0m > Block gas limit: 5716712 (0x573ae8)
+[33mcontract-getter_1  |[0m 
+[33mcontract-getter_1  |[0m 
+[33mcontract-getter_1  |[0m 1_initial_migration.js
+[33mcontract-getter_1  |[0m ======================
+[32mloom_1             |[0m I[2021-08-03|15:32:59.101] Deployed contract                            vm=plugin location=chainconfig:1.0.0 name=chainconfig address=default:0xb9fA0896573A89cF4065c43563C069b3B3C15c37
+[36mbfa_1              |[0m INFO [08-03|15:32:58.723] Regenerated local transaction journal    transactions=0 accounts=0
+[35mmongo_1            |[0m 2021-08-03T15:32:59.450+0000 I CONTROL  [initandlisten] 
+[32mloom_1             |[0m E[2021-08-03|15:32:59.133] Couldn't connect to any seeds                module=p2p 
+[33mcontract-getter_1  |[0m 
+[33mcontract-getter_1  |[0m    Replacing 'Migrations'
+[33mcontract-getter_1  |[0m    ----------------------
+[35mmongo_1            |[0m 2021-08-03T15:32:59.454+0000 I NETWORK  [HostnameCanonicalizationWorker] Starting hostname canonicalization worker
+[35mmongo_1            |[0m 2021-08-03T15:32:59.454+0000 I FTDC     [initandlisten] Initializing full-time diagnostic data capture with directory '/data/db/diagnostic.data'
+[36mbfa_1              |[0m INFO [08-03|15:32:58.724] Stored checkpoint snapshot to disk       number=0 hash=ba0e16…13cfa9
+[32mloom_1             |[0m I[2021-08-03|15:32:59.135] Starting RPC HTTP server on [::]:46658       module=query-server 
+[35mmongo_1            |[0m 2021-08-03T15:32:59.488+0000 I NETWORK  [initandlisten] waiting for connections on port 27017
+[32mloom_1             |[0m ts=2021-08-03T15:33:00.1767295Z module=loom level=info _msg="[Feature status changed]" name=appstore:v3.1 from=WAITING to=ENABLED block_height=1 percentage=0
+[32mloom_1             |[0m ts=2021-08-03T15:33:00.1767678Z module=loom level=info _msg="[Feature status changed]" name=auth:sigtx:eth from=WAITING to=ENABLED block_height=1 percentage=0
+[32mloom_1             |[0m ts=2021-08-03T15:33:00.1767769Z module=loom level=info _msg="[Feature status changed]" name=chaincfg:v1.1 from=WAITING to=ENABLED block_height=1 percentage=0
+[32mloom_1             |[0m ts=2021-08-03T15:33:00.1767826Z module=loom level=info _msg="[Feature status changed]" name=chaincfg:v1.2 from=WAITING to=ENABLED block_height=1 percentage=0
+[32mloom_1             |[0m ts=2021-08-03T15:33:00.1767882Z module=loom level=info _msg="[Feature status changed]" name=chaincfg:v1.3 from=WAITING to=ENABLED block_height=1 percentage=0
+[32mloom_1             |[0m ts=2021-08-03T15:33:00.1767936Z module=loom level=info _msg="[Feature status changed]" name=coin:v1.1 from=WAITING to=ENABLED block_height=1 percentage=0
+[32mloom_1             |[0m ts=2021-08-03T15:33:00.1767987Z module=loom level=info _msg="[Feature status changed]" name=dpos:v3.1 from=WAITING to=ENABLED block_height=1 percentage=0
+[32mloom_1             |[0m ts=2021-08-03T15:33:00.1768041Z module=loom level=info _msg="[Feature status changed]" name=evm:constantinople from=WAITING to=ENABLED block_height=1 percentage=0
+[32mloom_1             |[0m ts=2021-08-03T15:33:00.1768111Z module=loom level=info _msg="[Feature status changed]" name=receipts:v2 from=WAITING to=ENABLED block_height=1 percentage=0
+[32mloom_1             |[0m ts=2021-08-03T15:33:00.1768166Z module=loom level=info _msg="[Feature status changed]" name=receipts:v3.1 from=WAITING to=ENABLED block_height=1 percentage=0
+[32mloom_1             |[0m ts=2021-08-03T15:33:00.1768235Z module=loom level=info _msg="[Feature status changed]" name=receipts:v3.4 from=WAITING to=ENABLED block_height=1 percentage=0
+[32mloom_1             |[0m ts=2021-08-03T15:33:00.1768292Z module=loom level=info _msg="[Feature status changed]" name=tx:check-value from=WAITING to=ENABLED block_height=1 percentage=0
+[32mloom_1             |[0m ts=2021-08-03T15:33:00.1768346Z module=loom level=info _msg="[Feature status changed]" name=tx:eth from=WAITING to=ENABLED block_height=1 percentage=0
+[33mcontract-getter_1  |[0m    > transaction hash:    0x655a9256213328a2d00e876c76516c95cba47d00952c79b1db082f79d7f5e160
+[36mbfa_1              |[0m INFO [08-03|15:32:58.746] New local node record                    seq=1 id=f6b9d8dca6be2cd1 ip=127.0.0.1 udp=30303 tcp=30303
+[33mcontract-getter_1  |[0m - Blocks: 0            Seconds: 0
+[32mloom_1             |[0m I[2021-08-03|15:33:00.177] validator manager took 0.000279 seconds-----
+[32mloom_1             |[0m  module=loom 
+[36mbfa_1              |[0m INFO [08-03|15:32:58.747] Started P2P networking                   self=enode://767a615df4b5c583da65c6e88c96b1c2806e5996aeedf0fec5588367d4659687267aa361675735026de2b7d4d68422df83cced933cde95921786205c6b8d7c7e@127.0.0.1:30303
+[32mloom_1             |[0m I[2021-08-03|15:33:01.211] validator manager took 0.000155 seconds-----
+[32mloom_1             |[0m  module=loom 
+[36mbfa_1              |[0m INFO [08-03|15:32:58.749] IPC endpoint opened                      url=/usr/bfa/devnet/network/node/geth.ipc
+[32mloom_1             |[0m I[2021-08-03|15:33:02.247] validator manager took 0.000204 seconds-----
+[32mloom_1             |[0m  module=loom 
+[36mbfa_1              |[0m ERROR[08-03|15:32:58.749] Unavailable modules in HTTP API list     unavailable="['personal db miner']" available="[admin debug web3 eth txpool personal clique miner net]"
+[32mloom_1             |[0m I[2021-08-03|15:33:03.292] validator manager took 0.000135 seconds-----
+[32mloom_1             |[0m  module=loom 
+[36mbfa_1              |[0m INFO [08-03|15:32:58.752] HTTP endpoint opened                     url=http://[::]:8545/                     cors=* vhosts=localhost,bfa
+[32mloom_1             |[0m I[2021-08-03|15:33:04.331] validator manager took 0.000166 seconds-----
+[32mloom_1             |[0m  module=loom 
+[36mbfa_1              |[0m INFO [08-03|15:32:58.752] WebSocket endpoint opened                url=ws://[::]:8546
+[32mloom_1             |[0m I[2021-08-03|15:33:05.365] validator manager took 0.000137 seconds-----
+[32mloom_1             |[0m  module=loom 
+[36mbfa_1              |[0m INFO [08-03|15:32:59.508] Unlocked account                         address=0x28863498efeDE12296888F7CA6Cf0B94974fBdbc
+[32mloom_1             |[0m I[2021-08-03|15:33:06.398] validator manager took 0.000158 seconds-----
+[32mloom_1             |[0m  module=loom 
+[36mbfa_1              |[0m INFO [08-03|15:32:59.508] Transaction pool price threshold updated price=1
+[36mbfa_1              |[0m INFO [08-03|15:32:59.508] Transaction pool price threshold updated price=1
+[36mbfa_1              |[0m INFO [08-03|15:32:59.508] Etherbase automatically configured       address=0x28863498efeDE12296888F7CA6Cf0B94974fBdbc
+[32mloom_1             |[0m I[2021-08-03|15:33:07.429] validator manager took 0.000171 seconds-----
+[32mloom_1             |[0m  module=loom 
+[36mbfa_1              |[0m INFO [08-03|15:32:59.508] Commit new mining work                   number=1 sealhash=452fbe…cb9253 uncles=0 txs=0 gas=0 fees=0 elapsed=82.2µs
+[32mloom_1             |[0m I[2021-08-03|15:33:09.508] validator manager took 0.000160 seconds-----
+[32mloom_1             |[0m  module=loom 
+[36mbfa_1              |[0m INFO [08-03|15:32:59.508] Successfully sealed new block            number=1 sealhash=452fbe…cb9253 hash=06a428…831f93 elapsed=488.1µs
+[36mbfa_1              |[0m INFO [08-03|15:32:59.508] 🔨 mined potential block                  number=1 hash=06a428…831f93
+[36mbfa_1              |[0m INFO [08-03|15:32:59.509] Commit new mining work                   number=2 sealhash=4ee38a…9ad01f uncles=0 txs=0 gas=0 fees=0 elapsed=266.6µs
+[32mloom_1             |[0m I[2021-08-03|15:33:10.531] validator manager took 0.000205 seconds-----
+[32mloom_1             |[0m  module=loom 
+[36mbfa_1              |[0m ERROR[08-03|15:32:59.660] Failed to enumerate USB devices          hub=trezor vendor=4617  failcount=3 err="failed to initialize libusb: libusb: unknown error [code -99]"
+[36mbfa_1              |[0m ERROR[08-03|15:32:59.660] Failed to enumerate USB devices          hub=trezor vendor=21324 failcount=3 err="failed to initialize libusb: libusb: unknown error [code -99]"
+[32mloom_1             |[0m I[2021-08-03|15:33:11.568] validator manager took 0.000221 seconds-----
+[32mloom_1             |[0m  module=loom 
+[36mbfa_1              |[0m ERROR[08-03|15:32:59.660] Failed to enumerate USB devices          hub=ledger vendor=11415 failcount=3 err="failed to initialize libusb: libusb: unknown error [code -99]"
+[32mloom_1             |[0m I[2021-08-03|15:33:12.604] validator manager took 0.000253 seconds-----
+[32mloom_1             |[0m  module=loom 
+[36mbfa_1              |[0m INFO [08-03|15:33:00.342] New local node record                    seq=2 id=f6b9d8dca6be2cd1 ip=181.168.179.248 udp=63852 tcp=30303
+[32mloom_1             |[0m I[2021-08-03|15:33:13.636] validator manager took 0.000141 seconds-----
+[32mloom_1             |[0m  module=loom 
+[36mbfa_1              |[0m INFO [08-03|15:33:12.816] Looking for peers                        peercount=0 tried=119 static=0
+[32mloom_1             |[0m I[2021-08-03|15:33:15.310] validator manager took 0.000185 seconds-----
+[32mloom_1             |[0m  module=loom 
+[36mbfa_1              |[0m INFO [08-03|15:33:14.000] Successfully sealed new block            number=2 sealhash=4ee38a…9ad01f hash=33f61a…0f1863 elapsed=14.491s
+[36mbfa_1              |[0m INFO [08-03|15:33:14.000] 🔨 mined potential block                  number=2 hash=33f61a…0f1863
+[32mloom_1             |[0m I[2021-08-03|15:33:16.337] validator manager took 0.000215 seconds-----
+[32mloom_1             |[0m  module=loom 
+[36mbfa_1              |[0m INFO [08-03|15:33:14.000] Commit new mining work                   number=3 sealhash=5f9cd6…4bdef0 uncles=0 txs=0 gas=0 fees=0 elapsed=303.5µs
+[32mloom_1             |[0m I[2021-08-03|15:33:17.480] validator manager took 0.000128 seconds-----
+[32mloom_1             |[0m  module=loom 
+[36mbfa_1              |[0m INFO [08-03|15:33:23.442] Looking for peers                        peercount=0 tried=84  static=0
+[32mloom_1             |[0m I[2021-08-03|15:33:18.611] validator manager took 0.000361 seconds-----
+[32mloom_1             |[0m  module=loom 
+[36mbfa_1              |[0m INFO [08-03|15:33:29.000] Successfully sealed new block            number=3 sealhash=5f9cd6…4bdef0 hash=e8ae6d…5d1099 elapsed=14.999s
+[36mbfa_1              |[0m INFO [08-03|15:33:29.000] 🔨 mined potential block                  number=3 hash=e8ae6d…5d1099
+[32mloom_1             |[0m I[2021-08-03|15:33:19.705] validator manager took 0.000292 seconds-----
+[32mloom_1             |[0m  module=loom 
+[36mbfa_1              |[0m INFO [08-03|15:33:29.001] Commit new mining work                   number=4 sealhash=021241…a0100b uncles=0 txs=0 gas=0 fees=0 elapsed=384.1µs
+[32mloom_1             |[0m I[2021-08-03|15:33:20.790] validator manager took 0.000210 seconds-----
+[32mloom_1             |[0m  module=loom 
+[36mbfa_1              |[0m INFO [08-03|15:33:33.747] Looking for peers                        peercount=0 tried=94  static=0
+[32mloom_1             |[0m I[2021-08-03|15:33:21.913] validator manager took 0.000130 seconds-----
+[32mloom_1             |[0m  module=loom 
+[36mbfa_1              |[0m INFO [08-03|15:33:34.086] Setting new local account                address=0x28863498efeDE12296888F7CA6Cf0B94974fBdbc
+[32mloom_1             |[0m I[2021-08-03|15:33:23.025] validator manager took 0.000157 seconds-----
+[32mloom_1             |[0m  module=loom 
+[36mbfa_1              |[0m INFO [08-03|15:33:34.086] Submitted contract creation              fullhash=0x655a9256213328a2d00e876c76516c95cba47d00952c79b1db082f79d7f5e160 contract=0x510d9d2003A5FA5aC4B6eEaB5AAC7CAA2F610b90
+[32mloom_1             |[0m I[2021-08-03|15:33:24.109] validator manager took 0.000227 seconds-----
+[32mloom_1             |[0m  module=loom 
+[32mloom_1             |[0m I[2021-08-03|15:33:25.206] validator manager took 0.000139 seconds-----
+[32mloom_1             |[0m  module=loom 
+[32mloom_1             |[0m I[2021-08-03|15:33:26.294] validator manager took 0.000342 seconds-----
+[32mloom_1             |[0m  module=loom 
+[32mloom_1             |[0m E[2021-08-03|15:33:29.134] Couldn't connect to any seeds                module=p2p 
+[32mloom_1             |[0m I[2021-08-03|15:33:34.578] validator manager took 0.001121 seconds-----
+[32mloom_1             |[0m  module=loom 
+[36mbfa_1              |[0m INFO [08-03|15:33:35.015] Commit new mining work                   number=4 sealhash=88be20…8fe749 uncles=0 txs=1 gas=270400 fees=2.704e-13 elapsed=13.497ms
+[36;1mweb_1              |[0m 
+[36;1mweb_1              |[0m > web@0.1.0 dev /usr/src/app/web
+[36;1mweb_1              |[0m > next dev
+[36;1mweb_1              |[0m 
+[32mloom_1             |[0m I[2021-08-03|15:33:35.671] validator manager took 0.002211 seconds-----
+[32mloom_1             |[0m  module=loom 
+[32mloom_1             |[0m I[2021-08-03|15:33:36.759] validator manager took 0.000431 seconds-----
+[32mloom_1             |[0m  module=loom 
+[36;1mweb_1              |[0m Browserslist: caniuse-lite is outdated. Please run:
+[36;1mweb_1              |[0m npx browserslist@latest --update-db
+[36;1mweb_1              |[0m ready - started server on http://localhost:3000
+[32mloom_1             |[0m I[2021-08-03|15:33:38.121] validator manager took 0.000935 seconds-----
+[32mloom_1             |[0m  module=loom 
+[32mloom_1             |[0m I[2021-08-03|15:33:39.150] validator manager took 0.000578 seconds-----
+[32mloom_1             |[0m  module=loom 
+[32mloom_1             |[0m I[2021-08-03|15:33:40.212] validator manager took 0.000796 seconds-----
+[32mloom_1             |[0m  module=loom 
+[32mloom_1             |[0m I[2021-08-03|15:33:41.288] validator manager took 0.000551 seconds-----
+[32mloom_1             |[0m  module=loom 
+[36;1mweb_1              |[0m info  - Using external babel configuration from /usr/src/app/web/.babelrc
+[32mloom_1             |[0m I[2021-08-03|15:33:42.357] validator manager took 0.000365 seconds-----
+[32mloom_1             |[0m  module=loom 
+[32mloom_1             |[0m I[2021-08-03|15:33:43.424] validator manager took 0.000409 seconds-----
+[32mloom_1             |[0m  module=loom 
+[36mbfa_1              |[0m INFO [08-03|15:33:43.747] Looking for peers                        peercount=0 tried=97  static=0
+[36mbfa_1              |[0m INFO [08-03|15:33:44.003] Successfully sealed new block            number=4 sealhash=88be20…8fe749 hash=9cd7ae…9fc274 elapsed=8.989s
+[36mbfa_1              |[0m INFO [08-03|15:33:44.003] 🔨 mined potential block                  number=4 hash=9cd7ae…9fc274
+[36mbfa_1              |[0m INFO [08-03|15:33:44.004] Commit new mining work                   number=5 sealhash=7776c1…018e17 uncles=0 txs=0 gas=0      fees=0         elapsed=733.9µs
+[33mcontract-getter_1  |[0m    > Blocks: 0            Seconds: 8
+[33mcontract-getter_1  |[0m    > contract address:    0x510d9d2003A5FA5aC4B6eEaB5AAC7CAA2F610b90
+[33mcontract-getter_1  |[0m    > block number:        4
+[33mcontract-getter_1  |[0m    > block timestamp:     1628004824
+[33mcontract-getter_1  |[0m    > account:             0x28863498efeDE12296888F7CA6Cf0B94974fBdbc
+[33mcontract-getter_1  |[0m    > balance:             904625697166532776746648320380374280103671755200316906558.262375061821325312
+[33mcontract-getter_1  |[0m    > gas used:            270400 (0x42040)
+[33mcontract-getter_1  |[0m    > gas price:           0.000000001 gwei
+[33mcontract-getter_1  |[0m    > value sent:          0 ETH
+[33mcontract-getter_1  |[0m    > total cost:          0.0000000000002704 ETH
+[33mcontract-getter_1  |[0m 
+[33mcontract-getter_1  |[0m 
+[33mcontract-getter_1  |[0m - Saving migration to chain.
+[36mbfa_1              |[0m INFO [08-03|15:33:44.353] Submitted transaction                    fullhash=0xe128ac846e00257c5bf5b0c575bf14a57d4629a24c2e5d5269aefb778338c7a4 recipient=0x510d9d2003A5FA5aC4B6eEaB5AAC7CAA2F610b90
+[32mloom_1             |[0m I[2021-08-03|15:33:44.502] validator manager took 0.000335 seconds-----
+[32mloom_1             |[0m  module=loom 
+[32mloom_1             |[0m I[2021-08-03|15:33:45.566] validator manager took 0.000396 seconds-----
+[32mloom_1             |[0m  module=loom 
+[32mloom_1             |[0m I[2021-08-03|15:33:46.638] validator manager took 0.000405 seconds-----
+[32mloom_1             |[0m  module=loom 
+[36mbfa_1              |[0m INFO [08-03|15:33:47.004] Commit new mining work                   number=5 sealhash=f68fd3…2074fb uncles=0 txs=1 gas=42538  fees=4.2538e-14 elapsed=406.5µs
+[32mloom_1             |[0m I[2021-08-03|15:33:47.700] validator manager took 0.000214 seconds-----
+[32mloom_1             |[0m  module=loom 
+[36;1mweb_1              |[0m event - compiled successfully
+[36;1mweb_1              |[0m Attention: Next.js now collects completely anonymous telemetry regarding usage.
+[36;1mweb_1              |[0m This information is used to shape Next.js' roadmap and prioritize features.
+[36;1mweb_1              |[0m You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:
+[36;1mweb_1              |[0m https://nextjs.org/telemetry
+[36;1mweb_1              |[0m 
+[32mloom_1             |[0m I[2021-08-03|15:33:48.752] validator manager took 0.000147 seconds-----
+[32mloom_1             |[0m  module=loom 
+[32mloom_1             |[0m I[2021-08-03|15:33:49.813] validator manager took 0.000164 seconds-----
+[32mloom_1             |[0m  module=loom 
+[32mloom_1             |[0m I[2021-08-03|15:33:50.873] validator manager took 0.000506 seconds-----
+[32mloom_1             |[0m  module=loom 
+[32mloom_1             |[0m I[2021-08-03|15:33:51.931] validator manager took 0.000222 seconds-----
+[32mloom_1             |[0m  module=loom 
+[32mloom_1             |[0m I[2021-08-03|15:33:52.992] validator manager took 0.000237 seconds-----
+[32mloom_1             |[0m  module=loom 
+[36mbfa_1              |[0m INFO [08-03|15:33:53.874] Looking for peers                        peercount=0 tried=42  static=0
+[32mloom_1             |[0m I[2021-08-03|15:33:54.054] validator manager took 0.000327 seconds-----
+[32mloom_1             |[0m  module=loom 
+[32mloom_1             |[0m I[2021-08-03|15:33:55.109] validator manager took 0.000179 seconds-----
+[32mloom_1             |[0m  module=loom 
+[32mloom_1             |[0m I[2021-08-03|15:33:56.167] validator manager took 0.000234 seconds-----
+[32mloom_1             |[0m  module=loom 
+[32mloom_1             |[0m I[2021-08-03|15:33:57.226] validator manager took 0.000170 seconds-----
+[32mloom_1             |[0m  module=loom 
+[32mloom_1             |[0m I[2021-08-03|15:33:58.289] validator manager took 0.000136 seconds-----
+[32mloom_1             |[0m  module=loom 
+[36mbfa_1              |[0m INFO [08-03|15:33:59.000] Successfully sealed new block            number=5 sealhash=f68fd3…2074fb hash=7784d4…2b4563 elapsed=11.996s
+[36mbfa_1              |[0m INFO [08-03|15:33:59.000] 🔨 mined potential block                  number=5 hash=7784d4…2b4563
+[36mbfa_1              |[0m INFO [08-03|15:33:59.001] Commit new mining work                   number=6 sealhash=6b6abe…c563c6 uncles=0 txs=0 gas=0      fees=0          elapsed=409.5µs
+[32mloom_1             |[0m E[2021-08-03|15:33:59.134] Couldn't connect to any seeds                module=p2p 
+[32mloom_1             |[0m I[2021-08-03|15:33:59.367] validator manager took 0.000244 seconds-----
+[32mloom_1             |[0m  module=loom 
+[33mcontract-getter_1  |[0m    > Saving migration to chain.
+[33mcontract-getter_1  |[0m    > Saving artifacts
+[33mcontract-getter_1  |[0m    -------------------------------------
+[33mcontract-getter_1  |[0m    > Total cost:     0.0000000000002704 ETH
+[33mcontract-getter_1  |[0m 
+[33mcontract-getter_1  |[0m 
+[33mcontract-getter_1  |[0m 2_sidechain_contracts.js
+[33mcontract-getter_1  |[0m ========================
+[32mloom_1             |[0m I[2021-08-03|15:34:00.402] validator manager took 0.000309 seconds-----
+[32mloom_1             |[0m  module=loom 
+[32mloom_1             |[0m I[2021-08-03|15:34:01.488] validator manager took 0.000547 seconds-----
+[32mloom_1             |[0m  module=loom 
+[32mloom_1             |[0m I[2021-08-03|15:34:02.541] validator manager took 0.000431 seconds-----
+[32mloom_1             |[0m  module=loom 
+[33mcontract-getter_1  |[0m 
+[33mcontract-getter_1  |[0m - Saving migration to chain.
+[36mbfa_1              |[0m INFO [08-03|15:34:03.149] Submitted transaction                    fullhash=0x7a44b59e3bc1d6649f5270d2e933c8e6375d608a27b76613fbd7574fbba3289d recipient=0x510d9d2003A5FA5aC4B6eEaB5AAC7CAA2F610b90
+[32mloom_1             |[0m I[2021-08-03|15:34:03.617] validator manager took 0.000445 seconds-----
+[32mloom_1             |[0m  module=loom 
+[36mbfa_1              |[0m INFO [08-03|15:34:03.950] Looking for peers                        peercount=0 tried=112 static=0
+[32mloom_1             |[0m I[2021-08-03|15:34:04.695] validator manager took 0.000460 seconds-----
+[32mloom_1             |[0m  module=loom 
+[36mbfa_1              |[0m INFO [08-03|15:34:05.001] Commit new mining work                   number=6 sealhash=47104d…d68d8b uncles=0 txs=1 gas=27538  fees=2.7538e-14 elapsed=307.2µs
+[32mloom_1             |[0m I[2021-08-03|15:34:05.756] validator manager took 0.000278 seconds-----
+[32mloom_1             |[0m  module=loom 
+[32mloom_1             |[0m I[2021-08-03|15:34:06.815] validator manager took 0.000230 seconds-----
+[32mloom_1             |[0m  module=loom 
+[32mloom_1             |[0m I[2021-08-03|15:34:07.897] validator manager took 0.000173 seconds-----
+[32mloom_1             |[0m  module=loom 
+[32mloom_1             |[0m I[2021-08-03|15:34:08.981] validator manager took 0.000153 seconds-----
+[32mloom_1             |[0m  module=loom 
+[32mloom_1             |[0m I[2021-08-03|15:34:10.035] validator manager took 0.000143 seconds-----
+[32mloom_1             |[0m  module=loom 
+[32mloom_1             |[0m I[2021-08-03|15:34:11.092] validator manager took 0.000160 seconds-----
+[32mloom_1             |[0m  module=loom 
+[32mloom_1             |[0m I[2021-08-03|15:34:12.157] validator manager took 0.000222 seconds-----
+[32mloom_1             |[0m  module=loom 
+[32mloom_1             |[0m I[2021-08-03|15:34:13.248] validator manager took 0.000181 seconds-----
+[32mloom_1             |[0m  module=loom 
+[36mbfa_1              |[0m INFO [08-03|15:34:13.970] Looking for peers                        peercount=2 tried=49  static=0
+[36mbfa_1              |[0m INFO [08-03|15:34:14.000] Successfully sealed new block            number=6 sealhash=47104d…d68d8b hash=13a02a…e5dfaa elapsed=8.999s
+[36mbfa_1              |[0m INFO [08-03|15:34:14.000] 🔨 mined potential block                  number=6 hash=13a02a…e5dfaa
+[36mbfa_1              |[0m INFO [08-03|15:34:14.001] Commit new mining work                   number=7 sealhash=0bc139…f8cb70 uncles=0 txs=0 gas=0      fees=0          elapsed=327.3µs
+[33mcontract-getter_1  |[0m    > Saving migration to chain.
+[33mcontract-getter_1  |[0m    -------------------------------------
+[33mcontract-getter_1  |[0m    > Total cost:                   0 ETH
+[33mcontract-getter_1  |[0m 
+[32mloom_1             |[0m I[2021-08-03|15:34:14.304] validator manager took 0.000169 seconds-----
+[32mloom_1             |[0m  module=loom 
+[33mcontract-getter_1  |[0m 
+[33mcontract-getter_1  |[0m 3_mainchain_contracts.js
+[33mcontract-getter_1  |[0m ========================
+[32mloom_1             |[0m I[2021-08-03|15:34:15.356] validator manager took 0.000160 seconds-----
+[32mloom_1             |[0m  module=loom 
+[32mloom_1             |[0m I[2021-08-03|15:34:16.415] validator manager took 0.000166 seconds-----
+[32mloom_1             |[0m  module=loom 
+[33mcontract-getter_1  |[0m Deploying mainnet contracts to bfa...
+[33mcontract-getter_1  |[0m VALIDATOR = 0x28863498efeDE12296888F7CA6Cf0B94974fBdbc
+[33mcontract-getter_1  |[0m 
+[33mcontract-getter_1  |[0m    Replacing 'MainnetGateway'
+[33mcontract-getter_1  |[0m    --------------------------
+[36mbfa_1              |[0m INFO [08-03|15:34:16.910] Submitted contract creation              fullhash=0xa1d5553ab85931b7864e9ba9b9ad6ac0081a542a8682b224102d5ebc37b769a9 contract=0x4b251b6900536Ff7060305796444d97E68ED383B
+[33mcontract-getter_1  |[0m    > transaction hash:    0xa1d5553ab85931b7864e9ba9b9ad6ac0081a542a8682b224102d5ebc37b769a9
+[33mcontract-getter_1  |[0m - Blocks: 0            Seconds: 0
+[36mbfa_1              |[0m INFO [08-03|15:34:17.001] Commit new mining work                   number=7 sealhash=bf1b5c…b8614b uncles=0 txs=1 gas=4132619 fees=4.132619e-12 elapsed=620.3µs
+[32mloom_1             |[0m I[2021-08-03|15:34:17.493] validator manager took 0.000264 seconds-----
+[32mloom_1             |[0m  module=loom 
+[32mloom_1             |[0m I[2021-08-03|15:34:18.525] validator manager took 0.000164 seconds-----
+[32mloom_1             |[0m  module=loom 
+[32mloom_1             |[0m I[2021-08-03|15:34:19.577] validator manager took 0.000184 seconds-----
+[32mloom_1             |[0m  module=loom 
+[32mloom_1             |[0m I[2021-08-03|15:34:20.635] validator manager took 0.000136 seconds-----
+[32mloom_1             |[0m  module=loom 
+[32mloom_1             |[0m I[2021-08-03|15:34:21.717] validator manager took 0.000175 seconds-----
+[32mloom_1             |[0m  module=loom 
+[32mloom_1             |[0m I[2021-08-03|15:34:22.788] validator manager took 0.000131 seconds-----
+[32mloom_1             |[0m  module=loom 
+[32mloom_1             |[0m I[2021-08-03|15:34:23.859] validator manager took 0.000169 seconds-----
+[32mloom_1             |[0m  module=loom 
+[36mbfa_1              |[0m INFO [08-03|15:34:24.052] Looking for peers                        peercount=0 tried=115 static=0
+[32mloom_1             |[0m I[2021-08-03|15:34:24.919] validator manager took 0.000128 seconds-----
+[32mloom_1             |[0m  module=loom 
+[32mloom_1             |[0m I[2021-08-03|15:34:25.977] validator manager took 0.000136 seconds-----
+[32mloom_1             |[0m  module=loom 
+[32mloom_1             |[0m I[2021-08-03|15:34:27.032] validator manager took 0.000166 seconds-----
+[32mloom_1             |[0m  module=loom 
+[32mloom_1             |[0m I[2021-08-03|15:34:28.094] validator manager took 0.001671 seconds-----
+[32mloom_1             |[0m  module=loom 
+[36mbfa_1              |[0m INFO [08-03|15:34:29.000] Successfully sealed new block            number=7 sealhash=bf1b5c…b8614b hash=8f80df…65ff7d elapsed=11.999s
+[36mbfa_1              |[0m INFO [08-03|15:34:29.001] 🔨 mined potential block                  number=7 hash=8f80df…65ff7d
+[36mbfa_1              |[0m INFO [08-03|15:34:29.001] Commit new mining work                   number=8 sealhash=3abbdf…37dbb7 uncles=0 txs=0 gas=0       fees=0            elapsed=384.8µs
+[32mloom_1             |[0m E[2021-08-03|15:34:29.134] Couldn't connect to any seeds                module=p2p 
+[32mloom_1             |[0m I[2021-08-03|15:34:29.138] validator manager took 0.000150 seconds-----
+[32mloom_1             |[0m  module=loom 
+[33mcontract-getter_1  |[0m    > Blocks: 0            Seconds: 12
+[33mcontract-getter_1  |[0m    > contract address:    0x4b251b6900536Ff7060305796444d97E68ED383B
+[33mcontract-getter_1  |[0m    > block number:        7
+[33mcontract-getter_1  |[0m    > block timestamp:     1628004869
+[33mcontract-getter_1  |[0m    > account:             0x28863498efeDE12296888F7CA6Cf0B94974fBdbc
+[33mcontract-getter_1  |[0m    > balance:             904625697166532776746648320380374280103671755200316906558.262375061821325312
+[33mcontract-getter_1  |[0m    > gas used:            4132619 (0x3f0f0b)
+[33mcontract-getter_1  |[0m    > gas price:           0.000000001 gwei
+[33mcontract-getter_1  |[0m    > value sent:          0 ETH
+[33mcontract-getter_1  |[0m    > total cost:          0.000000000004132619 ETH
+[33mcontract-getter_1  |[0m 
+[33mcontract-getter_1  |[0m Gateway deployed at address: 0x4b251b6900536Ff7060305796444d97E68ED383B
+[33mcontract-getter_1  |[0m 
+[33mcontract-getter_1  |[0m    Replacing 'DragonSerializer'
+[33mcontract-getter_1  |[0m    ----------------------------
+[36mbfa_1              |[0m INFO [08-03|15:34:30.064] Submitted contract creation              fullhash=0x53a989113e8834a2e8139d05109a59734d6b5f2798b6e4db16dbca47f2a54019 contract=0xD08e643a58F919dCB931daEC073668c8f07Fe1cc
+[33mcontract-getter_1  |[0m - Blocks: 0            Seconds: 0
+[33mcontract-getter_1  |[0m    > transaction hash:    0x53a989113e8834a2e8139d05109a59734d6b5f2798b6e4db16dbca47f2a54019
+[32mloom_1             |[0m I[2021-08-03|15:34:30.220] validator manager took 0.000134 seconds-----
+[32mloom_1             |[0m  module=loom 
+[32mloom_1             |[0m I[2021-08-03|15:34:31.327] validator manager took 0.000337 seconds-----
+[32mloom_1             |[0m  module=loom 
+[36mbfa_1              |[0m INFO [08-03|15:34:32.001] Commit new mining work                   number=8 sealhash=720b82…bb0f3a uncles=0 txs=1 gas=1665324 fees=1.665324e-12 elapsed=304.4µs
+[32mloom_1             |[0m I[2021-08-03|15:34:32.416] validator manager took 0.000126 seconds-----
+[32mloom_1             |[0m  module=loom 
+[32mloom_1             |[0m I[2021-08-03|15:34:33.481] validator manager took 0.000190 seconds-----
+[32mloom_1             |[0m  module=loom 
+[36mbfa_1              |[0m INFO [08-03|15:34:34.281] Looking for peers                        peercount=0 tried=111 static=0
+[32mloom_1             |[0m I[2021-08-03|15:34:34.545] validator manager took 0.000185 seconds-----
+[32mloom_1             |[0m  module=loom 
+[32mloom_1             |[0m I[2021-08-03|15:34:35.611] validator manager took 0.000183 seconds-----
+[32mloom_1             |[0m  module=loom 
+[32mloom_1             |[0m I[2021-08-03|15:34:36.667] validator manager took 0.000155 seconds-----
+[32mloom_1             |[0m  module=loom 
+[32mloom_1             |[0m I[2021-08-03|15:34:37.725] validator manager took 0.000166 seconds-----
+[32mloom_1             |[0m  module=loom 
+[32mloom_1             |[0m I[2021-08-03|15:34:38.780] validator manager took 0.000141 seconds-----
+[32mloom_1             |[0m  module=loom 
+[32mloom_1             |[0m I[2021-08-03|15:34:39.847] validator manager took 0.000137 seconds-----
+[32mloom_1             |[0m  module=loom 
+[32mloom_1             |[0m I[2021-08-03|15:34:40.906] validator manager took 0.000161 seconds-----
+[32mloom_1             |[0m  module=loom 
+[32mloom_1             |[0m I[2021-08-03|15:34:41.962] validator manager took 0.000225 seconds-----
+[32mloom_1             |[0m  module=loom 
+[32mloom_1             |[0m I[2021-08-03|15:34:43.021] validator manager took 0.000303 seconds-----
+[32mloom_1             |[0m  module=loom 
+[36mbfa_1              |[0m INFO [08-03|15:34:44.000] Successfully sealed new block            number=8 sealhash=720b82…bb0f3a hash=12da86…c323ef elapsed=11.999s
+[36mbfa_1              |[0m INFO [08-03|15:34:44.000] 🔗 block reached canonical chain          number=1 hash=06a428…831f93
+[36mbfa_1              |[0m INFO [08-03|15:34:44.000] 🔨 mined potential block                  number=8 hash=12da86…c323ef
+[36mbfa_1              |[0m INFO [08-03|15:34:44.001] Commit new mining work                   number=9 sealhash=4cada1…40a830 uncles=0 txs=0 gas=0       fees=0            elapsed=464.9µs
+[32mloom_1             |[0m I[2021-08-03|15:34:44.074] validator manager took 0.000629 seconds-----
+[32mloom_1             |[0m  module=loom 
+[33mcontract-getter_1  |[0m    > Blocks: 0            Seconds: 12
+[33mcontract-getter_1  |[0m    > contract address:    0xD08e643a58F919dCB931daEC073668c8f07Fe1cc
+[33mcontract-getter_1  |[0m    > block number:        8
+[33mcontract-getter_1  |[0m    > block timestamp:     1628004884
+[33mcontract-getter_1  |[0m    > account:             0x28863498efeDE12296888F7CA6Cf0B94974fBdbc
+[33mcontract-getter_1  |[0m    > balance:             904625697166532776746648320380374280103671755200316906558.262375061821325312
+[33mcontract-getter_1  |[0m    > gas used:            1665324 (0x19692c)
+[33mcontract-getter_1  |[0m    > gas price:           0.000000001 gwei
+[33mcontract-getter_1  |[0m    > value sent:          0 ETH
+[33mcontract-getter_1  |[0m    > total cost:          0.000000000001665324 ETH
+[33mcontract-getter_1  |[0m 
+[33mcontract-getter_1  |[0m DragonSerializer deployed at address: 0xD08e643a58F919dCB931daEC073668c8f07Fe1cc
+[33mcontract-getter_1  |[0m DragonSerializer transaction at hash: 0x53a989113e8834a2e8139d05109a59734d6b5f2798b6e4db16dbca47f2a54019
+[33mcontract-getter_1  |[0m 
+[33mcontract-getter_1  |[0m    Replacing 'MainnetTransferableDragon'
+[33mcontract-getter_1  |[0m    -------------------------------------
+[36mbfa_1              |[0m INFO [08-03|15:34:44.175] Submitted contract creation              fullhash=0x269306f3cc34251ddd7612a4f1674324cd796960d8948e54a902e213461a7eae contract=0x7FFf34CD33ce0D3fFfE5a8f2dc7A8BE234521971
+[33mcontract-getter_1  |[0m - Blocks: 0            Seconds: 0
+[33mcontract-getter_1  |[0m    > transaction hash:    0x269306f3cc34251ddd7612a4f1674324cd796960d8948e54a902e213461a7eae
+[36mbfa_1              |[0m INFO [08-03|15:34:44.419] Looking for peers                        peercount=0 tried=65  static=0
+[32mloom_1             |[0m I[2021-08-03|15:34:45.143] validator manager took 0.000218 seconds-----
+[32mloom_1             |[0m  module=loom 
+[32mloom_1             |[0m I[2021-08-03|15:34:46.207] validator manager took 0.000249 seconds-----
+[32mloom_1             |[0m  module=loom 
+[36mbfa_1              |[0m INFO [08-03|15:34:47.001] Commit new mining work                   number=9 sealhash=1dff8c…98b2a3 uncles=0 txs=1 gas=5051133 fees=5.051133e-12 elapsed=846.9µs
+[32mloom_1             |[0m I[2021-08-03|15:34:47.264] validator manager took 0.000352 seconds-----
+[32mloom_1             |[0m  module=loom 
+[32mloom_1             |[0m I[2021-08-03|15:34:48.331] validator manager took 0.000374 seconds-----
+[32mloom_1             |[0m  module=loom 
+[32mloom_1             |[0m I[2021-08-03|15:34:49.394] validator manager took 0.000346 seconds-----
+[32mloom_1             |[0m  module=loom 
+[32mloom_1             |[0m I[2021-08-03|15:34:50.460] validator manager took 0.000228 seconds-----
+[32mloom_1             |[0m  module=loom 
+[32mloom_1             |[0m I[2021-08-03|15:34:51.518] validator manager took 0.000284 seconds-----
+[32mloom_1             |[0m  module=loom 
+[32mloom_1             |[0m I[2021-08-03|15:34:52.576] validator manager took 0.000568 seconds-----
+[32mloom_1             |[0m  module=loom 
+[32mloom_1             |[0m I[2021-08-03|15:34:53.641] validator manager took 0.000363 seconds-----
+[32mloom_1             |[0m  module=loom 
+[36mbfa_1              |[0m INFO [08-03|15:34:54.427] Looking for peers                        peercount=2 tried=81  static=0
+[32mloom_1             |[0m I[2021-08-03|15:34:54.714] validator manager took 0.000261 seconds-----
+[32mloom_1             |[0m  module=loom 
+[32mloom_1             |[0m I[2021-08-03|15:34:55.766] validator manager took 0.000188 seconds-----
+[32mloom_1             |[0m  module=loom 
+[32mloom_1             |[0m I[2021-08-03|15:34:56.824] validator manager took 0.000273 seconds-----
+[32mloom_1             |[0m  module=loom 
+[32mloom_1             |[0m I[2021-08-03|15:34:57.881] validator manager took 0.000243 seconds-----
+[32mloom_1             |[0m  module=loom 
+[32mloom_1             |[0m I[2021-08-03|15:34:58.947] validator manager took 0.000422 seconds-----
+[32mloom_1             |[0m  module=loom 
+[36mbfa_1              |[0m INFO [08-03|15:34:59.000] Successfully sealed new block            number=9 sealhash=1dff8c…98b2a3 hash=3431af…b5c7b2 elapsed=11.998s
+[36mbfa_1              |[0m INFO [08-03|15:34:59.000] 🔗 block reached canonical chain          number=2 hash=33f61a…0f1863
+[36mbfa_1              |[0m INFO [08-03|15:34:59.000] 🔨 mined potential block                  number=9 hash=3431af…b5c7b2
+[36mbfa_1              |[0m INFO [08-03|15:34:59.001] Commit new mining work                   number=10 sealhash=4be879…de214e uncles=0 txs=0 gas=0       fees=0            elapsed=469.8µs
+[32mloom_1             |[0m E[2021-08-03|15:34:59.143] Couldn't connect to any seeds                module=p2p 
+[33mcontract-getter_1  |[0m    > Blocks: 0            Seconds: 12
+[33mcontract-getter_1  |[0m    > contract address:    0x7FFf34CD33ce0D3fFfE5a8f2dc7A8BE234521971
+[33mcontract-getter_1  |[0m    > block number:        9
+[33mcontract-getter_1  |[0m    > block timestamp:     1628004899
+[33mcontract-getter_1  |[0m    > account:             0x28863498efeDE12296888F7CA6Cf0B94974fBdbc
+[33mcontract-getter_1  |[0m    > balance:             904625697166532776746648320380374280103671755200316906558.262375061821325312
+[33mcontract-getter_1  |[0m    > gas used:            5051133 (0x4d12fd)
+[33mcontract-getter_1  |[0m    > gas price:           0.000000001 gwei
+[33mcontract-getter_1  |[0m    > value sent:          0 ETH
+[33mcontract-getter_1  |[0m    > total cost:          0.000000000005051133 ETH
+[33mcontract-getter_1  |[0m 
+[33mcontract-getter_1  |[0m DragonToken deployed at address: 0x7FFf34CD33ce0D3fFfE5a8f2dc7A8BE234521971
+[33mcontract-getter_1  |[0m DragonToken transaction at hash: 0x269306f3cc34251ddd7612a4f1674324cd796960d8948e54a902e213461a7eae
+[33mcontract-getter_1  |[0m 
+[33mcontract-getter_1  |[0m    Replacing 'GenesLaboratory'
+[33mcontract-getter_1  |[0m    ---------------------------
+[36mbfa_1              |[0m INFO [08-03|15:34:59.244] Submitted contract creation              fullhash=0x5b826b2642098466d67c7b14d3f75c71a9c6d93467f8fcf22e10964e1ab26aab contract=0x5FcFaE9ce5263E5B54B60116280d6a735992B90A
+[33mcontract-getter_1  |[0m    > transaction hash:    0x5b826b2642098466d67c7b14d3f75c71a9c6d93467f8fcf22e10964e1ab26aab
+[33mcontract-getter_1  |[0m - Blocks: 0            Seconds: 0
+[32mloom_1             |[0m I[2021-08-03|15:35:00.002] validator manager took 0.000249 seconds-----
+[32mloom_1             |[0m  module=loom 
+[32mloom_1             |[0m I[2021-08-03|15:35:01.062] validator manager took 0.000422 seconds-----
+[32mloom_1             |[0m  module=loom 
+[36mbfa_1              |[0m INFO [08-03|15:35:02.001] Commit new mining work                   number=10 sealhash=f6490b…f6bfa1 uncles=0 txs=1 gas=1367966 fees=1.367966e-12 elapsed=625µs
+[32mloom_1             |[0m I[2021-08-03|15:35:02.122] validator manager took 0.000277 seconds-----
+[32mloom_1             |[0m  module=loom 
+[32mloom_1             |[0m I[2021-08-03|15:35:03.184] validator manager took 0.000266 seconds-----
+[32mloom_1             |[0m  module=loom 
+[32mloom_1             |[0m I[2021-08-03|15:35:04.248] validator manager took 0.000268 seconds-----
+[32mloom_1             |[0m  module=loom 
+[36mbfa_1              |[0m INFO [08-03|15:35:04.435] Looking for peers                        peercount=0 tried=94  static=0
+[32mloom_1             |[0m I[2021-08-03|15:35:05.318] validator manager took 0.000318 seconds-----
+[32mloom_1             |[0m  module=loom 
+Gracefully stopping... (press Ctrl+C again to force)

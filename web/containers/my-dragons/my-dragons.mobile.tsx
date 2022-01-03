@@ -11,24 +11,24 @@ import { tProps } from './types'
 
 function MyDragonsMobile({
   accountsState,
-  checkedGateways,
+  attribute,
   checkedMainchain,
   checkedSidechain,
+  dragons,
+  filteredDragons,
   handleCheckedChange,
   handleSearchChange,
-  search,
-  loading,
-  attribute,
   handleChangeAttribute,
   handleChangeSelectLowHigh,
+  loading,
   lowOrHigh,
-  dragons,
+  search,
+  transferMethod,
 }: tProps): ReactElement {
   return (
     <>
       <AppToolbar deviceType="mobile" section="my-dragons" accountsState={accountsState} />
       <MyDragonsSearchContainerMobile
-        checkedGateways={checkedGateways}
         checkedMainchain={checkedMainchain}
         checkedSidechain={checkedSidechain}
         handleCheckedChange={handleCheckedChange}
@@ -39,7 +39,13 @@ function MyDragonsMobile({
         lowOrHigh={lowOrHigh}
         handleChangeSelectLowHigh={handleChangeSelectLowHigh}
       />
-      <MyDragonsGridViewMobile dragons={dragons} loading={loading} />
+      <MyDragonsGridViewMobile
+        dragons={dragons}
+        filteredDragons={filteredDragons}
+        loading={loading}
+        transferMethod={transferMethod}
+        mappedAccounts={accountsState && accountsState.mapped_accounts}
+      />
       <FooterMobile />
     </>
   )

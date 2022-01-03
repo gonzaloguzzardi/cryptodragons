@@ -11,4 +11,13 @@ const getSidechainData = async (mainchainAccountId) =>
     .then((res) => res.data)
     .catch((err) => console.log(`Error fetching sidechain data: ${err}`))
 
-export { getSidechainData }
+const getDragonsFromOracleAPI = async () =>
+  axios
+    .get(
+      `${oracleApiUrl}:${oracleApiPort}/api/dragons`
+    )
+    .then((res) => res.data)
+    .catch((err) => console.log(`Error fetching sidechain data: ${err}`))
+
+
+export { getDragonsFromOracleAPI, getSidechainData }

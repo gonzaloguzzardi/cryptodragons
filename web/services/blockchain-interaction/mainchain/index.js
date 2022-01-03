@@ -34,6 +34,10 @@ class MainchainAPI {
     return client
   }
 
+  static getAccountId() {
+    return client && client.account;
+  }
+
   static async connectToProvider() {
     if (!client) return Promise.resolve('Provider(ej: Metamask) not connected');
 

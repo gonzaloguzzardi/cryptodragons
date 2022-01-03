@@ -1,16 +1,21 @@
+import Alert from '@material-ui/lab/Alert'
 import AppBar from '@material-ui/core/AppBar'
-import Toolbar from '@material-ui/core/Toolbar'
 import Fab from '@material-ui/core/Fab'
 import IconButton from '@material-ui/core/IconButton'
-import PetsIcon from '@material-ui/icons/Pets'
+import LinearProgress from '@material-ui/core/LinearProgress'
+import { Link as LinkComponent } from '@material-ui/core'
 import MenuBookIcon from '@material-ui/icons/MenuBook'
+import PetsIcon from '@material-ui/icons/Pets'
 import StorefrontIcon from '@material-ui/icons/Storefront'
+import Toolbar from '@material-ui/core/Toolbar'
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp'
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles'
 import useScrollTrigger from '@material-ui/core/useScrollTrigger'
 import Zoom from '@material-ui/core/Zoom'
 import Avatar from '@material-ui/core/Avatar'
 
+import MainchainAPI from '../../services/blockchain-interaction/mainchain'
+import SidechainAPI from '../../services/blockchain-interaction/sidechain'
 import SessionComponent from './session-component'
 import Modal from '../../components/modals'
 
@@ -65,6 +70,7 @@ interface IProps {
     sidechain_new_account: string
     mapped_accounts: boolean
     provider_installed: boolean
+    updateAccountsData: () => void
   }
   deviceType: deviceType
   section: 'home' | 'my-dragons' | 'marketplace' | 'guides'
@@ -72,8 +78,9 @@ interface IProps {
 
 export default function AppToolbar({ accountsState, deviceType, section }: IProps): ReactElement {
   const [modalState, setModalState] = useState({ open: false, type: null })
+  const [loadingState, setLoadingState] = useState(false)
 
-  function onClickStart(accountsState): void {
+  function onConnectMetamask(accountsState): void {
     if (!isChromeBrowser()) {
       return setModalState({ open: true, type: 'NOT_CHROME_BROWSER' })
     }
@@ -92,6 +99,25 @@ export default function AppToolbar({ accountsState, deviceType, section }: IProp
         `Sidechain account: ${accountsState.sidechain_account}, priv key: ${accountsState.sidechain_priv_key}`
       )
     }
+  }
+
+  const mapAccounts: (event, accountsState) => unknown = () => {
+    event.preventDefault()
+    onConnectMetamask(accountsState)
+    setLoadingState(true)
+
+    Promise.all([
+      MainchainAPI.mapAccountToSidechainAccount(accountsState.sidechain_account),
+      SidechainAPI.mapAccountToMainchainAccount(accountsState.mainchain_account),
+    ])
+      .then((values) => {
+        console.log('[MAINCHAIN]: MAPEO EN MAINCHAIN', values[0])
+        console.log('[SIDECHAIN]: MAPEO EN SIDECHAIN', values[1])
+        accountsState.updateAccountsData()
+      })
+      .finally(() => {
+        setInterval(() => setLoadingState(false), 1500)
+      })
   }
 
   return (
@@ -165,12 +191,32 @@ export default function AppToolbar({ accountsState, deviceType, section }: IProp
               sidechain_new_account={accountsState && accountsState.sidechain_new_account}
               mapped_accounts={accountsState && accountsState.mapped_accounts}
               device={deviceType}
-              onClickStart={() => onClickStart(accountsState)}
+              onClickStart={() => onConnectMetamask(accountsState)}
             />
           </div>
         </Toolbar>
       </AppBar>
       <Toolbar id="back-to-top-anchor" />
+
+      {section === 'my-dragons' &&
+        accountsState &&
+        !accountsState.mapped_accounts &&
+        !loadingState && (
+          <Alert severity="warning">
+            {
+              'You need to map your Mainchain & Sidechain accounts before being able to transfer your CryptoDragons between them!  '
+            }
+            <LinkComponent
+              href="#"
+              color="secondary"
+              onClick={(e) => mapAccounts(e, accountsState)}
+            >
+              {'Map Accounts'}
+            </LinkComponent>
+          </Alert>
+        )}
+
+      {loadingState && <LinearProgress color="secondary" />}
 
       <ScrollTop>
         <Fab color="secondary" size="large" aria-label="Scroll back to top">

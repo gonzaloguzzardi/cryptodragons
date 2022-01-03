@@ -6,7 +6,13 @@ import CircularProgress from '@material-ui/core/CircularProgress'
 import { tProps } from './types'
 import styles from './desktop.module.scss'
 
-export default function MyDragonsGridViewDesktop({ dragons, loading }: tProps): ReactElement {
+export default function MyDragonsGridViewDesktop({
+  dragons,
+  filteredDragons,
+  loading,
+  mappedAccounts,
+  transferMethod,
+}: tProps): ReactElement {
   if (loading) {
     return (
       <div className={styles.spinnerContainer}>
@@ -18,11 +24,18 @@ export default function MyDragonsGridViewDesktop({ dragons, loading }: tProps): 
   return (
     <div className={styles.main}>
       <div className={styles.container}>
-        {dragons.length === 0 && <BuyDragonCard />}
+        {filteredDragons.length === 0 && dragons.length === 0 && <BuyDragonCard />}
+        {filteredDragons.length === 0 && dragons.length > 0 && <p>Try another search</p>}
 
-        {dragons.length > 0 &&
-          dragons.map((dragon) => (
-            <Dragon key={`${dragon.source}_${dragon.id}`} id={dragon.id} location={dragon.source} />
+        {filteredDragons.length > 0 &&
+          filteredDragons.map((dragon) => (
+            <Dragon
+              key={`${dragon.source}_${dragon.id}`}
+              id={dragon.id}
+              location={dragon.source}
+              mappedAccounts={mappedAccounts}
+              transferMethod={transferMethod}
+            />
           ))}
       </div>
     </div>

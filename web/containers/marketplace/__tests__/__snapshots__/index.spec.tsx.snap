@@ -11,6 +11,7 @@ exports[`Renders Marketplace desktop 1`] = `
           "connectToProvider": [Function],
           "mainchain_account": null,
           "provider_installed": false,
+          "updateAccountsData": [Function],
         }
       }
       deviceType="desktop"
@@ -34,6 +35,7 @@ exports[`Renders Marketplace mobile 1`] = `
           "connectToProvider": [Function],
           "mainchain_account": null,
           "provider_installed": false,
+          "updateAccountsData": [Function],
         }
       }
       deviceType="mobile"

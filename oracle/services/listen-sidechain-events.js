@@ -7,7 +7,7 @@ const { sideChainDragonsInstance, sideChainGatewayInstance } = require('./contra
 // MAIN
 function listenSideChainEvents() {
   sideChainDragonsInstance.events.allEvents((err, event) => {
-    if (err) console.err(err);
+    if (err) console.error(err);
     if (event) {
       console.log('sideChainDragonsInstance', 'EVENTO ->', event.event);
       switch (event.event) {
@@ -24,7 +24,7 @@ function listenSideChainEvents() {
   });
 
   sideChainGatewayInstance.events.allEvents((err, event) => {
-    if (err) console.err(err);
+    if (err) console.error(err);
     if (event) {
       console.log('sideChainGatewayInstance', 'Evento de sidechain ->', event.event);
       switch (event.event) {

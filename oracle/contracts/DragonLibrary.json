@@ -7,23 +7,23 @@
   "immutableReferences": {},
   "generatedSources": [],
   "deployedGeneratedSources": [],
-  "sourceMap": "70:649:19:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;",
-  "deployedSourceMap": "70:649:19:-:0;;;;;;;;",
+  "sourceMap": "70:649:9:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;",
+  "deployedSourceMap": "70:649:9:-:0;;;;;;;;",
   "source": "// SPDX-License-Identifier: GPL-3.0 License\n\npragma solidity ^0.8.0;\n\nlibrary DragonLibrary {\n\tstruct Dragon {\n\t\tbytes32 genes;\n\t\tbytes32 name; // maybe we can avoid saving the name in teh blockchain\n\t\tuint64 creationTime; // Initialzed at egg instantiation\n\t\t// parents information\n\t\tuint32 dadId;\n\t\tuint32 motherId;\n\t\t// level attributes\n\t\tuint32 currentExperience; // level will ve determined by exp\n\t\tuint16 actionCooldown; // time to be waited to perform an action\n\t\t// fighting attributes\n\t\tuint16 health;\n\t\tuint16 strength;\n\t\tuint16 agility;\n\t\tuint16 fortitude;\n\t\tuint16 hatchTime; // in minutes, capped to 45 days - Maybe it would be nice to reuse some variable like current exp\n\t\tuint8 blockchainOriginId;\n\t}\n}\n",
   "sourcePath": "/usr/src/app/contractGetter/contracts/common/libraries/DragonLibrary.sol",
   "ast": {
     "absolutePath": "project:/contracts/common/libraries/DragonLibrary.sol",
     "exportedSymbols": {
       "DragonLibrary": [
-        1344
+        1324
       ]
     },
-    "id": 1345,
+    "id": 1325,
     "license": "GPL-3.0 License",
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 1316,
+        "id": 1296,
         "literals": [
           "solidity",
           "^",
@@ -31,7 +31,7 @@
           ".0"
         ],
         "nodeType": "PragmaDirective",
-        "src": "45:23:19"
+        "src": "45:23:9"
       },
       {
         "abstract": false,
@@ -39,27 +39,27 @@
         "contractDependencies": [],
         "contractKind": "library",
         "fullyImplemented": true,
-        "id": 1344,
+        "id": 1324,
         "linearizedBaseContracts": [
-          1344
+          1324
         ],
         "name": "DragonLibrary",
-        "nameLocation": "78:13:19",
+        "nameLocation": "78:13:9",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "canonicalName": "DragonLibrary.Dragon",
-            "id": 1343,
+            "id": 1323,
             "members": [
               {
                 "constant": false,
-                "id": 1318,
+                "id": 1298,
                 "mutability": "mutable",
                 "name": "genes",
-                "nameLocation": "121:5:19",
+                "nameLocation": "121:5:9",
                 "nodeType": "VariableDeclaration",
-                "scope": 1343,
-                "src": "113:13:19",
+                "scope": 1323,
+                "src": "113:13:9",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -67,10 +67,10 @@
                   "typeString": "bytes32"
                 },
                 "typeName": {
-                  "id": 1317,
+                  "id": 1297,
                   "name": "bytes32",
                   "nodeType": "ElementaryTypeName",
-                  "src": "113:7:19",
+                  "src": "113:7:9",
                   "typeDescriptions": {
                     "typeIdentifier": "t_bytes32",
                     "typeString": "bytes32"
@@ -80,13 +80,13 @@
               },
               {
                 "constant": false,
-                "id": 1320,
+                "id": 1300,
                 "mutability": "mutable",
                 "name": "name",
-                "nameLocation": "138:4:19",
+                "nameLocation": "138:4:9",
                 "nodeType": "VariableDeclaration",
-                "scope": 1343,
-                "src": "130:12:19",
+                "scope": 1323,
+                "src": "130:12:9",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -94,10 +94,10 @@
                   "typeString": "bytes32"
                 },
                 "typeName": {
-                  "id": 1319,
+                  "id": 1299,
                   "name": "bytes32",
                   "nodeType": "ElementaryTypeName",
-                  "src": "130:7:19",
+                  "src": "130:7:9",
                   "typeDescriptions": {
                     "typeIdentifier": "t_bytes32",
                     "typeString": "bytes32"
@@ -107,13 +107,13 @@
               },
               {
                 "constant": false,
-                "id": 1322,
+                "id": 1302,
                 "mutability": "mutable",
                 "name": "creationTime",
-                "nameLocation": "209:12:19",
+                "nameLocation": "209:12:9",
                 "nodeType": "VariableDeclaration",
-                "scope": 1343,
-                "src": "202:19:19",
+                "scope": 1323,
+                "src": "202:19:9",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -121,10 +121,10 @@
                   "typeString": "uint64"
                 },
                 "typeName": {
-                  "id": 1321,
+                  "id": 1301,
                   "name": "uint64",
                   "nodeType": "ElementaryTypeName",
-                  "src": "202:6:19",
+                  "src": "202:6:9",
                   "typeDescriptions": {
                     "typeIdentifier": "t_uint64",
                     "typeString": "uint64"
@@ -134,13 +134,13 @@
               },
               {
                 "constant": false,
-                "id": 1324,
+                "id": 1304,
                 "mutability": "mutable",
                 "name": "dadId",
-                "nameLocation": "292:5:19",
+                "nameLocation": "292:5:9",
                 "nodeType": "VariableDeclaration",
-                "scope": 1343,
-                "src": "285:12:19",
+                "scope": 1323,
+                "src": "285:12:9",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -148,10 +148,10 @@
                   "typeString": "uint32"
                 },
                 "typeName": {
-                  "id": 1323,
+                  "id": 1303,
                   "name": "uint32",
                   "nodeType": "ElementaryTypeName",
-                  "src": "285:6:19",
+                  "src": "285:6:9",
                   "typeDescriptions": {
                     "typeIdentifier": "t_uint32",
                     "typeString": "uint32"
@@ -161,13 +161,13 @@
               },
               {
                 "constant": false,
-                "id": 1326,
+                "id": 1306,
                 "mutability": "mutable",
                 "name": "motherId",
-                "nameLocation": "308:8:19",
+                "nameLocation": "308:8:9",
                 "nodeType": "VariableDeclaration",
-                "scope": 1343,
-                "src": "301:15:19",
+                "scope": 1323,
+                "src": "301:15:9",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -175,10 +175,10 @@
                   "typeString": "uint32"
                 },
                 "typeName": {
-                  "id": 1325,
+                  "id": 1305,
                   "name": "uint32",
                   "nodeType": "ElementaryTypeName",
-                  "src": "301:6:19",
+                  "src": "301:6:9",
                   "typeDescriptions": {
                     "typeIdentifier": "t_uint32",
                     "typeString": "uint32"
@@ -188,13 +188,13 @@
               },
               {
                 "constant": false,
-                "id": 1328,
+                "id": 1308,
                 "mutability": "mutable",
                 "name": "currentExperience",
-                "nameLocation": "349:17:19",
+                "nameLocation": "349:17:9",
                 "nodeType": "VariableDeclaration",
-                "scope": 1343,
-                "src": "342:24:19",
+                "scope": 1323,
+                "src": "342:24:9",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -202,10 +202,10 @@
                   "typeString": "uint32"
                 },
                 "typeName": {
-                  "id": 1327,
+                  "id": 1307,
                   "name": "uint32",
                   "nodeType": "ElementaryTypeName",
-                  "src": "342:6:19",
+                  "src": "342:6:9",
                   "typeDescriptions": {
                     "typeIdentifier": "t_uint32",
                     "typeString": "uint32"
@@ -215,13 +215,13 @@
               },
               {
                 "constant": false,
-                "id": 1330,
+                "id": 1310,
                 "mutability": "mutable",
                 "name": "actionCooldown",
-                "nameLocation": "412:14:19",
+                "nameLocation": "412:14:9",
                 "nodeType": "VariableDeclaration",
-                "scope": 1343,
-                "src": "405:21:19",
+                "scope": 1323,
+                "src": "405:21:9",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -229,10 +229,10 @@
                   "typeString": "uint16"
                 },
                 "typeName": {
-                  "id": 1329,
+                  "id": 1309,
                   "name": "uint16",
                   "nodeType": "ElementaryTypeName",
-                  "src": "405:6:19",
+                  "src": "405:6:9",
                   "typeDescriptions": {
                     "typeIdentifier": "t_uint16",
                     "typeString": "uint16"
@@ -242,13 +242,13 @@
               },
               {
                 "constant": false,
-                "id": 1332,
+                "id": 1312,
                 "mutability": "mutable",
                 "name": "health",
-                "nameLocation": "504:6:19",
+                "nameLocation": "504:6:9",
                 "nodeType": "VariableDeclaration",
-                "scope": 1343,
-                "src": "497:13:19",
+                "scope": 1323,
+                "src": "497:13:9",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -256,10 +256,10 @@
                   "typeString": "uint16"
                 },
                 "typeName": {
-                  "id": 1331,
+                  "id": 1311,
                   "name": "uint16",
                   "nodeType": "ElementaryTypeName",
-                  "src": "497:6:19",
+                  "src": "497:6:9",
                   "typeDescriptions": {
                     "typeIdentifier": "t_uint16",
                     "typeString": "uint16"
@@ -269,13 +269,13 @@
               },
               {
                 "constant": false,
-                "id": 1334,
+                "id": 1314,
                 "mutability": "mutable",
                 "name": "strength",
-                "nameLocation": "521:8:19",
+                "nameLocation": "521:8:9",
                 "nodeType": "VariableDeclaration",
-                "scope": 1343,
-                "src": "514:15:19",
+                "scope": 1323,
+                "src": "514:15:9",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -283,10 +283,10 @@
                   "typeString": "uint16"
                 },
                 "typeName": {
-                  "id": 1333,
+                  "id": 1313,
                   "name": "uint16",
                   "nodeType": "ElementaryTypeName",
-                  "src": "514:6:19",
+                  "src": "514:6:9",
                   "typeDescriptions": {
                     "typeIdentifier": "t_uint16",
                     "typeString": "uint16"
@@ -296,13 +296,13 @@
               },
               {
                 "constant": false,
-                "id": 1336,
+                "id": 1316,
                 "mutability": "mutable",
                 "name": "agility",
-                "nameLocation": "540:7:19",
+                "nameLocation": "540:7:9",
                 "nodeType": "VariableDeclaration",
-                "scope": 1343,
-                "src": "533:14:19",
+                "scope": 1323,
+                "src": "533:14:9",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -310,10 +310,10 @@
                   "typeString": "uint16"
                 },
                 "typeName": {
-                  "id": 1335,
+                  "id": 1315,
                   "name": "uint16",
                   "nodeType": "ElementaryTypeName",
-                  "src": "533:6:19",
+                  "src": "533:6:9",
                   "typeDescriptions": {
                     "typeIdentifier": "t_uint16",
                     "typeString": "uint16"
@@ -323,13 +323,13 @@
               },
               {
                 "constant": false,
-                "id": 1338,
+                "id": 1318,
                 "mutability": "mutable",
                 "name": "fortitude",
-                "nameLocation": "558:9:19",
+                "nameLocation": "558:9:9",
                 "nodeType": "VariableDeclaration",
-                "scope": 1343,
-                "src": "551:16:19",
+                "scope": 1323,
+                "src": "551:16:9",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -337,10 +337,10 @@
                   "typeString": "uint16"
                 },
                 "typeName": {
-                  "id": 1337,
+                  "id": 1317,
                   "name": "uint16",
                   "nodeType": "ElementaryTypeName",
-                  "src": "551:6:19",
+                  "src": "551:6:9",
                   "typeDescriptions": {
                     "typeIdentifier": "t_uint16",
                     "typeString": "uint16"
@@ -350,13 +350,13 @@
               },
               {
                 "constant": false,
-                "id": 1340,
+                "id": 1320,
                 "mutability": "mutable",
                 "name": "hatchTime",
-                "nameLocation": "578:9:19",
+                "nameLocation": "578:9:9",
                 "nodeType": "VariableDeclaration",
-                "scope": 1343,
-                "src": "571:16:19",
+                "scope": 1323,
+                "src": "571:16:9",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -364,10 +364,10 @@
                   "typeString": "uint16"
                 },
                 "typeName": {
-                  "id": 1339,
+                  "id": 1319,
                   "name": "uint16",
                   "nodeType": "ElementaryTypeName",
-                  "src": "571:6:19",
+                  "src": "571:6:9",
                   "typeDescriptions": {
                     "typeIdentifier": "t_uint16",
                     "typeString": "uint16"
@@ -377,13 +377,13 @@
               },
               {
                 "constant": false,
-                "id": 1342,
+                "id": 1322,
                 "mutability": "mutable",
                 "name": "blockchainOriginId",
-                "nameLocation": "695:18:19",
+                "nameLocation": "695:18:9",
                 "nodeType": "VariableDeclaration",
-                "scope": 1343,
-                "src": "689:24:19",
+                "scope": 1323,
+                "src": "689:24:9",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -391,10 +391,10 @@
                   "typeString": "uint8"
                 },
                 "typeName": {
-                  "id": 1341,
+                  "id": 1321,
                   "name": "uint8",
                   "nodeType": "ElementaryTypeName",
-                  "src": "689:5:19",
+                  "src": "689:5:9",
                   "typeDescriptions": {
                     "typeIdentifier": "t_uint8",
                     "typeString": "uint8"
@@ -404,33 +404,33 @@
               }
             ],
             "name": "Dragon",
-            "nameLocation": "102:6:19",
+            "nameLocation": "102:6:9",
             "nodeType": "StructDefinition",
-            "scope": 1344,
-            "src": "95:622:19",
+            "scope": 1324,
+            "src": "95:622:9",
             "visibility": "public"
           }
         ],
-        "scope": 1345,
-        "src": "70:649:19",
+        "scope": 1325,
+        "src": "70:649:9",
         "usedErrors": []
       }
     ],
-    "src": "45:675:19"
+    "src": "45:675:9"
   },
   "legacyAST": {
     "absolutePath": "project:/contracts/common/libraries/DragonLibrary.sol",
     "exportedSymbols": {
       "DragonLibrary": [
-        1344
+        1324
       ]
     },
-    "id": 1345,
+    "id": 1325,
     "license": "GPL-3.0 License",
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 1316,
+        "id": 1296,
         "literals": [
           "solidity",
           "^",
@@ -438,7 +438,7 @@
           ".0"
         ],
         "nodeType": "PragmaDirective",
-        "src": "45:23:19"
+        "src": "45:23:9"
       },
       {
         "abstract": false,
@@ -446,27 +446,27 @@
         "contractDependencies": [],
         "contractKind": "library",
         "fullyImplemented": true,
-        "id": 1344,
+        "id": 1324,
         "linearizedBaseContracts": [
-          1344
+          1324
         ],
         "name": "DragonLibrary",
-        "nameLocation": "78:13:19",
+        "nameLocation": "78:13:9",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "canonicalName": "DragonLibrary.Dragon",
-            "id": 1343,
+            "id": 1323,
             "members": [
               {
                 "constant": false,
-                "id": 1318,
+                "id": 1298,
                 "mutability": "mutable",
                 "name": "genes",
-                "nameLocation": "121:5:19",
+                "nameLocation": "121:5:9",
                 "nodeType": "VariableDeclaration",
-                "scope": 1343,
-                "src": "113:13:19",
+                "scope": 1323,
+                "src": "113:13:9",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -474,10 +474,10 @@
                   "typeString": "bytes32"
                 },
                 "typeName": {
-                  "id": 1317,
+                  "id": 1297,
                   "name": "bytes32",
                   "nodeType": "ElementaryTypeName",
-                  "src": "113:7:19",
+                  "src": "113:7:9",
                   "typeDescriptions": {
                     "typeIdentifier": "t_bytes32",
                     "typeString": "bytes32"
@@ -487,13 +487,13 @@
               },
               {
                 "constant": false,
-                "id": 1320,
+                "id": 1300,
                 "mutability": "mutable",
                 "name": "name",
-                "nameLocation": "138:4:19",
+                "nameLocation": "138:4:9",
                 "nodeType": "VariableDeclaration",
-                "scope": 1343,
-                "src": "130:12:19",
+                "scope": 1323,
+                "src": "130:12:9",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -501,10 +501,10 @@
                   "typeString": "bytes32"
                 },
                 "typeName": {
-                  "id": 1319,
+                  "id": 1299,
                   "name": "bytes32",
                   "nodeType": "ElementaryTypeName",
-                  "src": "130:7:19",
+                  "src": "130:7:9",
                   "typeDescriptions": {
                     "typeIdentifier": "t_bytes32",
                     "typeString": "bytes32"
@@ -514,13 +514,13 @@
               },
               {
                 "constant": false,
-                "id": 1322,
+                "id": 1302,
                 "mutability": "mutable",
                 "name": "creationTime",
-                "nameLocation": "209:12:19",
+                "nameLocation": "209:12:9",
                 "nodeType": "VariableDeclaration",
-                "scope": 1343,
-                "src": "202:19:19",
+                "scope": 1323,
+                "src": "202:19:9",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -528,10 +528,10 @@
                   "typeString": "uint64"
                 },
                 "typeName": {
-                  "id": 1321,
+                  "id": 1301,
                   "name": "uint64",
                   "nodeType": "ElementaryTypeName",
-                  "src": "202:6:19",
+                  "src": "202:6:9",
                   "typeDescriptions": {
                     "typeIdentifier": "t_uint64",
                     "typeString": "uint64"
@@ -541,13 +541,13 @@
               },
               {
                 "constant": false,
-                "id": 1324,
+                "id": 1304,
                 "mutability": "mutable",
                 "name": "dadId",
-                "nameLocation": "292:5:19",
+                "nameLocation": "292:5:9",
                 "nodeType": "VariableDeclaration",
-                "scope": 1343,
-                "src": "285:12:19",
+                "scope": 1323,
+                "src": "285:12:9",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -555,10 +555,10 @@
                   "typeString": "uint32"
                 },
                 "typeName": {
-                  "id": 1323,
+                  "id": 1303,
                   "name": "uint32",
                   "nodeType": "ElementaryTypeName",
-                  "src": "285:6:19",
+                  "src": "285:6:9",
                   "typeDescriptions": {
                     "typeIdentifier": "t_uint32",
                     "typeString": "uint32"
@@ -568,13 +568,13 @@
               },
               {
                 "constant": false,
-                "id": 1326,
+                "id": 1306,
                 "mutability": "mutable",
                 "name": "motherId",
-                "nameLocation": "308:8:19",
+                "nameLocation": "308:8:9",
                 "nodeType": "VariableDeclaration",
-                "scope": 1343,
-                "src": "301:15:19",
+                "scope": 1323,
+                "src": "301:15:9",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -582,10 +582,10 @@
                   "typeString": "uint32"
                 },
                 "typeName": {
-                  "id": 1325,
+                  "id": 1305,
                   "name": "uint32",
                   "nodeType": "ElementaryTypeName",
-                  "src": "301:6:19",
+                  "src": "301:6:9",
                   "typeDescriptions": {
                     "typeIdentifier": "t_uint32",
                     "typeString": "uint32"
@@ -595,13 +595,13 @@
               },
               {
                 "constant": false,
-                "id": 1328,
+                "id": 1308,
                 "mutability": "mutable",
                 "name": "currentExperience",
-                "nameLocation": "349:17:19",
+                "nameLocation": "349:17:9",
                 "nodeType": "VariableDeclaration",
-                "scope": 1343,
-                "src": "342:24:19",
+                "scope": 1323,
+                "src": "342:24:9",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -609,10 +609,10 @@
                   "typeString": "uint32"
                 },
                 "typeName": {
-                  "id": 1327,
+                  "id": 1307,
                   "name": "uint32",
                   "nodeType": "ElementaryTypeName",
-                  "src": "342:6:19",
+                  "src": "342:6:9",
                   "typeDescriptions": {
                     "typeIdentifier": "t_uint32",
                     "typeString": "uint32"
@@ -622,13 +622,13 @@
               },
               {
                 "constant": false,
-                "id": 1330,
+                "id": 1310,
                 "mutability": "mutable",
                 "name": "actionCooldown",
-                "nameLocation": "412:14:19",
+                "nameLocation": "412:14:9",
                 "nodeType": "VariableDeclaration",
-                "scope": 1343,
-                "src": "405:21:19",
+                "scope": 1323,
+                "src": "405:21:9",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -636,10 +636,10 @@
                   "typeString": "uint16"
                 },
                 "typeName": {
-                  "id": 1329,
+                  "id": 1309,
                   "name": "uint16",
                   "nodeType": "ElementaryTypeName",
-                  "src": "405:6:19",
+                  "src": "405:6:9",
                   "typeDescriptions": {
                     "typeIdentifier": "t_uint16",
                     "typeString": "uint16"
@@ -649,13 +649,13 @@
               },
               {
                 "constant": false,
-                "id": 1332,
+                "id": 1312,
                 "mutability": "mutable",
                 "name": "health",
-                "nameLocation": "504:6:19",
+                "nameLocation": "504:6:9",
                 "nodeType": "VariableDeclaration",
-                "scope": 1343,
-                "src": "497:13:19",
+                "scope": 1323,
+                "src": "497:13:9",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -663,10 +663,10 @@
                   "typeString": "uint16"
                 },
                 "typeName": {
-                  "id": 1331,
+                  "id": 1311,
                   "name": "uint16",
                   "nodeType": "ElementaryTypeName",
-                  "src": "497:6:19",
+                  "src": "497:6:9",
                   "typeDescriptions": {
                     "typeIdentifier": "t_uint16",
                     "typeString": "uint16"
@@ -676,13 +676,13 @@
               },
               {
                 "constant": false,
-                "id": 1334,
+                "id": 1314,
                 "mutability": "mutable",
                 "name": "strength",
-                "nameLocation": "521:8:19",
+                "nameLocation": "521:8:9",
                 "nodeType": "VariableDeclaration",
-                "scope": 1343,
-                "src": "514:15:19",
+                "scope": 1323,
+                "src": "514:15:9",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -690,10 +690,10 @@
                   "typeString": "uint16"
                 },
                 "typeName": {
-                  "id": 1333,
+                  "id": 1313,
                   "name": "uint16",
                   "nodeType": "ElementaryTypeName",
-                  "src": "514:6:19",
+                  "src": "514:6:9",
                   "typeDescriptions": {
                     "typeIdentifier": "t_uint16",
                     "typeString": "uint16"
@@ -703,13 +703,13 @@
               },
               {
                 "constant": false,
-                "id": 1336,
+                "id": 1316,
                 "mutability": "mutable",
                 "name": "agility",
-                "nameLocation": "540:7:19",
+                "nameLocation": "540:7:9",
                 "nodeType": "VariableDeclaration",
-                "scope": 1343,
-                "src": "533:14:19",
+                "scope": 1323,
+                "src": "533:14:9",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -717,10 +717,10 @@
                   "typeString": "uint16"
                 },
                 "typeName": {
-                  "id": 1335,
+                  "id": 1315,
                   "name": "uint16",
                   "nodeType": "ElementaryTypeName",
-                  "src": "533:6:19",
+                  "src": "533:6:9",
                   "typeDescriptions": {
                     "typeIdentifier": "t_uint16",
                     "typeString": "uint16"
@@ -730,13 +730,13 @@
               },
               {
                 "constant": false,
-                "id": 1338,
+                "id": 1318,
                 "mutability": "mutable",
                 "name": "fortitude",
-                "nameLocation": "558:9:19",
+                "nameLocation": "558:9:9",
                 "nodeType": "VariableDeclaration",
-                "scope": 1343,
-                "src": "551:16:19",
+                "scope": 1323,
+                "src": "551:16:9",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -744,10 +744,10 @@
                   "typeString": "uint16"
                 },
                 "typeName": {
-                  "id": 1337,
+                  "id": 1317,
                   "name": "uint16",
                   "nodeType": "ElementaryTypeName",
-                  "src": "551:6:19",
+                  "src": "551:6:9",
                   "typeDescriptions": {
                     "typeIdentifier": "t_uint16",
                     "typeString": "uint16"
@@ -757,13 +757,13 @@
               },
               {
                 "constant": false,
-                "id": 1340,
+                "id": 1320,
                 "mutability": "mutable",
                 "name": "hatchTime",
-                "nameLocation": "578:9:19",
+                "nameLocation": "578:9:9",
                 "nodeType": "VariableDeclaration",
-                "scope": 1343,
-                "src": "571:16:19",
+                "scope": 1323,
+                "src": "571:16:9",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -771,10 +771,10 @@
                   "typeString": "uint16"
                 },
                 "typeName": {
-                  "id": 1339,
+                  "id": 1319,
                   "name": "uint16",
                   "nodeType": "ElementaryTypeName",
-                  "src": "571:6:19",
+                  "src": "571:6:9",
                   "typeDescriptions": {
                     "typeIdentifier": "t_uint16",
                     "typeString": "uint16"
@@ -784,13 +784,13 @@
               },
               {
                 "constant": false,
-                "id": 1342,
+                "id": 1322,
                 "mutability": "mutable",
                 "name": "blockchainOriginId",
-                "nameLocation": "695:18:19",
+                "nameLocation": "695:18:9",
                 "nodeType": "VariableDeclaration",
-                "scope": 1343,
-                "src": "689:24:19",
+                "scope": 1323,
+                "src": "689:24:9",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -798,10 +798,10 @@
                   "typeString": "uint8"
                 },
                 "typeName": {
-                  "id": 1341,
+                  "id": 1321,
                   "name": "uint8",
                   "nodeType": "ElementaryTypeName",
-                  "src": "689:5:19",
+                  "src": "689:5:9",
                   "typeDescriptions": {
                     "typeIdentifier": "t_uint8",
                     "typeString": "uint8"
@@ -811,19 +811,19 @@
               }
             ],
             "name": "Dragon",
-            "nameLocation": "102:6:19",
+            "nameLocation": "102:6:9",
             "nodeType": "StructDefinition",
-            "scope": 1344,
-            "src": "95:622:19",
+            "scope": 1324,
+            "src": "95:622:9",
             "visibility": "public"
           }
         ],
-        "scope": 1345,
-        "src": "70:649:19",
+        "scope": 1325,
+        "src": "70:649:9",
         "usedErrors": []
       }
     ],
-    "src": "45:675:19"
+    "src": "45:675:9"
   },
   "compiler": {
     "name": "solc",
@@ -831,7 +831,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.1",
-  "updatedAt": "2021-10-31T22:03:17.623Z",
+  "updatedAt": "2022-01-04T00:05:51.623Z",
   "devdoc": {
     "kind": "dev",
     "methods": {},

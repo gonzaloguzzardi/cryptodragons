@@ -3,6 +3,7 @@ const ADMIN_PASSWORD = 'admin';
 const ADMIN_SECRET = '3Frox9vF4lI1LaoK';
 
 const collection = 'transactions';
+const fs = require('fs');
 
 const database = 'crypto-dragons';
 const mongoUrl = !process.env.DOCKERENV
@@ -20,6 +21,8 @@ const READ_URL = !process.env.DOCKERENV ? 'ws://0.0.0.0:46658/queryws' : 'ws://l
 const BFA_CONNECTION = !process.env.DOCKERENV ? 'http://0.0.0.0:8545' : 'http://bfa:8545';
 const BFA_SOCKET_CONNECTION = !process.env.DOCKERENV ? 'ws://0.0.0.0:8546' : 'ws://bfa:8546';
 const BFA_NETWORK_ID = '12345';
+
+console.log(`Dir name: ${__dirname}`);
 
 const SidechainDragonContract = require('../contracts/DappchainTransferableDragon');
 const SidechainGatewayContract = require('../contracts/DappchainGateway');

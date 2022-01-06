@@ -23,5 +23,10 @@ contractGetter('DappchainTransferableDragon.json');
 contractGetter('DappchainGateway.json');
 contractGetter('MainnetGateway.json');
 contractGetter('MainnetTransferableDragon.json');
-
+contractGetter('DragonApi.json');
+contractGetter('MainnetMarketplace.json');
+contractGetter('MainnetDragonApi.json');
+contractGetter('DragonLibrary.json');
+contractGetter('DragonSerializer.json');
+contractGetter('GenesLaboratory.json');
 console.log(`dir: ${__dirname}`);

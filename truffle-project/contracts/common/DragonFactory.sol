@@ -1,8 +1,11 @@
-pragma solidity ^0.5.0;
+// SPDX-License-Identifier: GPL-3.0 License
+
+pragma solidity ^0.8.0;
 
 import './DragonBase.sol';
+import './libraries/DragonLibrary.sol';
 
-contract IGenesLaboratory {
+interface IGenesLaboratory {
 	function createNewDragonGenes()
 		external
 		returns (
@@ -37,10 +40,13 @@ contract IGenesLaboratory {
 		);
 }
 
-contract DragonFactory is DragonBase {
-	uint256 constant dnaDigits = 16;
-	uint256 constant dnaModulus = 10**dnaDigits;
+interface IDragonSerializer {
+	function encodeDragonToBytes(DragonLibrary.Dragon memory _dragon) external pure returns (bytes memory);
+	function decodeDragonFromBytes(bytes calldata _data) external pure returns (DragonLibrary.Dragon memory dragon);
+	function decodeBlockchainIdFromData(bytes calldata _data) external pure returns (uint8 blockchainId);
+}
 
+contract DragonFactory is DragonBase {
 	uint8 internal _blockchainId = 0;
 
 	// Maps other token ids from the other blockchain to token ids of this blockchain
@@ -53,14 +59,22 @@ contract DragonFactory is DragonBase {
 
 	event NewDragon(uint256 dragonId, uint256 genes);
 
-	constructor(address gateway, uint8 blockchainId) public DragonBase() {
+	address internal _dragonDecoderAddress;
+
+	constructor(
+		address gateway,
+		address dragonDecoder,
+		uint8 blockchainId
+	) DragonBase() {
 		require(gateway != address(0), 'Invalid gateway address');
+		require(dragonDecoder != address(0), 'Invalid decoder address');
 		_gateway = gateway;
+		_dragonDecoderAddress = dragonDecoder;
 		_blockchainId = blockchainId;
 	}
 
 	function setGenesLaboratoryAddress(address genesLaboratoryAddress) external onlyOwner {
-		require(genesLaboratoryAddress != address(0), 'address should have a valid value');
+		require(genesLaboratoryAddress != address(0), 'Invalid address');
 		_genesLaboratory = genesLaboratoryAddress;
 	}
 
@@ -110,19 +124,6 @@ contract DragonFactory is DragonBase {
 		emit NewDragon(id, uint256(genes));
 	}
 
-	function getVisualAttributes(uint256 id)
-		public
-		view
-		returns (
-			uint16 head,
-			uint16 body,
-			uint16 wings
-		)
-	{
-		Dragon storage dragon = dragons[id];
-		(head, body, wings) = IGenesLaboratory(_genesLaboratory).getVisualAttributes(dragon.genes);
-	}
-
 	//TODO implement burn function which should update mainchainToSidechainIds mapping
 
 	//
@@ -134,7 +135,7 @@ contract DragonFactory is DragonBase {
 		uint256 _originalTokenId,
 		bytes memory _data
 	) internal {
-		uint8 blockchainId = _decodeBlockchainIdFromData(_data);
+		uint8 blockchainId = IDragonSerializer(_dragonDecoderAddress).decodeBlockchainIdFromData(_data);
 		bool originatedInThisBlockchain = blockchainId == _blockchainId;
 
 		if (originatedInThisBlockchain) {
@@ -160,35 +161,23 @@ contract DragonFactory is DragonBase {
 	}
 
 	function _createDragonFromData(bytes memory _data) private returns (uint256) {
-		(bytes32 _genes, bytes32 _name, uint64 _creationTime, uint32 _dadId, uint32 _motherId, uint32 _currentExperience) =
-			_decodeFirstHalfOfDragonFromBytes(_data);
+		DragonLibrary.Dragon memory dragon = IDragonSerializer(_dragonDecoderAddress).decodeDragonFromBytes(_data);
 
-		(
-			uint16 _actionCooldown,
-			uint16 _health,
-			uint16 _strength,
-			uint16 _agility,
-			uint16 _fortitude,
-			uint16 _hatchTime,
-			uint8 _blockchainOriginId
-		) = _decodeSecondHalfOfDragonFromBytes(_data);
-
-		uint256 id =
-			_createDragonWithStats(
-				_genes,
-				_name,
-				_creationTime,
-				_dadId,
-				_motherId,
-				_currentExperience,
-				_actionCooldown,
-				_health,
-				_strength,
-				_agility,
-				_fortitude,
-				_hatchTime,
-				_blockchainOriginId
-			);
+		uint256 id = _createDragonWithStats(
+			dragon.genes,
+			dragon.name,
+			dragon.creationTime,
+			dragon.dadId,
+			dragon.motherId,
+			dragon.currentExperience,
+			dragon.actionCooldown,
+			dragon.health,
+			dragon.strength,
+			dragon.agility,
+			dragon.fortitude,
+			dragon.hatchTime,
+			dragon.blockchainOriginId
+		);
 
 		return id;
 	}
@@ -208,25 +197,24 @@ contract DragonFactory is DragonBase {
 		uint16 _hatchTime,
 		uint8 _blockchainOriginId
 	) private returns (uint256 id) {
-		id =
-			dragons.push(
-				Dragon({
-					genes: 0,
-					name: 0,
-					creationTime: _creationTime, // level attributes
-					currentExperience: _currentExperience, // parents information
-					dadId: _dadId,
-					motherId: _motherId,
-					actionCooldown: _actionCooldown,
-					health: _health,
-					strength: _strength,
-					agility: _agility,
-					fortitude: _fortitude,
-					hatchTime: _hatchTime,
-					blockchainOriginId: _blockchainOriginId
-				})
-			) -
-			1;
+		dragons.push(
+			DragonLibrary.Dragon({
+				genes: 0,
+				name: 0,
+				creationTime: _creationTime,
+				currentExperience: _currentExperience,
+				dadId: _dadId,
+				motherId: _motherId,
+				actionCooldown: _actionCooldown,
+				health: _health,
+				strength: _strength,
+				agility: _agility,
+				fortitude: _fortitude,
+				hatchTime: _hatchTime,
+				blockchainOriginId: _blockchainOriginId
+			})
+		);
+		id = dragons.length - 1;
 
 		// Assign genes in different function as a workaround to the stack too deep exception
 		_assignGenesAndName(id, _genes, _name);
@@ -237,40 +225,29 @@ contract DragonFactory is DragonBase {
 		bytes32 _genes,
 		bytes32 _name
 	) private {
-		Dragon storage dragon = dragons[_dragonId];
+		DragonLibrary.Dragon storage dragon = dragons[_dragonId];
 		dragon.genes = _genes;
 		dragon.name = _name;
 	}
 
 	function _updateDragonFromData(uint256 _tokenId, bytes memory _data) private {
-		(bytes32 _genes, bytes32 _name, uint64 _creationTime, uint32 _dadId, uint32 _motherId, uint32 _currentExperience) =
-			_decodeFirstHalfOfDragonFromBytes(_data);
-
-		(
-			uint16 _actionCooldown,
-			uint16 _health,
-			uint16 _strength,
-			uint16 _agility,
-			uint16 _fortitude,
-			uint16 _hatchTime,
-			uint8 _blockchainOriginId
-		) = _decodeSecondHalfOfDragonFromBytes(_data);
+		DragonLibrary.Dragon memory dragon = IDragonSerializer(_dragonDecoderAddress).decodeDragonFromBytes(_data);
 
 		_updateDragonWithStats(
 			_tokenId,
-			_genes,
-			_name,
-			_creationTime,
-			_dadId,
-			_motherId,
-			_currentExperience,
-			_actionCooldown,
-			_health,
-			_strength,
-			_agility,
-			_fortitude,
-			_hatchTime,
-			_blockchainOriginId
+			dragon.genes,
+			dragon.name,
+			dragon.creationTime,
+			dragon.dadId,
+			dragon.motherId,
+			dragon.currentExperience,
+			dragon.actionCooldown,
+			dragon.health,
+			dragon.strength,
+			dragon.agility,
+			dragon.fortitude,
+			dragon.hatchTime,
+			dragon.blockchainOriginId
 		);
 	}
 
@@ -290,7 +267,7 @@ contract DragonFactory is DragonBase {
 		uint16 _hatchTime,
 		uint8 _blockchainOriginId
 	) private {
-		Dragon storage dragon = dragons[_tokenId];
+		DragonLibrary.Dragon storage dragon = dragons[_tokenId];
 		dragon.genes = _genes;
 		dragon.name = _name;
 		dragon.creationTime = _creationTime;
@@ -304,11 +281,6 @@ contract DragonFactory is DragonBase {
 		dragon.fortitude = _fortitude;
 		dragon.hatchTime = _hatchTime;
 		dragon.blockchainOriginId = _blockchainOriginId;
-	}
-
-	function _generateRandomDna(string memory _str) private pure returns (uint256) {
-		uint256 rand = uint256(keccak256(abi.encodePacked(_str)));
-		return rand % dnaModulus;
 	}
 
 	function _getForeignTokenId(uint256 _localTokenId) internal view returns (uint256) {

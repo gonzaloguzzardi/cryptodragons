@@ -35616,11 +35616,11 @@
       "events": {},
       "links": {},
       "address": "0xb0A6d565323700453F08d30cb3e5575d1E4381c7",
-      "transactionHash": "0xff5746ae1b9106e4a5eec2013bc117468ad1b029221dcee1735df5b9fd9cdea3"
+      "transactionHash": "0x23e7943ad443125e56da7de6c70cb68585425217250165dd38ae249be86792dd"
     }
   },
   "schemaVersion": "3.4.1",
-  "updatedAt": "2022-01-04T14:49:24.047Z",
+  "updatedAt": "2022-01-06T20:22:52.974Z",
   "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",

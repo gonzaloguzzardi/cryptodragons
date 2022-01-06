@@ -16679,11 +16679,11 @@
       "events": {},
       "links": {},
       "address": "0xfB96762a6e98AA8929a71F4211818Fd8D2e564Bb",
-      "transactionHash": "0x1256905781b063461416316f7335c99054f67d0b809fb618ede2a3c508a60f94"
+      "transactionHash": "0x6e446e4ec74b9749a591a1d4cc210079260b2b598b56a09f06160a98ad33000d"
     }
   },
   "schemaVersion": "3.4.1",
-  "updatedAt": "2022-01-04T14:49:18.072Z",
+  "updatedAt": "2022-01-06T20:22:46.675Z",
   "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",

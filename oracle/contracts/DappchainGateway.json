@@ -43035,11 +43035,11 @@
       },
       "links": {},
       "address": "0x0466a78c091274040137d4569f1733D478901EbC",
-      "transactionHash": "0xe60d41e33e289489658d0dd35ac111062b3729dd6b36636e263917daa9eef69f"
+      "transactionHash": "0x6c25688e7083ef1f621c66b3a7c4543f0a30fcd99f0234e2de38be23caff35f6"
     }
   },
   "schemaVersion": "3.4.1",
-  "updatedAt": "2022-01-04T14:49:17.938Z",
+  "updatedAt": "2022-01-06T20:22:46.591Z",
   "networkType": "ethereum",
   "devdoc": {
     "events": {

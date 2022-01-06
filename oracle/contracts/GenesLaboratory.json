@@ -68064,11 +68064,11 @@
       "events": {},
       "links": {},
       "address": "0xEc1a1bA59771996C426A87071d3A5464d49fa3eB",
-      "transactionHash": "0x38f9924c9bcd3ad17494a087e1c0736c8b02b4b7609bb5db185218cd97323d2b"
+      "transactionHash": "0xc779834c0e93af1f28f09d728d24d7dd70b4ba5be6b510e704ccc42a8711b3c1"
     }
   },
   "schemaVersion": "3.4.1",
-  "updatedAt": "2022-01-04T14:49:24.155Z",
+  "updatedAt": "2022-01-06T20:22:53.076Z",
   "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",

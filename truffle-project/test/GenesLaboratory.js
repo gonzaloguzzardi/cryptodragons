@@ -2,7 +2,7 @@ const GenesLaboratory = artifacts.require('GenesLaboratory');
 
 contract('GenesLaboratory', accounts => {
     let genesLaboratory;
-    let genes = "0x001400C8000500500006004A0004004B00F00026010101010101010101010101";
+    let genes = "0x001400C8000500500006004A0004004B00F0002601030405060708090A0B0C0D";
     let motherGenes = "0x001900CA000400700005004C0005004A00E00024000200030001000100010002";
 
 	beforeEach(async () => {
@@ -104,7 +104,7 @@ contract('GenesLaboratory', accounts => {
     });
     
     it('Should get body color attribute value from bytes', async () => {
-        const expectedValue = 1;
+        const expectedValue = 3;
         await genesLaboratory.getBodyColorFromBytes(genes, { from: accounts[0] })
         .then(bodyColorAttribute => {
             assert.equal(bodyColorAttribute, expectedValue);
@@ -112,7 +112,7 @@ contract('GenesLaboratory', accounts => {
     });
     
     it('Should get body pattern type attribute value from bytes', async () => {
-        const expectedValue = 1;
+        const expectedValue = 4;
         await genesLaboratory.getBodyPatternTypeFromBytes(genes, { from: accounts[0] })
         .then(bodyPatternTypeAttribute => {
             assert.equal(bodyPatternTypeAttribute, expectedValue);
@@ -120,7 +120,7 @@ contract('GenesLaboratory', accounts => {
     });
 
     it('Should get body pattern color attribute value from bytes', async () => {
-        const expectedValue = 1;
+        const expectedValue = 5;
         await genesLaboratory.getBodyPatternColorFromBytes(genes, { from: accounts[0] })
         .then(bodyPatternColorAttribute => {
             assert.equal(bodyPatternColorAttribute, expectedValue);
@@ -128,7 +128,7 @@ contract('GenesLaboratory', accounts => {
     });
 
     it('Should get wings type attribute value from bytes', async () => {
-        const expectedValue = 1;
+        const expectedValue = 6;
         await genesLaboratory.getWingsTypeFromBytes(genes, { from: accounts[0] })
         .then(wingsTypeAttribute => {
             assert.equal(wingsTypeAttribute, expectedValue);
@@ -136,7 +136,7 @@ contract('GenesLaboratory', accounts => {
     });
 
     it('Should get wings color attribute value from bytes', async () => {
-        const expectedValue = 1;
+        const expectedValue = 7;
         await genesLaboratory.getWingsColorFromBytes(genes, { from: accounts[0] })
         .then(wingsColorAttribute => {
             assert.equal(wingsColorAttribute, expectedValue);
@@ -144,7 +144,7 @@ contract('GenesLaboratory', accounts => {
     });
 
     it('Should get horns type attribute value from bytes', async () => {
-        const expectedValue = 1;
+        const expectedValue = 8;
         await genesLaboratory.getHornsTypeFromBytes(genes, { from: accounts[0] })
         .then(hornsTypeAttribute => {
             assert.equal(hornsTypeAttribute, expectedValue);
@@ -152,7 +152,7 @@ contract('GenesLaboratory', accounts => {
     });
 
     it('Should get horns color attribute value from bytes', async () => {
-        const expectedValue = 1;
+        const expectedValue = 9;
         await genesLaboratory.getHornsColorFromBytes(genes, { from: accounts[0] })
         .then(hornsColorAttribute => {
             assert.equal(hornsColorAttribute, expectedValue);
@@ -160,7 +160,7 @@ contract('GenesLaboratory', accounts => {
     });
 
     it('Should get eyes type attribute value from bytes', async () => {
-        const expectedValue = 1;
+        const expectedValue = 10;
         await genesLaboratory.getEyesTypeFromBytes(genes, { from: accounts[0] })
         .then(eyesTypeAttribute => {
             assert.equal(eyesTypeAttribute, expectedValue);
@@ -168,7 +168,7 @@ contract('GenesLaboratory', accounts => {
     });
 
     it('Should get eyes color attribute value from bytes', async () => {
-        const expectedValue = 1;
+        const expectedValue = 10;
         await genesLaboratory.getEyesColorFromBytes(genes, { from: accounts[0] })
         .then(eyesColorAttribute => {
             assert.equal(eyesColorAttribute, expectedValue);
@@ -176,7 +176,7 @@ contract('GenesLaboratory', accounts => {
     });
 
     it('Should get tail type attribute value from bytes', async () => {
-        const expectedValue = 1;
+        const expectedValue = 12;
         await genesLaboratory.getTailTypeFromBytes(genes, { from: accounts[0] })
         .then(tailTypeAttribute => {
             assert.equal(tailTypeAttribute, expectedValue);
@@ -184,7 +184,7 @@ contract('GenesLaboratory', accounts => {
     });
 
     it('Should get tail color attribute value from bytes', async () => {
-        const expectedValue = 1;
+        const expectedValue = 13;
         await genesLaboratory.getTailColorFromBytes(genes, { from: accounts[0] })
         .then(tailColorAttribute => {
             assert.equal(tailColorAttribute, expectedValue);

@@ -168,7 +168,7 @@ contract('GenesLaboratory', accounts => {
     });
 
     it('Should get eyes color attribute value from bytes', async () => {
-        const expectedValue = 10;
+        const expectedValue = 11;
         await genesLaboratory.getEyesColorFromBytes(genes, { from: accounts[0] })
         .then(eyesColorAttribute => {
             assert.equal(eyesColorAttribute, expectedValue);

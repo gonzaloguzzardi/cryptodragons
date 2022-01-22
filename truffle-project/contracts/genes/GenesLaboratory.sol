@@ -2,6 +2,8 @@
 
 pragma solidity ^0.8.0;
 
+import "../common/libraries/DragonLibrary.sol";
+
 contract GenesLaboratory {
 	address private _dragonContractAddress;
 	uint256 private _randomNonce;
@@ -67,16 +69,37 @@ contract GenesLaboratory {
 		childGenes = getChildMaxFortitude(childGenes, fatherGenes, motherGenes);
 		(childGenes, actionCooldown) = getChildActionCooldown(childGenes, fatherGenes, motherGenes);
 		(childGenes, hatchTime) = getChildHatchTime(childGenes, fatherGenes, motherGenes);
-		childGenes = getChildHead(childGenes, fatherGenes, motherGenes);
-		childGenes = getChildBody(childGenes, fatherGenes, motherGenes);
-		childGenes = getChildWings(childGenes, fatherGenes, motherGenes);
-		childGenes = getChildGeneration(childGenes, fatherGenes, motherGenes);
+
+		childGenes = getChildBodyType(childGenes, fatherGenes, motherGenes);
+		childGenes = getChildBodyColor(childGenes, fatherGenes, motherGenes);
+		childGenes = getChildBodyPatternType(childGenes, fatherGenes, motherGenes);
+		childGenes = getChildBodyPatternColor(childGenes, fatherGenes, motherGenes);
+		childGenes = getChildWingsType(childGenes, fatherGenes, motherGenes);
+		childGenes = getChildWingsColor(childGenes, fatherGenes, motherGenes);
+		childGenes = getChildHornsType(childGenes, fatherGenes, motherGenes);
+		childGenes = getChildHornsColor(childGenes, fatherGenes, motherGenes);
+		childGenes = getChildEyesType(childGenes, fatherGenes, motherGenes);
+		childGenes = getChildEyesColor(childGenes, fatherGenes, motherGenes);
+		childGenes = getChildTailType(childGenes, fatherGenes, motherGenes);
+		childGenes = getChildTailColor(childGenes, fatherGenes, motherGenes);
 	}
-	
-	function getVisualAttributes(bytes32 genes) external pure returns (uint16 head, uint16 body, uint16 wings) {
-	    head = getHeadAttributeFromBytes(genes);
-	    body = getBodyAttributeFromBytes(genes);
-	    wings = getWingsAttributeFromBytes(genes);
+
+	function getVisualAttributes(bytes32 genes) external pure returns (DragonLibrary.DragonVisualAttributes memory) {
+		DragonLibrary.DragonVisualAttributes memory visualAttributes = DragonLibrary.DragonVisualAttributes({
+			bodyType: getBodyTypeFromBytes(genes),
+			bodyColor: getBodyColorFromBytes(genes),
+			bodyPatternType: getBodyPatternTypeFromBytes(genes),
+			bodyPatternColor: getBodyPatternColorFromBytes(genes),
+			wingsType: getWingsTypeFromBytes(genes),
+			wingsColor: getWingsColorFromBytes(genes),
+			hornsType: getHornsTypeFromBytes(genes),
+			hornsColor: getHornsColorFromBytes(genes),
+			eyesType: getEyesTypeFromBytes(genes),
+			eyesColor: getEyesColorFromBytes(genes),
+			tailType: getTailTypeFromBytes(genes),
+			tailColor: getTailColorFromBytes(genes)
+		});
+		return visualAttributes;
 	}
 
 	/************************** Genes creation ***************************************** */
@@ -354,62 +377,182 @@ contract GenesLaboratory {
 		return (bytes32(result), uint16(value));
 	}
 
-	function getChildHead(
+	function getChildBodyType(
 		bytes32 childGenes,
 		bytes32 fatherGenes,
 		bytes32 motherGenes
 	) private returns (bytes32) {
-		uint16 fatherHead = getHeadAttributeFromBytes(fatherGenes);
-		uint16 motherHead = getHeadAttributeFromBytes(motherGenes);
+		uint16 fatherHead = getBodyTypeFromBytes(fatherGenes);
+		uint16 motherHead = getBodyTypeFromBytes(motherGenes);
 
-		uint256 childHead = generateChildHeadValue(fatherHead, motherHead);
+		uint256 childHead = generateChildVisualAttributeValue(fatherHead, motherHead);
 
-		uint256 shiftedValue = childHead << (10 * 8);
+		uint256 shiftedValue = childHead << (11 * 8);
 		uint256 result = shiftedValue | uint256(childGenes);
 		return bytes32(result);
 	}
 
-	function getChildBody(
+	function getChildBodyColor(
 		bytes32 childGenes,
 		bytes32 fatherGenes,
 		bytes32 motherGenes
 	) private returns (bytes32) {
-		uint16 fatherBody = getBodyAttributeFromBytes(fatherGenes);
-		uint16 motherBody = getBodyAttributeFromBytes(motherGenes);
+		uint16 fatherBody = getBodyColorFromBytes(fatherGenes);
+		uint16 motherBody = getBodyColorFromBytes(motherGenes);
 
-		uint256 childBody = generateChildBodyValue(fatherBody, motherBody);
+		uint256 childBody = generateChildVisualAttributeValue(fatherBody, motherBody);
 
-		uint256 shiftedValue = childBody << (10 * 6);
+		uint256 shiftedValue = childBody << (10 * 8);
 		uint256 result = shiftedValue | uint256(childGenes);
 		return bytes32(result);
 	}
 
-	function getChildWings(
+	function getChildBodyPatternType(
 		bytes32 childGenes,
 		bytes32 fatherGenes,
 		bytes32 motherGenes
 	) private returns (bytes32) {
-		uint16 fatherWings = getBodyAttributeFromBytes(fatherGenes);
-		uint16 motherWings = getBodyAttributeFromBytes(motherGenes);
+		uint16 fatherHead = getBodyPatternTypeFromBytes(fatherGenes);
+		uint16 motherHead = getBodyPatternTypeFromBytes(motherGenes);
 
-		uint256 childWings = generateChildWingsValue(fatherWings, motherWings);
+		uint256 childHead = generateChildVisualAttributeValue(fatherHead, motherHead);
 
-		uint256 shiftedValue = childWings << (10 * 4);
+		uint256 shiftedValue = childHead << (9 * 8);
 		uint256 result = shiftedValue | uint256(childGenes);
 		return bytes32(result);
 	}
 
-	function getChildGeneration(
+	function getChildBodyPatternColor(
 		bytes32 childGenes,
 		bytes32 fatherGenes,
 		bytes32 motherGenes
-	) private pure returns (bytes32) {
-		uint16 fatherGeneration = getGenerationAttributeFromBytes(fatherGenes);
-		uint16 motherGeneration = getGenerationAttributeFromBytes(motherGenes);
+	) private returns (bytes32) {
+		uint16 fatherBody = getBodyPatternColorFromBytes(fatherGenes);
+		uint16 motherBody = getBodyPatternColorFromBytes(motherGenes);
 
-		uint256 childGeneration = generateChildGeneration(fatherGeneration, motherGeneration);
+		uint256 childBody = generateChildVisualAttributeValue(fatherBody, motherBody);
 
-		uint256 result = childGeneration | uint256(childGenes);
+		uint256 shiftedValue = childBody << (8 * 8);
+		uint256 result = shiftedValue | uint256(childGenes);
+		return bytes32(result);
+	}
+
+	function getChildWingsType(
+		bytes32 childGenes,
+		bytes32 fatherGenes,
+		bytes32 motherGenes
+	) private returns (bytes32) {
+		uint16 fatherHead = getWingsTypeFromBytes(fatherGenes);
+		uint16 motherHead = getWingsTypeFromBytes(motherGenes);
+
+		uint256 childHead = generateChildVisualAttributeValue(fatherHead, motherHead);
+
+		uint256 shiftedValue = childHead << (7 * 8);
+		uint256 result = shiftedValue | uint256(childGenes);
+		return bytes32(result);
+	}
+
+	function getChildWingsColor(
+		bytes32 childGenes,
+		bytes32 fatherGenes,
+		bytes32 motherGenes
+	) private returns (bytes32) {
+		uint16 fatherBody = getWingsColorFromBytes(fatherGenes);
+		uint16 motherBody = getWingsColorFromBytes(motherGenes);
+
+		uint256 childBody = generateChildVisualAttributeValue(fatherBody, motherBody);
+
+		uint256 shiftedValue = childBody << (6 * 8);
+		uint256 result = shiftedValue | uint256(childGenes);
+		return bytes32(result);
+	}
+
+	function getChildHornsType(
+		bytes32 childGenes,
+		bytes32 fatherGenes,
+		bytes32 motherGenes
+	) private returns (bytes32) {
+		uint16 fatherHead = getHornsTypeFromBytes(fatherGenes);
+		uint16 motherHead = getHornsTypeFromBytes(motherGenes);
+
+		uint256 childHead = generateChildVisualAttributeValue(fatherHead, motherHead);
+
+		uint256 shiftedValue = childHead << (5 * 8);
+		uint256 result = shiftedValue | uint256(childGenes);
+		return bytes32(result);
+	}
+
+	function getChildHornsColor(
+		bytes32 childGenes,
+		bytes32 fatherGenes,
+		bytes32 motherGenes
+	) private returns (bytes32) {
+		uint16 fatherBody = getHornsColorFromBytes(fatherGenes);
+		uint16 motherBody = getHornsColorFromBytes(motherGenes);
+
+		uint256 childBody = generateChildVisualAttributeValue(fatherBody, motherBody);
+
+		uint256 shiftedValue = childBody << (4 * 8);
+		uint256 result = shiftedValue | uint256(childGenes);
+		return bytes32(result);
+	}
+
+	function getChildEyesType(
+		bytes32 childGenes,
+		bytes32 fatherGenes,
+		bytes32 motherGenes
+	) private returns (bytes32) {
+		uint16 fatherHead = getEyesTypeFromBytes(fatherGenes);
+		uint16 motherHead = getEyesTypeFromBytes(motherGenes);
+
+		uint256 childHead = generateChildVisualAttributeValue(fatherHead, motherHead);
+
+		uint256 shiftedValue = childHead << (3 * 8);
+		uint256 result = shiftedValue | uint256(childGenes);
+		return bytes32(result);
+	}
+
+	function getChildEyesColor(
+		bytes32 childGenes,
+		bytes32 fatherGenes,
+		bytes32 motherGenes
+	) private returns (bytes32) {
+		uint16 fatherBody = getEyesColorFromBytes(fatherGenes);
+		uint16 motherBody = getEyesColorFromBytes(motherGenes);
+
+		uint256 childBody = generateChildVisualAttributeValue(fatherBody, motherBody);
+
+		uint256 shiftedValue = childBody << (2 * 8);
+		uint256 result = shiftedValue | uint256(childGenes);
+		return bytes32(result);
+	}
+
+	function getChildTailType(
+		bytes32 childGenes,
+		bytes32 fatherGenes,
+		bytes32 motherGenes
+	) private returns (bytes32) {
+		uint16 fatherHead = getTailTypeFromBytes(fatherGenes);
+		uint16 motherHead = getTailTypeFromBytes(motherGenes);
+
+		uint256 childHead = generateChildVisualAttributeValue(fatherHead, motherHead);
+
+		uint256 shiftedValue = childHead << (1 * 8);
+		uint256 result = shiftedValue | uint256(childGenes);
+		return bytes32(result);
+	}
+
+	function getChildTailColor(
+		bytes32 childGenes,
+		bytes32 fatherGenes,
+		bytes32 motherGenes
+	) private returns (bytes32) {
+		uint16 fatherBody = getTailColorFromBytes(fatherGenes);
+		uint16 motherBody = getTailColorFromBytes(motherGenes);
+
+		uint256 childBody = generateChildVisualAttributeValue(fatherBody, motherBody);
+
+		uint256 result = childBody | uint256(childGenes);
 		return bytes32(result);
 	}
 
@@ -442,7 +585,7 @@ contract GenesLaboratory {
 		return uint16(randomValue);
 	}
 
-	function generateChildHeadValue(uint16 fatherValue, uint16 motherValue) private returns (uint16 value) {
+	function generateChildVisualAttributeValue(uint16 fatherValue, uint16 motherValue) private returns (uint16 value) {
 		uint256 roll = random(0, 10000);
 		if (roll < 4000) {
 			value = fatherValue;
@@ -451,37 +594,6 @@ contract GenesLaboratory {
 		} else {
 			value = uint16(random(1, 4));
 		}
-	}
-
-	function generateChildBodyValue(uint16 fatherValue, uint16 motherValue) private returns (uint16 value) {
-		uint256 roll = random(0, 10000);
-		if (roll < 3750) {
-			value = fatherValue;
-		} else if (roll < 7500) {
-			value = motherValue;
-		} else {
-			value = uint16(random(1, 4));
-		}
-	}
-
-	function generateChildWingsValue(uint16 fatherValue, uint16 motherValue) private returns (uint16 value) {
-		uint256 roll = random(0, 10000);
-		if (roll < 3500) {
-			value = fatherValue;
-		} else if (roll < 7500) {
-			value = motherValue;
-		} else {
-			value = uint16(random(1, 4));
-		}
-	}
-
-	function generateChildGeneration(uint16 fatherValue, uint16 motherValue) private pure returns (uint16) {
-		uint256 maxValue = (fatherValue > motherValue) ? fatherValue : motherValue;
-		maxValue = maxValue + 1;
-		if (maxValue > 65535) {
-			maxValue = 65535;
-		}
-		return uint16(maxValue);
 	}
 
 	/**************************** Getters *********************************************** */
@@ -527,21 +639,54 @@ contract GenesLaboratory {
 	}
 
 	/*********************** Visual Attributes *************************************** */
-	function getHeadAttributeFromBytes(bytes32 genes) public pure returns (uint16) {
-		return uint16(uint256(genes) >> (10 * 8));
+	function getBodyTypeFromBytes(bytes32 genes) public pure returns (uint8) {
+		return uint8(uint256(genes) >> (11 * 8));
 	}
 
-	function getBodyAttributeFromBytes(bytes32 genes) public pure returns (uint16) {
-		return uint16(uint256(genes) >> (8 * 8));
+	function getBodyColorFromBytes(bytes32 genes) public pure returns (uint8) {
+		return uint8(uint256(genes) >> (10 * 8));
 	}
 
-	function getWingsAttributeFromBytes(bytes32 genes) public pure returns (uint16) {
-		return uint16(uint256(genes) >> (6 * 8));
+	function getBodyPatternTypeFromBytes(bytes32 genes) public pure returns (uint8) {
+		return uint8(uint256(genes) >> (9 * 8));
 	}
 
-	function getGenerationAttributeFromBytes(bytes32 genes) public pure returns (uint16) {
-		return uint16(uint256(genes));
+	function getBodyPatternColorFromBytes(bytes32 genes) public pure returns (uint8) {
+		return uint8(uint256(genes) >> (8 * 8));
 	}
+
+	function getWingsTypeFromBytes(bytes32 genes) public pure returns (uint8) {
+		return uint8(uint256(genes) >> (7 * 8));
+	}
+
+	function getWingsColorFromBytes(bytes32 genes) public pure returns (uint8) {
+		return uint8(uint256(genes) >> (6 * 8));
+	}
+
+	function getHornsTypeFromBytes(bytes32 genes) public pure returns (uint8) {
+		return uint8(uint256(genes) >> (5 * 8));
+	}
+
+	function getHornsColorFromBytes(bytes32 genes) public pure returns (uint8) {
+		return uint8(uint256(genes) >> (4 * 8));
+	}
+
+	function getEyesTypeFromBytes(bytes32 genes) public pure returns (uint8) {
+		return uint8(uint256(genes) >> (3 * 8));
+	}
+
+	function getEyesColorFromBytes(bytes32 genes) public pure returns (uint8) {
+		return uint8(uint256(genes) >> (2 * 8));
+	}
+
+	function getTailTypeFromBytes(bytes32 genes) public pure returns (uint8) {
+		return uint8(uint256(genes) >> (1 * 8));
+	}
+
+	function getTailColorFromBytes(bytes32 genes) public pure returns (uint8) {
+		return uint8(uint256(genes));
+	}
+
 
 	/********************* Utils *************************************** */
 

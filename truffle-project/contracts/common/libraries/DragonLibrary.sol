@@ -21,4 +21,19 @@ library DragonLibrary {
 		uint16 hatchTime; // in minutes, capped to 45 days - Maybe it would be nice to reuse some variable like current exp
 		uint8 blockchainOriginId;
 	}
+
+	struct DragonVisualAttributes {
+		uint8 bodyType;
+		uint8 bodyColor;
+		uint8 bodyPatternType;
+		uint8 bodyPatternColor;
+		uint8 wingsType;
+		uint8 wingsColor;
+		uint8 hornsType;
+		uint8 hornsColor;
+		uint8 eyesType;
+		uint8 eyesColor;
+		uint8 tailType;
+		uint8 tailColor;
+	}
 }

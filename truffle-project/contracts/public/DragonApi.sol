@@ -13,11 +13,7 @@ interface IGenesLaboratory {
 	function getVisualAttributes(bytes32 genes)
 		external
 		pure
-		returns (
-			uint16 head,
-			uint16 body,
-			uint16 wings
-		);
+		returns (DragonLibrary.DragonVisualAttributes memory);
 }
 
 contract DragonApi {
@@ -80,13 +76,9 @@ contract DragonApi {
 	function getVisualAttributes(uint256 dragonId)
 		external
 		view
-		returns (
-			uint16 head,
-			uint16 body,
-			uint16 wings
-		)
+		returns (DragonLibrary.DragonVisualAttributes memory)
 	{
 		DragonLibrary.Dragon memory dragon = IDragonContract(_dragonAddress).getDragonById(dragonId);
-		(head, body, wings) = IGenesLaboratory(_genesLaboratory).getVisualAttributes(dragon.genes);
+		return IGenesLaboratory(_genesLaboratory).getVisualAttributes(dragon.genes);
 	}
 }

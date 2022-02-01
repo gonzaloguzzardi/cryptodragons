@@ -592,7 +592,7 @@ contract GenesLaboratory {
 		} else if (roll < 7500) {
 			value = motherValue;
 		} else {
-			value = uint16(random(1, 4));
+			value = uint16(random(1, 255));
 		}
 	}
 

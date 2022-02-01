@@ -36,6 +36,19 @@ interface IState {
   agility: string
   strength: string
   fortitude: string
+
+  bodyColor: number
+  bodyPatternColor: number
+  bodyPatternType: number
+  bodyType: number
+  eyesColor: number
+  eyesType: number
+  hornsColor: number
+  hornsType: number
+  tailColor: number
+  tailType: number
+  wingsColor: number
+  wingsType: number
 }
 
 class Dragon extends Component<IProps, IState> {
@@ -52,6 +65,18 @@ class Dragon extends Component<IProps, IState> {
       agility: '',
       strength: '',
       fortitude: '',
+      bodyColor: 1,
+      bodyPatternColor: 1,
+      bodyPatternType: 1,
+      bodyType: 1,
+      eyesColor: 1,
+      eyesType: 1,
+      hornsColor: 1,
+      hornsType: 1,
+      tailColor: 1,
+      tailType: 1,
+      wingsColor: 1,
+      wingsType: 1,
     }
 
     this.getDragonData()
@@ -71,16 +96,33 @@ class Dragon extends Component<IProps, IState> {
     }
   }
 
-  //TODO: map when backend is ready.
+  updateDragonVisualData = (dragonData) => {
+    console.log(dragonData)
+    this.setState({
+      bodyPatternColor: Math.round(dragonData.bodyPatternColor * 1.41),
+      bodyPatternType: (dragonData.bodyPatternType % 2) + 1, //1-2
+      bodyColor: Math.round(dragonData.bodyColor * 1.41),
+      bodyType: (dragonData.bodyType % 2) + 1, //1-2
+      eyesColor: Math.round(dragonData.eyesColor * 1.41),
+      eyesType: (dragonData.eyesType % 4) + 1, //1-4
+      hornsColor: Math.round(dragonData.hornsColor * 1.41),
+      hornsType: (dragonData.hornsType % 4) + 1, //1-4
+      tailColor: Math.round(dragonData.tailColor * 1.41),
+      tailType: (dragonData.tailType % 4) + 1, //1-4
+      wingsColor: Math.round(dragonData.wingsColor * 1.41),
+      wingsType: (dragonData.wingsType % 4) + 1, //1-4
+    })
+  }
+
   getDragonVisualData: () => unknown = () => {
     if (this.state.location === 'SIDECHAIN') {
       SidechainAPI.getDragonVisualDataById(this.state.id).then((dragonData) =>
-        console.log(dragonData)
+        this.updateDragonVisualData(dragonData)
       )
     }
     if (this.state.location === 'MAINCHAIN') {
       MainchainAPI.getDragonVisualDataById(this.state.id).then((dragonData) =>
-        console.log(dragonData)
+        this.updateDragonVisualData(dragonData)
       )
     }
   }
@@ -117,18 +159,18 @@ class Dragon extends Component<IProps, IState> {
 
           <CardMedia className={dragonStyles.card}>
             <DragonCreator
-              typeAlas={1}
-              typeCuernos={1}
-              typeOjos={1}
-              typePanza={1}
-              typeCola={1}
-              typeCuerpo={1}
-              colorAlas={1}
-              colorCuernos={1}
-              colorOjos={1}
-              colorPanza={1}
-              colorCola={1}
-              colorCuerpo={1}
+              typeAlas={this.state.wingsType}
+              typeCuernos={this.state.hornsType}
+              typeOjos={this.state.eyesType}
+              typePanza={this.state.bodyType}
+              typeCola={this.state.tailType}
+              typeCuerpo={this.state.bodyPatternType}
+              colorAlas={this.state.wingsColor}
+              colorCuernos={this.state.hornsColor}
+              colorOjos={this.state.eyesColor}
+              colorPanza={this.state.bodyColor}
+              colorCola={this.state.tailColor}
+              colorCuerpo={this.state.bodyPatternColor}
             />
           </CardMedia>
 

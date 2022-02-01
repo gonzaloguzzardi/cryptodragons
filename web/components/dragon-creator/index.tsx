@@ -39,6 +39,7 @@ class DragonCreator extends Component<DProps> {
 
   constructor(props: DProps) {
     super(props)
+
     this.state = {
       colorAlas: props.colorAlas,
       colorCola: props.colorCola,
@@ -56,20 +57,20 @@ class DragonCreator extends Component<DProps> {
     }
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps, prevState, snapshot) {
     if (
-      prevProps.colorAlas !== this.props.colorAlas ||
-      prevProps.colorCola !== this.props.colorCola ||
-      prevProps.colorPanza !== this.props.colorPanza ||
-      prevProps.colorCuernos !== this.props.colorCuernos ||
-      prevProps.colorOjos !== this.props.colorOjos ||
-      prevProps.colorCuerpo !== this.props.colorCuerpo ||
-      prevProps.typeAlas !== this.props.typeAlas ||
-      prevProps.typeCola !== this.props.typeCola ||
-      prevProps.typePanza !== this.props.typePanza ||
-      prevProps.typeCuernos !== this.props.typeCuernos ||
-      prevProps.typeOjos !== this.props.typeOjos ||
-      prevProps.typeCuerpo !== this.props.typeCuerpo
+      prevState.colorAlas !== this.props.colorAlas ||
+      prevState.colorCola !== this.props.colorCola ||
+      prevState.colorPanza !== this.props.colorPanza ||
+      prevState.colorCuernos !== this.props.colorCuernos ||
+      prevState.colorOjos !== this.props.colorOjos ||
+      prevState.colorCuerpo !== this.props.colorCuerpo ||
+      prevState.typeAlas !== this.props.typeAlas ||
+      prevState.typeCola !== this.props.typeCola ||
+      prevState.typePanza !== this.props.typePanza ||
+      prevState.typeCuernos !== this.props.typeCuernos ||
+      prevState.typeOjos !== this.props.typeOjos ||
+      prevState.typeCuerpo !== this.props.typeCuerpo
     ) {
       this.setState({
         colorAlas: this.props.colorAlas,

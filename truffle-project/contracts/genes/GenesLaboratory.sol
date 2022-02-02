@@ -40,10 +40,18 @@ contract GenesLaboratory {
 		genes = createMaxFortitudeValue(genes);
 		(genes, actionCooldown) = createActionCooldown(genes);
 		(genes, hatchTime) = createHatchTime(genes);
-		genes = createHead(genes);
-		genes = createBody(genes);
-		genes = createWings(genes);
-		genes = createGeneration(genes);
+		genes = createVisualAttribute(genes, 11);
+		genes = createVisualAttribute(genes, 10);
+		genes = createVisualAttribute(genes, 9);
+		genes = createVisualAttribute(genes, 8);
+		genes = createVisualAttribute(genes, 7);
+		genes = createVisualAttribute(genes, 6);
+		genes = createVisualAttribute(genes, 5);
+		genes = createVisualAttribute(genes, 4);
+		genes = createVisualAttribute(genes, 3);
+		genes = createVisualAttribute(genes, 2);
+		genes = createVisualAttribute(genes, 1);
+		genes = createVisualAttribute(genes, 0);
 	}
 
 	function createChildGenes(bytes32 fatherGenes, bytes32 motherGenes)
@@ -174,36 +182,10 @@ contract GenesLaboratory {
 		return (bytes32(result), uint16(value));
 	}
 
-	function createHead(bytes32 genes) private returns (bytes32) {
-		uint256 headsAmount = 5;
-		uint256 value = random(0, headsAmount);
-
-		uint256 shiftedValue = value << (10 * 8);
+	function createVisualAttribute(bytes32 genes, uint position) private returns (bytes32) {
+		uint256 value = random(1, 255);
+		uint256 shiftedValue = value << (position * 8);
 		uint256 result = shiftedValue | uint256(genes);
-		return bytes32(result);
-	}
-
-	function createBody(bytes32 genes) private returns (bytes32) {
-		uint256 bodyAmount = 5;
-		uint256 value = random(0, bodyAmount);
-
-		uint256 shiftedValue = value << (8 * 8);
-		uint256 result = shiftedValue | uint256(genes);
-		return bytes32(result);
-	}
-
-	function createWings(bytes32 genes) private returns (bytes32) {
-		uint256 wingsAmount = 5;
-		uint256 value = random(0, wingsAmount);
-
-		uint256 shiftedValue = value << (6 * 8);
-		uint256 result = shiftedValue | uint256(genes);
-		return bytes32(result);
-	}
-
-	function createGeneration(bytes32 genes) private pure returns (bytes32) {
-		uint256 generation = 1;
-		uint256 result = generation | uint256(genes);
 		return bytes32(result);
 	}
 

@@ -96,10 +96,16 @@ class DragonCreator extends Component<DProps> {
     switch (number) {
       case 1:
         return (
-          <svg className="cuernos" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 114.36 18.67">
+          <svg
+            id={'id-' + this.state.id + '-cuernos'}
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 114.36 18.67"
+          >
             <defs>
               <style>
-                {`.cuernos {
+                {`#id-` +
+                  this.state.id +
+                  `-cuernos {
                         position: absolute;
                         z-index: 3;
                         margin-left: auto; 
@@ -130,10 +136,16 @@ class DragonCreator extends Component<DProps> {
         )
       case 2:
         return (
-          <svg className="cuernos" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 76.83 16.99">
+          <svg
+            id={'id-' + this.state.id + '-cuernos'}
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 76.83 16.99"
+          >
             <defs>
               <style>
-                {`.cuernos {
+                {`#id-` +
+                  this.state.id +
+                  `-cuernos {
                         position: absolute;
                         z-index: 3;
                         margin-left: auto; 
@@ -172,10 +184,16 @@ class DragonCreator extends Component<DProps> {
         )
       case 3:
         return (
-          <svg className="cuernos" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 106.29 36.32">
+          <svg
+            id={'id-' + this.state.id + '-cuernos'}
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 106.29 36.32"
+          >
             <defs>
               <style>
-                {`.cuernos {
+                {`#id-` +
+                  this.state.id +
+                  `-cuernos {
                         position: absolute;
                         z-index: 3;
                         margin-left: auto; 
@@ -220,10 +238,16 @@ class DragonCreator extends Component<DProps> {
         )
       case 4:
         return (
-          <svg className="cuernos" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144.31 34.88">
+          <svg
+            id={'id-' + this.state.id + '-cuernos'}
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 144.31 34.88"
+          >
             <defs>
               <style>
-                {`.cuernos {
+                {`#id-` +
+                  this.state.id +
+                  `-cuernos {
                       position: absolute;
                       z-index: 3;
                       margin-left: auto; 
@@ -551,10 +575,16 @@ class DragonCreator extends Component<DProps> {
       case 1:
         return (
           <div>
-            <svg className="alas" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 293.74 80.96">
+            <svg
+              id={'id-' + this.state.id + '-alas'}
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 293.74 80.96"
+            >
               <defs>
                 <style>
-                  {`.alas{
+                  {`#id-` +
+                    this.state.id +
+                    `-alas{
                           position: absolute;
                           z-index: 1; 
                           margin-left: auto; 
@@ -593,10 +623,16 @@ class DragonCreator extends Component<DProps> {
         )
       case 2:
         return (
-          <svg className="alas" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 393.94 90.79">
+          <svg
+            id={'id-' + this.state.id + '-alas'}
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 393.94 90.79"
+          >
             <defs>
               <style>
-                {`.alas{
+                {`#id-` +
+                  this.state.id +
+                  `-alas{
                           position: absolute;
                           z-index: 1; 
                           margin-left: auto; 
@@ -652,10 +688,16 @@ class DragonCreator extends Component<DProps> {
         )
       case 3:
         return (
-          <svg className="alas" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 303.54 118.26">
+          <svg
+            id={'id-' + this.state.id + '-alas'}
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 303.54 118.26"
+          >
             <defs>
               <style>
-                {`.alas{
+                {`#id-` +
+                  this.state.id +
+                  `-alas{
                                     position: absolute;
                                     z-index: 1; 
                                     margin-left: auto; 
@@ -710,10 +752,16 @@ class DragonCreator extends Component<DProps> {
         )
       case 4:
         return (
-          <svg className="alas" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 358.19 114.88">
+          <svg
+            id={'id-' + this.state.id + '-alas'}
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 358.19 114.88"
+          >
             <defs>
               <style>
-                {`.alas{
+                {`#id-` +
+                  this.state.id +
+                  `-alas{
                                     position: absolute;
                                     z-index: 1; 
                                     margin-left: auto; 
@@ -777,13 +825,21 @@ class DragonCreator extends Component<DProps> {
   }
 
   createOjos(color, number) {
+    const class5 = 'cls-5-' + this.state.id
+    const class6 = 'cls-6-' + this.state.id
     switch (number) {
       case 1:
         return (
-          <svg className="ojos" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 43.95 24.29">
+          <svg
+            id={'id-' + this.state.id + '-ojos'}
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 43.95 24.29"
+          >
             <defs>
               <style>
-                {`.ojos {
+                {`#id-` +
+                  this.state.id +
+                  `-ojos {
                         position: absolute;
                         margin-left: auto; 
                         margin-right: auto; 
@@ -793,21 +849,25 @@ class DragonCreator extends Component<DProps> {
                         z-index: 5;
                         width: 15%
                       }
-                      .cls-5{fill:hsl(` +
+                      .` +
+                  class5 +
+                  `{fill:hsl(` +
                   color +
                   `,100%,50%);stroke:#1d1d1b;stroke-miterlimit:10;stroke-width:3px;}
-                      .cls-6{fill:#1d1d1b;}`}
+                      .` +
+                  class6 +
+                  `{fill:#1d1d1b;}`}
               </style>
             </defs>
-            <rect className="cls-5" x="28.72" y="7.12" width="12.51" height="15.67" rx="6.26" />
-            <rect className="cls-6" x="28.72" y="10.94" width="12.51" height="12.51" rx="6.26" />
+            <rect className={class5} x="28.72" y="7.12" width="12.51" height="15.67" rx="6.26" />
+            <rect className={class6} x="28.72" y="10.94" width="12.51" height="12.51" rx="6.26" />
             <path
-              className="cls-6"
+              className={class6}
               d="M174.62,48.82h-.12a.8.8,0,0,1-.79-.69c-.46-2.65-3.54-4.7-7.26-4.7s-6.8,2-7.26,4.7a.8.8,0,0,1-.79.69h-.12a.79.79,0,0,1-.79-.9c.56-3.5,4.37-6.21,9-6.21s8.4,2.71,9,6.21A.8.8,0,0,1,174.62,48.82Z"
               transform="translate(-131.48 -41.71)"
             />
             <rect
-              className="cls-5"
+              className={class5}
               x="134.25"
               y="48.83"
               width="12.51"
@@ -816,7 +876,7 @@ class DragonCreator extends Component<DProps> {
               transform="translate(149.89 70.73) rotate(179.64)"
             />
             <rect
-              className="cls-6"
+              className={class6}
               x="134.26"
               y="52.64"
               width="12.51"
@@ -825,7 +885,7 @@ class DragonCreator extends Component<DProps> {
               transform="translate(149.93 75.21) rotate(179.64)"
             />
             <path
-              className="cls-6"
+              className={class6}
               d="M132.29,48.88h.12a.81.81,0,0,0,.78-.7c.45-2.65,3.52-4.73,7.23-4.75s6.81,2,7.29,4.66a.8.8,0,0,0,.79.68h.13a.79.79,0,0,0,.79-.9c-.59-3.5-4.41-6.19-9-6.16S132,44.48,131.49,48A.79.79,0,0,0,132.29,48.88Z"
               transform="translate(-131.48 -41.71)"
             />
@@ -833,10 +893,16 @@ class DragonCreator extends Component<DProps> {
         )
       case 2:
         return (
-          <svg className="ojos" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 53.31 17.55">
+          <svg
+            id={'id-' + this.state.id + '-ojos'}
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 53.31 17.55"
+          >
             <defs>
               <style>
-                {`.ojos {
+                {`#id-` +
+                  this.state.id +
+                  `-ojos {
                         position: absolute;
                         margin-left: auto; 
                         margin-right: auto; 
@@ -846,28 +912,32 @@ class DragonCreator extends Component<DProps> {
                         z-index: 5;
                         width: 15%
                       }
-                      .cls-5{fill:hsl(` +
+                      .` +
+                  class5 +
+                  `{fill:hsl(` +
                   color +
                   `,100%,50%);stroke:#1d1d1b;stroke-miterlimit:10;stroke-width:3px;}
-                      .cls-6{fill:#1d1d1b;}`}
+                      .` +
+                  class6 +
+                  `{fill:#1d1d1b;}`}
               </style>
             </defs>
             <g id="Capa_2" data-name="Capa 2">
               <g id="Capa_1-2" data-name="Capa 1">
                 <g id="ojos_2" data-name="ojos 2">
-                  <line className="cls-5" x1="20.85" y1="6.75" x2="0.15" y2="1.25" />
+                  <line className={class5} x1="20.85" y1="6.75" x2="0.15" y2="1.25" />
                   <path d="M19.55,7.45l-18.8-5a1,1,0,0,1-.7-1.2h0a1,1,0,0,1,1.2-.7l18.8,5a1,1,0,0,1,.7,1.2h0A.86.86,0,0,1,19.55,7.45Z" />
-                  <line className="cls-5" x1="16.85" y1="11.15" x2="0.15" y2="6.75" />
+                  <line className={class5} x1="16.85" y1="11.15" x2="0.15" y2="6.75" />
                   <path d="M15.55,11.85.75,8a1,1,0,0,1-.7-1.2h0a1,1,0,0,1,1.2-.7L16.05,10a1,1,0,0,1,.7,1.2h0A1,1,0,0,1,15.55,11.85Z" />
                   <path d="M14,13.15c0,2.4-1.4,4.4-3.2,4.4s-3.2-2-3.2-4.4,1.4-3.4,3.2-3.4S14,10.65,14,13.15Z" />
-                  <line className="cls-5" x1="20.85" y1="6.75" x2="0.15" y2="1.25" />
+                  <line className={class5} x1="20.85" y1="6.75" x2="0.15" y2="1.25" />
                   <path d="M19.55,7.45l-18.8-5a1,1,0,0,1-.7-1.2h0a1,1,0,0,1,1.2-.7l18.8,5a1,1,0,0,1,.7,1.2h0A.86.86,0,0,1,19.55,7.45Z" />
-                  <line className="cls-5" x1="16.85" y1="11.15" x2="0.15" y2="6.75" />
+                  <line className={class5} x1="16.85" y1="11.15" x2="0.15" y2="6.75" />
                   <path d="M15.55,11.85.75,8a1,1,0,0,1-.7-1.2h0a1,1,0,0,1,1.2-.7L16.05,10a1,1,0,0,1,.7,1.2h0A1,1,0,0,1,15.55,11.85Z" />
                   <path d="M14,13.15c0,2.4-1.4,4.4-3.2,4.4s-3.2-2-3.2-4.4,1.4-3.4,3.2-3.4S14,10.65,14,13.15Z" />
-                  <line className="cls-5" x1="32.55" y1="6.25" x2="53.15" y2="0.75" />
+                  <line className={class5} x1="32.55" y1="6.25" x2="53.15" y2="0.75" />
                   <path d="M33.75,7l18.8-5a1,1,0,0,0,.7-1.2h0a1,1,0,0,0-1.2-.7l-18.8,5a1,1,0,0,0-.7,1.2h0A1,1,0,0,0,33.75,7Z" />
-                  <line className="cls-5" x1="36.55" y1="10.65" x2="53.15" y2="6.25" />
+                  <line className={class5} x1="36.55" y1="10.65" x2="53.15" y2="6.25" />
                   <path d="M37.75,11.35l14.8-3.9a1,1,0,0,0,.7-1.2h0a1,1,0,0,0-1.2-.7l-14.8,3.9a1,1,0,0,0-.7,1.2h0A1,1,0,0,0,37.75,11.35Z" />
                   <path d="M39.45,12.65c0,2.4,1.4,4.4,3.2,4.4s3.2-2,3.2-4.4-1.4-3.4-3.2-3.4S39.45,10.15,39.45,12.65Z" />
                 </g>
@@ -877,10 +947,16 @@ class DragonCreator extends Component<DProps> {
         )
       case 3:
         return (
-          <svg className="ojos" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 47 24.72">
+          <svg
+            id={'id-' + this.state.id + '-ojos'}
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 47 24.72"
+          >
             <defs>
               <style>
-                {`.ojos {
+                {`#id-` +
+                  this.state.id +
+                  `-ojos {
                         position: absolute;
                         margin-left: auto; 
                         margin-right: auto; 
@@ -890,10 +966,14 @@ class DragonCreator extends Component<DProps> {
                         z-index: 5;
                         width: 15%
                       }
-                      .cls-5{fill:hsl(` +
+                      .` +
+                  class5 +
+                  `{fill:hsl(` +
                   color +
                   `,100%,50%);stroke:#1d1d1b;stroke-miterlimit:10;stroke-width:3px;}
-                      .cls-6{fill:#1d1d1b;}`}
+                      .` +
+                  class6 +
+                  `{fill:#1d1d1b;}`}
               </style>
             </defs>
             <g id="Capa_2" data-name="Capa 2">
@@ -910,10 +990,16 @@ class DragonCreator extends Component<DProps> {
         )
       case 4:
         return (
-          <svg className="ojos" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 45.79 21.42">
+          <svg
+            id={'id-' + this.state.id + '-ojos'}
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 45.79 21.42"
+          >
             <defs>
               <style>
-                {`.ojos {
+                {`#id-` +
+                  this.state.id +
+                  `-ojos {
                         position: absolute;
                         margin-left: auto; 
                         margin-right: auto; 
@@ -923,10 +1009,14 @@ class DragonCreator extends Component<DProps> {
                         z-index: 5;
                         width: 15%
                       }
-                      .cls-5{fill:hsl(` +
+                      .` +
+                  class5 +
+                  `{fill:hsl(` +
                   color +
                   `,100%,50%);stroke:#1d1d1b;stroke-miterlimit:10;stroke-width:3px;}
-                      .cls-6{fill:#1d1d1b;}`}
+                      .` +
+                  class6 +
+                  `{fill:#1d1d1b;}`}
               </style>
             </defs>
             <g id="Capa_2" data-name="Capa 2">
@@ -935,12 +1025,12 @@ class DragonCreator extends Component<DProps> {
                   <path d="M1,7.32H1a1,1,0,0,1-.9-1.4,9.26,9.26,0,0,1,3.9-4c2.3-1.3,7.2-2.8,14.3,1.1a1.11,1.11,0,0,1,.4,1.4h0a1,1,0,0,1-1.4.3c-5.9-3.3-10-2.5-12.3-1.1a7.06,7.06,0,0,0-3,3.1A1.33,1.33,0,0,1,1,7.32Z" />
                   <path d="M44.89,5.92a1.23,1.23,0,0,1-1-.5,7.23,7.23,0,0,0-3.3-2.7c-2.5-1.1-6.6-1.5-12.1,2.4a1.08,1.08,0,0,1-1.4-.2h0a1.08,1.08,0,0,1,.2-1.4C34-1.18,39-.18,41.39.92a9.86,9.86,0,0,1,4.3,3.6,1,1,0,0,1-.8,1.4Z" />
                   <path
-                    className="cls-5"
+                    className={class5}
                     d="M9.69,20.42a8.07,8.07,0,0,0,8.1-8.1H1.59A8.13,8.13,0,0,0,9.69,20.42Z"
                   />
                   <ellipse cx="9.39" cy="15.52" rx="2.3" ry="3.2" />
                   <path
-                    className="cls-5"
+                    className={class5}
                     d="M36.29,20.42a8.07,8.07,0,0,0,8.1-8.1H28.19A8.07,8.07,0,0,0,36.29,20.42Z"
                   />
                   <ellipse cx="35.99" cy="15.02" rx="2.3" ry="3.2" />

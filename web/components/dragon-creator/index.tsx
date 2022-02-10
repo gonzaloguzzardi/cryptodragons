@@ -17,6 +17,7 @@ interface DProps {
   typeCuernos?: number
   typeOjos?: number
   typeCuerpo?: number
+  id?: string
 }
 interface DState {
   colorAlas?: number
@@ -32,6 +33,7 @@ interface DState {
   typeCuernos?: number
   typeOjos?: number
   typeCuerpo?: number
+  id?: string
 }
 
 class DragonCreator extends Component<DProps> {
@@ -39,7 +41,7 @@ class DragonCreator extends Component<DProps> {
 
   constructor(props: DProps) {
     super(props)
-
+    console.log(props.id)
     this.state = {
       colorAlas: props.colorAlas,
       colorCola: props.colorCola,
@@ -54,10 +56,13 @@ class DragonCreator extends Component<DProps> {
       typeCuernos: props.typeCuernos,
       typeOjos: props.typeOjos,
       typeCuerpo: props.typeCuerpo,
+
+      id: props.id,
     }
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
+    console.log(this.props)
     if (
       prevState.colorAlas !== this.props.colorAlas ||
       prevState.colorCola !== this.props.colorCola ||
@@ -353,20 +358,29 @@ class DragonCreator extends Component<DProps> {
   }
 
   createCola(color, number) {
+    const class8 = 'cls-8-' + this.state.id
     switch (number) {
       case 2:
         return (
-          <svg className="cola" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 93.92 127.62">
+          <svg
+            id={'id-' + this.state.id + '-cola'}
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 93.92 127.62"
+          >
             <defs>
               <style>
-                {`.cola {
+                {`#id-` +
+                  this.state.id +
+                  `-cola {
                       position: absolute;
                       z-index: 0;
                       top: 42%;
                       left: 63%;
                       width: 30%;
                     } 
-                    .cls-8{fill:hsl(` +
+                    .` +
+                  class8 +
+                  ` {fill:hsl(` +
                   color +
                   `,100%,50%);stroke:#000;stroke-miterlimit:10;stroke-width:2px;}`}
               </style>
@@ -374,29 +388,37 @@ class DragonCreator extends Component<DProps> {
             <g id="Capa_2" data-name="Capa 2">
               <g id="Capa_9" data-name="Capa 9">
                 <path
-                  className="cls-8"
+                  className={class8}
                   d="M17.44,89.89,2.38,125.82,33.92,122A50.11,50.11,0,0,0,77.8,76.91L82,31.53l4.7,2a4.1,4.1,0,0,0,5.55-4.86L85.13,2.74a1.69,1.69,0,0,0-2.9-.66L63.8,23.39a2.85,2.85,0,0,0,2,4.71l6.39.4-13,27.07A64.22,64.22,0,0,1,17.44,89.89Z"
                 />
-                <circle className="cls-8" cx="31.61" cy="100.75" r="4.05" />
-                <circle className="cls-8" cx="61.44" cy="87.58" r="5.19" />
-                <circle className="cls-8" cx="65.61" cy="59.8" r="1.02" />
+                <circle className={class8} cx="31.61" cy="100.75" r="4.05" />
+                <circle className={class8} cx="61.44" cy="87.58" r="5.19" />
+                <circle className={class8} cx="65.61" cy="59.8" r="1.02" />
               </g>
             </g>
           </svg>
         )
       case 1:
         return (
-          <svg className="cola" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 103.98 121.93">
+          <svg
+            id={'id-' + this.state.id + '-cola'}
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 103.98 121.93"
+          >
             <defs>
               <style>
-                {`.cola {
+                {`#id-` +
+                  this.state.id +
+                  `-cola {
                       position: absolute;
                       z-index: 0;
                       top: 43%;
                       left: 65%;
                       width: 35%;
                     } 
-                    .cls-8{fill:hsl(` +
+                    .` +
+                  class8 +
+                  ` {fill:hsl(` +
                   color +
                   `,100%,50%);stroke:#000;stroke-miterlimit:10;stroke-width:2px;}`}
               </style>
@@ -404,30 +426,38 @@ class DragonCreator extends Component<DProps> {
             <g id="Capa_2" data-name="Capa 2">
               <g id="Capa_6" data-name="Capa 6">
                 <path
-                  className="cls-8"
+                  className={class8}
                   d="M1.93,111l29.46,2.51a39,39,0,0,0,17.9-2.65c15.05-6,24.45-21.16,24-37.37L73,59.39a121.13,121.13,0,0,1,12.12-56h0L80.73,5.61A96.39,96.39,0,0,0,38,49.17l-.41.84A98,98,0,0,1,9.14,84.85h0Z"
                 />
-                <circle className="cls-8" cx="42.35" cy="98.59" r="6.54" />
-                <circle className="cls-8" cx="40.72" cy="79.38" r="2.79" />
-                <circle className="cls-8" cx="68.69" cy="41.18" r="2.94" />
-                <circle className="cls-8" cx="53.96" cy="43.31" r="5.07" />
+                <circle className={class8} cx="42.35" cy="98.59" r="6.54" />
+                <circle className={class8} cx="40.72" cy="79.38" r="2.79" />
+                <circle className={class8} cx="68.69" cy="41.18" r="2.94" />
+                <circle className={class8} cx="53.96" cy="43.31" r="5.07" />
               </g>
             </g>
           </svg>
         )
       case 3:
         return (
-          <svg className="cola" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140.13 71.12">
+          <svg
+            id={'id-' + this.state.id + '-cola'}
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 140.13 71.12"
+          >
             <defs>
               <style>
-                {`.cola {
+                {`#id-` +
+                  this.state.id +
+                  `-cola {
                         position: absolute;
                         z-index: 0;
                         top: 63%;
                         left: 65%;
                         width: 37%;
                       } 
-                      .cls-8{fill:hsl(` +
+                      .` +
+                  class8 +
+                  ` {fill:hsl(` +
                   color +
                   `,100%,50%);stroke:#000;stroke-miterlimit:10;stroke-width:2px;}`}
               </style>
@@ -435,55 +465,68 @@ class DragonCreator extends Component<DProps> {
             <g id="Capa_2" data-name="Capa 2">
               <g id="Capa_7" data-name="Capa 7">
                 <path
-                  className="cls-8"
+                  className={class8}
                   d="M1.72,53.73l2.78.71a76.27,76.27,0,0,0,59.9-9.5L124,7.06,67.38,20.87A66.62,66.62,0,0,1,9.75,8h0Z"
                 />
-                <path className="cls-8" d="M34.92,20.63l5-5.79a3.64,3.64,0,0,1,6.09,1L49,22.7Z" />
+                <path className={class8} d="M34.92,20.63l5-5.79a3.64,3.64,0,0,1,6.09,1L49,22.7Z" />
                 <path
-                  className="cls-8"
+                  className={class8}
                   d="M62.88,20.63,64.43,14a3.77,3.77,0,0,1,6.46-1.68l5.73,6.28Z"
                 />
-                <path className="cls-8" d="M91,15.11V8.39a3.5,3.5,0,0,1,5.72-2.71l7.58,6.19Z" />
-                <path className="cls-8" d="M115,9.26l1.63-6a2.37,2.37,0,0,1,4.23-.73L124,7.06Z" />
-                <circle className="cls-8" cx="26.26" cy="36.67" r="4.72" />
-                <circle className="cls-8" cx="64.37" cy="33.44" r="1.49" />
+                <path className={class8} d="M91,15.11V8.39a3.5,3.5,0,0,1,5.72-2.71l7.58,6.19Z" />
+                <path className={class8} d="M115,9.26l1.63-6a2.37,2.37,0,0,1,4.23-.73L124,7.06Z" />
+                <circle className={class8} cx="26.26" cy="36.67" r="4.72" />
+                <circle className={class8} cx="64.37" cy="33.44" r="1.49" />
               </g>
             </g>
           </svg>
         )
       case 4:
         return (
-          <svg className="cola" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 116.37 142.47">
+          <svg
+            id={'id-' + this.state.id + '-cola'}
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 116.37 142.47"
+          >
             <defs>
               <style>
-                {`.cola {
+                {`#id-` +
+                  this.state.id +
+                  `-cola {
                       position: absolute;
                       z-index: 0;
                       top: 40%;
                       left: 62%;
                       width: 33%;
                     } 
-                    .cls-8{fill:hsl(` +
+                    .` +
+                  class8 +
+                  `{fill:hsl(` +
                   color +
                   `,100%,50%);stroke:#000;stroke-miterlimit:10;}
-                    .cls-8{stroke - width:2px;}`}
+                    .` +
+                  class8 +
+                  ` {stroke - width:2px;}`}
               </style>
             </defs>
             <g id="Capa_2" data-name="Capa 2">
               <g id="Capa_8" data-name="Capa 8">
                 <path
-                  className="cls-8"
+                  className={class8}
                   d="M16.5,128.79,4.2,150.9l29.85-19.06A107.51,107.51,0,0,0,83.39,49.05l-.5-35.29L77.8,38.46A177.43,177.43,0,0,1,62.44,82.52h0C51,96.67,32.66,97,16.7,105.74Z"
                 />
                 <path
-                  className="cls-8"
+                  className={class8}
                   d="M76.47,44.36,64.83,32a2.66,2.66,0,0,1,2.48-4.43l12.2,2.53Z"
                 />
-                <path className="cls-8" d="M81.52,20.39,65.87,14.56a1.9,1.9,0,0,1,.66-3.68h15Z" />
-                <path className="cls-8" d="M64.45,77.08l-7.07-3a1.64,1.64,0,0,0-2.1,2.28l4.81,9Z" />
-                <ellipse className="cls-8" cx="34.27" cy="118.35" rx="2.77" ry="1.52" />
-                <circle className="cls-8" cx="45.69" cy="116.46" r="1.89" />
-                <circle className="cls-8" cx="74.11" cy="68.6" r="1.03" />
+                <path className={class8} d="M81.52,20.39,65.87,14.56a1.9,1.9,0,0,1,.66-3.68h15Z" />
+                <path
+                  className={class8}
+                  d="M64.45,77.08l-7.07-3a1.64,1.64,0,0,0-2.1,2.28l4.81,9Z"
+                />
+                <ellipse className={class8} cx="34.27" cy="118.35" rx="2.77" ry="1.52" />
+                <circle className={class8} cx="45.69" cy="116.46" r="1.89" />
+                <circle className={class8} cx="74.11" cy="68.6" r="1.03" />
               </g>
             </g>
           </svg>

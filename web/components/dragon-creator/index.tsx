@@ -41,7 +41,6 @@ class DragonCreator extends Component<DProps> {
 
   constructor(props: DProps) {
     super(props)
-    console.log(props.id)
     this.state = {
       colorAlas: props.colorAlas,
       colorCola: props.colorCola,
@@ -62,7 +61,6 @@ class DragonCreator extends Component<DProps> {
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-    console.log(this.props)
     if (
       prevState.colorAlas !== this.props.colorAlas ||
       prevState.colorCola !== this.props.colorCola ||
@@ -279,10 +277,16 @@ class DragonCreator extends Component<DProps> {
     switch (number) {
       case 1:
         return (
-          <svg className="panza" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 90.85 132.71">
+          <svg
+            id={'id-' + this.state.id + '-panza'}
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 90.85 132.71"
+          >
             <defs>
               <style>
-                {`.panza {
+                {`#id-` +
+                  this.state.id +
+                  `-panza {
                       position: absolute;
                       z-index: 2;
                       margin-left: auto; 
@@ -309,10 +313,16 @@ class DragonCreator extends Component<DProps> {
         )
       case 2:
         return (
-          <svg className="panza" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 90.8 134.27">
+          <svg
+            id={'id-' + this.state.id + '-panza'}
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 90.8 134.27"
+          >
             <defs>
               <style>
-                {`.panza {
+                {`#id-` +
+                  this.state.id +
+                  `-panza {
                         position: absolute;
                         z-index: 2;
                         margin-left: auto; 

@@ -100,7 +100,7 @@ class Dragon extends Component<IProps, IState> {
     console.log(dragonData)
     this.setState({
       bodyPatternColor: Math.round(dragonData.bodyPatternColor * 1.41),
-      bodyPatternType: (dragonData.bodyPatternType % 2) + 1, //1-2
+      bodyPatternType: 1, //(dragonData.bodyPatternType % 2) + 1, //1-2
       bodyColor: Math.round(dragonData.bodyColor * 1.41),
       bodyType: (dragonData.bodyType % 2) + 1, //1-2
       eyesColor: Math.round(dragonData.eyesColor * 1.41),
@@ -171,6 +171,7 @@ class Dragon extends Component<IProps, IState> {
               colorPanza={this.state.bodyColor}
               colorCola={this.state.tailColor}
               colorCuerpo={this.state.bodyPatternColor}
+              id={this.state.id}
             />
           </CardMedia>
 

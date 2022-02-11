@@ -1455,6 +1455,7 @@ class DragonCreator extends Component<DProps> {
           {this.createPanza(this.state.colorPanza, this.state.typePanza)}
           {this.createOjos(this.state.colorOjos, this.state.typeOjos)}
         </CardContent>
+        <img className="landImg" src={'/assets/land2.jpg'} />
       </Card>
       <style global jsx>{`
         .cardContainer {
@@ -1462,6 +1463,12 @@ class DragonCreator extends Component<DProps> {
           width: 100px;
           height: 120px;
           float: left;
+        }
+        .landImg {
+          width: 100px;
+          height: 120px;
+          margin-top: -30px;
+          max-height: -webkit-fill-available;
         }
       `}</style>
     </>

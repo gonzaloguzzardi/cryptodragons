@@ -16,17 +16,24 @@ interface IERC721 {
 
 contract MainnetMarketplace is Ownable, ReentrancyGuard {
     using Counters for Counters.Counter;
-    Counters.Counter private _listingIdsCounter;
+    Counters.Counter private _itemIds;
+    Counters.Counter private _itemsSold;
+    Counters.Counter private _itemsCancelled;
+
     /*
      * @dev Maps listing id to listed item
      */
-    mapping(uint256 => uint256) private _listingIdToIndex;
-    mapping(uint256 => bool) private _listingIdToListingIsActive;
-    ListingData[] private _activeListings;
+    mapping(uint256 => ListingData) private _idToListedItem;
 
     /************* Fees ****************/
-    uint256 public teamFee = 2;
+    uint256 public teamFee = 1;
     address payable private _teamAddress;
+
+    enum ListingStatus {
+        Active,
+        Sold,
+        Cancelled
+    }
 
     struct ListingData {
         uint256 listingId;
@@ -34,6 +41,7 @@ contract MainnetMarketplace is Ownable, ReentrancyGuard {
         address nftContract;
         address payable seller;
         uint256 price;
+        ListingStatus status;
     }
 
     event ItemListed(
@@ -55,7 +63,6 @@ contract MainnetMarketplace is Ownable, ReentrancyGuard {
 
     event ItemCancelled(uint256 listingId, address seller);
 
-    /****************************** Restricted Functions **********************************************************/
     /**
      * @dev Function to change fees in case adjustments are needed or for special events
      */
@@ -71,7 +78,54 @@ contract MainnetMarketplace is Ownable, ReentrancyGuard {
         _teamAddress = payable(teamAddress);
     }
 
-    /****************************** External Functions **********************************************************/
+    /**************************** View Functions ********************************************************/
+
+    function geListedItem(uint256 listingId) external view returns (ListingData memory) {
+        return _idToListedItem[listingId];
+    }
+
+    function getActiveListingsForAddress(address sellerAddress) external view returns (ListingData[] memory) {
+        uint256 totalItemCount = _itemIds.current();
+        uint256 itemCount = 0;
+        uint256 currentIndex = 0;
+
+        for (uint256 i = 1; i <= totalItemCount; i++) {
+            if (_idToListedItem[i].seller == sellerAddress && _idToListedItem[i].status == ListingStatus.Active) {
+                itemCount += 1;
+            }
+        }
+
+        ListingData[] memory items = new ListingData[](itemCount);
+        for (uint256 i = 1; i <= totalItemCount; i++) {
+            if (_idToListedItem[i].seller == sellerAddress && _idToListedItem[i].status == ListingStatus.Active) {
+                uint256 currentId = _idToListedItem[i].listingId;
+                ListingData storage currentItem = _idToListedItem[currentId];
+                items[currentIndex] = currentItem;
+                currentIndex += 1;
+            }
+        }
+        return items;
+    }
+
+    function fetchMarketItems() external view returns (ListingData[] memory) {
+        uint256 itemCount = _itemIds.current();
+        uint256 unsoldItemCount = _itemIds.current() - _itemsSold.current() - _itemsCancelled.current();
+        uint256 currentIndex = 0;
+
+        ListingData[] memory items = new ListingData[](unsoldItemCount);
+        for (uint256 i = 1; i <= itemCount; i++) {
+            if (_idToListedItem[i].status == ListingStatus.Active) {
+                uint256 currentId = _idToListedItem[i].listingId;
+                ListingData storage currentItem = _idToListedItem[currentId];
+                items[currentIndex] = currentItem;
+                currentIndex += 1;
+            }
+        }
+
+        return items;
+    }
+
+    /**************************** External Functions ********************************************************/
 
     function listToken(
         address nftContract,
@@ -80,13 +134,17 @@ contract MainnetMarketplace is Ownable, ReentrancyGuard {
     ) external payable nonReentrant {
         require(price > 0, "Price must be at least 1 wei");
 
-        _listingIdsCounter.increment();
-        uint256 listingId = _listingIdsCounter.current();
-        uint256 index = _activeListings.length;
-        _listingIdToIndex[listingId] = index;
-        _listingIdToListingIsActive[listingId] = true;
+        _itemIds.increment();
+        uint256 listingId = _itemIds.current();
 
-        _activeListings.push(ListingData(listingId, tokenId, nftContract, payable(msg.sender), price));
+        _idToListedItem[listingId] = ListingData(
+            listingId,
+            tokenId,
+            nftContract,
+            payable(msg.sender),
+            price,
+            ListingStatus.Active
+        );
 
         IERC721(nftContract).safeTransferFrom(msg.sender, address(this), tokenId);
 
@@ -94,99 +152,39 @@ contract MainnetMarketplace is Ownable, ReentrancyGuard {
     }
 
     function buyListedToken(address nftContract, uint256 listingId) external payable nonReentrant {
-        require(_listingIdToListingIsActive[listingId] == true, "Item no longer on sale");
-
-        uint256 index = _listingIdToIndex[listingId];
-
-        // Copy data to memory to keep the reference after listing is destroyed
-        ListingData memory listedItem = _activeListings[index];
+        ListingData storage listedItem = _idToListedItem[listingId];
         uint256 price = listedItem.price;
+        uint256 tokenId = listedItem.tokenId;
 
         require(msg.value == price, "Please submit the asking price in order to complete the purchase");
+        require(listedItem.status == ListingStatus.Active, "Item no longer on sale");
 
         // State changes
-        _listingIdToListingIsActive[listingId] = false;
-        removeListingAtIndex(index);
+        _idToListedItem[listingId].status = ListingStatus.Sold;
+        _itemsSold.increment();
 
-        // Transfer money charging 2% fee for team.
+        // Transfer money charging 5% fees: 4% to rewards treasury and 1% to team.
         uint256 teamFeeCharge = (price * teamFee) / 100;
         listedItem.seller.transfer(msg.value - teamFeeCharge);
         _teamAddress.transfer(teamFeeCharge);
 
         // Transfer NFT ownership
-        IERC721(nftContract).safeTransferFrom(address(this), msg.sender, listedItem.tokenId);
+        IERC721(nftContract).safeTransferFrom(address(this), msg.sender, tokenId);
 
-        emit ItemSold(listingId, listedItem.tokenId, nftContract, listedItem.seller, msg.sender, price);
+        emit ItemSold(listingId, tokenId, nftContract, listedItem.seller, msg.sender, price);
     }
 
-    function cancelListing(uint256 listingId) external {
-        require(_listingIdToListingIsActive[listingId] == true, "Item not on sale");
-
-        uint256 index = _listingIdToIndex[listingId];
-        ListingData memory listedItem = _activeListings[index];
+    function cancelListing(uint256 listingId) external nonReentrant {
+        ListingData storage listedItem = _idToListedItem[listingId];
 
         require(msg.sender == listedItem.seller, "Only seller can cancel listing");
+        require(listedItem.status == ListingStatus.Active, "Item not on sale");
 
-        _listingIdToListingIsActive[listingId] = false;
-        removeListingAtIndex(index);
+        listedItem.status = ListingStatus.Cancelled;
+        _itemsCancelled.increment();
 
         IERC721(listedItem.nftContract).safeTransferFrom(address(this), msg.sender, listedItem.tokenId);
 
         emit ItemCancelled(listingId, listedItem.seller);
-    }
-
-    /************************************** View Functions ***************************************************/
-
-    function getListedItem(uint256 listingId) external view returns (ListingData memory) {
-        require(_listingIdToListingIsActive[listingId] == true, "Item not on sale");
-
-        uint256 index = _listingIdToIndex[listingId];
-        return _activeListings[index];
-    }
-
-    function getAllListedItems() external view returns (ListingData[] memory) {
-        return _activeListings;
-    }
-
-    function getActiveListingsForAddress(address sellerAddress) external view returns (ListingData[] memory) {
-        uint256 itemCount = 0;
-        uint256 currentIndex = 0;
-
-        for (uint256 i = 0; i < _activeListings.length; i++) {
-            if (
-                _activeListings[i].seller == sellerAddress &&
-                _listingIdToListingIsActive[_activeListings[i].listingId] == true
-            ) {
-                itemCount += 1;
-            }
-        }
-
-        ListingData[] memory items = new ListingData[](itemCount);
-        for (uint256 i = 0; i < _activeListings.length; i++) {
-            if (
-                _activeListings[i].seller == sellerAddress &&
-                _listingIdToListingIsActive[_activeListings[i].listingId] == true
-            ) {
-                ListingData storage currentItem = _activeListings[i];
-                items[currentIndex] = currentItem;
-                currentIndex += 1;
-            }
-        }
-        return items;
-    }
-
-    /************************************** Private Functions ***************************************************/
-
-    function removeListingAtIndex(uint256 index) private {
-        require(index < _activeListings.length, "Error removing listing");
-
-        ListingData storage lastListing = _activeListings[_activeListings.length - 1];
-
-        // Update index mapping
-        _listingIdToIndex[lastListing.listingId] = index;
-
-        // Move last element to index position and remove last element from listing array
-        _activeListings[index] = _activeListings[_activeListings.length - 1];
-        _activeListings.pop();
     }
 }

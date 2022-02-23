@@ -74,7 +74,7 @@ contract MainnetMarketplace is Ownable, ReentrancyGuard {
      * @dev Change addresses where fees are deposited
      */
     function setFeeAccounts(address teamAddress) external onlyOwner {
-        require(teamAddress != address(0), "Invalid tean address");
+        require(teamAddress != address(0), "Invalid team address");
         _teamAddress = payable(teamAddress);
     }
 

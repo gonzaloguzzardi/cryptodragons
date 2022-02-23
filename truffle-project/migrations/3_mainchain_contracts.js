@@ -1,11 +1,13 @@
-const { writeFileSync } = require('fs');
+const {
+	writeFileSync
+} = require('fs');
 
-const MyRinkebyToken = artifacts.require('./MyRinkebyToken.sol');
-const MyRinkebyCoin = artifacts.require('./MyRinkebyCoin.sol');
+const DragonSerializer = artifacts.require('./common/serialization/DragonSerializer.sol');
 const DragonToken = artifacts.require('./mainnet/MainnetTransferableDragon.sol');
-const DragonCoin = artifacts.require('./mainnet/MainnetDragonCoin.sol');
 const Gateway = artifacts.require('./mainnet/gateway/MainnetGateway.sol');
 const GenesLaboratory = artifacts.require('./genes/GenesLaboratory.sol');
+const Marketplace = artifacts.require('./mainnet/marketplace/MainnetMarketplace.sol');
+const DragonApi = artifacts.require('./public/MainnetDragonApi.sol');
 
 module.exports = function (deployer, network, accounts) {
 	if (network !== 'rinkeby' && network !== 'ganache' && network !== 'bfa') {
@@ -25,7 +27,17 @@ module.exports = function (deployer, network, accounts) {
 
 		console.log(`Gateway deployed at address: ${gatewayInstance.address}`);
 
-		const dragonTokenContract = await deployer.deploy(DragonToken, gatewayInstance.address, 128);
+		const dragonSerializerContract = await deployer.deploy(DragonSerializer);
+		const dragonSerializerInstance = await DragonSerializer.deployed();
+		console.log(`DragonSerializer deployed at address: ${dragonSerializerInstance.address}`);
+		console.log(`DragonSerializer transaction at hash: ${dragonSerializerContract.transactionHash}`);
+
+		const dragonTokenContract = await deployer.deploy(
+			DragonToken,
+			gatewayInstance.address,
+			dragonSerializerInstance.address,
+			128,
+		);
 		const dragonTokenInstance = await DragonToken.deployed();
 
 		console.log(`DragonToken deployed at address: ${dragonTokenInstance.address}`);
@@ -37,11 +49,17 @@ module.exports = function (deployer, network, accounts) {
 		console.log(`GenesLaboratory deployed at address: ${genesContractInstance.address}`);
 		console.log(`GenesLaboratory transaction at hash: ${genesContract.transactionHash}`);
 
-		const dragonCoinContract = await deployer.deploy(DragonCoin, gatewayInstance.address);
-		const dragonCoinInstance = await DragonCoin.deployed();
+		const marketplaceContract = await deployer.deploy(Marketplace, dragonTokenInstance.address);
+		const marketplaceContractInstance = await Marketplace.deployed();
 
-		console.log(`DragonCoin deployed at address: ${dragonCoinInstance.address}`);
-		console.log(`DragonCoin transaction at hash: ${dragonCoinContract.transactionHash}`);
+		console.log(`Marketplace deployed at address: ${marketplaceContractInstance.address}`);
+		console.log(`Marketplace transaction at hash: ${marketplaceContract.transactionHash}`);
+
+		const dragonApiContract = await deployer.deploy(DragonApi, dragonTokenInstance.address, genesContractInstance.address, marketplaceContractInstance.address);
+		const dragonApiInstance = await DragonApi.deployed();
+
+		console.log(`DragonApi deployed at address: ${dragonApiInstance.address}`);
+		console.log(`DragonApi transaction at hash: ${dragonApiContract.transactionHash}`);
 
 		// await gatewayInstance.toggleToken(dragonTokenInstance.address, { from: validator })
 		// await dragonTokenInstance.register(user)
@@ -55,19 +73,5 @@ module.exports = function (deployer, network, accounts) {
 		writeFileSync('../mainnet_gateway_address', gatewayInstance.address);
 		writeFileSync('../mainnet_dragon_token_address', dragonTokenInstance.address);
 		writeFileSync('../mainnet_dragon_token_tx_hash', dragonTokenContract.transactionHash);
-		writeFileSync('../loom_dragon_coin_address', dragonCoinInstance.address);
-		writeFileSync('../loom_dragon_coin_tx_hash', dragonCoinContract.transactionHash);
-
-		// Example
-		await deployer.deploy(MyRinkebyToken);
-		const myTokenInstance = await MyRinkebyToken.deployed();
-
-		await deployer.deploy(MyRinkebyCoin);
-		const myCoinInstance = await MyRinkebyCoin.deployed();
-
-		console.log('\n*************************************************************************\n');
-		console.log(`MyRinkebyToken Contract Address: ${myTokenInstance.address}`);
-		console.log(`MyRinkebyCoin Contract Address: ${myCoinInstance.address}`);
-		console.log('\n*************************************************************************\n');
 	});
 };

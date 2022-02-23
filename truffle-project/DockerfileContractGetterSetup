@@ -16,7 +16,7 @@ RUN if test -d node_modules; then rm -r node_modules; fi
 RUN apt-get update
 RUN apt-get install libudev-dev -y
 RUN apt-get install libusb-1.0-0-dev -y
-RUN npm install --silent
+RUN yarn install
 
 # Inform Docker that the container is listening on the specified port at runtime.
 EXPOSE 8082

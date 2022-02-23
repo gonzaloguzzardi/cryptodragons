@@ -81,6 +81,7 @@ contract MainnetMarketplace is Ownable, ReentrancyGuard {
     /**************************** View Functions ********************************************************/
 
     function geListedItem(uint256 listingId) external view returns (ListingData memory) {
+        require(listingId >= _idToListedItem.length, "Invalid listingId");
         return _idToListedItem[listingId];
     }
 

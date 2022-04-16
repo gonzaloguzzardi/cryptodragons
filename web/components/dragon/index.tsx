@@ -146,6 +146,12 @@ class Dragon extends Component<IProps, IState> {
     }
   }
 
+  sell: () => unknown = () => {
+    MainchainAPI.createSellOrder(this.state.id)
+      .then((res) => console.log('[MAINCHAIN]: Create sell order succesfully created...', res))
+      .catch(() => console.log('buying error...'))
+  }
+
   render: () => ReactNode = () => {
     return (
       <Card className={dragonStyles.container} raised>
@@ -219,6 +225,11 @@ class Dragon extends Component<IProps, IState> {
               )}
             {(this.state.fetching || this.props.location.includes('GATEWAY')) && (
               <CircularProgress color="secondary" />
+            )}
+            {this.props.location === 'MAINCHAIN' && (
+              <Button variant="contained" color="secondary" onClick={this.sell}>
+                Sell Dragon
+              </Button>
             )}
           </CardActions>
         </CardContent>

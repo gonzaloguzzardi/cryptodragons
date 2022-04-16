@@ -34,8 +34,8 @@ class Demo extends Component<IProps> {
     super(props)
 
     this.state = {
-      sideAccount: '0xa6870913263de49b430f5a9f26f54d2e22151432',
-      mainAccount: '0xA64D35d224c85f239820a229CA3aCf5575d28Fdd',
+      sideAccount: '0x663e8e1865c1f70c031a3eeee2f83a0d2e8a0161',
+      mainAccount: '0x921f74894cf29218b948c9d50b38f3f1540520b8',
 
       sideDragons: [],
       mainDragons: [],

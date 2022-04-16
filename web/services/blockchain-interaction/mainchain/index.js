@@ -82,6 +82,31 @@ class MainchainAPI {
   //
   //
   //
+
+  static async createSellOrder(dragonId, gas = GAS_DEFAULT_VALUE) {
+    try {
+      const {
+        marketPlaceContract: contract,
+        account: ownerAccount,
+      } = await MainchainAPI.getClientHelper()
+      return await CommonAPI.sCreateSellOrder(dragonId, contract, ownerAccount, gas)
+    } catch (err) {
+      console.error(err)
+    }
+  }
+
+  static async buyDragon(dragonId, gas = GAS_DEFAULT_VALUE) {
+    try {
+      const {
+        marketPlaceContract: contract,
+        account: ownerAccount,
+      } = await MainchainAPI.getClientHelper()
+      return await CommonAPI.sBuyDragon(dragonId, contract, ownerAccount, gas)
+    } catch (err) {
+      console.error(err)
+    }
+  }
+
   static async createDragon(gas = GAS_DEFAULT_VALUE) {
     try {
       const {

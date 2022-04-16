@@ -2,6 +2,10 @@
 
 pragma solidity ^0.8.0;
 
+import "../../common/ownership/Ownable.sol";
+import "../../common/security/ReentrancyGuard.sol";
+import "../../common/utils/Counters.sol";
+
 interface IERC721 {
 	function safeTransferFrom(
 		address from,
@@ -10,105 +14,177 @@ interface IERC721 {
 	) external;
 }
 
-contract MainnetMarketplace {
-	// dragon id => sell order
-	mapping(uint256 => SellOrder) public sellOrderById;
+contract MainnetMarketplace is Ownable, ReentrancyGuard {
+    using Counters for Counters.Counter;
+    Counters.Counter private _itemIds;
+    Counters.Counter private _itemsSold;
+    Counters.Counter private _itemsCancelled;
 
-	// Contain sell orders for dragons on sale
-	SellOrder[] public sellOrders;
+    /*
+     * @dev Maps listing id to listed item
+     */
+    mapping(uint256 => ListingData) private _idToListedItem;
 
-	// History containing all sales
-	Sale[] public salesHistory;
+    /************* Fees ****************/
+    uint256 public teamFee = 1;
+    address payable private _teamAddress;
 
-	address public dragonTokenAddress;
+    enum ListingStatus {
+        Active,
+        Sold,
+        Cancelled
+    }
 
-	struct SellOrder {
-		uint256 id;
-		string title;
-		string description;
-		uint256 date;
-		address payable owner;
-		uint256 price;
-	}
-	struct Sale {
-		uint256 id;
-		address owner;
-		address buyer;
-		uint256 price;
-		string title;
-	}
+    struct ListingData {
+        uint256 listingId;
+        uint256 tokenId;
+        address nftContract;
+        address payable seller;
+        uint256 price;
+        ListingStatus status;
+    }
 
-	/// @notice To setup the address of the ERC-721 token to use for this contract
-	/// @param _dragonTokenAddress The token address
-	constructor(address _dragonTokenAddress) {
-		require(_dragonTokenAddress != address(0), 'Empty address');
-		dragonTokenAddress = _dragonTokenAddress;
-	}
+    event ItemListed(
+        uint256 indexed listingId,
+        uint256 indexed tokenId,
+        address indexed nftContract,
+        address seller,
+        uint256 price
+    );
 
-	/**
-	 * @dev Throws if function isn't called from dragon contract
-	 */
-	modifier onlyFromDragonToken() {
-		require(dragonTokenAddress == msg.sender, 'Invalid permission');
-		_;
-	}
+    event ItemSold(
+        uint256 indexed listingId,
+        uint256 indexed tokenId,
+        address indexed nftContract,
+        address seller,
+        address buyer,
+        uint256 price
+    );
 
-	/// @notice To publish a sellOrder as a seller
-	/// @param _dragonId The if of the dragon being published
-	/// @param _title The title of the sellOrder
-	/// @param _description The description of the sellOrder
-	/// @param _price The price of the sellOrder in ETH
-	function createSellOrder(
-		uint256 _dragonId,
-		string calldata _title,
-		string calldata _description,
-		uint256 _price
-	) external onlyFromDragonToken() {
-		// Parameter validity are checked in dragon token contract
-		SellOrder memory sellOrder = SellOrder(
-			_dragonId,
-			_title,
-			_description,
-			block.timestamp,
-			payable(msg.sender),
-			_price
-		);
-		sellOrders.push(sellOrder);
-		sellOrderById[_dragonId] = sellOrder;
-	}
+    event ItemCancelled(uint256 listingId, address seller);
 
-	/// @notice To buy a new dragon, note that the seller must authorize this contract to manage the token
-	/// @param _dragonId The id of the dragon to buy - dragon id references a sell order
-	function buyDragon(uint256 _dragonId) external payable {
-		require(dragonTokenAddress != address(0), 'Invalid address');
+    /**
+     * @dev Function to change fees in case adjustments are needed or for special events
+     */
+    function setTeamFee(uint256 _teamFee) external onlyOwner {
+        teamFee = _teamFee;
+    }
 
-		SellOrder memory sellOrder = sellOrderById[_dragonId];
-		require(sellOrder.owner != address(0), 'A sell order must exist');
+    /**
+     * @dev Change addresses where fees are deposited
+     */
+    function setFeeAccounts(address teamAddress) external onlyOwner {
+        require(teamAddress != address(0), "Invalid team address");
+        _teamAddress = payable(teamAddress);
+    }
 
-		Sale memory sale = Sale(_dragonId, sellOrder.owner, msg.sender, sellOrder.price, sellOrder.title);
+    /**************************** View Functions ********************************************************/
 
-		require(msg.value >= sellOrder.price, 'Payment is not enough');
+    function geListedItem(uint256 listingId) external view returns (ListingData memory) {
+        return _idToListedItem[listingId];
+    }
 
-		// We can charge a fee here
+    function getActiveListingsForAddress(address sellerAddress) external view returns (ListingData[] memory) {
+        uint256 totalItemCount = _itemIds.current();
+        uint256 itemCount = 0;
+        uint256 currentIndex = 0;
 
-		// Delete the sellOrder from the array of sellOrders
-		for (uint256 i = 0; i < sellOrders.length; i++) {
-			if (sellOrders[i].id == _dragonId) {
-				SellOrder memory lastElement = sellOrders[sellOrders.length - 1];
-				sellOrders[i] = lastElement;
-				sellOrders.pop();
-			}
-		}
-		// Return the excess ETH sent by the buyer
-		if (msg.value > sellOrder.price) {
-			payable(msg.sender).transfer(msg.value - sellOrder.price);
-		}
+        for (uint256 i = 1; i <= totalItemCount; i++) {
+            if (_idToListedItem[i].seller == sellerAddress && _idToListedItem[i].status == ListingStatus.Active) {
+                itemCount += 1;
+            }
+        }
 
-		salesHistory.push(sale);
+        ListingData[] memory items = new ListingData[](itemCount);
+        for (uint256 i = 1; i <= totalItemCount; i++) {
+            if (_idToListedItem[i].seller == sellerAddress && _idToListedItem[i].status == ListingStatus.Active) {
+                uint256 currentId = _idToListedItem[i].listingId;
+                ListingData storage currentItem = _idToListedItem[currentId];
+                items[currentIndex] = currentItem;
+                currentIndex += 1;
+            }
+        }
+        return items;
+    }
 
-		//Transfer the token to the new owner
-		IERC721(dragonTokenAddress).safeTransferFrom(address(this), msg.sender, _dragonId);
+    function fetchMarketItems() external view returns (ListingData[] memory) {
+        uint256 itemCount = _itemIds.current();
+        uint256 unsoldItemCount = _itemIds.current() - _itemsSold.current() - _itemsCancelled.current();
+        uint256 currentIndex = 0;
 
-		sellOrder.owner.transfer(sellOrder.price);
-	}
+        ListingData[] memory items = new ListingData[](unsoldItemCount);
+        for (uint256 i = 1; i <= itemCount; i++) {
+            if (_idToListedItem[i].status == ListingStatus.Active) {
+                uint256 currentId = _idToListedItem[i].listingId;
+                ListingData storage currentItem = _idToListedItem[currentId];
+                items[currentIndex] = currentItem;
+                currentIndex += 1;
+            }
+        }
+
+        return items;
+    }
+
+    /**************************** External Functions ********************************************************/
+
+    function listToken(
+        address nftContract,
+        uint256 tokenId,
+        uint256 price
+    ) external payable nonReentrant {
+        require(price > 0, "Price must be at least 1 wei");
+
+        _itemIds.increment();
+        uint256 listingId = _itemIds.current();
+
+        _idToListedItem[listingId] = ListingData(
+            listingId,
+            tokenId,
+            nftContract,
+            payable(msg.sender),
+            price,
+            ListingStatus.Active
+        );
+
+        IERC721(nftContract).safeTransferFrom(msg.sender, address(this), tokenId);
+
+        emit ItemListed(listingId, tokenId, nftContract, msg.sender, price);
+    }
+
+    function buyListedToken(address nftContract, uint256 listingId) external payable nonReentrant {
+        ListingData storage listedItem = _idToListedItem[listingId];
+        uint256 price = listedItem.price;
+        uint256 tokenId = listedItem.tokenId;
+
+        require(msg.value == price, "Please submit the asking price in order to complete the purchase");
+        require(listedItem.status == ListingStatus.Active, "Item no longer on sale");
+
+        // State changes
+        _idToListedItem[listingId].status = ListingStatus.Sold;
+        _itemsSold.increment();
+
+        // Transfer money charging 5% fees: 4% to rewards treasury and 1% to team.
+        uint256 teamFeeCharge = (price * teamFee) / 100;
+        listedItem.seller.transfer(msg.value - teamFeeCharge);
+        _teamAddress.transfer(teamFeeCharge);
+
+        // Transfer NFT ownership
+        IERC721(nftContract).safeTransferFrom(address(this), msg.sender, tokenId);
+
+        emit ItemSold(listingId, tokenId, nftContract, listedItem.seller, msg.sender, price);
+    }
+
+    function cancelListing(uint256 listingId) external nonReentrant {
+        ListingData storage listedItem = _idToListedItem[listingId];
+
+        require(msg.sender == listedItem.seller, "Only seller can cancel listing");
+        require(listedItem.status == ListingStatus.Active, "Item not on sale");
+
+        listedItem.status = ListingStatus.Cancelled;
+        _itemsCancelled.increment();
+
+        IERC721(listedItem.nftContract).safeTransferFrom(address(this), msg.sender, listedItem.tokenId);
+
+        emit ItemCancelled(listingId, listedItem.seller);
+    }
 }

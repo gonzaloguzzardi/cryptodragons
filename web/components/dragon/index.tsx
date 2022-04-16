@@ -81,6 +81,7 @@ class Dragon extends Component<IProps, IState> {
 
     this.getDragonData()
     this.getDragonVisualData()
+    this.isDragonApproved()
   }
 
   getDragonData: () => unknown = () => {
@@ -94,6 +95,12 @@ class Dragon extends Component<IProps, IState> {
         .then((dragonData) => this.setState(dragonData))
         .catch((err) => console.error(err))
     }
+  }
+
+  isDragonApproved: () => unknown = () => {
+    MainchainAPI.isApproved(this.state.id)
+      .then((dragonData) => console.log(dragonData))
+      .catch((err) => console.error(err))
   }
 
   updateDragonVisualData = (dragonData) => {
@@ -144,6 +151,12 @@ class Dragon extends Component<IProps, IState> {
           .catch(() => this.setState({ fetching: false }))
       }
     }
+  }
+
+  approve: () => unknown = () => {
+    MainchainAPI.approveSellDragon(this.state.id)
+      .then((res) => console.log('[MAINCHAIN]: Create sell order succesfully created...', res))
+      .catch(() => console.log('buying error...'))
   }
 
   sell: () => unknown = () => {
@@ -225,6 +238,11 @@ class Dragon extends Component<IProps, IState> {
               )}
             {(this.state.fetching || this.props.location.includes('GATEWAY')) && (
               <CircularProgress color="secondary" />
+            )}
+            {this.props.location === 'MAINCHAIN' && (
+              <Button variant="contained" color="secondary" onClick={this.approve}>
+                Approve trx
+              </Button>
             )}
             {this.props.location === 'MAINCHAIN' && (
               <Button variant="contained" color="secondary" onClick={this.sell}>

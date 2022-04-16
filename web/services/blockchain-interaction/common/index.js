@@ -20,9 +20,11 @@ class CommonAPI {
     const title = "Title of the sell order...";
     const description = "Description of the sell order..."
     const price = 0;
+    console.log(contract.methods);
     const gasEstimate = await contract.methods
       .createSellOrder(dragonId, title, description, price)
       .estimateGas({ from: ownerAccount, gas })
+    console.log(gasEstimate);
     //console.log(`[COMMON-API_GET-MY-DRAGONS]: Gas sent: ${gas}, Gas Estimate: ${gasEstimate}, ownerAccount: ${ownerAccount}`)
     if (gasEstimate >= gas) throw new Error('Not enough enough gas, send more.')
 

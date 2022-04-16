@@ -83,13 +83,75 @@ class MainchainAPI {
   //
   //
 
+  static async isApproved(dragonId, gas = GAS_DEFAULT_VALUE) {
+    try {
+      const {
+        tokenContract: contract,
+        account: ownerAccount,
+      } = await MainchainAPI.getClientHelper()
+      const gasEstimate = await contract.methods
+        .getApproved(dragonId)
+        .estimateGas({ from: ownerAccount, gas })
+      console.log(gasEstimate);
+      if (gasEstimate >= gas) throw new Error('Not enough enough gas, send more.')
+
+      return await contract.methods
+        .getApproved(dragonId)
+        .call({ from: ownerAccount, gas: gasEstimate })
+
+    } catch (err) {
+      console.error(err)
+    }
+  }
+
+  static async approveSellDragon(dragonId, gas = GAS_DEFAULT_VALUE) {
+    try {
+      const {
+        tokenContract: contract,
+        marketPlaceContract: marketPlace,
+        account: ownerAccount,
+      } = await MainchainAPI.getClientHelper()
+      console.log(dragonId);
+      console.log(marketPlace._address);
+      const gasEstimate = await contract.methods
+        .approve(marketPlace._address,dragonId)
+        .estimateGas({ from: ownerAccount, gas })
+      console.log(gasEstimate);
+      if (gasEstimate >= gas) throw new Error('Not enough enough gas, send more.')
+
+      return await contract.methods
+        .approve(marketPlace._address,dragonId)
+        .send({ from: ownerAccount, gas: gasEstimate })
+    } catch (err) {
+      console.error(err)
+    }
+  }
+
   static async createSellOrder(dragonId, gas = GAS_DEFAULT_VALUE) {
     try {
       const {
         marketPlaceContract: contract,
+        tokenContract: erc721Contract,
         account: ownerAccount,
       } = await MainchainAPI.getClientHelper()
-      return await CommonAPI.sCreateSellOrder(dragonId, contract, ownerAccount, gas)
+      const price = 1000;
+      console.log(contract.methods);
+
+      console.log(erc721Contract._address);
+      console.log(dragonId);
+      console.log(price);
+
+      //const gasEstimate = await contract.methods
+      //  .listToken(erc721Contract._address,dragonId,price)
+      //  .estimateGas({ from: ownerAccount, gas })
+      //console.log(gasEstimate);
+      ////console.log(`[COMMON-API_GET-MY-DRAGONS]: Gas sent: ${gas}, Gas Estimate: ${gasEstimate}, ownerAccount: ${ownerAccount}`)
+      //if (gasEstimate >= gas) throw new Error('Not enough enough gas, send more.')
+  //
+      return await contract.methods
+        .listToken(erc721Contract._address,dragonId,price)
+        .send({ from: ownerAccount, gas: 22000 })
+
     } catch (err) {
       console.error(err)
     }

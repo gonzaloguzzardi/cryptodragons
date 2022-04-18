@@ -39,7 +39,9 @@ class MainchainAPI {
   }
 
   static async connectToProvider() {
-    if (!client) return Promise.resolve('Provider(ej: Metamask) not connected');
+    await MainchainAPI.getClientHelper();
+
+    if (!client) return Promise.reject('Provider(ej: Metamask) not connected');
 
     return new Promise((res, rej) => {
       ethereum

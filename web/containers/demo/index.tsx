@@ -34,8 +34,8 @@ class Demo extends Component<IProps> {
     super(props)
 
     this.state = {
-      sideAccount: '0xa6870913263de49b430f5a9f26f54d2e22151432',
-      mainAccount: '0xA64D35d224c85f239820a229CA3aCf5575d28Fdd',
+      sideAccount: '0x4b9b2e580230927e7b07ae4a8b45f783f570a7e8',
+      mainAccount: '0xa64d35d224c85f239820a229ca3acf5575d28fdd',
 
       sideDragons: [],
       mainDragons: [],
@@ -193,7 +193,7 @@ class Demo extends Component<IProps> {
                 {this.state.sideDragons
                   ? this.state.sideDragons.map((value) => (
                       <Grid key={value} item>
-                        <Dragon location="SIDECHAIN" id={value} />
+                        <Dragon mappedAccounts={this.state.accountsAreMapped} location="SIDECHAIN" id={value} />
                       </Grid>
                     ))
                   : null}
@@ -209,7 +209,7 @@ class Demo extends Component<IProps> {
                 {this.state.mainDragons
                   ? this.state.mainDragons.map((value) => (
                       <Grid key={value} item>
-                        <Dragon location="MAINCHAIN" id={value} />
+                        <Dragon mappedAccounts={this.state.accountsAreMapped} location="MAINCHAIN" id={value} />
                       </Grid>
                     ))
                   : null}
@@ -227,7 +227,7 @@ class Demo extends Component<IProps> {
             {this.state.sidechainGatewayDragons
               ? this.state.sidechainGatewayDragons.map((value) => (
                   <Grid key={value} item>
-                    <Dragon location="SIDECHAIN_GATEWAY" id={value} />
+                    <Dragon mappedAccounts={this.state.accountsAreMapped} location="SIDECHAIN_GATEWAY" id={value} />
                   </Grid>
                 ))
               : null}
@@ -239,7 +239,7 @@ class Demo extends Component<IProps> {
             {this.state.mainchainGatewayDragons
               ? this.state.mainchainGatewayDragons.map((value) => (
                   <Grid key={value} item>
-                    <Dragon location="MAINCHAIN_GATEWAY" id={value} />
+                    <Dragon mappedAccounts={this.state.accountsAreMapped} location="MAINCHAIN_GATEWAY" id={value} />
                   </Grid>
                 ))
               : null}

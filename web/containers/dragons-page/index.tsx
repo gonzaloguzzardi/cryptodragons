@@ -4,8 +4,6 @@ import Slider from '../../components/slider/Slider'
 import DragonCreator from '../../components/dragon-creator'
 import Grid from '@material-ui/core/Grid'
 
-// http://localhost:3000/dragon-creation
-
 interface DProps {
   any
 }
@@ -59,9 +57,9 @@ class DragonsPage extends Component<DProps> {
     }
   }
 
-  updateColorAlas = (color) => this.setState({ colorCola: color })
-
-  //updateColorAlas(color) { this.setState({ colorAlas: color }); }
+  updateColorAlas(color) {
+    this.setState({ colorAlas: color });
+  }
   updateColorCola(color) {
     this.setState({ colorCola: color })
   }
@@ -241,8 +239,8 @@ class DragonsPage extends Component<DProps> {
           float: left;
         }
         .navigation {
-          margin: 0 auto;
-          width: 400px;
+          margin-left: 600px;
+          width: 600px;
         }
       `}</style>
     </div>

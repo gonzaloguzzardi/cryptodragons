@@ -9,23 +9,25 @@ import styles from './index.module.scss'
 import deviceType from 'types/device-types'
 
 type tProps = {
-  mainchain_account: string
-  sidechain_account: string
-  sidechain_priv_key: string
-  sidechain_new_account: string
-  mapped_accounts: boolean
   device: deviceType
+  loading: boolean
+  mainchain_account: string
+  mapped_accounts: boolean
   onClickStart: () => void
+  sidechain_account: string
+  sidechain_new_account: string
+  sidechain_priv_key: string
 }
 
 export default function SessionComponent({
-  mainchain_account,
-  sidechain_account,
-  sidechain_priv_key,
-  sidechain_new_account,
-  mapped_accounts,
   device,
+  loading,
+  mainchain_account,
+  mapped_accounts,
   onClickStart,
+  sidechain_account,
+  sidechain_new_account,
+  sidechain_priv_key,
 }: tProps): ReactElement {
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null)
 
@@ -46,6 +48,13 @@ export default function SessionComponent({
   }
 
   const open = Boolean(anchorEl)
+
+  if (loading)
+    return (
+      <Typography>
+        Loading...
+      </Typography>
+    )
 
   if (!mainchain_account)
     return (

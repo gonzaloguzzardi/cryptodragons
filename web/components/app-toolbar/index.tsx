@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 )
 
-function ScrollTop({ children }: { children: ReactElement }): ReactElement {
+function ScrollTop({ children }: { children?: ReactElement }): ReactElement {
   const classes = useStyles()
 
   const handleClick = (event: React.MouseEvent<HTMLDivElement>): void => {
@@ -64,6 +64,7 @@ function ScrollTop({ children }: { children: ReactElement }): ReactElement {
 
 interface IProps {
   accountsState: {
+    loading: boolean
     mainchain_account: string
     sidechain_account: string
     sidechain_priv_key: string
@@ -185,13 +186,14 @@ export default function AppToolbar({ accountsState, deviceType, section }: IProp
           {/* Profile | Sign in/up */}
           <div className={appbarStyles.profileSection}>
             <SessionComponent
-              mainchain_account={accountsState && accountsState.mainchain_account}
-              sidechain_account={accountsState && accountsState.sidechain_account}
-              sidechain_priv_key={accountsState && accountsState.sidechain_priv_key}
-              sidechain_new_account={accountsState && accountsState.sidechain_new_account}
-              mapped_accounts={accountsState && accountsState.mapped_accounts}
               device={deviceType}
+              loading={accountsState.loading}
+              mainchain_account={accountsState.mainchain_account}
+              mapped_accounts={accountsState.mapped_accounts}
               onClickStart={() => onConnectMetamask(accountsState)}
+              sidechain_account={accountsState.sidechain_account}
+              sidechain_priv_key={accountsState.sidechain_priv_key}
+              sidechain_new_account={accountsState.sidechain_new_account}
             />
           </div>
         </Toolbar>

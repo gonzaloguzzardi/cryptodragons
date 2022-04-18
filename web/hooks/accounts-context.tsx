@@ -36,6 +36,8 @@ const AccountsContext = createContext({})
 AccountsContext.displayName = 'AccountsContext'
 
 const fetchAndSetAllAccountsData = (mainchainData, setData): void => {
+  setData({ loading: false })
+
   if (!mainchainData) return
   setData({
     provider_installed: true,
@@ -50,12 +52,14 @@ const fetchAndSetAllAccountsData = (mainchainData, setData): void => {
       sidechain_account: sidechainData.sideAccount,
       sidechain_priv_key: sidechainData.sidePrivateKey,
       sidechain_new_account: sidechainData.isFirst,
+      loading: false,
     }))
 
     MainchainAPI.areAccountsMapped(sidechainData.sideAccount, 45000).then((res) => {
       setData((prevData) => ({
         ...prevData,
         mapped_accounts: res,
+        loading: false,
       }))
     })
   })
@@ -63,8 +67,9 @@ const fetchAndSetAllAccountsData = (mainchainData, setData): void => {
 
 const AccountsProvider = ({ children }: { children: ReactNode }): ReactElement => {
   const [data, setData] = useState({
-    provider_installed: false,
+    loading: true,
     mainchain_account: null,
+    provider_installed: false,
   })
 
   const connectToProvider = (): void => {

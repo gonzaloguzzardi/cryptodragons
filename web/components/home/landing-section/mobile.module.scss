@@ -2,6 +2,9 @@
 
 .main {
   padding: $section-mobile-margins 0;
+  display: flex;
+  justify-content: center;
+  width: 100%;
 }
 
 .title {

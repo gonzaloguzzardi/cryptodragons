@@ -1,16 +1,3 @@
-@import '../../../styles/variables.scss';
-
-.main {
-  padding: 20px 0 10px;
-  background-color: $pallete-primary;
-  display: flex;
-  justify-content: center;
-}
-
-.container {
-  width: $max-width-by-screen-mobile;
-}
-
 .searchbar {
   display: flex;
 }

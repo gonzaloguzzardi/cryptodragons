@@ -1,0 +1,12 @@
+@import '../../styles/variables.scss';
+
+.main {
+  padding: 40px 0 10px;
+  background-color: $pallete-primary;
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  width: $max-width-by-screen-desktop;
+}

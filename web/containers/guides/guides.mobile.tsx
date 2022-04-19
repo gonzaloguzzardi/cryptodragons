@@ -1,9 +1,9 @@
 import React from 'react'
 import { ReactElement } from 'react'
 
-import { withAccountsHOC } from '../../hooks/accounts-context'
+import { withAccountsHOC } from 'hooks/accounts-context'
 
-import AppToolbar from '../../components/app-toolbar'
+import AppToolbar from 'components/app-toolbar'
 
 function GuidesMobile({ accountsState }): ReactElement {
   return (

@@ -1,11 +1,11 @@
 import React, { ReactElement } from 'react'
 
-import { withAccountsHOC } from '../../hooks/accounts-context'
+import { withAccountsHOC } from 'hooks/accounts-context'
 
-import AppToolbar from '../../components/app-toolbar'
-import MyDragonsSearchContainerMobile from '../../components/my-dragons/search-container/mobile'
-import MyDragonsGridViewMobile from '../../components/my-dragons/grid-view/mobile'
-import FooterMobile from '../../components/footer/mobile'
+import AppToolbar from 'components/app-toolbar'
+import MyDragonsSearchContainerMobile from 'components/my-dragons/search-container/mobile'
+import MyDragonsGridViewMobile from 'components/my-dragons/grid-view/mobile'
+import FooterMobile from 'components/footer/mobile'
 
 import { tProps } from './types'
 

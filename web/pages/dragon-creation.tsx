@@ -1,3 +1,3 @@
-import DragonsPage from '../containers/dragons-page'
+import DragonCreation from '../containers/dragon-creation'
 
-export default DragonsPage
+export default DragonCreation

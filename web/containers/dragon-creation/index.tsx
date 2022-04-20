@@ -21,7 +21,7 @@ interface DState {
   typeOjos?: number
   typeCuerpo?: number
 }
-class DragonsPage extends Component<DProps> {
+class DragonCreation extends Component<DProps> {
   state: DState
 
   constructor(props: DProps) {
@@ -58,7 +58,7 @@ class DragonsPage extends Component<DProps> {
   }
 
   updateColorAlas(color) {
-    this.setState({ colorAlas: color });
+    this.setState({ colorAlas: color })
   }
   updateColorCola(color) {
     this.setState({ colorCola: color })
@@ -247,4 +247,4 @@ class DragonsPage extends Component<DProps> {
   )
 }
 
-export default DragonsPage
+export default DragonCreation

@@ -30,28 +30,33 @@ export default function MyDragons({ deviceType }: ISSRPropsDeviceOnly): ReactEle
   }
 
   // Checkbox - change
-  const checkedMainchain = useRef(true)
-  const checkedSidechain = useRef(true)
+  const chMainchain = useRef(true)
+  const chSidechain = useRef(true)
   const handleCheckedChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    if (event.target.name === 'checkedMainchain') {
-      checkedMainchain.current = event.target.checked
+    if (event.target.name === 'Mainchain') {
+      chMainchain.current = event.target.checked
     }
-    if (event.target.name === 'checkedSidechain') {
-      checkedSidechain.current = event.target.checked
+    if (event.target.name === 'Sidechain') {
+      chSidechain.current = event.target.checked
     }
     setFilteredDragons(
       updateDragonsBasedOnSearchFilters(
         dragons,
         event.target.name,
         event.target.checked,
-        checkedMainchain.current,
-        checkedSidechain.current
+        chMainchain.current,
+        chSidechain.current
       )
     )
   }
 
   // Sort by - change
-  const [attribute, setAttribute] = useState(10)
+  const attributes = [
+    { name: 'Strength', value: 0 },
+    { name: 'Fire', value: 1 },
+    { name: 'Whatever', value: 2 },
+  ]
+  const [attributeValue, setAttribute] = useState(0)
   const handleChangeAttribute = (event: React.ChangeEvent<{ value: unknown }>): void => {
     setAttribute(event.target.value as number)
   }
@@ -85,8 +90,8 @@ export default function MyDragons({ deviceType }: ISSRPropsDeviceOnly): ReactEle
           dragons,
           null,
           null,
-          checkedMainchain.current,
-          checkedSidechain.current
+          chMainchain.current,
+          chSidechain.current
         )
       )
       setLoading(false)
@@ -130,9 +135,10 @@ export default function MyDragons({ deviceType }: ISSRPropsDeviceOnly): ReactEle
   }
 
   const commonProps = {
-    attribute,
-    checkedMainchain: checkedMainchain.current,
-    checkedSidechain: checkedSidechain.current,
+    attributes,
+    attributeValue,
+    chMainchain: chMainchain.current,
+    chSidechain: chSidechain.current,
     dragons,
     filteredDragons,
     handleChangeAttribute: handleChangeAttribute,

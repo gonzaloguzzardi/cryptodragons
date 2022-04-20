@@ -3,9 +3,10 @@ import { tLowOrHigh } from 'components/sorting-bar/types'
 
 export type tProps = {
   accountsState: any // @todo: complete
-  attribute: number
-  checkedMainchain: boolean
-  checkedSidechain: boolean
+  attributes: { name: string; value: number }[]
+  attributeValue: number
+  chMainchain: boolean
+  chSidechain: boolean
   dragons: tDragon[]
   filteredDragons: tDragon[]
   handleCheckedChange: (event: React.ChangeEvent<HTMLInputElement>) => void

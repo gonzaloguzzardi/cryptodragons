@@ -7,7 +7,10 @@
     margin-left: auto;
     user-select: none;
 
-    &_sortByLabel,
+    &_sortByLabel {
+      padding-right: 6px !important;
+    }
+
     &_sortByValue {
       padding-right: 16px !important;
     }

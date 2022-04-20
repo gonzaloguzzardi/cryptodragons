@@ -6,12 +6,13 @@ import ComponentContainerDesktop from 'components/component-container/desktop'
 import { tComponentProps } from './types'
 
 export default function MyDragonsSearchContainerDesktop({
-  checkedMainchain,
-  checkedSidechain,
+  chMainchain,
+  chSidechain,
   handleCheckedChange,
   handleSearchChange,
   search,
-  attribute,
+  attributes,
+  attributeValue,
   handleChangeAttribute,
   handleChangeSelectLowHigh,
   lowOrHigh,
@@ -20,11 +21,11 @@ export default function MyDragonsSearchContainerDesktop({
     <ComponentContainerDesktop>
       <SearchBar value={search} onChange={handleSearchChange} />
       <SortingBarDesktop
-        checkedMainchain={checkedMainchain}
-        checkedSidechain={checkedSidechain}
+        chMainchain={chMainchain}
+        chSidechain={chSidechain}
         handleCheckedChange={handleCheckedChange}
-        handleSearchChange={handleSearchChange}
-        attribute={attribute}
+        attributes={attributes}
+        attributeValue={attributeValue}
         handleChangeAttribute={handleChangeAttribute}
         handleChangeSelectLowHigh={handleChangeSelectLowHigh}
         lowOrHigh={lowOrHigh}

@@ -2,7 +2,7 @@ import React, { ReactElement } from 'react'
 
 import styles from './desktop.module.scss'
 
-type tProps = { children: ReactElement }
+type tProps = { children: ReactElement[] | ReactElement }
 
 export default function ComponentContainerDesktop({ children }: tProps): ReactElement {
   return (

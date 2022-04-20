@@ -12,9 +12,10 @@ import { tProps } from './types'
 
 function MyDragonsDesktop({
   accountsState,
-  attribute,
-  checkedMainchain,
-  checkedSidechain,
+  attributeValue,
+  attributes,
+  chMainchain,
+  chSidechain,
   dragons,
   filteredDragons,
   handleChangeAttribute,
@@ -30,12 +31,13 @@ function MyDragonsDesktop({
     <>
       <AppToolbar deviceType="desktop" section="my-dragons" accountsState={accountsState} />
       <MyDragonsSearchContainerDesktop
-        checkedMainchain={checkedMainchain}
-        checkedSidechain={checkedSidechain}
+        chMainchain={chMainchain}
+        chSidechain={chSidechain}
         handleCheckedChange={handleCheckedChange}
         handleSearchChange={handleSearchChange}
         search={search}
-        attribute={attribute}
+        attributeValue={attributeValue}
+        attributes={attributes}
         handleChangeAttribute={handleChangeAttribute}
         lowOrHigh={lowOrHigh}
         handleChangeSelectLowHigh={handleChangeSelectLowHigh}

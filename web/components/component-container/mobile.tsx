@@ -2,7 +2,7 @@ import React, { ReactElement } from 'react'
 
 import styles from './mobile.module.scss'
 
-type tProps = { children: ReactElement }
+type tProps = { children: ReactElement[] | ReactElement }
 
 export default function ComponentContainerMobile({ children }: tProps): ReactElement {
   return (

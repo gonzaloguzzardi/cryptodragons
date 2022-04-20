@@ -1,19 +1,12 @@
-import { tDragon } from 'types/data'
-import { tLowOrHigh } from 'components/sorting-bar/types'
+export type tLowOrHigh = 'LOW_TO_HIGH_VALUE' | 'HIGH_TO_LOW_VALUE'
 
-export type tProps = {
-  accountsState: any // @todo: complete
-  attribute: number
+export type tComponentProps = {
   checkedMainchain: boolean
   checkedSidechain: boolean
-  dragons: tDragon[]
-  filteredDragons: tDragon[]
   handleCheckedChange: (event: React.ChangeEvent<HTMLInputElement>) => void
   handleSearchChange: (event: React.ChangeEvent<HTMLInputElement>) => void
+  attribute: number
   handleChangeAttribute: (event: React.ChangeEvent<{ value: unknown }>) => void
   handleChangeSelectLowHigh: (event: React.ChangeEvent<{ value: unknown }>) => void
-  loading: boolean
   lowOrHigh: tLowOrHigh
-  transferMethod?: (id: string, location: string) => unknown
-  search: string
 }

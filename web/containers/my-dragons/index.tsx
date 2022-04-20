@@ -13,10 +13,7 @@ import {
   updateDragonLocationOk,
   updateDragonsBasedOnSearchFilters,
 } from './utils'
-import {
-  LOW_TO_HIGH_VALUE,
-  HIGH_TO_LOW_VALUE,
-} from '../../components/my-dragons/search-container/constants'
+import { LOW_TO_HIGH_VALUE, HIGH_TO_LOW_VALUE } from '../../components/sorting-bar/constants'
 import { tLowOHigh } from '../../components/my-dragons/search-container/types'
 
 import { ISSRPropsDeviceOnly } from '../../types/server-side-props-device-only'
@@ -43,7 +40,13 @@ export default function MyDragons({ deviceType }: ISSRPropsDeviceOnly): ReactEle
       checkedSidechain.current = event.target.checked
     }
     setFilteredDragons(
-      updateDragonsBasedOnSearchFilters(dragons, event.target.name, event.target.checked, checkedMainchain.current, checkedSidechain.current)
+      updateDragonsBasedOnSearchFilters(
+        dragons,
+        event.target.name,
+        event.target.checked,
+        checkedMainchain.current,
+        checkedSidechain.current
+      )
     )
   }
 
@@ -78,7 +81,13 @@ export default function MyDragons({ deviceType }: ISSRPropsDeviceOnly): ReactEle
       ]
       setDragons(dragons)
       setFilteredDragons(
-        updateDragonsBasedOnSearchFilters(dragons, null, null, checkedMainchain.current, checkedSidechain.current)
+        updateDragonsBasedOnSearchFilters(
+          dragons,
+          null,
+          null,
+          checkedMainchain.current,
+          checkedSidechain.current
+        )
       )
       setLoading(false)
     })
@@ -137,8 +146,16 @@ export default function MyDragons({ deviceType }: ISSRPropsDeviceOnly): ReactEle
   }
 
   if (deviceType === 'desktop') {
-    return <MyDragonsCommons children={<MyDragonsDesktop {...commonProps} />} />
+    return (
+      <MyDragonsCommons>
+        <MyDragonsDesktop {...commonProps} />
+      </MyDragonsCommons>
+    )
   }
 
-  return <MyDragonsCommons children={<MyDragonsMobile {...commonProps} />} />
+  return (
+    <MyDragonsCommons>
+      <MyDragonsMobile {...commonProps} />
+    </MyDragonsCommons>
+  )
 }

@@ -3,33 +3,34 @@ import React, { ReactElement } from 'react'
 import { withAccountsHOC } from 'hooks/accounts-context'
 
 import AppToolbar from 'components/app-toolbar'
-import ComponentContainerDesktop from 'components/component-container/desktop'
-import SortingBarDesktop from 'components/sorting-bar/desktop'
+import MarketplaceSearchContainerDesktop from 'components/marketplace/search-container/desktop'
+import MarketplaceGridViewDesktop from 'components/marketplace/grid-view/desktop'
 import FooterDesktop from 'components/footer/desktop'
 
 function MarketplaceDesktop({
+  dragons,
+  filteredDragons,
+  loading,
   accountsState,
   attributeValue,
   attributes,
-  handleChangeAttribute,
   lowOrHigh,
   handleChangeSelectLowHigh,
 }): ReactElement {
   return (
     <>
       <AppToolbar deviceType="desktop" section="marketplace" accountsState={accountsState} />
-
-      <ComponentContainerDesktop>
-        <SortingBarDesktop
-          checkboxes={false}
-          attributeValue={attributeValue}
-          attributes={attributes}
-          handleChangeAttribute={handleChangeAttribute}
-          lowOrHigh={lowOrHigh}
-          handleChangeSelectLowHigh={handleChangeSelectLowHigh}
-        />
-      </ComponentContainerDesktop>
-
+      <MarketplaceSearchContainerDesktop
+        attributeValue={attributeValue}
+        attributes={attributes}
+        lowOrHigh={lowOrHigh}
+        handleChangeSelectLowHigh={handleChangeSelectLowHigh}
+      />
+      <MarketplaceGridViewDesktop
+        dragons={dragons}
+        filteredDragons={filteredDragons}
+        loading={loading}
+      />
       <FooterDesktop />
     </>
   )

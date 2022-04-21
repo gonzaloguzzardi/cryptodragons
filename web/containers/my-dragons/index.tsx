@@ -4,19 +4,19 @@ import MyDragonsCommons from './my-dragons'
 import MyDragonsDesktop from './my-dragons.desktop'
 import MyDragonsMobile from './my-dragons.mobile'
 
-import MainchainAPI from '../../services/blockchain-interaction/mainchain'
-import SidechainAPI from '../../services/blockchain-interaction/sidechain'
-import { getDragonsFromOracleAPI } from '../../services/oracle'
+import MainchainAPI from 'services/blockchain-interaction/mainchain'
+import SidechainAPI from 'services/blockchain-interaction/sidechain'
+import { getDragonsFromOracleAPI } from 'services/oracle'
 import {
   mapDragonsResults,
   updateDragonLocationError,
   updateDragonLocationOk,
   updateDragonsBasedOnSearchFilters,
 } from './utils'
-import { LOW_TO_HIGH_VALUE, HIGH_TO_LOW_VALUE } from '../../components/sorting-bar/constants'
-import { tLowOHigh } from '../../components/my-dragons/search-container/types'
+import { LOW_TO_HIGH_VALUE, HIGH_TO_LOW_VALUE } from 'components/sorting-bar/constants'
+import { tLowOHigh } from 'components/my-dragons/search-container/types'
 
-import { ISSRPropsDeviceOnly } from '../../types/server-side-props-device-only'
+import { ISSRPropsDeviceOnly } from 'types/server-side-props-device-only'
 
 export default function MyDragons({ deviceType }: ISSRPropsDeviceOnly): ReactElement {
   const [dragons, setDragons] = useState([])
@@ -100,7 +100,7 @@ export default function MyDragons({ deviceType }: ISSRPropsDeviceOnly): ReactEle
 
   useEffect(() => {
     updateDragons()
-    setInterval(updateDragons, 30000)
+    setInterval(updateDragons, 10000)
   }, [])
 
   const transferDragon = (id: string, location: string): void => {
@@ -135,20 +135,20 @@ export default function MyDragons({ deviceType }: ISSRPropsDeviceOnly): ReactEle
   }
 
   const commonProps = {
-    attributes,
-    attributeValue,
-    chMainchain: chMainchain.current,
-    chSidechain: chSidechain.current,
     dragons,
     filteredDragons,
-    handleChangeAttribute: handleChangeAttribute,
-    handleChangeSelectLowHigh: handleChangeSelectLowHigh,
-    handleCheckedChange: handleCheckedChange,
-    handleSearchChange: handleSearchChange,
-    loading: loading,
-    lowOrHigh: lowOrHigh as tLowOHigh,
-    transferMethod: transferDragon,
     search,
+    handleSearchChange,
+    chMainchain: chMainchain.current,
+    chSidechain: chSidechain.current,
+    handleCheckedChange,
+    attributes,
+    attributeValue,
+    handleChangeAttribute,
+    lowOrHigh: lowOrHigh as tLowOHigh,
+    handleChangeSelectLowHigh,
+    loading,
+    transferMethod: transferDragon,
   }
 
   if (deviceType === 'desktop') {

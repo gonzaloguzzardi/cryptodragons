@@ -1,0 +1,24 @@
+@import '../../../styles/variables.scss';
+
+.spinnerContainer {
+  text-align: center;
+  padding: 40px 0;
+}
+
+.main {
+  padding: 20px 0 40px;
+  background-color: $pallete-primary;
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  width: $max-width-by-screen-mobile;
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  row-gap: 30px;
+
+  & > div {
+    margin: auto;
+  }
+}

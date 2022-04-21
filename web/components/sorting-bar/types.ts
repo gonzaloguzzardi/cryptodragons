@@ -7,7 +7,7 @@ export type tComponentProps = {
   handleCheckedChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
   attributeValue: number
   attributes: { name: string; value: number }[]
-  handleChangeAttribute: (event: React.ChangeEvent<{ value: unknown }>) => void
+  handleChangeAttribute?: (event: React.ChangeEvent<{ value: unknown }>) => void
   handleChangeSelectLowHigh: (event: React.ChangeEvent<{ value: unknown }>) => void
   lowOrHigh: tLowOrHigh
 }

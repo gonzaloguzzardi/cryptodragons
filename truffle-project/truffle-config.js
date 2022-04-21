@@ -93,7 +93,7 @@ module.exports = {
 			from: '0x28863498efede12296888f7ca6cf0b94974fbdbc',
 			skipDryRun: true,
 			networkCheckTimeout: 9000000,
-      timeoutBlocks: 90000
+			timeoutBlocks: 90000
 		},
 	},
 	plugins: ['truffle-contract-size'],

@@ -1,18 +1,17 @@
 /* eslint-disable @typescript-eslint/ban-types */
-import React, { Component } from 'react'
+import React, { Component, ReactElement } from 'react'
 
-import Layout from '../../components/layout'
-import Dragon from '../../components/dragon'
+import Layout from 'components/layout'
+import Dragon from 'components/dragon'
 
 import Grid from '@material-ui/core/Grid'
 import Button from '@material-ui/core/Button'
 import Input from '@material-ui/core/Input'
 import FormLabel from '@material-ui/core/FormLabel'
 
-import MainchainAPI from '../../services/blockchain-interaction/mainchain'
-import SidechainAPI from '../../services/blockchain-interaction/sidechain'
-import { getDragonsFromOracleAPI } from '../../services/oracle'
-import { ReactElement } from 'react'
+import MainchainAPI from 'services/blockchain-interaction/mainchain'
+import SidechainAPI from 'services/blockchain-interaction/sidechain'
+import { getDragonsFromOracleAPI } from 'services/oracle'
 
 interface IProps {
   any
@@ -34,7 +33,7 @@ class Demo extends Component<IProps> {
     super(props)
 
     this.state = {
-      sideAccount: '0x4b9b2e580230927e7b07ae4a8b45f783f570a7e8',
+      sideAccount: '0x50f6e2f5d3143ab9b9df9eb65e3541113fc86b28',
       mainAccount: '0xa64d35d224c85f239820a229ca3acf5575d28fdd',
 
       sideDragons: [],

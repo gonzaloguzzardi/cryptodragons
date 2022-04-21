@@ -21,8 +21,7 @@ export default function MarketplaceGridViewMobile({
   return (
     <div className={styles.main}>
       <div className={styles.container}>
-        {filteredDragons.length === 0 && dragons.length === 0 && <p>No dragons available...</p>}
-        {filteredDragons.length === 0 && dragons.length > 0 && <p>Try another search</p>}
+        {filteredDragons.length === 0 && <p>No dragons available...</p>}
 
         {filteredDragons.length > 0 &&
           filteredDragons.map((dragon) => (

@@ -42,7 +42,7 @@ export default function Marketplace({ deviceType }: ISSRPropsDeviceOnly): ReactE
         ...mapDragonsResults(results[2][1]['mainchain-gateway-results'], 'MAINCHAIN_GATEWAY'),
       ]
       setDragons(dragons)
-      setFilteredDragons(updateDragonsBasedOnSearchFilters(dragons, null, null, null, null))
+      setFilteredDragons(updateDragonsBasedOnSearchFilters(dragons, null, null, true, true))
       setLoading(false)
     })
   }

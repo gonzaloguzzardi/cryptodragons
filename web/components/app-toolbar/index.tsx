@@ -1,3 +1,6 @@
+import { ReactElement, useState } from 'react'
+import classnames from 'classnames'
+import Link from 'next/link'
 import Alert from '@material-ui/lab/Alert'
 import AppBar from '@material-ui/core/AppBar'
 import Fab from '@material-ui/core/Fab'
@@ -14,17 +17,11 @@ import useScrollTrigger from '@material-ui/core/useScrollTrigger'
 import Zoom from '@material-ui/core/Zoom'
 import Avatar from '@material-ui/core/Avatar'
 
-import MainchainAPI from '../../services/blockchain-interaction/mainchain'
-import SidechainAPI from '../../services/blockchain-interaction/sidechain'
+import MainchainAPI from 'services/blockchain-interaction/mainchain'
+import SidechainAPI from 'services/blockchain-interaction/sidechain'
 import SessionComponent from './session-component'
-import Modal from '../../components/modals'
-
-import isChromeBrowser from '../../utils/is-chrome-browser'
-
-import classnames from 'classnames'
-
-import { ReactElement, useState } from 'react'
-import Link from 'next/link'
+import Modal from 'components/modals'
+import isChromeBrowser from 'utils/is-chrome-browser'
 
 import appbarStyles from './app-toolbar.module.scss'
 

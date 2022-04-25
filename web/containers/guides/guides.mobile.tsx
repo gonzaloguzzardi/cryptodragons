@@ -1,15 +1,17 @@
-import React from 'react'
-import { ReactElement } from 'react'
+import React, { ReactElement } from 'react'
 
 import { withAccountsHOC } from 'hooks/accounts-context'
 
 import AppToolbar from 'components/app-toolbar'
+import FooterMobile from 'components/footer/mobile'
 
-function GuidesMobile({ accountsState }): ReactElement {
+function GuidesMobile({ accountsState, content }): ReactElement {
   return (
     <>
       <AppToolbar deviceType="mobile" section="guides" accountsState={accountsState} />
       <p>Guides</p>
+      {content}
+      <FooterMobile />
     </>
   )
 }

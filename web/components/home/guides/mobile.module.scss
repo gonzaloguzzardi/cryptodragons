@@ -2,28 +2,27 @@
 
 .main {
   padding: $section-mobile-margins 0;
-  justify-content: center;
-  text-align: center;
-  display: flex;
-  background-color: #f3f1ee;
+  background-color: $pallete-primary-alternative;
   background-image: url(https://www.cryptokitties.co/images/pattern-tile.svg);
+  display: flex;
+  justify-content: center;
 }
 
 .card {
-  padding: 40px 0;
+  padding: 40px 20px;
   max-width: $max-width-by-screen-mobile;
   border-radius: 50px !important;
 }
 
 .guideButton {
-  margin: 10px !important;
-  width: 100%;
   border-radius: 30px !important;
   text-transform: none !important;
+  width: 100%;
+  margin: 5px 0;
 }
 
 .img {
-  height: 200px;
-  width: 200px;
+  height: 170px;
+  width: 170px;
   margin: 0 auto;
 }

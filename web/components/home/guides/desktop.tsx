@@ -1,3 +1,5 @@
+import { ReactElement } from 'react'
+
 import Link from 'next/link'
 import Button from '@mui/material/Button'
 import Card from '@mui/material/Card'
@@ -5,8 +7,6 @@ import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 
 import styles from './desktop.module.scss'
-
-import { ReactElement } from 'react'
 
 export default function MarketplaceSection(): ReactElement {
   return (

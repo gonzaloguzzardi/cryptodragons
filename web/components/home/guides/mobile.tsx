@@ -12,7 +12,7 @@ export default function MarketplaceSection(): ReactElement {
   return (
     <div className={styles.main}>
       <Card className={styles.card} raised>
-        <Grid container spacing={4}>
+        <Grid container justifyContent="center">
           <Grid container>
             <img
               className={styles.img}
@@ -20,18 +20,14 @@ export default function MarketplaceSection(): ReactElement {
               src="/assets/home/wise-dragon.jpg"
             />
           </Grid>
-          <div className={styles.title}>
-            <Typography variant="h5" component="h3" gutterBottom>
-              Learn how to play CryptoDragons!
-            </Typography>
-          </div>
-          <div className={styles.subtitle}>
-            <Typography variant="subtitle2" color="textSecondary" gutterBottom>
-              Check the guides and become an expert of Cryptodragons - It is free. <br /> Review
-              the main features features such as purchasing a dragon, train them <br /> and
-              everything you must know to start your journey in this magic world.
-            </Typography>
-          </div>
+          <Typography variant="h5" component="h3" gutterBottom align="center">
+            Learn how to play!
+          </Typography>
+          <Typography variant="subtitle2" color="textSecondary" gutterBottom align="center">
+            Check the guides and become an expert of Cryptodragons - It is free. Review
+            the main features features such as purchasing a dragon, train them and
+            everything you must know to start your journey in this magic world.
+          </Typography>
           <Link href="/guides">
             <Button
               variant="contained"

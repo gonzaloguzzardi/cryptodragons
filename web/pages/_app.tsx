@@ -1,6 +1,7 @@
 import * as React from 'react';
 import type { AppProps } from 'next/app';
 import { CacheProvider, EmotionCache } from '@emotion/react';
+import { StylesProvider, createGenerateClassName } from '@mui/styles';
 
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
@@ -17,13 +18,19 @@ interface MyAppProps extends AppProps {
 
 const clientSideEmotionCache = createEmotionCache();
 
+const generateClassName = createGenerateClassName({
+  productionPrefix: 'c',
+});
+
 const MyApp: React.FunctionComponent<MyAppProps> = (props) => {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
 
   return (
-    <CacheProvider value={emotionCache}>
-      <Component {...pageProps} />
-    </CacheProvider>
+    <StylesProvider generateClassName={generateClassName}>
+      <CacheProvider value={emotionCache}>
+        <Component {...pageProps} />
+      </CacheProvider>
+    </StylesProvider>
   );
 };
 

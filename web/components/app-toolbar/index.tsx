@@ -124,7 +124,7 @@ export default function AppToolbar({ accountsState, deviceType, section }: IProp
 
   return (
     <>
-      <AppBar variant="outlined">
+      <AppBar>
         <Toolbar>
           <Link href="/">
             <a className={appbarStyles.homeIconLabelAnchor}>

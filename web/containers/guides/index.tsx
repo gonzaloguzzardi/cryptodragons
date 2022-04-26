@@ -1,9 +1,6 @@
 import React, { ReactElement /*, useEffect, useState*/ } from 'react'
 // import { useRouter } from 'next/router'
-// import marked from 'marked'
 
-// import ReactMarkdown from 'react-markdown'
-// import remarkGfm from 'remark-gfm'
 import AboutMarkdown from './templates/hola.mdx'
 
 import GuidesCommons from './guides'
@@ -18,17 +15,7 @@ export default function Guides({ deviceType }: ISSRPropsDeviceOnly): ReactElemen
 
   // const [markdown, setMarkdown] = useState('')
 
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
-  // const markdown = require(`./templates/hola.md`)
-  // console.log('MOCKITA', markdown)
-  // const content = markdown ? (
-  //   // <ReactMarkdown /*remarkPlugins={[remarkGfm]}*/>{markdown}</ReactMarkdown>
-
-  //   ) : (
-  //   'Content not found'
-  // )
-
-  // const readmePath = require('./templates/hola.md')
+  // const readmePath = require('./templates/hola.mdx')
 
   // useEffect(() => {
   //   fetch(readmePath)

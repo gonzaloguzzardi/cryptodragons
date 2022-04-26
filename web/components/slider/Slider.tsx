@@ -1,10 +1,10 @@
-// Slider.js
+import React, { Component } from 'react'
 
-import React, { Component, ReactElement } from 'react'
-import InputRange from "react-input-range";
+// @TODO: Fix this
+// import InputRange from "react-input-range";
+// import 'react-input-range/lib/css/index.css';
+
 import './Slider.module.scss'
-import 'react-input-range/lib/css/index.css';
-//
 
 interface SProps {
     any
@@ -44,13 +44,13 @@ class Slider extends Component<any> {
         return (
             <div>
                 <label>{this.state.label}</label>
-                <InputRange
+                {/* <InputRange
                     minValue={this.state.min}
                     maxValue={this.state.max}
                     step={this.state.step}
                     onChange={this.onChange}
                     value={this.state.value}
-                />
+                /> */}
             </div>
         );
     }

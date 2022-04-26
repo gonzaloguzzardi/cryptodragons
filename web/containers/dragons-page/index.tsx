@@ -2,7 +2,7 @@
 import React, { Component, ReactElement } from 'react'
 import Slider from '../../components/slider/Slider'
 import DragonCreator from '../../components/dragon-creator'
-import Grid from '@material-ui/core/Grid'
+import Grid from '@mui/material/Grid'
 
 interface DProps {
   any

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-types */
 import React, { Component, ReactElement } from 'react'
 import Slider from '../../components/slider/Slider'
-import Grid from '@material-ui/core/Grid'
+import Grid from '@mui/material/Grid'
 
 // http://localhost:3000/dragon-creation
 

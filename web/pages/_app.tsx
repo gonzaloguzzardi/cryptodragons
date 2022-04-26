@@ -1,30 +1,35 @@
-import type { AppProps /*, AppContext */ } from 'next/app'
-import { ReactElement } from 'react'
-import Head from 'next/head'
+import * as React from 'react';
+import type { AppProps } from 'next/app';
+import { CacheProvider, EmotionCache } from '@emotion/react';
+import { ThemeProvider, CssBaseline, createTheme } from '@mui/material';
 
-import '../styles/globals.scss'
+import '@fontsource/roboto/300.css';
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/500.css';
+import '@fontsource/roboto/700.css';
 
-function MyApp({ Component, pageProps }: AppProps): ReactElement {
-  return (
-    <>
-      <Head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      </Head>
-      <Component {...pageProps} />
-    </>
-  )
+import createEmotionCache from '../utility/createEmotionCache';
+import lightThemeOptions from '../styles/theme/lightThemeOptions';
+import '../styles/globals.scss';
+interface MyAppProps extends AppProps {
+  emotionCache?: EmotionCache;
 }
 
-// Only uncomment this method if you have blocking data requirements for
-// every single page in your application. This disables the ability to
-// perform automatic static optimization, causing every page in your app to
-// be server-side rendered.
-//
-// MyApp.getInitialProps = async (appContext: AppContext) => {
-//   // calls page's `getInitialProps` and fills `appProps.pageProps`
-//   const appProps = await App.getInitialProps(appContext);
+const clientSideEmotionCache = createEmotionCache();
 
-//   return { ...appProps }
-// }
+const lightTheme = createTheme(lightThemeOptions);
 
-export default MyApp
+const MyApp: React.FunctionComponent<MyAppProps> = (props) => {
+  const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
+
+  return (
+    <CacheProvider value={emotionCache}>
+      <ThemeProvider theme={lightTheme}>
+        <CssBaseline />
+        <Component {...pageProps} />
+      </ThemeProvider>
+    </CacheProvider>
+  );
+};
+
+export default MyApp;

@@ -2,8 +2,8 @@ import Head from 'next/head'
 
 import styles from './layout.module.scss'
 import { ReactNode, ReactElement } from 'react'
-import CssBaseline from '@material-ui/core/CssBaseline'
-import { ThemeProvider } from '@material-ui/core/styles'
+import CssBaseline from '@mui/material/CssBaseline'
+import { ThemeProvider } from '@mui/material/styles'
 import PageContainer from 'components/page-container'
 import theme from './theme'
 

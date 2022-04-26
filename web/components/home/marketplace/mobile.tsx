@@ -1,11 +1,11 @@
 import Link from 'next/link'
-import Button from '@material-ui/core/Button'
-import Typography from '@material-ui/core/Typography'
+import Button from '@mui/material/Button'
+import Typography from '@mui/material/Typography'
 
-import Carousel from 'react-material-ui-carousel'
-import FeaturedCard from '../../card/featured-card'
-
-import mock from './dragons-data'
+// @TODO: Fix this
+// import Carousel from 'react-material-ui-carousel'
+// import FeaturedCard from '../../card/featured-card'
+// import mock from './dragons-data'
 
 import styles from './mobile.module.scss'
 
@@ -27,7 +27,7 @@ export default function MarketplaceSection(): ReactElement {
           </Typography>
         </div>
         <div className={styles.marketplaceCollections}>
-          <Carousel animation="slide">
+          {/* <Carousel animation="slide">
             {mock.map((data) => (
               <FeaturedCard
                 key={data.image}
@@ -36,7 +36,7 @@ export default function MarketplaceSection(): ReactElement {
                 owner={data.owner}
               />
             ))}
-          </Carousel>
+          </Carousel> */}
         </div>
         <Link href="/marketplace">
           <Button

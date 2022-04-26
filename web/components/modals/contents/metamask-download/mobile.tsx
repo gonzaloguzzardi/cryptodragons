@@ -4,8 +4,8 @@ import Button from '@mui/material/Button'
 import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 
-import { Theme, createStyles } from '@mui/material/styles'
-import { makeStyles } from '@mui/styles'
+import { Theme } from '@mui/material/styles'
+import { createStyles, makeStyles } from '@mui/styles'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

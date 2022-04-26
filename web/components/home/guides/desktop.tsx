@@ -35,58 +35,66 @@ export default function MarketplaceSection(): ReactElement {
               </Typography>
             </div>
 
-            <Grid container direction="row" justify="space-between" item xs={11}>
-              <Link href="/guides">
-                <Button
-                  variant="contained"
-                  size="large"
-                  color="secondary"
-                  className={styles.guideButton}
-                >
-                  <Typography variant="body1" component="span">
-                    Getting Started
-                  </Typography>
-                </Button>
-              </Link>
+            <Grid container justifyContent="center" spacing={2}>
+              <Grid item>
+                <Link href="/guides">
+                  <Button
+                    variant="contained"
+                    size="large"
+                    color="secondary"
+                    className={styles.guideButton}
+                  >
+                    <Typography variant="body1" component="span">
+                      Getting Started
+                    </Typography>
+                  </Button>
+                </Link>
+              </Grid>
 
-              <Link href="/guides">
-                <Button
-                  variant="contained"
-                  size="large"
-                  color="secondary"
-                  className={styles.guideButton}
-                >
-                  <Typography variant="body1" component="span">
-                    Gas and Fees
-                  </Typography>
-                </Button>
-              </Link>
+              <Grid item>
+                <Link href="/guides">
+                  <Button
+                    variant="contained"
+                    size="large"
+                    color="secondary"
+                    className={styles.guideButton}
+                  >
+                    <Typography variant="body1" component="span">
+                      Gas and Fees
+                    </Typography>
+                  </Button>
+                </Link>
+              </Grid>
 
-              <Link href="/guides">
-                <Button
-                  variant="contained"
-                  size="large"
-                  color="secondary"
-                  className={styles.guideButton}
-                >
-                  <Typography variant="body1" component="span">
-                    Marketplace
-                  </Typography>
-                </Button>
-              </Link>
+              <Grid item>
+                <Link href="/guides">
+                  <Button
+                    variant="contained"
+                    size="large"
+                    color="secondary"
+                    className={styles.guideButton}
+                  >
+                    <Typography variant="body1" component="span">
+                      Marketplace
+                    </Typography>
+                  </Button>
+                </Link>
+              </Grid>
 
-              <Link href="/guides">
-                <Button
-                  variant="contained"
-                  size="large"
-                  color="secondary"
-                  className={styles.guideButton}
-                >
-                  <Typography variant="body1" component="span">
-                    FAQs
-                  </Typography>
-                </Button>
-              </Link>
+              <Grid item>
+                <Link href="/guides">
+                  <Button
+                    variant="contained"
+                    size="large"
+                    color="secondary"
+                    className={styles.guideButton}
+                  >
+                    <Typography variant="body1" component="span">
+                      FAQs
+                    </Typography>
+                  </Button>
+                </Link>
+              </Grid>
             </Grid>
           </Grid>
         </Grid>

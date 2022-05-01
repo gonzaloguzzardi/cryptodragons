@@ -2,10 +2,9 @@ const {expectRevert} = require('@openzeppelin/test-helpers');
 
 const MainnetMarketplace = artifacts.require('MainnetMarketplace');
 const MainnetTransferableDragon = artifacts.require('MainnetTransferableDragon');
+const GenesLaboratory = artifacts.require('GenesLaboratory');
 
 contract('MainnetMarketplace', (accounts) => {
-    const DRAGON_TOKEN_ADDRESS = '0x1234567890123456789012345678901234567891';
-
     const GATEWAY_ADDRESS = '0x1234567890123456789012345678901234567892';
     const DRAGON_DECODER_ADDRESS = '0x1234567890123456789012345678901234567893';
     const BLOCKCHAIN_ID = '1';
@@ -18,18 +17,56 @@ contract('MainnetMarketplace', (accounts) => {
     let marketplaceContract;
     let tokenContract;
 
-    beforeEach(async () => {
-        marketplaceContract = await MainnetMarketplace.new(DRAGON_TOKEN_ADDRESS);
+    before(async () => {
         tokenContract = await MainnetTransferableDragon.new(GATEWAY_ADDRESS, DRAGON_DECODER_ADDRESS, BLOCKCHAIN_ID);
+        marketplaceContract = await MainnetMarketplace.new();
+
+        const genesLaboratory = await GenesLaboratory.new('0x1234567890123456789012345678901234567890');
+
+        await tokenContract.setGenesLaboratoryAddress(genesLaboratory.address, {
+            from: ownerAccount
+        });
 
         await tokenContract.createDragon("test", 0, 0, 0, {
             from: ownerAccount
         });
+
     });
 
-    it('listToken should revert if token was not approved by owner', async () => {
-        await tryCatch(marketplaceContract.listToken(DRAGON_TOKEN_ADDRESS, 0, PRICE, {
+    beforeEach(async () => {
+
+    });
+
+    it('listToken should revert if marketplace was not approved by owner to transfer token', async () => {
+        await expectRevert(marketplaceContract.listToken(tokenContract.address, 0, PRICE, {
             from: nonOwnerAccount
-        }), errTypes.revert);
+        }), "Not owner nor approved");
+    });
+
+    it('listToken should succeed when token is approved to be transfered by marketplace', async () => {
+        await tokenContract.approve(marketplaceContract.address, 0, {
+            from: ownerAccount
+        });
+
+        await marketplaceContract.listToken(tokenContract.address, 0, PRICE, {
+            from: ownerAccount
+        });
+    });
+
+    it('buyListedItem should revert if price is not right', async () => {
+        const listingId = 1;
+        const price = 50;
+
+        await expectRevert(marketplaceContract.buyListedToken(listingId, {
+            from: nonOwnerAccount, value: price
+        }), "Please submit the asking price in order to complete the purchase");
+    });
+
+    it('buyListedItem should succeed if valid listing id and price is right', async () => {
+        const listingId = 1;
+
+        await marketplaceContract.buyListedToken(listingId, {
+            from: nonOwnerAccount, value: PRICE
+        });
     });
 });

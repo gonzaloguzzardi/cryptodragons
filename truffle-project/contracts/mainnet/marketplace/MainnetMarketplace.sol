@@ -7,7 +7,7 @@ import "../../common/security/ReentrancyGuard.sol";
 import "../../common/utils/Counters.sol";
 
 interface IERC721 {
-	function safeTransferFrom(
+	function transferFrom(
 		address from,
 		address to,
 		uint256 tokenId
@@ -146,12 +146,12 @@ contract MainnetMarketplace is Ownable, ReentrancyGuard {
             ListingStatus.Active
         );
 
-        IERC721(nftContract).safeTransferFrom(msg.sender, address(this), tokenId);
+        IERC721(nftContract).transferFrom(msg.sender, address(this), tokenId);
 
         emit ItemListed(listingId, tokenId, nftContract, msg.sender, price);
     }
 
-    function buyListedToken(address nftContract, uint256 listingId) external payable nonReentrant {
+    function buyListedToken(uint256 listingId) external payable nonReentrant {
         ListingData storage listedItem = _idToListedItem[listingId];
         uint256 price = listedItem.price;
         uint256 tokenId = listedItem.tokenId;
@@ -169,9 +169,9 @@ contract MainnetMarketplace is Ownable, ReentrancyGuard {
         _teamAddress.transfer(teamFeeCharge);
 
         // Transfer NFT ownership
-        IERC721(nftContract).safeTransferFrom(address(this), msg.sender, tokenId);
+        IERC721(listedItem.nftContract).transferFrom(address(this), msg.sender, tokenId);
 
-        emit ItemSold(listingId, tokenId, nftContract, listedItem.seller, msg.sender, price);
+        emit ItemSold(listingId, tokenId, listedItem.nftContract, listedItem.seller, msg.sender, price);
     }
 
     function cancelListing(uint256 listingId) external nonReentrant {
@@ -183,7 +183,7 @@ contract MainnetMarketplace is Ownable, ReentrancyGuard {
         listedItem.status = ListingStatus.Cancelled;
         _itemsCancelled.increment();
 
-        IERC721(listedItem.nftContract).safeTransferFrom(address(this), msg.sender, listedItem.tokenId);
+        IERC721(listedItem.nftContract).transferFrom(address(this), msg.sender, listedItem.tokenId);
 
         emit ItemCancelled(listingId, listedItem.seller);
     }

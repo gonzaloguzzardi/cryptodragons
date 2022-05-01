@@ -111,14 +111,11 @@ class MainchainAPI {
         marketPlaceContract: marketPlace,
         account: ownerAccount,
       } = await MainchainAPI.getClientHelper()
-      console.log(dragonId);
-      console.log(marketPlace._address);
       const gasEstimate = await contract.methods
         .approve(marketPlace._address,dragonId)
         .estimateGas({ from: ownerAccount, gas })
       console.log(gasEstimate);
       if (gasEstimate >= gas) throw new Error('Not enough enough gas, send more.')
-
       return await contract.methods
         .approve(marketPlace._address,dragonId)
         .send({ from: ownerAccount, gas: gasEstimate })
@@ -134,23 +131,18 @@ class MainchainAPI {
         tokenContract: erc721Contract,
         account: ownerAccount,
       } = await MainchainAPI.getClientHelper()
+
+      //TODO: check price here...
       const price = 1000;
-      console.log(contract.methods);
+      console.log("TODO: check price here...");
 
-      console.log(erc721Contract._address);
-      console.log(dragonId);
-      console.log(price);
-
-      //const gasEstimate = await contract.methods
-      //  .listToken(erc721Contract._address,dragonId,price)
-      //  .estimateGas({ from: ownerAccount, gas })
-      //console.log(gasEstimate);
-      ////console.log(`[COMMON-API_GET-MY-DRAGONS]: Gas sent: ${gas}, Gas Estimate: ${gasEstimate}, ownerAccount: ${ownerAccount}`)
-      //if (gasEstimate >= gas) throw new Error('Not enough enough gas, send more.')
-  //
-      return await contract.methods
+      const gasEstimate = await contract.methods
         .listToken(erc721Contract._address,dragonId,price)
-        .send({ from: ownerAccount, gas: 22000 })
+        .estimateGas({ from: ownerAccount, gas })
+      if (gasEstimate >= gas) throw new Error('Not enough enough gas, send more.')
+      return await contract.methods
+        .listToken(erc721Contract._address,dragonId,price)//MainnetTransferableDragon.json
+        .send({ from: ownerAccount, gas: gasEstimate })
 
     } catch (err) {
       console.error(err)

@@ -34,8 +34,8 @@ class Demo extends Component<IProps> {
     super(props)
 
     this.state = {
-      sideAccount: '0x49f33ec73d7d4ba507606591fe9bd8821badbd36',
-      mainAccount: '0x758ebb157a5779069453a101b5280976dd336ef5',
+      sideAccount: '0xf4146f947395bca3b6cbb04bd1d293d6f4cce534',
+      mainAccount: '0x594d107e6d49b96356709683107ec6d372486c81',
 
       sideDragons: [],
       mainDragons: [],
@@ -68,6 +68,10 @@ class Demo extends Component<IProps> {
     this.getDragonsFromMain()
     this.getDragonsFromSide()
     this.getDragonsFromOracle()
+  }
+
+  getDragonsInMarketPlace: () => unknown = () => {
+    MainchainAPI.getMarketPlaceDragons().then((res) => console.log(res))
   }
 
   getDragonsFromMain: () => unknown = () => {
@@ -179,6 +183,11 @@ class Demo extends Component<IProps> {
         <Grid item>
           <Button variant="contained" color="primary" onClick={this.buyDragonInMainChain}>
             Buy New Dragon in Mainchain
+          </Button>
+        </Grid>
+        <Grid item>
+          <Button variant="contained" color="primary" onClick={this.getDragonsInMarketPlace}>
+            Get Dragons From MarketPlace
           </Button>
         </Grid>
       </Grid>

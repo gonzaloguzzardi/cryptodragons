@@ -173,6 +173,24 @@ class MainchainAPI {
     }
   }
 
+  static async getMarketPlaceDragons(gas = GAS_DEFAULT_VALUE) {
+    try {
+      const {
+        marketPlaceContract: marketPlace,
+        account: ownerAccount,
+      } = await MainchainAPI.getClientHelper()
+      const gasEstimate = await marketPlace.methods
+      .fetchMarketItems()
+      .estimateGas({ from: ownerAccount, gas })
+      if (gasEstimate >= gas) throw new Error('Not enough enough gas, send more.')
+      return await marketPlace.methods
+        .fetchMarketItems()
+        .call({ from: ownerAccount, gas: gasEstimate })
+    } catch (err) {
+      console.error(err)
+    }
+  }
+
   static async getMyDragons(gas = GAS_DEFAULT_VALUE) {
     try {
       const {

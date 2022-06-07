@@ -1,5 +1,5 @@
 # Base Image
-FROM node:10.19.0
+FROM node:16.14.2
 
 # Set the working directory
 RUN mkdir -p /usr/src/app/web
@@ -14,7 +14,7 @@ RUN if test -d node_modules; then rm -r node_modules; fi
 
 # Run the command inside your image filesystem
 RUN apt-get update
-RUN npm install --silent
+RUN npm install --legacy-peer-deps --silent
 
 # Inform Docker that the container is listening on the specified port at runtime.
 EXPOSE 3000

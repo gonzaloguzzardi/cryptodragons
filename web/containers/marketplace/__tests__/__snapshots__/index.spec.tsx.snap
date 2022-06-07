@@ -4,22 +4,36 @@ exports[`Renders Marketplace desktop 1`] = `
 <div
   className="container"
 >
-  <main>
-    <AppToolbar
-      accountsState={
-        Object {
-          "connectToProvider": [Function],
-          "mainchain_account": null,
-          "provider_installed": false,
-          "updateAccountsData": [Function],
-        }
+  <style
+    dangerouslySetInnerHTML={
+      Object {
+        "__html": "html{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;box-sizing:border-box;-webkit-text-size-adjust:100%;}*,*::before,*::after{box-sizing:inherit;}strong,b{font-weight:700;}body{margin:0;color:#222;font-family:Raleway,Arial;font-weight:400;font-size:1rem;line-height:1.5;background-color:#fff;}@media print{body{background-color:#fff;}}body::backdrop{background-color:#fff;}",
       }
-      deviceType="desktop"
-      section="marketplace"
-    />
-    <p>
-      Marketplace
-    </p>
+    }
+    data-emotion="css-global 7yq8k8"
+  />
+  <main>
+    <div
+      className="container"
+    >
+      <AppToolbar
+        accountsState={
+          Object {
+            "connectToProvider": [Function],
+            "loading": true,
+            "mainchain_account": null,
+            "provider_installed": false,
+            "updateAccountsData": [Function],
+          }
+        }
+        deviceType="desktop"
+        section="marketplace"
+      />
+      <p>
+        Marketplace
+      </p>
+      <AppFooter />
+    </div>
   </main>
 </div>
 `;
@@ -28,22 +42,36 @@ exports[`Renders Marketplace mobile 1`] = `
 <div
   className="container"
 >
-  <main>
-    <AppToolbar
-      accountsState={
-        Object {
-          "connectToProvider": [Function],
-          "mainchain_account": null,
-          "provider_installed": false,
-          "updateAccountsData": [Function],
-        }
+  <style
+    dangerouslySetInnerHTML={
+      Object {
+        "__html": "html{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;box-sizing:border-box;-webkit-text-size-adjust:100%;}*,*::before,*::after{box-sizing:inherit;}strong,b{font-weight:700;}body{margin:0;color:#222;font-family:Raleway,Arial;font-weight:400;font-size:1rem;line-height:1.5;background-color:#fff;}@media print{body{background-color:#fff;}}body::backdrop{background-color:#fff;}",
       }
-      deviceType="mobile"
-      section="marketplace"
-    />
-    <p>
-      Marketplace
-    </p>
+    }
+    data-emotion="css-global 7yq8k8"
+  />
+  <main>
+    <div
+      className="container"
+    >
+      <AppToolbar
+        accountsState={
+          Object {
+            "connectToProvider": [Function],
+            "loading": true,
+            "mainchain_account": null,
+            "provider_installed": false,
+            "updateAccountsData": [Function],
+          }
+        }
+        deviceType="mobile"
+        section="marketplace"
+      />
+      <p>
+        Marketplace
+      </p>
+      <AppFooter />
+    </div>
   </main>
 </div>
 `;

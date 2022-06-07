@@ -8,19 +8,20 @@
 }
 
 .card {
-  padding: 40px 0;
+  padding: 40px 20px;
   max-width: $max-width-by-screen-mobile;
   border-radius: 50px !important;
 
   &Button {
     border-radius: 30px !important;
     text-transform: none !important;
+    width: 100%;
+    margin: 10px 20px;
   }
 }
 
 .img {
-  margin-top: 8px;
   height: 200px;
   width: 200px;
-  margin: 20px;
+  margin: 0 auto;
 }

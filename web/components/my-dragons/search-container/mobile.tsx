@@ -1,11 +1,11 @@
 import { ReactElement } from 'react'
-import FormControl from '@material-ui/core/FormControl'
-import FormGroup from '@material-ui/core/FormGroup'
-import MenuItem from '@material-ui/core/MenuItem'
-import Select from '@material-ui/core/Select'
-import Typography from '@material-ui/core/Typography'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
-import Checkbox from '@material-ui/core/Checkbox'
+import FormControl from '@mui/material/FormControl'
+import FormGroup from '@mui/material/FormGroup'
+import MenuItem from '@mui/material/MenuItem'
+import Select from '@mui/material/Select'
+import Typography from '@mui/material/Typography'
+import FormControlLabel from '@mui/material/FormControlLabel'
+import Checkbox from '@mui/material/Checkbox'
 import SearchBar from '../../search-bar'
 
 import { LOW_TO_HIGH_VALUE, HIGH_TO_LOW_VALUE } from './constants'
@@ -37,6 +37,7 @@ export default function MyDragonsSearchContainerMobile({
                   onChange={handleCheckedChange}
                   name="checkedMainchain"
                   size="small"
+                  color="secondary"
                 />
               }
               label={<Typography variant="caption">Mainchain</Typography>}
@@ -48,6 +49,7 @@ export default function MyDragonsSearchContainerMobile({
                   onChange={handleCheckedChange}
                   name="checkedSidechain"
                   size="small"
+                  color="secondary"
                 />
               }
               label={<Typography variant="caption">Sidechain</Typography>}

@@ -1,30 +1,37 @@
-import type { AppProps /*, AppContext */ } from 'next/app'
-import { ReactElement } from 'react'
-import Head from 'next/head'
+import * as React from 'react';
+import type { AppProps } from 'next/app';
+import { CacheProvider, EmotionCache } from '@emotion/react';
+import { StylesProvider, createGenerateClassName } from '@mui/styles';
 
-import '../styles/globals.scss'
+import '@fontsource/roboto/300.css';
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/500.css';
+import '@fontsource/roboto/700.css';
 
-function MyApp({ Component, pageProps }: AppProps): ReactElement {
-  return (
-    <>
-      <Head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      </Head>
-      <Component {...pageProps} />
-    </>
-  )
+import createEmotionCache from '../utility/createEmotionCache';
+import '../styles/globals.scss';
+interface MyAppProps extends AppProps {
+  Component: any;
+  emotionCache?: EmotionCache;
+  pageProps: any;
 }
 
-// Only uncomment this method if you have blocking data requirements for
-// every single page in your application. This disables the ability to
-// perform automatic static optimization, causing every page in your app to
-// be server-side rendered.
-//
-// MyApp.getInitialProps = async (appContext: AppContext) => {
-//   // calls page's `getInitialProps` and fills `appProps.pageProps`
-//   const appProps = await App.getInitialProps(appContext);
+const clientSideEmotionCache = createEmotionCache();
 
-//   return { ...appProps }
-// }
+const generateClassName = createGenerateClassName({
+  productionPrefix: 'c',
+});
 
-export default MyApp
+const MyApp: React.FunctionComponent<MyAppProps> = (props) => {
+  const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
+
+  return (
+    <StylesProvider generateClassName={generateClassName}>
+      <CacheProvider value={emotionCache}>
+        <Component {...pageProps} />
+      </CacheProvider>
+    </StylesProvider>
+  );
+};
+
+export default MyApp;

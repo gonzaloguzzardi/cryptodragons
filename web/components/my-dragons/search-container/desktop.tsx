@@ -36,6 +36,7 @@ export default function MyDragonsSearchContainerDesktop({
                   checked={checkedMainchain}
                   onChange={handleCheckedChange}
                   name="checkedMainchain"
+                  color="secondary"
                 />
               }
               label={<Typography variant="caption">in Mainchain</Typography>}
@@ -46,6 +47,7 @@ export default function MyDragonsSearchContainerDesktop({
                   checked={checkedSidechain}
                   onChange={handleCheckedChange}
                   name="checkedSidechain"
+                  color="secondary"
                 />
               }
               label={<Typography variant="caption">in Sidechain</Typography>}

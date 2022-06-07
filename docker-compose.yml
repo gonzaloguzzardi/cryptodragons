@@ -60,6 +60,7 @@ services:
     platform: linux/amd64
     restart: always
     environment:
+      - DOCKERENV=1
       - CHOKIDAR_USEPOLLING=true
     build:
       context: ./web

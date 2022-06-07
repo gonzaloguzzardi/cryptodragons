@@ -56,16 +56,17 @@ function AdminLoginDesktop({ error, loading, submitHandler }: Props): ReactEleme
           <FormControl className={styles.usernameField} variant="outlined">
             <InputLabel htmlFor="outlined-username">Username</InputLabel>
             <OutlinedInput
+              autoComplete="username"
               id="outlined-username"
               value={values.username}
               name="username"
               onChange={handleChange('username')}
-              labelWidth={70}
             />
           </FormControl>
           <FormControl className={styles.passwordField} variant="outlined">
             <InputLabel htmlFor="outlined-password">Password</InputLabel>
             <OutlinedInput
+              autoComplete="current-password"
               id="outlined-password"
               type={values.showPassword ? 'text' : 'password'}
               value={values.password}
@@ -83,7 +84,6 @@ function AdminLoginDesktop({ error, loading, submitHandler }: Props): ReactEleme
                   </IconButton>
                 </InputAdornment>
               }
-              labelWidth={70}
             />
           </FormControl>
           {!loading ? (

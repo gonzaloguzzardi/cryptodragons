@@ -53,4 +53,13 @@ export default createTheme({
       textTransform: 'none',
     },
   },
+  components: {
+    MuiMobileStepper: {
+      styleOverrides: {
+        dotActive: {
+          backgroundColor: '#88f'
+        }
+      }
+    }
+  }
 })

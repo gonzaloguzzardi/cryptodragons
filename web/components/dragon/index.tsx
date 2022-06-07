@@ -175,7 +175,7 @@ class Dragon extends Component<IProps, IState> {
             />
           </CardMedia>
 
-          <Grid container justify="center" spacing={2}>
+          <Grid container justifyContent="center" spacing={2}>
             <Grid item>
               <img src={'/assets/corazon.svg'} alt="" width="20" height="20" />
               <Typography variant="body2" align="center">
@@ -203,7 +203,7 @@ class Dragon extends Component<IProps, IState> {
           </Grid>
 
           <CardContent>
-            <Grid container justify="center">
+            <Grid container justifyContent="center">
               <Typography variant="caption">Location:&nbsp;</Typography>
               <Chip color="secondary" size="small" label={<b>{this.state.location}</b>} />
             </Grid>

@@ -37,6 +37,7 @@ export default function MyDragonsSearchContainerMobile({
                   onChange={handleCheckedChange}
                   name="checkedMainchain"
                   size="small"
+                  color="secondary"
                 />
               }
               label={<Typography variant="caption">Mainchain</Typography>}
@@ -48,6 +49,7 @@ export default function MyDragonsSearchContainerMobile({
                   onChange={handleCheckedChange}
                   name="checkedSidechain"
                   size="small"
+                  color="secondary"
                 />
               }
               label={<Typography variant="caption">Sidechain</Typography>}

@@ -1,30 +1,28 @@
-import Alert from '@material-ui/lab/Alert'
-import AppBar from '@material-ui/core/AppBar'
-import Fab from '@material-ui/core/Fab'
-import IconButton from '@material-ui/core/IconButton'
-import LinearProgress from '@material-ui/core/LinearProgress'
-import { Link as LinkComponent } from '@material-ui/core'
-import MenuBookIcon from '@material-ui/icons/MenuBook'
-import PetsIcon from '@material-ui/icons/Pets'
-import StorefrontIcon from '@material-ui/icons/Storefront'
-import Toolbar from '@material-ui/core/Toolbar'
-import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp'
-import { makeStyles, Theme, createStyles } from '@material-ui/core/styles'
-import useScrollTrigger from '@material-ui/core/useScrollTrigger'
-import Zoom from '@material-ui/core/Zoom'
-import Avatar from '@material-ui/core/Avatar'
-
-import MainchainAPI from '../../services/blockchain-interaction/mainchain'
-import SidechainAPI from '../../services/blockchain-interaction/sidechain'
-import SessionComponent from './session-component'
-import Modal from '../../components/modals'
-
-import isChromeBrowser from '../../utils/is-chrome-browser'
-
-import classnames from 'classnames'
-
 import { ReactElement, useState } from 'react'
+import classnames from 'classnames'
 import Link from 'next/link'
+import Alert from '@mui/material/Alert'
+import AppBar from '@mui/material/AppBar'
+import Fab from '@mui/material/Fab'
+import IconButton from '@mui/material/IconButton'
+import LinearProgress from '@mui/material/LinearProgress'
+import { Link as LinkComponent } from '@mui/material'
+import MenuBookIcon from '@mui/icons-material/MenuBook'
+import PetsIcon from '@mui/icons-material/Pets'
+import StorefrontIcon from '@mui/icons-material/Storefront'
+import Toolbar from '@mui/material/Toolbar'
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp'
+import { Theme } from '@mui/material/styles'
+import { createStyles, makeStyles } from '@mui/styles'
+import useScrollTrigger from '@mui/material/useScrollTrigger'
+import Zoom from '@mui/material/Zoom'
+import Avatar from '@mui/material/Avatar'
+
+import MainchainAPI from 'services/blockchain-interaction/mainchain'
+import SidechainAPI from 'services/blockchain-interaction/sidechain'
+import SessionComponent from './session-component'
+import Modal from 'components/modals'
+import isChromeBrowser from 'utils/is-chrome-browser'
 
 import appbarStyles from './app-toolbar.module.scss'
 
@@ -40,7 +38,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 )
 
-function ScrollTop({ children }: { children: ReactElement }): ReactElement {
+function ScrollTop({ children }: { children?: ReactElement }): ReactElement {
   const classes = useStyles()
 
   const handleClick = (event: React.MouseEvent<HTMLDivElement>): void => {
@@ -64,6 +62,7 @@ function ScrollTop({ children }: { children: ReactElement }): ReactElement {
 
 interface IProps {
   accountsState: {
+    loading: boolean
     mainchain_account: string
     sidechain_account: string
     sidechain_priv_key: string
@@ -122,7 +121,7 @@ export default function AppToolbar({ accountsState, deviceType, section }: IProp
 
   return (
     <>
-      <AppBar variant="outlined">
+      <AppBar>
         <Toolbar>
           <Link href="/">
             <a className={appbarStyles.homeIconLabelAnchor}>
@@ -185,13 +184,14 @@ export default function AppToolbar({ accountsState, deviceType, section }: IProp
           {/* Profile | Sign in/up */}
           <div className={appbarStyles.profileSection}>
             <SessionComponent
-              mainchain_account={accountsState && accountsState.mainchain_account}
-              sidechain_account={accountsState && accountsState.sidechain_account}
-              sidechain_priv_key={accountsState && accountsState.sidechain_priv_key}
-              sidechain_new_account={accountsState && accountsState.sidechain_new_account}
-              mapped_accounts={accountsState && accountsState.mapped_accounts}
               device={deviceType}
+              loading={accountsState.loading}
+              mainchain_account={accountsState.mainchain_account}
+              mapped_accounts={accountsState.mapped_accounts}
               onClickStart={() => onConnectMetamask(accountsState)}
+              sidechain_account={accountsState.sidechain_account}
+              sidechain_priv_key={accountsState.sidechain_priv_key}
+              sidechain_new_account={accountsState.sidechain_new_account}
             />
           </div>
         </Toolbar>

@@ -81,5 +81,5 @@ export default async function clientFactory() {
         })
       )
     )
-    .catch((err) => console.error(err))
+    .catch((err) => console.error("Error Sidechain client-factory", err));
 }

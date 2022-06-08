@@ -1,18 +1,16 @@
-/* eslint-disable @typescript-eslint/ban-types */
-import React, { Component } from 'react'
+import React, { Component, ReactElement } from 'react'
 
-import Layout from '../../components/layout'
-import Dragon from '../../components/dragon'
+import Layout from 'components/layout'
+import Dragon from 'components/dragon'
 
-import Grid from '@material-ui/core/Grid'
-import Button from '@material-ui/core/Button'
-import Input from '@material-ui/core/Input'
-import FormLabel from '@material-ui/core/FormLabel'
+import Grid from '@mui/material/Grid'
+import Button from '@mui/material/Button'
+import Input from '@mui/material/Input'
+import FormLabel from '@mui/material/FormLabel'
 
-import MainchainAPI from '../../services/blockchain-interaction/mainchain'
-import SidechainAPI from '../../services/blockchain-interaction/sidechain'
-import { getDragonsFromOracleAPI } from '../../services/oracle'
-import { ReactElement } from 'react'
+import MainchainAPI from 'services/blockchain-interaction/mainchain'
+import SidechainAPI from 'services/blockchain-interaction/sidechain'
+import { getDragonsFromOracleAPI } from 'services/oracle'
 
 interface IProps {
   any
@@ -22,8 +20,8 @@ interface IState {
   mainAccount?: string
   sideDragons?: Array<string>
   mainDragons?: Array<string>
-  sidechainGatewayDragons?: Array<Object>
-  mainchainGatewayDragons?: Array<Object>
+  sidechainGatewayDragons?: Array<string>
+  mainchainGatewayDragons?: Array<string>
   accountsAreMapped?: boolean
 }
 
@@ -34,8 +32,8 @@ class Demo extends Component<IProps> {
     super(props)
 
     this.state = {
-      sideAccount: '0xf4146f947395bca3b6cbb04bd1d293d6f4cce534',
-      mainAccount: '0x594d107e6d49b96356709683107ec6d372486c81',
+      sideAccount: '0x4db65f5e24acbedb56e0d89855b41ee4450d476a',
+      mainAccount: '0xa64d35d224c85f239820a229ca3acf5575d28fdd',
 
       sideDragons: [],
       mainDragons: [],
@@ -134,7 +132,7 @@ class Demo extends Component<IProps> {
 
   render: () => ReactElement<IProps> = () => (
     <Layout>
-      <Grid container justify="center" spacing={2}>
+      <Grid container justifyContent="center" mt={2} mb={2}>
         <Grid item>
           <FormLabel>
             <b>SideChain Account:</b>&nbsp;
@@ -147,7 +145,7 @@ class Demo extends Component<IProps> {
             />
           </FormLabel>
         </Grid>
-        <Grid item>
+        <Grid item ml={2}>
           {this.state.accountsAreMapped ? (
             // eslint-disable-next-line jsx-a11y/accessible-emoji
             <Button variant="contained" disabled>
@@ -159,7 +157,7 @@ class Demo extends Component<IProps> {
             </Button>
           )}
         </Grid>
-        <Grid item>
+        <Grid item ml={2}>
           <FormLabel>
             <b>MainChain Account:</b>&nbsp;
             <Input
@@ -174,7 +172,7 @@ class Demo extends Component<IProps> {
       </Grid>
 
       {/* Buttons - Buy Dragons in blockchains */}
-      <Grid container justify="center" spacing={2}>
+      <Grid container justifyContent="center" spacing={2}>
         <Grid item>
           <Button variant="contained" color="primary" onClick={this.buyDragonInSideChain}>
             Buy New Dragon in Sidechain
@@ -193,7 +191,7 @@ class Demo extends Component<IProps> {
       </Grid>
 
       {/* Sidechain dragons - Mainchain dragons */}
-      <Grid container justify="center" spacing={2}>
+      <Grid container justifyContent="center" spacing={2}>
         <Grid item xs={6} className="containerGridDragonsItems">
           <h3 className="chainsHeadings">Sidechain Dragons</h3>
           <Grid container spacing={2}>
@@ -202,7 +200,7 @@ class Demo extends Component<IProps> {
                 {this.state.sideDragons
                   ? this.state.sideDragons.map((value) => (
                       <Grid key={value} item>
-                        <Dragon location="SIDECHAIN" id={value} />
+                        <Dragon mappedAccounts={this.state.accountsAreMapped} location="SIDECHAIN" id={value} />
                       </Grid>
                     ))
                   : null}
@@ -218,7 +216,7 @@ class Demo extends Component<IProps> {
                 {this.state.mainDragons
                   ? this.state.mainDragons.map((value) => (
                       <Grid key={value} item>
-                        <Dragon location="MAINCHAIN" id={value} />
+                        <Dragon mappedAccounts={this.state.accountsAreMapped} location="MAINCHAIN" id={value} />
                       </Grid>
                     ))
                   : null}
@@ -232,11 +230,11 @@ class Demo extends Component<IProps> {
       <Grid container spacing={2}>
         <Grid item xs={6} className="containerGridDragonsItems">
           <h3 className="oracleHeading">Sidechain Gateway Dragons</h3>
-          <Grid container justify="center" spacing={2}>
+          <Grid container justifyContent="center" spacing={2}>
             {this.state.sidechainGatewayDragons
               ? this.state.sidechainGatewayDragons.map((value) => (
-                  <Grid key={value} item>
-                    <Dragon location="SIDECHAIN_GATEWAY" id={value} />
+                  <Grid item>
+                    <Dragon mappedAccounts={this.state.accountsAreMapped} location="SIDECHAIN_GATEWAY" id={value} />
                   </Grid>
                 ))
               : null}
@@ -244,11 +242,11 @@ class Demo extends Component<IProps> {
         </Grid>
         <Grid item xs={6} className="containerGridDragonsItems">
           <h3 className="oracleHeading">Mainchain Gateway Dragons</h3>
-          <Grid container justify="center" spacing={2}>
+          <Grid container justifyContent="center" spacing={2}>
             {this.state.mainchainGatewayDragons
               ? this.state.mainchainGatewayDragons.map((value) => (
-                  <Grid key={value} item>
-                    <Dragon location="MAINCHAIN_GATEWAY" id={value} />
+                  <Grid item>
+                    <Dragon mappedAccounts={this.state.accountsAreMapped} location="MAINCHAIN_GATEWAY" id={value} />
                   </Grid>
                 ))
               : null}
@@ -261,12 +259,8 @@ class Demo extends Component<IProps> {
           position: relative !important;
         }
 
-        .container {
-          margin-top: 20px;
-        }
-
         .mapAcountsInput {
-          width: 360px;
+          width: 380px;
         }
 
         .chainsHeadings {

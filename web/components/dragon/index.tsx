@@ -1,13 +1,13 @@
 import React, { Component, ReactNode } from 'react'
-import Button from '@material-ui/core/Button'
-import Card from '@material-ui/core/Card'
-import CardActions from '@material-ui/core/CardActions'
-import CardContent from '@material-ui/core/CardContent'
-import CardMedia from '@material-ui/core/CardMedia'
-import Chip from '@material-ui/core/Chip'
-import CircularProgress from '@material-ui/core/CircularProgress'
-import Grid from '@material-ui/core/Grid'
-import Typography from '@material-ui/core/Typography'
+import Button from '@mui/material/Button'
+import Card from '@mui/material/Card'
+import CardActions from '@mui/material/CardActions'
+import CardContent from '@mui/material/CardContent'
+import CardMedia from '@mui/material/CardMedia'
+import Chip from '@mui/material/Chip'
+import CircularProgress from '@mui/material/CircularProgress'
+import Grid from '@mui/material/Grid'
+import Typography from '@mui/material/Typography'
 
 import DragonCreator from '../../components/dragon-creator'
 
@@ -23,7 +23,7 @@ interface IProps {
   id: string
   key: string
   transferMethod?: (id: string, location: string) => unknown
-  mappedAccounts: boolean
+  mappedAccounts?: boolean
 }
 
 interface IState {
@@ -194,7 +194,7 @@ class Dragon extends Component<IProps, IState> {
             />
           </CardMedia>
 
-          <Grid container justify="center" spacing={2}>
+          <Grid container justifyContent="center" spacing={2}>
             <Grid item>
               <img src={'/assets/corazon.svg'} alt="" width="20" height="20" />
               <Typography variant="body2" align="center">
@@ -222,7 +222,7 @@ class Dragon extends Component<IProps, IState> {
           </Grid>
 
           <CardContent>
-            <Grid container justify="center">
+            <Grid container justifyContent="center">
               <Typography variant="caption">Location:&nbsp;</Typography>
               <Chip color="secondary" size="small" label={<b>{this.state.location}</b>} />
             </Grid>

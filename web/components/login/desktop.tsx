@@ -1,14 +1,14 @@
 import React, { ReactElement } from 'react'
-import Button from '@material-ui/core/Button'
-import Card from '@material-ui/core/Card'
-import CircularProgress from '@material-ui/core/CircularProgress'
-import IconButton from '@material-ui/core/IconButton'
-import OutlinedInput from '@material-ui/core/OutlinedInput'
-import InputLabel from '@material-ui/core/InputLabel'
-import InputAdornment from '@material-ui/core/InputAdornment'
-import FormControl from '@material-ui/core/FormControl'
-import Visibility from '@material-ui/icons/Visibility'
-import VisibilityOff from '@material-ui/icons/VisibilityOff'
+import Button from '@mui/material/Button'
+import Card from '@mui/material/Card'
+import CircularProgress from '@mui/material/CircularProgress'
+import IconButton from '@mui/material/IconButton'
+import OutlinedInput from '@mui/material/OutlinedInput'
+import InputLabel from '@mui/material/InputLabel'
+import InputAdornment from '@mui/material/InputAdornment'
+import FormControl from '@mui/material/FormControl'
+import Visibility from '@mui/icons-material/Visibility'
+import VisibilityOff from '@mui/icons-material/VisibilityOff'
 
 import ErrorLabel from '../error/label'
 
@@ -56,16 +56,17 @@ function AdminLoginDesktop({ error, loading, submitHandler }: Props): ReactEleme
           <FormControl className={styles.usernameField} variant="outlined">
             <InputLabel htmlFor="outlined-username">Username</InputLabel>
             <OutlinedInput
+              autoComplete="username"
               id="outlined-username"
               value={values.username}
               name="username"
               onChange={handleChange('username')}
-              labelWidth={70}
             />
           </FormControl>
           <FormControl className={styles.passwordField} variant="outlined">
             <InputLabel htmlFor="outlined-password">Password</InputLabel>
             <OutlinedInput
+              autoComplete="current-password"
               id="outlined-password"
               type={values.showPassword ? 'text' : 'password'}
               value={values.password}
@@ -83,7 +84,6 @@ function AdminLoginDesktop({ error, loading, submitHandler }: Props): ReactEleme
                   </IconButton>
                 </InputAdornment>
               }
-              labelWidth={70}
             />
           </FormControl>
           {!loading ? (

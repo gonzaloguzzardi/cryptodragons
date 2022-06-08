@@ -1,6 +1,6 @@
 import React, { Component, ReactNode } from 'react'
-import Card from '@material-ui/core/Card'
-import CardContent from '@material-ui/core/CardContent'
+import Card from '@mui/material/Card'
+import CardContent from '@mui/material/CardContent'
 
 //TODO: change to type dragon & functional components.
 interface DProps {
@@ -1465,8 +1465,8 @@ class DragonCreator extends Component<DProps> {
           float: left;
         }
         .landImg {
-          width: 100px;
-          height: 120px;
+          width: inherit;
+          height: inherit;
           margin-top: -30px;
           max-height: -webkit-fill-available;
         }

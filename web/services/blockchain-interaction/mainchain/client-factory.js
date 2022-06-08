@@ -33,27 +33,27 @@ async function getMarketPlaceContract(web3js) {
 
 export default async function clientFactory() {
   if (typeof window === "undefined") return Promise.resolve(null);
-
+  
   const provider = await detectEthereumProvider();
-
+  
   if (!provider) {
     console.log('Provider(ej: Metamask) not found');
     return Promise.resolve(null);
   }
-
+  
   if (provider !== window.ethereum) {
     console.error('Do you have multiple wallets installed?');
   }
-
+  
   const web3js = new Web3(provider);
-
+  
   const networkId = await web3js.eth.net.getId();
   console.log("Network id: " + networkId);
   if (networkId !== 12345) {
     alert("Connect to BFA mainnet with metamask");
     return Promise.resolve({});
   }
-
+  
   return Promise.all([
     ethereum.request({ method: 'eth_accounts' }),
     ethereum.request({ method: 'eth_chainId' }),
@@ -70,5 +70,5 @@ export default async function clientFactory() {
       dragonApiContract: values[4],
       marketPlaceContract: values[5]
     }))
-    .catch((err) => console.error(err));
+    .catch((err) => console.error("Error Mainchain client-factory", err));
 }

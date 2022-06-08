@@ -1,6 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
-import Typography from '@material-ui/core/Typography'
+import Typography from '@mui/material/Typography'
 import Icon from '../../icon'
 import { ReactElement } from 'react'
 

@@ -7,6 +7,8 @@ services:
       - "46658:46658"
 
   contract-getter:
+    platform: linux/amd64
+    restart: always
     environment:
       DOCKERENV: 1
     build:
@@ -37,6 +39,8 @@ services:
       - "28017:28017" # http
 
   oracle:
+    platform: linux/amd64
+    restart: always
     environment:
       DOCKERENV: 1
     build:
@@ -53,7 +57,10 @@ services:
       - /usr/src/app/oracle/node_modules
 
   web:
+    platform: linux/amd64
+    restart: always
     environment:
+      - DOCKERENV=1
       - CHOKIDAR_USEPOLLING=true
     build:
       context: ./web

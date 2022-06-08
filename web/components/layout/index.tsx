@@ -1,10 +1,12 @@
+import { ReactNode, ReactElement } from 'react'
 import Head from 'next/head'
 
-import styles from './layout.module.scss'
-import { ReactNode, ReactElement } from 'react'
-import CssBaseline from '@material-ui/core/CssBaseline'
-import { ThemeProvider } from '@material-ui/core/styles'
+import CssBaseline from '@mui/material/CssBaseline'
+import { ThemeProvider } from '@mui/material/styles'
+import PageContainer from 'components/page-container'
 import theme from './theme'
+
+import styles from './layout.module.scss'
 
 export const siteTitle = 'CryptoDragons'
 
@@ -20,11 +22,13 @@ export default function Layout({ children }: LayoutProps): ReactElement {
         <link rel="icon" href="/favicon.ico" />
         <meta name="description" content="CryptoDragons" />
         <meta name="og:title" content={siteTitle} />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="theme-color" content={theme.palette.primary.main} />
       </Head>
 
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <main>{children}</main>
+        <main><PageContainer children={children} /></main>
       </ThemeProvider>
     </div>
   )

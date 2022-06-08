@@ -1,20 +1,21 @@
 import React from 'react'
 import { ReactElement } from 'react'
 
-import { withAccountsHOC } from '../../hooks/accounts-context'
+import { withAccountsHOC } from 'hooks/accounts-context'
 
-import AppToolbar from '../../components/app-toolbar'
-import MyDragonsSearchContainerDesktop from '../../components/my-dragons/search-container/desktop'
-import MyDragonsGridViewDesktop from '../../components/my-dragons/grid-view/desktop'
-import FooterDesktop from '../../components/footer/desktop'
+import AppToolbar from 'components/app-toolbar'
+import MyDragonsSearchContainerDesktop from 'components/my-dragons/search-container/desktop'
+import MyDragonsGridViewDesktop from 'components/my-dragons/grid-view/desktop'
+import FooterDesktop from 'components/footer/desktop'
 
 import { tProps } from './types'
 
 function MyDragonsDesktop({
   accountsState,
-  attribute,
-  checkedMainchain,
-  checkedSidechain,
+  attributeValue,
+  attributes,
+  chMainchain,
+  chSidechain,
   dragons,
   filteredDragons,
   handleChangeAttribute,
@@ -30,12 +31,13 @@ function MyDragonsDesktop({
     <>
       <AppToolbar deviceType="desktop" section="my-dragons" accountsState={accountsState} />
       <MyDragonsSearchContainerDesktop
-        checkedMainchain={checkedMainchain}
-        checkedSidechain={checkedSidechain}
+        chMainchain={chMainchain}
+        chSidechain={chSidechain}
         handleCheckedChange={handleCheckedChange}
         handleSearchChange={handleSearchChange}
         search={search}
-        attribute={attribute}
+        attributeValue={attributeValue}
+        attributes={attributes}
         handleChangeAttribute={handleChangeAttribute}
         lowOrHigh={lowOrHigh}
         handleChangeSelectLowHigh={handleChangeSelectLowHigh}

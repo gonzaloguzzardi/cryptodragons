@@ -1,7 +1,7 @@
-import Guides from '../containers/guides'
+import Guides from 'containers/guides'
 
 import { GetServerSideProps } from 'next'
-import getDeviceType from '../utils/get-device-type'
+import getDeviceType from 'utils/get-device-type'
 
 export const getServerSideProps: GetServerSideProps = async (context) => ({
   props: {

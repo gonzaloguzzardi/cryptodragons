@@ -1,5 +1,12 @@
 @import '../../../styles/variables.scss';
 
+.landingImage {
+  background-image: url('/assets/home/background_dragon-land.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 .main {
   padding: $section-mobile-margins 0;
 }

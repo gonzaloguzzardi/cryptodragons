@@ -1,6 +1,6 @@
-import { createMuiTheme } from '@material-ui/core/styles'
+import { createTheme } from '@mui/material/styles'
 
-export default createMuiTheme({
+export default createTheme({
   palette: {
     action: {
       active: '#222',
@@ -53,4 +53,13 @@ export default createMuiTheme({
       textTransform: 'none',
     },
   },
+  components: {
+    MuiMobileStepper: {
+      styleOverrides: {
+        dotActive: {
+          backgroundColor: '#88f'
+        }
+      }
+    }
+  }
 })

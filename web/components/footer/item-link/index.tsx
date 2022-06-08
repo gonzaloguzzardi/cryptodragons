@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-import Typography from '@material-ui/core/Typography'
+import Typography from '@mui/material/Typography'
 
 import styles from './item-link.module.scss'
 

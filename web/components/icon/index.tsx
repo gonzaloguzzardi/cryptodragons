@@ -1,12 +1,12 @@
 import Link from 'next/link'
 
-import FacebookIcon from '@material-ui/icons/Facebook'
-import TwitterIcon from '@material-ui/icons/Twitter'
-import YoutubeIcon from '@material-ui/icons/YouTube'
-import AndroidOutlinedIcon from '@material-ui/icons/AndroidOutlined'
-import AppleIcon from '@material-ui/icons/Apple'
-import InstagramIcon from '@material-ui/icons/Instagram'
-import AddIcon from '@material-ui/icons/Add'
+import FacebookIcon from '@mui/icons-material/Facebook'
+import TwitterIcon from '@mui/icons-material/Twitter'
+import YoutubeIcon from '@mui/icons-material/YouTube'
+import AndroidOutlinedIcon from '@mui/icons-material/AndroidOutlined'
+import AppleIcon from '@mui/icons-material/Apple'
+import InstagramIcon from '@mui/icons-material/Instagram'
+import AddIcon from '@mui/icons-material/Add'
 
 import styles from './index.module.scss'
 

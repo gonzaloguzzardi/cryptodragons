@@ -1,5 +1,5 @@
-import { ReactElement } from 'react'
-import Typography from '@material-ui/core/Typography'
+import React, { ReactElement } from 'react'
+import Typography from '@mui/material/Typography'
 
 interface Props {
   message: string

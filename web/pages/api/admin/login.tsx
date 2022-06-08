@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-import { oracleApiUrl, oracleApiPort } from '../../../config'
+import { oracleApiUrl, oracleApiPort } from 'config'
 
 import type { NextApiRequest, NextApiResponse } from 'next'
 

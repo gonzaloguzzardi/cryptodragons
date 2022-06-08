@@ -1,8 +1,8 @@
 import { ReactElement } from 'react'
 
-import TextField from '@material-ui/core/TextField'
-import SearchIcon from '@material-ui/icons/Search'
-import InputAdornment from '@material-ui/core/InputAdornment'
+import TextField from '@mui/material/TextField'
+import SearchIcon from '@mui/icons-material/Search'
+import InputAdornment from '@mui/material/InputAdornment'
 
 import styles from './desktop.module.scss'
 

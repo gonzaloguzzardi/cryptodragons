@@ -1,13 +1,13 @@
 import React, { Component, ReactNode } from 'react'
-import Button from '@material-ui/core/Button'
-import Card from '@material-ui/core/Card'
-import CardActions from '@material-ui/core/CardActions'
-import CardContent from '@material-ui/core/CardContent'
-import CardMedia from '@material-ui/core/CardMedia'
-import Chip from '@material-ui/core/Chip'
-import CircularProgress from '@material-ui/core/CircularProgress'
-import Grid from '@material-ui/core/Grid'
-import Typography from '@material-ui/core/Typography'
+import Button from '@mui/material/Button'
+import Card from '@mui/material/Card'
+import CardActions from '@mui/material/CardActions'
+import CardContent from '@mui/material/CardContent'
+import CardMedia from '@mui/material/CardMedia'
+import Chip from '@mui/material/Chip'
+import CircularProgress from '@mui/material/CircularProgress'
+import Grid from '@mui/material/Grid'
+import Typography from '@mui/material/Typography'
 
 import DragonCreator from '../../components/dragon-creator'
 
@@ -23,7 +23,7 @@ interface IProps {
   id: string
   key: string
   transferMethod?: (id: string, location: string) => unknown
-  mappedAccounts: boolean
+  mappedAccounts?: boolean
 }
 
 interface IState {
@@ -36,6 +36,19 @@ interface IState {
   agility: string
   strength: string
   fortitude: string
+
+  bodyColor: number
+  bodyPatternColor: number
+  bodyPatternType: number
+  bodyType: number
+  eyesColor: number
+  eyesType: number
+  hornsColor: number
+  hornsType: number
+  tailColor: number
+  tailType: number
+  wingsColor: number
+  wingsType: number
 }
 
 class Dragon extends Component<IProps, IState> {
@@ -52,6 +65,18 @@ class Dragon extends Component<IProps, IState> {
       agility: '',
       strength: '',
       fortitude: '',
+      bodyColor: 1,
+      bodyPatternColor: 1,
+      bodyPatternType: 1,
+      bodyType: 1,
+      eyesColor: 1,
+      eyesType: 1,
+      hornsColor: 1,
+      hornsType: 1,
+      tailColor: 1,
+      tailType: 1,
+      wingsColor: 1,
+      wingsType: 1,
     }
 
     this.getDragonData()
@@ -71,16 +96,33 @@ class Dragon extends Component<IProps, IState> {
     }
   }
 
-  //TODO: map when backend is ready.
+  updateDragonVisualData = (dragonData) => {
+    console.log(dragonData)
+    this.setState({
+      bodyPatternColor: Math.round(dragonData.bodyPatternColor * 1.41),
+      bodyPatternType: 1, //(dragonData.bodyPatternType % 2) + 1, //1-2
+      bodyColor: Math.round(dragonData.bodyColor * 1.41),
+      bodyType: (dragonData.bodyType % 2) + 1, //1-2
+      eyesColor: Math.round(dragonData.eyesColor * 1.41),
+      eyesType: (dragonData.eyesType % 4) + 1, //1-4
+      hornsColor: Math.round(dragonData.hornsColor * 1.41),
+      hornsType: (dragonData.hornsType % 4) + 1, //1-4
+      tailColor: Math.round(dragonData.tailColor * 1.41),
+      tailType: (dragonData.tailType % 4) + 1, //1-4
+      wingsColor: Math.round(dragonData.wingsColor * 1.41),
+      wingsType: (dragonData.wingsType % 4) + 1, //1-4
+    })
+  }
+
   getDragonVisualData: () => unknown = () => {
     if (this.state.location === 'SIDECHAIN') {
       SidechainAPI.getDragonVisualDataById(this.state.id).then((dragonData) =>
-        console.log(dragonData)
+        this.updateDragonVisualData(dragonData)
       )
     }
     if (this.state.location === 'MAINCHAIN') {
       MainchainAPI.getDragonVisualDataById(this.state.id).then((dragonData) =>
-        console.log(dragonData)
+        this.updateDragonVisualData(dragonData)
       )
     }
   }
@@ -117,22 +159,23 @@ class Dragon extends Component<IProps, IState> {
 
           <CardMedia className={dragonStyles.card}>
             <DragonCreator
-              typeAlas={1}
-              typeCuernos={1}
-              typeOjos={1}
-              typePanza={1}
-              typeCola={1}
-              typeCuerpo={1}
-              colorAlas={1}
-              colorCuernos={1}
-              colorOjos={1}
-              colorPanza={1}
-              colorCola={1}
-              colorCuerpo={1}
+              typeAlas={this.state.wingsType}
+              typeCuernos={this.state.hornsType}
+              typeOjos={this.state.eyesType}
+              typePanza={this.state.bodyType}
+              typeCola={this.state.tailType}
+              typeCuerpo={this.state.bodyPatternType}
+              colorAlas={this.state.wingsColor}
+              colorCuernos={this.state.hornsColor}
+              colorOjos={this.state.eyesColor}
+              colorPanza={this.state.bodyColor}
+              colorCola={this.state.tailColor}
+              colorCuerpo={this.state.bodyPatternColor}
+              id={this.state.id}
             />
           </CardMedia>
 
-          <Grid container justify="center" spacing={2}>
+          <Grid container justifyContent="center" spacing={2}>
             <Grid item>
               <img src={'/assets/corazon.svg'} alt="" width="20" height="20" />
               <Typography variant="body2" align="center">
@@ -160,7 +203,7 @@ class Dragon extends Component<IProps, IState> {
           </Grid>
 
           <CardContent>
-            <Grid container justify="center">
+            <Grid container justifyContent="center">
               <Typography variant="caption">Location:&nbsp;</Typography>
               <Chip color="secondary" size="small" label={<b>{this.state.location}</b>} />
             </Grid>

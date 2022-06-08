@@ -57,6 +57,8 @@ module.exports = {
 				return null;
 			},
 			network_id: '*',
+			networkCheckTimeout: 1000000,
+      timeoutBlocks: 200
 		},
 		loom_mainnet: {
 			provider() {
@@ -89,6 +91,9 @@ module.exports = {
 			network_id: '12345',
 			gas: 5227597,
 			from: '0x28863498efede12296888f7ca6cf0b94974fbdbc',
+			skipDryRun: true,
+			networkCheckTimeout: 9000000,
+			timeoutBlocks: 90000
 		},
 	},
 	plugins: ['truffle-contract-size'],

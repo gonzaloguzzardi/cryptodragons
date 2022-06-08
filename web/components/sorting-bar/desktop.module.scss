@@ -1,0 +1,18 @@
+.fieldsFilterForm {
+  align-content: space-between;
+
+  &_secondGroup {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    user-select: none;
+
+    &_sortByLabel {
+      padding-right: 6px !important;
+    }
+
+    &_sortByValue {
+      padding-right: 16px !important;
+    }
+  }
+}

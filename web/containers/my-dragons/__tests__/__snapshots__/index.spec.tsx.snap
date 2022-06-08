@@ -4,6 +4,14 @@ exports[`Renders MyDragons desktop 1`] = `
 <div
   className="container"
 >
+  <style
+    dangerouslySetInnerHTML={
+      Object {
+        "__html": "html{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;box-sizing:border-box;-webkit-text-size-adjust:100%;}*,*::before,*::after{box-sizing:inherit;}strong,b{font-weight:700;}body{margin:0;color:#222;font-family:Raleway,Arial;font-weight:400;font-size:1rem;line-height:1.5;background-color:#fff;}@media print{body{background-color:#fff;}}body::backdrop{background-color:#fff;}",
+      }
+    }
+    data-emotion="css-global 7yq8k8"
+  />
   <main>
     <div
       className="container"
@@ -30,19 +38,65 @@ exports[`Renders MyDragons desktop 1`] = `
           <div
             className="searchbar"
           >
+            <style
+              dangerouslySetInnerHTML={
+                Object {
+                  "__html": ".css-wb57ya-MuiFormControl-root-MuiTextField-root{display:-webkit-inline-box;display:-webkit-inline-flex;display:-ms-inline-flexbox;display:inline-flex;-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column;position:relative;min-width:0;padding:0;margin:0;border:0;vertical-align:top;width:100%;}",
+                }
+              }
+              data-emotion="css wb57ya-MuiFormControl-root-MuiTextField-root"
+            />
             <div
-              className="MuiFormControl-root MuiTextField-root MuiFormControl-fullWidth"
+              className="MuiFormControl-root MuiFormControl-fullWidth MuiTextField-root css-wb57ya-MuiFormControl-root-MuiTextField-root"
             >
+              <style
+                dangerouslySetInnerHTML={
+                  Object {
+                    "__html": "@-webkit-keyframes mui-auto-fill{from{display:block;}}@keyframes mui-auto-fill{from{display:block;}}@-webkit-keyframes mui-auto-fill-cancel{from{display:block;}}@keyframes mui-auto-fill-cancel{from{display:block;}}",
+                  }
+                }
+                data-emotion="css-global 1prfaxn"
+              />
+              <style
+                dangerouslySetInnerHTML={
+                  Object {
+                    "__html": ".css-1wghwtf-MuiInputBase-root-MuiOutlinedInput-root{font-family:Raleway,Arial;font-weight:400;font-size:1rem;line-height:1.4375em;color:#222;box-sizing:border-box;position:relative;cursor:text;display:-webkit-inline-box;display:-webkit-inline-flex;display:-ms-inline-flexbox;display:inline-flex;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;width:100%;position:relative;border-radius:4px;padding-left:14px;}.css-1wghwtf-MuiInputBase-root-MuiOutlinedInput-root.Mui-disabled{color:rgba(0, 0, 0, 0.38);cursor:default;}.css-1wghwtf-MuiInputBase-root-MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline{border-color:#222;}@media (hover: none){.css-1wghwtf-MuiInputBase-root-MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline{border-color:rgba(0, 0, 0, 0.23);}}.css-1wghwtf-MuiInputBase-root-MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline{border-color:#88f;border-width:2px;}.css-1wghwtf-MuiInputBase-root-MuiOutlinedInput-root.Mui-error .MuiOutlinedInput-notchedOutline{border-color:#f44;}.css-1wghwtf-MuiInputBase-root-MuiOutlinedInput-root.Mui-disabled .MuiOutlinedInput-notchedOutline{border-color:rgba(0, 0, 0, 0.26);}",
+                  }
+                }
+                data-emotion="css 1wghwtf-MuiInputBase-root-MuiOutlinedInput-root"
+              />
               <div
-                className="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-colorSecondary MuiInput-colorSecondary MuiInputBase-fullWidth MuiInput-fullWidth MuiInputBase-formControl MuiInput-formControl MuiInputBase-adornedStart"
+                className="MuiOutlinedInput-root MuiInputBase-root MuiInputBase-colorSecondary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedStart css-1wghwtf-MuiInputBase-root-MuiOutlinedInput-root"
                 onClick={[Function]}
               >
+                <style
+                  dangerouslySetInnerHTML={
+                    Object {
+                      "__html": ".css-iczq09-MuiInputAdornment-root{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;height:0.01em;max-height:2em;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;white-space:nowrap;color:#222;margin-right:8px;}",
+                    }
+                  }
+                  data-emotion="css iczq09-MuiInputAdornment-root"
+                />
                 <div
-                  className="MuiInputAdornment-root MuiInputAdornment-positionStart"
+                  className="MuiInputAdornment-root MuiInputAdornment-positionStart MuiInputAdornment-outlined MuiInputAdornment-sizeMedium css-iczq09-MuiInputAdornment-root"
                 >
+                  <span
+                    className="notranslate"
+                  >
+                    ​
+                  </span>
+                  <style
+                    dangerouslySetInnerHTML={
+                      Object {
+                        "__html": ".css-i4bv87-MuiSvgIcon-root{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;width:1em;height:1em;display:inline-block;fill:currentColor;-webkit-flex-shrink:0;-ms-flex-negative:0;flex-shrink:0;-webkit-transition:fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;transition:fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;font-size:1.5rem;}",
+                      }
+                    }
+                    data-emotion="css i4bv87-MuiSvgIcon-root"
+                  />
                   <svg
                     aria-hidden={true}
-                    className="MuiSvgIcon-root"
+                    className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                    data-testid="SearchIcon"
                     focusable="false"
                     viewBox="0 0 24 24"
                   >
@@ -51,10 +105,18 @@ exports[`Renders MyDragons desktop 1`] = `
                     />
                   </svg>
                 </div>
+                <style
+                  dangerouslySetInnerHTML={
+                    Object {
+                      "__html": ".css-1o9s3wi-MuiInputBase-input-MuiOutlinedInput-input{font:inherit;letter-spacing:inherit;color:currentColor;padding:4px 0 5px;border:0;box-sizing:content-box;background:none;height:1.4375em;margin:0;-webkit-tap-highlight-color:transparent;display:block;min-width:0;width:100%;-webkit-animation-name:mui-auto-fill-cancel;animation-name:mui-auto-fill-cancel;-webkit-animation-duration:10ms;animation-duration:10ms;padding:16.5px 14px;padding-left:0;}.css-1o9s3wi-MuiInputBase-input-MuiOutlinedInput-input::-webkit-input-placeholder{color:currentColor;opacity:0.42;-webkit-transition:opacity 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;transition:opacity 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;}.css-1o9s3wi-MuiInputBase-input-MuiOutlinedInput-input::-moz-placeholder{color:currentColor;opacity:0.42;-webkit-transition:opacity 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;transition:opacity 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;}.css-1o9s3wi-MuiInputBase-input-MuiOutlinedInput-input:-ms-input-placeholder{color:currentColor;opacity:0.42;-webkit-transition:opacity 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;transition:opacity 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;}.css-1o9s3wi-MuiInputBase-input-MuiOutlinedInput-input::-ms-input-placeholder{color:currentColor;opacity:0.42;-webkit-transition:opacity 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;transition:opacity 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;}.css-1o9s3wi-MuiInputBase-input-MuiOutlinedInput-input:focus{outline:0;}.css-1o9s3wi-MuiInputBase-input-MuiOutlinedInput-input:invalid{box-shadow:none;}.css-1o9s3wi-MuiInputBase-input-MuiOutlinedInput-input::-webkit-search-decoration{-webkit-appearance:none;}label[data-shrink=false]+.MuiInputBase-formControl .css-1o9s3wi-MuiInputBase-input-MuiOutlinedInput-input::-webkit-input-placeholder{opacity:0!important;}label[data-shrink=false]+.MuiInputBase-formControl .css-1o9s3wi-MuiInputBase-input-MuiOutlinedInput-input::-moz-placeholder{opacity:0!important;}label[data-shrink=false]+.MuiInputBase-formControl .css-1o9s3wi-MuiInputBase-input-MuiOutlinedInput-input:-ms-input-placeholder{opacity:0!important;}label[data-shrink=false]+.MuiInputBase-formControl .css-1o9s3wi-MuiInputBase-input-MuiOutlinedInput-input::-ms-input-placeholder{opacity:0!important;}label[data-shrink=false]+.MuiInputBase-formControl .css-1o9s3wi-MuiInputBase-input-MuiOutlinedInput-input:focus::-webkit-input-placeholder{opacity:0.42;}label[data-shrink=false]+.MuiInputBase-formControl .css-1o9s3wi-MuiInputBase-input-MuiOutlinedInput-input:focus::-moz-placeholder{opacity:0.42;}label[data-shrink=false]+.MuiInputBase-formControl .css-1o9s3wi-MuiInputBase-input-MuiOutlinedInput-input:focus:-ms-input-placeholder{opacity:0.42;}label[data-shrink=false]+.MuiInputBase-formControl .css-1o9s3wi-MuiInputBase-input-MuiOutlinedInput-input:focus::-ms-input-placeholder{opacity:0.42;}.css-1o9s3wi-MuiInputBase-input-MuiOutlinedInput-input.Mui-disabled{opacity:1;-webkit-text-fill-color:rgba(0, 0, 0, 0.38);}.css-1o9s3wi-MuiInputBase-input-MuiOutlinedInput-input:-webkit-autofill{-webkit-animation-duration:5000s;animation-duration:5000s;-webkit-animation-name:mui-auto-fill;animation-name:mui-auto-fill;}.css-1o9s3wi-MuiInputBase-input-MuiOutlinedInput-input:-webkit-autofill{border-radius:inherit;}",
+                    }
+                  }
+                  data-emotion="css 1o9s3wi-MuiInputBase-input-MuiOutlinedInput-input"
+                />
                 <input
                   aria-invalid={false}
                   autoFocus={false}
-                  className="MuiInputBase-input MuiInput-input MuiInputBase-inputAdornedStart"
+                  className="MuiOutlinedInput-input MuiInputBase-input MuiInputBase-inputAdornedStart css-1o9s3wi-MuiInputBase-input-MuiOutlinedInput-input"
                   disabled={false}
                   id="standard-secondary"
                   onAnimationStart={[Function]}
@@ -66,22 +128,100 @@ exports[`Renders MyDragons desktop 1`] = `
                   type="text"
                   value=""
                 />
+                <style
+                  dangerouslySetInnerHTML={
+                    Object {
+                      "__html": ".css-rki20w-MuiOutlinedInput-notchedOutline{border-color:rgba(0, 0, 0, 0.23);}",
+                    }
+                  }
+                  data-emotion="css rki20w-MuiOutlinedInput-notchedOutline"
+                />
+                <style
+                  dangerouslySetInnerHTML={
+                    Object {
+                      "__html": ".css-1d3z3hw-MuiOutlinedInput-notchedOutline{text-align:left;position:absolute;bottom:0;right:0;top:-5px;left:0;margin:0;padding:0 8px;pointer-events:none;border-radius:inherit;border-style:solid;border-width:1px;overflow:hidden;min-width:0%;border-color:rgba(0, 0, 0, 0.23);}",
+                    }
+                  }
+                  data-emotion="css 1d3z3hw-MuiOutlinedInput-notchedOutline"
+                />
+                <fieldset
+                  aria-hidden={true}
+                  className="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
+                >
+                  <style
+                    dangerouslySetInnerHTML={
+                      Object {
+                        "__html": ".css-hdw1oc{float:unset;overflow:hidden;padding:0;line-height:11px;-webkit-transition:width 150ms cubic-bezier(0.0, 0, 0.2, 1) 0ms;transition:width 150ms cubic-bezier(0.0, 0, 0.2, 1) 0ms;}",
+                      }
+                    }
+                    data-emotion="css hdw1oc"
+                  />
+                  <legend
+                    className="css-hdw1oc"
+                  >
+                    <span
+                      className="notranslate"
+                    >
+                      ​
+                    </span>
+                  </legend>
+                </fieldset>
               </div>
             </div>
           </div>
+          <style
+            dangerouslySetInnerHTML={
+              Object {
+                "__html": ".css-qfz70r-MuiFormGroup-root{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-direction:row;-ms-flex-direction:row;flex-direction:row;-webkit-box-flex-wrap:wrap;-webkit-flex-wrap:wrap;-ms-flex-wrap:wrap;flex-wrap:wrap;}",
+              }
+            }
+            data-emotion="css qfz70r-MuiFormGroup-root"
+          />
           <div
-            className="MuiFormGroup-root fieldsFilterForm MuiFormGroup-row"
+            className="MuiFormGroup-root MuiFormGroup-row fieldsFilterForm css-qfz70r-MuiFormGroup-root"
           >
             <div
               className="fieldsFilterForm_firstGroup"
             >
+              <style
+                dangerouslySetInnerHTML={
+                  Object {
+                    "__html": ".css-j204z7-MuiFormControlLabel-root{display:-webkit-inline-box;display:-webkit-inline-flex;display:-ms-inline-flexbox;display:inline-flex;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;cursor:pointer;vertical-align:middle;-webkit-tap-highlight-color:transparent;margin-left:-11px;margin-right:16px;}.css-j204z7-MuiFormControlLabel-root.Mui-disabled{cursor:default;}.css-j204z7-MuiFormControlLabel-root .MuiFormControlLabel-label.Mui-disabled{color:rgba(0, 0, 0, 0.38);}",
+                  }
+                }
+                data-emotion="css j204z7-MuiFormControlLabel-root"
+              />
               <label
-                className="MuiFormControlLabel-root"
+                className="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-j204z7-MuiFormControlLabel-root"
               >
+                <style
+                  dangerouslySetInnerHTML={
+                    Object {
+                      "__html": ".css-lbusu0-MuiCheckbox-root{color:#828282;}.css-lbusu0-MuiCheckbox-root:hover{background-color:rgba(136, 136, 255, 0.04);}@media (hover: none){.css-lbusu0-MuiCheckbox-root:hover{background-color:transparent;}}.css-lbusu0-MuiCheckbox-root.Mui-checked,.css-lbusu0-MuiCheckbox-root.MuiCheckbox-indeterminate{color:#88f;}.css-lbusu0-MuiCheckbox-root.Mui-disabled{color:rgba(0, 0, 0, 0.26);}",
+                    }
+                  }
+                  data-emotion="css lbusu0-MuiCheckbox-root"
+                />
+                <style
+                  dangerouslySetInnerHTML={
+                    Object {
+                      "__html": ".css-1qblcbn-MuiCheckbox-root{padding:9px;border-radius:50%;color:#828282;}.css-1qblcbn-MuiCheckbox-root:hover{background-color:rgba(136, 136, 255, 0.04);}@media (hover: none){.css-1qblcbn-MuiCheckbox-root:hover{background-color:transparent;}}.css-1qblcbn-MuiCheckbox-root.Mui-checked,.css-1qblcbn-MuiCheckbox-root.MuiCheckbox-indeterminate{color:#88f;}.css-1qblcbn-MuiCheckbox-root.Mui-disabled{color:rgba(0, 0, 0, 0.26);}",
+                    }
+                  }
+                  data-emotion="css 1qblcbn-MuiCheckbox-root"
+                />
+                <style
+                  dangerouslySetInnerHTML={
+                    Object {
+                      "__html": ".css-hzoy7s-MuiButtonBase-root-MuiCheckbox-root{display:-webkit-inline-box;display:-webkit-inline-flex;display:-ms-inline-flexbox;display:inline-flex;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;-webkit-justify-content:center;justify-content:center;position:relative;box-sizing:border-box;-webkit-tap-highlight-color:transparent;background-color:transparent;outline:0;border:0;margin:0;border-radius:0;padding:0;cursor:pointer;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;vertical-align:middle;-moz-appearance:none;-webkit-appearance:none;-webkit-text-decoration:none;text-decoration:none;color:inherit;padding:9px;border-radius:50%;color:#828282;}.css-hzoy7s-MuiButtonBase-root-MuiCheckbox-root::-moz-focus-inner{border-style:none;}.css-hzoy7s-MuiButtonBase-root-MuiCheckbox-root.Mui-disabled{pointer-events:none;cursor:default;}@media print{.css-hzoy7s-MuiButtonBase-root-MuiCheckbox-root{-webkit-print-color-adjust:exact;color-adjust:exact;}}.css-hzoy7s-MuiButtonBase-root-MuiCheckbox-root:hover{background-color:rgba(136, 136, 255, 0.04);}@media (hover: none){.css-hzoy7s-MuiButtonBase-root-MuiCheckbox-root:hover{background-color:transparent;}}.css-hzoy7s-MuiButtonBase-root-MuiCheckbox-root.Mui-checked,.css-hzoy7s-MuiButtonBase-root-MuiCheckbox-root.MuiCheckbox-indeterminate{color:#88f;}.css-hzoy7s-MuiButtonBase-root-MuiCheckbox-root.Mui-disabled{color:rgba(0, 0, 0, 0.26);}",
+                    }
+                  }
+                  data-emotion="css hzoy7s-MuiButtonBase-root-MuiCheckbox-root"
+                />
                 <span
-                  aria-disabled={false}
-                  className="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-1 MuiCheckbox-root MuiCheckbox-colorSecondary PrivateSwitchBase-checked-2 Mui-checked MuiIconButton-colorSecondary"
+                  className="MuiCheckbox-root MuiCheckbox-colorSecondary MuiButtonBase-root MuiCheckbox-root MuiCheckbox-colorSecondary PrivateSwitchBase-root Mui-checked css-hzoy7s-MuiButtonBase-root-MuiCheckbox-root"
                   onBlur={[Function]}
+                  onContextMenu={[Function]}
                   onDragLeave={[Function]}
                   onFocus={[Function]}
                   onKeyDown={[Function]}
@@ -94,46 +234,63 @@ exports[`Renders MyDragons desktop 1`] = `
                   onTouchStart={[Function]}
                   tabIndex={null}
                 >
-                  <span
-                    className="MuiIconButton-label"
+                  <style
+                    dangerouslySetInnerHTML={
+                      Object {
+                        "__html": ".css-1m9pwf3{cursor:inherit;position:absolute;opacity:0;width:100%;height:100%;top:0;left:0;margin:0;padding:0;z-index:1;}",
+                      }
+                    }
+                    data-emotion="css 1m9pwf3"
+                  />
+                  <input
+                    checked={true}
+                    className="PrivateSwitchBase-input css-1m9pwf3"
+                    data-indeterminate={false}
+                    name="checkedMainchain"
+                    onChange={[Function]}
+                    type="checkbox"
+                  />
+                  <style
+                    dangerouslySetInnerHTML={
+                      Object {
+                        "__html": ".css-i4bv87-MuiSvgIcon-root{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;width:1em;height:1em;display:inline-block;fill:currentColor;-webkit-flex-shrink:0;-ms-flex-negative:0;flex-shrink:0;-webkit-transition:fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;transition:fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;font-size:1.5rem;}",
+                      }
+                    }
+                    data-emotion="css i4bv87-MuiSvgIcon-root"
+                  />
+                  <svg
+                    aria-hidden={true}
+                    className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                    data-testid="CheckBoxIcon"
+                    focusable="false"
+                    viewBox="0 0 24 24"
                   >
-                    <input
-                      checked={true}
-                      className="PrivateSwitchBase-input-4"
-                      data-indeterminate={false}
-                      name="checkedMainchain"
-                      onChange={[Function]}
-                      type="checkbox"
+                    <path
+                      d="M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.11 0 2-.9 2-2V5c0-1.1-.89-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
                     />
-                    <svg
-                      aria-hidden={true}
-                      className="MuiSvgIcon-root"
-                      focusable="false"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        d="M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.11 0 2-.9 2-2V5c0-1.1-.89-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
-                      />
-                    </svg>
-                  </span>
+                  </svg>
                 </span>
+                <style
+                  dangerouslySetInnerHTML={
+                    Object {
+                      "__html": ".css-1b4kcbq-MuiTypography-root{margin:0;font-size:14px;font-weight:600;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;font-family:Raleway,Arial;line-height:1.66;}",
+                    }
+                  }
+                  data-emotion="css 1b4kcbq-MuiTypography-root"
+                />
                 <span
-                  className="MuiTypography-root MuiFormControlLabel-label MuiTypography-body1"
+                  className="MuiTypography-root MuiTypography-caption css-1b4kcbq-MuiTypography-root"
                 >
-                  <span
-                    className="MuiTypography-root MuiTypography-caption"
-                  >
-                    in Mainchain
-                  </span>
+                  in Mainchain
                 </span>
               </label>
               <label
-                className="MuiFormControlLabel-root"
+                className="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-j204z7-MuiFormControlLabel-root"
               >
                 <span
-                  aria-disabled={false}
-                  className="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-1 MuiCheckbox-root MuiCheckbox-colorSecondary PrivateSwitchBase-checked-2 Mui-checked MuiIconButton-colorSecondary"
+                  className="MuiCheckbox-root MuiCheckbox-colorSecondary MuiButtonBase-root MuiCheckbox-root MuiCheckbox-colorSecondary PrivateSwitchBase-root Mui-checked css-hzoy7s-MuiButtonBase-root-MuiCheckbox-root"
                   onBlur={[Function]}
+                  onContextMenu={[Function]}
                   onDragLeave={[Function]}
                   onFocus={[Function]}
                   onKeyDown={[Function]}
@@ -146,58 +303,100 @@ exports[`Renders MyDragons desktop 1`] = `
                   onTouchStart={[Function]}
                   tabIndex={null}
                 >
-                  <span
-                    className="MuiIconButton-label"
+                  <input
+                    checked={true}
+                    className="PrivateSwitchBase-input css-1m9pwf3"
+                    data-indeterminate={false}
+                    name="checkedSidechain"
+                    onChange={[Function]}
+                    type="checkbox"
+                  />
+                  <svg
+                    aria-hidden={true}
+                    className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                    data-testid="CheckBoxIcon"
+                    focusable="false"
+                    viewBox="0 0 24 24"
                   >
-                    <input
-                      checked={true}
-                      className="PrivateSwitchBase-input-4"
-                      data-indeterminate={false}
-                      name="checkedSidechain"
-                      onChange={[Function]}
-                      type="checkbox"
+                    <path
+                      d="M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.11 0 2-.9 2-2V5c0-1.1-.89-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
                     />
-                    <svg
-                      aria-hidden={true}
-                      className="MuiSvgIcon-root"
-                      focusable="false"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        d="M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.11 0 2-.9 2-2V5c0-1.1-.89-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
-                      />
-                    </svg>
-                  </span>
+                  </svg>
                 </span>
                 <span
-                  className="MuiTypography-root MuiFormControlLabel-label MuiTypography-body1"
+                  className="MuiTypography-root MuiTypography-caption css-1b4kcbq-MuiTypography-root"
                 >
-                  <span
-                    className="MuiTypography-root MuiTypography-caption"
-                  >
-                    in Sidechain
-                  </span>
+                  in Sidechain
                 </span>
               </label>
             </div>
             <div
               className="fieldsFilterForm_secondGroup"
             >
+              <style
+                dangerouslySetInnerHTML={
+                  Object {
+                    "__html": ".css-1fif7pm-MuiTypography-root{margin:0;font-family:Raleway,Arial;font-weight:400;font-size:0.875rem;line-height:1.43;}",
+                  }
+                }
+                data-emotion="css 1fif7pm-MuiTypography-root"
+              />
               <p
-                className="MuiTypography-root fieldsFilterForm_secondGroup_sortByLabel MuiTypography-body2"
+                className="MuiTypography-root MuiTypography-body2 fieldsFilterForm_secondGroup_sortByLabel css-1fif7pm-MuiTypography-root"
               >
                 Sort by
               </p>
+              <style
+                dangerouslySetInnerHTML={
+                  Object {
+                    "__html": ".css-1nrlq1o-MuiFormControl-root{display:-webkit-inline-box;display:-webkit-inline-flex;display:-ms-inline-flexbox;display:inline-flex;-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column;position:relative;min-width:0;padding:0;margin:0;border:0;vertical-align:top;}",
+                  }
+                }
+                data-emotion="css 1nrlq1o-MuiFormControl-root"
+              />
               <div
-                className="MuiFormControl-root fieldsFilterForm_secondGroup_sortByValue"
+                className="MuiFormControl-root fieldsFilterForm_secondGroup_sortByValue css-1nrlq1o-MuiFormControl-root"
               >
+                <style
+                  dangerouslySetInnerHTML={
+                    Object {
+                      "__html": "@-webkit-keyframes mui-auto-fill{from{display:block;}}@keyframes mui-auto-fill{from{display:block;}}@-webkit-keyframes mui-auto-fill-cancel{from{display:block;}}@keyframes mui-auto-fill-cancel{from{display:block;}}",
+                    }
+                  }
+                  data-emotion="css-global 1prfaxn"
+                />
+                <style
+                  dangerouslySetInnerHTML={
+                    Object {
+                      "__html": ".css-1auijsu-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root{font-family:Raleway,Arial;font-weight:400;font-size:1rem;line-height:1.4375em;color:#222;box-sizing:border-box;position:relative;cursor:text;display:-webkit-inline-box;display:-webkit-inline-flex;display:-ms-inline-flexbox;display:inline-flex;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;position:relative;border-radius:4px;}.css-1auijsu-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root.Mui-disabled{color:rgba(0, 0, 0, 0.38);cursor:default;}.css-1auijsu-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root:hover .MuiOutlinedInput-notchedOutline{border-color:#222;}@media (hover: none){.css-1auijsu-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root:hover .MuiOutlinedInput-notchedOutline{border-color:rgba(0, 0, 0, 0.23);}}.css-1auijsu-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root.Mui-focused .MuiOutlinedInput-notchedOutline{border-color:#fff;border-width:2px;}.css-1auijsu-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root.Mui-error .MuiOutlinedInput-notchedOutline{border-color:#f44;}.css-1auijsu-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root.Mui-disabled .MuiOutlinedInput-notchedOutline{border-color:rgba(0, 0, 0, 0.26);}",
+                    }
+                  }
+                  data-emotion="css 1auijsu-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root"
+                />
                 <div
-                  className="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-formControl MuiInput-formControl"
+                  className="MuiOutlinedInput-root MuiInputBase-root MuiInputBase-colorPrimary MuiInputBase-formControl  css-1auijsu-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root"
                   onClick={[Function]}
                 >
+                  <style
+                    dangerouslySetInnerHTML={
+                      Object {
+                        "__html": ".css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input{font:inherit;letter-spacing:inherit;color:currentColor;padding:4px 0 5px;border:0;box-sizing:content-box;background:none;height:1.4375em;margin:0;-webkit-tap-highlight-color:transparent;display:block;min-width:0;width:100%;-webkit-animation-name:mui-auto-fill-cancel;animation-name:mui-auto-fill-cancel;-webkit-animation-duration:10ms;animation-duration:10ms;padding:16.5px 14px;}.css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input::-webkit-input-placeholder{color:currentColor;opacity:0.42;-webkit-transition:opacity 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;transition:opacity 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;}.css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input::-moz-placeholder{color:currentColor;opacity:0.42;-webkit-transition:opacity 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;transition:opacity 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;}.css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input:-ms-input-placeholder{color:currentColor;opacity:0.42;-webkit-transition:opacity 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;transition:opacity 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;}.css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input::-ms-input-placeholder{color:currentColor;opacity:0.42;-webkit-transition:opacity 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;transition:opacity 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;}.css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input:focus{outline:0;}.css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input:invalid{box-shadow:none;}.css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input::-webkit-search-decoration{-webkit-appearance:none;}label[data-shrink=false]+.MuiInputBase-formControl .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input::-webkit-input-placeholder{opacity:0!important;}label[data-shrink=false]+.MuiInputBase-formControl .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input::-moz-placeholder{opacity:0!important;}label[data-shrink=false]+.MuiInputBase-formControl .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input:-ms-input-placeholder{opacity:0!important;}label[data-shrink=false]+.MuiInputBase-formControl .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input::-ms-input-placeholder{opacity:0!important;}label[data-shrink=false]+.MuiInputBase-formControl .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input:focus::-webkit-input-placeholder{opacity:0.42;}label[data-shrink=false]+.MuiInputBase-formControl .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input:focus::-moz-placeholder{opacity:0.42;}label[data-shrink=false]+.MuiInputBase-formControl .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input:focus:-ms-input-placeholder{opacity:0.42;}label[data-shrink=false]+.MuiInputBase-formControl .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input:focus::-ms-input-placeholder{opacity:0.42;}.css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input.Mui-disabled{opacity:1;-webkit-text-fill-color:rgba(0, 0, 0, 0.38);}.css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input:-webkit-autofill{-webkit-animation-duration:5000s;animation-duration:5000s;-webkit-animation-name:mui-auto-fill;animation-name:mui-auto-fill;}.css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input:-webkit-autofill{border-radius:inherit;}",
+                      }
+                    }
+                    data-emotion="css 1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input"
+                  />
+                  <style
+                    dangerouslySetInnerHTML={
+                      Object {
+                        "__html": ".css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input{-moz-appearance:none;-webkit-appearance:none;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;border-radius:4px;cursor:pointer;font:inherit;letter-spacing:inherit;color:currentColor;padding:4px 0 5px;border:0;box-sizing:content-box;background:none;height:1.4375em;margin:0;-webkit-tap-highlight-color:transparent;display:block;min-width:0;width:100%;-webkit-animation-name:mui-auto-fill-cancel;animation-name:mui-auto-fill-cancel;-webkit-animation-duration:10ms;animation-duration:10ms;padding:16.5px 14px;}.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input:focus{border-radius:4px;}.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input::-ms-expand{display:none;}.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.Mui-disabled{cursor:default;}.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input[multiple]{height:auto;}.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input:not([multiple]) option,.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input:not([multiple]) optgroup{background-color:#fff;}.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input{padding-right:32px;}.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.MuiSelect-select{height:auto;min-height:1.4375em;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;}.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input::-webkit-input-placeholder{color:currentColor;opacity:0.42;-webkit-transition:opacity 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;transition:opacity 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;}.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input::-moz-placeholder{color:currentColor;opacity:0.42;-webkit-transition:opacity 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;transition:opacity 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;}.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input:-ms-input-placeholder{color:currentColor;opacity:0.42;-webkit-transition:opacity 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;transition:opacity 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;}.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input::-ms-input-placeholder{color:currentColor;opacity:0.42;-webkit-transition:opacity 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;transition:opacity 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;}.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input:focus{outline:0;}.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input:invalid{box-shadow:none;}.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input::-webkit-search-decoration{-webkit-appearance:none;}label[data-shrink=false]+.MuiInputBase-formControl .css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input::-webkit-input-placeholder{opacity:0!important;}label[data-shrink=false]+.MuiInputBase-formControl .css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input::-moz-placeholder{opacity:0!important;}label[data-shrink=false]+.MuiInputBase-formControl .css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input:-ms-input-placeholder{opacity:0!important;}label[data-shrink=false]+.MuiInputBase-formControl .css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input::-ms-input-placeholder{opacity:0!important;}label[data-shrink=false]+.MuiInputBase-formControl .css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input:focus::-webkit-input-placeholder{opacity:0.42;}label[data-shrink=false]+.MuiInputBase-formControl .css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input:focus::-moz-placeholder{opacity:0.42;}label[data-shrink=false]+.MuiInputBase-formControl .css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input:focus:-ms-input-placeholder{opacity:0.42;}label[data-shrink=false]+.MuiInputBase-formControl .css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input:focus::-ms-input-placeholder{opacity:0.42;}.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.Mui-disabled{opacity:1;-webkit-text-fill-color:rgba(0, 0, 0, 0.38);}.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input:-webkit-autofill{-webkit-animation-duration:5000s;animation-duration:5000s;-webkit-animation-name:mui-auto-fill;animation-name:mui-auto-fill;}.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input:-webkit-autofill{border-radius:inherit;}",
+                      }
+                    }
+                    data-emotion="css 11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+                  />
                   <div
+                    aria-expanded="false"
                     aria-haspopup="listbox"
-                    className="MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiInputBase-input MuiInput-input"
+                    className="MuiSelect-select MuiSelect-outlined MuiOutlinedInput-input MuiInputBase-input css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
                     onBlur={[Function]}
                     onFocus={[Function]}
                     onKeyDown={[Function]}
@@ -206,23 +405,49 @@ exports[`Renders MyDragons desktop 1`] = `
                     tabIndex={0}
                   >
                     <span
-                      className="MuiTypography-root MuiTypography-caption"
+                      className="MuiTypography-root MuiTypography-caption css-1b4kcbq-MuiTypography-root"
                     >
                       Age
                     </span>
                   </div>
+                  <style
+                    dangerouslySetInnerHTML={
+                      Object {
+                        "__html": ".css-yf8vq0-MuiSelect-nativeInput{bottom:0;left:0;position:absolute;opacity:0;pointer-events:none;width:100%;box-sizing:border-box;}",
+                      }
+                    }
+                    data-emotion="css yf8vq0-MuiSelect-nativeInput"
+                  />
                   <input
                     aria-hidden={true}
-                    className="MuiSelect-nativeInput"
+                    className="MuiSelect-nativeInput css-yf8vq0-MuiSelect-nativeInput"
+                    disabled={false}
                     onAnimationStart={[Function]}
                     onChange={[Function]}
                     required={false}
                     tabIndex={-1}
                     value={10}
                   />
+                  <style
+                    dangerouslySetInnerHTML={
+                      Object {
+                        "__html": ".css-113w5nq-MuiSelect-icon{position:absolute;right:7px;top:calc(50% - .5em);pointer-events:none;color:#222;}.css-113w5nq-MuiSelect-icon.Mui-disabled{color:rgba(0, 0, 0, 0.26);}",
+                      }
+                    }
+                    data-emotion="css 113w5nq-MuiSelect-icon"
+                  />
+                  <style
+                    dangerouslySetInnerHTML={
+                      Object {
+                        "__html": ".css-1l33zyf-MuiSvgIcon-root-MuiSelect-icon{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;width:1em;height:1em;display:inline-block;fill:currentColor;-webkit-flex-shrink:0;-ms-flex-negative:0;flex-shrink:0;-webkit-transition:fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;transition:fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;font-size:1.5rem;position:absolute;right:7px;top:calc(50% - .5em);pointer-events:none;color:#222;}.css-1l33zyf-MuiSvgIcon-root-MuiSelect-icon.Mui-disabled{color:rgba(0, 0, 0, 0.26);}",
+                      }
+                    }
+                    data-emotion="css 1l33zyf-MuiSvgIcon-root-MuiSelect-icon"
+                  />
                   <svg
                     aria-hidden={true}
-                    className="MuiSvgIcon-root MuiSelect-icon"
+                    className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconOutlined css-1l33zyf-MuiSvgIcon-root-MuiSelect-icon"
+                    data-testid="ArrowDropDownIcon"
                     focusable="false"
                     viewBox="0 0 24 24"
                   >
@@ -230,18 +455,65 @@ exports[`Renders MyDragons desktop 1`] = `
                       d="M7 10l5 5 5-5z"
                     />
                   </svg>
+                  <style
+                    dangerouslySetInnerHTML={
+                      Object {
+                        "__html": ".css-rki20w-MuiOutlinedInput-notchedOutline{border-color:rgba(0, 0, 0, 0.23);}",
+                      }
+                    }
+                    data-emotion="css rki20w-MuiOutlinedInput-notchedOutline"
+                  />
+                  <style
+                    dangerouslySetInnerHTML={
+                      Object {
+                        "__html": ".css-1d3z3hw-MuiOutlinedInput-notchedOutline{text-align:left;position:absolute;bottom:0;right:0;top:-5px;left:0;margin:0;padding:0 8px;pointer-events:none;border-radius:inherit;border-style:solid;border-width:1px;overflow:hidden;min-width:0%;border-color:rgba(0, 0, 0, 0.23);}",
+                      }
+                    }
+                    data-emotion="css 1d3z3hw-MuiOutlinedInput-notchedOutline"
+                  />
+                  <fieldset
+                    aria-hidden={true}
+                    className="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
+                  >
+                    <style
+                      dangerouslySetInnerHTML={
+                        Object {
+                          "__html": ".css-hdw1oc{float:unset;overflow:hidden;padding:0;line-height:11px;-webkit-transition:width 150ms cubic-bezier(0.0, 0, 0.2, 1) 0ms;transition:width 150ms cubic-bezier(0.0, 0, 0.2, 1) 0ms;}",
+                        }
+                      }
+                      data-emotion="css hdw1oc"
+                    />
+                    <legend
+                      className="css-hdw1oc"
+                    >
+                      <span
+                        className="notranslate"
+                      >
+                        ​
+                      </span>
+                    </legend>
+                  </fieldset>
                 </div>
               </div>
               <div
-                className="MuiFormControl-root"
+                className="MuiFormControl-root css-1nrlq1o-MuiFormControl-root"
               >
+                <style
+                  dangerouslySetInnerHTML={
+                    Object {
+                      "__html": "@-webkit-keyframes mui-auto-fill{from{display:block;}}@keyframes mui-auto-fill{from{display:block;}}@-webkit-keyframes mui-auto-fill-cancel{from{display:block;}}@keyframes mui-auto-fill-cancel{from{display:block;}}",
+                    }
+                  }
+                  data-emotion="css-global 1prfaxn"
+                />
                 <div
-                  className="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-formControl MuiInput-formControl"
+                  className="MuiOutlinedInput-root MuiInputBase-root MuiInputBase-colorPrimary MuiInputBase-formControl  css-1auijsu-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root"
                   onClick={[Function]}
                 >
                   <div
+                    aria-expanded="false"
                     aria-haspopup="listbox"
-                    className="MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiInputBase-input MuiInput-input"
+                    className="MuiSelect-select MuiSelect-outlined MuiOutlinedInput-input MuiInputBase-input css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
                     onBlur={[Function]}
                     onFocus={[Function]}
                     onKeyDown={[Function]}
@@ -250,14 +522,15 @@ exports[`Renders MyDragons desktop 1`] = `
                     tabIndex={0}
                   >
                     <span
-                      className="MuiTypography-root MuiTypography-caption"
+                      className="MuiTypography-root MuiTypography-caption css-1b4kcbq-MuiTypography-root"
                     >
                       low to high
                     </span>
                   </div>
                   <input
                     aria-hidden={true}
-                    className="MuiSelect-nativeInput"
+                    className="MuiSelect-nativeInput css-yf8vq0-MuiSelect-nativeInput"
+                    disabled={false}
                     onAnimationStart={[Function]}
                     onChange={[Function]}
                     required={false}
@@ -266,7 +539,8 @@ exports[`Renders MyDragons desktop 1`] = `
                   />
                   <svg
                     aria-hidden={true}
-                    className="MuiSvgIcon-root MuiSelect-icon"
+                    className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconOutlined css-1l33zyf-MuiSvgIcon-root-MuiSelect-icon"
+                    data-testid="ArrowDropDownIcon"
                     focusable="false"
                     viewBox="0 0 24 24"
                   >
@@ -274,6 +548,20 @@ exports[`Renders MyDragons desktop 1`] = `
                       d="M7 10l5 5 5-5z"
                     />
                   </svg>
+                  <fieldset
+                    aria-hidden={true}
+                    className="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
+                  >
+                    <legend
+                      className="css-hdw1oc"
+                    >
+                      <span
+                        className="notranslate"
+                      >
+                        ​
+                      </span>
+                    </legend>
+                  </fieldset>
                 </div>
               </div>
             </div>
@@ -283,8 +571,16 @@ exports[`Renders MyDragons desktop 1`] = `
       <div
         className="spinnerContainer"
       >
-        <div
-          className="MuiCircularProgress-root MuiCircularProgress-colorSecondary MuiCircularProgress-indeterminate"
+        <style
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": ".css-1mnlj4g-MuiCircularProgress-root{display:inline-block;color:#88f;-webkit-animation:animation-61bdi0 1.4s linear infinite;animation:animation-61bdi0 1.4s linear infinite;}@-webkit-keyframes animation-61bdi0{0%{-webkit-transform:rotate(0deg);-moz-transform:rotate(0deg);-ms-transform:rotate(0deg);transform:rotate(0deg);}100%{-webkit-transform:rotate(360deg);-moz-transform:rotate(360deg);-ms-transform:rotate(360deg);transform:rotate(360deg);}}@keyframes animation-61bdi0{0%{-webkit-transform:rotate(0deg);-moz-transform:rotate(0deg);-ms-transform:rotate(0deg);transform:rotate(0deg);}100%{-webkit-transform:rotate(360deg);-moz-transform:rotate(360deg);-ms-transform:rotate(360deg);transform:rotate(360deg);}}",
+            }
+          }
+          data-emotion="css 1mnlj4g-MuiCircularProgress-root animation-61bdi0"
+        />
+        <span
+          className="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorSecondary css-1mnlj4g-MuiCircularProgress-root"
           role="progressbar"
           style={
             Object {
@@ -293,12 +589,28 @@ exports[`Renders MyDragons desktop 1`] = `
             }
           }
         >
+          <style
+            dangerouslySetInnerHTML={
+              Object {
+                "__html": ".css-1idz92c-MuiCircularProgress-svg{display:block;}",
+              }
+            }
+            data-emotion="css 1idz92c-MuiCircularProgress-svg"
+          />
           <svg
-            className="MuiCircularProgress-svg"
+            className="MuiCircularProgress-svg css-1idz92c-MuiCircularProgress-svg"
             viewBox="22 22 44 44"
           >
+            <style
+              dangerouslySetInnerHTML={
+                Object {
+                  "__html": ".css-176wh8e-MuiCircularProgress-circle{stroke:currentColor;stroke-dasharray:80px,200px;stroke-dashoffset:0;-webkit-animation:animation-1p2h4ri 1.4s ease-in-out infinite;animation:animation-1p2h4ri 1.4s ease-in-out infinite;}@-webkit-keyframes animation-1p2h4ri{0%{stroke-dasharray:1px,200px;stroke-dashoffset:0;}50%{stroke-dasharray:100px,200px;stroke-dashoffset:-15px;}100%{stroke-dasharray:100px,200px;stroke-dashoffset:-125px;}}@keyframes animation-1p2h4ri{0%{stroke-dasharray:1px,200px;stroke-dashoffset:0;}50%{stroke-dasharray:100px,200px;stroke-dashoffset:-15px;}100%{stroke-dasharray:100px,200px;stroke-dashoffset:-125px;}}",
+                }
+              }
+              data-emotion="css 176wh8e-MuiCircularProgress-circle animation-1p2h4ri"
+            />
             <circle
-              className="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate"
+              className="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-176wh8e-MuiCircularProgress-circle"
               cx={44}
               cy={44}
               fill="none"
@@ -307,16 +619,32 @@ exports[`Renders MyDragons desktop 1`] = `
               style={Object {}}
             />
           </svg>
-        </div>
+        </span>
       </div>
       <footer
         className="main"
       >
+        <style
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": ".css-11lq3yg-MuiGrid-root{box-sizing:border-box;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-flex-wrap:wrap;-webkit-flex-wrap:wrap;-ms-flex-wrap:wrap;flex-wrap:wrap;width:100%;-webkit-flex-direction:row;-ms-flex-direction:row;flex-direction:row;}",
+            }
+          }
+          data-emotion="css 11lq3yg-MuiGrid-root"
+        />
         <div
-          className="MuiGrid-root container MuiGrid-container"
+          className="MuiGrid-root MuiGrid-container container css-11lq3yg-MuiGrid-root"
         >
+          <style
+            dangerouslySetInnerHTML={
+              Object {
+                "__html": ".css-1equabv-MuiGrid-root{box-sizing:border-box;margin:0;-webkit-flex-direction:row;-ms-flex-direction:row;flex-direction:row;-webkit-flex-basis:25%;-ms-flex-preferred-size:25%;flex-basis:25%;-webkit-box-flex:0;-webkit-flex-grow:0;-ms-flex-positive:0;flex-grow:0;max-width:25%;}@media (min-width:600px){.css-1equabv-MuiGrid-root{-webkit-flex-basis:25%;-ms-flex-preferred-size:25%;flex-basis:25%;-webkit-box-flex:0;-webkit-flex-grow:0;-ms-flex-positive:0;flex-grow:0;max-width:25%;}}@media (min-width:900px){.css-1equabv-MuiGrid-root{-webkit-flex-basis:25%;-ms-flex-preferred-size:25%;flex-basis:25%;-webkit-box-flex:0;-webkit-flex-grow:0;-ms-flex-positive:0;flex-grow:0;max-width:25%;}}@media (min-width:1200px){.css-1equabv-MuiGrid-root{-webkit-flex-basis:25%;-ms-flex-preferred-size:25%;flex-basis:25%;-webkit-box-flex:0;-webkit-flex-grow:0;-ms-flex-positive:0;flex-grow:0;max-width:25%;}}@media (min-width:1536px){.css-1equabv-MuiGrid-root{-webkit-flex-basis:25%;-ms-flex-preferred-size:25%;flex-basis:25%;-webkit-box-flex:0;-webkit-flex-grow:0;-ms-flex-positive:0;flex-grow:0;max-width:25%;}}",
+              }
+            }
+            data-emotion="css 1equabv-MuiGrid-root"
+          />
           <div
-            className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3"
+            className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3 css-1equabv-MuiGrid-root"
           >
             <a
               className="anchorTag"
@@ -324,8 +652,16 @@ exports[`Renders MyDragons desktop 1`] = `
               onClick={[Function]}
               onMouseEnter={[Function]}
             >
+              <style
+                dangerouslySetInnerHTML={
+                  Object {
+                    "__html": ".css-139d0uy-MuiTypography-root{margin:0;font-size:14px;font-weight:600;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;font-family:Raleway,Arial;line-height:1.66;color:#fff;}",
+                  }
+                }
+                data-emotion="css 139d0uy-MuiTypography-root"
+              />
               <p
-                className="MuiTypography-root MuiTypography-caption MuiTypography-colorPrimary"
+                className="MuiTypography-root MuiTypography-caption css-139d0uy-MuiTypography-root"
               >
                 My profile
               </p>
@@ -337,7 +673,7 @@ exports[`Renders MyDragons desktop 1`] = `
               onMouseEnter={[Function]}
             >
               <p
-                className="MuiTypography-root MuiTypography-caption MuiTypography-colorPrimary"
+                className="MuiTypography-root MuiTypography-caption css-139d0uy-MuiTypography-root"
               >
                 Search
               </p>
@@ -349,7 +685,7 @@ exports[`Renders MyDragons desktop 1`] = `
               onMouseEnter={[Function]}
             >
               <p
-                className="MuiTypography-root MuiTypography-caption MuiTypography-colorPrimary"
+                className="MuiTypography-root MuiTypography-caption css-139d0uy-MuiTypography-root"
               >
                 FAQs
               </p>
@@ -361,7 +697,7 @@ exports[`Renders MyDragons desktop 1`] = `
               onMouseEnter={[Function]}
             >
               <p
-                className="MuiTypography-root MuiTypography-caption MuiTypography-colorPrimary"
+                className="MuiTypography-root MuiTypography-caption css-139d0uy-MuiTypography-root"
               >
                 Latest updates
               </p>
@@ -373,7 +709,7 @@ exports[`Renders MyDragons desktop 1`] = `
               onMouseEnter={[Function]}
             >
               <p
-                className="MuiTypography-root MuiTypography-caption MuiTypography-colorPrimary"
+                className="MuiTypography-root MuiTypography-caption css-139d0uy-MuiTypography-root"
               >
                 Privacy
               </p>
@@ -385,14 +721,14 @@ exports[`Renders MyDragons desktop 1`] = `
               onMouseEnter={[Function]}
             >
               <p
-                className="MuiTypography-root MuiTypography-caption MuiTypography-colorPrimary"
+                className="MuiTypography-root MuiTypography-caption css-139d0uy-MuiTypography-root"
               >
                 Terms and Conditions
               </p>
             </a>
           </div>
           <div
-            className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3"
+            className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3 css-1equabv-MuiGrid-root"
           >
             <a
               className="anchorTag"
@@ -401,7 +737,7 @@ exports[`Renders MyDragons desktop 1`] = `
               onMouseEnter={[Function]}
             >
               <p
-                className="MuiTypography-root MuiTypography-caption MuiTypography-colorPrimary"
+                className="MuiTypography-root MuiTypography-caption css-139d0uy-MuiTypography-root"
               >
                 About us
               </p>
@@ -413,7 +749,7 @@ exports[`Renders MyDragons desktop 1`] = `
               onMouseEnter={[Function]}
             >
               <p
-                className="MuiTypography-root MuiTypography-caption MuiTypography-colorPrimary"
+                className="MuiTypography-root MuiTypography-caption css-139d0uy-MuiTypography-root"
               >
                 Join us!
               </p>
@@ -425,31 +761,48 @@ exports[`Renders MyDragons desktop 1`] = `
               onMouseEnter={[Function]}
             >
               <p
-                className="MuiTypography-root MuiTypography-caption MuiTypography-colorPrimary"
+                className="MuiTypography-root MuiTypography-caption css-139d0uy-MuiTypography-root"
               >
                 Contact us
               </p>
             </a>
           </div>
-          <div
-            className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-2"
+          <style
+            dangerouslySetInnerHTML={
+              Object {
+                "__html": ".css-1o7apob-MuiGrid-root{box-sizing:border-box;margin:0;-webkit-flex-direction:row;-ms-flex-direction:row;flex-direction:row;-webkit-flex-basis:16.666667%;-ms-flex-preferred-size:16.666667%;flex-basis:16.666667%;-webkit-box-flex:0;-webkit-flex-grow:0;-ms-flex-positive:0;flex-grow:0;max-width:16.666667%;}@media (min-width:600px){.css-1o7apob-MuiGrid-root{-webkit-flex-basis:16.666667%;-ms-flex-preferred-size:16.666667%;flex-basis:16.666667%;-webkit-box-flex:0;-webkit-flex-grow:0;-ms-flex-positive:0;flex-grow:0;max-width:16.666667%;}}@media (min-width:900px){.css-1o7apob-MuiGrid-root{-webkit-flex-basis:16.666667%;-ms-flex-preferred-size:16.666667%;flex-basis:16.666667%;-webkit-box-flex:0;-webkit-flex-grow:0;-ms-flex-positive:0;flex-grow:0;max-width:16.666667%;}}@media (min-width:1200px){.css-1o7apob-MuiGrid-root{-webkit-flex-basis:16.666667%;-ms-flex-preferred-size:16.666667%;flex-basis:16.666667%;-webkit-box-flex:0;-webkit-flex-grow:0;-ms-flex-positive:0;flex-grow:0;max-width:16.666667%;}}@media (min-width:1536px){.css-1o7apob-MuiGrid-root{-webkit-flex-basis:16.666667%;-ms-flex-preferred-size:16.666667%;flex-basis:16.666667%;-webkit-box-flex:0;-webkit-flex-grow:0;-ms-flex-positive:0;flex-grow:0;max-width:16.666667%;}}",
+              }
+            }
+            data-emotion="css 1o7apob-MuiGrid-root"
           />
           <div
-            className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-2"
+            className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-2 css-1o7apob-MuiGrid-root"
+          />
+          <div
+            className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-2 css-1o7apob-MuiGrid-root"
           >
             <p
-              className="MuiTypography-root socialMediaText MuiTypography-caption MuiTypography-colorPrimary"
+              className="MuiTypography-root MuiTypography-caption socialMediaText css-139d0uy-MuiTypography-root"
             >
               Follow us
             </p>
             <a
-              href="https://www.instagram.com/"
+              href="https://www.instagram.com"
               onClick={[Function]}
               onMouseEnter={[Function]}
             >
+              <style
+                dangerouslySetInnerHTML={
+                  Object {
+                    "__html": ".css-i4bv87-MuiSvgIcon-root{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;width:1em;height:1em;display:inline-block;fill:currentColor;-webkit-flex-shrink:0;-ms-flex-negative:0;flex-shrink:0;-webkit-transition:fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;transition:fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;font-size:1.5rem;}",
+                  }
+                }
+                data-emotion="css i4bv87-MuiSvgIcon-root"
+              />
               <svg
                 aria-hidden={true}
-                className="MuiSvgIcon-root icon iconInstagram mr-6"
+                className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium icon iconInstagram mr-6 css-i4bv87-MuiSvgIcon-root"
+                data-testid="InstagramIcon"
                 focusable="false"
                 style={
                   Object {
@@ -465,13 +818,14 @@ exports[`Renders MyDragons desktop 1`] = `
               </svg>
             </a>
             <a
-              href="https://www.twitter.com/"
+              href="https://www.twitter.com"
               onClick={[Function]}
               onMouseEnter={[Function]}
             >
               <svg
                 aria-hidden={true}
-                className="MuiSvgIcon-root icon iconTwitter mr-6"
+                className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium icon iconTwitter mr-6 css-i4bv87-MuiSvgIcon-root"
+                data-testid="TwitterIcon"
                 focusable="false"
                 style={
                   Object {
@@ -487,13 +841,14 @@ exports[`Renders MyDragons desktop 1`] = `
               </svg>
             </a>
             <a
-              href="https://www.facebook.com/"
+              href="https://www.facebook.com"
               onClick={[Function]}
               onMouseEnter={[Function]}
             >
               <svg
                 aria-hidden={true}
-                className="MuiSvgIcon-root icon iconFacebook mr-6"
+                className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium icon iconFacebook mr-6 css-i4bv87-MuiSvgIcon-root"
+                data-testid="FacebookIcon"
                 focusable="false"
                 style={
                   Object {
@@ -509,13 +864,14 @@ exports[`Renders MyDragons desktop 1`] = `
               </svg>
             </a>
             <a
-              href="https://www.youtube.com/"
+              href="https://www.youtube.com"
               onClick={[Function]}
               onMouseEnter={[Function]}
             >
               <svg
                 aria-hidden={true}
-                className="MuiSvgIcon-root icon iconYoutube mr-6"
+                className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium icon iconYoutube mr-6 css-i4bv87-MuiSvgIcon-root"
+                data-testid="YouTubeIcon"
                 focusable="false"
                 style={
                   Object {
@@ -532,21 +888,22 @@ exports[`Renders MyDragons desktop 1`] = `
             </a>
           </div>
           <div
-            className="MuiGrid-root downloadAppSection MuiGrid-item MuiGrid-grid-xs-2"
+            className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-2 downloadAppSection css-1o7apob-MuiGrid-root"
           >
             <p
-              className="MuiTypography-root downloadAppText MuiTypography-caption MuiTypography-colorPrimary"
+              className="MuiTypography-root MuiTypography-caption downloadAppText css-139d0uy-MuiTypography-root"
             >
               Download App
             </p>
             <a
-              href="https://www.android.com/"
+              href="https://www.android.com"
               onClick={[Function]}
               onMouseEnter={[Function]}
             >
               <svg
                 aria-hidden={true}
-                className="MuiSvgIcon-root icon iconAndroid ml-6"
+                className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium icon iconAndroid ml-6 css-i4bv87-MuiSvgIcon-root"
+                data-testid="AndroidOutlinedIcon"
                 focusable="false"
                 style={
                   Object {
@@ -557,18 +914,19 @@ exports[`Renders MyDragons desktop 1`] = `
                 viewBox="0 0 24 24"
               >
                 <path
-                  d="M6 18c0 .55.45 1 1 1h1v3.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V19h2v3.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V19h1c.55 0 1-.45 1-1V8H6v10zM3.5 8C2.67 8 2 8.67 2 9.5v7c0 .83.67 1.5 1.5 1.5S5 17.33 5 16.5v-7C5 8.67 4.33 8 3.5 8zm17 0c-.83 0-1.5.67-1.5 1.5v7c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5v-7c0-.83-.67-1.5-1.5-1.5zm-4.97-5.84l1.3-1.3c.2-.2.2-.51 0-.71s-.51-.2-.71 0l-1.48 1.48C13.85 1.23 12.95 1 12 1c-.96 0-1.86.23-2.66.63L7.85.15c-.2-.2-.51-.2-.71 0-.2.2-.2.51 0 .71l1.31 1.31C6.97 3.26 6 5.01 6 7h12c0-1.99-.97-3.75-2.47-4.84zM10 5H9V4h1v1zm5 0h-1V4h1v1z"
+                  d="m17.6 9.48 1.84-3.18c.16-.31.04-.69-.26-.85-.29-.15-.65-.06-.83.22l-1.88 3.24c-2.86-1.21-6.08-1.21-8.94 0L5.65 5.67c-.19-.29-.58-.38-.87-.2-.28.18-.37.54-.22.83L6.4 9.48C3.3 11.25 1.28 14.44 1 18h22c-.28-3.56-2.3-6.75-5.4-8.52zM7 15.25c-.69 0-1.25-.56-1.25-1.25s.56-1.25 1.25-1.25 1.25.56 1.25 1.25-.56 1.25-1.25 1.25zm10 0c-.69 0-1.25-.56-1.25-1.25s.56-1.25 1.25-1.25 1.25.56 1.25 1.25-.56 1.25-1.25 1.25z"
                 />
               </svg>
             </a>
             <a
-              href="https://www.apple.com/"
+              href="https://www.apple.com"
               onClick={[Function]}
               onMouseEnter={[Function]}
             >
               <svg
                 aria-hidden={true}
-                className="MuiSvgIcon-root icon iconApple ml-6"
+                className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium icon iconApple ml-6 css-i4bv87-MuiSvgIcon-root"
+                data-testid="AppleIcon"
                 focusable="false"
                 style={
                   Object {
@@ -585,17 +943,49 @@ exports[`Renders MyDragons desktop 1`] = `
             </a>
           </div>
         </div>
+        <style
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": ".css-9mgopn-MuiDivider-root{margin:0;-webkit-flex-shrink:0;-ms-flex-negative:0;flex-shrink:0;border-width:0;border-style:solid;border-color:rgba(0, 0, 0, 0.12);border-bottom-width:thin;}",
+            }
+          }
+          data-emotion="css 9mgopn-MuiDivider-root"
+        />
         <hr
-          className="MuiDivider-root divider"
+          className="MuiDivider-root MuiDivider-fullWidth divider css-9mgopn-MuiDivider-root"
+        />
+        <style
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": ".css-11lq3yg-MuiGrid-root{box-sizing:border-box;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-flex-wrap:wrap;-webkit-flex-wrap:wrap;-ms-flex-wrap:wrap;flex-wrap:wrap;width:100%;-webkit-flex-direction:row;-ms-flex-direction:row;flex-direction:row;}",
+            }
+          }
+          data-emotion="css 11lq3yg-MuiGrid-root"
         />
         <div
-          className="MuiGrid-root container MuiGrid-container"
+          className="MuiGrid-root MuiGrid-container container css-11lq3yg-MuiGrid-root"
         >
+          <style
+            dangerouslySetInnerHTML={
+              Object {
+                "__html": ".css-1o7apob-MuiGrid-root{box-sizing:border-box;margin:0;-webkit-flex-direction:row;-ms-flex-direction:row;flex-direction:row;-webkit-flex-basis:16.666667%;-ms-flex-preferred-size:16.666667%;flex-basis:16.666667%;-webkit-box-flex:0;-webkit-flex-grow:0;-ms-flex-positive:0;flex-grow:0;max-width:16.666667%;}@media (min-width:600px){.css-1o7apob-MuiGrid-root{-webkit-flex-basis:16.666667%;-ms-flex-preferred-size:16.666667%;flex-basis:16.666667%;-webkit-box-flex:0;-webkit-flex-grow:0;-ms-flex-positive:0;flex-grow:0;max-width:16.666667%;}}@media (min-width:900px){.css-1o7apob-MuiGrid-root{-webkit-flex-basis:16.666667%;-ms-flex-preferred-size:16.666667%;flex-basis:16.666667%;-webkit-box-flex:0;-webkit-flex-grow:0;-ms-flex-positive:0;flex-grow:0;max-width:16.666667%;}}@media (min-width:1200px){.css-1o7apob-MuiGrid-root{-webkit-flex-basis:16.666667%;-ms-flex-preferred-size:16.666667%;flex-basis:16.666667%;-webkit-box-flex:0;-webkit-flex-grow:0;-ms-flex-positive:0;flex-grow:0;max-width:16.666667%;}}@media (min-width:1536px){.css-1o7apob-MuiGrid-root{-webkit-flex-basis:16.666667%;-ms-flex-preferred-size:16.666667%;flex-basis:16.666667%;-webkit-box-flex:0;-webkit-flex-grow:0;-ms-flex-positive:0;flex-grow:0;max-width:16.666667%;}}",
+              }
+            }
+            data-emotion="css 1o7apob-MuiGrid-root"
+          />
           <div
-            className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-2"
+            className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-2 css-1o7apob-MuiGrid-root"
           >
+            <style
+              dangerouslySetInnerHTML={
+                Object {
+                  "__html": ".css-16if3aq-MuiTypography-root{margin:0;font-size:14px;font-weight:600;text-transform:none;font-family:Raleway,Arial;line-height:2.66;color:#fff;}",
+                }
+              }
+              data-emotion="css 16if3aq-MuiTypography-root"
+            />
             <p
-              className="MuiTypography-root copyRightText MuiTypography-overline MuiTypography-colorPrimary"
+              className="MuiTypography-root MuiTypography-overline copyRightText css-16if3aq-MuiTypography-root"
             >
               CryptoDragons © 2021
             </p>
@@ -611,6 +1001,14 @@ exports[`Renders MyDragons mobile 1`] = `
 <div
   className="container"
 >
+  <style
+    dangerouslySetInnerHTML={
+      Object {
+        "__html": "html{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;box-sizing:border-box;-webkit-text-size-adjust:100%;}*,*::before,*::after{box-sizing:inherit;}strong,b{font-weight:700;}body{margin:0;color:#222;font-family:Raleway,Arial;font-weight:400;font-size:1rem;line-height:1.5;background-color:#fff;}@media print{body{background-color:#fff;}}body::backdrop{background-color:#fff;}",
+      }
+    }
+    data-emotion="css-global 7yq8k8"
+  />
   <main>
     <div
       className="container"
@@ -637,19 +1035,65 @@ exports[`Renders MyDragons mobile 1`] = `
           <div
             className="searchbar"
           >
+            <style
+              dangerouslySetInnerHTML={
+                Object {
+                  "__html": ".css-wb57ya-MuiFormControl-root-MuiTextField-root{display:-webkit-inline-box;display:-webkit-inline-flex;display:-ms-inline-flexbox;display:inline-flex;-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column;position:relative;min-width:0;padding:0;margin:0;border:0;vertical-align:top;width:100%;}",
+                }
+              }
+              data-emotion="css wb57ya-MuiFormControl-root-MuiTextField-root"
+            />
             <div
-              className="MuiFormControl-root MuiTextField-root MuiFormControl-fullWidth"
+              className="MuiFormControl-root MuiFormControl-fullWidth MuiTextField-root css-wb57ya-MuiFormControl-root-MuiTextField-root"
             >
+              <style
+                dangerouslySetInnerHTML={
+                  Object {
+                    "__html": "@-webkit-keyframes mui-auto-fill{from{display:block;}}@keyframes mui-auto-fill{from{display:block;}}@-webkit-keyframes mui-auto-fill-cancel{from{display:block;}}@keyframes mui-auto-fill-cancel{from{display:block;}}",
+                  }
+                }
+                data-emotion="css-global 1prfaxn"
+              />
+              <style
+                dangerouslySetInnerHTML={
+                  Object {
+                    "__html": ".css-1wghwtf-MuiInputBase-root-MuiOutlinedInput-root{font-family:Raleway,Arial;font-weight:400;font-size:1rem;line-height:1.4375em;color:#222;box-sizing:border-box;position:relative;cursor:text;display:-webkit-inline-box;display:-webkit-inline-flex;display:-ms-inline-flexbox;display:inline-flex;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;width:100%;position:relative;border-radius:4px;padding-left:14px;}.css-1wghwtf-MuiInputBase-root-MuiOutlinedInput-root.Mui-disabled{color:rgba(0, 0, 0, 0.38);cursor:default;}.css-1wghwtf-MuiInputBase-root-MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline{border-color:#222;}@media (hover: none){.css-1wghwtf-MuiInputBase-root-MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline{border-color:rgba(0, 0, 0, 0.23);}}.css-1wghwtf-MuiInputBase-root-MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline{border-color:#88f;border-width:2px;}.css-1wghwtf-MuiInputBase-root-MuiOutlinedInput-root.Mui-error .MuiOutlinedInput-notchedOutline{border-color:#f44;}.css-1wghwtf-MuiInputBase-root-MuiOutlinedInput-root.Mui-disabled .MuiOutlinedInput-notchedOutline{border-color:rgba(0, 0, 0, 0.26);}",
+                  }
+                }
+                data-emotion="css 1wghwtf-MuiInputBase-root-MuiOutlinedInput-root"
+              />
               <div
-                className="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-colorSecondary MuiInput-colorSecondary MuiInputBase-fullWidth MuiInput-fullWidth MuiInputBase-formControl MuiInput-formControl MuiInputBase-adornedStart"
+                className="MuiOutlinedInput-root MuiInputBase-root MuiInputBase-colorSecondary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedStart css-1wghwtf-MuiInputBase-root-MuiOutlinedInput-root"
                 onClick={[Function]}
               >
+                <style
+                  dangerouslySetInnerHTML={
+                    Object {
+                      "__html": ".css-iczq09-MuiInputAdornment-root{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;height:0.01em;max-height:2em;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;white-space:nowrap;color:#222;margin-right:8px;}",
+                    }
+                  }
+                  data-emotion="css iczq09-MuiInputAdornment-root"
+                />
                 <div
-                  className="MuiInputAdornment-root MuiInputAdornment-positionStart"
+                  className="MuiInputAdornment-root MuiInputAdornment-positionStart MuiInputAdornment-outlined MuiInputAdornment-sizeMedium css-iczq09-MuiInputAdornment-root"
                 >
+                  <span
+                    className="notranslate"
+                  >
+                    ​
+                  </span>
+                  <style
+                    dangerouslySetInnerHTML={
+                      Object {
+                        "__html": ".css-i4bv87-MuiSvgIcon-root{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;width:1em;height:1em;display:inline-block;fill:currentColor;-webkit-flex-shrink:0;-ms-flex-negative:0;flex-shrink:0;-webkit-transition:fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;transition:fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;font-size:1.5rem;}",
+                      }
+                    }
+                    data-emotion="css i4bv87-MuiSvgIcon-root"
+                  />
                   <svg
                     aria-hidden={true}
-                    className="MuiSvgIcon-root"
+                    className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                    data-testid="SearchIcon"
                     focusable="false"
                     viewBox="0 0 24 24"
                   >
@@ -658,10 +1102,18 @@ exports[`Renders MyDragons mobile 1`] = `
                     />
                   </svg>
                 </div>
+                <style
+                  dangerouslySetInnerHTML={
+                    Object {
+                      "__html": ".css-1o9s3wi-MuiInputBase-input-MuiOutlinedInput-input{font:inherit;letter-spacing:inherit;color:currentColor;padding:4px 0 5px;border:0;box-sizing:content-box;background:none;height:1.4375em;margin:0;-webkit-tap-highlight-color:transparent;display:block;min-width:0;width:100%;-webkit-animation-name:mui-auto-fill-cancel;animation-name:mui-auto-fill-cancel;-webkit-animation-duration:10ms;animation-duration:10ms;padding:16.5px 14px;padding-left:0;}.css-1o9s3wi-MuiInputBase-input-MuiOutlinedInput-input::-webkit-input-placeholder{color:currentColor;opacity:0.42;-webkit-transition:opacity 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;transition:opacity 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;}.css-1o9s3wi-MuiInputBase-input-MuiOutlinedInput-input::-moz-placeholder{color:currentColor;opacity:0.42;-webkit-transition:opacity 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;transition:opacity 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;}.css-1o9s3wi-MuiInputBase-input-MuiOutlinedInput-input:-ms-input-placeholder{color:currentColor;opacity:0.42;-webkit-transition:opacity 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;transition:opacity 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;}.css-1o9s3wi-MuiInputBase-input-MuiOutlinedInput-input::-ms-input-placeholder{color:currentColor;opacity:0.42;-webkit-transition:opacity 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;transition:opacity 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;}.css-1o9s3wi-MuiInputBase-input-MuiOutlinedInput-input:focus{outline:0;}.css-1o9s3wi-MuiInputBase-input-MuiOutlinedInput-input:invalid{box-shadow:none;}.css-1o9s3wi-MuiInputBase-input-MuiOutlinedInput-input::-webkit-search-decoration{-webkit-appearance:none;}label[data-shrink=false]+.MuiInputBase-formControl .css-1o9s3wi-MuiInputBase-input-MuiOutlinedInput-input::-webkit-input-placeholder{opacity:0!important;}label[data-shrink=false]+.MuiInputBase-formControl .css-1o9s3wi-MuiInputBase-input-MuiOutlinedInput-input::-moz-placeholder{opacity:0!important;}label[data-shrink=false]+.MuiInputBase-formControl .css-1o9s3wi-MuiInputBase-input-MuiOutlinedInput-input:-ms-input-placeholder{opacity:0!important;}label[data-shrink=false]+.MuiInputBase-formControl .css-1o9s3wi-MuiInputBase-input-MuiOutlinedInput-input::-ms-input-placeholder{opacity:0!important;}label[data-shrink=false]+.MuiInputBase-formControl .css-1o9s3wi-MuiInputBase-input-MuiOutlinedInput-input:focus::-webkit-input-placeholder{opacity:0.42;}label[data-shrink=false]+.MuiInputBase-formControl .css-1o9s3wi-MuiInputBase-input-MuiOutlinedInput-input:focus::-moz-placeholder{opacity:0.42;}label[data-shrink=false]+.MuiInputBase-formControl .css-1o9s3wi-MuiInputBase-input-MuiOutlinedInput-input:focus:-ms-input-placeholder{opacity:0.42;}label[data-shrink=false]+.MuiInputBase-formControl .css-1o9s3wi-MuiInputBase-input-MuiOutlinedInput-input:focus::-ms-input-placeholder{opacity:0.42;}.css-1o9s3wi-MuiInputBase-input-MuiOutlinedInput-input.Mui-disabled{opacity:1;-webkit-text-fill-color:rgba(0, 0, 0, 0.38);}.css-1o9s3wi-MuiInputBase-input-MuiOutlinedInput-input:-webkit-autofill{-webkit-animation-duration:5000s;animation-duration:5000s;-webkit-animation-name:mui-auto-fill;animation-name:mui-auto-fill;}.css-1o9s3wi-MuiInputBase-input-MuiOutlinedInput-input:-webkit-autofill{border-radius:inherit;}",
+                    }
+                  }
+                  data-emotion="css 1o9s3wi-MuiInputBase-input-MuiOutlinedInput-input"
+                />
                 <input
                   aria-invalid={false}
                   autoFocus={false}
-                  className="MuiInputBase-input MuiInput-input MuiInputBase-inputAdornedStart"
+                  className="MuiOutlinedInput-input MuiInputBase-input MuiInputBase-inputAdornedStart css-1o9s3wi-MuiInputBase-input-MuiOutlinedInput-input"
                   disabled={false}
                   id="standard-secondary"
                   onAnimationStart={[Function]}
@@ -673,22 +1125,172 @@ exports[`Renders MyDragons mobile 1`] = `
                   type="text"
                   value=""
                 />
+                <style
+                  dangerouslySetInnerHTML={
+                    Object {
+                      "__html": ".css-rki20w-MuiOutlinedInput-notchedOutline{border-color:rgba(0, 0, 0, 0.23);}",
+                    }
+                  }
+                  data-emotion="css rki20w-MuiOutlinedInput-notchedOutline"
+                />
+                <style
+                  dangerouslySetInnerHTML={
+                    Object {
+                      "__html": ".css-1d3z3hw-MuiOutlinedInput-notchedOutline{text-align:left;position:absolute;bottom:0;right:0;top:-5px;left:0;margin:0;padding:0 8px;pointer-events:none;border-radius:inherit;border-style:solid;border-width:1px;overflow:hidden;min-width:0%;border-color:rgba(0, 0, 0, 0.23);}",
+                    }
+                  }
+                  data-emotion="css 1d3z3hw-MuiOutlinedInput-notchedOutline"
+                />
+                <fieldset
+                  aria-hidden={true}
+                  className="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
+                >
+                  <style
+                    dangerouslySetInnerHTML={
+                      Object {
+                        "__html": ".css-hdw1oc{float:unset;overflow:hidden;padding:0;line-height:11px;-webkit-transition:width 150ms cubic-bezier(0.0, 0, 0.2, 1) 0ms;transition:width 150ms cubic-bezier(0.0, 0, 0.2, 1) 0ms;}",
+                      }
+                    }
+                    data-emotion="css hdw1oc"
+                  />
+                  <legend
+                    className="css-hdw1oc"
+                  >
+                    <span
+                      className="notranslate"
+                    >
+                      ​
+                    </span>
+                  </legend>
+                </fieldset>
               </div>
             </div>
           </div>
+          <style
+            dangerouslySetInnerHTML={
+              Object {
+                "__html": ".css-qfz70r-MuiFormGroup-root{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-direction:row;-ms-flex-direction:row;flex-direction:row;-webkit-box-flex-wrap:wrap;-webkit-flex-wrap:wrap;-ms-flex-wrap:wrap;flex-wrap:wrap;}",
+              }
+            }
+            data-emotion="css qfz70r-MuiFormGroup-root"
+          />
           <div
-            className="MuiFormGroup-root fieldsFilterForm MuiFormGroup-row"
+            className="MuiFormGroup-root MuiFormGroup-row fieldsFilterForm css-qfz70r-MuiFormGroup-root"
           >
             <div
               className="fieldsFilterForm_firstGroup"
             >
+              <style
+                dangerouslySetInnerHTML={
+                  Object {
+                    "__html": ".css-j204z7-MuiFormControlLabel-root{display:-webkit-inline-box;display:-webkit-inline-flex;display:-ms-inline-flexbox;display:inline-flex;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;cursor:pointer;vertical-align:middle;-webkit-tap-highlight-color:transparent;margin-left:-11px;margin-right:16px;}.css-j204z7-MuiFormControlLabel-root.Mui-disabled{cursor:default;}.css-j204z7-MuiFormControlLabel-root .MuiFormControlLabel-label.Mui-disabled{color:rgba(0, 0, 0, 0.38);}",
+                  }
+                }
+                data-emotion="css j204z7-MuiFormControlLabel-root"
+              />
               <label
-                className="MuiFormControlLabel-root"
+                className="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-j204z7-MuiFormControlLabel-root"
+              >
+                <style
+                  dangerouslySetInnerHTML={
+                    Object {
+                      "__html": ".css-lbusu0-MuiCheckbox-root{color:#828282;}.css-lbusu0-MuiCheckbox-root:hover{background-color:rgba(136, 136, 255, 0.04);}@media (hover: none){.css-lbusu0-MuiCheckbox-root:hover{background-color:transparent;}}.css-lbusu0-MuiCheckbox-root.Mui-checked,.css-lbusu0-MuiCheckbox-root.MuiCheckbox-indeterminate{color:#88f;}.css-lbusu0-MuiCheckbox-root.Mui-disabled{color:rgba(0, 0, 0, 0.26);}",
+                    }
+                  }
+                  data-emotion="css lbusu0-MuiCheckbox-root"
+                />
+                <style
+                  dangerouslySetInnerHTML={
+                    Object {
+                      "__html": ".css-1qblcbn-MuiCheckbox-root{padding:9px;border-radius:50%;color:#828282;}.css-1qblcbn-MuiCheckbox-root:hover{background-color:rgba(136, 136, 255, 0.04);}@media (hover: none){.css-1qblcbn-MuiCheckbox-root:hover{background-color:transparent;}}.css-1qblcbn-MuiCheckbox-root.Mui-checked,.css-1qblcbn-MuiCheckbox-root.MuiCheckbox-indeterminate{color:#88f;}.css-1qblcbn-MuiCheckbox-root.Mui-disabled{color:rgba(0, 0, 0, 0.26);}",
+                    }
+                  }
+                  data-emotion="css 1qblcbn-MuiCheckbox-root"
+                />
+                <span
+                  className="MuiCheckbox-root MuiCheckbox-colorSecondary MuiButtonBase-root MuiCheckbox-root MuiCheckbox-colorSecondary PrivateSwitchBase-root Mui-checked css-hzoy7s-MuiButtonBase-root-MuiCheckbox-root"
+                  onBlur={[Function]}
+                  onContextMenu={[Function]}
+                  onDragLeave={[Function]}
+                  onFocus={[Function]}
+                  onKeyDown={[Function]}
+                  onKeyUp={[Function]}
+                  onMouseDown={[Function]}
+                  onMouseLeave={[Function]}
+                  onMouseUp={[Function]}
+                  onTouchEnd={[Function]}
+                  onTouchMove={[Function]}
+                  onTouchStart={[Function]}
+                  tabIndex={null}
+                >
+                  <style
+                    dangerouslySetInnerHTML={
+                      Object {
+                        "__html": ".css-1m9pwf3{cursor:inherit;position:absolute;opacity:0;width:100%;height:100%;top:0;left:0;margin:0;padding:0;z-index:1;}",
+                      }
+                    }
+                    data-emotion="css 1m9pwf3"
+                  />
+                  <input
+                    checked={true}
+                    className="PrivateSwitchBase-input css-1m9pwf3"
+                    data-indeterminate={false}
+                    name="checkedMainchain"
+                    onChange={[Function]}
+                    type="checkbox"
+                  />
+                  <style
+                    dangerouslySetInnerHTML={
+                      Object {
+                        "__html": ".css-ptiqhd-MuiSvgIcon-root{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;width:1em;height:1em;display:inline-block;fill:currentColor;-webkit-flex-shrink:0;-ms-flex-negative:0;flex-shrink:0;-webkit-transition:fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;transition:fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;font-size:1.25rem;}",
+                      }
+                    }
+                    data-emotion="css ptiqhd-MuiSvgIcon-root"
+                  />
+                  <svg
+                    aria-hidden={true}
+                    className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-ptiqhd-MuiSvgIcon-root"
+                    data-testid="CheckBoxIcon"
+                    focusable="false"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"
+                    />
+                  </svg>
+                  <style
+                    dangerouslySetInnerHTML={
+                      Object {
+                        "__html": ".css-8je8zh-MuiTouchRipple-root{overflow:hidden;pointer-events:none;position:absolute;z-index:0;top:0;right:0;bottom:0;left:0;border-radius:inherit;}",
+                      }
+                    }
+                    data-emotion="css 8je8zh-MuiTouchRipple-root"
+                  />
+                  <span
+                    className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                  />
+                </span>
+                <style
+                  dangerouslySetInnerHTML={
+                    Object {
+                      "__html": ".css-1b4kcbq-MuiTypography-root{margin:0;font-size:14px;font-weight:600;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;font-family:Raleway,Arial;line-height:1.66;}",
+                    }
+                  }
+                  data-emotion="css 1b4kcbq-MuiTypography-root"
+                />
+                <span
+                  className="MuiTypography-root MuiTypography-caption css-1b4kcbq-MuiTypography-root"
+                >
+                  Mainchain
+                </span>
+              </label>
+              <label
+                className="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-j204z7-MuiFormControlLabel-root"
               >
                 <span
-                  aria-disabled={false}
-                  className="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-1 MuiCheckbox-root MuiCheckbox-colorSecondary PrivateSwitchBase-checked-2 Mui-checked MuiIconButton-colorSecondary"
+                  className="MuiCheckbox-root MuiCheckbox-colorSecondary MuiButtonBase-root MuiCheckbox-root MuiCheckbox-colorSecondary PrivateSwitchBase-root Mui-checked css-hzoy7s-MuiButtonBase-root-MuiCheckbox-root"
                   onBlur={[Function]}
+                  onContextMenu={[Function]}
                   onDragLeave={[Function]}
                   onFocus={[Function]}
                   onKeyDown={[Function]}
@@ -825,9 +1427,10 @@ exports[`Renders MyDragons mobile 1`] = `
                     </span>
                   </div>
                   <input
-                    aria-hidden={true}
-                    className="MuiSelect-nativeInput"
-                    onAnimationStart={[Function]}
+                    checked={true}
+                    className="PrivateSwitchBase-input css-1m9pwf3"
+                    data-indeterminate={false}
+                    name="checkedSidechain"
                     onChange={[Function]}
                     required={false}
                     tabIndex={-1}
@@ -835,7 +1438,8 @@ exports[`Renders MyDragons mobile 1`] = `
                   />
                   <svg
                     aria-hidden={true}
-                    className="MuiSvgIcon-root MuiSelect-icon"
+                    className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-ptiqhd-MuiSvgIcon-root"
+                    data-testid="CheckBoxIcon"
                     focusable="false"
                     viewBox="0 0 24 24"
                   >
@@ -843,18 +1447,52 @@ exports[`Renders MyDragons mobile 1`] = `
                       d="M7 10l5 5 5-5z"
                     />
                   </svg>
-                </div>
-              </div>
+                  <span
+                    className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                  />
+                </span>
+                <span
+                  className="MuiTypography-root MuiTypography-caption css-1b4kcbq-MuiTypography-root"
+                >
+                  Sidechain
+                </span>
+              </label>
+            </div>
+            <style
+              dangerouslySetInnerHTML={
+                Object {
+                  "__html": ".css-1kc071o-MuiTypography-root{margin:0;font-size:14px;font-weight:600;text-transform:none;font-family:Raleway,Arial;line-height:2.66;}",
+                }
+              }
+              data-emotion="css 1kc071o-MuiTypography-root"
+            />
+            <span
+              className="MuiTypography-root MuiTypography-overline css-1kc071o-MuiTypography-root"
+            >
+              Sort by
+            </span>
+            <div
+              className="fieldsFilterForm_secondGroup"
+            >
               <div
-                className="MuiFormControl-root fieldsFilterForm_secondGroup_sortByValue"
+                className="MuiFormControl-root fieldsFilterForm_secondGroup_sortByValue css-1nrlq1o-MuiFormControl-root"
               >
+                <style
+                  dangerouslySetInnerHTML={
+                    Object {
+                      "__html": "@-webkit-keyframes mui-auto-fill{from{display:block;}}@keyframes mui-auto-fill{from{display:block;}}@-webkit-keyframes mui-auto-fill-cancel{from{display:block;}}@keyframes mui-auto-fill-cancel{from{display:block;}}",
+                    }
+                  }
+                  data-emotion="css-global 1prfaxn"
+                />
                 <div
-                  className="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-formControl MuiInput-formControl"
+                  className="MuiOutlinedInput-root MuiInputBase-root MuiInputBase-colorPrimary MuiInputBase-formControl  css-1auijsu-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root"
                   onClick={[Function]}
                 >
                   <div
+                    aria-expanded="false"
                     aria-haspopup="listbox"
-                    className="MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiInputBase-input MuiInput-input"
+                    className="MuiSelect-select MuiSelect-outlined MuiOutlinedInput-input MuiInputBase-input css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
                     onBlur={[Function]}
                     onFocus={[Function]}
                     onKeyDown={[Function]}
@@ -863,14 +1501,92 @@ exports[`Renders MyDragons mobile 1`] = `
                     tabIndex={0}
                   >
                     <span
-                      className="MuiTypography-root MuiTypography-caption"
+                      className="MuiTypography-root MuiTypography-caption css-1b4kcbq-MuiTypography-root"
+                    >
+                      Age
+                    </span>
+                  </div>
+                  <input
+                    aria-hidden={true}
+                    className="MuiSelect-nativeInput css-yf8vq0-MuiSelect-nativeInput"
+                    disabled={false}
+                    onAnimationStart={[Function]}
+                    onChange={[Function]}
+                    required={false}
+                    tabIndex={-1}
+                    value={10}
+                  />
+                  <style
+                    dangerouslySetInnerHTML={
+                      Object {
+                        "__html": ".css-1l33zyf-MuiSvgIcon-root-MuiSelect-icon{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;width:1em;height:1em;display:inline-block;fill:currentColor;-webkit-flex-shrink:0;-ms-flex-negative:0;flex-shrink:0;-webkit-transition:fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;transition:fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;font-size:1.5rem;position:absolute;right:7px;top:calc(50% - .5em);pointer-events:none;color:#222;}.css-1l33zyf-MuiSvgIcon-root-MuiSelect-icon.Mui-disabled{color:rgba(0, 0, 0, 0.26);}",
+                      }
+                    }
+                    data-emotion="css 1l33zyf-MuiSvgIcon-root-MuiSelect-icon"
+                  />
+                  <svg
+                    aria-hidden={true}
+                    className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconOutlined css-1l33zyf-MuiSvgIcon-root-MuiSelect-icon"
+                    data-testid="ArrowDropDownIcon"
+                    focusable="false"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="M7 10l5 5 5-5z"
+                    />
+                  </svg>
+                  <fieldset
+                    aria-hidden={true}
+                    className="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
+                  >
+                    <legend
+                      className="css-hdw1oc"
+                    >
+                      <span
+                        className="notranslate"
+                      >
+                        ​
+                      </span>
+                    </legend>
+                  </fieldset>
+                </div>
+              </div>
+              <div
+                className="MuiFormControl-root fieldsFilterForm_secondGroup_sortByValue css-1nrlq1o-MuiFormControl-root"
+              >
+                <style
+                  dangerouslySetInnerHTML={
+                    Object {
+                      "__html": "@-webkit-keyframes mui-auto-fill{from{display:block;}}@keyframes mui-auto-fill{from{display:block;}}@-webkit-keyframes mui-auto-fill-cancel{from{display:block;}}@keyframes mui-auto-fill-cancel{from{display:block;}}",
+                    }
+                  }
+                  data-emotion="css-global 1prfaxn"
+                />
+                <div
+                  className="MuiOutlinedInput-root MuiInputBase-root MuiInputBase-colorPrimary MuiInputBase-formControl  css-1auijsu-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root"
+                  onClick={[Function]}
+                >
+                  <div
+                    aria-expanded="false"
+                    aria-haspopup="listbox"
+                    className="MuiSelect-select MuiSelect-outlined MuiOutlinedInput-input MuiInputBase-input css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+                    onBlur={[Function]}
+                    onFocus={[Function]}
+                    onKeyDown={[Function]}
+                    onMouseDown={[Function]}
+                    role="button"
+                    tabIndex={0}
+                  >
+                    <span
+                      className="MuiTypography-root MuiTypography-caption css-1b4kcbq-MuiTypography-root"
                     >
                       low to high
                     </span>
                   </div>
                   <input
                     aria-hidden={true}
-                    className="MuiSelect-nativeInput"
+                    className="MuiSelect-nativeInput css-yf8vq0-MuiSelect-nativeInput"
+                    disabled={false}
                     onAnimationStart={[Function]}
                     onChange={[Function]}
                     required={false}
@@ -879,7 +1595,8 @@ exports[`Renders MyDragons mobile 1`] = `
                   />
                   <svg
                     aria-hidden={true}
-                    className="MuiSvgIcon-root MuiSelect-icon"
+                    className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconOutlined css-1l33zyf-MuiSvgIcon-root-MuiSelect-icon"
+                    data-testid="ArrowDropDownIcon"
                     focusable="false"
                     viewBox="0 0 24 24"
                   >
@@ -887,6 +1604,20 @@ exports[`Renders MyDragons mobile 1`] = `
                       d="M7 10l5 5 5-5z"
                     />
                   </svg>
+                  <fieldset
+                    aria-hidden={true}
+                    className="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
+                  >
+                    <legend
+                      className="css-hdw1oc"
+                    >
+                      <span
+                        className="notranslate"
+                      >
+                        ​
+                      </span>
+                    </legend>
+                  </fieldset>
                 </div>
               </div>
             </div>
@@ -896,8 +1627,16 @@ exports[`Renders MyDragons mobile 1`] = `
       <div
         className="spinnerContainer"
       >
-        <div
-          className="MuiCircularProgress-root MuiCircularProgress-colorSecondary MuiCircularProgress-indeterminate"
+        <style
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": ".css-1mnlj4g-MuiCircularProgress-root{display:inline-block;color:#88f;-webkit-animation:animation-61bdi0 1.4s linear infinite;animation:animation-61bdi0 1.4s linear infinite;}@-webkit-keyframes animation-61bdi0{0%{-webkit-transform:rotate(0deg);-moz-transform:rotate(0deg);-ms-transform:rotate(0deg);transform:rotate(0deg);}100%{-webkit-transform:rotate(360deg);-moz-transform:rotate(360deg);-ms-transform:rotate(360deg);transform:rotate(360deg);}}@keyframes animation-61bdi0{0%{-webkit-transform:rotate(0deg);-moz-transform:rotate(0deg);-ms-transform:rotate(0deg);transform:rotate(0deg);}100%{-webkit-transform:rotate(360deg);-moz-transform:rotate(360deg);-ms-transform:rotate(360deg);transform:rotate(360deg);}}",
+            }
+          }
+          data-emotion="css 1mnlj4g-MuiCircularProgress-root animation-61bdi0"
+        />
+        <span
+          className="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorSecondary css-1mnlj4g-MuiCircularProgress-root"
           role="progressbar"
           style={
             Object {
@@ -906,12 +1645,28 @@ exports[`Renders MyDragons mobile 1`] = `
             }
           }
         >
+          <style
+            dangerouslySetInnerHTML={
+              Object {
+                "__html": ".css-1idz92c-MuiCircularProgress-svg{display:block;}",
+              }
+            }
+            data-emotion="css 1idz92c-MuiCircularProgress-svg"
+          />
           <svg
-            className="MuiCircularProgress-svg"
+            className="MuiCircularProgress-svg css-1idz92c-MuiCircularProgress-svg"
             viewBox="22 22 44 44"
           >
+            <style
+              dangerouslySetInnerHTML={
+                Object {
+                  "__html": ".css-176wh8e-MuiCircularProgress-circle{stroke:currentColor;stroke-dasharray:80px,200px;stroke-dashoffset:0;-webkit-animation:animation-1p2h4ri 1.4s ease-in-out infinite;animation:animation-1p2h4ri 1.4s ease-in-out infinite;}@-webkit-keyframes animation-1p2h4ri{0%{stroke-dasharray:1px,200px;stroke-dashoffset:0;}50%{stroke-dasharray:100px,200px;stroke-dashoffset:-15px;}100%{stroke-dasharray:100px,200px;stroke-dashoffset:-125px;}}@keyframes animation-1p2h4ri{0%{stroke-dasharray:1px,200px;stroke-dashoffset:0;}50%{stroke-dasharray:100px,200px;stroke-dashoffset:-15px;}100%{stroke-dasharray:100px,200px;stroke-dashoffset:-125px;}}",
+                }
+              }
+              data-emotion="css 176wh8e-MuiCircularProgress-circle animation-1p2h4ri"
+            />
             <circle
-              className="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate"
+              className="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-176wh8e-MuiCircularProgress-circle"
               cx={44}
               cy={44}
               fill="none"
@@ -920,7 +1675,7 @@ exports[`Renders MyDragons mobile 1`] = `
               style={Object {}}
             />
           </svg>
-        </div>
+        </span>
       </div>
       <AppFooter />
     </div>

@@ -1,6 +1,6 @@
 import { ReactElement } from 'react'
 import Dragon from 'components/dragon'
-import CircularProgress from '@material-ui/core/CircularProgress'
+import CircularProgress from '@mui/material/CircularProgress'
 
 import styles from './desktop.module.scss'
 

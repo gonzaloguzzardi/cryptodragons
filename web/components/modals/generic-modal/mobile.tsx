@@ -1,8 +1,8 @@
 import React, { ReactElement, ReactNode } from 'react'
 
-import Button from '@material-ui/core/Button'
-import Typography from '@material-ui/core/Typography'
-import Divider from '@material-ui/core/Divider'
+import Button from '@mui/material/Button'
+import Typography from '@mui/material/Typography'
+import Divider from '@mui/material/Divider'
 
 import GenericModal from '.'
 

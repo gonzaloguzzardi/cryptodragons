@@ -1,8 +1,8 @@
 import Link from 'next/link'
-import Button from '@material-ui/core/Button'
-import Grid from '@material-ui/core/Grid'
-import Card from '@material-ui/core/Card'
-import Typography from '@material-ui/core/Typography'
+import Button from '@mui/material/Button'
+import Grid from '@mui/material/Grid'
+import Card from '@mui/material/Card'
+import Typography from '@mui/material/Typography'
 
 import { ReactElement } from 'react'
 
@@ -14,7 +14,7 @@ export default function BuyADragonSection(): ReactElement {
       <Card className={styles.card} raised>
         <Grid container spacing={3}>
           <Grid item xs={4}>
-            <Grid container justify="center">
+            <Grid container justifyContent="center">
               <img className={styles.img} alt="complex" src="/assets/home/dragon-2.png" />
             </Grid>
           </Grid>

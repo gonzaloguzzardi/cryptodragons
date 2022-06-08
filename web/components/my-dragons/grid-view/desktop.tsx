@@ -1,7 +1,7 @@
 import { ReactElement } from 'react'
 import BuyDragonCard from '../../card/buy-dragon/desktop'
 import Dragon from '../../dragon'
-import CircularProgress from '@material-ui/core/CircularProgress'
+import CircularProgress from '@mui/material/CircularProgress'
 
 import { tProps } from './types'
 import styles from './desktop.module.scss'

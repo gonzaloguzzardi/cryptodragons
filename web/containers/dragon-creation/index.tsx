@@ -1,8 +1,7 @@
-/* eslint-disable @typescript-eslint/ban-types */
 import React, { Component, ReactElement } from 'react'
-import Slider from '../../components/slider/Slider'
-import DragonCreator from '../../components/dragon-creator'
-import Grid from '@material-ui/core/Grid'
+import DragonCreator from 'components/dragon-creator'
+import DragonAttributes from 'components/dragon-attributes'
+
 
 interface DProps {
   any
@@ -75,7 +74,6 @@ class DragonCreation extends Component<DProps> {
   updateColorCuerpo(color) {
     this.setState({ colorCuerpo: color })
   }
-
   updateTypeAlas(n) {
     this.setState({ typeAlas: n })
   }
@@ -95,141 +93,40 @@ class DragonCreation extends Component<DProps> {
     this.setState({ typeCuerpo: n })
   }
 
-  createSliderForPart(
-    parte,
-    callbackColorFunction,
-    callbacktypeFunction,
-    typeTotal,
-    haveTypes,
-    haveColors
-  ) {
-    return (
-      <div>
-        <label>{parte}</label>
-        <div className="aParent">
-          <div className="slider">
-            {haveTypes ? (
-              <Slider
-                min={1}
-                max={typeTotal}
-                step={1}
-                value={1}
-                label={'Tipo'}
-                parentMethod={callbacktypeFunction}
-              />
-            ) : null}
-          </div>
-          <div className="slider">
-            {haveColors ? (
-              <Slider
-                min={1}
-                max={360}
-                step={1}
-                value={1}
-                label={'Color'}
-                parentMethod={callbackColorFunction}
-              />
-            ) : null}
-          </div>
-        </div>
-        <style global jsx>
-          {`
-            .aParent {
-              display: flex;
-            }
-            .slider {
-              width: 500px;
-              padding-left: 40px;
-            }
-          `}
-        </style>
-      </div>
-    )
-  }
-
   render: () => ReactElement<DProps> = () => (
-    <div>
-      <div className="main">
-        <DragonCreator
-          typeAlas={this.state.typeAlas}
-          typeCuernos={this.state.typeCuernos}
-          typeOjos={this.state.typeOjos}
-          typePanza={this.state.typePanza}
-          typeCola={this.state.typeCola}
-          typeCuerpo={this.state.typeCuerpo}
-          colorAlas={this.state.colorAlas}
-          colorCuernos={this.state.colorCuernos}
-          colorOjos={this.state.colorOjos}
-          colorPanza={this.state.colorPanza}
-          colorCola={this.state.colorCola}
-          colorCuerpo={this.state.colorCuerpo}
-        />
-        <Grid className="navigation">
-          <Grid item>
-            {this.createSliderForPart(
-              'Cuernos',
-              this.updateColorCuernos,
-              this.updateTypeCuernos,
-              4,
-              true,
-              true
-            )}
-          </Grid>
-          <Grid item>
-            {this.createSliderForPart(
-              'Panza',
-              this.updateColorPanza,
-              this.updateTypePanza,
-              2,
-              true,
-              true
-            )}
-          </Grid>
-          <Grid item>
-            {this.createSliderForPart(
-              'Cola',
-              this.updateColorCola,
-              this.updateTypeCola,
-              4,
-              true,
-              true
-            )}
-          </Grid>
-          <Grid item>
-            {this.createSliderForPart(
-              'Alas',
-              this.updateColorAlas,
-              this.updateTypeAlas,
-              4,
-              true,
-              true
-            )}
-          </Grid>
-          <Grid item>
-            {this.createSliderForPart(
-              'Ojos',
-              this.updateColorOjos,
-              this.updateTypeOjos,
-              4,
-              true,
-              true
-            )}
-          </Grid>
-          <Grid item>
-            {this.createSliderForPart(
-              'Cuerpo',
-              this.updateColorCuerpo,
-              this.updateTypeCuerpo,
-              1,
-              false,
-              true
-            )}
-          </Grid>
-        </Grid>
-      </div>
+    <div className="main">
+      <DragonCreator
+        typeAlas={this.state.typeAlas}
+        typeCuernos={this.state.typeCuernos}
+        typeOjos={this.state.typeOjos}
+        typePanza={this.state.typePanza}
+        typeCola={this.state.typeCola}
+        typeCuerpo={this.state.typeCuerpo}
+        colorAlas={this.state.colorAlas}
+        colorCuernos={this.state.colorCuernos}
+        colorOjos={this.state.colorOjos}
+        colorPanza={this.state.colorPanza}
+        colorCola={this.state.colorCola}
+        colorCuerpo={this.state.colorCuerpo}
+      />
+      <DragonAttributes
+        updateColorCuernos={this.updateColorCuernos}
+        updateTypeCuernos={this.updateTypeCuernos}
+        updateColorPanza={this.updateColorPanza}
+        updateTypePanza={this.updateTypePanza}
+        updateColorCola={this.updateColorCola}
+        updateTypeCola={this.updateTypeCola}
+        updateColorAlas={this.updateColorAlas}
+        updateTypeAlas={this.updateTypeAlas}
+        updateColorOjos={this.updateColorOjos}
+        updateTypeOjos={this.updateTypeOjos}
+        updateColorCuerpo={this.updateColorCuerpo}
+        updateTypeCuerpo={this.updateTypeCuerpo}
+      />
       <style global jsx>{`
         .main {
           width: 100%;
+          padding-top: 10px;
         }
         .cardContainer {
           position: absolute;
@@ -239,7 +136,7 @@ class DragonCreation extends Component<DProps> {
           float: left;
         }
         .navigation {
-          margin-left: 600px;
+          margin-left: 525px;
           width: 600px;
         }
       `}</style>

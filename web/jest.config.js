@@ -4,7 +4,7 @@ module.exports = {
   moduleDirectories: ['node_modules', '<rootDir>'],
   testPathIgnorePatterns: [
     '<rootDir>[/\\\\](node_modules|.next)[/\\\\]',
-    'web/pages/api/admin/session/test.tsx'
+    'web/pages/api/admin/session/test.tsx',
   ],
   transformIgnorePatterns: [
     '[/\\\\]node_modules[/\\\\].+\\.(ts|tsx|js|jsx)$'

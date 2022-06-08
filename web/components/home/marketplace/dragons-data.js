@@ -1,7 +1,7 @@
 export default [
   {
     image: "/assets/dragonsito2.jpeg",
-    name: "Flarion",
+    label: "Flarion",
     owner: {
       name: "Mocca",
       image: "/assets/mocca.jpg",
@@ -9,7 +9,7 @@ export default [
   },
   {
     image: "/assets/dragonsito3.png",
-    name: "Flarion",
+    label: "Moriett",
     owner: {
       name: "Mocca",
       image: "/assets/mocca.jpg",
@@ -17,7 +17,7 @@ export default [
   },
   {
     image: "/assets/dragonsito4.jpeg",
-    name: "Flarion",
+    label: "Charming",
     owner: {
       name: "Mocca",
       image: "/assets/mocca.jpg",
@@ -25,7 +25,7 @@ export default [
   },
   {
     image: "/assets/dragonsito5.jpeg",
-    name: "Flarion",
+    label: "Hotty",
     owner: {
       name: "Mocca",
       image: "/assets/mocca.jpg",

@@ -1,6 +1,6 @@
 import { ReactElement } from 'react'
 import ComponentContainerMobile from 'components/component-container/mobile'
-import SearchBar from '../../search-bar'
+import SearchBar from 'components/search-bar'
 import SortingBarMobile from 'components/sorting-bar/mobile'
 
 import { tComponentProps } from './types'

@@ -4,22 +4,19 @@ import MyDragonsCommons from './my-dragons'
 import MyDragonsDesktop from './my-dragons.desktop'
 import MyDragonsMobile from './my-dragons.mobile'
 
-import MainchainAPI from '../../services/blockchain-interaction/mainchain'
-import SidechainAPI from '../../services/blockchain-interaction/sidechain'
-import { getDragonsFromOracleAPI } from '../../services/oracle'
+import MainchainAPI from 'services/blockchain-interaction/mainchain'
+import SidechainAPI from 'services/blockchain-interaction/sidechain'
+import { getDragonsFromOracleAPI } from 'services/oracle'
 import {
   mapDragonsResults,
   updateDragonLocationError,
   updateDragonLocationOk,
   updateDragonsBasedOnSearchFilters,
 } from './utils'
-import {
-  LOW_TO_HIGH_VALUE,
-  HIGH_TO_LOW_VALUE,
-} from '../../components/my-dragons/search-container/constants'
-import { tLowOHigh } from '../../components/my-dragons/search-container/types'
+import { LOW_TO_HIGH_VALUE, HIGH_TO_LOW_VALUE } from 'components/sorting-bar/constants'
+import { tLowOHigh } from 'components/my-dragons/search-container/types'
 
-import { ISSRPropsDeviceOnly } from '../../types/server-side-props-device-only'
+import { ISSRPropsDeviceOnly } from 'types/server-side-props-device-only'
 
 export default function MyDragons({ deviceType }: ISSRPropsDeviceOnly): ReactElement {
   const [dragons, setDragons] = useState([])
@@ -33,22 +30,33 @@ export default function MyDragons({ deviceType }: ISSRPropsDeviceOnly): ReactEle
   }
 
   // Checkbox - change
-  const checkedMainchain = useRef(true)
-  const checkedSidechain = useRef(true)
+  const chMainchain = useRef(true)
+  const chSidechain = useRef(true)
   const handleCheckedChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    if (event.target.name === 'checkedMainchain') {
-      checkedMainchain.current = event.target.checked
+    if (event.target.name === 'Mainchain') {
+      chMainchain.current = event.target.checked
     }
-    if (event.target.name === 'checkedSidechain') {
-      checkedSidechain.current = event.target.checked
+    if (event.target.name === 'Sidechain') {
+      chSidechain.current = event.target.checked
     }
     setFilteredDragons(
-      updateDragonsBasedOnSearchFilters(dragons, event.target.name, event.target.checked, checkedMainchain.current, checkedSidechain.current)
+      updateDragonsBasedOnSearchFilters(
+        dragons,
+        event.target.name,
+        event.target.checked,
+        chMainchain.current,
+        chSidechain.current
+      )
     )
   }
 
   // Sort by - change
-  const [attribute, setAttribute] = useState(10)
+  const attributes = [
+    { name: 'Strength', value: 0 },
+    { name: 'Fire', value: 1 },
+    { name: 'Whatever', value: 2 },
+  ]
+  const [attributeValue, setAttribute] = useState(0)
   const handleChangeAttribute = (event: React.ChangeEvent<{ value: unknown }>): void => {
     setAttribute(event.target.value as number)
   }
@@ -78,7 +86,13 @@ export default function MyDragons({ deviceType }: ISSRPropsDeviceOnly): ReactEle
       ]
       setDragons(dragons)
       setFilteredDragons(
-        updateDragonsBasedOnSearchFilters(dragons, null, null, checkedMainchain.current, checkedSidechain.current)
+        updateDragonsBasedOnSearchFilters(
+          dragons,
+          null,
+          null,
+          chMainchain.current,
+          chSidechain.current
+        )
       )
       setLoading(false)
     })
@@ -86,7 +100,7 @@ export default function MyDragons({ deviceType }: ISSRPropsDeviceOnly): ReactEle
 
   useEffect(() => {
     updateDragons()
-    setInterval(updateDragons, 30000)
+    setInterval(updateDragons, 10000)
   }, [])
 
   const transferDragon = (id: string, location: string): void => {
@@ -121,24 +135,33 @@ export default function MyDragons({ deviceType }: ISSRPropsDeviceOnly): ReactEle
   }
 
   const commonProps = {
-    attribute,
-    checkedMainchain: checkedMainchain.current,
-    checkedSidechain: checkedSidechain.current,
     dragons,
     filteredDragons,
-    handleChangeAttribute: handleChangeAttribute,
-    handleChangeSelectLowHigh: handleChangeSelectLowHigh,
-    handleCheckedChange: handleCheckedChange,
-    handleSearchChange: handleSearchChange,
-    loading: loading,
-    lowOrHigh: lowOrHigh as tLowOHigh,
-    transferMethod: transferDragon,
     search,
+    handleSearchChange,
+    chMainchain: chMainchain.current,
+    chSidechain: chSidechain.current,
+    handleCheckedChange,
+    attributes,
+    attributeValue,
+    handleChangeAttribute,
+    lowOrHigh: lowOrHigh as tLowOHigh,
+    handleChangeSelectLowHigh,
+    loading,
+    transferMethod: transferDragon,
   }
 
   if (deviceType === 'desktop') {
-    return <MyDragonsCommons children={<MyDragonsDesktop {...commonProps} />} />
+    return (
+      <MyDragonsCommons>
+        <MyDragonsDesktop {...commonProps} />
+      </MyDragonsCommons>
+    )
   }
 
-  return <MyDragonsCommons children={<MyDragonsMobile {...commonProps} />} />
+  return (
+    <MyDragonsCommons>
+      <MyDragonsMobile {...commonProps} />
+    </MyDragonsCommons>
+  )
 }

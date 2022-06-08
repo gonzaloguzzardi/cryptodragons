@@ -29,18 +29,12 @@ export function updateDragonsBasedOnSearchFilters(
   checkedSidechain: boolean
 ): any[] {
   let finalDragons = dragons
-  if (
-    (name === 'checkedMainchain' && !checked) ||
-    (name !== 'checkedMainchain' && !checkedMainchain)
-  ) {
+  if ((name === 'Mainchain' && !checked) || (name !== 'Mainchain' && !checkedMainchain)) {
     finalDragons = finalDragons.filter(
       (dragon) => dragon.source !== 'MAINCHAIN' && dragon.source !== 'MAINCHAIN_GATEWAY'
     )
   }
-  if (
-    (name === 'checkedSidechain' && !checked) ||
-    (name !== 'checkedSidechain' && !checkedSidechain)
-  ) {
+  if ((name === 'Sidechain' && !checked) || (name !== 'Sidechain' && !checkedSidechain)) {
     finalDragons = finalDragons.filter(
       (dragon) => dragon.source !== 'SIDECHAIN' && dragon.source !== 'SIDECHAIN_GATEWAY'
     )

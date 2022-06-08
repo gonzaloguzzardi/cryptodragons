@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, ReactElement } from 'react'
 
 import Layout from 'components/layout'
 import Dragon from 'components/dragon'
@@ -11,7 +11,6 @@ import FormLabel from '@mui/material/FormLabel'
 import MainchainAPI from 'services/blockchain-interaction/mainchain'
 import SidechainAPI from 'services/blockchain-interaction/sidechain'
 import { getDragonsFromOracleAPI } from 'services/oracle'
-import { ReactElement } from 'react'
 
 interface IProps {
   any
@@ -21,8 +20,8 @@ interface IState {
   mainAccount?: string
   sideDragons?: Array<string>
   mainDragons?: Array<string>
-  sidechainGatewayDragons?: Array<Object>
-  mainchainGatewayDragons?: Array<Object>
+  sidechainGatewayDragons?: Array<string>
+  mainchainGatewayDragons?: Array<string>
   accountsAreMapped?: boolean
 }
 
@@ -183,7 +182,7 @@ class Demo extends Component<IProps> {
       </Grid>
 
       {/* Sidechain dragons - Mainchain dragons */}
-      <Grid container justify="center" spacing={2}>
+      <Grid container justifyContent="center" spacing={2}>
         <Grid item xs={6} className="containerGridDragonsItems">
           <h3 className="chainsHeadings">Sidechain Dragons</h3>
           <Grid container spacing={2}>
@@ -222,10 +221,10 @@ class Demo extends Component<IProps> {
       <Grid container spacing={2}>
         <Grid item xs={6} className="containerGridDragonsItems">
           <h3 className="oracleHeading">Sidechain Gateway Dragons</h3>
-          <Grid container justify="center" spacing={2}>
+          <Grid container justifyContent="center" spacing={2}>
             {this.state.sidechainGatewayDragons
               ? this.state.sidechainGatewayDragons.map((value) => (
-                  <Grid key={value} item>
+                  <Grid item>
                     <Dragon mappedAccounts={this.state.accountsAreMapped} location="SIDECHAIN_GATEWAY" id={value} />
                   </Grid>
                 ))
@@ -234,10 +233,10 @@ class Demo extends Component<IProps> {
         </Grid>
         <Grid item xs={6} className="containerGridDragonsItems">
           <h3 className="oracleHeading">Mainchain Gateway Dragons</h3>
-          <Grid container justify="center" spacing={2}>
+          <Grid container justifyContent="center" spacing={2}>
             {this.state.mainchainGatewayDragons
               ? this.state.mainchainGatewayDragons.map((value) => (
-                  <Grid key={value} item>
+                  <Grid item>
                     <Dragon mappedAccounts={this.state.accountsAreMapped} location="MAINCHAIN_GATEWAY" id={value} />
                   </Grid>
                 ))

@@ -23,7 +23,7 @@ interface IProps {
   id: string
   key: string
   transferMethod?: (id: string, location: string) => unknown
-  mappedAccounts: boolean
+  mappedAccounts?: boolean
 }
 
 interface IState {

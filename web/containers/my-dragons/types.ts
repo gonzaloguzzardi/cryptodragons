@@ -1,14 +1,12 @@
-import {
-  LOW_TO_HIGH_VALUE,
-  HIGH_TO_LOW_VALUE,
-} from '../../components/my-dragons/search-container/constants'
-import { tDragon } from '../../types/data'
+import { tDragon } from 'types/data'
+import { tLowOrHigh } from 'components/sorting-bar/types'
 
 export type tProps = {
   accountsState: any // @todo: complete
-  attribute: number
-  checkedMainchain: boolean
-  checkedSidechain: boolean
+  attributes: { name: string; value: number }[]
+  attributeValue: number
+  chMainchain: boolean
+  chSidechain: boolean
   dragons: tDragon[]
   filteredDragons: tDragon[]
   handleCheckedChange: (event: React.ChangeEvent<HTMLInputElement>) => void
@@ -16,7 +14,7 @@ export type tProps = {
   handleChangeAttribute: (event: React.ChangeEvent<{ value: unknown }>) => void
   handleChangeSelectLowHigh: (event: React.ChangeEvent<{ value: unknown }>) => void
   loading: boolean
-  lowOrHigh: typeof LOW_TO_HIGH_VALUE | typeof HIGH_TO_LOW_VALUE
+  lowOrHigh: tLowOrHigh
   transferMethod?: (id: string, location: string) => unknown
   search: string
 }

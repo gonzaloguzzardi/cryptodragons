@@ -1,7 +1,7 @@
 import React, { Component, ReactElement } from 'react'
 import DragonCreator from 'components/dragon-creator'
 import DragonAttributes from 'components/dragon-attributes'
-import Grid from '@mui/material/Grid'
+
 
 interface DProps {
   any
@@ -57,7 +57,7 @@ class DragonCreation extends Component<DProps> {
   }
 
   updateColorAlas(color) {
-    this.setState({ colorAlas: color });
+    this.setState({ colorAlas: color })
   }
   updateColorCola(color) {
     this.setState({ colorCola: color })

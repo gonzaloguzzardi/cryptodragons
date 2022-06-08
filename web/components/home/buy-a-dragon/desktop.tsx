@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import Button from '@mui/material/Button'
 import Grid from '@mui/material/Grid'
 import Card from '@mui/material/Card'
@@ -13,7 +14,7 @@ export default function BuyADragonSection(): ReactElement {
       <Card className={styles.card} raised>
         <Grid container spacing={3}>
           <Grid item xs={4}>
-            <Grid container justify="center">
+            <Grid container justifyContent="center">
               <img className={styles.img} alt="complex" src="/assets/home/dragon-2.png" />
             </Grid>
           </Grid>
@@ -31,18 +32,20 @@ export default function BuyADragonSection(): ReactElement {
             <Grid container>
               <Grid item xs={6}></Grid>
               <Grid item xs={4}>
-                <Button
-                  variant="contained"
-                  size="large"
-                  color="secondary"
-                  fullWidth
-                  endIcon={<img src="/assets/home/dragon-3.png" alt="" height="50px" />}
-                  className={styles.cardButton}
-                >
-                  <Typography variant="h6" component="span">
-                    Buy a Dragon
-                  </Typography>
-                </Button>
+                <Link href="/marketplace">
+                  <Button
+                    variant="contained"
+                    size="large"
+                    color="secondary"
+                    fullWidth
+                    endIcon={<img src="/assets/home/dragon-3.png" alt="" height="50px" />}
+                    className={styles.cardButton}
+                  >
+                    <Typography variant="h6" component="span">
+                      Buy a Dragon
+                    </Typography>
+                  </Button>
+                </Link>
               </Grid>
             </Grid>
           </Grid>

@@ -5,21 +5,26 @@ exports[`Renders Guides desktop 1`] = `
   className="container"
 >
   <main>
-    <AppToolbar
-      accountsState={
-        Object {
-          "connectToProvider": [Function],
-          "mainchain_account": null,
-          "provider_installed": false,
-          "updateAccountsData": [Function],
+    <div
+      className="container"
+    >
+      <AppToolbar
+        accountsState={
+          Object {
+            "connectToProvider": [Function],
+            "loading": true,
+            "mainchain_account": null,
+            "provider_installed": false,
+            "updateAccountsData": [Function],
+          }
         }
-      }
-      deviceType="desktop"
-      section="guides"
-    />
-    <p>
-      Guides
-    </p>
+        deviceType="desktop"
+        section="guides"
+      />
+      <p>
+        Guides
+      </p>
+    </div>
   </main>
 </div>
 `;
@@ -29,21 +34,26 @@ exports[`Renders Guides mobile 1`] = `
   className="container"
 >
   <main>
-    <AppToolbar
-      accountsState={
-        Object {
-          "connectToProvider": [Function],
-          "mainchain_account": null,
-          "provider_installed": false,
-          "updateAccountsData": [Function],
+    <div
+      className="container"
+    >
+      <AppToolbar
+        accountsState={
+          Object {
+            "connectToProvider": [Function],
+            "loading": true,
+            "mainchain_account": null,
+            "provider_installed": false,
+            "updateAccountsData": [Function],
+          }
         }
-      }
-      deviceType="mobile"
-      section="guides"
-    />
-    <p>
-      Guides
-    </p>
+        deviceType="mobile"
+        section="guides"
+      />
+      <p>
+        Guides
+      </p>
+    </div>
   </main>
 </div>
 `;

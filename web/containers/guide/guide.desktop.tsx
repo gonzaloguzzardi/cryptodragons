@@ -17,11 +17,3 @@ function GuidesDesktop({ accountsState, guideData }): ReactElement {
 }
 
 export default withAccountsHOC(GuidesDesktop)
-
-// metadata: {
-//   title: string
-//   description: string
-//   thumbnailUrl: string
-// }
-// slug: string
-// mdxContent

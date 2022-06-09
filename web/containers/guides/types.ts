@@ -3,6 +3,4 @@ import { tGuideMetadata } from 'types/data'
 
 export type tGuidesProps =
   ISSRPropsDeviceOnly &
-  {
-    guidesData: tGuideMetadata[]
-  }
+  { guidesData: tGuideMetadata[] }

@@ -15,6 +15,6 @@ export type tGuideMetadata = {
   slug: string
 }
 
-export type tGuideData = tGuideMetadata & {
-  mdxContent
-}
+export type tGuideData =
+  tGuideMetadata &
+  { mdxContent }

@@ -34149,11 +34149,11 @@
       },
       "links": {},
       "address": "0xdF69A20F7237e94C74D082A94a55B9f7e922a425",
-      "transactionHash": "0x7c10d35551c711d8c71de794b30d619dbaff0140c5bb1559a7f741b5a3f9e296"
+      "transactionHash": "0x012ea53a7717d4c41006967522126e44fc84e94274d150d12dcaa8c537f3734b"
     }
   },
   "schemaVersion": "3.4.1",
-  "updatedAt": "2022-06-08T03:10:04.065Z",
+  "updatedAt": "2022-06-08T20:27:22.634Z",
   "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",

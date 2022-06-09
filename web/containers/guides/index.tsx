@@ -1,25 +1,19 @@
 import React, { ReactElement } from 'react'
-// import { useRouter } from 'next/router'
-
-import AboutMarkdown from './templates/hola.mdx'
 
 import GuidesCommons from './guides'
 import GuidesDesktop from './guides.desktop'
 import GuidesMobile from './guides.mobile'
 
-import { ISSRPropsDeviceOnly } from 'types/server-side-props-device-only'
+import { tGuidesProps } from './types'
 
-export default function Guides({ deviceType }: ISSRPropsDeviceOnly): ReactElement {
-  // const router = useRouter()
-  // const { pid } = router.query
-
+export default function Guides({ deviceType, guidesData }: tGuidesProps): ReactElement {
   return deviceType === 'desktop' ? (
     <GuidesCommons>
-      <GuidesDesktop content={<AboutMarkdown />} />
+      <GuidesDesktop guidesData={guidesData} />
     </GuidesCommons>
   ) : (
     <GuidesCommons>
-      <GuidesMobile content={<AboutMarkdown />} />
+      <GuidesMobile guidesData={guidesData} />
     </GuidesCommons>
   )
 }

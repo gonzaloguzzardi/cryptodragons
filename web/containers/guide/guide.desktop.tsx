@@ -3,17 +3,25 @@ import React, { ReactElement } from 'react'
 import { withAccountsHOC } from 'hooks/accounts-context'
 
 import AppToolbar from 'components/app-toolbar'
-import GuidesListDesktop from 'components/guides/list/desktop'
+import GuideViewDesktop from 'components/guides/view/desktop'
 import FooterDesktop from 'components/footer/desktop'
 
-function GuidesDesktop({ accountsState, guidesData }): ReactElement {
+function GuidesDesktop({ accountsState, guideData }): ReactElement {
   return (
     <>
       <AppToolbar deviceType="desktop" section="guides" accountsState={accountsState} />
-      <GuidesListDesktop guidesData={guidesData} />
+      <GuideViewDesktop guideData={guideData} />
       <FooterDesktop />
     </>
   )
 }
 
 export default withAccountsHOC(GuidesDesktop)
+
+// metadata: {
+//   title: string
+//   description: string
+//   thumbnailUrl: string
+// }
+// slug: string
+// mdxContent

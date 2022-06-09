@@ -5,3 +5,16 @@ export type tDragon = {
   id: string
   source: tDragonSrc
 }
+
+export type tGuideMetadata = {
+  metadata: {
+    title: string
+    description: string
+    thumbnailUrl: string
+  }
+  slug: string
+}
+
+export type tGuideData = tGuideMetadata & {
+  mdxContent
+}

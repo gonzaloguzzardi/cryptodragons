@@ -1,7 +1,6 @@
 import { ReactNode, ReactElement } from 'react'
 import Head from 'next/head'
 
-import CssBaseline from '@mui/material/CssBaseline'
 import { ThemeProvider } from '@mui/material/styles'
 import PageContainer from 'components/page-container'
 import theme from './theme'
@@ -27,7 +26,6 @@ export default function Layout({ children }: LayoutProps): ReactElement {
       </Head>
 
       <ThemeProvider theme={theme}>
-        <CssBaseline />
         <main><PageContainer children={children} /></main>
       </ThemeProvider>
     </div>

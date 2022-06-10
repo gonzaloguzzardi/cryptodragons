@@ -10,9 +10,20 @@
 .container {
   width: $max-width-by-screen-desktop;
   display: grid;
-  row-gap: 30px;
+  justify-content: flex-start;
 
   & > div {
     margin: auto;
+    width: $max-width-by-screen-desktop-vw;
+  }
+}
+
+.guidesAnchor {
+  width: fit-content;
+  margin-bottom: 20px;
+  text-decoration-color: $pallete-secondary;
+
+  &:not(:hover) {
+    text-decoration: none;
   }
 }

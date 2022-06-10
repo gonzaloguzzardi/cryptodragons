@@ -2,11 +2,20 @@ import { ReactElement } from 'react'
 import { MDXRemote } from 'next-mdx-remote'
 import Link from 'next/link'
 import Button from '@mui/material/Button'
-import CardMedia from '@mui/material/CardMedia';
+// import CardMedia from '@mui/material/CardMedia';
+import Image from 'next/image'
 import Typography from '@mui/material/Typography';
 
 import styles from './desktop.module.scss'
 import { tProps } from './types'
+
+const components = {
+  img: (props) => <Image alt={props.alt} layout="responsive" {...props} />,
+  h1: (props) => <Typography gutterBottom variant="h1" {...props}/>,
+  h2: (props) => <Typography gutterBottom variant="h2" {...props}/>,
+  p: (props) => <Typography gutterBottom variant="p" {...props}/>,
+  Button,
+}
 
 export default function GuidesListDesktop({ guideData }: tProps): ReactElement {
   return (
@@ -14,34 +23,33 @@ export default function GuidesListDesktop({ guideData }: tProps): ReactElement {
       <div className={styles.container}>
         {/* Back Button */}
         <Link href={'/guides'}>
-          <Button
-            variant="contained"
-            size="large"
-            color="secondary"
-            fullWidth
-          >
-            <Typography gutterBottom variant="h3" component="div">
-              Back
+          <a className={styles.guidesAnchor}>
+            <Typography variant="caption" color="secondary" component="p" fontSize={16}>
+              {'< Guides'}
             </Typography>
-          </Button>
+          </a>
         </Link>
 
         {/* Metadata */}
-        <CardMedia
-          component="img"
-          height="160"
-          image={guideData.metadata.thumbnailUrl}
-          alt="guide thumbnail"
-        />
-        <Typography gutterBottom variant="h5" component="div">
+        {/* @TODO: Add thumbnail img in here
+          <CardMedia
+            component="img"
+            height="160"
+            image={guideData.metadata.thumbnailUrl}
+            alt="guide thumbnail"
+          />
+        */}
+
+        {/* Metadata */}
+        <Typography gutterBottom variant="h4">
           {guideData.metadata.title}
         </Typography>
-        <Typography variant="body2" color="text.secondary">
+        <Typography gutterBottom variant="body1" fontStyle="italic" color="text.secondary">
           {guideData.metadata.description}
         </Typography>
 
         {/* MDX Content */}
-        <MDXRemote {...guideData.mdxContent} components={{ Button }} />
+        <MDXRemote {...guideData.mdxContent} components={components} />
       </div>
     </div>
   )

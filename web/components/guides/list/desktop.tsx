@@ -17,23 +17,23 @@ export default function GuidesListDesktop({ guidesData }: tProps): ReactElement 
         {guidesData.map(({ metadata, slug }, idx) => (
           <Link href={'/guide/' + slug} key={idx}>
             <CardActionArea>
-              <Card sx={{ display: 'flex' }}>
+              <Card sx={{ display: 'flex' }} raised>
                 <Box sx={{ display: 'flex', flexDirection: 'column' }}>
                   <CardContent>
-                    <Typography gutterBottom variant="h5" component="div">
+                    <Typography gutterBottom variant="h5">
                       {metadata.title}
                     </Typography>
-                    <Typography variant="body2" color="text.secondary">
+                    <Typography gutterBottom variant="body2" color="text.secondary">
                       {metadata.description}
                     </Typography>
                   </CardContent>
                 </Box>
-                <CardMedia
+                {/* <CardMedia
                   component="img"
                   height="160"
                   image={metadata.thumbnailUrl}
                   alt="guide thumbnail"
-                />
+                /> */}
               </Card>
             </CardActionArea>
           </Link>

@@ -29,16 +29,6 @@ contract('DragonApi', (accounts) => {
         await initializeTestDragons();
     });
 
-    it('getDragonsByPage should return empty page if pageSize is 0', async () => {
-        const pageNumber = 1;
-        const pageSize = 0;
-        await dragonApiContract.getDragonsByPage(pageNumber, pageSize, {
-            from: mainAccount
-        })
-        .then(dragonPageData => {
-            assert.equal(0, dragonPageData.length);
-        });
-    });
 
     it('getDragonsByPage should return first and second dragons for first page with size 2', async () => {
         const pageNumber = 1;
@@ -46,7 +36,11 @@ contract('DragonApi', (accounts) => {
         await dragonApiContract.getDragonsByPage(pageNumber, pageSize, {
             from: mainAccount
         })
-        .then(dragonPageData => {
+        .then(result => {
+            const totalPages = result[0];
+            const dragonPageData = result[1];
+
+            assert.equal(3, totalPages);
             assert.equal(2, dragonPageData.length);
 
             assert.equal(0, dragonPageData[0].dragonId);
@@ -65,7 +59,11 @@ contract('DragonApi', (accounts) => {
         await dragonApiContract.getDragonsByPage(pageNumber, pageSize, {
             from: mainAccount
         })
-        .then(dragonPageData => {
+        .then(result => {
+            const totalPages = result[0];
+            const dragonPageData = result[1];
+
+            assert.equal(3, totalPages);
             assert.equal(2, dragonPageData.length);
 
             assert.equal(2, dragonPageData[0].dragonId);
@@ -85,7 +83,11 @@ contract('DragonApi', (accounts) => {
         await dragonApiContract.getDragonsByPage(pageNumber, pageSize, {
             from: mainAccount
         })
-        .then(dragonPageData => {
+        .then(result => {
+            const totalPages = result[0];
+            const dragonPageData = result[1];
+
+            assert.equal(3, totalPages);
             assert.equal(1, dragonPageData.length);
 
             assert.equal(4, dragonPageData[0].dragonId);

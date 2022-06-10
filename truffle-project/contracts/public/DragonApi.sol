@@ -42,9 +42,12 @@ contract DragonApi {
 	 * @dev Return dragons with pagination
 	 * @param pageNumber page starting with value 1. Page 1 will return dragons with id 0 to pageSize
 	 * @param pageSize amount of dragons that will be returned in each page
+	 * @return totalPages amount of pages that can be fetched
 	 * @return dragonPagesData all dragon ids contain in the resulting page
 	 */
-	function getDragonsByPage(uint256 pageNumber, uint256 pageSize) external view returns (DragonLibrary.DragonFetchPageData[] memory dragonPagesData) {
+	function getDragonsByPage(uint256 pageNumber, uint256 pageSize) external view returns (uint256 totalPages, DragonLibrary.DragonFetchPageData[] memory dragonPagesData) {
+		require(pageSize > 0, "pageSize cannot be zero");
+		
 		uint256 cursor = (pageNumber - 1) * pageSize;
 		uint256 totalDragons = IERC721Enumerable(_dragonAddress).totalSupply();
 
@@ -57,15 +60,20 @@ contract DragonApi {
 
 		dragonPagesData = new DragonLibrary.DragonFetchPageData[](length);
 		for (uint256 i = 0; i < length; i++) {
-			address dragonOwner = IERC721(_dragonAddress).ownerOf(cursor);
+			uint256 tokenId = cursor + i;
+			address dragonOwner = IERC721(_dragonAddress).ownerOf(tokenId);
 			dragonPagesData[i] = DragonLibrary.DragonFetchPageData( {
-				dragonId: cursor + i,
+				dragonId: tokenId,
 				owner: dragonOwner,
 				onSale: isDragonOnSale(dragonOwner)
 			});
 		}
 
-		return dragonPagesData;
+		uint256 pages = (totalDragons / pageSize);
+		if (totalDragons - pages > 0) {
+			pages += 1;
+		}
+		return (pages, dragonPagesData);
     }
 
 	/**

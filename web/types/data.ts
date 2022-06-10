@@ -17,4 +17,8 @@ export type tGuideMetadata = {
 
 export type tGuideData =
   tGuideMetadata &
-  { mdxContent }
+  { mdxContent: {
+      compiledSource: string;
+      scope?: any;
+    }
+  }

@@ -1,8 +1,8 @@
 import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
-import { serialize } from 'next-mdx-remote/serialize'
 import { GetServerSideProps } from 'next'
+import { serialize } from 'next-mdx-remote/serialize'
 import getDeviceType from 'utils/get-device-type'
 
 import Guide from 'containers/guide'
@@ -22,7 +22,7 @@ export const getServerSideProps: GetServerSideProps = async ({ params: { slug },
       guideData: {
         metadata,
         slug,
-        mdxContent
+        mdxContent,
       }
     }
   }

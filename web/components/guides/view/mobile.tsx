@@ -4,10 +4,10 @@ import Link from 'next/link'
 import Typography from '@mui/material/Typography'
 import MDXRenderer from 'components/MDXRenderer'
 
-import styles from './desktop.module.scss'
+import styles from './mobile.module.scss'
 import { tProps } from './types'
 
-export default function GuidesListDesktop({ guideData }: tProps): ReactElement {
+export default function GuidesListMobile({ guideData }: tProps): ReactElement {
   return (
     <div className={styles.main}>
       <div className={styles.container}>

@@ -7,10 +7,10 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 
-import styles from './desktop.module.scss'
+import styles from './mobile.module.scss'
 import { tProps } from './types'
 
-export default function GuidesListDesktop({ guidesData }: tProps): ReactElement {
+export default function GuidesListMobile({ guidesData }: tProps): ReactElement {
   return (
     <div className={styles.main}>
       <div className={styles.container}>

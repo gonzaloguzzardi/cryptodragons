@@ -70,7 +70,7 @@ contract DragonApi {
 		}
 
 		uint256 pages = (totalDragons / pageSize);
-		if (totalDragons - pages > 0) {
+		if (totalDragons - (pages * pageSize)) > 0) {
 			pages += 1;
 		}
 		return (pages, dragonPagesData);

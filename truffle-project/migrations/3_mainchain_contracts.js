@@ -55,7 +55,7 @@ module.exports = function (deployer, network, accounts) {
 		console.log(`Marketplace deployed at address: ${marketplaceContractInstance.address}`);
 		console.log(`Marketplace transaction at hash: ${marketplaceContract.transactionHash}`);
 
-		const dragonApiContract = await deployer.deploy(DragonApi, dragonTokenInstance.address, genesContractInstance.address);
+		const dragonApiContract = await deployer.deploy(DragonApi, dragonTokenInstance.address, genesContractInstance.address, marketplaceContractInstance.address);
 		const dragonApiInstance = await DragonApi.deployed();
 
 		console.log(`DragonApi deployed at address: ${dragonApiInstance.address}`);

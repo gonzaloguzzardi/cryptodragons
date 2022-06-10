@@ -15,7 +15,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     const { data: metadata } = matter(markdownWithMeta)
     return {
       metadata,
-      slug: filename.split('.')[0]
+      slug: filename.substring(3).split('.')[0]
     }
   })
 

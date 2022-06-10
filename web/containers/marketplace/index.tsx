@@ -26,25 +26,19 @@ export default function Marketplace({ deviceType }: ISSRPropsDeviceOnly): ReactE
   }
 
   const updateDragons = (): void => {
-    console.log('Updating dragons')
-    Promise.all([
-      MainchainAPI.getMyDragons(),
-      SidechainAPI.getMyDragons(),
-      getDragonsFromOracleAPI(),
-    ]).then((results) => {
-      console.log(`Results: ${results}`)
-      if (!results || !results[0] || !results[1] || !results[2]) return setLoading(false)
+    MainchainAPI.getMarketPlaceDragons().then((marketplaceTokens) => 
+      {
+        var dragonIDS = [];
+        for (var i in marketplaceTokens) {  
+          dragonIDS.push(marketplaceTokens[i].tokenId);
+        };
+        var dragons = mapDragonsResults(dragonIDS, 'MAINCHAIN');
+        setDragons(dragons);
+        setFilteredDragons(updateDragonsBasedOnSearchFilters(dragons, null, null, true, true));
+        setLoading(false);
+      }
 
-      const dragons = [
-        ...mapDragonsResults(results[0], 'MAINCHAIN'),
-        ...mapDragonsResults(results[1], 'SIDECHAIN'),
-        ...mapDragonsResults(results[2][0]['sidechain-gateway-results'], 'SIDECHAIN_GATEWAY'),
-        ...mapDragonsResults(results[2][1]['mainchain-gateway-results'], 'MAINCHAIN_GATEWAY'),
-      ]
-      setDragons(dragons)
-      setFilteredDragons(updateDragonsBasedOnSearchFilters(dragons, null, null, true, true))
-      setLoading(false)
-    })
+    )
   }
 
   useEffect(() => {

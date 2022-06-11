@@ -1,7 +1,7 @@
 @import '../../../styles/variables.scss';
 
 .main {
-  padding: 40px 0;
+  padding: 40px 0 0 0;
   background-color: $pallete-primary;
   display: flex;
   justify-content: center;
@@ -9,18 +9,13 @@
 
 .container {
   width: $max-width-by-screen-desktop;
-  display: grid;
+  display: block;
   justify-content: flex-start;
-
-  & > div {
-    margin: auto;
-    width: $max-width-by-screen-desktop-vw;
-  }
 }
 
 .guidesAnchor {
+  display: block;
   width: fit-content;
-  margin-bottom: 20px;
   text-decoration-color: $pallete-secondary;
 
   &:not(:hover) {

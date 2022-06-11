@@ -1,6 +1,8 @@
 import { ReactElement } from 'react'
 import Link from 'next/link'
 // import Image from 'next/image'
+import Box from '@mui/material/Box'
+import Divider from '@mui/material/Divider'
 import Typography from '@mui/material/Typography'
 import MDXRenderer from 'components/MDXRenderer'
 
@@ -14,7 +16,13 @@ export default function GuidesListDesktop({ guideData }: tProps): ReactElement {
         {/* Back Button */}
         <Link href={'/guides'}>
           <a className={styles.guidesAnchor}>
-            <Typography variant="caption" color="secondary" component="p" fontSize={16}>
+            <Typography
+              variant="caption"
+              color="secondary"
+              component="p"
+              fontSize={16}
+              gutterBottom
+            >
               {'< Guides'}
             </Typography>
           </a>
@@ -35,8 +43,12 @@ export default function GuidesListDesktop({ guideData }: tProps): ReactElement {
           {guideData.metadata.description}
         </Typography>
 
+        <Divider variant="fullWidth" />
+
         {/* MDX Content */}
-        <MDXRenderer {...guideData.mdxContent} />
+        <Box display="grid" mt={2} mb={2}>
+          <MDXRenderer {...guideData.mdxContent} />
+        </Box>
       </div>
     </div>
   )

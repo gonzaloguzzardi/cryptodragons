@@ -56,6 +56,7 @@ class Dragon extends Component<IProps, IState> {
     super(props)
 
     this.state = {
+      isApproved: false,
       location: props.location,
       name: 'dragon',
       id: props.id,
@@ -97,28 +98,25 @@ class Dragon extends Component<IProps, IState> {
     }
   }
 
-  isDragonApproved: () => unknown = () => {
-    MainchainAPI.isApproved(this.state.id)
-      .then((dragonData) => console.log(dragonData))
-      .catch((err) => console.error(err))
-  }
-
   updateDragonVisualData = (dragonData) => {
     console.log(dragonData)
-    this.setState({
-      bodyPatternColor: Math.round(dragonData.bodyPatternColor * 1.41),
-      bodyPatternType: 1, //(dragonData.bodyPatternType % 2) + 1, //1-2
-      bodyColor: Math.round(dragonData.bodyColor * 1.41),
-      bodyType: (dragonData.bodyType % 2) + 1, //1-2
-      eyesColor: Math.round(dragonData.eyesColor * 1.41),
-      eyesType: (dragonData.eyesType % 4) + 1, //1-4
-      hornsColor: Math.round(dragonData.hornsColor * 1.41),
-      hornsType: (dragonData.hornsType % 4) + 1, //1-4
-      tailColor: Math.round(dragonData.tailColor * 1.41),
-      tailType: (dragonData.tailType % 4) + 1, //1-4
-      wingsColor: Math.round(dragonData.wingsColor * 1.41),
-      wingsType: (dragonData.wingsType % 4) + 1, //1-4
-    })
+    if (dragonData) {
+      this.setState({
+        bodyPatternColor: Math.round(dragonData.bodyPatternColor * 1.41),
+        bodyPatternType: 1, //(dragonData.bodyPatternType % 2) + 1, //1-2
+        bodyColor: Math.round(dragonData.bodyColor * 1.41),
+        bodyType: (dragonData.bodyType % 2) + 1, //1-2
+        eyesColor: Math.round(dragonData.eyesColor * 1.41),
+        eyesType: (dragonData.eyesType % 4) + 1, //1-4
+        hornsColor: Math.round(dragonData.hornsColor * 1.41),
+        hornsType: (dragonData.hornsType % 4) + 1, //1-4
+        tailColor: Math.round(dragonData.tailColor * 1.41),
+        tailType: (dragonData.tailType % 4) + 1, //1-4
+        wingsColor: Math.round(dragonData.wingsColor * 1.41),
+        wingsType: (dragonData.wingsType % 4) + 1, //1-4
+      })
+    }
+
   }
 
   getDragonVisualData: () => unknown = () => {
@@ -151,6 +149,18 @@ class Dragon extends Component<IProps, IState> {
           .catch(() => this.setState({ fetching: false }))
       }
     }
+  }
+
+  isDragonApproved: () => unknown = () => {
+    MainchainAPI.isApproved(this.state.id)
+      .then((dragonData) => {
+          if (dragonData) {
+            console.log(this.state.id);
+            console.log(dragonData);
+            this.setState({isApproved:true});
+          }
+      })
+      .catch((err) => console.error(err))
   }
 
   approve: () => unknown = () => {
@@ -239,12 +249,16 @@ class Dragon extends Component<IProps, IState> {
             {(this.state.fetching || this.props.location.includes('GATEWAY')) && (
               <CircularProgress color="secondary" />
             )}
-            {this.props.location === 'MAINCHAIN' && (
+            {this.props.location === 'MAINCHAIN' &&
+              !this.state.isApproved &&
+            (
               <Button variant="contained" color="secondary" onClick={this.approve}>
                 Approve trx
               </Button>
             )}
-            {this.props.location === 'MAINCHAIN' && (
+            {this.props.location === 'MAINCHAIN' && 
+              this.state.isApproved &&
+            (
               <Button variant="contained" color="secondary" onClick={this.sell}>
                 Sell Dragon
               </Button>

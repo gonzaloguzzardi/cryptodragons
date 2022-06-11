@@ -85,6 +85,10 @@ class MainchainAPI {
   //
   //
 
+  static isNullOrEmpty(data) {
+    return /^0x0{40}$/.test(data);
+  }
+
   static async isApproved(dragonId, gas = GAS_DEFAULT_VALUE) {
     try {
       const {
@@ -97,9 +101,11 @@ class MainchainAPI {
       console.log(gasEstimate);
       if (gasEstimate >= gas) throw new Error('Not enough enough gas, send more.')
 
-      return await contract.methods
+      const dragonData = await contract.methods
         .getApproved(dragonId)
         .call({ from: ownerAccount, gas: gasEstimate })
+      
+      return !this.isNullOrEmpty(dragonData);
 
     } catch (err) {
       console.error(err)

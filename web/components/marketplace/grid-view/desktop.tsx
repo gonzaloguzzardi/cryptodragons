@@ -2,6 +2,8 @@ import { ReactElement } from 'react'
 import Dragon from 'components/dragon'
 import CircularProgress from '@mui/material/CircularProgress'
 
+import {BuyMainDragonCardDesktop} from '../../card/buy-dragon/desktop'
+
 import styles from './desktop.module.scss'
 
 import { tProps } from './types'
@@ -22,7 +24,7 @@ export default function MarketplaceGridViewDesktop({
   return (
     <div className={styles.main}>
       <div className={styles.container}>
-        {filteredDragons.length === 0 && <p>No dragons available...</p>}
+        {filteredDragons.length === 0 && <BuyMainDragonCardDesktop />}
 
         {filteredDragons.length > 0 &&
           filteredDragons.map((dragon) => (

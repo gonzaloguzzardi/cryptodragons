@@ -1,9 +1,8 @@
-import React from 'react'
-import { ReactElement } from 'react'
+import React, { ReactElement } from 'react'
 
-import LoginDesktop from '../../components/login/desktop'
+import LoginDesktop from 'components/login/desktop'
 
-import { postLoginData } from '../../services/admin'
+import { postLoginData } from 'services/admin'
 
 import { JWT_LS_ID } from '../../constants'
 

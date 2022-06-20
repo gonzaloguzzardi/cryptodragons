@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react'
 import { ReactElement } from 'react'
-import AppBar from '@material-ui/core/AppBar'
-import Avatar from '@material-ui/core/Avatar'
-import Toolbar from '@material-ui/core/Toolbar'
+import AppBar from '@mui/material/AppBar'
+import Avatar from '@mui/material/Avatar'
+import Toolbar from '@mui/material/Toolbar'
 
-import Layout from '../../components/layout'
-import AdminButtonsTokenCreate from '../../components/admin/buttons/tokens-create'
-import AdminTable from '../../components/admin/table'
+import Layout from 'components/layout'
+import AdminButtonsTokenCreate from 'components/admin/buttons/tokens-create'
+import AdminTable from 'components/admin/table'
 
-import { getSessionAdmin } from '../../services/admin'
+import { getSessionAdmin } from 'services/admin'
 
 import { JWT_LS_ID } from '../../constants'
 

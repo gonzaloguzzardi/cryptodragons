@@ -1,13 +1,13 @@
 import { ReactElement } from 'react'
-import FirstPageIcon from '@material-ui/icons/FirstPage'
-import IconButton from '@material-ui/core/IconButton'
-import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft'
-import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight'
-import LastPageIcon from '@material-ui/icons/LastPage'
+import FirstPageIcon from '@mui/icons-material/FirstPage'
+import IconButton from '@mui/material/IconButton'
+import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft'
+import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight'
+import LastPageIcon from '@mui/icons-material/LastPage'
 
-import { makeStyles, useTheme, Theme, createStyles } from '@material-ui/core/styles'
+import { makeStyles, useTheme, createStyles } from '@mui/material/styles'
 
-const useStyles1 = makeStyles((theme: Theme) =>
+const useStyles1 = makeStyles((theme) =>
   createStyles({
     root: {
       flexShrink: 0,

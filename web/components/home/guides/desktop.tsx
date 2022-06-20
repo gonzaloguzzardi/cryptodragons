@@ -37,7 +37,7 @@ export default function MarketplaceSection(): ReactElement {
 
             <Grid container justifyContent="center" spacing={2}>
               <Grid item>
-                <Link href="/guides">
+                <Link href="/guide/getting-started">
                   <Button
                     variant="contained"
                     size="large"
@@ -52,7 +52,7 @@ export default function MarketplaceSection(): ReactElement {
               </Grid>
 
               <Grid item>
-                <Link href="/guides">
+                <Link href="/guide/gas-and-fees">
                   <Button
                     variant="contained"
                     size="large"
@@ -67,7 +67,7 @@ export default function MarketplaceSection(): ReactElement {
               </Grid>
 
               <Grid item>
-                <Link href="/guides">
+                <Link href="/guide/marketplace">
                   <Button
                     variant="contained"
                     size="large"
@@ -82,7 +82,7 @@ export default function MarketplaceSection(): ReactElement {
               </Grid>
 
               <Grid item>
-                <Link href="/guides">
+                <Link href="/guide/FAQs">
                   <Button
                     variant="contained"
                     size="large"

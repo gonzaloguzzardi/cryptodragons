@@ -3,14 +3,14 @@ import React, { ReactElement } from 'react'
 import { withAccountsHOC } from 'hooks/accounts-context'
 
 import AppToolbar from 'components/app-toolbar'
-import GuidesListMobile from 'components/guides/list/mobile'
+import GuideViewMobile from 'components/guides/view/mobile'
 import FooterMobile from 'components/footer/mobile'
 
-function GuidesMobile({ accountsState, guidesData }): ReactElement {
+function GuidesMobile({ accountsState, guideData }): ReactElement {
   return (
     <>
       <AppToolbar deviceType="mobile" section="guides" accountsState={accountsState} />
-      <GuidesListMobile guidesData={guidesData} />
+      <GuideViewMobile guideData={guideData} />
       <FooterMobile />
     </>
   )

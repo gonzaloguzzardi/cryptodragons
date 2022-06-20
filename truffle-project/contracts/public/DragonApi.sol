@@ -3,6 +3,7 @@
 pragma solidity ^0.8.0;
 
 import '../common/token/IERC721Enumerable.sol';
+import '../common/token/IERC721.sol';
 import '../common/libraries/DragonLibrary.sol';
 
 interface IDragonContract {
@@ -36,6 +37,44 @@ contract DragonApi {
 	/*******************************************************************************************
         GETTERS
     ********************************************************************************************/
+	
+	/**
+	 * @dev Return dragons with pagination
+	 * @param pageNumber page starting with value 1. Page 1 will return dragons with id 0 to pageSize
+	 * @param pageSize amount of dragons that will be returned in each page
+	 * @return totalPages amount of pages that can be fetched
+	 * @return dragonPagesData all dragon ids contain in the resulting page
+	 */
+	function getDragonsByPage(uint256 pageNumber, uint256 pageSize) external view returns (uint256 totalPages, DragonLibrary.DragonFetchPageData[] memory dragonPagesData) {
+		require(pageSize > 0, "pageSize cannot be zero");
+		
+		uint256 cursor = (pageNumber - 1) * pageSize;
+		uint256 totalDragons = IERC721Enumerable(_dragonAddress).totalSupply();
+
+		require(cursor <= totalDragons, "Out of range page");
+
+		uint256 length = pageSize;
+		if (length > totalDragons - cursor) {
+			length = totalDragons - cursor;
+		}
+
+		dragonPagesData = new DragonLibrary.DragonFetchPageData[](length);
+		for (uint256 i = 0; i < length; i++) {
+			uint256 tokenId = cursor + i;
+			address dragonOwner = IERC721(_dragonAddress).ownerOf(tokenId);
+			dragonPagesData[i] = DragonLibrary.DragonFetchPageData( {
+				dragonId: tokenId,
+				owner: dragonOwner,
+				onSale: isDragonOnSale(dragonOwner)
+			});
+		}
+
+		uint256 pages = (totalDragons / pageSize);
+		if (totalDragons - (pages * pageSize) > 0) {
+			pages += 1;
+		}
+		return (pages, dragonPagesData);
+    }
 
 	/**
 	 * @dev Get all dragons ids owned by owner address
@@ -80,5 +119,9 @@ contract DragonApi {
 	{
 		DragonLibrary.Dragon memory dragon = IDragonContract(_dragonAddress).getDragonById(dragonId);
 		return IGenesLaboratory(_genesLaboratory).getVisualAttributes(dragon.genes);
+	}
+
+	function isDragonOnSale(address dragonOwner) internal virtual view returns (bool) {
+		return false;
 	}
 }

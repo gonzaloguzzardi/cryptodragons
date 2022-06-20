@@ -28,7 +28,7 @@ export default function MarketplaceSection(): ReactElement {
             the main features features such as purchasing a dragon, train them and
             everything you must know to start your journey in this magic world.
           </Typography>
-          <Link href="/guides">
+          <Link href="/guide/getting-started">
             <Button
               variant="contained"
               size="large"
@@ -40,7 +40,7 @@ export default function MarketplaceSection(): ReactElement {
               </Typography>
             </Button>
           </Link>
-          <Link href="/guides">
+          <Link href="/guide/gas-and-fees">
             <Button
               variant="contained"
               size="large"
@@ -52,7 +52,7 @@ export default function MarketplaceSection(): ReactElement {
               </Typography>
             </Button>
           </Link>
-          <Link href="/guides">
+          <Link href="/guide/marketplace">
             <Button
               variant="contained"
               size="large"
@@ -64,7 +64,7 @@ export default function MarketplaceSection(): ReactElement {
               </Typography>
             </Button>
           </Link>
-          <Link href="/guides">
+          <Link href="/guide/FAQs">
             <Button
               variant="contained"
               size="large"

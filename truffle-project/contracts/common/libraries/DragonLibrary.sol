@@ -36,4 +36,10 @@ library DragonLibrary {
 		uint8 tailType;
 		uint8 tailColor;
 	}
+
+	struct DragonFetchPageData {
+		uint256 dragonId;
+		address owner;
+		bool onSale;
+	}
 }

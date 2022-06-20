@@ -11,7 +11,7 @@ const components = {
   h3: props => <Typography gutterBottom variant="h3" {...props}/>,
   h4: props => <Typography gutterBottom variant="h4" {...props}/>,
   h5: props => <Typography gutterBottom variant="h5" {...props}/>,
-  img: props => <Image alt={props.alt} layout="responsive" {...props} />,
+  img: props => <Image {...props} />,
   p: props => <Typography gutterBottom variant="p" {...props}/>,
 }
 

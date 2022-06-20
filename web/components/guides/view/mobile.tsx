@@ -46,7 +46,7 @@ export default function GuidesListMobile({ guideData }: tProps): ReactElement {
         <Divider variant="fullWidth" />
 
         {/* MDX Content */}
-        <Box display="grid" mt={2} mb={2}>
+        <Box display="grid" mt={2}>
           <MDXRenderer {...guideData.mdxContent} />
         </Box>
       </div>

@@ -11,7 +11,7 @@ const TEMPLATE_PATH = 'containers/guides/templates'
 
 export const getServerSideProps: GetServerSideProps = async ({ params: { slug }, req }) => {
   const templates = fs.readdirSync(path.join(TEMPLATE_PATH))
-  const fullFilename = templates.find(filename => filename.includes(slug as string))
+  const fullFilename = templates?.find(filename => filename?.includes(slug as string))
   const markdownWithMeta = fs.readFileSync(path.join(TEMPLATE_PATH, fullFilename), 'utf-8')
   const { data: metadata, content } = matter(markdownWithMeta)
   const mdxContent = await serialize(content)

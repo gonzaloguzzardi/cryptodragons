@@ -25,7 +25,7 @@ async function getDragonApiContract(web3js) {
   return new web3js.eth.Contract(DragonApiJson.abi, DragonApiJson.networks[networkId].address);
 }
 
-async function getMarketPlaceContract(web3js) {
+async function getMarketplaceContract(web3js) {
   const networkId = await web3js.eth.net.getId();
   const { data: MainnetMarketplaceJson } = await axios.get(contractGetterApiUrl + '/api/contract/MainnetMarketplace.json');
   return new web3js.eth.Contract(MainnetMarketplaceJson.abi, MainnetMarketplaceJson.networks[networkId].address);
@@ -60,7 +60,7 @@ export default async function clientFactory() {
     getMainNetTokenContract(web3js),
     getMainNetGatewayContract(web3js),
     getDragonApiContract(web3js),
-    getMarketPlaceContract(web3js)
+    getMarketplaceContract(web3js)
   ])
     .then((values) => ({
       account: values[0][0],
@@ -68,7 +68,7 @@ export default async function clientFactory() {
       tokenContract: values[2],
       gatewayContract: values[3],
       dragonApiContract: values[4],
-      marketPlaceContract: values[5]
+      marketplaceContract: values[5]
     }))
     .catch((err) => console.error("Error Mainchain client-factory", err));
 }

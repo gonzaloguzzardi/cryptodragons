@@ -116,16 +116,16 @@ class MainchainAPI {
     try {
       const {
         tokenContract: contract,
-        marketPlaceContract: marketPlace,
+        marketplaceContract: marketplace,
         account: ownerAccount,
       } = await MainchainAPI.getClientHelper()
       const gasEstimate = await contract.methods
-        .approve(marketPlace._address,dragonId)
+        .approve(marketplace._address,dragonId)
         .estimateGas({ from: ownerAccount, gas })
       console.log(gasEstimate);
       if (gasEstimate >= gas) throw new Error('Not enough enough gas, send more.')
       return await contract.methods
-        .approve(marketPlace._address,dragonId)
+        .approve(marketplace._address,dragonId)
         .send({ from: ownerAccount, gas: gasEstimate })
     } catch (err) {
       console.error(err)
@@ -135,7 +135,7 @@ class MainchainAPI {
   static async createSellOrder(dragonId, gas = GAS_DEFAULT_VALUE) {
     try {
       const {
-        marketPlaceContract: contract,
+        marketplaceContract: contract,
         tokenContract: erc721Contract,
         account: ownerAccount,
       } = await MainchainAPI.getClientHelper()
@@ -160,10 +160,20 @@ class MainchainAPI {
   static async buyDragon(dragonId, gas = GAS_DEFAULT_VALUE) {
     try {
       const {
-        marketPlaceContract: contract,
+        marketplaceContract: contract,
         account: ownerAccount,
       } = await MainchainAPI.getClientHelper()
-      return await CommonAPI.sBuyDragon(dragonId, contract, ownerAccount, gas)
+
+      const gasEstimate = await contract.methods
+      .buyDragon(dragonId)
+      .estimateGas({ from: ownerAccount, gas })
+      //console.log(`[COMMON-API_GET-MY-DRAGONS]: Gas sent: ${gas}, Gas Estimate: ${gasEstimate}, ownerAccount: ${ownerAccount}`)
+      if (gasEstimate >= gas) throw new Error('Not enough enough gas, send more.')
+
+      return await contract.methods
+        .buyDragon(dragonId)
+        .call({ from: ownerAccount, gas: gasEstimate })
+
     } catch (err) {
       console.error(err)
     }
@@ -181,17 +191,17 @@ class MainchainAPI {
     }
   }
 
-  static async getMarketPlaceDragons(gas = GAS_DEFAULT_VALUE) {
+  static async getMarketplaceDragons(gas = GAS_DEFAULT_VALUE) {
     try {
       const {
-        marketPlaceContract: marketPlace,
+        marketplaceContract: marketplace,
         account: ownerAccount,
       } = await MainchainAPI.getClientHelper()
-      const gasEstimate = await marketPlace.methods
+      const gasEstimate = await marketplace.methods
       .fetchMarketItems()
       .estimateGas({ from: ownerAccount, gas })
       if (gasEstimate >= gas) throw new Error('Not enough enough gas, send more.')
-      return await marketPlace.methods
+      return await marketplace.methods
         .fetchMarketItems()
         .call({ from: ownerAccount, gas: gasEstimate })
     } catch (err) {

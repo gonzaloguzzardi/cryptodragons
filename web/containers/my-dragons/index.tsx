@@ -77,7 +77,6 @@ export default function MyDragons({ deviceType }: ISSRPropsDeviceOnly): ReactEle
     ]).then((results) => {
       console.log(`Results: ${results}`)
       if (!results || !results[0] || !results[1] || !results[2]) return setLoading(false)
-
       const dragons = [
         ...mapDragonsResults(results[0], 'MAINCHAIN'),
         ...mapDragonsResults(results[1], 'SIDECHAIN'),

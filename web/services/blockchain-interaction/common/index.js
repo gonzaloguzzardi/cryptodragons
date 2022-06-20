@@ -15,18 +15,6 @@ class CommonAPI {
     console.log(`[COMMON-API]: Dragon created, tx hash: ${tx.transactionHash}`)
     return tx.transactionHash
   }
-  
-  static async sBuyDragon(dragonId, contract, ownerAccount, gas) {
-    const gasEstimate = await contract.methods
-      .buyDragon(dragonId)
-      .estimateGas({ from: ownerAccount, gas })
-    //console.log(`[COMMON-API_GET-MY-DRAGONS]: Gas sent: ${gas}, Gas Estimate: ${gasEstimate}, ownerAccount: ${ownerAccount}`)
-    if (gasEstimate >= gas) throw new Error('Not enough enough gas, send more.')
-
-    return await contract.methods
-      .buyDragon(dragonId)
-      .call({ from: ownerAccount, gas: gasEstimate })
-  }
 
   static async sGetMyDragons(contract, ownerAccount, gas) {
     const gasEstimate = await contract.methods

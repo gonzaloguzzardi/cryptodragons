@@ -5,7 +5,7 @@ import Grid from '@mui/material/Grid'
 
 import MainchainAPI from 'services/blockchain-interaction/mainchain'
 
-import adminButtonsStyles from './tokens-create-buttons.module.scss'
+import adminButtonsStyles from './styles.module.scss'
 
 export default function AdminButtonsTokenCreate(): ReactElement {
   const buyDragonInMainChain: () => unknown = () => {

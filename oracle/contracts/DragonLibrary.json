@@ -1,24 +1,24 @@
 {
   "contractName": "DragonLibrary",
   "abi": [],
-  "metadata": "{\"compiler\":{\"version\":\"0.8.4+commit.c7e474f2\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/common/libraries/DragonLibrary.sol\":\"DragonLibrary\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/common/libraries/DragonLibrary.sol\":{\"keccak256\":\"0x7476de5cf9d0fdd957a76d9bff96dff26b24c191377aaffbda30848621c33b61\",\"license\":\"GPL-3.0 License\",\"urls\":[\"bzz-raw://13a65fb1b6bbf09cc236eb85b146488ea21b947762a2958bb08cbfeb80135b2e\",\"dweb:/ipfs/QmYY6mdMy1eKMQsGqMWwNxZCgFCvm6g3FB1Kw4iznt4tw7\"]}},\"version\":1}",
-  "bytecode": "0x60566050600b82828239805160001a6073146043577f4e487b7100000000000000000000000000000000000000000000000000000000600052600060045260246000fd5b30600052607381538281f3fe73000000000000000000000000000000000000000030146080604052600080fdfea2646970667358221220b2fd1c4ac5bd833345b2742bc54a572fef0c36324a7e76aed36a740d993cf55f64736f6c63430008040033",
-  "deployedBytecode": "0x73000000000000000000000000000000000000000030146080604052600080fdfea2646970667358221220b2fd1c4ac5bd833345b2742bc54a572fef0c36324a7e76aed36a740d993cf55f64736f6c63430008040033",
+  "metadata": "{\"compiler\":{\"version\":\"0.8.4+commit.c7e474f2\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/common/libraries/DragonLibrary.sol\":\"DragonLibrary\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/common/libraries/DragonLibrary.sol\":{\"keccak256\":\"0x94334f4f4aeb4e85c8aa740b05aaa5f6b99b9d284a20467c6a2aa022b14560b3\",\"license\":\"GPL-3.0 License\",\"urls\":[\"bzz-raw://9d04122544e41b564a373a6ab5c727e01bf0813b639726bd04ef6ca0b66db2f5\",\"dweb:/ipfs/QmPTeswLQFDS6yFh5YdF1cyXNShcDjroJGJxcXhNuLZnSc\"]}},\"version\":1}",
+  "bytecode": "0x60566050600b82828239805160001a6073146043577f4e487b7100000000000000000000000000000000000000000000000000000000600052600060045260246000fd5b30600052607381538281f3fe73000000000000000000000000000000000000000030146080604052600080fdfea2646970667358221220fbddcb23ebd12d5980e69efffc21f804711e387831d84cf1d132d274c8525ac964736f6c63430008040033",
+  "deployedBytecode": "0x73000000000000000000000000000000000000000030146080604052600080fdfea2646970667358221220fbddcb23ebd12d5980e69efffc21f804711e387831d84cf1d132d274c8525ac964736f6c63430008040033",
   "immutableReferences": {},
   "generatedSources": [],
   "deployedGeneratedSources": [],
-  "sourceMap": "70:926:3:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;",
-  "deployedSourceMap": "70:926:3:-:0;;;;;;;;",
-  "source": "// SPDX-License-Identifier: GPL-3.0 License\n\npragma solidity ^0.8.0;\n\nlibrary DragonLibrary {\n\tstruct Dragon {\n\t\tbytes32 genes;\n\t\tbytes32 name; // maybe we can avoid saving the name in teh blockchain\n\t\tuint64 creationTime; // Initialzed at egg instantiation\n\t\t// parents information\n\t\tuint32 dadId;\n\t\tuint32 motherId;\n\t\t// level attributes\n\t\tuint32 currentExperience; // level will ve determined by exp\n\t\tuint16 actionCooldown; // time to be waited to perform an action\n\t\t// fighting attributes\n\t\tuint16 health;\n\t\tuint16 strength;\n\t\tuint16 agility;\n\t\tuint16 fortitude;\n\t\tuint16 hatchTime; // in minutes, capped to 45 days - Maybe it would be nice to reuse some variable like current exp\n\t\tuint8 blockchainOriginId;\n\t}\n\n\tstruct DragonVisualAttributes {\n\t\tuint8 bodyType;\n\t\tuint8 bodyColor;\n\t\tuint8 bodyPatternType;\n\t\tuint8 bodyPatternColor;\n\t\tuint8 wingsType;\n\t\tuint8 wingsColor;\n\t\tuint8 hornsType;\n\t\tuint8 hornsColor;\n\t\tuint8 eyesType;\n\t\tuint8 eyesColor;\n\t\tuint8 tailType;\n\t\tuint8 tailColor;\n\t}\n}\n",
+  "sourceMap": "70:1012:3:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;",
+  "deployedSourceMap": "70:1012:3:-:0;;;;;;;;",
+  "source": "// SPDX-License-Identifier: GPL-3.0 License\n\npragma solidity ^0.8.0;\n\nlibrary DragonLibrary {\n\tstruct Dragon {\n\t\tbytes32 genes;\n\t\tbytes32 name; // maybe we can avoid saving the name in teh blockchain\n\t\tuint64 creationTime; // Initialzed at egg instantiation\n\t\t// parents information\n\t\tuint32 dadId;\n\t\tuint32 motherId;\n\t\t// level attributes\n\t\tuint32 currentExperience; // level will ve determined by exp\n\t\tuint16 actionCooldown; // time to be waited to perform an action\n\t\t// fighting attributes\n\t\tuint16 health;\n\t\tuint16 strength;\n\t\tuint16 agility;\n\t\tuint16 fortitude;\n\t\tuint16 hatchTime; // in minutes, capped to 45 days - Maybe it would be nice to reuse some variable like current exp\n\t\tuint8 blockchainOriginId;\n\t}\n\n\tstruct DragonVisualAttributes {\n\t\tuint8 bodyType;\n\t\tuint8 bodyColor;\n\t\tuint8 bodyPatternType;\n\t\tuint8 bodyPatternColor;\n\t\tuint8 wingsType;\n\t\tuint8 wingsColor;\n\t\tuint8 hornsType;\n\t\tuint8 hornsColor;\n\t\tuint8 eyesType;\n\t\tuint8 eyesColor;\n\t\tuint8 tailType;\n\t\tuint8 tailColor;\n\t}\n\n\tstruct DragonFetchPageData {\n\t\tuint256 dragonId;\n\t\taddress owner;\n\t\tbool onSale;\n\t}\n}\n",
   "sourcePath": "/usr/src/app/contractGetter/contracts/common/libraries/DragonLibrary.sol",
   "ast": {
     "absolutePath": "project:/contracts/common/libraries/DragonLibrary.sol",
     "exportedSymbols": {
       "DragonLibrary": [
-        862
+        869
       ]
     },
-    "id": 863,
+    "id": 870,
     "license": "GPL-3.0 License",
     "nodeType": "SourceUnit",
     "nodes": [
@@ -39,9 +39,9 @@
         "contractDependencies": [],
         "contractKind": "library",
         "fullyImplemented": true,
-        "id": 862,
+        "id": 869,
         "linearizedBaseContracts": [
-          862
+          869
         ],
         "name": "DragonLibrary",
         "nameLocation": "78:13:3",
@@ -406,7 +406,7 @@
             "name": "Dragon",
             "nameLocation": "102:6:3",
             "nodeType": "StructDefinition",
-            "scope": 862,
+            "scope": 869,
             "src": "95:622:3",
             "visibility": "public"
           },
@@ -742,26 +742,120 @@
             "name": "DragonVisualAttributes",
             "nameLocation": "727:22:3",
             "nodeType": "StructDefinition",
-            "scope": 862,
+            "scope": 869,
             "src": "720:274:3",
+            "visibility": "public"
+          },
+          {
+            "canonicalName": "DragonLibrary.DragonFetchPageData",
+            "id": 868,
+            "members": [
+              {
+                "constant": false,
+                "id": 863,
+                "mutability": "mutable",
+                "name": "dragonId",
+                "nameLocation": "1036:8:3",
+                "nodeType": "VariableDeclaration",
+                "scope": 868,
+                "src": "1028:16:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 862,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1028:7:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 865,
+                "mutability": "mutable",
+                "name": "owner",
+                "nameLocation": "1056:5:3",
+                "nodeType": "VariableDeclaration",
+                "scope": 868,
+                "src": "1048:13:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 864,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1048:7:3",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 867,
+                "mutability": "mutable",
+                "name": "onSale",
+                "nameLocation": "1070:6:3",
+                "nodeType": "VariableDeclaration",
+                "scope": 868,
+                "src": "1065:11:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bool",
+                  "typeString": "bool"
+                },
+                "typeName": {
+                  "id": 866,
+                  "name": "bool",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1065:4:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "name": "DragonFetchPageData",
+            "nameLocation": "1004:19:3",
+            "nodeType": "StructDefinition",
+            "scope": 869,
+            "src": "997:83:3",
             "visibility": "public"
           }
         ],
-        "scope": 863,
-        "src": "70:926:3",
+        "scope": 870,
+        "src": "70:1012:3",
         "usedErrors": []
       }
     ],
-    "src": "45:952:3"
+    "src": "45:1038:3"
   },
   "legacyAST": {
     "absolutePath": "project:/contracts/common/libraries/DragonLibrary.sol",
     "exportedSymbols": {
       "DragonLibrary": [
-        862
+        869
       ]
     },
-    "id": 863,
+    "id": 870,
     "license": "GPL-3.0 License",
     "nodeType": "SourceUnit",
     "nodes": [
@@ -782,9 +876,9 @@
         "contractDependencies": [],
         "contractKind": "library",
         "fullyImplemented": true,
-        "id": 862,
+        "id": 869,
         "linearizedBaseContracts": [
-          862
+          869
         ],
         "name": "DragonLibrary",
         "nameLocation": "78:13:3",
@@ -1149,7 +1243,7 @@
             "name": "Dragon",
             "nameLocation": "102:6:3",
             "nodeType": "StructDefinition",
-            "scope": 862,
+            "scope": 869,
             "src": "95:622:3",
             "visibility": "public"
           },
@@ -1485,17 +1579,111 @@
             "name": "DragonVisualAttributes",
             "nameLocation": "727:22:3",
             "nodeType": "StructDefinition",
-            "scope": 862,
+            "scope": 869,
             "src": "720:274:3",
+            "visibility": "public"
+          },
+          {
+            "canonicalName": "DragonLibrary.DragonFetchPageData",
+            "id": 868,
+            "members": [
+              {
+                "constant": false,
+                "id": 863,
+                "mutability": "mutable",
+                "name": "dragonId",
+                "nameLocation": "1036:8:3",
+                "nodeType": "VariableDeclaration",
+                "scope": 868,
+                "src": "1028:16:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 862,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1028:7:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 865,
+                "mutability": "mutable",
+                "name": "owner",
+                "nameLocation": "1056:5:3",
+                "nodeType": "VariableDeclaration",
+                "scope": 868,
+                "src": "1048:13:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 864,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1048:7:3",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 867,
+                "mutability": "mutable",
+                "name": "onSale",
+                "nameLocation": "1070:6:3",
+                "nodeType": "VariableDeclaration",
+                "scope": 868,
+                "src": "1065:11:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bool",
+                  "typeString": "bool"
+                },
+                "typeName": {
+                  "id": 866,
+                  "name": "bool",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1065:4:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "name": "DragonFetchPageData",
+            "nameLocation": "1004:19:3",
+            "nodeType": "StructDefinition",
+            "scope": 869,
+            "src": "997:83:3",
             "visibility": "public"
           }
         ],
-        "scope": 863,
-        "src": "70:926:3",
+        "scope": 870,
+        "src": "70:1012:3",
         "usedErrors": []
       }
     ],
-    "src": "45:952:3"
+    "src": "45:1038:3"
   },
   "compiler": {
     "name": "solc",
@@ -1503,7 +1691,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.1",
-  "updatedAt": "2022-06-08T20:21:46.419Z",
+  "updatedAt": "2022-06-25T22:01:03.578Z",
   "devdoc": {
     "kind": "dev",
     "methods": {},

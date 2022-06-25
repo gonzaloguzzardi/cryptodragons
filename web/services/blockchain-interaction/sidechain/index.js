@@ -141,6 +141,20 @@ class SidechainAPI {
       console.error(err)
     }
   }
+
+  // ADMIN functions
+  static async getDragonsByPage(pageNumber, pageSize, gas = GAS_DEFAULT_VALUE) {
+    try {
+      const {
+        tokenContract: contract,
+        account: ownerAccount,
+      } = await MainchainAPI.getClientHelper();
+
+      return await CommonAPI.sGetDragonsByPage(contract, ownerAccount, pageNumber, pageSize, gas);
+    } catch (err) {
+      console.error(err);
+    }
+  }
 }
 
 export default SidechainAPI

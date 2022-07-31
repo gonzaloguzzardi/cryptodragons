@@ -25646,11 +25646,11 @@
       "events": {},
       "links": {},
       "address": "0xfB96762a6e98AA8929a71F4211818Fd8D2e564Bb",
-      "transactionHash": "0x92ea9d6570f63b45fbac3a1deb6481c4bf7c3dbc3eacbd3c21be6eb7acecfcf5"
+      "transactionHash": "0xd255d4278316f21ad7b462a356115382ae7ee1965826b33b942d05794242ff25"
     }
   },
   "schemaVersion": "3.4.1",
-  "updatedAt": "2022-06-25T22:06:36.524Z",
+  "updatedAt": "2022-07-16T23:20:39.692Z",
   "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",

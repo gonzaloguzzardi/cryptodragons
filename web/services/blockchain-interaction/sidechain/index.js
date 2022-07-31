@@ -148,7 +148,7 @@ class SidechainAPI {
       const {
         tokenContract: contract,
         account: ownerAccount,
-      } = await MainchainAPI.getClientHelper();
+      } = await SidechainAPI.getClientHelper();
 
       return await CommonAPI.sGetDragonsByPage(contract, ownerAccount, pageNumber, pageSize, gas);
     } catch (err) {

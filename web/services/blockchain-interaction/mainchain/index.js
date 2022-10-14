@@ -159,10 +159,10 @@ class MainchainAPI {
   }
 
   // ADMIN functions
-  static async getDragonsByPage(pageNumber, pageSize, gas = GAS_DEFAULT_VALUE) {
+  static async getDragonsByPage(pageNumber = 1, pageSize = 10, gas = GAS_DEFAULT_VALUE) {
     try {
       const {
-        tokenContract: contract,
+        dragonApiContract: contract,
         account: ownerAccount,
       } = await MainchainAPI.getClientHelper();
 

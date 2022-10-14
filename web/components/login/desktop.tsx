@@ -96,12 +96,13 @@ function AdminLoginDesktop({ error, loading, submitHandler }: Props): ReactEleme
               classes={{ root: styles.submitButton }}
               size="large"
               type="submit"
+              color="secondary"
             >
               Submit
             </Button>
           ) : (
             <div className={styles.spinnerContainer}>
-              <CircularProgress color="primary" />
+              <CircularProgress color="secondary" />
             </div>
           )}
         </div>

@@ -1,13 +1,16 @@
-import * as React from 'react';
+import * as React from 'react'
 import Container from '@mui/material/Container'
-import Paper from '@mui/material/Paper';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TablePagination from '@mui/material/TablePagination';
-import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper'
+import Table from '@mui/material/Table'
+import TableBody from '@mui/material/TableBody'
+import TableCell from '@mui/material/TableCell'
+import TableContainer from '@mui/material/TableContainer'
+import TableHead from '@mui/material/TableHead'
+import TablePagination from '@mui/material/TablePagination'
+import TableRow from '@mui/material/TableRow'
+
+import MainchainAPI from 'services/blockchain-interaction/mainchain'
+// import SidechainAPI from 'services/blockchain-interaction/sidechain'
 
 interface Column {
   id: 'name' | 'code' | 'population' | 'size' | 'density';
@@ -92,9 +95,19 @@ export default function AdminTable() {
     setPage(0);
   };
 
+  React.useEffect(() => {
+    MainchainAPI.getDragonsByPage().then((result) => {
+      const totalPages = result[0];
+      const dragonPageData = result[1];
+
+      console.log(`[Mocca-result] Total pages: ${totalPages}`)
+      console.log(`[Mocca-result] dragon page data: ${dragonPageData}`)
+    })
+  })
+
   return (
     <Container>
-      <Paper elevation={3}>
+      <Paper>
         <TableContainer sx={{ maxHeight: 440 }}>
           <Table stickyHeader aria-label="sticky table">
             <TableHead>

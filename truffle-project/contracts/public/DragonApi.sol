@@ -46,6 +46,7 @@ contract DragonApi {
 	 * @return dragonPagesData all dragon ids contain in the resulting page
 	 */
 	function getDragonsByPage(uint256 pageNumber, uint256 pageSize) external view returns (uint256 totalPages, DragonLibrary.DragonFetchPageData[] memory dragonPagesData) {
+		require(pageNumber > 0, "pageNumber cannot be zero");
 		require(pageSize > 0, "pageSize cannot be zero");
 		
 		uint256 cursor = (pageNumber - 1) * pageSize;

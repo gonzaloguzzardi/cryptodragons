@@ -1,5 +1,6 @@
 import React, { ReactElement } from 'react'
 
+import Layout from 'components/layout'
 import LoginDesktop from 'components/login/desktop'
 
 import { postLoginData } from 'services/admin'
@@ -24,5 +25,9 @@ export default function AdminLogin(): ReactElement {
       .finally(() => setLoading(false))
   }
 
-  return <LoginDesktop submitHandler={submitHandler} error={error} loading={loading} />
+  return (
+    <Layout>
+      <LoginDesktop submitHandler={submitHandler} error={error} loading={loading} />
+    </Layout>
+  )
 }

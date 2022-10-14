@@ -9,12 +9,12 @@ import CircularProgress from '@mui/material/CircularProgress'
 import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 
-import DragonCreator from '../../components/dragon-creator'
+import DragonCreator from 'components/dragon-creator'
 
-import MainchainAPI from '../../services/blockchain-interaction/mainchain'
-import SidechainAPI from '../../services/blockchain-interaction/sidechain'
+import MainchainAPI from 'services/blockchain-interaction/mainchain'
+import SidechainAPI from 'services/blockchain-interaction/sidechain'
 
-import { tDragonSrc } from '../../types/data'
+import { tDragonSrc } from 'types/data'
 
 import dragonStyles from './dragon.module.scss'
 

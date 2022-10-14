@@ -8,7 +8,7 @@ import styles from './styles.module.scss'
 export default function AdminToolbar(): ReactElement {
   return (
     <>
-      <AppBar variant="outlined">
+      <AppBar>
         <Toolbar>
           <div className={styles.toolbarIconLabelAnchor}>
             <Avatar variant="square" alt="CryptoDragons Icon" src="/assets/dragonsito.jpg" />

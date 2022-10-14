@@ -9,6 +9,7 @@ import InputAdornment from '@mui/material/InputAdornment'
 import FormControl from '@mui/material/FormControl'
 import Visibility from '@mui/icons-material/Visibility'
 import VisibilityOff from '@mui/icons-material/VisibilityOff'
+import TextField from '@mui/material/TextField'
 
 import ErrorLabel from '../error/label'
 
@@ -53,24 +54,24 @@ function AdminLoginDesktop({ error, loading, submitHandler }: Props): ReactEleme
       <Card raised>
         <div className={styles.container}>
           <ErrorLabel message={error} />
-          <FormControl className={styles.usernameField} variant="outlined">
-            <InputLabel htmlFor="outlined-username">Username</InputLabel>
-            <OutlinedInput
-              autoComplete="username"
-              id="outlined-username"
-              value={values.username}
-              name="username"
-              onChange={handleChange('username')}
-            />
-          </FormControl>
-          <FormControl className={styles.passwordField} variant="outlined">
-            <InputLabel htmlFor="outlined-password">Password</InputLabel>
+          <TextField
+            id="outlined-username"
+            className={styles.usernameField}
+            autoComplete="username"
+            label="Username"
+            variant="outlined"
+            value={values.username}
+            name="username"
+            onChange={handleChange('username')}
+            color="secondary"
+          />
+          <FormControl className={styles.passwordField} variant="outlined" color="secondary">
+            <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
             <OutlinedInput
               autoComplete="current-password"
-              id="outlined-password"
+              id="outlined-adornment-password"
               type={values.showPassword ? 'text' : 'password'}
               value={values.password}
-              name="password"
               onChange={handleChange('password')}
               endAdornment={
                 <InputAdornment position="end">
@@ -80,10 +81,12 @@ function AdminLoginDesktop({ error, loading, submitHandler }: Props): ReactEleme
                     onMouseDown={handleMouseDownPassword}
                     edge="end"
                   >
-                    {values.showPassword ? <Visibility /> : <VisibilityOff />}
+                    {values.showPassword ? <VisibilityOff /> : <Visibility />}
                   </IconButton>
                 </InputAdornment>
               }
+              label="Password"
+              color="secondary"
             />
           </FormControl>
           {!loading ? (

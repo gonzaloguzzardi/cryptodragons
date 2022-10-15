@@ -21,8 +21,10 @@ export default function AdminLogin(): ReactElement {
         localStorage.setItem(JWT_LS_ID, res.token)
         location.href = '/admin'
       })
-      .catch(({ message }) => setError(message))
-      .finally(() => setLoading(false))
+      .catch(({ message }) => {
+        setError(message)
+        setLoading(false)
+      });
   }
 
   return (

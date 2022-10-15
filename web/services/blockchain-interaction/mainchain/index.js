@@ -81,6 +81,7 @@ class MainchainAPI {
       return await CommonAPI.sCreateDragonToken(contract, ownerAccount, gas)
     } catch (err) {
       console.error(err)
+      throw err
     }
   }
 

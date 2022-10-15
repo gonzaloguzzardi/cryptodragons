@@ -9,9 +9,13 @@ import adminButtonsStyles from './styles.module.scss'
 
 export default function AdminButtonsTokenCreate(): ReactElement {
   const buyDragonInMainChain: () => unknown = () => {
-    MainchainAPI.createDragon().then((res) =>
-      console.log('[MAINCHAIN]: Dragon create response', res)
-    )
+    MainchainAPI.createDragon()
+      .then((res) =>
+        console.log('[MAINCHAIN]: Dragon create response', res)
+      )
+      .catch((err) => 
+        console.error("Handle this error appropriately", err)
+      )
   }
 
   return (

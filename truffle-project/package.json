@@ -22,7 +22,7 @@
 		"contracts-uml-custom": "sol2uml -b DappchainTransferableDragon,DappchainGateway,DragonBase,DragonFactory,MainnetTransferableDragon -f png -o uml/contracts-uml-custom ./contracts"
 	},
 	"dependencies": {
-		"express": "4.17.1",
+		"express": "4.17.3",
 		"phantomjs-prebuilt": "2.1.16",
 		"@truffle/hdwallet-provider": "1.4.2",
 		"@trufflesuite/web3-provider-engine": "15.0.13-1",

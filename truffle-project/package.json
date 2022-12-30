@@ -40,7 +40,7 @@
 		"node-hid": "2.1.1",
 		"openzeppelin-solidity": "4.2.0",
 		"regenerator-runtime": "0.13.9",
-		"truffle": "5.4.1", 
+		"truffle": "5.7.1", 
 		"truffle-contract-size": "2.0.1",
 		"truffle-privatekey-provider": "1.5.0",
 		"web3": "1.5.0"

@@ -17,7 +17,7 @@ export default createTheme({
     },
     text: {
       primary: '#222',
-      secondary: '#828282',
+      secondary: '#626262',
     },
     error: {
       main: '#f44',

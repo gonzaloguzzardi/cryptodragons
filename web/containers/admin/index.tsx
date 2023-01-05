@@ -26,7 +26,7 @@ export default function Admin(): ReactElement {
   }, [])
 
   if (!token) {
-    return <p>No admin privileges...</p>
+    return <></>
   }
 
   return (

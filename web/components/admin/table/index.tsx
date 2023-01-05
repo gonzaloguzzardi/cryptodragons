@@ -1,6 +1,8 @@
 import * as React from 'react'
 import Container from '@mui/material/Container'
 import Paper from '@mui/material/Paper'
+import IconButton from '@mui/material/IconButton'
+import RefreshIcon from '@mui/icons-material/Refresh'
 import Table from '@mui/material/Table'
 import TableBody from '@mui/material/TableBody'
 import TableCell from '@mui/material/TableCell'
@@ -8,82 +10,77 @@ import TableContainer from '@mui/material/TableContainer'
 import TableHead from '@mui/material/TableHead'
 import TablePagination from '@mui/material/TablePagination'
 import TableRow from '@mui/material/TableRow'
+import Tabs from '@mui/material/Tabs'
+import Tab from '@mui/material/Tab'
+import Typography from '@mui/material/Typography'
+import Box from '@mui/material/Box'
 
 import MainchainAPI from 'services/blockchain-interaction/mainchain'
-// import SidechainAPI from 'services/blockchain-interaction/sidechain'
+import SidechainAPI from 'services/blockchain-interaction/sidechain'
 
 interface Column {
-  id: 'name' | 'code' | 'population' | 'size' | 'density';
+  id: 'nft' | 'code' | 'owner' | 'onSale';
   label: string;
   minWidth?: number;
-  align?: 'right';
+  align?: 'center' | 'right' | 'left';
   format?: (value: number) => string;
 }
 
 const columns: Column[] = [
-  { id: 'name', label: 'Name', minWidth: 170 },
-  { id: 'code', label: 'ISO\u00a0Code', minWidth: 100 },
+  { id: 'nft', label: 'NFT', minWidth: 170, align: 'center' },
+  { id: 'code', label: 'Genetic\u00a0Code', minWidth: 100, align: 'center' },
   {
-    id: 'population',
-    label: 'Population',
+    id: 'owner',
+    label: 'Owner',
     minWidth: 170,
-    align: 'right',
+    align: 'center',
     format: (value: number) => value.toLocaleString('en-US'),
   },
   {
-    id: 'size',
-    label: 'Size\u00a0(km\u00b2)',
+    id: 'onSale',
+    label: 'On\u00a0Sale',
     minWidth: 170,
-    align: 'right',
+    align: 'center',
     format: (value: number) => value.toLocaleString('en-US'),
-  },
-  {
-    id: 'density',
-    label: 'Density',
-    minWidth: 170,
-    align: 'right',
-    format: (value: number) => value.toFixed(2),
   },
 ];
 
 interface Data {
-  name: string;
+  nft: string;
   code: string;
-  population: number;
-  size: number;
-  density: number;
+  owner: number;
+  onSale: boolean;
 }
 
 function createData(
-  name: string,
+  nft: string,
   code: string,
-  population: number,
-  size: number,
+  owner: number,
+  onSale: boolean,
 ): Data {
-  const density = population / size;
-  return { name, code, population, size, density };
+  return { nft, code, owner, onSale };
 }
 
 const rows = [
-  createData('India', 'IN', 1324171354, 3287263),
-  createData('China', 'CN', 1403500365, 9596961),
-  createData('Italy', 'IT', 60483973, 301340),
-  createData('United States', 'US', 327167434, 9833520),
-  createData('Canada', 'CA', 37602103, 9984670),
-  createData('Australia', 'AU', 25475400, 7692024),
-  createData('Germany', 'DE', 83019200, 357578),
-  createData('Ireland', 'IE', 4857000, 70273),
-  createData('Mexico', 'MX', 126577691, 1972550),
-  createData('Japan', 'JP', 126317000, 377973),
-  createData('France', 'FR', 67022000, 640679),
-  createData('United Kingdom', 'GB', 67545757, 242495),
-  createData('Russia', 'RU', 146793744, 17098246),
-  createData('Nigeria', 'NG', 200962417, 923768),
-  createData('Brazil', 'BR', 210147125, 8515767),
+  createData('India', 'IN', 1324171354, true),
+  createData('China', 'CN', 1403500365, true),
+  createData('Italy', 'IT', 60483973, false),
+  createData('United States', 'US', 327167434, false),
+  createData('Canada', 'CA', 37602103, false),
+  createData('Australia', 'AU', 25475400, true),
+  createData('Germany', 'DE', 83019200, true),
+  createData('Ireland', 'IE', 4857000, false),
+  createData('Mexico', 'MX', 126577691, true),
+  createData('Japan', 'JP', 126317000, false),
+  createData('France', 'FR', 67022000, false),
+  createData('United Kingdom', 'GB', 67545757, true),
+  createData('Russia', 'RU', 146793744, true),
+  createData('Nigeria', 'NG', 200962417, false),
+  createData('Brazil', 'BR', 210147125, false),
 ];
 
 export default function AdminTable() {
-  const [page, setPage] = React.useState(0);
+  const [page, setPage] = React.useState(1);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
   const handleChangePage = (event: unknown, newPage: number) => {
@@ -96,72 +93,119 @@ export default function AdminTable() {
   };
 
   React.useEffect(() => {
-    MainchainAPI.getDragonsByPage().then((result) => {
-      const totalPages = result[0];
-      const dragonPageData = result[1];
+    Promise.all([
+      MainchainAPI.getDragonsByPage(page, rowsPerPage),
+      SidechainAPI.getDragonsByPage(page, rowsPerPage)
+    ]).then(result => {
+      const mainchainResults = result[0]
+      const sidechainResults = result[1]
 
-      console.log(`[Mocca-result] Total pages: ${totalPages}`)
-      console.log(`[Mocca-result] dragon page data: ${dragonPageData}`)
-    })
+      console.log(`[Mocca-result] Total pages Mainchain: ${mainchainResults[0]}`)
+      console.log(`[Mocca-result] dragon page data Mainchain: ${mainchainResults[1]}`)
+
+      console.log(`[Mocca-result] Total pages Sidechain: ${sidechainResults[0]}`)
+      console.log(`[Mocca-result] dragon page data Sidechain: ${sidechainResults[1]}`)
+    });
   })
+
+  interface TabPanelProps {
+    children?: React.ReactNode;
+    index: number;
+    value: number;
+  }
+  
+  function TabPanel({ children, value, index, ...other }: TabPanelProps) {
+    return (
+      <div
+        role="tabpanel"
+        hidden={value !== index}
+        id={`simple-tabpanel-${index}`}
+        aria-labelledby={`simple-tab-${index}`}
+        {...other}
+      >
+        {value === index && (<Box>{children}</Box>)}
+      </div>
+    );
+  }
+
+  const [tabValue, setTabValue] = React.useState(0);
+
+  const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
+    setTabValue(newValue);
+  };
 
   return (
     <Container>
       <Paper>
-        <TableContainer sx={{ maxHeight: 440 }}>
-          <Table stickyHeader aria-label="sticky table">
-            <TableHead>
-              <TableRow>
-                <TableCell align="center" colSpan={2}>
-                  Country
-                </TableCell>
-                <TableCell align="center" colSpan={3}>
-                  Details
-                </TableCell>
-              </TableRow>
-              <TableRow>
-                {columns.map((column) => (
-                  <TableCell
-                    key={column.id}
-                    align={column.align}
-                    style={{ top: 57, minWidth: column.minWidth }}
-                  >
-                    {column.label}
-                  </TableCell>
-                ))}
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {rows
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row) => {
-                  return (
-                    <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
-                      {columns.map((column) => {
-                        const value = row[column.id];
-                        return (
-                          <TableCell key={column.id} align={column.align}>
-                            {column.format && typeof value === 'number'
-                              ? column.format(value)
-                              : value}
-                          </TableCell>
-                        );
-                      })}
-                    </TableRow>
-                  );
-                })}
-            </TableBody>
-          </Table>
-        </TableContainer>
-        <TablePagination
-          rowsPerPageOptions={[10, 25, 100]}
-          component="div"
-          count={rows.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-        />
+        <Box>
+          <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+            <Tabs
+              value={tabValue}
+              onChange={handleTabChange}
+              variant="fullWidth"
+              sx={{ backgroundColor: '#88f' }}
+            >
+              <Tab label="Mainchain" id="simple-tab-0" />
+              <Tab label="Sidechain" id="simple-tab-1" />
+            </Tabs>
+          </Box>
+          <TabPanel value={tabValue} index={0}>
+            <TableContainer sx={{ maxHeight: 440 }}>
+              <Table stickyHeader aria-label="sticky table">
+                <TableHead>
+                  <TableRow>
+                    {columns.map((column) => (
+                      <TableCell
+                        key={column.id}
+                        align={column.align}
+                        style={{ minWidth: column.minWidth }}
+                      >
+                        <Typography variant='overline'>{column.label}</Typography>
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {rows
+                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                    .map((row) => {
+                      return (
+                        <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
+                          {columns.map((column) => {
+                            const value = row[column.id];
+                            return (
+                              <TableCell key={column.id} align={column.align}>
+                                {column.format && typeof value === 'number'
+                                  ? column.format(value)
+                                  : ''+value}
+                              </TableCell>
+                            );
+                          })}
+                        </TableRow>
+                      );
+                    })}
+                </TableBody>
+              </Table>
+            </TableContainer>
+            <TablePagination
+              rowsPerPageOptions={[10, 25, 100]}
+              component="div"
+              count={rows.length}
+              rowsPerPage={rowsPerPage}
+              page={page}
+              onPageChange={handleChangePage}
+              onRowsPerPageChange={handleChangeRowsPerPage}
+              ActionsComponent={() =>
+                <IconButton>
+                  <RefreshIcon />
+                </IconButton>
+              }
+            />
+          </TabPanel>
+          <TabPanel value={tabValue} index={1}>
+            Item Two
+          </TabPanel>
+        </Box>
       </Paper>
     </Container>
   );

@@ -1,4 +1,4 @@
-import React, { Component, ReactElement } from 'react'
+import React from 'react'
 import SliderCustom from 'components/slider/SliderCustom'
 import Grid from '@mui/material/Grid'
 

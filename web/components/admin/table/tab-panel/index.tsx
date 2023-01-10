@@ -36,5 +36,5 @@ export default function TabPanel({
         </Box>
       )}
     </div>
-  );
+  )
 }

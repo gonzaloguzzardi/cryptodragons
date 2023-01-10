@@ -112,7 +112,7 @@ class Dragon extends Component<IProps, IState> {
         tailType,
         wingsColor,
         wingsType,
-      } = dragonData;
+      } = dragonData
 
       this.setState({
         bodyPatternColor: Math.round(bodyPatternColor * 1.41),

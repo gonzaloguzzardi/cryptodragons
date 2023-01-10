@@ -24,7 +24,7 @@ export default function AdminLogin(): ReactElement {
       .catch(({ message }) => {
         setError(message)
         setLoading(false)
-      });
+      })
   }
 
   return (

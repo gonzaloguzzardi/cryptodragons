@@ -26,17 +26,17 @@ const columns: Column[] = [
     minWidth: 170,
     align: 'center',
   },
-];
+]
 
 export default function TabContent({ dragonsData, location, page, setPage, rowsPerPage, setRowsPerPage }): ReactElement {
   const handleChangePage = (event: unknown, newPage: number) => {
-    setPage(newPage);
-  };
+    setPage(newPage)
+  }
 
   const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setRowsPerPage(+event.target.value);
-    setPage(0);
-  };
+    setRowsPerPage(+event.target.value)
+    setPage(0)
+  }
 
   return (
     <>
@@ -62,7 +62,7 @@ export default function TabContent({ dragonsData, location, page, setPage, rowsP
                 return (
                   <TableRow hover role="checkbox" tabIndex={-1} key={dragonData.dragonId}>
                     {columns.map((column) => {
-                      const value = dragonData[column.id];
+                      const value = dragonData[column.id]
 
                       return column.id === 'nft' ? (
                         <TableCell key={column.id} align={column.align} sx={{ display: 'flex', justifyContent: 'center' }}>
@@ -79,7 +79,7 @@ export default function TabContent({ dragonsData, location, page, setPage, rowsP
                       )
                     })}
                   </TableRow>
-                );
+                )
               })}
           </TableBody>
         </Table>

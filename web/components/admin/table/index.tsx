@@ -1,4 +1,4 @@
-import * as React from 'react'
+import { useEffect } from 'react'
 import Container from '@mui/material/Container'
 import Paper from '@mui/material/Paper'
 import Tabs from '@mui/material/Tabs'
@@ -8,41 +8,18 @@ import TabPanel from './tab-panel'
 
 import adminTableStyles from './styles.module.scss'
 
-import MainchainAPI from 'services/blockchain-interaction/mainchain'
-import SidechainAPI from 'services/blockchain-interaction/sidechain'
-
-export default function AdminTable({ setLoading }) {
-
-  // DRAGONS DATA: { dragonId, owner, onSale }
-  const [dragonsData, setDragonsData] = React.useState([]);
-
-  // TABS: 0 for Mainchain, 1 for Sidechain
-  const [tabValue, setTabValue] = React.useState(0);
-  const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
-    setTabValue(newValue);
-  };
-
-  // PAGES: 1 for page, 10 for page size are default values
-  const [pages, setPages] = React.useState(1);
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
-
-  const updateTokensData = () => {
-    setLoading(true);
-    setDragonsData([]);
-
-    const API = tabValue === 0 ? MainchainAPI : SidechainAPI;
-    API.getDragonsByPage(page + 1, rowsPerPage)
-      .then(result => {
-        if (!result || !result[1][0]) return;
-        setPages(result[0]);
-        setDragonsData(result[1]);
-      })
-      .finally(() => setLoading(false));
-  }
-
-  React.useEffect(() => {
-    updateTokensData();
+export default function AdminTable({
+  dragonsData,
+  tabValue,
+  setTabValue,
+  page,
+  setPage,
+  rowsPerPage,
+  setRowsPerPage,
+  updateTokensData,
+}) {
+  useEffect(() => {
+    updateTokensData()
   }, [tabValue, page, rowsPerPage])
 
   return (
@@ -52,7 +29,7 @@ export default function AdminTable({ setLoading }) {
           <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
             <Tabs
               value={tabValue}
-              onChange={handleTabChange}
+              onChange={(_e, newValue) => setTabValue(newValue)}
               variant="fullWidth"
               sx={{ backgroundColor: '#88f' }}
             >
@@ -83,5 +60,5 @@ export default function AdminTable({ setLoading }) {
         </Box>
       </Paper>
     </Container>
-  );
+  )
 }

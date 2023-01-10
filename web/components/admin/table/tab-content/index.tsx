@@ -28,7 +28,7 @@ const columns: Column[] = [
   },
 ];
 
-export default function TabContent({ dragonsData, page, setPage, rowsPerPage, setRowsPerPage }): ReactElement {
+export default function TabContent({ dragonsData, location, page, setPage, rowsPerPage, setRowsPerPage }): ReactElement {
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
   };
@@ -69,7 +69,7 @@ export default function TabContent({ dragonsData, page, setPage, rowsPerPage, se
                           <Dragon
                             key={`MAINCHAIN${dragonData.dragonId}`}
                             id={dragonData.dragonId}
-                            location='MAINCHAIN'
+                            location={location}
                           />
                         </TableCell>
                       ) : (

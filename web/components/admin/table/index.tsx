@@ -13,7 +13,7 @@ import MainchainAPI from 'services/blockchain-interaction/mainchain'
 import SidechainAPI from 'services/blockchain-interaction/sidechain'
 
 export default function AdminTable() {
-  function TabPanel({ children, dragonsData, index, page, setPage, value, rowsPerPage, setRowsPerPage, ...other }: TabPanelProps) {
+  function TabPanel({ children, dragonsData, index, location, page, setPage, value, rowsPerPage, setRowsPerPage, ...other }: TabPanelProps) {
     return (
       <div
         role="tabpanel"
@@ -26,6 +26,7 @@ export default function AdminTable() {
           <Box>
             <TabContent
               dragonsData={dragonsData}
+              location={location}
               page={page}
               setPage={setPage}
               rowsPerPage={rowsPerPage}
@@ -95,6 +96,7 @@ export default function AdminTable() {
             value={tabValue}
             index={0}
             dragonsData={dragonsData}
+            location='MAINCHAIN'
             page={page}
             setPage={setPage}
             rowsPerPage={rowsPerPage}
@@ -104,6 +106,7 @@ export default function AdminTable() {
             value={tabValue}
             index={1}
             dragonsData={dragonsData}
+            location='SIDECHAIN'
             page={page}
             setPage={setPage}
             rowsPerPage={rowsPerPage}

@@ -1,11 +1,12 @@
 import { ReactElement } from 'react'
 import AppBar from '@mui/material/AppBar'
 import Avatar from '@mui/material/Avatar'
+import LinearProgress from '@mui/material/LinearProgress'
 import Toolbar from '@mui/material/Toolbar'
 
 import styles from './styles.module.scss'
 
-export default function AdminToolbar(): ReactElement {
+export default function AdminToolbar({ loadingState = false }): ReactElement {
   return (
     <>
       <AppBar>
@@ -16,7 +17,8 @@ export default function AdminToolbar(): ReactElement {
           </div>
         </Toolbar>
       </AppBar>
-      <div className={styles.bottomSpacer} />
+      <Toolbar />
+      {loadingState && <LinearProgress color="secondary" />}
     </>
   )
 }

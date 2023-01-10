@@ -7,8 +7,9 @@ import MainchainAPI from 'services/blockchain-interaction/mainchain'
 
 import adminButtonsStyles from './styles.module.scss'
 
-export default function AdminButtonsTokenCreate(): ReactElement {
+export default function AdminButtonsTokenCreate({ setLoading }): ReactElement {
   const buyDragonInMainChain: () => unknown = () => {
+    setLoading(true)
     MainchainAPI.createDragon()
       .then((res) =>
         console.log('[MAINCHAIN]: Dragon create response', res)
@@ -16,6 +17,7 @@ export default function AdminButtonsTokenCreate(): ReactElement {
       .catch((err) => 
         console.error("Handle this error appropriately", err)
       )
+      .finally(() => setLoading(false))
   }
 
   return (

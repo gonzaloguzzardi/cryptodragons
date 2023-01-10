@@ -11,6 +11,7 @@ import { getSessionAdmin } from 'services/admin'
 import { JWT_LS_ID } from '../../constants'
 
 export default function Admin(): ReactElement {
+  const [loading, setLoading] = useState(false)
   const [token, setToken] = useState(null)
 
   useEffect(() => {
@@ -31,8 +32,8 @@ export default function Admin(): ReactElement {
 
   return (
     <Layout>
-      <AdminToolbar />
-      <AdminButtonsTokenCreate />
+      <AdminToolbar loadingState={loading} />
+      <AdminButtonsTokenCreate setLoading={setLoading} />
       <AdminTable />
     </Layout>
   )

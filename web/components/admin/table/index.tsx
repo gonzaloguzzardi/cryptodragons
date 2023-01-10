@@ -7,6 +7,8 @@ import Box from '@mui/material/Box'
 import TabContent from './tab-content'
 import { TabPanelProps } from './types'
 
+import adminTableStyles from './styles.module.scss'
+
 import MainchainAPI from 'services/blockchain-interaction/mainchain'
 import SidechainAPI from 'services/blockchain-interaction/sidechain'
 
@@ -75,7 +77,7 @@ export default function AdminTable() {
   }, [tabValue, page, rowsPerPage])
 
   return (
-    <Container>
+    <Container className={adminTableStyles.container}>
       <Paper>
         <Box>
           <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>

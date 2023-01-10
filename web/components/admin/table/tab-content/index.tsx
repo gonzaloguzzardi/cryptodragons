@@ -63,19 +63,20 @@ export default function TabContent({ dragonsData, page, setPage, rowsPerPage, se
                   <TableRow hover role="checkbox" tabIndex={-1} key={dragonData.dragonId}>
                     {columns.map((column) => {
                       const value = dragonData[column.id];
-                      return (
-                        <TableCell key={column.id} align={column.align}>
-                          { column.id === 'nft' ? (
-                            <Dragon
-                              key={`MAINCHAIN${dragonData.dragonId}`}
-                              id={dragonData.dragonId}
-                              location='MAINCHAIN'
-                            />
-                          ) : (
-                            typeof value === 'number' ? value.toLocaleString('en-US') : ''+value
-                          )}
+
+                      return column.id === 'nft' ? (
+                        <TableCell key={column.id} align={column.align} sx={{ display: 'flex', justifyContent: 'center' }}>
+                          <Dragon
+                            key={`MAINCHAIN${dragonData.dragonId}`}
+                            id={dragonData.dragonId}
+                            location='MAINCHAIN'
+                          />
                         </TableCell>
-                      );
+                      ) : (
+                        <TableCell key={column.id} align={column.align}>
+                          {typeof value === 'number' ? value.toLocaleString('en-US') : ''+value}
+                        </TableCell>
+                      )
                     })}
                   </TableRow>
                 );

@@ -34,7 +34,7 @@ export default function Admin(): ReactElement {
     <Layout>
       <AdminToolbar loadingState={loading} />
       <AdminButtonsTokenCreate setLoading={setLoading} />
-      <AdminTable />
+      <AdminTable setLoading={setLoading} />
     </Layout>
   )
 }

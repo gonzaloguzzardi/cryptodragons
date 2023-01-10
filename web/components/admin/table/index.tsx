@@ -4,39 +4,14 @@ import Paper from '@mui/material/Paper'
 import Tabs from '@mui/material/Tabs'
 import Tab from '@mui/material/Tab'
 import Box from '@mui/material/Box'
-import TabContent from './tab-content'
-import { TabPanelProps } from './types'
+import TabPanel from './tab-panel'
 
 import adminTableStyles from './styles.module.scss'
 
 import MainchainAPI from 'services/blockchain-interaction/mainchain'
 import SidechainAPI from 'services/blockchain-interaction/sidechain'
 
-export default function AdminTable() {
-  function TabPanel({ children, dragonsData, index, location, page, setPage, value, rowsPerPage, setRowsPerPage, ...other }: TabPanelProps) {
-    return (
-      <div
-        role="tabpanel"
-        hidden={value !== index}
-        id={`simple-tabpanel-${index}`}
-        aria-labelledby={`simple-tab-${index}`}
-        {...other}
-      >
-        {value === index && (
-          <Box>
-            <TabContent
-              dragonsData={dragonsData}
-              location={location}
-              page={page}
-              setPage={setPage}
-              rowsPerPage={rowsPerPage}
-              setRowsPerPage={setRowsPerPage}
-            />
-          </Box>
-        )}
-      </div>
-    );
-  }
+export default function AdminTable({ setLoading }) {
 
   // DRAGONS DATA: { dragonId, owner, onSale }
   const [dragonsData, setDragonsData] = React.useState([]);
@@ -52,29 +27,22 @@ export default function AdminTable() {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
-  React.useEffect(() => {
+  const updateTokensData = () => {
+    setLoading(true);
     setDragonsData([]);
+
     const API = tabValue === 0 ? MainchainAPI : SidechainAPI;
-    const APIName = tabValue === 0 ? 'MainchainAPI' : 'SidechainAPI';
+    API.getDragonsByPage(page + 1, rowsPerPage)
+      .then(result => {
+        if (!result || !result[1][0]) return;
+        setPages(result[0]);
+        setDragonsData(result[1]);
+      })
+      .finally(() => setLoading(false));
+  }
 
-    API.getDragonsByPage(page + 1, rowsPerPage).then(result => {
-      if (!result || !result[1][0]) {
-        console.log(`[Mocca-result] ${APIName}: No results, ${JSON.stringify(result, null, 2)}.`)
-        return
-      }
-      setPages(result[0])
-      setDragonsData(result[1]);
-
-      const pages = result[0];
-      const dragonsData = result[1];
-      const { dragonId, owner, onSale } = dragonsData[0];
-
-      console.log(`[Mocca-result] Total pages ${APIName}: ${pages}`)
-      console.log(`[Mocca-result] Dragons data ${APIName}: ${JSON.stringify(dragonsData, null, 2)}`)
-      if (dragonId) {
-        console.log(`[Mocca-result] First dragon data ${APIName}: ${dragonId}, ${owner}, ${''+onSale}.`)
-      }
-    });
+  React.useEffect(() => {
+    updateTokensData();
   }, [tabValue, page, rowsPerPage])
 
   return (

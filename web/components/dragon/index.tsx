@@ -98,20 +98,37 @@ class Dragon extends Component<IProps, IState> {
 
   updateDragonVisualData = (dragonData) => {
     console.log(dragonData)
-    this.setState({
-      bodyPatternColor: Math.round(dragonData.bodyPatternColor * 1.41),
-      bodyPatternType: 1, //(dragonData.bodyPatternType % 2) + 1, //1-2
-      bodyColor: Math.round(dragonData.bodyColor * 1.41),
-      bodyType: (dragonData.bodyType % 2) + 1, //1-2
-      eyesColor: Math.round(dragonData.eyesColor * 1.41),
-      eyesType: (dragonData.eyesType % 4) + 1, //1-4
-      hornsColor: Math.round(dragonData.hornsColor * 1.41),
-      hornsType: (dragonData.hornsType % 4) + 1, //1-4
-      tailColor: Math.round(dragonData.tailColor * 1.41),
-      tailType: (dragonData.tailType % 4) + 1, //1-4
-      wingsColor: Math.round(dragonData.wingsColor * 1.41),
-      wingsType: (dragonData.wingsType % 4) + 1, //1-4
-    })
+    if (dragonData) {
+      const {
+        bodyPatternColor,
+        // bodyPatternType,
+        bodyColor,
+        bodyType,
+        eyesColor,
+        eyesType,
+        hornsColor,
+        hornsType,
+        tailColor,
+        tailType,
+        wingsColor,
+        wingsType,
+      } = dragonData;
+
+      this.setState({
+        bodyPatternColor: Math.round(bodyPatternColor * 1.41),
+        bodyPatternType: 1, //(bodyPatternType % 2) + 1, //1-2
+        bodyColor: Math.round(bodyColor * 1.41),
+        bodyType: (bodyType % 2) + 1, //1-2
+        eyesColor: Math.round(eyesColor * 1.41),
+        eyesType: (eyesType % 4) + 1, //1-4
+        hornsColor: Math.round(hornsColor * 1.41),
+        hornsType: (hornsType % 4) + 1, //1-4
+        tailColor: Math.round(tailColor * 1.41),
+        tailType: (tailType % 4) + 1, //1-4
+        wingsColor: Math.round(wingsColor * 1.41),
+        wingsType: (wingsType % 4) + 1, //1-4
+      })
+    }
   }
 
   getDragonVisualData: () => unknown = () => {

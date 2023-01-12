@@ -28,7 +28,14 @@ const columns: Column[] = [
   },
 ]
 
-export default function TabContent({ dragonsData, location, page, setPage, rowsPerPage, setRowsPerPage }): ReactElement {
+export default function TabContent({
+  dragonsData,
+  location,
+  page,
+  setPage,
+  rowsPerPage,
+  setRowsPerPage
+}): ReactElement {
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage)
   }
@@ -65,7 +72,11 @@ export default function TabContent({ dragonsData, location, page, setPage, rowsP
                       const value = dragonData[column.id]
 
                       return column.id === 'nft' ? (
-                        <TableCell key={column.id} align={column.align} sx={{ display: 'flex', justifyContent: 'center' }}>
+                        <TableCell
+                          key={column.id}
+                          align={column.align}
+                          sx={{ display: 'flex', justifyContent: 'center' }}
+                        >
                           <Dragon
                             key={`MAINCHAIN${dragonData.dragonId}`}
                             id={dragonData.dragonId}
@@ -74,7 +85,10 @@ export default function TabContent({ dragonsData, location, page, setPage, rowsP
                         </TableCell>
                       ) : (
                         <TableCell key={column.id} align={column.align}>
-                          {typeof value === 'number' ? value.toLocaleString('en-US') : ''+value}
+                          { typeof value === 'number' ?
+                            value.toLocaleString('en-US') :
+                            ''+value
+                          }
                         </TableCell>
                       )
                     })}

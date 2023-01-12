@@ -26192,11 +26192,11 @@
       "events": {},
       "links": {},
       "address": "0xfB96762a6e98AA8929a71F4211818Fd8D2e564Bb",
-      "transactionHash": "0xf6debd613e5f6fc262cdbe35ca44e0d5531b4dbc923c8e141fd5903ac461d7c7"
+      "transactionHash": "0x4c5472f98540c7e8a9cb3999927e2e1cbd35db36ea0d08316d2de2daa6194820"
     }
   },
   "schemaVersion": "3.4.1",
-  "updatedAt": "2023-01-09T19:51:20.438Z",
+  "updatedAt": "2023-01-12T15:57:20.895Z",
   "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",

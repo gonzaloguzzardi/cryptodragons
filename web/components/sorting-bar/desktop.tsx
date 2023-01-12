@@ -16,8 +16,8 @@ export default function SortingBarDesktop({
   chMainchain,
   chSidechain,
   handleCheckedChange,
-  attributeValue,
   attributes,
+  attributeValue,
   handleChangeAttribute,
   lowOrHigh,
   handleChangeSelectLowHigh,
@@ -28,13 +28,13 @@ export default function SortingBarDesktop({
         <div className={styles.fieldsFilterForm_firstGroup}>
           <FormControlLabel
             control={
-              <Checkbox checked={chMainchain} onChange={handleCheckedChange} name="Mainchain" />
+              <Checkbox checked={chMainchain} onChange={handleCheckedChange} name="Mainchain" color="secondary" />
             }
             label={<Typography variant="caption">in Mainchain</Typography>}
           />
           <FormControlLabel
             control={
-              <Checkbox checked={chSidechain} onChange={handleCheckedChange} name="Sidechain" />
+              <Checkbox checked={chSidechain} onChange={handleCheckedChange} name="Sidechain" color="secondary" />
             }
             label={<Typography variant="caption">in Sidechain</Typography>}
           />

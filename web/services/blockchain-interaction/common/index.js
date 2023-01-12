@@ -97,6 +97,18 @@ class CommonAPI {
       .call({ from: ownerAccount, gas: gasEstimate })
   }
 
+  static async sGetDragonsByPage(contract, ownerAccount, pageNumber, pageSize, gas) {
+    const gasEstimate = await contract.methods
+      .getDragonsByPage(pageNumber, pageSize)
+      .estimateGas({ from: ownerAccount, gas })
+
+    console.log(`[COMMON-API_GET-DRAGONS-BY-PAGE-ADMIN]: Gas sent: ${gas}, Gas Estimate: ${gasEstimate}`)
+    if (gasEstimate >= gas) throw new Error('Not enough enough gas, send more.')
+
+    return await contract.methods
+      .getDragonsByPage(pageNumber, pageSize)
+      .call({ from: ownerAccount, gas: gasEstimate })
+  }
 
 }
 

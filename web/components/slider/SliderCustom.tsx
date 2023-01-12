@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
-import Box from '@mui/material/Box';
-import Slider from '@mui/material/Slider';
+import Box from '@mui/material/Box'
+import Slider from '@mui/material/Slider'
 
 const SliderCustom = ({
   label,
@@ -12,12 +12,12 @@ const SliderCustom = ({
   track,
   value,
 }) => {
-  const [valueSlider, setValue] = useState(value);
+  const [valueSlider, setValue] = useState(value)
 
   const onChange = (_e, newValue) => {
-    setValue(newValue);
-    parentMethod(newValue);
-  };
+    setValue(newValue)
+    parentMethod(newValue)
+  }
 
   return (
     <div>
@@ -40,7 +40,7 @@ const SliderCustom = ({
         />
       </Box>
     </div>
-  );
+  )
 }
 
-export default SliderCustom;
+export default SliderCustom

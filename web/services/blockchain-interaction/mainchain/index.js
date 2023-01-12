@@ -71,19 +71,7 @@ class MainchainAPI {
       console.error(err);
     }
   }
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
+
   static async createDragon(gas = GAS_DEFAULT_VALUE) {
     try {
       const {
@@ -93,6 +81,7 @@ class MainchainAPI {
       return await CommonAPI.sCreateDragonToken(contract, ownerAccount, gas)
     } catch (err) {
       console.error(err)
+      throw err
     }
   }
 
@@ -170,6 +159,19 @@ class MainchainAPI {
     }
   }
 
+  // ADMIN functions
+  static async getDragonsByPage(pageNumber = 1, pageSize = 10, gas = GAS_DEFAULT_VALUE) {
+    try {
+      const {
+        dragonApiContract: contract,
+        account: ownerAccount,
+      } = await MainchainAPI.getClientHelper();
+
+      return await CommonAPI.sGetDragonsByPage(contract, ownerAccount, pageNumber, pageSize, gas);
+    } catch (err) {
+      console.error(err);
+    }
+  }
 }
 
 export default MainchainAPI

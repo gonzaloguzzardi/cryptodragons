@@ -3,7 +3,7 @@ const MainnetTransferableDragon = artifacts.require('MainnetTransferableDragon')
 const GenesLaboratory = artifacts.require('GenesLaboratory');
 const MainnetDragonApi = artifacts.require('MainnetDragonApi');
 
-contract('DragonApi', (accounts) => {
+contract('MainnetDragonApi', (accounts) => {
     const INITIAL_DRAGON_AMOUNT = 5;
     const GATEWAY_ADDRESS = '0x1234567890123456789012345678901234567892';
     const DRAGON_DECODER_ADDRESS = '0x1234567890123456789012345678901234567893';
@@ -92,6 +92,59 @@ contract('DragonApi', (accounts) => {
 
             assert.equal(4, dragonPageData[0].dragonId);
             assert.equal(mainAccount, dragonPageData[0].owner);
+            assert.equal(false, dragonPageData[0].onSale);
+        });
+    });
+
+    it('cancelListing should delist dragon from marketplace', async () => {
+        const pageNumber = INITIAL_DRAGON_AMOUNT;
+        const pageSize = 1;
+        const dragonId = 4;
+        const price = 500;
+
+        await dragonApiContract.getDragonsByPage(pageNumber, pageSize, {
+            from: mainAccount
+        })
+        .then(result => {
+            const totalPages = result[0];
+            const dragonPageData = result[1];
+
+            assert.equal(INITIAL_DRAGON_AMOUNT, totalPages);
+            assert.equal(1, dragonPageData.length);
+
+            assert.equal(dragonId, dragonPageData[0].dragonId);
+            assert.equal(mainAccount, dragonPageData[0].owner);
+            assert.equal(false, dragonPageData[0].onSale);
+        });
+
+        console.log("marketplace address = " + marketplaceContract.address);
+        console.log("dragon token address = " + tokenContract.address);
+        console.log("dragon api address = " + dragonApiContract.address);
+        console.log("main account address = " + mainAccount);
+
+        // List dragon token using dragon api
+        await marketplaceContract.listToken(tokenContract.address, dragonId, price, {
+            from: mainAccount
+        });
+
+        await dragonApiContract.getDragonsByPage(pageNumber, pageSize, {
+            from: mainAccount
+        })
+        .then(result => {
+            const dragonPageData = result[1];
+            assert.equal(true, dragonPageData[0].onSale);
+        });
+
+        // Delist dragon from marketplace
+        await dragonApiContract.cancelListing(dragonId, {
+            from: mainAccount
+        });
+
+        await dragonApiContract.getDragonsByPage(pageNumber, pageSize, {
+            from: mainAccount
+        })
+        .then(result => {
+            const dragonPageData = result[1];
             assert.equal(false, dragonPageData[0].onSale);
         });
     });

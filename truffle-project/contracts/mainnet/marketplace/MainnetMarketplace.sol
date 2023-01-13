@@ -12,6 +12,9 @@ interface IERC721 {
 		address to,
 		uint256 tokenId
 	) external;
+
+    function approve(address to, uint256 tokenId) external;
+    function setApprovalForAll(address to, bool approved) external;
 }
 
 contract MainnetMarketplace is Ownable, ReentrancyGuard {
@@ -24,6 +27,11 @@ contract MainnetMarketplace is Ownable, ReentrancyGuard {
      * @dev Maps listing id to listed item
      */
     mapping(uint256 => ListingData) private _idToListedItem;
+
+    /*
+     * @dev Maps token id to listing id
+     */
+    mapping(uint256 => uint256) private _tokenIdToListingId;
 
     /************* Fees ****************/
     uint256 public teamFee = 1;
@@ -84,6 +92,14 @@ contract MainnetMarketplace is Ownable, ReentrancyGuard {
         return _idToListedItem[listingId];
     }
 
+    function geListingId(uint256 tokenId) external view returns (uint256) {
+        return _tokenIdToListingId[tokenId];
+    }
+
+    function isOnSale(uint256 tokenId) external view returns (bool) {
+        return _tokenIdToListingId[tokenId] != 0;
+    }
+
     function getActiveListingsForAddress(address sellerAddress) external view returns (ListingData[] memory) {
         uint256 totalItemCount = _itemIds.current();
         uint256 itemCount = 0;
@@ -126,7 +142,7 @@ contract MainnetMarketplace is Ownable, ReentrancyGuard {
     }
 
     /**************************** External Functions ********************************************************/
-
+    
     function listToken(
         address nftContract,
         uint256 tokenId,
@@ -145,8 +161,9 @@ contract MainnetMarketplace is Ownable, ReentrancyGuard {
             price,
             ListingStatus.Active
         );
+        _tokenIdToListingId[tokenId] = listingId;
 
-        IERC721(nftContract).safeTransferFrom(msg.sender, address(this), tokenId);
+        IERC721(nftContract).approve(address(this), tokenId);
 
         emit ItemListed(listingId, tokenId, nftContract, msg.sender, price);
     }
@@ -161,6 +178,7 @@ contract MainnetMarketplace is Ownable, ReentrancyGuard {
 
         // State changes
         _idToListedItem[listingId].status = ListingStatus.Sold;
+        _tokenIdToListingId[tokenId] = 0;
         _itemsSold.increment();
 
         // Transfer money charging 5% fees: 4% to rewards treasury and 1% to team.
@@ -169,7 +187,7 @@ contract MainnetMarketplace is Ownable, ReentrancyGuard {
         _teamAddress.transfer(teamFeeCharge);
 
         // Transfer NFT ownership
-        IERC721(nftContract).safeTransferFrom(address(this), msg.sender, tokenId);
+        IERC721(nftContract).safeTransferFrom(listedItem.seller, msg.sender, tokenId);
 
         emit ItemSold(listingId, tokenId, nftContract, listedItem.seller, msg.sender, price);
     }
@@ -182,8 +200,7 @@ contract MainnetMarketplace is Ownable, ReentrancyGuard {
 
         listedItem.status = ListingStatus.Cancelled;
         _itemsCancelled.increment();
-
-        IERC721(listedItem.nftContract).safeTransferFrom(address(this), msg.sender, listedItem.tokenId);
+        _tokenIdToListingId[listedItem.tokenId] = 0;
 
         emit ItemCancelled(listingId, listedItem.seller);
     }

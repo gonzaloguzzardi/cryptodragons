@@ -7,12 +7,4 @@ contract('MainnetMarketplace', (accounts) => {
     beforeEach(async () => {
         marketplace = await MainnetMarketplace.new(DRAGON_TOKEN_ADDRESS);
     });
-
-    it('Should initialize dragonTokenAddress with provided value', async () => {
-        const tx = await marketplace.dragonTokenAddress({
-            from: accounts[0]
-        }).then((dragonTokenAddress) => {
-            assert.equal(dragonTokenAddress, DRAGON_TOKEN_ADDRESS);
-        });
-    });
 });

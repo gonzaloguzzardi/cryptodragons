@@ -66,7 +66,7 @@ contract DragonApi {
 			dragonPagesData[i] = DragonLibrary.DragonFetchPageData( {
 				dragonId: tokenId,
 				owner: dragonOwner,
-				onSale: isDragonOnSale(dragonOwner)
+				onSale: isDragonOnSale(tokenId)
 			});
 		}
 
@@ -122,7 +122,7 @@ contract DragonApi {
 		return IGenesLaboratory(_genesLaboratory).getVisualAttributes(dragon.genes);
 	}
 
-	function isDragonOnSale(address dragonOwner) internal virtual view returns (bool) {
+	function isDragonOnSale(uint256 tokenId) internal virtual view returns (bool) {
 		return false;
 	}
 }

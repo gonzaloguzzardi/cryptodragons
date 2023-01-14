@@ -13,8 +13,7 @@ interface IERC721 {
 		uint256 tokenId
 	) external;
 
-    function approve(address to, uint256 tokenId) external;
-    function setApprovalForAll(address to, bool approved) external;
+    function getApproved(uint256 tokenId) external view returns (address);
 }
 
 contract MainnetMarketplace is Ownable, ReentrancyGuard {
@@ -149,6 +148,7 @@ contract MainnetMarketplace is Ownable, ReentrancyGuard {
         uint256 price
     ) external payable nonReentrant {
         require(price > 0, "Price must be at least 1 wei");
+        require(IERC721(nftContract).getApproved(tokenId) == address(this), "Marketplace is not approved to transfer this token");
 
         _itemIds.increment();
         uint256 listingId = _itemIds.current();
@@ -162,8 +162,6 @@ contract MainnetMarketplace is Ownable, ReentrancyGuard {
             ListingStatus.Active
         );
         _tokenIdToListingId[tokenId] = listingId;
-
-        IERC721(nftContract).approve(address(this), tokenId);
 
         emit ItemListed(listingId, tokenId, nftContract, msg.sender, price);
     }

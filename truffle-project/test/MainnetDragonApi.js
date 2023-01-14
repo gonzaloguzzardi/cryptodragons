@@ -2,21 +2,24 @@ const MainnetMarketplace = artifacts.require('MainnetMarketplace');
 const MainnetTransferableDragon = artifacts.require('MainnetTransferableDragon');
 const GenesLaboratory = artifacts.require('GenesLaboratory');
 const MainnetDragonApi = artifacts.require('MainnetDragonApi');
+const DragonDecoder = artifacts.require('DragonSerializer');
 
 contract('MainnetDragonApi', (accounts) => {
     const INITIAL_DRAGON_AMOUNT = 5;
     const GATEWAY_ADDRESS = '0x1234567890123456789012345678901234567892';
-    const DRAGON_DECODER_ADDRESS = '0x1234567890123456789012345678901234567893';
     const BLOCKCHAIN_ID = '1';
 
     let mainAccount = accounts[0];
+    let dragonOwner = accounts[1];
 
     let marketplaceContract;
     let tokenContract;
     let dragonApiContract;
+    let dragonDecoder;
 
     before(async () => {
-        tokenContract = await MainnetTransferableDragon.new(GATEWAY_ADDRESS, DRAGON_DECODER_ADDRESS, BLOCKCHAIN_ID);
+        dragonDecoder = await DragonDecoder.new();
+        tokenContract = await MainnetTransferableDragon.new(GATEWAY_ADDRESS, dragonDecoder.address, BLOCKCHAIN_ID);
         marketplaceContract = await MainnetMarketplace.new();
         const genesLaboratory = await GenesLaboratory.new('0x1234567890123456789012345678901234567890');
 
@@ -44,11 +47,11 @@ contract('MainnetDragonApi', (accounts) => {
             assert.equal(2, dragonPageData.length);
 
             assert.equal(0, dragonPageData[0].dragonId);
-            assert.equal(mainAccount, dragonPageData[0].owner);
+            assert.equal(dragonOwner, dragonPageData[0].owner);
             assert.equal(false, dragonPageData[0].onSale);
 
             assert.equal(1, dragonPageData[1].dragonId);
-            assert.equal(mainAccount, dragonPageData[1].owner);
+            assert.equal(dragonOwner, dragonPageData[1].owner);
             assert.equal(false, dragonPageData[1].onSale);
         });
     });
@@ -67,11 +70,11 @@ contract('MainnetDragonApi', (accounts) => {
             assert.equal(2, dragonPageData.length);
 
             assert.equal(2, dragonPageData[0].dragonId);
-            assert.equal(mainAccount, dragonPageData[0].owner);
+            assert.equal(dragonOwner, dragonPageData[0].owner);
             assert.equal(false, dragonPageData[0].onSale);
 
             assert.equal(3, dragonPageData[1].dragonId);
-            assert.equal(mainAccount, dragonPageData[1].owner);
+            assert.equal(dragonOwner, dragonPageData[1].owner);
             assert.equal(false, dragonPageData[1].onSale);
         });
     });
@@ -91,7 +94,7 @@ contract('MainnetDragonApi', (accounts) => {
             assert.equal(1, dragonPageData.length);
 
             assert.equal(4, dragonPageData[0].dragonId);
-            assert.equal(mainAccount, dragonPageData[0].owner);
+            assert.equal(dragonOwner, dragonPageData[0].owner);
             assert.equal(false, dragonPageData[0].onSale);
         });
     });
@@ -113,7 +116,7 @@ contract('MainnetDragonApi', (accounts) => {
             assert.equal(1, dragonPageData.length);
 
             assert.equal(dragonId, dragonPageData[0].dragonId);
-            assert.equal(mainAccount, dragonPageData[0].owner);
+            assert.equal(dragonOwner, dragonPageData[0].owner);
             assert.equal(false, dragonPageData[0].onSale);
         });
 
@@ -122,9 +125,14 @@ contract('MainnetDragonApi', (accounts) => {
         console.log("dragon api address = " + dragonApiContract.address);
         console.log("main account address = " + mainAccount);
 
+        // Approve token
+        await tokenContract.approve(marketplaceContract.address, dragonId, {
+            from: dragonOwner
+        });
+
         // List dragon token using dragon api
-        await marketplaceContract.listToken(tokenContract.address, dragonId, price, {
-            from: mainAccount
+        await dragonApiContract.listToken(dragonId, price, {
+            from: dragonOwner
         });
 
         await dragonApiContract.getDragonsByPage(pageNumber, pageSize, {
@@ -137,7 +145,7 @@ contract('MainnetDragonApi', (accounts) => {
 
         // Delist dragon from marketplace
         await dragonApiContract.cancelListing(dragonId, {
-            from: mainAccount
+            from: dragonOwner
         });
 
         await dragonApiContract.getDragonsByPage(pageNumber, pageSize, {
@@ -152,7 +160,7 @@ contract('MainnetDragonApi', (accounts) => {
     async function initializeTestDragons() {
         for (var i = 0; i < INITIAL_DRAGON_AMOUNT; i++) {
             await tokenContract.createDragon("test", 0, 0, 0, {
-                from: mainAccount
+                from: dragonOwner
             });
          }
     }

@@ -5,13 +5,14 @@ pragma solidity ^0.8.0;
 import './DragonApi.sol';
 
 interface IMarketplace {
-	function cancelListing(uint256 listingId) external;
     function geListingId(uint256 tokenId) external view returns (uint256);
+    function isOnSale(uint256 tokenId) external view returns (bool);
     function listToken(
         address nftContract,
         uint256 tokenId,
         uint256 price
     ) external payable;
+    	function cancelListing(uint256 listingId) external;
 }
 
 contract MainnetDragonApi is DragonApi {
@@ -33,7 +34,7 @@ contract MainnetDragonApi is DragonApi {
         marketplace.cancelListing(listingId);
 	}
 
-    function isDragonOnSale(address dragonOwner) internal virtual override view returns (bool) {
-		return dragonOwner == _marketplaceAddress;
+    function isDragonOnSale(uint256 tokenId) internal virtual override view returns (bool) {
+		return IMarketplace(_marketplaceAddress).isOnSale(tokenId);
 	}
 }

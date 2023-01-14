@@ -12,7 +12,7 @@ interface IMarketplace {
         uint256 tokenId,
         uint256 price
     ) external payable;
-    	function cancelListing(uint256 listingId) external;
+    function cancelListing(uint256 listingId) external;
 }
 
 contract MainnetDragonApi is DragonApi {
@@ -26,7 +26,7 @@ contract MainnetDragonApi is DragonApi {
 
     function listToken(uint256 tokenId, uint256 price) external payable {
         IMarketplace(_marketplaceAddress).listToken(_dragonAddress, tokenId, price);
-	}
+    }
 
     function cancelListing(uint256 tokenId) external {
         IMarketplace marketplace = IMarketplace(_marketplaceAddress);

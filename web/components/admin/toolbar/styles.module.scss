@@ -1,0 +1,23 @@
+@import '../../../styles/variables.scss';
+
+.toolbarIconLabelAnchor {
+  display: flex;
+  margin-right: auto;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.toolbarLabel {
+  display: flex;
+  color: $font-color-black;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 18px;
+  text-decoration: none;
+  align-items: center;
+  margin: 0 0 0 24px;
+  letter-spacing: -0.3px;
+}

@@ -2,7 +2,7 @@ import { ReactElement } from 'react'
 import { MDXRemote } from 'next-mdx-remote'
 import Button from '@mui/material/Button'
 import Image from 'next/image'
-import Typography from '@mui/material/Typography';
+import Typography from '@mui/material/Typography'
 
 const components = {
   Button,

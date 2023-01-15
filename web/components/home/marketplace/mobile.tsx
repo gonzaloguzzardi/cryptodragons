@@ -13,23 +13,23 @@ import mock from './dragons-data'
 
 import styles from './mobile.module.scss'
 
-const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
+const AutoPlaySwipeableViews = autoPlay(SwipeableViews)
 
 function SwipeableTextMobileStepper() {
-  const [activeStep, setActiveStep] = useState(0);
-  const maxSteps = mock.length;
+  const [activeStep, setActiveStep] = useState(0)
+  const maxSteps = mock.length
 
   const handleNext = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-  };
+    setActiveStep((prevActiveStep) => prevActiveStep + 1)
+  }
 
   const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  };
+    setActiveStep((prevActiveStep) => prevActiveStep - 1)
+  }
 
   const handleStepChange = (step: number) => {
-    setActiveStep(step);
-  };
+    setActiveStep(step)
+  }
 
   return (
     <Box sx={{ maxWidth: '100vw', flexGrow: 1 }}>
@@ -68,7 +68,7 @@ function SwipeableTextMobileStepper() {
         }
       />
     </Box>
-  );
+  )
 }
 
 export default function MarketplaceSection(): ReactElement {

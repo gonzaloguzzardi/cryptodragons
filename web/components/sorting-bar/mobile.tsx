@@ -12,7 +12,7 @@ import { tComponentProps } from './types'
 import styles from './mobile.module.scss'
 
 export default function SortingBarMobile({
-  checkboxes,
+  checkboxes = true,
   chMainchain,
   chSidechain,
   handleCheckedChange,
@@ -33,6 +33,7 @@ export default function SortingBarMobile({
                 onChange={handleCheckedChange}
                 name="chMainchain"
                 size="small"
+                color="secondary"
               />
             }
             label={<Typography variant="caption">Mainchain</Typography>}
@@ -44,6 +45,7 @@ export default function SortingBarMobile({
                 onChange={handleCheckedChange}
                 name="chSidechain"
                 size="small"
+                color="secondary"
               />
             }
             label={<Typography variant="caption">Sidechain</Typography>}

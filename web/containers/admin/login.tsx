@@ -1,9 +1,9 @@
-import React from 'react'
-import { ReactElement } from 'react'
+import React, { ReactElement } from 'react'
 
-import LoginDesktop from '../../components/login/desktop'
+import Layout from 'components/layout'
+import LoginDesktop from 'components/login/desktop'
 
-import { postLoginData } from '../../services/admin'
+import { postLoginData } from 'services/admin'
 
 import { JWT_LS_ID } from '../../constants'
 
@@ -21,9 +21,15 @@ export default function AdminLogin(): ReactElement {
         localStorage.setItem(JWT_LS_ID, res.token)
         location.href = '/admin'
       })
-      .catch(({ message }) => setError(message))
-      .finally(() => setLoading(false))
+      .catch(({ message }) => {
+        setError(message)
+        setLoading(false)
+      })
   }
 
-  return <LoginDesktop submitHandler={submitHandler} error={error} loading={loading} />
+  return (
+    <Layout>
+      <LoginDesktop submitHandler={submitHandler} error={error} loading={loading} />
+    </Layout>
+  )
 }

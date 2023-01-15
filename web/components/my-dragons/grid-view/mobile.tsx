@@ -25,7 +25,7 @@ export default function MyDragonsGridViewMobile({
     <div className={styles.main}>
       <div className={styles.container}>
         {filteredDragons.length === 0 && dragons.length === 0 && <BuyDragonCard />}
-        {filteredDragons.length === 0 && dragons.length > 0 && <p>Try another search</p>}
+        {filteredDragons.length === 0 && dragons.length > 0 && <p>Try another search...</p>}
 
         {filteredDragons.length > 0 &&
           filteredDragons.map((dragon) => (

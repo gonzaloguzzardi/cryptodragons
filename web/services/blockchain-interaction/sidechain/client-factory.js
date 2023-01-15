@@ -60,9 +60,8 @@ async function loadLoomAccount(mainchainAccountId) {
 export default async function clientFactory() {
   if (typeof window === "undefined") return Promise.resolve(null);
 
-  const {
-    account: mainchainAccountId,
-  } = await MainchainAPI.getClientHelper()
+  const { account: mainchainAccountId } = await MainchainAPI.getClientHelper()
+
   return loadLoomAccount(mainchainAccountId)
     .then(({ account, web3js, client }) =>
       Promise.all([

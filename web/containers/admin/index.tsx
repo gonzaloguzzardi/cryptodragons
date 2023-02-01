@@ -20,7 +20,8 @@ export default function Admin(): ReactElement {
   const [token, setToken] = useState(null)
 
   // DRAGONS DATA: { dragonId, owner, onSale }
-  const [dragonsData, setDragonsData] = useState([])
+  const [dragonsMData, setDragonsMData] = useState([])
+  const [dragonsSData, setDragonsSData] = useState([])
 
   // TABS: 0 for Mainchain, 1 for Sidechain
   const [tabValue, setTabValue] = useState(0)
@@ -32,14 +33,13 @@ export default function Admin(): ReactElement {
 
   const updateTokensData = () => {
     setLoading(true)
-    setDragonsData([])
 
     const API = tabValue === 0 ? MainchainAPI : SidechainAPI
     API.getDragonsByPage(page + 1, rowsPerPage)
       .then(result => {
         if (!result || !result[1][0]) return
         setPages(result[0])
-        setDragonsData(result[1])
+        tabValue === 0 ? setDragonsMData(result[1]) : setDragonsSData(result[1]);
       })
       .finally(() => setLoading(false))
   }
@@ -65,7 +65,8 @@ export default function Admin(): ReactElement {
       <AdminToolbar loadingState={loading} />
       <AdminTableButtons setLoading={setLoading} updateTokensData={updateTokensData} />
       <AdminTable
-        dragonsData={dragonsData}
+        dragonsMData={dragonsMData}
+        dragonsSData={dragonsSData}
         tabValue={tabValue}
         setTabValue={setTabValue}
         page={page}

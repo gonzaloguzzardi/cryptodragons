@@ -84063,11 +84063,11 @@
       "events": {},
       "links": {},
       "address": "0xEc1a1bA59771996C426A87071d3A5464d49fa3eB",
-      "transactionHash": "0xfff2a1fd3ddba030f62cc4ba89cd1949f7bf3acd5fb4a37ff2802a6e8905811d"
+      "transactionHash": "0xf68aaba57f67aae428b5a08298d07225a64b7a404c84f2b51cedd5719f5a6c3e"
     }
   },
   "schemaVersion": "3.4.1",
-  "updatedAt": "2023-01-12T15:57:36.912Z",
+  "updatedAt": "2023-02-01T19:22:45.629Z",
   "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",

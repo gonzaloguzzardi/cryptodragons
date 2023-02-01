@@ -9,7 +9,8 @@ import TabPanel from './tab-panel'
 import adminTableStyles from './styles.module.scss'
 
 export default function AdminTable({
-  dragonsData,
+  dragonsMData,
+  dragonsSData,
   tabValue,
   setTabValue,
   page,
@@ -40,7 +41,7 @@ export default function AdminTable({
           <TabPanel
             value={tabValue}
             index={0}
-            dragonsData={dragonsData}
+            dragonsData={dragonsMData}
             location='MAINCHAIN'
             page={page}
             setPage={setPage}
@@ -50,7 +51,7 @@ export default function AdminTable({
           <TabPanel
             value={tabValue}
             index={1}
-            dragonsData={dragonsData}
+            dragonsData={dragonsSData}
             location='SIDECHAIN'
             page={page}
             setPage={setPage}

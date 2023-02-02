@@ -44,12 +44,30 @@ export default function Admin(): ReactElement {
       .finally(() => setLoading(false))
   }
 
+  const cancelEditHandler = (location) => {
+    const dragonsData = location === 'MAINCHAIN' ? dragonsMData : dragonsSData;
+
+    const finalDragonsData = dragonsData.map(dragonData => ({
+      ...dragonData,
+      editing: {},
+    }));
+
+    if (location === 'MAINCHAIN') {
+      setDragonsMData(finalDragonsData);
+    } else {
+      setDragonsSData(finalDragonsData);
+    }
+  }
+
   const editHandler = (location, dragonId, column) => {
     const dragonsData = location === 'MAINCHAIN' ? dragonsMData : dragonsSData;
 
     const finalDragonsData = dragonsData.map(dragonData => ({
       ...dragonData,
-      editing: dragonData.dragonId === dragonId ? column : '',
+      editing: dragonData.dragonId === dragonId ? ({
+        id: column,
+        value: dragonsData[column]
+      }) : {},
     }));
 
     if (location === 'MAINCHAIN') {
@@ -82,6 +100,7 @@ export default function Admin(): ReactElement {
       <AdminTable
         dragonsMData={dragonsMData}
         dragonsSData={dragonsSData}
+        cancelEditHandler={cancelEditHandler}
         editHandler={editHandler}
         tabValue={tabValue}
         setTabValue={setTabValue}

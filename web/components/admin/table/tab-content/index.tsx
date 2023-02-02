@@ -31,6 +31,7 @@ const onSaleValues = [
 
 export default function TabContent({
   dragonsData,
+  cancelEditHandler,
   editHandler,
   location,
   page,
@@ -89,7 +90,7 @@ export default function TabContent({
                         )
                       }
 
-                      if (dragonData.editing === column.id) {
+                      if (dragonData.editing && (dragonData.editing.id === column.id)) {
                         return (
                           <TableCell key={column.id} align={column.align}>
                             { column.id === 'owner' && (
@@ -125,7 +126,7 @@ export default function TabContent({
                             <IconButton
                               color="error"
                               aria-label="allows to edit dragon properties"
-                              onClick={() => editHandler(location, dragonData.dragonId, column.id)}
+                              onClick={() => cancelEditHandler(location)}
                             >
                               <ClearIcon />
                             </IconButton>

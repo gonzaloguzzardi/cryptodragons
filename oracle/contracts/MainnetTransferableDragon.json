@@ -34108,12 +34108,12 @@
         }
       },
       "links": {},
-      "address": "0x7FFf34CD33ce0D3fFfE5a8f2dc7A8BE234521971",
-      "transactionHash": "0xf6a6889c547ec5cf2201c952efc39bb6a0b4c760cf58a9610191e4369ea01089"
+      "address": "0x7967A192407F900e6df53EB34a1b83F83b71D38C",
+      "transactionHash": "0x54eb2ab5c913cf72e4bb18afae2a5162392ae84d535727a80b6d157bbda8ca23"
     }
   },
   "schemaVersion": "3.4.1",
-  "updatedAt": "2023-02-02T14:39:07.911Z",
+  "updatedAt": "2023-02-04T21:07:27.980Z",
   "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",

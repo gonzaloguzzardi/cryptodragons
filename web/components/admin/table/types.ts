@@ -13,6 +13,7 @@ export interface Column {
 export interface TabPanelProps {
   children?: React.ReactNode
   dragonsData?: any
+  cancelEditHandler: () => void
   editHandler: () => void
   index: number
   location: string

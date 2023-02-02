@@ -1,6 +1,9 @@
 import React, { ReactElement } from 'react'
+import ClearIcon from '@mui/icons-material/Clear'
+import CheckIcon from '@mui/icons-material/Check'
 import EditIcon from '@mui/icons-material/Edit'
 import IconButton from '@mui/material/IconButton'
+import MenuItem from '@mui/material/MenuItem'
 import Table from '@mui/material/Table'
 import TableBody from '@mui/material/TableBody'
 import TableCell from '@mui/material/TableCell'
@@ -8,6 +11,7 @@ import TableContainer from '@mui/material/TableContainer'
 import TableHead from '@mui/material/TableHead'
 import TablePagination from '@mui/material/TablePagination'
 import TableRow from '@mui/material/TableRow'
+import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
 
 import { Column } from '../types'
@@ -18,6 +22,11 @@ const columns: Column[] = [
   { id: 'nft', label: 'NFT', minWidth: 170, align: 'center' },
   { id: 'owner', label: 'Owner', minWidth: 170, align: 'center', editable: true },
   { id: 'onSale', label: 'On\u00a0Sale', minWidth: 170, align: 'center', editable: true },
+]
+
+const onSaleValues = [
+  { value: 'true', label: 'Yes' },
+  { value: 'false', label: 'No' },
 ]
 
 export default function TabContent({
@@ -80,13 +89,55 @@ export default function TabContent({
                         )
                       }
 
+                      if (dragonData.editing === column.id) {
+                        return (
+                          <TableCell key={column.id} align={column.align}>
+                            { column.id === 'owner' && (
+                              <TextField
+                                id="standard-basic"
+                                variant="standard"
+                                color='secondary'
+                                sx={{ minWidth: 360 }}
+                              />
+                            )}
+
+                            { column.id === 'onSale' && (
+                              <TextField
+                                id="outlined-select-currency"
+                                select
+                                defaultValue={value}
+                              >
+                                {onSaleValues.map((option) => (
+                                  <MenuItem key={option.value} value={option.value}>
+                                    {option.label}
+                                  </MenuItem>
+                                ))}
+                              </TextField>
+                            )}
+
+                            <IconButton
+                              color="success"
+                              aria-label="allows to edit dragon properties"
+                              onClick={() => editHandler(location, dragonData.dragonId, column.id)}
+                            >
+                              <CheckIcon />
+                            </IconButton>
+                            <IconButton
+                              color="error"
+                              aria-label="allows to edit dragon properties"
+                              onClick={() => editHandler(location, dragonData.dragonId, column.id)}
+                            >
+                              <ClearIcon />
+                            </IconButton>
+                          </TableCell>
+                        );
+                      }
+
                       return (
                         <TableCell key={column.id} align={column.align}>
-                          {
-                            typeof value === 'number' ?
-                              value.toLocaleString('en-US') :
-                              ''+value
-                          }
+                          <Typography display="inline">
+                            {typeof value === 'boolean' ? (value ? 'Yes' : 'No') : value}
+                          </Typography>
                           {
                             column.editable && (
                             <IconButton

@@ -44,6 +44,21 @@ export default function Admin(): ReactElement {
       .finally(() => setLoading(false))
   }
 
+  const editHandler = (location, dragonId, column) => {
+    const dragonsData = location === 'MAINCHAIN' ? dragonsMData : dragonsSData;
+
+    const finalDragonsData = dragonsData.map(dragonData => ({
+      ...dragonData,
+      editing: dragonData.dragonId === dragonId ? column : '',
+    }));
+
+    if (location === 'MAINCHAIN') {
+      setDragonsMData(finalDragonsData);
+    } else {
+      setDragonsSData(finalDragonsData);
+    }
+  }
+
   useEffect(() => {
     getSessionAdmin(localStorage.getItem(JWT_LS_ID))
       .then((data) => {
@@ -67,6 +82,7 @@ export default function Admin(): ReactElement {
       <AdminTable
         dragonsMData={dragonsMData}
         dragonsSData={dragonsSData}
+        editHandler={editHandler}
         tabValue={tabValue}
         setTabValue={setTabValue}
         page={page}

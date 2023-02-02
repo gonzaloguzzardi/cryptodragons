@@ -11,6 +11,7 @@ import adminTableStyles from './styles.module.scss'
 export default function AdminTable({
   dragonsMData,
   dragonsSData,
+  editHandler,
   tabValue,
   setTabValue,
   page,
@@ -42,16 +43,18 @@ export default function AdminTable({
             value={tabValue}
             index={0}
             dragonsData={dragonsMData}
+            editHandler={editHandler}
             location='MAINCHAIN'
             page={page}
             setPage={setPage}
             rowsPerPage={rowsPerPage}
             setRowsPerPage={setRowsPerPage}
-          />
+            />
           <TabPanel
             value={tabValue}
             index={1}
             dragonsData={dragonsSData}
+            editHandler={editHandler}
             location='SIDECHAIN'
             page={page}
             setPage={setPage}

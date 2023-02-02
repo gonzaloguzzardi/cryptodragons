@@ -1,4 +1,6 @@
 import React, { ReactElement } from 'react'
+import EditIcon from '@mui/icons-material/Edit'
+import IconButton from '@mui/material/IconButton'
 import Table from '@mui/material/Table'
 import TableBody from '@mui/material/TableBody'
 import TableCell from '@mui/material/TableCell'
@@ -14,22 +16,13 @@ import Dragon from 'components/dragon'
 const columns: Column[] = [
   { id: 'dragonId', label: 'Id', minWidth: 100, align: 'center' },
   { id: 'nft', label: 'NFT', minWidth: 170, align: 'center' },
-  {
-    id: 'owner',
-    label: 'Owner',
-    minWidth: 170,
-    align: 'center',
-  },
-  {
-    id: 'onSale',
-    label: 'On\u00a0Sale',
-    minWidth: 170,
-    align: 'center',
-  },
+  { id: 'owner', label: 'Owner', minWidth: 170, align: 'center', editable: true },
+  { id: 'onSale', label: 'On\u00a0Sale', minWidth: 170, align: 'center', editable: true },
 ]
 
 export default function TabContent({
   dragonsData,
+  editHandler,
   location,
   page,
   setPage,
@@ -71,23 +64,39 @@ export default function TabContent({
                     {columns.map((column) => {
                       const value = dragonData[column.id]
 
-                      return column.id === 'nft' ? (
-                        <TableCell
-                          key={column.id}
-                          align={column.align}
-                          sx={{ display: 'flex', justifyContent: 'center' }}
-                        >
-                          <Dragon
-                            key={`MAINCHAIN${dragonData.dragonId}`}
-                            id={dragonData.dragonId}
-                            location={location}
-                          />
-                        </TableCell>
-                      ) : (
+                      if (column.id === 'nft') {
+                        return (
+                          <TableCell
+                            key={column.id}
+                            align={column.align}
+                            sx={{ display: 'flex', justifyContent: 'center' }}
+                          >
+                            <Dragon
+                              key={`MAINCHAIN${dragonData.dragonId}`}
+                              id={dragonData.dragonId}
+                              location={location}
+                            />
+                          </TableCell>
+                        )
+                      }
+
+                      return (
                         <TableCell key={column.id} align={column.align}>
-                          { typeof value === 'number' ?
-                            value.toLocaleString('en-US') :
-                            ''+value
+                          {
+                            typeof value === 'number' ?
+                              value.toLocaleString('en-US') :
+                              ''+value
+                          }
+                          {
+                            column.editable && (
+                            <IconButton
+                              color="secondary"
+                              aria-label="allows to edit dragon properties"
+                              onClick={() => editHandler(location, dragonData.dragonId, column.id)}
+                            >
+                              <EditIcon />
+                            </IconButton>
+                            )
                           }
                         </TableCell>
                       )

@@ -33,7 +33,9 @@ export default function TabContent({
   dragonsData,
   cancelEditHandler,
   editHandler,
+  editingValue,
   location,
+  onChangeEditHandler,
   page,
   setPage,
   rowsPerPage,
@@ -90,15 +92,19 @@ export default function TabContent({
                         )
                       }
 
-                      if (dragonData.editing && (dragonData.editing.id === column.id)) {
+                      // Editing view
+                      if (dragonData.editing === column.id) {
                         return (
                           <TableCell key={column.id} align={column.align}>
+
                             { column.id === 'owner' && (
                               <TextField
                                 id="standard-basic"
                                 variant="standard"
                                 color='secondary'
                                 sx={{ minWidth: 360 }}
+                                value={editingValue}
+                                onChange={onChangeEditHandler}
                               />
                             )}
 
@@ -106,7 +112,8 @@ export default function TabContent({
                               <TextField
                                 id="outlined-select-currency"
                                 select
-                                defaultValue={value}
+                                value={editingValue}
+                                onChange={onChangeEditHandler}
                               >
                                 {onSaleValues.map((option) => (
                                   <MenuItem key={option.value} value={option.value}>
@@ -134,6 +141,7 @@ export default function TabContent({
                         );
                       }
 
+                      // Reading view
                       return (
                         <TableCell key={column.id} align={column.align}>
                           <Typography display="inline">

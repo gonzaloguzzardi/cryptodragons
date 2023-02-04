@@ -1,4 +1,4 @@
-import { useEffect, useState, SyntheticEvent } from 'react'
+import { useEffect, useState, ChangeEvent } from 'react'
 import { ReactElement } from 'react'
 
 import Layout from 'components/layout'
@@ -31,6 +31,9 @@ export default function Admin(): ReactElement {
   const [page, setPage] = useState(0)
   const [rowsPerPage, setRowsPerPage] = useState(10)
 
+  // EDITING VALUE: Variable to retain the value when editing the ERC721 props
+  const [editingValue, setEditingValue] = useState(null)
+
   const updateTokensData = () => {
     setLoading(true)
 
@@ -62,19 +65,31 @@ export default function Admin(): ReactElement {
   const editHandler = (location, dragonId, column) => {
     const dragonsData = location === 'MAINCHAIN' ? dragonsMData : dragonsSData;
 
-    const finalDragonsData = dragonsData.map(dragonData => ({
-      ...dragonData,
-      editing: dragonData.dragonId === dragonId ? ({
-        id: column,
-        value: dragonsData[column]
-      }) : {},
-    }));
+    const finalDragonsData = dragonsData.map(dragonData => {
+      if (dragonData.dragonId !== dragonId) {
+        return {
+          ...dragonData,
+          editing: '',
+        };
+      }
+
+      setEditingValue(dragonData[column]); // Set initial value for editing
+      return {
+        ...dragonData,
+        editing: column,
+      }
+    })
+    
 
     if (location === 'MAINCHAIN') {
       setDragonsMData(finalDragonsData);
     } else {
       setDragonsSData(finalDragonsData);
     }
+  }
+
+  const onChangeEditHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    setEditingValue(event.target.value);
   }
 
   useEffect(() => {
@@ -102,6 +117,8 @@ export default function Admin(): ReactElement {
         dragonsSData={dragonsSData}
         cancelEditHandler={cancelEditHandler}
         editHandler={editHandler}
+        editingValue={editingValue}
+        onChangeEditHandler={onChangeEditHandler}
         tabValue={tabValue}
         setTabValue={setTabValue}
         page={page}

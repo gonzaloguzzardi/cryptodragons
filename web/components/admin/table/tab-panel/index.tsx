@@ -8,8 +8,10 @@ export default function TabPanel({
   dragonsData,
   cancelEditHandler,
   editHandler,
+  editingValue,
   index,
   location,
+  onChangeEditHandler,
   page,
   setPage,
   value,
@@ -31,7 +33,9 @@ export default function TabPanel({
             dragonsData={dragonsData}
             cancelEditHandler={cancelEditHandler}
             editHandler={editHandler}
+            editingValue={editingValue}
             location={location}
+            onChangeEditHandler={onChangeEditHandler}
             page={page}
             setPage={setPage}
             rowsPerPage={rowsPerPage}

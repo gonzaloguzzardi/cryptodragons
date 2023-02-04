@@ -13,6 +13,8 @@ export default function AdminTable({
   dragonsSData,
   cancelEditHandler,
   editHandler,
+  editingValue,
+  onChangeEditHandler,
   tabValue,
   setTabValue,
   page,
@@ -46,7 +48,9 @@ export default function AdminTable({
             dragonsData={dragonsMData}
             cancelEditHandler={cancelEditHandler}
             editHandler={editHandler}
+            editingValue={editingValue}
             location='MAINCHAIN'
+            onChangeEditHandler={onChangeEditHandler}
             page={page}
             setPage={setPage}
             rowsPerPage={rowsPerPage}
@@ -58,7 +62,9 @@ export default function AdminTable({
             dragonsData={dragonsSData}
             cancelEditHandler={cancelEditHandler}
             editHandler={editHandler}
+            editingValue={editingValue}
             location='SIDECHAIN'
+            onChangeEditHandler={(onChangeEditHandler)}
             page={page}
             setPage={setPage}
             rowsPerPage={rowsPerPage}

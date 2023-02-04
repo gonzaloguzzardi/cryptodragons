@@ -15,8 +15,10 @@ export interface TabPanelProps {
   dragonsData?: any
   cancelEditHandler: () => void
   editHandler: () => void
+  editingValue: number | boolean | string
   index: number
   location: string
+  onChangeEditHandler: () => void
   page: number
   setPage: Dispatch<SetStateAction<number>>
   value: number

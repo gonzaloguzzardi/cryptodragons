@@ -80,7 +80,21 @@ export default function Admin(): ReactElement {
   }
   
   const submitEditHandler = (dragonId, column, editingValue) => {
-    // TODO: Code this function
+    if (column === 'owner') {
+      // TODO: Finish with the UI implementation (loading, error handling, success handling)
+      MainchainAPI
+        .transferDragonToNewOwner(dragonId, editingValue)
+        .then(result => {
+          console.log("Response: ", result)
+        })
+        .catch(err => {
+          console.log("Error: ", err)
+        })
+    }
+
+    if (column === 'onSale') {
+      alert("TODO: Need to implement marketplace list feature")
+    }
   }
 
   useEffect(() => {

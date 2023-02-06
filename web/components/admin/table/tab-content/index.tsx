@@ -146,7 +146,7 @@ export default function TabContent({
                       return (
                         <TableCell key={column.id} align={column.align}>
                           <Typography display="inline">
-                            {typeof value === 'boolean' ? (value ? 'Yes' : 'No') : value}
+                            { typeof value === 'boolean' ? (value ? 'Yes' : 'No') : value }
                           </Typography>
                           {
                             column.editable &&

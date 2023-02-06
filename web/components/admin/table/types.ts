@@ -24,4 +24,5 @@ export interface TabPanelProps {
   value: number
   rowsPerPage: number
   setRowsPerPage: Dispatch<SetStateAction<number>>
+  submitEditHandler: () => void
 }

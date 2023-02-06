@@ -37,9 +37,10 @@ export default function TabContent({
   location,
   onChangeEditHandler,
   page,
-  setPage,
   rowsPerPage,
-  setRowsPerPage
+  setPage,
+  setRowsPerPage,
+  submitEditHandler
 }): ReactElement {
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage)
@@ -126,7 +127,7 @@ export default function TabContent({
                             <IconButton
                               color="success"
                               aria-label="allows to edit dragon properties"
-                              onClick={() => editHandler(location, dragonData.dragonId, column.id)}
+                              onClick={() => submitEditHandler(location, dragonData.dragonId, column.id, editingValue)}
                             >
                               <CheckIcon />
                             </IconButton>

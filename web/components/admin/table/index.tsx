@@ -21,6 +21,7 @@ export default function AdminTable({
   setPage,
   rowsPerPage,
   setRowsPerPage,
+  submitEditHandler,
   updateTokensData,
 }) {
   useEffect(() => {
@@ -55,7 +56,8 @@ export default function AdminTable({
             setPage={setPage}
             rowsPerPage={rowsPerPage}
             setRowsPerPage={setRowsPerPage}
-            />
+            submitEditHandler={submitEditHandler}
+          />
           <TabPanel
             value={tabValue}
             index={1}
@@ -69,6 +71,7 @@ export default function AdminTable({
             setPage={setPage}
             rowsPerPage={rowsPerPage}
             setRowsPerPage={setRowsPerPage}
+            submitEditHandler={submitEditHandler}
           />
         </Box>
       </Paper>

@@ -91,6 +91,10 @@ export default function Admin(): ReactElement {
   const onChangeEditHandler = (event: ChangeEvent<HTMLInputElement>) => {
     setEditingValue(event.target.value);
   }
+  
+  const submitEditHandler = (location, dragonId, column, editingValue) => {
+    // TODO: Code this function
+  }
 
   useEffect(() => {
     getSessionAdmin(localStorage.getItem(JWT_LS_ID))
@@ -125,6 +129,7 @@ export default function Admin(): ReactElement {
         setPage={setPage}
         rowsPerPage={rowsPerPage}
         setRowsPerPage={setRowsPerPage}
+        submitEditHandler={submitEditHandler}
         updateTokensData={updateTokensData}
       />
     </Layout>

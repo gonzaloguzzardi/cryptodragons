@@ -17,6 +17,7 @@ export default function TabPanel({
   value,
   rowsPerPage,
   setRowsPerPage,
+  submitEditHandler,
   ...other
 }: TabPanelProps) {
   return (
@@ -40,6 +41,7 @@ export default function TabPanel({
             setPage={setPage}
             rowsPerPage={rowsPerPage}
             setRowsPerPage={setRowsPerPage}
+            submitEditHandler={submitEditHandler}
           />
         </Box>
       )}

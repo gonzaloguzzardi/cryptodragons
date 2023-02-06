@@ -47,25 +47,17 @@ export default function Admin(): ReactElement {
       .finally(() => setLoading(false))
   }
 
-  const cancelEditHandler = (location) => {
-    const dragonsData = location === 'MAINCHAIN' ? dragonsMData : dragonsSData;
-
-    const finalDragonsData = dragonsData.map(dragonData => ({
+  const cancelEditHandler = () => {
+    const finalDragonsData = dragonsMData.map(dragonData => ({
       ...dragonData,
-      editing: {},
+      editing: '',
     }));
 
-    if (location === 'MAINCHAIN') {
-      setDragonsMData(finalDragonsData);
-    } else {
-      setDragonsSData(finalDragonsData);
-    }
+    setDragonsMData(finalDragonsData);
   }
 
-  const editHandler = (location, dragonId, column) => {
-    const dragonsData = location === 'MAINCHAIN' ? dragonsMData : dragonsSData;
-
-    const finalDragonsData = dragonsData.map(dragonData => {
+  const editHandler = (dragonId, column) => {
+    const finalDragonsData = dragonsMData.map(dragonData => {
       if (dragonData.dragonId !== dragonId) {
         return {
           ...dragonData,
@@ -79,20 +71,15 @@ export default function Admin(): ReactElement {
         editing: column,
       }
     })
-    
 
-    if (location === 'MAINCHAIN') {
-      setDragonsMData(finalDragonsData);
-    } else {
-      setDragonsSData(finalDragonsData);
-    }
+    setDragonsMData(finalDragonsData);
   }
 
   const onChangeEditHandler = (event: ChangeEvent<HTMLInputElement>) => {
     setEditingValue(event.target.value);
   }
   
-  const submitEditHandler = (location, dragonId, column, editingValue) => {
+  const submitEditHandler = (dragonId, column, editingValue) => {
     // TODO: Code this function
   }
 

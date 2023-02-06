@@ -18,7 +18,6 @@ import { Column } from '../types'
 import Dragon from 'components/dragon'
 
 const columns: Column[] = [
-  { id: 'dragonId', label: 'Id', minWidth: 100, align: 'center' },
   { id: 'nft', label: 'NFT', minWidth: 170, align: 'center' },
   { id: 'owner', label: 'Owner', minWidth: 170, align: 'center', editable: true },
   { id: 'onSale', label: 'On\u00a0Sale', minWidth: 170, align: 'center', editable: true },
@@ -71,12 +70,13 @@ export default function TabContent({
           <TableBody>
             {dragonsData
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((dragonData) => {
+              .map((dragonData) => { // For each row
                 return (
                   <TableRow hover role="checkbox" tabIndex={-1} key={dragonData.dragonId}>
-                    {columns.map((column) => {
+                    {columns.map((column) => { // For each column
                       const value = dragonData[column.id]
 
+                      // NFT column (special render)
                       if (column.id === 'nft') {
                         return (
                           <TableCell
@@ -93,7 +93,7 @@ export default function TabContent({
                         )
                       }
 
-                      // Editing view
+                      // Editing column view
                       if (dragonData.editing === column.id) {
                         return (
                           <TableCell key={column.id} align={column.align}>
@@ -127,14 +127,14 @@ export default function TabContent({
                             <IconButton
                               color="success"
                               aria-label="allows to edit dragon properties"
-                              onClick={() => submitEditHandler(location, dragonData.dragonId, column.id, editingValue)}
+                              onClick={() => submitEditHandler(dragonData.dragonId, column.id, editingValue)}
                             >
                               <CheckIcon />
                             </IconButton>
                             <IconButton
                               color="error"
                               aria-label="allows to edit dragon properties"
-                              onClick={() => cancelEditHandler(location)}
+                              onClick={cancelEditHandler}
                             >
                               <ClearIcon />
                             </IconButton>
@@ -142,18 +142,19 @@ export default function TabContent({
                         );
                       }
 
-                      // Reading view
+                      // Reading column view
                       return (
                         <TableCell key={column.id} align={column.align}>
                           <Typography display="inline">
                             {typeof value === 'boolean' ? (value ? 'Yes' : 'No') : value}
                           </Typography>
                           {
-                            column.editable && (
+                            column.editable &&
+                            location === 'MAINCHAIN' && ( // We are only editing values on mainchain
                             <IconButton
                               color="secondary"
                               aria-label="allows to edit dragon properties"
-                              onClick={() => editHandler(location, dragonData.dragonId, column.id)}
+                              onClick={() => editHandler(dragonData.dragonId, column.id)}
                             >
                               <EditIcon />
                             </IconButton>

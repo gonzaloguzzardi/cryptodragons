@@ -18,9 +18,9 @@ import { Column } from '../types'
 import Dragon from 'components/dragon'
 
 const columns: Column[] = [
-  { id: 'nft', label: 'NFT', minWidth: 170, align: 'center' },
-  { id: 'owner', label: 'Owner', minWidth: 170, align: 'center', editable: true },
-  { id: 'onSale', label: 'On\u00a0Sale', minWidth: 170, align: 'center', editable: true },
+  { id: 'nft', label: 'NFT', align: 'center' },
+  { id: 'owner', label: 'Owner', align: 'center', editable: true },
+  { id: 'onSale', label: 'On\u00a0Sale', align: 'center', editable: true },
 ]
 
 const onSaleValues = [
@@ -60,7 +60,6 @@ export default function TabContent({
                 <TableCell
                   key={column.id}
                   align={column.align}
-                  style={{ minWidth: column.minWidth }}
                 >
                   <Typography variant='overline'>{column.label}</Typography>
                 </TableCell>
@@ -103,7 +102,7 @@ export default function TabContent({
                                 id="standard-basic"
                                 variant="standard"
                                 color='secondary'
-                                sx={{ minWidth: 360 }}
+                                sx={{ minWidth: 385 }}
                                 value={editingValue}
                                 onChange={onChangeEditHandler}
                               />

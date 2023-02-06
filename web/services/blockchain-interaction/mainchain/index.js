@@ -129,7 +129,7 @@ class MainchainAPI {
         .transferFrom(ownerAccount, newOwner, dragonId)
         .send({ from: ownerAccount, gas: gasEstimate })
     } catch (err) {
-      console.error(err)
+      throw new Error(err)
     }
   }
 

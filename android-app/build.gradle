@@ -1,0 +1,32 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+buildscript {
+    dependencies {
+        classpath "io.gitlab.arturbosch.detekt:detekt-gradle-plugin:$detektVersion"
+        classpath "io.gitlab.arturbosch.detekt:detekt-formatting:$detektVersion"
+    }
+}
+
+plugins {
+    id 'com.android.application' version '7.3.1' apply false
+    id 'com.android.library' version '7.3.1' apply false
+    id 'org.jetbrains.kotlin.android' version '1.7.20' apply false
+    id "io.gitlab.arturbosch.detekt" version "$detektVersion"
+}
+
+subprojects {
+    detekt {
+        source = files(
+                "src/main/java",
+                "src/main/kotlin",
+                "gensrc/main/kotlin"
+        )
+        buildUponDefaultConfig = true
+        config = files("${project.rootDir}/detekt.yml")
+        parallel = true
+        autoCorrect = true
+        toolVersion = "$detektVersion"
+        basePath = projectDir
+    }
+}
+
+tasks.detekt.jvmTarget = "1.8"

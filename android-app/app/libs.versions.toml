@@ -1,0 +1,18 @@
+[versions]
+# Define the dependency versions
+kotlinVersion = "1.9.0"
+appcompatVersion = "1.6.1"
+
+[libraries]
+# Define the libraries
+compose_ui = { module = "androidx.compose.ui:ui", version.ref = "compose" }
+compose_material = { module = "androidx.compose.material:material", version.ref = "compose" }
+compose_tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose" }
+compose_icons = { module = "androidx.compose.material:material-icons-extended", version.ref = "compose" }
+
+[bundles]
+# Define bundles/groups of libraries
+compose = ["compose.ui", "compose.material", "compose.tooling", "compose.icons"]
+
+[plugins]
+kotlin = { id = "org.jetbrains.kotlin.android", version.ref = "kotlinVersion" }

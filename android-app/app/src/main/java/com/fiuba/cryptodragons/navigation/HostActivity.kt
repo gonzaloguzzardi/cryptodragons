@@ -1,13 +1,12 @@
 package com.fiuba.cryptodragons.navigation
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
-import android.view.Menu
-import android.view.MenuItem
 import com.fiuba.cryptodragons.R
 import com.fiuba.cryptodragons.databinding.ActivityMainBinding
 import com.fiuba.cryptodragons.utils.getNavController
@@ -46,7 +45,7 @@ class HostActivity : AppCompatActivity() {
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        val navController = findNavController(R.id.nav_host_fragment)
+        val navController = getNavController()
         return navController.navigateUp(appBarConfiguration)
                 || super.onSupportNavigateUp()
     }

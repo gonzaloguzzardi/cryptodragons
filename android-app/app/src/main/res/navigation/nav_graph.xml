@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/LoginFragment"
         android:name="com.fiuba.cryptodragons.login.LoginFragment"
-        android:label="@string/first_fragment_label"
+        android:label="@string/login_fragment_label"
         tools:layout="@layout/fragment_login">
         <action
             android:id="@+id/action_LoginFragment_to_HomeFragment"
@@ -17,7 +17,7 @@
     <fragment
         android:id="@+id/HomeFragment"
         android:name="com.fiuba.cryptodragons.home.HomeFragment"
-        android:label="@string/second_fragment_label"
+        android:label="@string/home_fragment_label"
         tools:layout="@layout/fragment_home">
     </fragment>
 </navigation>

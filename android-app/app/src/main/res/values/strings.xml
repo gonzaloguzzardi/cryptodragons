@@ -2,11 +2,15 @@
     <string name="app_name">Cryptodragons</string>
     <string name="action_settings">Settings</string>
     <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
+    <string name="login_fragment_label">Login Fragment</string>
+    <string name="home_fragment_label">Home Fragment</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 
-    <string name="hello_first_fragment">Hello first fragment</string>
+    <!-- Login Fragment -->
+    <string name="login">Log in</string>
+    <string name="login_title">Welcome</string>
+    <string name="login_address_input_text_hint">Link address</string>
+    <string name="login_link_address_button">Sign in</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 </resources>

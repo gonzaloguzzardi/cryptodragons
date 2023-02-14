@@ -1,4 +1,4 @@
-package com.fiuba.cryptodragons.navigation
+package com.fiuba.cryptodragons.host
 
 import android.os.Bundle
 import android.view.Menu

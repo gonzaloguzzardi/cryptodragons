@@ -13,6 +13,7 @@ export default function AdminTable({
   dragonsSData,
   cancelEditHandler,
   editHandler,
+  editingLoading,
   editingValue,
   onChangeEditHandler,
   tabValue,
@@ -49,6 +50,7 @@ export default function AdminTable({
             dragonsData={dragonsMData}
             cancelEditHandler={cancelEditHandler}
             editHandler={editHandler}
+            editingLoading={editingLoading}
             editingValue={editingValue}
             location='MAINCHAIN'
             onChangeEditHandler={onChangeEditHandler}
@@ -64,6 +66,7 @@ export default function AdminTable({
             dragonsData={dragonsSData}
             cancelEditHandler={cancelEditHandler}
             editHandler={editHandler}
+            editingLoading={editingLoading}
             editingValue={editingValue}
             location='SIDECHAIN'
             onChangeEditHandler={(onChangeEditHandler)}

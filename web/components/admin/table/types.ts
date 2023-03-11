@@ -15,6 +15,7 @@ export interface TabPanelProps {
   dragonsData?: any
   cancelEditHandler: () => void
   editHandler: () => void
+  editingLoading: boolean
   editingValue: number | boolean | string
   index: number
   location: string

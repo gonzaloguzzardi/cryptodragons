@@ -13,7 +13,7 @@ import { getSessionAdmin } from 'services/admin'
 import { JWT_LS_ID } from '../../constants'
 
 export default function Admin(): ReactElement {
-  // LOADING feature
+  // LOADING toolbar feature
   const [loading, setLoading] = useState(false)
 
   // JWT Token
@@ -31,8 +31,10 @@ export default function Admin(): ReactElement {
   const [page, setPage] = useState(0)
   const [rowsPerPage, setRowsPerPage] = useState(10)
 
-  // EDITING VALUE: Variable to retain the value when editing the ERC721 props
+  // EDITING VALUE: Variable to retain the field value when editing the ERC721 props
   const [editingValue, setEditingValue] = useState(null)
+  // EDITING LOADING: Variable to retain the loading value of the field being edited
+  const [editingLoading, setEditingLoading] = useState(false)
 
   const updateTokensData = () => {
     setLoading(true)
@@ -81,15 +83,18 @@ export default function Admin(): ReactElement {
   
   const submitEditHandler = (dragonId, column, editingValue) => {
     if (column === 'owner') {
-      // TODO: Finish with the UI implementation (loading, error handling, success handling)
+      setEditingLoading(true)
+
       MainchainAPI
         .transferDragonToNewOwner(dragonId, editingValue)
         .then(result => {
-          console.log("Response: ", result)
+          console.log("Change owner success: ", result)
+          updateTokensData()
         })
         .catch(err => {
-          console.log("Error: ", err)
+          alert(`Error editing ${dragonId} with value: ${editingValue}`);
         })
+        .finally(() => setEditingLoading(false))
     }
 
     if (column === 'onSale') {
@@ -122,6 +127,7 @@ export default function Admin(): ReactElement {
         dragonsSData={dragonsSData}
         cancelEditHandler={cancelEditHandler}
         editHandler={editHandler}
+        editingLoading={editingLoading}
         editingValue={editingValue}
         onChangeEditHandler={onChangeEditHandler}
         tabValue={tabValue}

@@ -1,4 +1,5 @@
 import React, { ReactElement } from 'react'
+import CircularProgress from '@mui/material/CircularProgress'
 import ClearIcon from '@mui/icons-material/Clear'
 import CheckIcon from '@mui/icons-material/Check'
 import EditIcon from '@mui/icons-material/Edit'
@@ -32,6 +33,7 @@ export default function TabContent({
   dragonsData,
   cancelEditHandler,
   editHandler,
+  editingLoading,
   editingValue,
   location,
   onChangeEditHandler,
@@ -94,9 +96,18 @@ export default function TabContent({
 
                       // Editing column view
                       if (dragonData.editing === column.id) {
+                        if (editingLoading) {
+                          return (
+                            <TableCell key={column.id} align={column.align}>
+                              { editingLoading && (
+                                <CircularProgress color="secondary" />
+                              )}
+                            </TableCell>
+                          )
+                        }
+
                         return (
                           <TableCell key={column.id} align={column.align}>
-
                             { column.id === 'owner' && (
                               <TextField
                                 id="standard-basic"

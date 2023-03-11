@@ -8,6 +8,7 @@ export default function TabPanel({
   dragonsData,
   cancelEditHandler,
   editHandler,
+  editingLoading,
   editingValue,
   index,
   location,
@@ -34,6 +35,7 @@ export default function TabPanel({
             dragonsData={dragonsData}
             cancelEditHandler={cancelEditHandler}
             editHandler={editHandler}
+            editingLoading={editingLoading}
             editingValue={editingValue}
             location={location}
             onChangeEditHandler={onChangeEditHandler}

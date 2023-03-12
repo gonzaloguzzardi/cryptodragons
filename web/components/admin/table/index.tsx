@@ -9,13 +9,20 @@ import TabPanel from './tab-panel'
 import adminTableStyles from './styles.module.scss'
 
 export default function AdminTable({
-  dragonsData,
+  dragonsMData,
+  dragonsSData,
+  cancelEditHandler,
+  editHandler,
+  editingLoading,
+  editingValue,
+  onChangeEditHandler,
   tabValue,
   setTabValue,
   page,
   setPage,
   rowsPerPage,
   setRowsPerPage,
+  submitEditHandler,
   updateTokensData,
 }) {
   useEffect(() => {
@@ -40,22 +47,34 @@ export default function AdminTable({
           <TabPanel
             value={tabValue}
             index={0}
-            dragonsData={dragonsData}
+            dragonsData={dragonsMData}
+            cancelEditHandler={cancelEditHandler}
+            editHandler={editHandler}
+            editingLoading={editingLoading}
+            editingValue={editingValue}
             location='MAINCHAIN'
+            onChangeEditHandler={onChangeEditHandler}
             page={page}
             setPage={setPage}
             rowsPerPage={rowsPerPage}
             setRowsPerPage={setRowsPerPage}
+            submitEditHandler={submitEditHandler}
           />
           <TabPanel
             value={tabValue}
             index={1}
-            dragonsData={dragonsData}
+            dragonsData={dragonsSData}
+            cancelEditHandler={cancelEditHandler}
+            editHandler={editHandler}
+            editingLoading={editingLoading}
+            editingValue={editingValue}
             location='SIDECHAIN'
+            onChangeEditHandler={(onChangeEditHandler)}
             page={page}
             setPage={setPage}
             rowsPerPage={rowsPerPage}
             setRowsPerPage={setRowsPerPage}
+            submitEditHandler={submitEditHandler}
           />
         </Box>
       </Paper>

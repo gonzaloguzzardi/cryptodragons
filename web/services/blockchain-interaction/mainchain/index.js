@@ -110,6 +110,29 @@ class MainchainAPI {
     }
   }
 
+  static async transferDragonToNewOwner(dragonId, newOwner, gas = GAS_DEFAULT_VALUE) {
+    try {
+      const {
+        tokenContract: contract,
+        account: ownerAccount,
+      } = await MainchainAPI.getClientHelper()
+
+      console.log(`Transfer dragon from account: ${ownerAccount} to account: ${newOwner}`)
+      const gasEstimate = await contract.methods
+        .transferFrom(ownerAccount, newOwner, dragonId)
+        .estimateGas({ from: ownerAccount, gas })
+      console.log(`Gas estimated: ${gasEstimate}`)
+
+      if (gasEstimate >= gas) throw new Error('Not enough enough gas, send more.')
+
+      return await contract.methods
+        .transferFrom(ownerAccount, newOwner, dragonId)
+        .send({ from: ownerAccount, gas: gasEstimate })
+    } catch (err) {
+      throw new Error(err)
+    }
+  }
+
   static async mapAccountToSidechainAccount(sideAccount, gas = GAS_DEFAULT_VALUE) {
     try {
       const {

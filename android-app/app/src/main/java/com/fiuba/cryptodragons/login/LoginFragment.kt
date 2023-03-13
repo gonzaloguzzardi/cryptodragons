@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import com.fiuba.cryptodragons.R
 import com.fiuba.cryptodragons.databinding.FragmentLoginBinding
 
 /**
@@ -28,9 +30,9 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        /*binding.buttonFirst.setOnClickListener {
+        binding.loginButton.setOnClickListener {
             findNavController().navigate(R.id.action_LoginFragment_to_HomeFragment)
-        }*/
+        }
     }
 
     override fun onDestroyView() {

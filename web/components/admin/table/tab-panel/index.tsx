@@ -6,13 +6,19 @@ import { TabPanelProps } from '../types'
 export default function TabPanel({
   children,
   dragonsData,
+  cancelEditHandler,
+  editHandler,
+  editingLoading,
+  editingValue,
   index,
   location,
+  onChangeEditHandler,
   page,
   setPage,
   value,
   rowsPerPage,
   setRowsPerPage,
+  submitEditHandler,
   ...other
 }: TabPanelProps) {
   return (
@@ -27,11 +33,17 @@ export default function TabPanel({
         <Box>
           <TabContent
             dragonsData={dragonsData}
+            cancelEditHandler={cancelEditHandler}
+            editHandler={editHandler}
+            editingLoading={editingLoading}
+            editingValue={editingValue}
             location={location}
+            onChangeEditHandler={onChangeEditHandler}
             page={page}
             setPage={setPage}
             rowsPerPage={rowsPerPage}
             setRowsPerPage={setRowsPerPage}
+            submitEditHandler={submitEditHandler}
           />
         </Box>
       )}

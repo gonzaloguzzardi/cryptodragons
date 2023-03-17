@@ -63,10 +63,12 @@ contract DragonApi {
 		for (uint256 i = 0; i < length; i++) {
 			uint256 tokenId = cursor + i;
 			address dragonOwner = IERC721(_dragonAddress).ownerOf(tokenId);
+			(bool isOnSale, uint256 price) = isDragonOnSale(tokenId);
 			dragonPagesData[i] = DragonLibrary.DragonFetchPageData( {
 				dragonId: tokenId,
+				listedPrice: price,
 				owner: dragonOwner,
-				onSale: isDragonOnSale(tokenId)
+				onSale: isOnSale
 			});
 		}
 
@@ -122,7 +124,7 @@ contract DragonApi {
 		return IGenesLaboratory(_genesLaboratory).getVisualAttributes(dragon.genes);
 	}
 
-	function isDragonOnSale(uint256 tokenId) internal virtual view returns (bool) {
-		return false;
+    function isDragonOnSale(uint256 tokenId) internal virtual view returns (bool onSale, uint256 price) {
+		return (false, 0);
 	}
 }

@@ -95,8 +95,14 @@ contract MainnetMarketplace is Ownable, ReentrancyGuard {
         return _tokenIdToListingId[tokenId];
     }
 
-    function isOnSale(uint256 tokenId) external view returns (bool) {
-        return _tokenIdToListingId[tokenId] != 0;
+    function isOnSale(uint256 tokenId) external view returns (bool onSale, uint256 price) {
+        uint256 listingId = _tokenIdToListingId[tokenId];
+        onSale = listingId != 0;
+        if (onSale) {
+            price = _idToListedItem[listingId].price;
+        } else {
+            price = 0;
+        }
     }
 
     function getActiveListingsForAddress(address sellerAddress) external view returns (ListingData[] memory) {

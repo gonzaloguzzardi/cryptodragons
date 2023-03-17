@@ -6,7 +6,7 @@ import './DragonApi.sol';
 
 interface IMarketplace {
     function geListingId(uint256 tokenId) external view returns (uint256);
-    function isOnSale(uint256 tokenId) external view returns (bool);
+    function isOnSale(uint256 tokenId) external view returns (bool onSale, uint256 price);
     function listToken(
         address nftContract,
         uint256 tokenId,
@@ -34,7 +34,7 @@ contract MainnetDragonApi is DragonApi {
         marketplace.cancelListing(listingId);
 	}
 
-    function isDragonOnSale(uint256 tokenId) internal virtual override view returns (bool) {
-		return IMarketplace(_marketplaceAddress).isOnSale(tokenId);
+    function isDragonOnSale(uint256 tokenId) internal virtual override view returns (bool onSale, uint256 price) {
+		(onSale, price) = IMarketplace(_marketplaceAddress).isOnSale(tokenId);
 	}
 }

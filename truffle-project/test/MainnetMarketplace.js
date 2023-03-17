@@ -55,6 +55,7 @@ contract('MainnetMarketplace', (accounts) => {
 
 	it('listToken should create a new listing', async () => {
 		const dragonId = 0;
+		const price = 500;
 		await tokenContract.approve(marketplaceContract.address, dragonId, {
 			from: dragonOwner,
 		});
@@ -63,11 +64,12 @@ contract('MainnetMarketplace', (accounts) => {
 			.isOnSale(dragonId, {
 				from: dragonOwner,
 			})
-			.then((isOnSale) => {
-				assert.equal(false, isOnSale);
+			.then((saleData) => {
+				assert.equal(false, saleData.onSale);
+				assert.equal(0, saleData.price);
 			});
 
-		await marketplaceContract.listToken(tokenContract.address, dragonId, 500, {
+		await marketplaceContract.listToken(tokenContract.address, dragonId, price, {
 			from: dragonOwner,
 		});
 
@@ -79,21 +81,23 @@ contract('MainnetMarketplace', (accounts) => {
 				assert.equal(1, result.length);
 				assert.equal(dragonId, result[0].tokenId);
 				assert.equal(tokenContract.address, result[0].nftContract);
-				assert.equal(500, result[0].price);
+				assert.equal(price, result[0].price);
 				assert.equal(dragonOwner, result[0].seller);
 				assert.equal(LISTING_ACTIVE, result[0].status);
 			});
 	});
 
-	it('isOnSale should return true when dragon is listed', async () => {
+	it('isOnSale should return true and price when dragon is listed', async () => {
 		const dragonId = 0;
+		const price = 500;
 
 		await marketplaceContract
 			.isOnSale(dragonId, {
 				from: dragonOwner,
 			})
-			.then((isOnSale) => {
-				assert.equal(true, isOnSale);
+			.then((saleData) => {
+				assert.equal(true, saleData.onSale);
+				assert.equal(price, saleData.price);
 			});
 	});
 
@@ -157,8 +161,9 @@ contract('MainnetMarketplace', (accounts) => {
 			.isOnSale(dragonId, {
 				from: dragonOwner,
 			})
-			.then((isOnSale) => {
-				assert.equal(false, isOnSale);
+			.then((saleData) => {
+				assert.equal(false, saleData.onSale);
+				assert.equal(0, saleData.price);
 			});
 	});
 

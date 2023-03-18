@@ -39,6 +39,7 @@ library DragonLibrary {
 
 	struct DragonFetchPageData {
 		uint256 dragonId;
+		uint256 listedPrice;
 		address owner;
 		bool onSale;
 	}

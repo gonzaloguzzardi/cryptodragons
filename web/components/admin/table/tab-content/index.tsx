@@ -1,9 +1,12 @@
-import React, { ReactElement } from 'react'
+import React, { ChangeEvent, ReactElement } from 'react'
 import CircularProgress from '@mui/material/CircularProgress'
 import ClearIcon from '@mui/icons-material/Clear'
 import CheckIcon from '@mui/icons-material/Check'
 import EditIcon from '@mui/icons-material/Edit'
+import FormControl from '@mui/material/FormControl'
 import IconButton from '@mui/material/IconButton'
+import Input from '@mui/material/Input'
+import InputAdornment from '@mui/material/InputAdornment'
 import MenuItem from '@mui/material/MenuItem'
 import Table from '@mui/material/Table'
 import TableBody from '@mui/material/TableBody'
@@ -50,6 +53,17 @@ export default function TabContent({
   const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
     setRowsPerPage(+event.target.value)
     setPage(0)
+  }
+
+  const onChangePriceHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    if (event.target.value === "") {
+      onChangeEditHandler(null, 0);
+      return;
+    }
+
+    if (isNaN(Number(event.target.value))) return;
+
+    onChangeEditHandler(null, event.target.value.replace(/^0+/, ''));
   }
 
   return (
@@ -120,18 +134,31 @@ export default function TabContent({
                             )}
 
                             { column.id === 'onSale' && (
-                              <TextField
-                                id="outlined-select-currency"
-                                select
-                                value={editingValue}
-                                onChange={onChangeEditHandler}
-                              >
-                                {onSaleValues.map((option) => (
-                                  <MenuItem key={option.value} value={option.value}>
-                                    {option.label}
-                                  </MenuItem>
-                                ))}
-                              </TextField>
+                              <>
+                                <TextField
+                                  id="outlined-select-currency"
+                                  select
+                                  value={editingValue ? 'true' : 'false'}
+                                  onChange={e => onChangeEditHandler(null, e.target.value === 'true' ? 1 : false)}
+                                >
+                                  {onSaleValues.map((option) => (
+                                    <MenuItem key={option.value} value={option.value}>
+                                      {option.label}
+                                    </MenuItem>
+                                  ))}
+                                </TextField>
+                                { (editingValue === 0 || editingValue) && (
+                                  <FormControl sx={{ margin: 1.5, maxWidth: 100 }}>
+                                    <Input
+                                      color="secondary"
+                                      id="standard-adornment-amount"
+                                      onChange={onChangePriceHandler}
+                                      startAdornment={<InputAdornment position="start">ETH</InputAdornment>}
+                                      value={editingValue}
+                                    />
+                                  </FormControl>
+                                )}
+                              </>
                             )}
 
                             <IconButton

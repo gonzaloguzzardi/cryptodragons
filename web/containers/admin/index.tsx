@@ -77,8 +77,8 @@ export default function Admin(): ReactElement {
     setDragonsMData(finalDragonsData);
   }
 
-  const onChangeEditHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    setEditingValue(event.target.value);
+  const onChangeEditHandler = (event: ChangeEvent<HTMLInputElement>, value: any) => {
+    setEditingValue(event?.target?.value ?? value);
   }
   
   const submitEditHandler = (dragonId, column, editingValue) => {

@@ -123,6 +123,7 @@ export default function Admin(): ReactElement {
       <AdminToolbar loadingState={loading} />
       <AdminTableButtons setLoading={setLoading} updateTokensData={updateTokensData} />
       <AdminTable
+        adminAccount={MainchainAPI.getAccountId()}
         dragonsMData={dragonsMData}
         dragonsSData={dragonsSData}
         cancelEditHandler={cancelEditHandler}

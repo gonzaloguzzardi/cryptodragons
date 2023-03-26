@@ -33,6 +33,7 @@ const onSaleValues = [
 ]
 
 export default function TabContent({
+  adminAccount,
   dragonsData,
   cancelEditHandler,
   editHandler,
@@ -192,6 +193,7 @@ export default function TabContent({
                               color="secondary"
                               aria-label="allows to edit dragon properties"
                               onClick={() => editHandler(dragonData.dragonId, column.id)}
+                              disabled={adminAccount !== dragonData.owner.toLowerCase()}
                             >
                               <EditIcon />
                             </IconButton>

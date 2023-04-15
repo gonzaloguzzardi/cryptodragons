@@ -1,13 +1,9 @@
-import React, { ChangeEvent, ReactElement } from 'react'
+import React, { ReactElement } from 'react'
 import CircularProgress from '@mui/material/CircularProgress'
 import ClearIcon from '@mui/icons-material/Clear'
 import CheckIcon from '@mui/icons-material/Check'
 import EditIcon from '@mui/icons-material/Edit'
-import FormControl from '@mui/material/FormControl'
 import IconButton from '@mui/material/IconButton'
-import Input from '@mui/material/Input'
-import InputAdornment from '@mui/material/InputAdornment'
-import MenuItem from '@mui/material/MenuItem'
 import Table from '@mui/material/Table'
 import TableBody from '@mui/material/TableBody'
 import TableCell from '@mui/material/TableCell'
@@ -24,12 +20,6 @@ import Dragon from 'components/dragon'
 const columns: Column[] = [
   { id: 'nft', label: 'NFT', align: 'center' },
   { id: 'owner', label: 'Owner', align: 'center', editable: true },
-  { id: 'onSale', label: 'On\u00a0Sale', align: 'center', editable: true },
-]
-
-const onSaleValues = [
-  { value: 'true', label: 'Yes' },
-  { value: 'false', label: 'No' },
 ]
 
 export default function TabContent({
@@ -54,17 +44,6 @@ export default function TabContent({
   const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
     setRowsPerPage(+event.target.value)
     setPage(0)
-  }
-
-  const onChangePriceHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    if (event.target.value === "") {
-      onChangeEditHandler(null, 0);
-      return;
-    }
-
-    if (isNaN(Number(event.target.value))) return;
-
-    onChangeEditHandler(null, event.target.value.replace(/^0+/, ''));
   }
 
   return (
@@ -123,44 +102,14 @@ export default function TabContent({
 
                         return (
                           <TableCell key={column.id} align={column.align}>
-                            { column.id === 'owner' && (
-                              <TextField
-                                id="standard-basic"
-                                variant="standard"
-                                color='secondary'
-                                sx={{ minWidth: 385 }}
-                                value={editingValue}
-                                onChange={onChangeEditHandler}
-                              />
-                            )}
-
-                            { column.id === 'onSale' && (
-                              <>
-                                <TextField
-                                  id="outlined-select-currency"
-                                  select
-                                  value={editingValue ? 'true' : 'false'}
-                                  onChange={e => onChangeEditHandler(null, e.target.value === 'true' ? 1 : false)}
-                                >
-                                  {onSaleValues.map((option) => (
-                                    <MenuItem key={option.value} value={option.value}>
-                                      {option.label}
-                                    </MenuItem>
-                                  ))}
-                                </TextField>
-                                { (editingValue === 0 || editingValue) && (
-                                  <FormControl sx={{ margin: 1.5, maxWidth: 100 }}>
-                                    <Input
-                                      color="secondary"
-                                      id="standard-adornment-amount"
-                                      onChange={onChangePriceHandler}
-                                      startAdornment={<InputAdornment position="start">ETH</InputAdornment>}
-                                      value={editingValue}
-                                    />
-                                  </FormControl>
-                                )}
-                              </>
-                            )}
+                            <TextField
+                              id="standard-basic"
+                              variant="standard"
+                              color='secondary'
+                              sx={{ minWidth: 385 }}
+                              value={editingValue}
+                              onChange={onChangeEditHandler}
+                            />
 
                             <IconButton
                               color="success"
@@ -184,7 +133,7 @@ export default function TabContent({
                       return (
                         <TableCell key={column.id} align={column.align}>
                           <Typography display="inline">
-                            { typeof value === 'boolean' ? (value ? 'Yes' : 'No') : value }
+                            { value }
                           </Typography>
                           {
                             column.editable &&

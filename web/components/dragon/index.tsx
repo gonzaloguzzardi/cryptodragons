@@ -30,6 +30,7 @@ interface IState {
   location: tDragonSrc
   name: string
   id: string
+  isApprovedForSelling: boolean
   pic: string
   fetching: boolean
   health: string
@@ -59,6 +60,7 @@ class Dragon extends Component<IProps, IState> {
       location: props.location,
       name: 'dragon',
       id: props.id,
+      isApprovedForSelling: false,
       pic: 'onepic',
       fetching: false,
       health: '',
@@ -81,6 +83,7 @@ class Dragon extends Component<IProps, IState> {
 
     this.getDragonData()
     this.getDragonVisualData()
+    this.getIsApprovedForSelling()
   }
 
   getDragonData: () => unknown = () => {
@@ -93,6 +96,19 @@ class Dragon extends Component<IProps, IState> {
       MainchainAPI.getDragonDataById(this.state.id)
         .then((dragonData) => this.setState(dragonData))
         .catch((err) => console.error(err))
+    }
+  }
+
+  getDragonVisualData: () => unknown = () => {
+    if (this.state.location === 'SIDECHAIN') {
+      SidechainAPI.getDragonVisualDataById(this.state.id).then((dragonData) =>
+        this.updateDragonVisualData(dragonData)
+      )
+    }
+    if (this.state.location === 'MAINCHAIN') {
+      MainchainAPI.getDragonVisualDataById(this.state.id).then((dragonData) =>
+        this.updateDragonVisualData(dragonData)
+      )
     }
   }
 
@@ -131,17 +147,12 @@ class Dragon extends Component<IProps, IState> {
     }
   }
 
-  getDragonVisualData: () => unknown = () => {
-    if (this.state.location === 'SIDECHAIN') {
-      SidechainAPI.getDragonVisualDataById(this.state.id).then((dragonData) =>
-        this.updateDragonVisualData(dragonData)
-      )
-    }
-    if (this.state.location === 'MAINCHAIN') {
-      MainchainAPI.getDragonVisualDataById(this.state.id).then((dragonData) =>
-        this.updateDragonVisualData(dragonData)
-      )
-    }
+  getIsApprovedForSelling: () => unknown = () => {
+    MainchainAPI.isApprovedForSelling(this.state.id)
+      .then(result => {
+        this.setState({ isApprovedForSelling: result });
+      })
+      .catch((err) => console.error(err))
   }
 
   transfer: () => unknown = () => {
@@ -161,6 +172,26 @@ class Dragon extends Component<IProps, IState> {
           .catch(() => this.setState({ fetching: false }))
       }
     }
+  }
+
+  approveForSelling: () => unknown = () => {
+    this.setState({ fetching: true })
+
+    MainchainAPI.approveSellDragon(this.state.id)
+      .then((res) => console.log('[MAINCHAIN]: Create sell order succesfully created...', res))
+      // .catch(() => this.setState({ fetching: false }))
+      .finally(() => {
+        this.getIsApprovedForSelling()
+        this.setState({ fetching: false })
+      })
+  }
+
+  sellDragon: () => unknown = () => {
+    this.setState({ fetching: true })
+
+    MainchainAPI.createSellOrder(this.state.id)
+      .then((res) => console.log('[MAINCHAIN]: Create sell order succesfully created...', res))
+      .catch(() => this.setState({ fetching: false }))
   }
 
   render: () => ReactNode = () => {
@@ -226,18 +257,44 @@ class Dragon extends Component<IProps, IState> {
             </Grid>
           </CardContent>
 
-          <CardActions style={{ justifyContent: 'center' }}>
-            {!this.props.location.includes('GATEWAY') &&
-              !this.state.fetching &&
-              this.props.mappedAccounts && (
+          {/* Transfer actions Begin */}
+          {!this.props.location.includes('GATEWAY') &&
+            !this.state.fetching &&
+            this.props.mappedAccounts && (
+              <CardActions style={{ justifyContent: 'center' }}>
                 <Button variant="contained" color="secondary" onClick={this.transfer}>
                   {`Transfer to ${this.props.location === 'SIDECHAIN' ? 'MAINCHAIN' : 'SIDECHAIN'}`}
                 </Button>
-              )}
-            {(this.state.fetching || this.props.location.includes('GATEWAY')) && (
+              </CardActions>
+          )}
+          {(this.state.fetching || this.props.location.includes('GATEWAY')) && (
+            <CardActions style={{ justifyContent: 'center' }}>
               <CircularProgress color="secondary" />
-            )}
-          </CardActions>
+            </CardActions>
+          )}
+          {/* Transfer actions End */}
+
+          {/* Marketplace actions Begins */}
+          {this.props.location === 'MAINCHAIN' &&
+            !this.state.fetching &&
+            !this.state.isApprovedForSelling && (
+              <CardActions style={{ justifyContent: 'center' }}>
+                <Button variant="contained" color="secondary" onClick={this.approveForSelling}>
+                  Approve for Selling
+                </Button>
+              </CardActions>
+            )
+          }
+          {this.props.location === 'MAINCHAIN' &&
+            !this.state.fetching &&
+            this.state.isApprovedForSelling && (
+              <CardActions style={{ justifyContent: 'center' }}>
+                <Button variant="contained" color="secondary" onClick={this.sellDragon}>
+                  Sell Dragon
+                </Button>
+              </CardActions>
+          )}
+          {/* Marketplace actions Ends */}
         </CardContent>
       </Card>
     )

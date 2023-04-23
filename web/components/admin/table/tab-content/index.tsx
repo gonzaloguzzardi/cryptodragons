@@ -83,6 +83,8 @@ export default function TabContent({
                               key={`MAINCHAIN${dragonData.dragonId}`}
                               id={dragonData.dragonId}
                               location={location}
+                              onSale={dragonData.onSale} // @TODO: Check if this needs to be a prop or it can be fetched within Dragon Component
+                              listedPrice={dragonData.listedPrice} // @TODO: Check if this needs to be a prop or it can be fetched within Dragon Component
                             />
                           </TableCell>
                         )

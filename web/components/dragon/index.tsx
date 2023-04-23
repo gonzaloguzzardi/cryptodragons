@@ -1,12 +1,18 @@
-import React, { Component, ReactNode } from 'react'
+import React, { ChangeEvent, Component, ReactNode } from 'react'
 import Button from '@mui/material/Button'
 import Card from '@mui/material/Card'
 import CardActions from '@mui/material/CardActions'
 import CardContent from '@mui/material/CardContent'
 import CardMedia from '@mui/material/CardMedia'
+import CheckIcon from '@mui/icons-material/Check'
 import Chip from '@mui/material/Chip'
+import ClearIcon from '@mui/icons-material/Clear'
 import CircularProgress from '@mui/material/CircularProgress'
+import FormControl from '@mui/material/FormControl'
 import Grid from '@mui/material/Grid'
+import IconButton from '@mui/material/IconButton'
+import Input from '@mui/material/Input'
+import InputAdornment from '@mui/material/InputAdornment'
 import Typography from '@mui/material/Typography'
 
 import DragonCreator from 'components/dragon-creator'
@@ -24,15 +30,22 @@ interface IProps {
   key: string
   transferMethod?: (id: string, location: string) => unknown
   mappedAccounts?: boolean
+  onSale: boolean
+  listedPrice: string
 }
 
 interface IState {
   location: tDragonSrc
+  isApprovedForSelling: boolean
+  fetching: boolean
+  editingSellPrice: boolean
+  editingSellPriceValue: string
+  onSale: boolean
+  price: string
+
   name: string
   id: string
-  isApprovedForSelling: boolean
   pic: string
-  fetching: boolean
   health: string
   agility: string
   strength: string
@@ -52,21 +65,33 @@ interface IState {
   wingsType: number
 }
 
+const SELL_PRICE_DEFAULT_VALUE = '1'
+
 class Dragon extends Component<IProps, IState> {
   constructor(props: IProps) {
     super(props)
 
     this.state = {
+      // props
       location: props.location,
+      onSale: props.onSale,
+      price: props.listedPrice,
+      
+      // internal state
+      fetching: false,
+      editingSellPrice: false,
+      editingSellPriceValue: SELL_PRICE_DEFAULT_VALUE,
+      
+      // dragon initial fetched data
       name: 'dragon',
       id: props.id,
-      isApprovedForSelling: false,
       pic: 'onepic',
-      fetching: false,
       health: '',
       agility: '',
       strength: '',
       fortitude: '',
+
+      // dragon fetched data 2 - visual data
       bodyColor: 1,
       bodyPatternColor: 1,
       bodyPatternType: 1,
@@ -79,6 +104,9 @@ class Dragon extends Component<IProps, IState> {
       tailType: 1,
       wingsColor: 1,
       wingsType: 1,
+
+      // dragon fetched data 3 - marketplace props
+      isApprovedForSelling: false,
     }
 
     this.getDragonData()
@@ -116,9 +144,9 @@ class Dragon extends Component<IProps, IState> {
     console.log(dragonData)
     if (dragonData) {
       const {
+        bodyColor,
         bodyPatternColor,
         // bodyPatternType,
-        bodyColor,
         bodyType,
         eyesColor,
         eyesType,
@@ -150,7 +178,8 @@ class Dragon extends Component<IProps, IState> {
   getIsApprovedForSelling: () => unknown = () => {
     MainchainAPI.isApprovedForSelling(this.state.id)
       .then(result => {
-        this.setState({ isApprovedForSelling: result });
+        this.setState({ isApprovedForSelling: result })
+        this.setState({ fetching: false })
       })
       .catch((err) => console.error(err))
   }
@@ -178,19 +207,54 @@ class Dragon extends Component<IProps, IState> {
     this.setState({ fetching: true })
 
     MainchainAPI.approveSellDragon(this.state.id)
-      .then((res) => console.log('[MAINCHAIN]: Create sell order succesfully created...', res))
-      // .catch(() => this.setState({ fetching: false }))
-      .finally(() => {
+      .then((res) => {
+        console.log('[MAINCHAIN]: Create sell order succesfully created...', res)
         this.getIsApprovedForSelling()
-        this.setState({ fetching: false })
       })
+      .catch(() => this.setState({ fetching: false }))
   }
 
-  sellDragon: () => unknown = () => {
+  sellDragonSetAmountOn: () => unknown = () => {
+    this.setState({ editingSellPrice: true })
+  }
+
+  sellDragonSetAmountCancel: () => unknown = () => {
+    this.setState({
+      editingSellPrice: false,
+      editingSellPriceValue: SELL_PRICE_DEFAULT_VALUE,
+    })
+  }
+
+  onChangePriceHandler: (event: ChangeEvent<HTMLInputElement>) => unknown = (event) => {
+    if (event.target.value === "") {
+      this.setState({ editingSellPriceValue: '0' })
+      return
+    }
+
+    if (isNaN(Number(event.target.value))) return;
+
+    this.setState({ editingSellPriceValue: event.target.value.replace(/^0+/, '') })
+  }
+
+  sellDragonSubmit: () => unknown = () => {
     this.setState({ fetching: true })
 
-    MainchainAPI.createSellOrder(this.state.id)
-      .then((res) => console.log('[MAINCHAIN]: Create sell order succesfully created...', res))
+    MainchainAPI.createSellOrder(this.state.id, this.state.editingSellPriceValue)
+      .then((res) => {
+        console.log('[MAINCHAIN]: Create sell order succesfully created...', res)
+        this.getDragonData() // @TODO: This is not updating the dragon price market condition because the price is a prop..
+      })
+      .catch(() => this.setState({ fetching: false }))
+  }
+
+  cancelSellDragon: () => unknown = () => {
+    this.setState({ fetching: true })
+
+    MainchainAPI.cancelSellOrder(this.state.id)
+      .then((res) => {
+        console.log('[MAINCHAIN]: Cancel sell order submited succesfully...', res)
+        this.getDragonData() // @TODO: This is not updating the dragon price market condition because the price is a prop..
+      })
       .catch(() => this.setState({ fetching: false }))
   }
 
@@ -201,6 +265,11 @@ class Dragon extends Component<IProps, IState> {
           <Typography color="textSecondary" align="center" gutterBottom>
             #{this.state.id}
           </Typography>
+          {this.state.onSale && (
+            <Typography color="textSecondary" align="center" gutterBottom>
+              Price: {this.state.price}
+            </Typography>
+          )}
           <Typography color="textSecondary" align="center" noWrap gutterBottom>
             {this.state.name}
           </Typography>
@@ -267,16 +336,21 @@ class Dragon extends Component<IProps, IState> {
                 </Button>
               </CardActions>
           )}
+          {/* Transfer actions End */}
+
+          {/* Spinner Begin */}
           {(this.state.fetching || this.props.location.includes('GATEWAY')) && (
             <CardActions style={{ justifyContent: 'center' }}>
               <CircularProgress color="secondary" />
             </CardActions>
           )}
-          {/* Transfer actions End */}
+          {/* Spinner End */}
 
           {/* Marketplace actions Begins */}
           {this.props.location === 'MAINCHAIN' &&
             !this.state.fetching &&
+            !this.state.onSale &&
+            !this.state.editingSellPrice &&
             !this.state.isApprovedForSelling && (
               <CardActions style={{ justifyContent: 'center' }}>
                 <Button variant="contained" color="secondary" onClick={this.approveForSelling}>
@@ -287,10 +361,54 @@ class Dragon extends Component<IProps, IState> {
           }
           {this.props.location === 'MAINCHAIN' &&
             !this.state.fetching &&
+            !this.state.onSale &&
+            !this.state.editingSellPrice &&
             this.state.isApprovedForSelling && (
               <CardActions style={{ justifyContent: 'center' }}>
-                <Button variant="contained" color="secondary" onClick={this.sellDragon}>
+                <Button variant="contained" color="secondary" onClick={this.sellDragonSetAmountOn}>
                   Sell Dragon
+                </Button>
+              </CardActions>
+          )}
+          {this.props.location === 'MAINCHAIN' &&
+            !this.state.fetching &&
+            !this.state.onSale &&
+            this.state.editingSellPrice &&
+            this.state.isApprovedForSelling && (
+              <>
+                <FormControl sx={{ padding: 1, maxWidth: 100 }}>
+                  <Input
+                    color="secondary"
+                    id="standard-adornment-amount"
+                    onChange={this.onChangePriceHandler}
+                    startAdornment={<InputAdornment position="start">ETH</InputAdornment>}
+                    value={this.state.editingSellPriceValue}
+                  />
+                </FormControl>
+                <IconButton
+                  color="success"
+                  aria-label="allows to edit dragon's price"
+                  onClick={this.sellDragonSubmit}
+                >
+                  <CheckIcon />
+                </IconButton>
+                <IconButton
+                  color="error"
+                  aria-label="allows to cancel edit of dragon's price"
+                  onClick={this.sellDragonSetAmountCancel}
+                >
+                  <ClearIcon />
+                </IconButton>
+              </>
+          )}
+          {this.props.location === 'MAINCHAIN' &&
+            !this.state.fetching &&
+            this.state.onSale &&
+            !this.state.editingSellPrice &&
+            this.state.isApprovedForSelling && (
+              <CardActions style={{ justifyContent: 'center' }}>
+                <Button variant="contained" color="secondary" onClick={this.cancelSellDragon}>
+                  Cancel Selling
                 </Button>
               </CardActions>
           )}

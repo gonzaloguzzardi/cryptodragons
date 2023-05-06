@@ -13,6 +13,7 @@ import Grid from '@mui/material/Grid'
 import IconButton from '@mui/material/IconButton'
 import Input from '@mui/material/Input'
 import InputAdornment from '@mui/material/InputAdornment'
+import SellTwoToneIcon from '@mui/icons-material/SellTwoTone'
 import Typography from '@mui/material/Typography'
 
 import DragonCreator from 'components/dragon-creator'
@@ -262,14 +263,14 @@ class Dragon extends Component<IProps, IState> {
     return (
       <Card className={dragonStyles.container} raised>
         <CardContent>
+          {this.state.onSale && (
+            <Grid textAlign="right">
+              <Chip icon={<SellTwoToneIcon />} label={`${this.state.price} ETH`} color="secondary" />
+            </Grid>
+          )}
           <Typography color="textSecondary" align="center" gutterBottom>
             #{this.state.id}
           </Typography>
-          {this.state.onSale && (
-            <Typography color="textSecondary" align="center" gutterBottom>
-              Price: {this.state.price}
-            </Typography>
-          )}
           <Typography color="textSecondary" align="center" noWrap gutterBottom>
             {this.state.name}
           </Typography>
@@ -320,9 +321,8 @@ class Dragon extends Component<IProps, IState> {
           </Grid>
 
           <CardContent>
-            <Grid container justifyContent="center">
-              <Typography variant="caption">Location:&nbsp;</Typography>
-              <Chip color="secondary" size="small" label={<b>{this.state.location}</b>} />
+            <Grid textAlign="center">
+              <Typography variant="caption">{`Location: ${this.state.location}`}</Typography>
             </Grid>
           </CardContent>
 

@@ -31,8 +31,6 @@ interface IProps {
   key: string
   transferMethod?: (id: string, location: string) => unknown
   mappedAccounts?: boolean
-  onSale: boolean
-  listedPrice: string
 }
 
 interface IState {
@@ -75,15 +73,13 @@ class Dragon extends Component<IProps, IState> {
     this.state = {
       // props
       location: props.location,
-      onSale: props.onSale,
-      price: props.listedPrice,
       
       // internal state
       fetching: false,
       editingSellPrice: false,
       editingSellPriceValue: SELL_PRICE_DEFAULT_VALUE,
       
-      // dragon initial fetched data
+      // dragon fetched data initial
       name: 'dragon',
       id: props.id,
       pic: 'onepic',
@@ -108,11 +104,13 @@ class Dragon extends Component<IProps, IState> {
 
       // dragon fetched data 3 - marketplace props
       isApprovedForSelling: false,
+      onSale: false,
+      price: null,
     }
 
-    this.getDragonData()
-    this.getDragonVisualData()
-    this.getIsApprovedForSelling()
+    this.getDragonData() // dragon fetched data initial
+    this.getDragonVisualData() // dragon fetched data 2 - visual data
+    this.getMarketplaceData() // dragon fetched data 3 - marketplace props
   }
 
   getDragonData: () => unknown = () => {
@@ -176,13 +174,22 @@ class Dragon extends Component<IProps, IState> {
     }
   }
 
-  getIsApprovedForSelling: () => unknown = () => {
+  getSellValues: () => unknown = () => 
+    MainchainAPI.isDragonOnSale(this.state.id)
+      .then(result => {
+        this.setState(result)
+      })
+
+  getMarketplaceData: () => unknown = () => {
     MainchainAPI.isApprovedForSelling(this.state.id)
       .then(result => {
         this.setState({ isApprovedForSelling: result })
-        this.setState({ fetching: false })
+        if (result) {
+          this.getSellValues()
+        }
       })
       .catch((err) => console.error(err))
+      .finally(() => this.setState({ fetching: false }))
   }
 
   transfer: () => unknown = () => {
@@ -210,7 +217,7 @@ class Dragon extends Component<IProps, IState> {
     MainchainAPI.approveSellDragon(this.state.id)
       .then((res) => {
         console.log('[MAINCHAIN]: Create sell order succesfully created...', res)
-        this.getIsApprovedForSelling()
+        this.getMarketplaceData()
       })
       .catch(() => this.setState({ fetching: false }))
   }
@@ -243,7 +250,7 @@ class Dragon extends Component<IProps, IState> {
     MainchainAPI.createSellOrder(this.state.id, this.state.editingSellPriceValue)
       .then((res) => {
         console.log('[MAINCHAIN]: Create sell order succesfully created...', res)
-        this.getDragonData() // @TODO: This is not updating the dragon price market condition because the price is a prop..
+        this.getSellValues()
       })
       .catch(() => this.setState({ fetching: false }))
   }
@@ -254,7 +261,7 @@ class Dragon extends Component<IProps, IState> {
     MainchainAPI.cancelSellOrder(this.state.id)
       .then((res) => {
         console.log('[MAINCHAIN]: Cancel sell order submited succesfully...', res)
-        this.getDragonData() // @TODO: This is not updating the dragon price market condition because the price is a prop..
+        this.getSellValues()
       })
       .catch(() => this.setState({ fetching: false }))
   }

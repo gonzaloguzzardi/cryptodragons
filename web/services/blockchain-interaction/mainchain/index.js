@@ -210,6 +210,33 @@ class MainchainAPI {
     }
   }
 
+  static async isDragonOnSale(dragonId, gas = GAS_DEFAULT_VALUE) {
+    try {
+      const {
+        dragonApiContract: APIContract,
+        account: ownerAccount,
+      } = await MainchainAPI.getClientHelper()
+
+      console.log(`Get isDragonOnSale for dragon id: ${dragonId}`)
+      console.log("WHATS, ", APIContract.methods)
+      const gasEstimate = await APIContract.methods
+        .isDragonOnSale(dragonId)
+        .estimateGas({ from: ownerAccount, gas })
+      console.log(`Gas estimated: ${gasEstimate}`)
+
+      if (gasEstimate >= gas) throw new Error('Not enough enough gas, send more.')
+
+      const dragonData = await APIContract.methods
+        .isDragonOnSale(dragonId)
+        .call({ from: ownerAccount, gas: gasEstimate })
+        
+      console.log(`Get isDragonOnSale for dragon id: ${dragonId}, response: ${dragonData}`)
+      return dragonData
+    } catch (err) {
+      console.error(err)
+    }
+  }
+
   static async approveSellDragon(dragonId, gas = GAS_DEFAULT_VALUE) {
     try {
       const {

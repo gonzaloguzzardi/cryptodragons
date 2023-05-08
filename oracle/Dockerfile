@@ -1,5 +1,5 @@
 # Base Image
-FROM node:10.19.0
+FROM node:10.24.1
 
 # Set the working directory
 RUN mkdir -p /usr/src/app/oracle

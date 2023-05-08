@@ -1,5 +1,5 @@
 # Base Image
-FROM node:10.19.0
+FROM node:10.24.1
 
 # Set the working directory
 RUN mkdir -p /usr/src/app/contractGetter
@@ -13,6 +13,8 @@ COPY . .
 RUN if test -d node_modules; then rm -r node_modules; fi
 
 # Run the command inside your image filesystem
+RUN echo "deb http://archive.debian.org/debian stretch main contrib non-free" > /etc/apt/sources.list
+RUN apt-get upgrade
 RUN apt-get update
 RUN apt-get install libudev-dev -y
 RUN apt-get install libusb-1.0-0-dev -y
@@ -23,4 +25,3 @@ EXPOSE 8082
 
 # Run the specified command within the container.
 CMD npm run deploy:reset:bfa:docker && npm run deploy:reset:loom:docker && npm run start-dev-contract-getter
-#CMD node contractGetter.js

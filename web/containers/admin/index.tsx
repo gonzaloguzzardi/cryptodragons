@@ -44,7 +44,7 @@ export default function Admin(): ReactElement {
       .then(result => {
         if (!result || !result[1][0]) return
         setPages(result[0])
-        tabValue === 0 ? setDragonsMData(result[1]) : setDragonsSData(result[1]);
+        tabValue === 0 ? setDragonsMData(result[1]) : setDragonsSData(result[1])
       })
       .finally(() => setLoading(false))
   }
@@ -53,9 +53,9 @@ export default function Admin(): ReactElement {
     const finalDragonsData = dragonsMData.map(dragonData => ({
       ...dragonData,
       editing: '',
-    }));
+    }))
 
-    setDragonsMData(finalDragonsData);
+    setDragonsMData(finalDragonsData)
   }
 
   const editHandler = (dragonId, column) => {
@@ -64,27 +64,27 @@ export default function Admin(): ReactElement {
         return {
           ...dragonData,
           editing: '',
-        };
+        }
       }
 
-      setEditingValue(dragonData[column]); // Set initial value for editing
+      setEditingValue(dragonData[column]) // Set initial value for editing
       return {
         ...dragonData,
         editing: column,
       }
     })
 
-    setDragonsMData(finalDragonsData);
+    setDragonsMData(finalDragonsData)
   }
 
   const onChangeEditHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    setEditingValue(event.target.value);
+    setEditingValue(event.target.value)
   }
   
   const submitEditHandler = (dragonId, column, editingValue) => {
-    if (column === 'owner') {
-      setEditingLoading(true)
+    setEditingLoading(true)
 
+    if (column === 'owner') {
       MainchainAPI
         .transferDragonToNewOwner(dragonId, editingValue)
         .then(result => {
@@ -92,13 +92,9 @@ export default function Admin(): ReactElement {
           updateTokensData()
         })
         .catch(err => {
-          alert(`Error editing ${dragonId} with value: ${editingValue}`);
+          alert(`Error editing ${dragonId} with value: ${editingValue}`)
         })
         .finally(() => setEditingLoading(false))
-    }
-
-    if (column === 'onSale') {
-      alert("TODO: Need to implement marketplace list feature")
     }
   }
 
@@ -123,6 +119,7 @@ export default function Admin(): ReactElement {
       <AdminToolbar loadingState={loading} />
       <AdminTableButtons setLoading={setLoading} updateTokensData={updateTokensData} />
       <AdminTable
+        adminAccount={MainchainAPI.getAccountId()}
         dragonsMData={dragonsMData}
         dragonsSData={dragonsSData}
         cancelEditHandler={cancelEditHandler}

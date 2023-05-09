@@ -9,6 +9,7 @@ import TabPanel from './tab-panel'
 import adminTableStyles from './styles.module.scss'
 
 export default function AdminTable({
+  adminAccount,
   dragonsMData,
   dragonsSData,
   cancelEditHandler,
@@ -47,6 +48,7 @@ export default function AdminTable({
           <TabPanel
             value={tabValue}
             index={0}
+            adminAccount={adminAccount}
             dragonsData={dragonsMData}
             cancelEditHandler={cancelEditHandler}
             editHandler={editHandler}
@@ -63,6 +65,7 @@ export default function AdminTable({
           <TabPanel
             value={tabValue}
             index={1}
+            adminAccount={adminAccount}
             dragonsData={dragonsSData}
             cancelEditHandler={cancelEditHandler}
             editHandler={editHandler}

@@ -4,7 +4,6 @@ import ClearIcon from '@mui/icons-material/Clear'
 import CheckIcon from '@mui/icons-material/Check'
 import EditIcon from '@mui/icons-material/Edit'
 import IconButton from '@mui/material/IconButton'
-import MenuItem from '@mui/material/MenuItem'
 import Table from '@mui/material/Table'
 import TableBody from '@mui/material/TableBody'
 import TableCell from '@mui/material/TableCell'
@@ -21,15 +20,10 @@ import Dragon from 'components/dragon'
 const columns: Column[] = [
   { id: 'nft', label: 'NFT', align: 'center' },
   { id: 'owner', label: 'Owner', align: 'center', editable: true },
-  { id: 'onSale', label: 'On\u00a0Sale', align: 'center', editable: true },
-]
-
-const onSaleValues = [
-  { value: 'true', label: 'Yes' },
-  { value: 'false', label: 'No' },
 ]
 
 export default function TabContent({
+  adminAccount,
   dragonsData,
   cancelEditHandler,
   editHandler,
@@ -108,31 +102,14 @@ export default function TabContent({
 
                         return (
                           <TableCell key={column.id} align={column.align}>
-                            { column.id === 'owner' && (
-                              <TextField
-                                id="standard-basic"
-                                variant="standard"
-                                color='secondary'
-                                sx={{ minWidth: 385 }}
-                                value={editingValue}
-                                onChange={onChangeEditHandler}
-                              />
-                            )}
-
-                            { column.id === 'onSale' && (
-                              <TextField
-                                id="outlined-select-currency"
-                                select
-                                value={editingValue}
-                                onChange={onChangeEditHandler}
-                              >
-                                {onSaleValues.map((option) => (
-                                  <MenuItem key={option.value} value={option.value}>
-                                    {option.label}
-                                  </MenuItem>
-                                ))}
-                              </TextField>
-                            )}
+                            <TextField
+                              id="standard-basic"
+                              variant="standard"
+                              color='secondary'
+                              sx={{ minWidth: 385 }}
+                              value={editingValue}
+                              onChange={onChangeEditHandler}
+                            />
 
                             <IconButton
                               color="success"
@@ -156,7 +133,7 @@ export default function TabContent({
                       return (
                         <TableCell key={column.id} align={column.align}>
                           <Typography display="inline">
-                            { typeof value === 'boolean' ? (value ? 'Yes' : 'No') : value }
+                            { value }
                           </Typography>
                           {
                             column.editable &&
@@ -165,6 +142,7 @@ export default function TabContent({
                               color="secondary"
                               aria-label="allows to edit dragon properties"
                               onClick={() => editHandler(dragonData.dragonId, column.id)}
+                              disabled={adminAccount !== dragonData.owner.toLowerCase()}
                             >
                               <EditIcon />
                             </IconButton>

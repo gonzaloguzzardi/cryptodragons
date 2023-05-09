@@ -5,6 +5,7 @@ import { TabPanelProps } from '../types'
 
 export default function TabPanel({
   children,
+  adminAccount,
   dragonsData,
   cancelEditHandler,
   editHandler,
@@ -32,6 +33,7 @@ export default function TabPanel({
       {value === index && (
         <Box>
           <TabContent
+            adminAccount={adminAccount}
             dragonsData={dragonsData}
             cancelEditHandler={cancelEditHandler}
             editHandler={editHandler}

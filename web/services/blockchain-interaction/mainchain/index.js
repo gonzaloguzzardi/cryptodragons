@@ -8,6 +8,8 @@ import { GAS_DEFAULT_VALUE } from '../constants'
 let client
 let clientFetching
 
+const isNullOrEmpty = data => /^0x0{40}$/.test(data);
+
 class MainchainAPI {
   static async getClientHelper() {
     while (!client && clientFetching) await sleep(1000);
@@ -88,10 +90,10 @@ class MainchainAPI {
   static async getMyDragons(gas = GAS_DEFAULT_VALUE) {
     try {
       const {
-        dragonApiContract: contract,
+        dragonApiContract: APIContract,
         account: ownerAccount,
       } = await MainchainAPI.getClientHelper()
-      return await CommonAPI.sGetMyDragons(contract, ownerAccount, gas)
+      return await CommonAPI.sGetMyDragons(APIContract, ownerAccount, gas)
     } catch (err) {
       console.error(err)
     }
@@ -172,11 +174,133 @@ class MainchainAPI {
   static async getDragonVisualDataById(dragonId, gas = GAS_DEFAULT_VALUE) {
     try {
       const {
-        dragonApiContract: contract,
+        dragonApiContract: APIContract,
         account: ownerAccount,
       } = await MainchainAPI.getClientHelper()
 
-      return await CommonAPI.getDragonVisualDataById(dragonId, contract, ownerAccount, gas)
+      return await CommonAPI.getDragonVisualDataById(dragonId, APIContract, ownerAccount, gas)
+    } catch (err) {
+      console.error(err)
+    }
+  }
+
+  static async isApprovedForSelling(dragonId, gas = GAS_DEFAULT_VALUE) {
+    try {
+      const {
+        tokenContract: contract,
+        account: ownerAccount,
+      } = await MainchainAPI.getClientHelper()
+
+      console.log(`Get isApprovedForSelling for dragon id: ${dragonId}`)
+      const gasEstimate = await contract.methods
+        .getApproved(dragonId)
+        .estimateGas({ from: ownerAccount, gas })
+      console.log(`Gas estimated: ${gasEstimate}`)
+
+      if (gasEstimate >= gas) throw new Error('Not enough enough gas, send more.')
+
+      const dragonData = await contract.methods
+        .getApproved(dragonId)
+        .call({ from: ownerAccount, gas: gasEstimate })
+        
+      console.log(`Get isApprovedForSelling for dragon id: ${dragonId}, response: ${dragonData}`)
+      return !isNullOrEmpty(dragonData)
+    } catch (err) {
+      console.error(err)
+    }
+  }
+
+  static async isDragonOnSale(dragonId, gas = GAS_DEFAULT_VALUE) {
+    try {
+      const {
+        marketplaceContract: marketplace,
+        account: ownerAccount,
+      } = await MainchainAPI.getClientHelper()
+
+      console.log(`Get isOnSale for dragon id: ${dragonId}`)
+      const gasEstimate = await marketplace.methods
+        .isOnSale(dragonId)
+        .estimateGas({ from: ownerAccount, gas })
+      console.log(`Gas estimated: ${gasEstimate}`)
+
+      if (gasEstimate >= gas) throw new Error('Not enough enough gas, send more.')
+
+      const dragonData = await marketplace.methods
+        .isOnSale(dragonId)
+        .call({ from: ownerAccount, gas: gasEstimate })
+        
+      console.log(`Get isOnSale for dragon id: ${dragonId}, response: ${dragonData}`)
+      return dragonData
+    } catch (err) {
+      console.error(err)
+    }
+  }
+
+  static async approveSellDragon(dragonId, gas = GAS_DEFAULT_VALUE) {
+    try {
+      const {
+        tokenContract: contract,
+        marketplaceContract: marketplace,
+        account: ownerAccount,
+      } = await MainchainAPI.getClientHelper()
+
+      console.log(`approveSellDragon for dragon id: ${dragonId}`)
+      const gasEstimate = await contract.methods
+        .approve(marketplace._address,dragonId)
+        .estimateGas({ from: ownerAccount, gas })
+      console.log(`Gas estimated: ${gasEstimate}`)
+
+      if (gasEstimate >= gas) throw new Error('Not enough enough gas, send more.')
+
+      return await contract.methods
+        .approve(marketplace._address,dragonId)
+        .send({ from: ownerAccount, gas: gasEstimate })
+    } catch (err) {
+      console.error(err)
+    }
+  }
+  
+  static async createSellOrder(dragonId, price, gas = GAS_DEFAULT_VALUE) {
+    try {
+      const {
+        dragonApiContract: APIContract,
+        account: ownerAccount,
+      } = await MainchainAPI.getClientHelper()
+
+      console.log(`createSellOrder for dragon id: ${dragonId}, price: ${price}`)
+      const gasEstimate = await APIContract.methods
+        .listToken(dragonId, price)
+        .estimateGas({ from: ownerAccount, gas })
+      console.log(`Gas estimated: ${gasEstimate}`)
+
+      if (gasEstimate >= gas) throw new Error('Not enough enough gas, send more.')
+
+      return await APIContract.methods
+        .listToken(dragonId, price)
+        .send({ from: ownerAccount, gas: gasEstimate })
+    } catch (err) {
+      console.error(err)
+    }
+  }
+
+  static async cancelSellOrder(dragonId, gas = GAS_DEFAULT_VALUE) {
+    try {
+      const {
+        dragonApiContract: APIContract,
+        account: ownerAccount,
+      } = await MainchainAPI.getClientHelper()
+
+      console.log(`cancelSellOrder for dragon id: ${dragonId}`)
+      const gasEstimate = await APIContract.methods
+        .cancelListing(dragonId)
+        .estimateGas({ from: ownerAccount, gas })
+      console.log(`Gas estimated: ${gasEstimate}`)
+
+      if (gasEstimate >= gas) throw new Error('Not enough enough gas, send more.')
+
+      return await APIContract.methods
+        .cancelListing(dragonId)
+        .send({ from: ownerAccount, gas: gasEstimate })
     } catch (err) {
       console.error(err)
     }
@@ -186,11 +310,11 @@ class MainchainAPI {
   static async getDragonsByPage(pageNumber = 1, pageSize = 10, gas = GAS_DEFAULT_VALUE) {
     try {
       const {
-        dragonApiContract: contract,
+        dragonApiContract: APIContract,
         account: ownerAccount,
       } = await MainchainAPI.getClientHelper();
 
-      return await CommonAPI.sGetDragonsByPage(contract, ownerAccount, pageNumber, pageSize, gas);
+      return await CommonAPI.sGetDragonsByPage(APIContract, ownerAccount, pageNumber, pageSize, gas);
     } catch (err) {
       console.error(err);
     }

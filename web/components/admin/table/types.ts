@@ -12,6 +12,7 @@ export interface Column {
 
 export interface TabPanelProps {
   children?: React.ReactNode
+  adminAccount: string
   dragonsData?: any
   cancelEditHandler: () => void
   editHandler: () => void

@@ -72,6 +72,7 @@ class Dragon extends Component<IProps, IState> {
 
     this.state = {
       // props
+      id: props.id,
       location: props.location,
       
       // internal state
@@ -81,7 +82,6 @@ class Dragon extends Component<IProps, IState> {
       
       // dragon fetched data initial
       name: 'dragon',
-      id: props.id,
       pic: 'onepic',
       health: '',
       agility: '',

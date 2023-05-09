@@ -176,9 +176,7 @@ class Dragon extends Component<IProps, IState> {
 
   getSellValues: () => unknown = () => 
     MainchainAPI.isDragonOnSale(this.state.id)
-      .then(result => {
-        this.setState(result)
-      })
+      .then(result => this.setState(result))
 
   getMarketplaceData: () => unknown = () => {
     MainchainAPI.isApprovedForSelling(this.state.id)
@@ -188,7 +186,6 @@ class Dragon extends Component<IProps, IState> {
           this.getSellValues()
         }
       })
-      .catch((err) => console.error(err))
       .finally(() => this.setState({ fetching: false }))
   }
 
@@ -201,12 +198,12 @@ class Dragon extends Component<IProps, IState> {
       if (this.state.location === 'SIDECHAIN') {
         SidechainAPI.transferDragon(this.state.id)
           .then((res) => console.log('[SIDECHAIN]: Transfer to Mainchain response', res))
-          .catch(() => this.setState({ fetching: false }))
+          .finally(() => this.setState({ fetching: false }))
       }
       if (this.state.location === 'MAINCHAIN') {
         MainchainAPI.transferDragon(this.state.id)
           .then((res) => console.log('[MAINCHAIN]: Transfer to Sidechain response', res))
-          .catch(() => this.setState({ fetching: false }))
+          .finally(() => this.setState({ fetching: false }))
       }
     }
   }
@@ -219,7 +216,7 @@ class Dragon extends Component<IProps, IState> {
         console.log('[MAINCHAIN]: Create sell order succesfully created...', res)
         this.getMarketplaceData()
       })
-      .catch(() => this.setState({ fetching: false }))
+      .finally(() => this.setState({ fetching: false }))
   }
 
   sellDragonSetAmountOn: () => unknown = () => {
@@ -251,8 +248,12 @@ class Dragon extends Component<IProps, IState> {
       .then((res) => {
         console.log('[MAINCHAIN]: Create sell order succesfully created...', res)
         this.getSellValues()
+        this.setState({
+          editingSellPrice: false,
+          editingSellPriceValue: SELL_PRICE_DEFAULT_VALUE,
+        })
       })
-      .catch(() => this.setState({ fetching: false }))
+      .finally(() => this.setState({ fetching: false }))
   }
 
   cancelSellDragon: () => unknown = () => {
@@ -262,8 +263,12 @@ class Dragon extends Component<IProps, IState> {
       .then((res) => {
         console.log('[MAINCHAIN]: Cancel sell order submited succesfully...', res)
         this.getSellValues()
+        this.setState({
+          editingSellPrice: false,
+          editingSellPriceValue: SELL_PRICE_DEFAULT_VALUE,
+        })
       })
-      .catch(() => this.setState({ fetching: false }))
+      .finally(() => this.setState({ fetching: false }))
   }
 
   render: () => ReactNode = () => {

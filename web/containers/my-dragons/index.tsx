@@ -42,8 +42,6 @@ export default function MyDragons({ deviceType }: ISSRPropsDeviceOnly): ReactEle
     setFilteredDragons(
       updateDragonsBasedOnSearchFilters(
         dragons,
-        event.target.name,
-        event.target.checked,
         chMainchain.current,
         chSidechain.current
       )
@@ -88,8 +86,6 @@ export default function MyDragons({ deviceType }: ISSRPropsDeviceOnly): ReactEle
       setFilteredDragons(
         updateDragonsBasedOnSearchFilters(
           dragons,
-          null,
-          null,
           chMainchain.current,
           chSidechain.current
         )

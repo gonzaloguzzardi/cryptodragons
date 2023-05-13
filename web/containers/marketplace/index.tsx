@@ -7,8 +7,6 @@ import MarketplaceMobile from './marketplace.mobile'
 import { LOW_TO_HIGH_VALUE, HIGH_TO_LOW_VALUE } from 'components/sorting-bar/constants'
 
 import MainchainAPI from 'services/blockchain-interaction/mainchain'
-import SidechainAPI from 'services/blockchain-interaction/sidechain'
-import { getDragonsFromOracleAPI } from 'services/oracle'
 import { mapDragonsResults, updateDragonsBasedOnSearchFilters } from '../my-dragons/utils'
 
 import { ISSRPropsDeviceOnly } from 'types/server-side-props-device-only'
@@ -16,7 +14,7 @@ import { ISSRPropsDeviceOnly } from 'types/server-side-props-device-only'
 export default function Marketplace({ deviceType }: ISSRPropsDeviceOnly): ReactElement {
   const [dragons, setDragons] = useState([])
   const [filteredDragons, setFilteredDragons] = useState([])
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(false)
 
   // low to high - change
   const [lowOrHigh, setLowOrHigh] = useState(LOW_TO_HIGH_VALUE)
@@ -26,24 +24,13 @@ export default function Marketplace({ deviceType }: ISSRPropsDeviceOnly): ReactE
   }
 
   const updateDragons = (): void => {
-    console.log('Updating dragons')
-    Promise.all([
-      MainchainAPI.getMyDragons(),
-      SidechainAPI.getMyDragons(),
-      getDragonsFromOracleAPI(),
-    ]).then((results) => {
-      console.log(`Results: ${results}`)
-      if (!results || !results[0] || !results[1] || !results[2]) return setLoading(false)
-
-      const dragons = [
-        ...mapDragonsResults(results[0], 'MAINCHAIN'),
-        ...mapDragonsResults(results[1], 'SIDECHAIN'),
-        ...mapDragonsResults(results[2][0]['sidechain-gateway-results'], 'SIDECHAIN_GATEWAY'),
-        ...mapDragonsResults(results[2][1]['mainchain-gateway-results'], 'MAINCHAIN_GATEWAY'),
-      ]
-      setDragons(dragons)
-      setFilteredDragons(updateDragonsBasedOnSearchFilters(dragons, null, null, true, true))
-      setLoading(false)
+    setLoading(true);
+    MainchainAPI.getMarketplaceDragons().then((marketplaceTokens) => {
+      const dragonIDs = marketplaceTokens.map(token => token.tokenId)
+      const dragons = mapDragonsResults(dragonIDs, 'MAINCHAIN')
+      setDragons(dragons);
+      setFilteredDragons(updateDragonsBasedOnSearchFilters(dragons, true, true)); // @TODO: Sort by attributes
+      setLoading(false);
     })
   }
 

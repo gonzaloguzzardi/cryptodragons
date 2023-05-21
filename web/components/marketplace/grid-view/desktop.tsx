@@ -26,7 +26,7 @@ export default function MarketplaceGridViewDesktop({
 
         {filteredDragons.length > 0 &&
           filteredDragons.map((dragon) => (
-            <Dragon key={`${dragon.source}_${dragon.id}`} id={dragon.id} location={dragon.source} />
+            <Dragon key={`${dragon.listingId}`} id={dragon.tokenId} location={'MAINCHAIN'} />
           ))}
       </div>
     </div>

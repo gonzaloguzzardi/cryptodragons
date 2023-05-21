@@ -1,7 +1,7 @@
-import { tDragon } from '../../../types/data'
+import { tMarketplaceDragon } from 'types/data'
 
 export type tProps = {
-  dragons: tDragon[]
-  filteredDragons: tDragon[]
+  dragons: tMarketplaceDragon[]
+  filteredDragons: tMarketplaceDragon[]
   loading: boolean
 }

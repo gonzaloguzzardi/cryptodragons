@@ -7,6 +7,8 @@ import MarketplaceSearchContainerDesktop from 'components/marketplace/search-con
 import MarketplaceGridViewDesktop from 'components/marketplace/grid-view/desktop'
 import FooterDesktop from 'components/footer/desktop'
 
+import { tProps } from './types'
+
 function MarketplaceDesktop({
   dragons,
   filteredDragons,
@@ -16,7 +18,7 @@ function MarketplaceDesktop({
   attributes,
   lowOrHigh,
   handleChangeSelectLowHigh,
-}): ReactElement {
+}: tProps): ReactElement {
   return (
     <>
       <AppToolbar deviceType="desktop" section="marketplace" accountsState={accountsState} />

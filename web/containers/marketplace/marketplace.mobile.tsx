@@ -7,6 +7,8 @@ import MarketplaceSearchContainerMobile from 'components/marketplace/search-cont
 import MarketplaceGridViewMobile from 'components/marketplace/grid-view/mobile'
 import FooterMobile from 'components/footer/mobile'
 
+import { tProps } from './types'
+
 function MarketplaceMobile({
   dragons,
   filteredDragons,
@@ -16,7 +18,7 @@ function MarketplaceMobile({
   attributes,
   lowOrHigh,
   handleChangeSelectLowHigh,
-}): ReactElement {
+}: tProps): ReactElement {
   return (
     <>
       <AppToolbar deviceType="mobile" section="marketplace" accountsState={accountsState} />

@@ -6,6 +6,15 @@ export type tDragon = {
   source: tDragonSrc
 }
 
+export type tMarketplaceDragon = {
+  listingId: string
+  nftContract: string
+  price: string
+  seller: string
+  status: string
+  tokenId: string
+}
+
 export type tGuideMetadata = {
   metadata: {
     title: string

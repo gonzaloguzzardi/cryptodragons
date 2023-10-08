@@ -28,7 +28,7 @@
     "fs": "^0.0.1-security",
     "gray-matter": "^4.0.3",
     "loom-js": "file:loom-js-1.80.0.tgz",
-    "next": "^12.1.5",
+    "next": "^13.5.4",
     "next-mdx-remote": "^3.0.4",
     "path": "^0.12.7",
     "react": "^18.0.0",

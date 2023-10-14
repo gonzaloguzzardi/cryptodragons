@@ -18,6 +18,29 @@ interface IGenesLaboratory {
 			uint16 hatchTime
 		);
 
+	function createNewDragonGenesWithStats()
+		external
+		returns (
+			bytes32 genes,
+			uint16 initialHealth,
+			uint16 initialStrength,
+			uint16 initialAgility,
+			uint16 initialFortitude,
+			uint16 actionCooldown,
+			uint16 hatchTime
+		);
+
+	function putNewDragonGenesStats(			
+			uint256 attrType,
+			uint256 attrColor,
+			uint position,
+			bytes32 genes)
+		external
+		returns (
+			bytes32 updatedGenes
+		);
+		
+
 	function createChildGenes(bytes32 fatherGenes, bytes32 motherGenes)
 		external
 		returns (
@@ -123,7 +146,58 @@ contract DragonFactory is DragonBase {
 		_mint(msg.sender, id);
 		emit NewDragon(id, uint256(genes));
 	}
+	
 
+	function createDragonWithStats(
+		string memory _name,
+		uint64 _creationTime,
+		uint32 _dadId,
+		uint32 _motherId,
+		DragonLibrary.DragonVisualAttributes memory _visualAttr
+	) public {
+		//Dragon storage father = dragons[_dadId];
+		// Dragon storage mother = dragons[_motherId];
+
+		(
+			bytes32 genes,
+			uint16 initialHealth,
+			uint16 initialStrength,
+			uint16 initialAgility,
+			uint16 initialFortitude,
+			uint16 actionCooldown,
+			uint16 hatchTime
+		) = IGenesLaboratory(_genesLaboratory).createNewDragonGenesWithStats();
+
+		//genes = IGenesLaboratory(_genesLaboratory).putNewDragonGenesStats(_visualAttr.bodyType,_visualAttr.bodyColor, 11, genes);
+		//genes = IGenesLaboratory(_genesLaboratory).putNewDragonGenesStats(_visualAttr.bodyPatternType,_visualAttr.bodyPatternColor, 9, genes);
+		//genes = IGenesLaboratory(_genesLaboratory).putNewDragonGenesStats(_visualAttr.wingsType,_visualAttr.wingsColor, 7, genes);
+		//genes = IGenesLaboratory(_genesLaboratory).putNewDragonGenesStats(_visualAttr.hornsType,_visualAttr.hornsColor, 5, genes);
+		//genes = IGenesLaboratory(_genesLaboratory).putNewDragonGenesStats(_visualAttr.eyesType,_visualAttr.eyesColor, 3, genes);
+		//genes = IGenesLaboratory(_genesLaboratory).putNewDragonGenesStats(_visualAttr.tailType,_visualAttr.tailColor, 1, genes);
+
+		bytes32 nameInBytes = _stringToBytes32(_name);
+
+		uint256 id =
+			_createDragonWithStats(
+				genes,
+				nameInBytes,
+				_creationTime,
+				_dadId,
+				_motherId,
+				0,
+				actionCooldown,
+				initialHealth,
+				initialStrength,
+				initialAgility,
+				initialFortitude,
+				hatchTime,
+				_blockchainId
+			);
+
+		_mint(msg.sender, id);
+		emit NewDragon(id, uint256(genes));
+	}
+	
 	//TODO implement burn function which should update mainchainToSidechainIds mapping
 
 	//

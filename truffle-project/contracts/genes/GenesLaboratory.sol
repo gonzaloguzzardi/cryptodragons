@@ -54,6 +54,51 @@ contract GenesLaboratory {
 		genes = createVisualAttribute(genes, 0);
 	}
 
+	
+	function createNewDragonGenesWithStats()
+		public
+		onlyFromDragonContract
+		returns (
+			bytes32 genes,
+			uint16 initialHealth,
+			uint16 initialStrength,
+			uint16 initialAgility,
+			uint16 initialFortitude,
+			uint16 actionCooldown,
+			uint16 hatchTime
+		)
+	{
+		(genes, initialHealth) = createInitialHealthValue(genes);
+		genes = createMaxHealthValue(genes);
+		(genes, initialStrength) = createInitialStrengthValue(genes);
+		genes = createMaxStrengthValue(genes);
+		(genes, initialAgility) = createInitialAgilityValue(genes);
+		genes = createMaxAgilityValue(genes);
+		(genes, initialFortitude) = createInitialFortitudeValue(genes);
+		genes = createMaxFortitudeValue(genes);
+		(genes, actionCooldown) = createActionCooldown(genes);
+		(genes, hatchTime) = createHatchTime(genes);
+
+	}
+
+	function putNewDragonGenesStats(
+			uint256 attrType,
+			uint256 attrColor,
+			uint position,
+			bytes32 genes
+
+	)
+		public
+		onlyFromDragonContract
+		returns (
+			bytes32 _genes
+		)
+	{
+		_genes = putVisualAttribute(genes, position, attrType);
+		_genes = putVisualAttribute(_genes, position - 1, attrColor);
+	}
+
+
 	function createChildGenes(bytes32 fatherGenes, bytes32 motherGenes)
 		public
 		onlyFromDragonContract
@@ -184,6 +229,12 @@ contract GenesLaboratory {
 
 	function createVisualAttribute(bytes32 genes, uint position) private returns (bytes32) {
 		uint256 value = random(1, 255);
+		uint256 shiftedValue = value << (position * 8);
+		uint256 result = shiftedValue | uint256(genes);
+		return bytes32(result);
+	}
+
+	function putVisualAttribute(bytes32 genes, uint position, uint256 value) private returns (bytes32) {
 		uint256 shiftedValue = value << (position * 8);
 		uint256 result = shiftedValue | uint256(genes);
 		return bytes32(result);

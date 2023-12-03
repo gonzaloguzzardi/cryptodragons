@@ -31,6 +31,8 @@ interface IProps {
   key: string
   transferMethod?: (id: string, location: string) => unknown
   mappedAccounts?: boolean
+  owned?: boolean
+  listingId: string
 }
 
 interface IState {
@@ -271,6 +273,17 @@ class Dragon extends Component<IProps, IState> {
       .finally(() => this.setState({ fetching: false }))
   }
 
+  buyDragon: () => unknown = () => {
+    this.setState({ fetching: true })
+
+    MainchainAPI.buyDragon(Number(this.props.listingId), Number(this.state.price))
+      .then((res) => {
+        console.log('[MAINCHAIN]: Buy order submited succesfully...', res)
+        // window.location.href = "/my-dragons";
+      })
+      .finally(() => this.setState({ fetching: false }))
+  }
+
   render: () => ReactNode = () => {
     return (
       <Card className={dragonStyles.container} raised>
@@ -339,8 +352,17 @@ class Dragon extends Component<IProps, IState> {
             </Grid>
           </CardContent>
 
+          {/* Spinner Begin */}
+          {(this.state.fetching || this.props.location.includes('GATEWAY')) && (
+            <CardActions style={{ justifyContent: 'center' }}>
+              <CircularProgress color="secondary" />
+            </CardActions>
+          )}
+          {/* Spinner End */}
+
           {/* Transfer actions Begin */}
-          {!this.props.location.includes('GATEWAY') &&
+          {this.props.owned &&
+            !this.props.location.includes('GATEWAY') &&
             !this.state.fetching &&
             this.props.mappedAccounts && (
               <CardActions style={{ justifyContent: 'center' }}>
@@ -351,16 +373,9 @@ class Dragon extends Component<IProps, IState> {
           )}
           {/* Transfer actions End */}
 
-          {/* Spinner Begin */}
-          {(this.state.fetching || this.props.location.includes('GATEWAY')) && (
-            <CardActions style={{ justifyContent: 'center' }}>
-              <CircularProgress color="secondary" />
-            </CardActions>
-          )}
-          {/* Spinner End */}
-
           {/* Marketplace actions Begins */}
-          {this.props.location === 'MAINCHAIN' &&
+          {this.props.owned &&
+            this.props.location === 'MAINCHAIN' &&
             !this.state.fetching &&
             !this.state.onSale &&
             !this.state.editingSellPrice &&
@@ -372,7 +387,8 @@ class Dragon extends Component<IProps, IState> {
               </CardActions>
             )
           }
-          {this.props.location === 'MAINCHAIN' &&
+          {this.props.owned &&
+            this.props.location === 'MAINCHAIN' &&
             !this.state.fetching &&
             !this.state.onSale &&
             !this.state.editingSellPrice &&
@@ -383,7 +399,8 @@ class Dragon extends Component<IProps, IState> {
                 </Button>
               </CardActions>
           )}
-          {this.props.location === 'MAINCHAIN' &&
+          {this.props.owned &&
+            this.props.location === 'MAINCHAIN' &&
             !this.state.fetching &&
             !this.state.onSale &&
             this.state.editingSellPrice &&
@@ -414,7 +431,8 @@ class Dragon extends Component<IProps, IState> {
                 </IconButton>
               </>
           )}
-          {this.props.location === 'MAINCHAIN' &&
+          {this.props.owned &&
+            this.props.location === 'MAINCHAIN' &&
             !this.state.fetching &&
             this.state.onSale &&
             !this.state.editingSellPrice &&
@@ -426,6 +444,17 @@ class Dragon extends Component<IProps, IState> {
               </CardActions>
           )}
           {/* Marketplace actions Ends */}
+
+          {!this.props.owned &&
+            this.props.location === 'MAINCHAIN' &&
+            this.state.onSale &&
+            this.state.isApprovedForSelling && (
+              <CardActions style={{ justifyContent: 'center' }}>
+                <Button variant="contained" color="secondary" onClick={this.buyDragon}>
+                  Buy Dragon
+                </Button>
+              </CardActions>
+          )}
         </CardContent>
       </Card>
     )

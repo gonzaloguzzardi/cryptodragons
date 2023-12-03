@@ -13,7 +13,7 @@ export default function BuyADragonSection(): ReactElement {
       <Card className={styles.card} raised>
         <Grid container justifyContent="center">
           <Grid container>
-            <img className={styles.img} alt="dragon-image" src="/assets/home/dragon-2.png" />
+            <img className={styles.img} alt="dragon-image" src="/assets/dragon-ai/playa-removebg-preview.png" />
           </Grid>
           <Typography variant="h5" component="h3" gutterBottom align="center">
             What is CryptoDragons?
@@ -28,7 +28,7 @@ export default function BuyADragonSection(): ReactElement {
             size="large"
             color="secondary"
             fullWidth
-            endIcon={<img src="/assets/home/dragon-3.png" alt="" height="50px" />}
+            endIcon={<img src="/assets/dragon-ai/desierto-removebg-preview.png" alt="" height="50px" />}
             className={styles.cardButton}
           >
             <Typography variant="body1" component="span">

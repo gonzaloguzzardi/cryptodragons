@@ -332,6 +332,31 @@ class MainchainAPI {
     }
   }
 
+  // @TODO: This buyDragon method is not working as expected, we need to get it fixed
+  static async buyDragon(listingId, price, gas = GAS_DEFAULT_VALUE) {
+    try {
+      const {
+        tokenContract: contract,
+        marketplaceContract: marketplace,
+        account: ownerAccount,
+      } = await MainchainAPI.getClientHelper()
+
+      console.log(`buyDragon for listing id: ${listingId}, price: ${price}, owner account: ${ownerAccount}`)
+      const gasEstimate = await marketplace.methods
+        .buyListedToken(contract._address, listingId)
+        .estimateGas({ from: ownerAccount, value: price, gas })
+      console.log(`Gas estimated: ${gasEstimate}`)
+
+      if (gasEstimate >= gas) throw new Error('Not enough enough gas, send more.')
+
+      return await marketplace.methods
+        .buyListedToken(contract._address, listingId)
+        .send({ from: ownerAccount, value: price, gas: gasEstimate })
+    } catch (err) {
+      console.error(err)
+    }
+  }
+
   // ADMIN functions
   static async getDragonsByPage(pageNumber = 1, pageSize = 10, gas = GAS_DEFAULT_VALUE) {
     try {

@@ -1,11 +1,6 @@
 import Link from 'next/link'
 import Button from '@mui/material/Button'
-import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
-
-import FeaturedCard from '../../card/featured-card'
-
-import mock from './dragons-data'
 
 import styles from './desktop.module.scss'
 
@@ -24,15 +19,6 @@ export default function MarketplaceSection(): ReactElement {
             of your favourite dragons and share them with our cryptodragons community.
           </Typography>
         </div>
-        <div className={styles.marketplaceCollections}>
-          <Grid container justify="space-between">
-            {mock.map((data) => (
-              <Grid key={data.image} container item justify="center" xs={12} sm={6} md={3}>
-                <FeaturedCard image={data.image} name={data.name} owner={data.owner} />
-              </Grid>
-            ))}
-          </Grid>
-        </div>
         <Link href="/marketplace">
           <Button
             variant="contained"
@@ -41,7 +27,7 @@ export default function MarketplaceSection(): ReactElement {
             className={styles.goMktpButton}
           >
             <Typography variant="body1" component="span">
-              Search more in marketplace!
+              Search in marketplace!
             </Typography>
           </Button>
         </Link>

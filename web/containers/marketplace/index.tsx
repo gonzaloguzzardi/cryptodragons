@@ -13,6 +13,7 @@ import { ISSRPropsDeviceOnly } from 'types/server-side-props-device-only'
 
 export default function Marketplace({ deviceType }: ISSRPropsDeviceOnly): ReactElement {
   const [dragons, setDragons] = useState([])
+  const [myDragons, setMyDragons] = useState([])
   const [filteredDragons, setFilteredDragons] = useState([])
   const [loading, setLoading] = useState(false)
   const [attributeValue, setattributeValue] = useState(0)
@@ -38,6 +39,9 @@ export default function Marketplace({ deviceType }: ISSRPropsDeviceOnly): ReactE
       setFilteredDragons(sortByAttribute(marketplaceTokens, attributes[attributeValue].name, LOW_TO_HIGH_VALUE));
       setLoading(false);
     })
+    MainchainAPI.getMyDragons().then((myDragons) => {
+      setMyDragons(myDragons);
+    })
   }
 
   useEffect(() => {
@@ -46,6 +50,7 @@ export default function Marketplace({ deviceType }: ISSRPropsDeviceOnly): ReactE
 
   const commonProps = {
     dragons,
+    myDragons,
     filteredDragons,
     attributes,
     attributeValue,

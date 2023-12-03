@@ -15,7 +15,7 @@ export default function BuyADragonSection(): ReactElement {
         <Grid container spacing={3}>
           <Grid item xs={4}>
             <Grid container justifyContent="center">
-              <img className={styles.img} alt="complex" src="/assets/home/dragon-2.png" />
+              <img className={styles.img} alt="complex" src="/assets/dragon-ai/playa-removebg-preview.png" />
             </Grid>
           </Grid>
           <Grid item xs={8} container alignItems="center">
@@ -38,7 +38,7 @@ export default function BuyADragonSection(): ReactElement {
                     size="large"
                     color="secondary"
                     fullWidth
-                    endIcon={<img src="/assets/home/dragon-3.png" alt="" height="50px" />}
+                    endIcon={<img src="/assets/dragon-ai/desierto-removebg-preview.png" alt="" height="50px" />}
                     className={styles.cardButton}
                   >
                     <Typography variant="h6" component="span">

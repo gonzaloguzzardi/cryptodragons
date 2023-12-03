@@ -35,6 +35,7 @@ export default function MyDragonsGridViewDesktop({
               location={dragon.source}
               mappedAccounts={mappedAccounts}
               transferMethod={transferMethod}
+              owned={true}
             />
           ))}
       </div>

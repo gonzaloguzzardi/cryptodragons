@@ -7,6 +7,7 @@ import styles from './mobile.module.scss'
 
 export default function MarketplaceGridViewMobile({
   dragons,
+  myDragons,
   filteredDragons,
   loading,
 }: tProps): ReactElement {
@@ -25,7 +26,13 @@ export default function MarketplaceGridViewMobile({
 
         {filteredDragons.length > 0 &&
           filteredDragons.map((dragon) => (
-            <Dragon key={`${dragon.listingId}`} id={dragon.tokenId} location={'MAINCHAIN'} />
+            <Dragon
+              key={`${dragon.listingId}`}
+              id={dragon.tokenId}
+              location={'MAINCHAIN'}
+              owned={myDragons.includes(dragon.tokenId)}
+              listingId={dragon.listingId}
+            />
           ))}
       </div>
     </div>

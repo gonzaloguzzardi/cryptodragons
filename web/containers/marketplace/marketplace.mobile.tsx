@@ -11,6 +11,7 @@ import { tProps } from './types'
 
 function MarketplaceMobile({
   dragons,
+  myDragons,
   filteredDragons,
   loading,
   accountsState,
@@ -30,6 +31,7 @@ function MarketplaceMobile({
       />
       <MarketplaceGridViewMobile
         dragons={dragons}
+        myDragons={myDragons}
         filteredDragons={filteredDragons}
         loading={loading}
       />

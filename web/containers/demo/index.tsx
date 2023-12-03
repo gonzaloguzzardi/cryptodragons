@@ -191,7 +191,7 @@ class Demo extends Component<IProps> {
                 {this.state.sideDragons
                   ? this.state.sideDragons.map((value) => (
                       <Grid key={value} item>
-                        <Dragon mappedAccounts={this.state.accountsAreMapped} location="SIDECHAIN" id={value} />
+                        <Dragon mappedAccounts={this.state.accountsAreMapped} location="SIDECHAIN" id={value} owned={true} />
                       </Grid>
                     ))
                   : null}
@@ -207,7 +207,7 @@ class Demo extends Component<IProps> {
                 {this.state.mainDragons
                   ? this.state.mainDragons.map((value) => (
                       <Grid key={value} item>
-                        <Dragon mappedAccounts={this.state.accountsAreMapped} location="MAINCHAIN" id={value} />
+                        <Dragon mappedAccounts={this.state.accountsAreMapped} location="MAINCHAIN" id={value} owned={true} />
                       </Grid>
                     ))
                   : null}
@@ -225,7 +225,7 @@ class Demo extends Component<IProps> {
             {this.state.sidechainGatewayDragons
               ? this.state.sidechainGatewayDragons.map((value) => (
                   <Grid item>
-                    <Dragon mappedAccounts={this.state.accountsAreMapped} location="SIDECHAIN_GATEWAY" id={value} />
+                    <Dragon mappedAccounts={this.state.accountsAreMapped} location="SIDECHAIN_GATEWAY" id={value} owned={true} />
                   </Grid>
                 ))
               : null}
@@ -237,7 +237,7 @@ class Demo extends Component<IProps> {
             {this.state.mainchainGatewayDragons
               ? this.state.mainchainGatewayDragons.map((value) => (
                   <Grid item>
-                    <Dragon mappedAccounts={this.state.accountsAreMapped} location="MAINCHAIN_GATEWAY" id={value} />
+                    <Dragon mappedAccounts={this.state.accountsAreMapped} location="MAINCHAIN_GATEWAY" id={value} owned={true} />
                   </Grid>
                 ))
               : null}

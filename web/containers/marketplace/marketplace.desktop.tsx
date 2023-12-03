@@ -11,6 +11,7 @@ import { tProps } from './types'
 
 function MarketplaceDesktop({
   dragons,
+  myDragons,
   filteredDragons,
   loading,
   accountsState,
@@ -30,6 +31,7 @@ function MarketplaceDesktop({
       />
       <MarketplaceGridViewDesktop
         dragons={dragons}
+        myDragons={myDragons}
         filteredDragons={filteredDragons}
         loading={loading}
       />

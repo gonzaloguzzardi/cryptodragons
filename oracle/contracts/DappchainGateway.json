@@ -42824,14 +42824,222 @@
   },
   "networks": {
     "13654820909954": {
-      "events": {},
+      "events": {
+        "0x8e15bf46bd11add443414ada75aa9592a4af68f3f2ec02ae3d49572f9843c2a8": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "validator",
+              "type": "address"
+            }
+          ],
+          "name": "AddedValidator",
+          "type": "event"
+        },
+        "0xd7bfef63d0fc0e667288131b6edbcceff4c15ddb1b4dfcf3ffa2fccebbeb8401": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "sidechainAddress",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "uid",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "bytes",
+              "name": "data",
+              "type": "bytes"
+            }
+          ],
+          "name": "DragonSuccessfullyRetrievedInSidechain",
+          "type": "event"
+        },
+        "0xa13cf347fb36122550e414f6fd1a0c2e490cff76331c4dcc20f760891ecca12a": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "from",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "amount",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "contractAddress",
+              "type": "address"
+            }
+          ],
+          "name": "ERC20Received",
+          "type": "event"
+        },
+        "0x588be4790523ccfac918f892b3167c3555209d3263e5f49e41a8a4cd9cbeed1d": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "from",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "uid",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "contractAddress",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "bytes",
+              "name": "data",
+              "type": "bytes"
+            }
+          ],
+          "name": "ERC721Received",
+          "type": "event"
+        },
+        "0xbfe611b001dfcd411432f7bf0d79b82b4b2ee81511edac123a3403c357fb972a": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "from",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "amount",
+              "type": "uint256"
+            }
+          ],
+          "name": "ETHReceived",
+          "type": "event"
+        },
+        "0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "previousOwner",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "newOwner",
+              "type": "address"
+            }
+          ],
+          "name": "OwnershipTransferred",
+          "type": "event"
+        },
+        "0xb625c55cf7e37b54fcd18bc4edafdf3f4f9acd59a5ec824c77c795dcb2d65070": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "validator",
+              "type": "address"
+            }
+          ],
+          "name": "RemovedValidator",
+          "type": "event"
+        },
+        "0x90f75b8584158f3e931097b4ca7a191f389af9be2b63e6ce384524ef8213c989": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "from",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "uid",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "toMainchainAddress",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "bytes",
+              "name": "data",
+              "type": "bytes"
+            }
+          ],
+          "name": "SendDragonToMainchainAttempt",
+          "type": "event"
+        },
+        "0x591f2d33d85291e32c4067b5a497caf3ddb5b1830eba9909e66006ec3a0051b4": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "owner",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "enum DappchainGateway.TokenKind",
+              "name": "kind",
+              "type": "uint8"
+            },
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "contractAddress",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "value",
+              "type": "uint256"
+            }
+          ],
+          "name": "TokenWithdrawn",
+          "type": "event"
+        }
+      },
       "links": {},
-      "address": "0x0466a78c091274040137d4569f1733D478901EbC",
-      "transactionHash": "0x3f3eb2630323f2b61fefe7f4f5771451ce263e951edb9bf72e839627a849e90a"
+      "address": "0xB16E9a4cc7d186e80041b3ed6070aE5fF5D3cB8F",
+      "transactionHash": "0xaa3cc0cdc0002a3b39642202a70a3a2a8adf1aa5423343bac572ba930858ea1d"
     }
   },
   "schemaVersion": "3.4.1",
-  "updatedAt": "2023-05-09T12:33:54.398Z",
+  "updatedAt": "2023-12-04T02:41:17.108Z",
   "networkType": "ethereum",
   "devdoc": {
     "events": {

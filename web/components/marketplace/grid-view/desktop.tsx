@@ -8,6 +8,7 @@ import { tProps } from './types'
 
 export default function MarketplaceGridViewDesktop({
   dragons,
+  myDragons,
   filteredDragons,
   loading,
 }: tProps): ReactElement {
@@ -26,7 +27,13 @@ export default function MarketplaceGridViewDesktop({
 
         {filteredDragons.length > 0 &&
           filteredDragons.map((dragon) => (
-            <Dragon key={`${dragon.listingId}`} id={dragon.tokenId} location={'MAINCHAIN'} />
+            <Dragon
+              key={`${dragon.listingId}`}
+              id={dragon.tokenId}
+              location={'MAINCHAIN'}
+              owned={myDragons.includes(dragon.tokenId)}
+              listingId={dragon.listingId}
+            />
           ))}
       </div>
     </div>

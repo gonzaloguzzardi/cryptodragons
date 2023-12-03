@@ -14,7 +14,7 @@ export default function LandingSection(): ReactElement {
           </Typography>
         </div>
         <div className={styles.images}>
-          <img src="/assets/home/dragon-1.png" alt="" width="300px" height="300px" />
+          <img src="/assets/dragon-ai/unicorn2-removebg.png" alt="" width="300px" height="300px" />
         </div>
       </div>
     </div>

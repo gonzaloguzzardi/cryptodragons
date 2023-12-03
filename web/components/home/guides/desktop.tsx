@@ -17,7 +17,7 @@ export default function MarketplaceSection(): ReactElement {
             <img
               className={styles.img}
               alt="complex"
-              src="/assets/home/wise-dragon.jpg"
+              src="/assets/dragon-ai/desierto-removebg-preview.png"
               width="200px"
             />
           </Grid>
@@ -52,7 +52,7 @@ export default function MarketplaceSection(): ReactElement {
               </Grid>
 
               <Grid item>
-                <Link href="/guide/gas-and-fees">
+                <Link href="/guide/how-to-use-metamask">
                   <Button
                     variant="contained"
                     size="large"
@@ -60,7 +60,7 @@ export default function MarketplaceSection(): ReactElement {
                     className={styles.guideButton}
                   >
                     <Typography variant="body1" component="span">
-                      Gas and Fees
+                      How to use Metamask
                     </Typography>
                   </Button>
                 </Link>

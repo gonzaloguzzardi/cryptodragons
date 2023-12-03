@@ -83,6 +83,7 @@ export default function TabContent({
                               key={`MAINCHAIN${dragonData.dragonId}`}
                               id={dragonData.dragonId}
                               location={location}
+                              owned={adminAccount == dragonData.owner.toLowerCase()}
                             />
                           </TableCell>
                         )

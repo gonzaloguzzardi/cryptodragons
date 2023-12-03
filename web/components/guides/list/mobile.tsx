@@ -3,7 +3,6 @@ import Link from 'next/link'
 import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
-// import CardMedia from '@mui/material/CardMedia'
 import Typography from '@mui/material/Typography'
 import { CardActionArea } from '@mui/material'
 
@@ -28,12 +27,6 @@ export default function GuidesListMobile({ guidesData }: tProps): ReactElement {
                     </Typography>
                   </CardContent>
                 </Box>
-                {/* <CardMedia
-                  component="img"
-                  height="160"
-                  image={metadata.thumbnailUrl}
-                  alt="guide thumbnail"
-                /> */}
               </Card>
             </CardActionArea>
           </Link>

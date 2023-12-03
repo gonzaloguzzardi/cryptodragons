@@ -1,6 +1,5 @@
 class CommonAPI {
   static async sCreateDragonToken(contract, ownerAccount, gas) {
-    // createDragon(string memory _name, uint64 _creationTime, uint32 _dadId, uint32 _motherId)
     const gasEstimate = await contract.methods
       .createDragon('test dragon2', 1, 2, 2)
       .estimateGas({ from: ownerAccount, gas })
@@ -20,7 +19,8 @@ class CommonAPI {
     const gasEstimate = await contract.methods
       .getDragonsIdsByOwner(ownerAccount)
       .estimateGas({ from: ownerAccount, gas })
-    //console.log(`[COMMON-API_GET-MY-DRAGONS]: Gas sent: ${gas}, Gas Estimate: ${gasEstimate}, ownerAccount: ${ownerAccount}`)
+
+    console.log(`[COMMON-API_GET-MY-DRAGONS]: Gas sent: ${gas}, Gas Estimate: ${gasEstimate}, ownerAccount: ${ownerAccount}`)
     if (gasEstimate >= gas) throw new Error('Not enough enough gas, send more.')
 
     return await contract.methods

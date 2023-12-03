@@ -1,5 +1,6 @@
 import { ReactElement, useState } from 'react'
 import Avatar from '@mui/material/Avatar'
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown'
@@ -74,9 +75,11 @@ export default function SessionComponent({
         role="button"
         tabIndex={0}
       >
-        <Avatar alt={'Mocca'} src={'/assets/mocca.jpg'} />
+        <Avatar alt={'User'} sx={{ bgcolor: '#88f' }}>
+         <AccountCircleIcon />
+        </Avatar>
         <Typography variant="body1" className={styles.accountName}>
-          Mocca
+          User
         </Typography>
         <ArrowDropDownIcon />
 

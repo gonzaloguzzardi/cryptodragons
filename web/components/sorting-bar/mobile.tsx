@@ -31,7 +31,7 @@ export default function SortingBarMobile({
               <Checkbox
                 checked={chMainchain}
                 onChange={handleCheckedChange}
-                name="chMainchain"
+                name="Mainchain"
                 size="small"
                 color="secondary"
               />
@@ -43,7 +43,7 @@ export default function SortingBarMobile({
               <Checkbox
                 checked={chSidechain}
                 onChange={handleCheckedChange}
-                name="chSidechain"
+                name="Sidechain"
                 size="small"
                 color="secondary"
               />

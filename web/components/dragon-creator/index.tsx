@@ -18,6 +18,7 @@ interface DProps {
   typeOjos?: number
   typeCuerpo?: number
   id?: string
+  location?: string
 }
 interface DState {
   colorAlas?: number
@@ -34,6 +35,7 @@ interface DState {
   typeOjos?: number
   typeCuerpo?: number
   id?: string
+  location?: string
 }
 
 class DragonCreator extends Component<DProps> {
@@ -57,7 +59,9 @@ class DragonCreator extends Component<DProps> {
       typeCuerpo: props.typeCuerpo,
 
       id: props.id,
+      location: props.location,
     }
+    console.log(props);
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
@@ -73,7 +77,8 @@ class DragonCreator extends Component<DProps> {
       prevState.typePanza !== this.props.typePanza ||
       prevState.typeCuernos !== this.props.typeCuernos ||
       prevState.typeOjos !== this.props.typeOjos ||
-      prevState.typeCuerpo !== this.props.typeCuerpo
+      prevState.typeCuerpo !== this.props.typeCuerpo ||
+      prevState.location !== this.props.location
     ) {
       this.setState({
         colorAlas: this.props.colorAlas,
@@ -88,6 +93,7 @@ class DragonCreator extends Component<DProps> {
         typeCuernos: this.props.typeCuernos,
         typeOjos: this.props.typeOjos,
         typeCuerpo: this.props.typeCuerpo,
+        location: this.props.location
       })
     }
   }
@@ -97,14 +103,14 @@ class DragonCreator extends Component<DProps> {
       case 1:
         return (
           <svg
-            id={'id-' + this.state.id + '-cuernos'}
+            id={'id-' + this.state.id + this.state.location + '-cuernos'}
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 114.36 18.67"
           >
             <defs>
               <style>
                 {`#id-` +
-                  this.state.id +
+                  this.state.id + this.state.location +
                   `-cuernos {
                         position: absolute;
                         z-index: 3;
@@ -137,14 +143,14 @@ class DragonCreator extends Component<DProps> {
       case 2:
         return (
           <svg
-            id={'id-' + this.state.id + '-cuernos'}
+            id={'id-' + this.state.id + this.state.location + '-cuernos'}
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 76.83 16.99"
           >
             <defs>
               <style>
                 {`#id-` +
-                  this.state.id +
+                  this.state.id + this.state.location +
                   `-cuernos {
                         position: absolute;
                         z-index: 3;
@@ -185,14 +191,14 @@ class DragonCreator extends Component<DProps> {
       case 3:
         return (
           <svg
-            id={'id-' + this.state.id + '-cuernos'}
+            id={'id-' + this.state.id + this.state.location + '-cuernos'}
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 106.29 36.32"
           >
             <defs>
               <style>
                 {`#id-` +
-                  this.state.id +
+                  this.state.id + this.state.location +
                   `-cuernos {
                         position: absolute;
                         z-index: 3;
@@ -239,14 +245,14 @@ class DragonCreator extends Component<DProps> {
       case 4:
         return (
           <svg
-            id={'id-' + this.state.id + '-cuernos'}
+            id={'id-' + this.state.id + this.state.location + '-cuernos'}
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 144.31 34.88"
           >
             <defs>
               <style>
                 {`#id-` +
-                  this.state.id +
+                  this.state.id + this.state.location +
                   `-cuernos {
                       position: absolute;
                       z-index: 3;
@@ -302,14 +308,14 @@ class DragonCreator extends Component<DProps> {
       case 1:
         return (
           <svg
-            id={'id-' + this.state.id + '-panza'}
+            id={'id-' + this.state.id + this.state.location + '-panza'}
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 90.85 132.71"
           >
             <defs>
               <style>
                 {`#id-` +
-                  this.state.id +
+                  this.state.id + this.state.location +
                   `-panza {
                       position: absolute;
                       z-index: 2;
@@ -338,14 +344,14 @@ class DragonCreator extends Component<DProps> {
       case 2:
         return (
           <svg
-            id={'id-' + this.state.id + '-panza'}
+            id={'id-' + this.state.id + this.state.location + '-panza'}
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 90.8 134.27"
           >
             <defs>
               <style>
                 {`#id-` +
-                  this.state.id +
+                  this.state.id + this.state.location +
                   `-panza {
                         position: absolute;
                         z-index: 2;
@@ -392,19 +398,19 @@ class DragonCreator extends Component<DProps> {
   }
 
   createCola(color, number) {
-    const class8 = 'cls-8-' + this.state.id
+    const class8 = 'cls-8-' + this.state.id + this.state.location
     switch (number) {
       case 2:
         return (
           <svg
-            id={'id-' + this.state.id + '-cola'}
+            id={'id-' + this.state.id + this.state.location + '-cola'}
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 93.92 127.62"
           >
             <defs>
               <style>
                 {`#id-` +
-                  this.state.id +
+                  this.state.id + this.state.location +
                   `-cola {
                       position: absolute;
                       z-index: 0;
@@ -435,14 +441,14 @@ class DragonCreator extends Component<DProps> {
       case 1:
         return (
           <svg
-            id={'id-' + this.state.id + '-cola'}
+            id={'id-' + this.state.id + this.state.location + '-cola'}
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 103.98 121.93"
           >
             <defs>
               <style>
                 {`#id-` +
-                  this.state.id +
+                  this.state.id + this.state.location +
                   `-cola {
                       position: absolute;
                       z-index: 0;
@@ -474,14 +480,14 @@ class DragonCreator extends Component<DProps> {
       case 3:
         return (
           <svg
-            id={'id-' + this.state.id + '-cola'}
+            id={'id-' + this.state.id + this.state.location + '-cola'}
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 140.13 71.12"
           >
             <defs>
               <style>
                 {`#id-` +
-                  this.state.id +
+                  this.state.id + this.state.location +
                   `-cola {
                         position: absolute;
                         z-index: 0;
@@ -518,14 +524,14 @@ class DragonCreator extends Component<DProps> {
       case 4:
         return (
           <svg
-            id={'id-' + this.state.id + '-cola'}
+            id={'id-' + this.state.id + this.state.location + '-cola'}
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 116.37 142.47"
           >
             <defs>
               <style>
                 {`#id-` +
-                  this.state.id +
+                  this.state.id + this.state.location +
                   `-cola {
                       position: absolute;
                       z-index: 0;
@@ -576,14 +582,14 @@ class DragonCreator extends Component<DProps> {
         return (
           <div>
             <svg
-              id={'id-' + this.state.id + '-alas'}
+              id={'id-' + this.state.id + this.state.location + '-alas'}
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 293.74 80.96"
             >
               <defs>
                 <style>
                   {`#id-` +
-                    this.state.id +
+                    this.state.id + this.state.location +
                     `-alas{
                           position: absolute;
                           z-index: 1; 
@@ -624,14 +630,14 @@ class DragonCreator extends Component<DProps> {
       case 2:
         return (
           <svg
-            id={'id-' + this.state.id + '-alas'}
+            id={'id-' + this.state.id + this.state.location + '-alas'}
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 393.94 90.79"
           >
             <defs>
               <style>
                 {`#id-` +
-                  this.state.id +
+                  this.state.id + this.state.location +
                   `-alas{
                           position: absolute;
                           z-index: 1; 
@@ -689,14 +695,14 @@ class DragonCreator extends Component<DProps> {
       case 3:
         return (
           <svg
-            id={'id-' + this.state.id + '-alas'}
+            id={'id-' + this.state.id + this.state.location + '-alas'}
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 303.54 118.26"
           >
             <defs>
               <style>
                 {`#id-` +
-                  this.state.id +
+                  this.state.id + this.state.location +
                   `-alas{
                                     position: absolute;
                                     z-index: 1; 
@@ -753,14 +759,14 @@ class DragonCreator extends Component<DProps> {
       case 4:
         return (
           <svg
-            id={'id-' + this.state.id + '-alas'}
+            id={'id-' + this.state.id + this.state.location + '-alas'}
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 358.19 114.88"
           >
             <defs>
               <style>
                 {`#id-` +
-                  this.state.id +
+                  this.state.id + this.state.location +
                   `-alas{
                                     position: absolute;
                                     z-index: 1; 
@@ -825,20 +831,20 @@ class DragonCreator extends Component<DProps> {
   }
 
   createOjos(color, number) {
-    const class5 = 'cls-5-' + this.state.id
-    const class6 = 'cls-6-' + this.state.id
+    const class5 = 'cls-5-' + this.state.id + this.state.location
+    const class6 = 'cls-6-' + this.state.id + this.state.location
     switch (number) {
       case 1:
         return (
           <svg
-            id={'id-' + this.state.id + '-ojos'}
+            id={'id-' + this.state.id + this.state.location + '-ojos'}
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 43.95 24.29"
           >
             <defs>
               <style>
                 {`#id-` +
-                  this.state.id +
+                  this.state.id + this.state.location +
                   `-ojos {
                         position: absolute;
                         margin-left: auto; 
@@ -894,14 +900,14 @@ class DragonCreator extends Component<DProps> {
       case 2:
         return (
           <svg
-            id={'id-' + this.state.id + '-ojos'}
+            id={'id-' + this.state.id + this.state.location + '-ojos'}
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 53.31 17.55"
           >
             <defs>
               <style>
                 {`#id-` +
-                  this.state.id +
+                  this.state.id + this.state.location +
                   `-ojos {
                         position: absolute;
                         margin-left: auto; 
@@ -948,14 +954,14 @@ class DragonCreator extends Component<DProps> {
       case 3:
         return (
           <svg
-            id={'id-' + this.state.id + '-ojos'}
+            id={'id-' + this.state.id + this.state.location + '-ojos'}
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 47 24.72"
           >
             <defs>
               <style>
                 {`#id-` +
-                  this.state.id +
+                  this.state.id + this.state.location +
                   `-ojos {
                         position: absolute;
                         margin-left: auto; 
@@ -991,14 +997,14 @@ class DragonCreator extends Component<DProps> {
       case 4:
         return (
           <svg
-            id={'id-' + this.state.id + '-ojos'}
+            id={'id-' + this.state.id + this.state.location + '-ojos'}
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 45.79 21.42"
           >
             <defs>
               <style>
                 {`#id-` +
-                  this.state.id +
+                  this.state.id + this.state.location +
                   `-ojos {
                         position: absolute;
                         margin-left: auto; 
@@ -1045,21 +1051,21 @@ class DragonCreator extends Component<DProps> {
   }
 
   createCuerpo(color, number) {
-    const class1 = 'cls-1-' + this.state.id
-    const class2 = 'cls-2-' + this.state.id
-    const class3 = 'cls-3-' + this.state.id
+    const class1 = 'cls-1-' + this.state.id + this.state.location
+    const class2 = 'cls-2-' + this.state.id + this.state.location
+    const class3 = 'cls-3-' + this.state.id + this.state.location
     switch (number) {
       case 1:
         return (
           <svg
-            id={'id-' + this.state.id + '-cuerpo'}
+            id={'id-' + this.state.id + this.state.location + '-cuerpo'}
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 180.21 314.55"
           >
             <defs>
               <style>
                 {`#id-` +
-                  this.state.id +
+                  this.state.id + this.state.location +
                   `-cuerpo {
                         position: absolute;
                         z-index: 4; 
@@ -1402,10 +1408,10 @@ class DragonCreator extends Component<DProps> {
   }
 
   createCuerpoFondo(color) {
-    const class100 = 'cls-100-' + this.state.id
+    const class100 = 'cls-100-' + this.state.id + this.state.location
     return (
       <svg
-        id={'id-' + this.state.id + '-cuerpoBack'}
+        id={'id-' + this.state.id + this.state.location + '-cuerpoBack'}
         className="cuerpoBack"
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 121.47 176.49"
@@ -1413,7 +1419,7 @@ class DragonCreator extends Component<DProps> {
         <defs>
           <style>
             {`#id-` +
-              this.state.id +
+              this.state.id + this.state.location +
               `-cuerpoBack {
                     position: absolute;
                     z-index: 0;

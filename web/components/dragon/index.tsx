@@ -302,6 +302,7 @@ class Dragon extends Component<IProps, IState> {
               colorCola={this.state.tailColor}
               colorCuerpo={this.state.bodyPatternColor}
               id={this.state.id}
+              location={this.state.location}
             />
           </CardMedia>
 
